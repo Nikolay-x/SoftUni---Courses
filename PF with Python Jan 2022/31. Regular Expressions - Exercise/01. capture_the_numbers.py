@@ -1,0 +1,63 @@
+# 1.Capture the Numbers
+# Write a program that receives strings on different lines and extracts only the numbers. Print all extracted numbers on a single line, separated by a single space.
+#
+# Input
+# The300
+# What is that?
+# I think it's the 3rd movie
+# Let's watch it at 22:45
+#
+# Output
+# 300 3 22 45
+
+# # from regex101 code generator
+# # coding=utf8
+# # the above tag defines encoding for this document and is for Python 2.x compatibility
+#
+# import re
+#
+# regex = r"\d+"
+#
+# test_str = ("The300\n"
+#             "What is that?\n"
+#             "I think it's the 3rd movie \n"
+#             "Let's watch it at 22:45")
+#
+# matches = re.finditer(regex, test_str, re.MULTILINE)
+#
+# for matchNum, match in enumerate(matches, start=1):
+#
+#     print("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum=matchNum, start=match.start(),
+#                                                                         end=match.end(), match=match.group()))
+#
+#     # for groupNum in range(0, len(match.groups())):
+#     #     groupNum = groupNum + 1
+#     #
+#     #     print("Group {groupNum} found at {start}-{end}: {group}".format(groupNum=groupNum, start=match.start(groupNum),
+#     #                                                                     end=match.end(groupNum),
+#     #                                                                     group=match.group(groupNum)))
+#
+# # Note: for Python 2.7 compatibility, use ur"" to prefix the regex and u"" to prefix the test string and substitution.
+
+import re
+regex = r"\d+"
+
+# while True:
+#     test_str = input()
+#     if not test_str:
+#         break
+#     matches = re.findall(regex, test_str)
+#
+#     if len(matches) > 0:
+#         print(" ".join(matches), end=" ")
+
+numbers_list = []
+while True:
+    line = input()
+    if line == "":
+        break
+    matches = re.findall(regex, line)
+    for match in matches:
+        numbers_list.append(match)
+
+print(" ".join(numbers_list))

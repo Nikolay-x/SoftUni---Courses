@@ -61,13 +61,14 @@ def sec_to_time(seconds):
 
 
 robots_line = input().split(";")
-robots_data = []
-robots_time = []
+robots = {}
+
 for robot in robots_line:
     name, process_time = robot.split("-")
-    robots_data.append(int(process_time))
-    robots_data.append(name)
-    robots_time.append(int(process_time))
+    robots[name] = int(process_time)
+
+available_robots = [k for k in robots.keys()]
+processing_robots = {}
 
 start_time_list = [int(x) for x in input().split(":")]
 start_time = time_to_sec(start_time_list)
@@ -81,16 +82,15 @@ while True:
 
 while products_que:
     start_time += 1
-    count = 0
-    for time in range(len(robots_time)):
-        if robots_time[time] == robots_data[time * 2]:
-            print(f"{robots_data[time * 2 +1]} - {products_que.popleft()} [{sec_to_time(start_time)}]")
-            robots_time[time] -= 1
-            count += 1
+    for robot_name in [k for k in processing_robots.keys()]:
+        processing_robots[robot_name] -= 1
+        if processing_robots[robot_name] <= 0:
+            processing_robots.pop(robot_name)
+    current_product = products_que.popleft()
+    for robot_name in available_robots:
+        if robot_name not in processing_robots:
+            print(f"{robot_name} - {current_product} [{sec_to_time(start_time)}]")
+            processing_robots[robot_name] = robots[robot_name]
             break
-        else:
-            robots_time[time] -= 1
-            if robots_time[time] <= 0:
-                robots_time[time] = robots_data[time * 2]
-    if count == 0:
-        products_que.append(products_que.popleft())
+    else:
+        products_que.append(current_product)

@@ -33,7 +33,7 @@
 # Output
 # You collected all coal! (2, 3)
 
-def get_miner_location(matrix, command, start_row, start_col):
+def get_miner_location(command, start_row, start_col):
     r, c = 0, 0
     if command == "left":
         r, c = start_row, start_col-1
@@ -73,7 +73,7 @@ for i in range(n):
 not_break = True
 
 for com in commands:
-    miner_row, miner_col = get_miner_location(mm, com, miner_row, miner_col)
+    miner_row, miner_col = get_miner_location(com, miner_row, miner_col)
     if mm[miner_row][miner_col] == "e":
         print(f"Game over! ({miner_row}, {miner_col})")
         not_break = False

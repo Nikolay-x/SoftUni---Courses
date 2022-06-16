@@ -1,0 +1,5 @@
+{"username": "n", "password": "123", "first_name": "n", "last_name": "b", "products": []}
+{"username": "m", "password": "234", "first_name": "m", "last_name": "z", "products": []}
+{"username": "c", "password": "567", "first_name": "c", "last_name": "d", "products": []}
+{"username": "b", "password": "236", "first_name": "sdgf", "last_name": "ags", "products": []}
+{"username": "f", "password": "123", "first_name": "err", "last_name": "3", "products": []}

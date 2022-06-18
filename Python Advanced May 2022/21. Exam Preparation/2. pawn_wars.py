@@ -100,7 +100,8 @@ c_row, c_col = current_player_location
 o_row, o_col = other_player_location
 
 while True:
-    if abs(c_row - o_row) == 1 and abs(c_col - o_col) == 1:
+    # if abs(c_row - o_row) == 1 and abs(c_col - o_col) == 1:  #100 points but not correct, w can capture downwards
+    if c_row - o_row == other_delta and abs(c_col - o_col) == 1:
         print(f"Game over! {current_player} win, capture on {board_mapping(*other_player_location)}.")
         break
     next_row = c_row + current_delta

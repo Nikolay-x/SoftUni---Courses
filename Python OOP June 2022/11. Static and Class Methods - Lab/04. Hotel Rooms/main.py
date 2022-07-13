@@ -57,4 +57,6 @@ hotel.take_room(1, 2)
 hotel.take_room(3, 1)
 hotel.take_room(3, 1)
 
+# hotel.free_room(3)
+
 print(hotel.status())

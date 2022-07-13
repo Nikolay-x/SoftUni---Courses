@@ -9,10 +9,11 @@ class Room:
         if not self.is_taken and self.capacity >= people:
             self.is_taken = True
             self.guests = people
+            return
         return f"Room number {self.number} cannot be taken"
 
     def free_room(self):
         if not self.is_taken:
             return f"Room number {self.number} is not taken"
         self.is_taken = False
-        self.guests = 0
+        self.guests = 0  # this row is skipped, if we handle hotel.guests manually

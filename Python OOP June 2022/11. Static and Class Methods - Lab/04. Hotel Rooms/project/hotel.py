@@ -5,6 +5,7 @@ class Hotel:
     def __init__(self, name):
         self.name = name
         self.rooms = []
+        # self.guests = 0
 
     @property
     def guests(self):
@@ -18,14 +19,19 @@ class Hotel:
         self.rooms.append(room)
 
     def take_room(self, room_number, people):
+        # room = [r for r in self.rooms if r.number == room_number][0]
+        # room.take_room(people)
+
         for room in self.rooms:
-            if room.number == room_number:
+            if room.number == room_number:  # and not room.is_taken:
                 room.take_room(people)
+                # self.guests += room.guests
 
     def free_room(self, room_number):
         for room in self.rooms:
-            if room.number == room_number:
+            if room.number == room_number:  # and room.is_taken:
                 room.free_room()
+                # self.guests -= room.guests
 
     def status(self):
         free_rooms = [str(r.number) for r in self.rooms if not r.is_taken]

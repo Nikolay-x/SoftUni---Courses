@@ -96,9 +96,9 @@ class CustomList:
         last_key = None
         last_value = " "
         if len(self.data) % 2 != 0:
-            last_key = self.data.pop()
+            last_key = self.data[-1]
         result_dict = {}
-        for i in range(0, len(self.data), 2):
+        for i in range(0, len(self.data)-1, 2):
             result_dict[self.data[i]] = self.data[i+1]
         if last_key:
             result_dict[last_key] = last_value

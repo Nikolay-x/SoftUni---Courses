@@ -104,7 +104,6 @@ class FoodOrdersApp:
 
         client.shopping_cart = []
         client.bill = 0
-        client.ordered_meals = {}
         self.receipt_id += 1
 
         return f"Receipt #{self.receipt_id} with total amount of {total_paid_money:.2f} " \

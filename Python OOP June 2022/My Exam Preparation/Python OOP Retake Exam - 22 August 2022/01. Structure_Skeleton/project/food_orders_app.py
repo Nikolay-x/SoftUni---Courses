@@ -92,7 +92,6 @@ class FoodOrdersApp:
 
         client.shopping_cart = []
         client.bill = 0
-        client.ordered_meals = {}
         return f"Client {client_phone_number} successfully canceled his order."
 
     def finish_order(self, client_phone_number: str):

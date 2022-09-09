@@ -1,0 +1,42 @@
+body {
+    font-family: 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ccc;
+}
+
+section {
+    width: 60%;
+    margin: 80px auto;
+}
+
+section h1 {
+    text-align: center;
+    font-size: 42px;
+}
+
+header p {
+    font-style: italic;
+}
+
+/* body {
+    margin: 0;
+    padding: 0;
+    background: #ccc;
+}
+
+section {
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+header > p {
+    font-style: italic;
+}
+
+article {
+    font-size: 24px;
+} */

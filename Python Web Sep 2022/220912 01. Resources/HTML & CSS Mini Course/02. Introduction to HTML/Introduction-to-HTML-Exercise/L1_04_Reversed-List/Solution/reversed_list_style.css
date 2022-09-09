@@ -1,0 +1,16 @@
+body {
+    background: #E3E2E2;
+    background-size: 50% 50%;
+    margin: 0 auto;
+    width: 280px;
+}
+
+body h3 {
+    text-align: center;
+    color: #203B5F;
+}
+
+body li {
+    text-decoration: underline;
+}
+

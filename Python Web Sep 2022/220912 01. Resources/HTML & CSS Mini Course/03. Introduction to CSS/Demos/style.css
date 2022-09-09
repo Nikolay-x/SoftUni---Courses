@@ -1,0 +1,68 @@
+article#red-article p {
+    background: red;
+}
+
+article.sky {
+    background: dodgerblue;
+}
+
+/* h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+} */
+
+.text-center {
+    text-align: center;
+}
+
+div.items a {
+    color: green;
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    background: blueviolet;
+}
+
+input[type="submit"] {
+    background: darkgray;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 6px;
+    padding: 6px 12px;
+    border: 3px solid #2b2a2c;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: wheat;
+    color: black;
+    border: 3px solid darkgray;
+}
+
+button:hover {
+    background: yellow;
+    color: black;
+}
+
+a:visited {
+    color: red; 
+}
+
+article#active-status:active {
+    background: grey;
+}
+
+p:nth-child(7) {
+    background: yellow;
+}
+
+p:nth-child(13) {
+    background: yellow;
+}
+
+p:nth-of-type(5) {
+    background: orange;
+}

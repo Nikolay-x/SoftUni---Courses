@@ -1,0 +1,121 @@
+body {
+    font-family: 'Lato' sans-serif;
+}
+
+form {
+    margin: 0 auto;
+    width: 900px;
+    height: 600px;
+    margin-top: 10%;
+}
+
+form section {
+    display: inline-block;
+    width: 420px;
+    height: 570px;
+    vertical-align: top;
+    margin: 0;
+}
+
+section.left {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(../Requirements-and-Resources/Images/peak.jpg) no-repeat;
+    background-size: cover;
+    color: white;
+    font-size: 18px;
+}
+
+section.left h1, p {
+    text-align: center;
+}
+
+section.left p {
+    margin-left: 5px;
+    position: relative;
+    top: 75%;
+    font-style: italic;
+}
+
+section.left i {
+    margin-left: 207px;
+    position: relative;
+    top: 74%;
+}
+
+section.right {
+    border: 3px solid #38082A;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-left: -4px;
+    height: 564px;
+    font-size: 18px;
+    text-align: center;
+}
+
+section.right label {
+    color: rgb(218, 217, 220);
+    width: 180px;
+    margin-top: 18px;
+    display: block;
+}
+
+body > form > section.right > label:nth-child(1) {
+    margin-top: 108px;
+    margin-left: 79px;
+}
+
+body > form > section.right > label:nth-child(3) {
+    margin-left: 62px;
+}
+
+body > form > section.right > label:nth-child(5) {
+    margin-left: 76px;
+}
+
+body > form > section.right > label:nth-child(7) {
+    margin-left: 111px;
+}
+
+section.right input {
+    color: rgb(118, 115, 115);
+    width: 180px;
+    border: none;
+    border-bottom: 2px solid #38082A;
+    background: white;
+    margin-top: 5px;
+}
+
+button#getstarted {
+    background: #38082A;
+    color: white;
+    font-size: 18px;
+    padding: 7px 15px;
+    display: block;
+    margin-top: 51px;
+    margin-left: 114px;
+    border-radius: 7px;
+}
+
+button#getstarted:hover {
+    background: white;
+    color: #38082A;
+    cursor: pointer;
+}
+
+button#signin {
+    background: white;
+    color: #38082A;
+    border: none;
+    font-size: 18px;
+    padding: 7px 15px;
+    border-radius: 7px;
+    display: block;
+    margin-top: -38px;
+    margin-left: 240px;
+}
+
+button#signin:hover {
+    background: white;
+    color: #38082A;
+    cursor: pointer;
+    border: 1px solid #38082A;
+}

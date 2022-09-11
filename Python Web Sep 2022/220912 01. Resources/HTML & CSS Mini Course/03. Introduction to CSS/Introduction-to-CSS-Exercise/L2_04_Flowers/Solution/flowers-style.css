@@ -1,0 +1,175 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: black;
+    width: 1300px;
+    margin: 0 auto;
+}
+
+header {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+header nav {
+    margin: 0 auto;
+    text-align: center;
+    background: white;
+}
+
+header nav ul {
+    margin: 0;
+    padding: 6px 0px;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: rgb(214,116,114);
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+header section.header {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(../Requirements-and-Resources/Images/header-flower.png) no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+header section.header h1 {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding: 312px 0 0 0;
+    margin-top: 0;
+    letter-spacing: 6px;
+}
+
+header section.header hr.topline {
+    width: 60px;
+    border: 2px solid rgb(214,116,114);
+}
+
+header section.header p {
+    color: white;
+    padding: 9px 0 312px 0;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+main {
+    width: 1300px;
+    margin: 0 auto;
+    background: rgb(214,116,114);
+}
+
+main article.top {
+    margin: 0 auto;
+}
+
+main article.top h1 {
+    color: white;
+    text-align: center;
+    margin-top: 0;
+    padding-top: 42px;
+    letter-spacing: 3px;
+}
+
+main article.top hr {
+    width: 60px;
+    border: 2px solid white;
+}
+
+main article.top p {
+    color: white;
+    padding: 9px 0 15px 0;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+main article.top button {
+    background: white;
+    color: rgb(214,116,114);
+    font-weight: bold;
+    padding: 9px 15px;
+    border: 1px solid rgb(214,116,114);
+    border-radius: 3px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 18px;
+}
+
+main article.top button:hover {
+    background: rgb(214,116,114);
+    color: white;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+main article.bottom {
+    background: white;
+    margin: 0 auto;
+}
+
+main article.bottom h1 {
+    color: black;
+    text-align: center;
+    margin-top: 0;
+    padding-top: 36px;
+}
+
+main article.bottom hr {
+    width: 60px;
+    border: 2px solid rgb(214,116,114);
+}
+
+main article.bottom ul {
+    margin: 0 auto;
+    text-align: center;
+}
+
+main article.bottom ul li {
+    vertical-align: top;
+    display: inline-block;
+    padding: 18px 51px 72px 12px;
+}
+
+main article.bottom ul li a {
+    text-decoration: none;
+}
+
+main article.bottom ul li a img {
+    width: 78px;
+}
+
+main article.bottom ul li a h2 {
+    color: black;
+}
+
+main article.bottom ul li a p {
+    width: 155px;
+    color: darkgray;
+}
+
+footer {
+    width: 1300px;
+    background: rgb(214,116,114);
+    margin: 0 auto;
+    height: 48px;
+}
+
+footer li {
+    display: block;
+    margin: 0 auto;
+    padding-top: 12px;
+    width: 375px;
+}
+
+footer li a {
+    color: white;
+    text-decoration: none;
+}

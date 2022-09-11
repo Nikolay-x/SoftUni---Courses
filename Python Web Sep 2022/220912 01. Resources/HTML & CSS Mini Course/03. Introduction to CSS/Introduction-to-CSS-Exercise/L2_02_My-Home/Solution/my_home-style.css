@@ -1,0 +1,54 @@
+body {
+    font-family: 'Open Sans';
+}
+
+header article {
+    border-left: 1px solid black;
+    display: inline-block;
+    font-size: 21px;
+}
+
+body > header > article:nth-child(1) {
+    width: 960px;
+    margin-left: 270px;
+}
+
+h2 {
+    font-size: 39px;
+    letter-spacing: 9px;
+    margin-left: 27px;
+}
+
+p {
+    color: #656565;
+    font-size: 20px;
+    margin-left: 21px;
+}
+
+main {
+    margin-top: 30px;
+}
+
+main article {
+    width: 390px;
+    vertical-align: top;
+    display: inline-block;
+    font-size: 21px;
+}
+
+body > main > article:nth-child(1) {
+    margin-left: 272px;
+}
+
+body > main > article:nth-child(2) {
+    margin-left: 87px;
+}
+
+body > main > article:nth-child(3) {
+    margin-left: 87px;
+}
+
+body > main > article:nth-child(3) > img {
+    width: 400px;
+    height: 270px;
+}

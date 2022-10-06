@@ -1,6 +1,10 @@
 # from enum import Enum
+from datetime import date
 
 from django.db import models
+from django.urls import reverse
+
+from models_demos.common.validators import validate_in_the_past
 
 # Create your models here.
 # models.py
@@ -45,16 +49,50 @@ SQL Server: money
 #     SENIOR = 'Senior',
 
 
-class Department(models.Model):
+class AuditInfoMixin(models.Model):
+
+    class Meta:
+        # 1. No table will be created in the DB
+        # 2. Can be inherited in other models
+        abstract = True
+
+    # This will be automatically set on creation
+    created_on = models.DateTimeField(
+        auto_now_add=True,  # optional
+    )
+
+    # This will be automatically set on each 'save' / 'update'
+    updated_on = models.DateTimeField(
+        auto_now=True,  # optional
+    )
+
+
+# class DeletableMixin(models.Model):
+#     is_deleted = models.BooleanField(default=False)
+
+
+class Department(AuditInfoMixin, models.Model):
     name = models.CharField(
         max_length=15,
+    )
+
+    slug = models.SlugField(
+        unique=True,
     )
 
     def __str__(self):
         return f'Id: {self.pk}; Name: {self.name}'
 
+    def get_absolute_url(self):
+        url = reverse('details department', kwargs={
+            'pk': self.pk,
+            'slug': self.slug,
+        })
 
-class Project(models.Model):
+        return url
+
+
+class Project(AuditInfoMixin, models.Model):
     name = models.CharField(
         max_length=30,
     )
@@ -67,7 +105,11 @@ class Project(models.Model):
     deadline = models.DateField()
 
 
-class Employee(models.Model):
+class Employee(AuditInfoMixin, models.Model):
+
+    class Meta:
+        ordering = ('-years_of_experience', 'age',)
+
     LEVEL_JUNIOR = 'Junior'
     LEVEL_REGULAR = 'Regular'
     LEVEL_SENIOR = 'Senior'
@@ -95,8 +137,8 @@ class Employee(models.Model):
         verbose_name='Seniority level',
     )
 
-    age = models.IntegerField(
-        default=-7,
+    age = models.PositiveIntegerField(
+        default=0,
     )
 
     # int >= 0
@@ -105,26 +147,18 @@ class Employee(models.Model):
     # Text => strings with unlimited length
     review = models.TextField()
 
-    start_date = models.DateField()
+    start_date = models.DateField(
+        validators=(validate_in_the_past,)
+    )
 
     email = models.EmailField(
         # Adds 'UNIQUE' constraint
         unique=True,
-        editable=False,
+        # editable=False,
     )
 
     is_full_time = models.BooleanField(
         null=True,
-    )
-
-    # This will be automatically set on creation
-    created_on = models.DateTimeField(
-        auto_now_add=True,  # optional
-    )
-
-    # This will be automatically set on each 'save' / 'update'
-    updated_on = models.DateTimeField(
-        auto_now=True,  # optional
     )
 
     # One-to-many
@@ -143,12 +177,16 @@ class Employee(models.Model):
     def fullname(self):
         return f'{self.first_name} {self.last_name}'
 
+    @property
+    def years_of_employment(self):
+        return date.today() - self.start_date
+
     def __str__(self):
         # self.id == self.pk
         return f'Id: {self.pk}; Name: {self.fullname}'
 
 
-class AccessCard(models.Model):
+class AccessCard(AuditInfoMixin, models.Model):
     employee = models.OneToOneField(
         Employee,
         on_delete=models.CASCADE,
@@ -156,7 +194,11 @@ class AccessCard(models.Model):
     )
 
 
-class Category(models.Model):
+class Category(AuditInfoMixin, models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(
         max_length=15,
     )

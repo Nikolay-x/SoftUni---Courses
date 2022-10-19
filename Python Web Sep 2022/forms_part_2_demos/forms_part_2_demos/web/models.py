@@ -1,3 +1,6 @@
+import os
+import uuid
+
 from django.db import models
 
 from forms_part_2_demos.web.validators import validate_text, ValueInRangeValidator
@@ -9,12 +12,18 @@ from forms_part_2_demos.web.validators import validate_text, ValueInRangeValidat
 class Person(models.Model):
     MAX_LEN_NAME = 20
 
+    def get_file_path(self, filename):
+        ext = filename.split('.')[-1]
+        filename = f"{uuid.uuid4()}.{ext}"
+        return os.path.join('media_files/persons', filename)
+
     name = models.CharField(
         max_length=MAX_LEN_NAME,
     )
 
     profile_image = models.ImageField(
-        upload_to='persons',
+        # upload_to='persons',
+        upload_to=get_file_path,
         null=True,
         blank=True,
     )
@@ -32,6 +41,8 @@ class Todo(models.Model):
         validators=(
             validate_text,
         ),
+        null=False,
+        blank=False,
     )
 
     priority = models.IntegerField(
@@ -43,9 +54,9 @@ class Todo(models.Model):
     )
 
     is_done = models.BooleanField(
+        default=False,
         null=False,
         blank=False,
-        default=False,
     )
 
     assignee = models.ForeignKey(

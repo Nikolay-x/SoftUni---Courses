@@ -47,7 +47,7 @@ def index(request):
     form_class = TodoForm
 
     if request.method == 'GET':
-        form = form_class
+        form = form_class()
     else:
         form = form_class(request.POST)
 

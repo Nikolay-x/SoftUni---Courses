@@ -12,18 +12,18 @@ from forms_part_2_demos.web.validators import validate_text, ValueInRangeValidat
 class Person(models.Model):
     MAX_LEN_NAME = 20
 
-    def get_file_path(self, filename):
-        ext = filename.split('.')[-1]
-        filename = f"{uuid.uuid4()}.{ext}"
-        return os.path.join('media_files/persons', filename)
+    # def get_file_path(self, filename):
+    #     ext = filename.split('.')[-1]
+    #     filename = f"{self.name}-{uuid.uuid4()}.{ext}"
+    #     return os.path.join('persons', filename)
 
     name = models.CharField(
         max_length=MAX_LEN_NAME,
     )
 
     profile_image = models.ImageField(
-        # upload_to='persons',
-        upload_to=get_file_path,
+        upload_to='persons',
+        # upload_to=get_file_path,
         null=True,
         blank=True,
     )

@@ -71,7 +71,7 @@ def list_persons(request):
 
 
 def create_person(request):
-    if request == 'GET':
+    if request.method == 'GET':
         form = PersonCreateForm()
     else:
         form = PersonCreateForm(request.POST, request.FILES)

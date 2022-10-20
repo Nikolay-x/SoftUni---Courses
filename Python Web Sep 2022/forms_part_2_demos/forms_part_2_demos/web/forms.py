@@ -94,13 +94,16 @@ class PersonCreateForm(forms.ModelForm):
         model = Person
         fields = '__all__'
 
-    # def clean_profile_image(self):
-    #     profile_image = self.cleaned_data['profile_image']
-    #     # profile_image.name = self.cleaned_data['name']
-    #     profile_image.name = str(uuid.uuid4())
-    #     return profile_image
+    def clean_profile_image(self):
+        profile_image = self.cleaned_data['profile_image']
+        profile_name = self.cleaned_data['name']
+        profile_image.name = f'{profile_name}-{uuid.uuid4()}'
+        # profile_image.name = str(uuid.uuid4())
+        return profile_image
 
     # def clean(self):
     #     super().clean()  # After this, all values are in 'cleaned_data'
     #     profile_image = self.cleaned_data['profile_image']
-    #     profile_image.name = self.cleaned_data['name']
+    #     profile_name = self.cleaned_data['name']
+    #     profile_image.name = str(uuid.uuid4())
+    #     return profile_image

@@ -60,59 +60,53 @@
                 {#                    <a class="button" href="#">Details</a>#}
                 {#                </li>#}
 
-                {#                                {% for book in books %}#}
-                {#                                    <li class="myBooks">#}
-                {#                                        <h3>{{ book.title }}</h3>#}
-                {#                                        <p>Type: {{ book.type }}</p>#}
-                {#                                        <p class="img"><img src="{{ book.image }}"#}
-                {#                                                            alt="{{ book.title }}">#}
-                {#                                        </p>#}
-                {#                                        <a class="button" href="{% url 'book details' book_id=book.pk %}">Details</a>#}
-                {#                                    </li>#}
-                {#                                {% endfor %}#}
+                {% for book in books %}
+                    <li class="myBooks">
+                        <h3>{{ book.title }}</h3>
+                        <p>Type: {{ book.type }}</p>
+                        <p class="img"><img src="{{ book.image }}"
+                                            alt="{{ book.title }}">
+                        </p>
+                        <a class="button"
+                           href="{% url 'book details' book_id=book.pk %}">Details</a>
+                    </li>
+                    {% if forloop.counter|divisibleby:3 %}
+                        </ul>
+                        <ul class="my-books-list">
+                    {% endif %}
+                {% endfor %}
 
-{#                                {% for book in books %}#}
-{#                                {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}#}
-{#                                <td><li class="myBooks">#}
+{#                <table>#}
+{#                    <tr>#}
+{#                        {% for book in books %}#}
+{#                            {% if forloop.counter0|divisibleby:3 %}#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                <td>#}
+{#                                    <li class="myBooks">#}
 {#                                        <h3>{{ book.title }}</h3>#}
 {#                                        <p>Type: {{ book.type }}</p>#}
 {#                                        <p class="img"><img src="{{ book.image }}"#}
 {#                                                            alt="{{ book.title }}">#}
 {#                                        </p>#}
 {#                                        <a class="button" href="{% url 'book details' book_id=book.pk %}">Details</a>#}
-{#                                    </li></td>#}
-{#                                {% if forloop.counter|divisibleby:3 or forloop.last %}</tr>{% endif %}#}
-{#                                {% endfor %}#}
-
-                    <tr>
-                    {% for book in books %}
-                    {% if forloop.counter|divisibleby:3 %}
-                        </tr>
-                        <tr>
-                            <td>
-                                    <li class="myBooks">
-                                    <h3>{{ book.title }}</h3>
-                                    <p>Type: {{ book.type }}</p>
-                                    <p class="img"><img src="{{ book.image }}"
-                                                        alt="{{ book.title }}">
-                                    </p>
-                                    <a class="button" href="{% url 'book details' book_id=book.pk %}">Details</a>
-                                </li>
-                                </td>
-                    {% else %}
-                        <td>
-                                <li class="myBooks">
-                                    <h3>{{ book.title }}</h3>
-                                    <p>Type: {{ book.type }}</p>
-                                    <p class="img"><img src="{{ book.image }}"
-                                                        alt="{{ book.title }}">
-                                    </p>
-                                    <a class="button" href="{% url 'book details' book_id=book.pk %}">Details</a>
-                                </li>
-                            </td>
-                    {% endif %}
-                    {% endfor %}
-                    </tr>
+{#                                    </li>#}
+{#                                </td>#}
+{#                            {% else %}#}
+{#                                <td>#}
+{#                                    <li class="myBooks">#}
+{#                                        <h3>{{ book.title }}</h3>#}
+{#                                        <p>Type: {{ book.type }}</p>#}
+{#                                        <p class="img"><img src="{{ book.image }}"#}
+{#                                                            alt="{{ book.title }}">#}
+{#                                        </p>#}
+{#                                        <a class="button" href="{% url 'book details' book_id=book.pk %}">Details</a>#}
+{#                                    </li>#}
+{#                                </td>#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                        </tr>#}
+{#                </table>#}
 
             </ul>
         {% endif %}

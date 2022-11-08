@@ -1,0 +1,17 @@
+<a href="{% url 'sign out' %}">Sign Out</a>
+<li>
+    <strong>Has email: {{ user.has_email }}</strong>
+</li>
+<ul>
+    {% for user in object_list %}
+        <li>
+            {% if user == request.user %}
+                <strong>
+                    {{ user.email }}
+                </strong>
+            {% else %}
+                {{ user.email }}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

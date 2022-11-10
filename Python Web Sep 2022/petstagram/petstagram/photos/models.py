@@ -1,6 +1,6 @@
 # photos/models.py
-from django.core.exceptions import ValidationError
-from django.core.validators import MinLengthValidator
+from django.contrib.auth import get_user_model
+from django.core import validators
 from django.db import models
 
 from petstagram.core.model_mixins import StrFromFieldsMixin
@@ -9,6 +9,9 @@ from petstagram.photos.validators import validate_file_less_than_5mb
 
 
 # Create your models here.
+
+
+UserModel = get_user_model()
 
 
 class Photo(StrFromFieldsMixin, models.Model):
@@ -34,7 +37,7 @@ class Photo(StrFromFieldsMixin, models.Model):
         max_length=MAX_DESCRIPTION_LENGTH,
         validators=(
             # Django/python validation, not DB validation
-            MinLengthValidator(MIN_DESCRIPTION_LENGTH),
+            validators.MinLengthValidator(MIN_DESCRIPTION_LENGTH),
         ),
         null=True,
         blank=True,
@@ -56,7 +59,12 @@ class Photo(StrFromFieldsMixin, models.Model):
     # One-to-one relations
     #
     # One-to-many relations
-    #
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.RESTRICT,
+    )
+
     # Many-to-many relations
 
     tagged_pets = models.ManyToManyField(

@@ -1,5 +1,5 @@
 # pets/models.py
-
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
 
@@ -7,6 +7,9 @@ from petstagram.core.model_mixins import StrFromFieldsMixin
 
 
 # Create your models here.
+
+
+UserModel = get_user_model()
 
 
 class Pet(StrFromFieldsMixin, models.Model):
@@ -34,6 +37,11 @@ class Pet(StrFromFieldsMixin, models.Model):
     date_of_birth = models.DateField(
         null=True,
         blank=True,
+    )
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.RESTRICT,
     )
 
     def save(self, *args, **kwargs):

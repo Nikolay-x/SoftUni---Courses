@@ -4,7 +4,7 @@
     <div class="top">
         <div class="userDetails">
             <!-- Link to User Profile Page -->
-            <a href="{% url 'details user' pk=1 %}">
+            <a href="{% url 'details user' pk=request.user.pk %}">
                 <div class="profilepic">
                     <div class="profile_img">
                         <div class="image">
@@ -15,11 +15,15 @@
             </a>
             <h3>
                 <!-- Link to User Profile Page -->
-                <a href="{% url 'details user' pk=1 %}">
+                <a href="{% url 'details user' pk=request.user.pk %}">
                     <!-- if user has first name and last name -->
-                    Diyan Kalaydzhiev
-                    <!-- else -->
-                    <!-- show user username -->
+                    {% if request.user.get_full_name %}
+                        {{ request.user.get_full_name }}
+                        <!-- else -->
+                        <!-- show user username -->
+                    {% else %}
+                        {{ request.user.username }}
+                    {% endif %}
                 </a>
                 <br>
                 <!-- if the photo has location -->
@@ -132,34 +136,34 @@
         <h5 class="postTime">{{ photo.publication_date }}</h5>
 
         {% for comment in photo.photocomment_set.all %}
-                 <div class="comments">
-                    <div class="top">
-                        <div class="userDetails">
-                            <div class="comment-data">
-                                <div class="profilepic">
-                                    <div class="profile_img">
-                                        <div class="image">
-                                            <!-- User Profile Image -->
-                                            <img src="{% static 'images/person.png' %}" alt="img8">
-                                        </div>
+            <div class="comments">
+                <div class="top">
+                    <div class="userDetails">
+                        <div class="comment-data">
+                            <div class="profilepic">
+                                <div class="profile_img">
+                                    <div class="image">
+                                        <!-- User Profile Image -->
+                                        <img src="{% static 'images/person.png' %}" alt="img8">
                                     </div>
                                 </div>
-                                <p>
-                                {# TODO: fix with auth #}
-                                    <!-- Link to User Profile Details Page-->
-                                    <!-- User First and/or Last Name or username-->
-                                    <a href="">Steven Ivanov</a>
-                                    <!-- User Comment -->
-                                    {{ comment.text }}
-
-                                </p>
                             </div>
-                            <span>{{ comment.publication_date }}</span>
+                            <p>
+                                {# TODO: fix with auth #}
+                                <!-- Link to User Profile Details Page-->
+                                <!-- User First and/or Last Name or username-->
+                                <a href="">Steven Ivanov</a>
+                                <!-- User Comment -->
+                                {{ comment.text }}
+
+                            </p>
                         </div>
+                        <span>{{ comment.publication_date }}</span>
                     </div>
-                 </div>
-                <!-- End Comments Section -->
-                {% endfor %}
+                </div>
+            </div>
+            <!-- End Comments Section -->
+        {% endfor %}
 
         <!-- Start Add Comments Section -->
         <div class="addComments">
@@ -172,7 +176,7 @@
             <form method="post" action="{% url 'comment photo' photo_id=photo.pk %}">
                 {{ comment_form }}
                 <button type="submit">Post</button>
-                {%  csrf_token %}
+                {% csrf_token %}
             </form>
             <!-- End Add Comments Form -->
 

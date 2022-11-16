@@ -24,11 +24,11 @@ def very_slow_operation():
 @cache_page(1 * 60)
 def index(request):
 
-    Employee.objects.create(
-        first_name='Doncho',
-        last_name='Minkov',
-        age=19,
-    )
+    # Employee.objects.create(
+    #     first_name='Doncho',
+    #     last_name='Minkov',
+    #     age=19,
+    # )
     value = very_slow_operation()
 
     latest_values = request.session.get(LATEST_VALUE_SESSION_KEY, [])
@@ -41,7 +41,7 @@ def index(request):
 
 def show_session(request):
     clicks_count = request.session.get(CLICKS_COUNT_SESSION_KEY, 0) + 1
-    request.session['CLICKS_COUNT_SESSION_KEY'] = clicks_count
+    request.session[CLICKS_COUNT_SESSION_KEY] = clicks_count
 
     # print(request.session)
 

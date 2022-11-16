@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
-    # 'sessions_middlewares_signals_cache.web.middleware.redirect_to_index_on_error_middleware',
+    'sessions_middlewares_signals_cache.web.middleware.redirect_to_index_on_error_middleware',
 ]
 
 ROOT_URLCONF = 'sessions_middlewares_signals_cache.urls'

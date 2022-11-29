@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env()
 
-SALTING = os.environ["PASSWORD_SALT"]
+# SALTING = os.environ["PASSWORD_SALT"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -59,9 +59,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'err_exc_handling.custom_middleware.Correlation',
+    # 'err_exc_handling.custom_middleware.Correlation',
     'request_logging.middleware.LoggingMiddleware',
-    'err_exc_handling.custom_middleware.CustomMiddleware',
+    # 'err_exc_handling.custom_middleware.CustomMiddleware',
 
 ]
 
@@ -85,7 +85,7 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {'EXCEPTION_HANDLER': 'custom_users.exception_handlers.global_exception_handler'}
 
-WSGI_APPLICATION = "djangoProject.wsgi.application"
+WSGI_APPLICATION = "err_exc_handling.wsgi.application"
 
 
 # Database
@@ -133,24 +133,24 @@ LOGGING = {
             'format': '%(levelname)s %(asctime)s %(module)s %(message)s {\'correlationId\':\'%(correlation_id)s\'}',
         },
     },
-    'filters': {
-        'correlation_filter': {
-            '()': 'djangoProject.custom_middleware.CorrelationFilter',
-        }
-    },
+    # 'filters': {
+    #     'correlation_filter': {
+    #         '()': 'djangoProject.custom_middleware.CorrelationFilter',
+    #     }
+    # },
     'handlers': {
         'console': {
             'level': 'DEBUG',
-            'filters': ['correlation_filter'],
+            # 'filters': ['correlation_filter'],
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
 
         },
         'file': {
-            'level': 'INFO',
-            'filters': ['correlation_filter'],
+            'level': 'DEBUG',
+            # 'filters': ['correlation_filter'],
             'class': 'logging.FileHandler',
-            'filename': '/Users/inesivanova/PycharmProjects/djangoProject/logs.txt',
+            'filename': '/Users/NB/PycharmProjects/Python Web Framework Oct 2022/err_exc_handling/logs.txt',
             'formatter': 'verbose'
         }
     },

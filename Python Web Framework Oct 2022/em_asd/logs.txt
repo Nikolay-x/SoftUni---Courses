@@ -1,0 +1,110 @@
+INFO 2022-12-09 17:33:04,029 views 13068 7080 User Test1 was logged in at 2022-12-09 17:33:04.029267. views.py 70 - post
+INFO 2022-12-09 17:33:50,094 views 13068 7080 Pump P0002 was viewed by Test1 views.py 55 - pump_details
+INFO 2022-12-09 17:33:54,745 views 13068 7080 Pump P0008 was viewed by Test1 views.py 55 - pump_details
+INFO 2022-12-09 17:35:29,931 views 10300 12176 User Test1 was logged in at 2022-12-09 17:35:29.931557. views.py 71 - post
+INFO 2022-12-09 17:36:31,262 connection 2272 3284 Connected to redis://localhost:6379// connection.py 22 - start
+INFO 2022-12-09 17:36:31,273 mingle 2272 3284 mingle: searching for neighbors mingle.py 40 - sync
+INFO 2022-12-09 17:36:32,340 mingle 2272 3284 mingle: all alone mingle.py 49 - sync
+WARNING 2022-12-09 17:36:32,405 warnings 2272 3284 C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\celery\fixups\django.py:203: UserWarning: Using settings.DEBUG leads to a memory
+            leak, never use this setting in production environments!
+  warnings.warn('''Using settings.DEBUG leads to a memory
+ warnings.py 109 - _showwarnmsg
+INFO 2022-12-09 17:36:32,411 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[ec96ccae-7782-4554-a692-8d5bbb790f87] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:36:32,416 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[335d3e27-1b6d-4bdc-a032-25ec1d1f6d7c] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:36:32,420 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[6448236d-d7c4-4367-9d05-36c59c635195] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:36:32,424 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[2851caa6-b612-4a13-92c1-002544138aec] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:36:32,429 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[471013e0-7538-4bf7-b9c1-b400166f515c] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:36:32,434 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[98212fd6-4287-4a65-9e33-16ee772d464d] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:36:32,439 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[f9a9ad76-70e1-494f-834a-2a701619c35d] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:38:07,774 tasks 2596 8640 The time consuming operation is executed at 2022-12-09 17:38:07.774130 tasks.py 19 - time_consuming_operation
+INFO 2022-12-09 17:38:07,808 views 2596 8640 User Test1 was logged in at 2022-12-09 17:38:07.808199. views.py 71 - post
+INFO 2022-12-09 17:39:17,820 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[e40b7d17-397e-41f6-96eb-e25a5308472c] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:39:17,834 views 3236 9824 User Test1 was logged in at 2022-12-09 17:39:17.834346. views.py 70 - post
+INFO 2022-12-09 17:41:51,307 strategy 2272 3284 Task em_asd.accounts.tasks.time_consuming_operation[75f0a4b6-306b-4152-ac28-830d089a2b43] received strategy.py 161 - task_message_handler
+INFO 2022-12-09 17:41:51,328 views 3236 1512 User Test1 was logged in at 2022-12-09 17:41:51.328316. views.py 70 - post
+WARNING 2022-12-09 17:53:42,999 consumer 2272 3284 consumer: Connection to broker lost. Trying to re-establish the connection... consumer.py 354 - on_connection_error_after_connected
+Traceback (most recent call last):
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\celery\worker\consumer\consumer.py", line 332, in start
+    blueprint.start(self)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\celery\worker\consumer\consumer.py", line 628, in start
+    c.loop(*c.loop_args())
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\celery\worker\loops.py", line 130, in synloop
+    connection.drain_events(timeout=2.0)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\connection.py", line 316, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\transport\virtual\base.py", line 971, in drain_events
+    get(self._deliver, timeout=timeout)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\transport\redis.py", line 584, in get
+    ret = self.handle_event(fileno, event)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\transport\redis.py", line 566, in handle_event
+    return self.on_readable(fileno), self
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\transport\redis.py", line 562, in on_readable
+    chan.handlers[type]()
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\transport\redis.py", line 906, in _receive
+    ret.append(self._receive_one(c))
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\kombu\transport\redis.py", line 916, in _receive_one
+    response = c.parse_response()
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\client.py", line 1531, in parse_response
+    response = self._execute(conn, try_read)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\client.py", line 1507, in _execute
+    return conn.retry.call_with_retry(
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\retry.py", line 49, in call_with_retry
+    fail(error)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\client.py", line 1509, in <lambda>
+    lambda error: self._disconnect_raise_connect(conn, error),
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\client.py", line 1496, in _disconnect_raise_connect
+    raise error
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\client.py", line 1508, in <lambda>
+    lambda: command(*args, **kwargs),
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\client.py", line 1529, in try_read
+    return conn.read_response()
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\connection.py", line 812, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\connection.py", line 318, in read_response
+    raw = self._buffer.readline()
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\connection.py", line 249, in readline
+    self._read_from_socket()
+  File "C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\redis\connection.py", line 195, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+WARNING 2022-12-09 17:53:43,138 warnings 2272 3284 C:\Users\NB\PycharmProjects\Python Web Framework Oct 2022\em_asd\venv\lib\site-packages\celery\worker\consumer\consumer.py:367: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered back to the queue.
+You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss setting.
+In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+ warnings.py 109 - _showwarnmsg
+DEBUG 2022-12-09 17:53:43,149 tasks 2272 3284 Canceling task consumer... tasks.py 52 - stop
+ERROR 2022-12-09 17:53:43,171 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Connection closed by server..
+Trying again in 2.00 seconds... (1/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:53:49,265 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 4.00 seconds... (2/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:53:57,362 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 6.00 seconds... (3/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:54:07,483 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 8.00 seconds... (4/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:54:19,639 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 10.00 seconds... (5/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:54:33,768 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 12.00 seconds... (6/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:54:49,884 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 14.00 seconds... (7/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:55:08,065 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 16.00 seconds... (8/100)
+ consumer.py 451 - _error_handler
+ERROR 2022-12-09 17:55:28,245 consumer 2272 3284 consumer: Cannot connect to redis://localhost:6379//: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it..
+Trying again in 18.00 seconds... (9/100)
+ consumer.py 451 - _error_handler

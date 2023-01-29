@@ -1,0 +1,49 @@
+body {
+    background-color: rgb(238, 238, 238);
+    font-family: Georgia, serif;
+    font-size: 1em;
+}
+
+.card {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card img {
+    position: absolute;
+    width: 100%;
+}
+
+.card div button {
+    position: absolute;
+    background-color: rgb(0, 153, 0);
+    border-color: rgb(0, 153, 0);
+    padding: 8px 16px;
+    border-radius: 4px;
+    right: 30px;
+    bottom: 30px;
+}
+
+.card div button a {
+    color: white;
+    text-decoration: none;
+}
+
+h3, p {
+    position: absolute;
+    padding: 6px 30px;
+}
+
+h3 {
+    top: 330px;
+    font-size: 1.2em;
+}
+
+p {
+    top: 360px;
+}

@@ -1,0 +1,33 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+.top_header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid rgb(0,0,0);
+}
+
+.top_header > p {
+    font-size: 27px;
+    margin: 12px;
+    font-weight: bold;
+    flex: 1 0 auto;
+}
+
+header > nav > ul {
+    display: flex;
+    list-style: none;
+    margin: 21px 0;
+}
+
+header > nav > ul > li {
+    margin-right: 30px;
+}
+
+a {
+    color: rgb(0, 153, 0);
+    text-decoration: none;
+}

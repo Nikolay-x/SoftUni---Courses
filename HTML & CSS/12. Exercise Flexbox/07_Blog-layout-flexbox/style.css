@@ -1,0 +1,98 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+.page {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav_header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0;
+    border-bottom: 2px solid black;
+}
+
+main {
+    display: inline-block;
+    width: 63%;
+    margin-left: 9px;
+}
+
+aside {
+    display: inline-block;
+    width: 24%;
+    vertical-align: top;
+    margin-left: 90px;
+}
+
+.nav_header p {
+    flex: 1 0 auto;
+    font-size: 27px;
+    margin: 6px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+header > nav > ul {
+    list-style: none;
+    display: flex;
+    margin-top: 12px;
+}
+
+header > nav > ul > li:not(:last-child) {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+a {
+    color: rgb(0, 153, 0);
+    text-decoration: none;
+}
+
+#inlineb {
+    display: inline-block;
+    width: 50%;
+}
+
+blockquote {
+    display: inline-block;
+    width: 30%;
+    font-family: Georgia, serif;
+    font-style: italic;
+    border-left: 3px solid gray;
+    font-size: 14px;
+    padding-left: 24px;
+    margin-bottom: 0px;
+    color: gray;
+}
+
+blockquote > p:nth-child(2) {
+    text-align: right;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, serif;
+}
+
+img {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.25);
+    border: 2px solid black;
+    padding: 6px;
+    margin: 6px;
+}
+
+.first {
+    float: right;
+    width: 24%;
+    margin: 2px;
+}
+
+.second {
+    float: left;
+    width: 30%;
+    margin: 0 15px 12px 0;
+}

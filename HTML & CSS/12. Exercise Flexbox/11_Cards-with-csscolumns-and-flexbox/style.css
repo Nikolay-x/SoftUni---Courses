@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+.masonry {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60wv;
+    gap: 12px;
+    justify-content: left;
+    align-items: stretch;
+}
+
+.card {
+    background-color: rgb(255, 255, 255);
+}
+
+.flex > .card {
+    flex-basis: 30%;
+}
+
+img {
+    width: 100%;
+}
+
+footer {
+    padding: 12px 0 0 0;
+    border-top: 2px solid black;
+}

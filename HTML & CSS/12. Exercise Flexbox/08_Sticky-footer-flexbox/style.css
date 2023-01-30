@@ -1,0 +1,27 @@
+body {
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(238, 238, 238);
+    height: 100vh;
+}
+
+.top_header {
+    position: sticky;
+    flex: 1 0 auto;
+    padding: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid rgb(0,0,0);
+}
+
+.top_header > p {
+    font-size: 27px;
+    margin: 0;
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(102, 102, 102);
+}

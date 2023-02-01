@@ -1,200 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Landing Page</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="typography.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/reset.css" />
+    <!-- <link rel="stylesheet" href="styles/typography.css" /> -->
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
     <header>
-        <div class="header__slogan">
-            <h1>Purple Spider</h1>
-            <p>The last Web Agency you will ever need</p>
-        </div>
+      <div class="header_slogan">
+        <h1>Purple Spider</h1>
+        <p>The last Web Agency you will ever need</p>
+      </div>
 
-        <nav class="header__nav">
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">Contacts</a></li>
-            </ul>
-        </nav>
-        <button class="hidden"><i class="fas fa-layer-group"></i></button>
+      <nav class="header_nav">
+        <ul>
+          <li role="list"><a href="">Home</a></li>
+          <li role="list"><a href="">About Us</a></li>
+          <li role="list"><a href="">Services</a></li>
+          <li role="list"><a href="">Blog</a></li>
+          <li role="list"><a href="">Contacts</a></li>
+        </ul>
+      </nav>
     </header>
     <section class="intro">
-        <div class="intro__container">
-            <h1>Need a website?</h1>
-            <p>
-                We do amazingly futuristic stuff using the same tools
-                everyone has. We are so unique and awesome we didn't spend
-                money on marketing gurus or copy writers!
-            </p>
-            <button>Tell us about your project</button>
-        </div>
-        <div class="intro__img">
-            <img src="globe.png" alt="" srcset=""/>
-        </div>
+      <div class="intro_container">
+        <h1>Need a website?</h1>
+        <p>
+          We do amazingly futuristic stuff using the same tools everyone has. We
+          are so unique and awesome we didn't spend money on marketing gurus or
+          copy writers!
+        </p>
+        <button>Tell us about your project</button>
+      </div>
+      <div class="intro_img">
+        <img src="images/globe.png" alt="" srcset="" />
+      </div>
     </section>
     <section>
-        <h1>Our Team</h1>
-        <div class="team">
-            <div>
-                <img src="person.jpg" alt="" srcset=""/>
-                <p>Genghis Khan</p>
-                <p>CTO</p>
-                <p>Smart dude, geeky, knows his stuff! Nothing else.</p>
-            </div>
-            <div>
-                <img src="person.jpg" alt="" srcset=""/>
-                <p>Sun Tzu</p>
-                <p>Sales</p>
-                <p>Very agressive! Results driven.</p>
-            </div>
-            <div>
-                <img src="person.jpg" alt="" srcset=""/>
-                <p>Genghis Khan</p>
-                <p>CEO</p>
-                <p>Drinks a lot. Loves meetings!</p>
-            </div>
-            <div>
-                <img src="person.jpg" alt="" srcset=""/>
-                <p>Some Guy</p>
-                <p>SEO Optimisation</p>
-                <p>Drinks. Hates computers ...</p>
-            </div>
-            <div>
-                <img src="person.jpg" alt="" srcset=""/>
-                <p>Generic Dude</p>
-                <p>Front End</p>
-                <p>Cares too much about useless things</p>
-            </div>
-            <div>
-                <img src="person.jpg" alt="" srcset=""/>
-                <p>Nice Guy</p>
-                <p>Lead Developer</p>
-                <p>We are not sure what he does!</p>
-            </div>
+      <h1>Our Team</h1>
+      <hr />
+      <div class="team">
+        <div>
+          <img src="images/person.jpg" alt="person" srcset="" />
+          <p>Genghis Khan</p>
+          <p>CTO</p>
+          <p>Smart dude, geeky, knows his stuff! Nothing else.</p>
         </div>
+        <div>
+          <img src="images/person.jpg" alt="person" srcset="" />
+          <p>Sun Tzu</p>
+          <p>Sales</p>
+          <p>Very agressive! Results driven.</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="person" srcset="" />
+          <p>Genghis Khan</p>
+          <p>CEO</p>
+          <p>Drinks a lot. Loves meetings!</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="person" srcset="" />
+          <p>Some Guy</p>
+          <p>SEO Optimisation</p>
+          <p>Drinks. Hates computers ...</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="person" srcset="" />
+          <p>Generic Dude</p>
+          <p>Front End</p>
+          <p>Cares too much about useless things</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="person" srcset="" />
+          <p>Nice Guy</p>
+          <p>Lead Developer</p>
+          <p>We are not sure what he does!</p>
+        </div>
+      </div>
     </section>
     <section class="purple">
-        <h1>Sign-up to our newsletter</h1>
-        <form action="" class="news">
-            <input type="text" name="sub"/>
-            <button>Sign-up</button>
-        </form>
+      <h1>Sign-up to our newsletter</h1>
+      <hr>
+      <form class="news">
+        <input type="text" name="sub" />
+        <button>Sign-up</button>
+      </form>
     </section>
-    <section>
-        <h1>Our Team</h1>
-        <div class="testemonials">
-            <div>
-                <img src="img/person.jpg" alt="" srcset=""/>
-                <p>
-                    The most amazingly professional and absolutely great
-                    people I have had the pleasure to work with on the face
-                    of the earth.
-                </p>
-                <p>Genghis Khan</p>
-                <p>Mongolian emperor</p>
-            </div>
-            <div>
-                <img src="img/person.jpg" alt="" srcset=""/>
-                <p>
-                    The most amazingly professional and absolutely great
-                    people I have had the pleasure to work with on the face
-                    of the earth.
-                </p>
-                <p>Genghis Khan</p>
-                <p>Mongolian emperor</p>
-            </div>
-            <div>
-                <img src="img/person.jpg" alt="" srcset=""/>
-                <p>
-                    The most amazingly professional and absolutely great
-                    people I have had the pleasure to work with on the face
-                    of the earth.
-                </p>
-                <p>Genghis Khan</p>
-                <p>Mongolian emperor</p>
-            </div>
-            <div>
-                <img src="img/person.jpg" alt="" srcset=""/>
-                <p>
-                    The most amazingly professional and absolutely great
-                    people I have had the pleasure to work with on the face
-                    of the earth.
-                </p>
-                <p>Genghis Khan</p>
-                <p>Mongolian emperor</p>
-            </div>
-            <div>
-                <img src="img/person.jpg" alt="" srcset=""/>
-                <p>
-                    The most amazingly professional and absolutely great
-                    people I have had the pleasure to work with on the face
-                    of the earth.
-                </p>
-                <p>Genghis Khan</p>
-                <p>Mongolian emperor</p>
-            </div>
-            <div>
-                <img src="img/person.jpg" alt="" srcset=""/>
-                <p>
-                    The most amazingly professional and absolutely great
-                    people I have had the pleasure to work with on the face
-                    of the earth.
-                </p>
-                <p>Genghis Khan</p>
-                <p>Mongolian emperor</p>
-            </div>
+    <section class="stripes">
+      <h1>Our Team</h1>
+      <hr />
+      <div class="testemonials">
+        <div>
+          <img src="images/person.jpg" alt="" srcset="" />
+          <p>
+            The most amazingly professional and absolutely great people I have
+            had the pleasure to work with on the face of the earth.
+          </p>
+          <p>Genghis Khan</p>
+          <p>Mongolian emperor</p>
         </div>
+        <div>
+          <img src="images/person.jpg" alt="" srcset="" />
+          <p>
+            The most amazingly professional and absolutely great people I have
+            had the pleasure to work with on the face of the earth.
+          </p>
+          <p>Genghis Khan</p>
+          <p>Mongolian emperor</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="" srcset="" />
+          <p>
+            The most amazingly professional and absolutely great people I have
+            had the pleasure to work with on the face of the earth.
+          </p>
+          <p>Genghis Khan</p>
+          <p>Mongolian emperor</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="" srcset="" />
+          <p>
+            The most amazingly professional and absolutely great people I have
+            had the pleasure to work with on the face of the earth.
+          </p>
+          <p>Genghis Khan</p>
+          <p>Mongolian emperor</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="" srcset="" />
+          <p>
+            The most amazingly professional and absolutely great people I have
+            had the pleasure to work with on the face of the earth.
+          </p>
+          <p>Genghis Khan</p>
+          <p>Mongolian emperor</p>
+        </div>
+        <div>
+          <img src="images/person.jpg" alt="" srcset="" />
+          <p>
+            The most amazingly professional and absolutely great people I have
+            had the pleasure to work with on the face of the earth.
+          </p>
+          <p>Genghis Khan</p>
+          <p>Mongolian emperor</p>
+        </div>
+      </div>
     </section>
     <footer>
-        <div class="footer__slogan">
-            <h1>Purple Spider</h1>
-            <p>
-                We are the best web gurus you will ever have the pleasure to
-                encounter. We are amazing!
-            </p>
+      <div class="footer_slogan">
+        <h1>Purple Spider</h1>
+        <p>
+          We are the best web gurus you will ever have the pleasure to
+          encounter. We are amazing!
+        </p>
+      </div>
+      <div class="footer_sitemap">
+        <h2>Sitemap</h2>
+        <div class="footer_container">
+          <ul role="list">
+            <li><a href="">Home</a></li>
+            <li><a href="">About us</a></li>
+            <li><a href="">Services </a></li>
+            <li><a href="">Blog</a></li>
+          </ul>
+          <ul role="list">
+            <li><a href="">Contacts</a></li>
+            <li><a href="">Terms and Conditions</a></li>
+            <li><a href="">Privacy Policy</a></li>
+          </ul>
         </div>
-        <div class="footer__sitemap">
-            <h2>Sitemap</h2>
-            <div class="footer__container">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About us</a></li>
-                    <li><a href="">Services </a></li>
-                    <li><a href="">Blog</a></li>
-                </ul>
-                <ul>
-                    <li><a href="">Contacts</a></li>
-                    <li><a href="">Terms and Conditions</a></li>
-                    <li><a href="">Privacy Policy</a></li>
-                </ul>
-            </div>
+      </div>
+      <div class="footer_contacts">
+        <h2>Contacts</h2>
+        <div class="icons">
+          <i class="fas fa-phone"></i>
+          <p>0700 12 345</p>
         </div>
-        <div class="footer__contacts">
-            <h2>Contacts</h2>
-            <div class="icons">
-                <i class="fas fa-phone"></i>
-                <p>0700 12 345</p>
-            </div>
-            <div class="icons">
-                <i class="fas fa-envelope"></i>
-                <p>office@purplespider.bg</p>
-            </div>
-            <div class="icons">
-                <i class="fas fa-clock"></i>
-                <p>Monday - Friday: 09:00 - 18:00</p>
-            </div>
-            <div class="icons">
-                <i class="fas fa-map"></i>
-                <p>28 Some Place Str.</p>
-            </div>
+        <div class="icons">
+          <i class="fas fa-envelope"></i>
+          <p>office@purplespider.bg</p>
         </div>
+        <div class="icons">
+          <i class="fas fa-clock"></i>
+          <p>Monday - Friday: 09:00 - 18:00</p>
+        </div>
+        <div class="icons">
+          <i class="fas fa-map"></i>
+          <p>28 Some Place Str.</p>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

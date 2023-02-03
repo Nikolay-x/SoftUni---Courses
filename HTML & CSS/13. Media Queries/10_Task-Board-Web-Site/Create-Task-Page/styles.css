@@ -1,170 +1,165 @@
-
-
-
 /* TODO	create a valid CSS Grid  */
 /* TODO make the layout responsive by using media queries */
 
+/* ----------- Styles ----------- */
 
-
-
-    /* ----------- Styles ----------- */
-
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    display: grid;
-    grid-template-columns: 120px auto;
-    grid-template-rows: 1fr 6fr 1fr;
-    grid-template-areas: 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-template-columns: 120px auto;
+  grid-template-rows: 1fr 6fr 1fr;
+  grid-template-areas:
     "header header"
     "aside main"
     "footer footer";
-    gap: 10px;
-  }
+  gap: 10px;
+}
 
-  body header {
-    grid-area: header;
-    display: grid;
-    grid-template-columns: 60px auto;
-    grid-template-areas: 
-    "logo header-text";
-    background: rgb(181, 216, 255);
-    padding: 0px 3px 4px 3px;
-    border-radius: 3px;
-  }
-  
-  body header a {
-    grid-area: logo;
-    align-self: center;
-    text-align: center;
-    font-size: 3.2em;
-    filter: drop-shadow(0px 0px 3px #777);
-    text-decoration: none;
-  }
-  
-  body header h1 {
-    grid-area: header-text;
-    margin: 0px;
-    align-self: center;
-    font-size: 1.5em;
-    padding-top: 8px;
-  }
-  
-  aside {
-    grid-area: aside;
-    background: rgb(181, 216, 255);
-    border-radius: 3px;
-  }
-  
-  aside ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 10px;
-  }
-  
-  aside ul a {
-    display: block;
-    padding: 5px;
-    color: rgb(86, 40, 129);
-    text-decoration: none;
-  }
+body header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 60px auto;
+  grid-template-areas: "logo header-text";
+  background: rgb(181, 216, 255);
+  padding: 0px 3px 4px 3px;
+  border-radius: 3px;
+}
 
-  main {
-    grid-area: main;
-    /* display: grid;
+body header a {
+  grid-area: logo;
+  align-self: center;
+  text-align: center;
+  font-size: 3.2em;
+  filter: drop-shadow(0px 0px 3px #777);
+  text-decoration: none;
+}
+
+body header h1 {
+  grid-area: header-text;
+  margin: 0px;
+  align-self: center;
+  font-size: 1.5em;
+  padding-top: 8px;
+}
+
+aside {
+  grid-area: aside;
+  background: rgb(181, 216, 255);
+  border-radius: 3px;
+}
+
+aside ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 10px;
+}
+
+aside ul a {
+  display: block;
+  padding: 5px;
+  color: rgb(86, 40, 129);
+  text-decoration: none;
+}
+
+main {
+  grid-area: main;
+  /* display: grid;
     grid-template-rows: 1fr auto; */
-  }
-  
-  main h1 {
-    font-size: 1.5em;
-  }
-  
-  footer {
-    grid-area: footer;
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    background: rgb(181, 216, 255);
-    padding: 8px;
-    border-radius: 3px; 
-  }
-  
-  
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  table td, table th {
-    border: 1px solid #ddd;
-    padding: 8px;
+}
+
+main h1 {
+  font-size: 1.5em;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  background: rgb(181, 216, 255);
+  padding: 8px;
+  border-radius: 3px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(84, 144, 212);
+  color: white;
+}
+
+td {
+  white-space: pre-wrap;
+}
+
+form table {
+  max-width: 800px;
+  margin: 0px auto 10px auto;
+}
+
+form table input,
+form table textarea,
+form table select {
+  width: 100%;
+}
+
+form table th {
+  width: 110px;
+}
+
+.description {
+  height: 30rem;
+}
+
+#description {
+  height: 30rem;
+}
+
+form button {
+  padding: 15px 30px;
+  border-radius: 10px;
+  outline: none;
+  background: #9bcef0;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  max-width: 800px;
+  font-size: 1.2em;
+}
+
+@media (max-width: 500px) {
+  body {
+    display: grid;
+    grid-template-rows: 1fr 1fr auto 1fr;
+    grid-template-areas:
+      "header header"
+      "aside aside"
+      "main main"
+      "footer footer";
   }
 
-  table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: rgb(84, 144, 212);
-    color: white;
-  }
-  
-  td {
-    white-space: pre-wrap;
-  }
-  
-  form table {
-    max-width: 800px;
-    margin: 0px auto 10px auto;
-  }
-  
-  form table input, form table textarea, form table select {
-    width: 100%;
-  }
-  
-  form table th {
-    width: 110px;
+  aside ul {
+    text-align: center;
   }
 
-  .description {
-    height: 30rem;
+  aside ul a {
+    color: rgb(44, 76, 114);
+    font-weight: bold;
   }
 
-  #description {
-    height: 30rem;
-  }
-  
-  form button {
-    padding: 15px 30px;
-    border-radius: 10px;
-    outline: none;
-    background: #9bcef0;
-    width: 100%;
-    margin: 0 auto;
+  main div {
     display: block;
-    max-width: 800px;
-    font-size: 1.2em;
   }
-  
-  @media (max-width: 500px) {
-    body {
-      display: grid;
-      grid-template-rows: 1fr 1fr auto 1fr;
-      grid-template-areas:
-        "header header"
-        "aside aside"
-        "main main"
-        "footer footer";
-    }
-
-    aside ul {
-      text-align: center;
-    }
-
-    aside ul a {
-      color: rgb(44, 76, 114);
-      font-weight: bold;
-    }
-
-    main div {
-      display: block;
-    }
-  }
+}

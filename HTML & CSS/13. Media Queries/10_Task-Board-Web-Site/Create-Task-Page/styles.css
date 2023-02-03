@@ -33,6 +33,7 @@
   }
   
   body header a {
+    grid-area: logo;
     align-self: center;
     text-align: center;
     font-size: 3.2em;
@@ -41,6 +42,7 @@
   }
   
   body header h1 {
+    grid-area: header-text;
     margin: 0px;
     align-self: center;
     font-size: 1.5em;
@@ -145,6 +147,7 @@
   @media (max-width: 500px) {
     body {
       display: grid;
+      grid-template-rows: 1fr 1fr auto 1fr;
       grid-template-areas:
         "header header"
         "aside aside"
@@ -152,8 +155,16 @@
         "footer footer";
     }
 
+    aside ul {
+      text-align: center;
+    }
+
+    aside ul a {
+      color: rgb(44, 76, 114);
+      font-weight: bold;
+    }
+
     main div {
       display: block;
     }
   }
-  

@@ -122,11 +122,21 @@
   @media (max-width: 500px) {
     body {
       display: grid;
+      grid-template-rows: 1fr 1fr auto 1fr;
       grid-template-areas:
         "header header"
         "aside aside"
         "main main"
         "footer footer";
+    }
+
+    aside ul {
+      text-align: center;
+    }
+
+    aside ul a {
+      color: rgb(44, 76, 114);
+      font-weight: bold;
     }
 
     main div {

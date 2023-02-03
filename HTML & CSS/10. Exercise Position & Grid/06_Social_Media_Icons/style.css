@@ -1,46 +1,50 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css);
 
 ul {
-    display: inline-block;
-    list-style: none;
+  display: inline-block;
+  list-style: none;
 }
 
 ul li {
-    display: inline-block;
-    margin-right: 12px;
+  display: inline-block;
+  margin-right: 12px;
 }
 
 a {
-    font-size: 40px;
-    background-color: #e6e6e6;
-    border-radius: 50%;
+  display: block;
+  width: 48px;
+  height: 48px;
+  background-color: #e6e6e6;
+  border-radius: 100%;
+  position: relative;
 }
 
 i {
-    position: relative;
-    top: -5px;
-    right: 0px;
-    font-size: 24px;
-    color: black;
-    padding: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 27px;
+  color: black;
+  padding: 12px;
+  transform: translate(-50%, -50%);
 }
 
 .fa-facebook-square:hover {
-    color: #334F8D;
+  color: #334f8d;
 }
 
 .fa-twitter:hover {
-    color: #3DA2E9;
+  color: #3da2e9;
 }
 
 .fa-google-plus:hover {
-    color: #CA4D36;
+  color: #ca4d36;
 }
 
 .fa-linkedin:hover {
-    color: #8395B2;
+  color: #8395b2;
 }
 
 .fa-instagram:hover {
-    color: #597999;
+  color: #597999;
 }

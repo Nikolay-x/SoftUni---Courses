@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Abril Fatface", cursive;
+}
+
+.top {
+  background-image: url("./image/image.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  padding: 30px;
+}
+
+.transperant,
+.gradient {
+  padding: 20px 10px;
+  width: 150px;
+  height: 150px;
+  box-shadow: 0 0 10px #333333;
+}
+
+.gradient {
+  float: right;
+  margin-right: 24px;
+  width: 300px;
+  height: unset;
+  background-image: linear-gradient(
+    to right,
+    #928982,
+    #9e9791,
+    #aba4a1,
+    #b7b3b0,
+    #c3c1c0
+  );
+  color: white;
+  text-align: right;
+}
+
+.container p {
+  font-size: 14px;
+  border-top: 1px solid white;
+  margin-top: 4px;
+  padding-top: 6px;
+}
+
+.gradient .big {
+  margin-top: -50px;
+  font-size: 60px;
+  font-weight: bold;
+  line-height: normal;
+  color: #686666;
+}
+
+.bottom {
+  background-color: #f0eef1;
+  display: flex;
+  align-items: stretch;
+}
+
+.right {
+  background-color: #b1a9a5;
+  /* width: 300px; */
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left {
+  padding: 50px;
+}
+
+.service {
+  margin: 20px 0px;
+}
+
+.service span {
+  font-weight: bold;
+}
+
+.num {
+  color: white;
+  font-size: 50px;
+  font-weight: 100;
+}
+
+.rightItem {
+  text-transform: uppercase;
+}
+
+.first2 {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.item {
+  padding: 10px;
+}
+
+.btns input,
+.btns button {
+  background-color: #B1A9A5;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.btns input::placeholder {
+  color: white;
+}
+
+.btns button {
+  background-color: #616D47;
+}

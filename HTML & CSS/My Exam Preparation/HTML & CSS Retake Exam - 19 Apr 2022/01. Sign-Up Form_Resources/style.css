@@ -1,0 +1,147 @@
+html {
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #e6e6e6;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 900px;
+}
+
+.left {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)),
+    url("./image/cover.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  padding: 20px;
+  width: 24vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  align-self: flex-start;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.heading {
+  text-align: center;
+}
+
+.left h1 {
+  font-size: 27px;
+  margin-bottom: 12px;
+}
+
+.head-p {
+  font-size: 21px;
+}
+
+.icons i {
+  margin-right: 12px;
+}
+
+.right {
+  width: 24vw;
+  height: 60vh;
+  background-color: white;
+  color: #b3b3b3;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 45px;
+  width: 100%;
+}
+
+.input-group label {
+  margin-bottom: 4%;
+}
+
+.input-group input {
+  border: none;
+  background-color: white;
+  border-bottom: 1px solid #999999;
+}
+
+.btns {
+  margin-top: 10%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btns button {
+  margin-right: 24px;
+  padding: 6px 38px;
+  border-radius: 38px;
+  color: white;
+  background-color: black;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+.btns a {
+  color: #999999;
+}
+
+::placeholder {
+  color: #999999;
+}
+
+@media screen and (max-width: 900px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left {
+    width: 60vw;
+    height: 30vh;
+  }
+
+  .right {
+    width: 60vw;
+    height: 63vh;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btns button {
+    margin-right: 0;
+    margin-bottom: 6px;
+  }
+}

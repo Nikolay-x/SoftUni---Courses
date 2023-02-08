@@ -1,0 +1,73 @@
+@media screen and (max-width: 800px) {
+  header {
+    display: block;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  nav p {
+    margin-left: 6%;
+    margin-bottom: 4%;
+  }
+
+  nav ul {
+    display: block;
+    text-align: center;
+  }
+
+  header div h1 {
+    font-size: 39px;
+  }
+
+  header div p {
+    font-size: 12px;
+  }
+
+  .trainings {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .trainings div {
+    width: 100%;
+  }
+
+  .instructors-pic {
+    flex-direction: column;
+  }
+
+  .classes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .classes li {
+    width: 50%;
+  }
+
+  .classes li > p {
+    font-size: 54px;
+  }
+
+  .classes li div h3 {
+    font-size: 18px;
+  }
+
+  .classes li div p {
+    font-size: 14px;
+  }
+
+  .getInTouch {
+    display: block;
+  }
+
+  .wrapper {
+    flex-wrap: wrap;
+  }
+
+  .wrapper .about {
+    flex-basis: 100%;
+  }
+}

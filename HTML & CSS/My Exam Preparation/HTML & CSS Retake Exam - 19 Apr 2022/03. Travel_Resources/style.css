@@ -1,0 +1,280 @@
+html {
+  font-family: Helvetica, sans-serif;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 20px;
+  min-height: 140px;
+  color: #505468;
+}
+
+.icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 18px;
+}
+
+.icon:hover {
+  color: white;
+  background-color: #caa942;
+  cursor: pointer;
+}
+
+.navigation {
+  width: 40%;
+}
+
+.navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #505468;
+  padding: 4px 18px;
+}
+
+.navigation a:hover {
+  background-color: #caa942;
+  color: white;
+}
+
+.main {
+  background-color: #caa942;
+}
+
+.slider {
+  /* position: relative; */
+}
+
+.logo {
+  background-color: #caa942;
+  width: 150px;
+  position: absolute;
+  top: 5%;
+  left: 6%;
+  padding: 20px;
+}
+
+.shuttle {
+  width: 400px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  position: absolute;
+  top: 480px;
+  /* top: 210px; */
+  left: 360px;
+}
+
+.shuttle button {
+  all: unset;
+  border: 1px solid white;
+  padding: 6px 12px;
+  margin-top: 12px;
+  color: #caa942;
+  font-weight: bold;
+}
+
+.shuttle button:hover {
+  border: 1px solid #caa942;
+  padding: 6px 12px;
+  margin-top: 12px;
+  background-color: white;
+  color: #caa942;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  width: 50%;
+  min-height: 360px;
+  margin: 0 auto;
+}
+
+.content p {
+  align-self: flex-start;
+}
+
+.content span {
+  margin-right: 6px;
+}
+
+.content button {
+  all: unset;
+  color: white;
+  border: 1px solid white;
+  padding: 6px 12px;
+}
+
+.content button:hover {
+  color: #caa942;
+  background-color: white;
+  border: 1px solid white;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.imgs {
+  background-color: white;
+  min-height: 360px;
+}
+
+.imgs h1 {
+  padding-top: 24px;
+  text-align: center;
+}
+
+.imgs > p {
+  text-align: center;
+  font-size: smaller;
+  margin-bottom: 60px;
+}
+
+.flex-imgs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-imgs img {
+  width: 90px;
+  border: 2px solid black;
+  border-radius: 100%;
+}
+
+.flex-imgs p {
+  font-size: smaller;
+  width: 70%;
+  text-align: center;
+}
+
+.img-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .top {
+  width: 100%;
+  min-height: 75px;
+  background-color: #caa942;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: white;
+  padding: 8px 20px;
+}
+
+.footer button {
+  all: unset;
+  color: white;
+  border: 1px solid white;
+  padding: 6px 12px;
+}
+
+.footer button:hover {
+  color: #caa942;
+  background-color: white;
+  border: 1px solid white;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.footer .bottom {
+  min-height: 60px;
+}
+
+.footer .bottom p {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        display: block;
+    }
+
+    .icons {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .icon {
+        display: block;
+        margin: 8px auto;
+    }
+
+    .navigation {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .navigation ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .slider {
+        display: block;
+    }
+
+    .logo {
+        position: static;
+        margin: 0 auto;
+    }
+    
+    .shuttle {
+        position: static;
+        margin: 0 auto;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .content h1 {
+        margin-bottom: 21px;
+    }
+
+    .content p {
+        margin-bottom: 15px;
+    }
+
+    .flex-imgs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .img-item {
+        flex-basis: 20%;
+    }
+}

@@ -1,0 +1,50 @@
+/* TODO: Add the responsive styles here */
+
+@media screen and (max-width: 600px) {
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+    flex-direction: column;
+  }
+
+  .tm-nav-li {
+    padding-left: 50px;
+    padding-right: 0;
+  }
+
+  .tm-welcome-section {
+    max-width: 600px;
+  }
+
+  .tm-section-title {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tm-gallery-page {
+    margin: 0 300px;
+    display: flex;
+    flex-wrap: wrap;
+
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tm-gallery-page {
+    margin: 0;
+  }
+
+  figure {
+    width: 100%;
+    margin: 0;
+  }
+
+  .tm-description-box {
+    margin-left: 0;
+  }
+
+  .tm-description-box {
+    width: 80%;
+  }
+}

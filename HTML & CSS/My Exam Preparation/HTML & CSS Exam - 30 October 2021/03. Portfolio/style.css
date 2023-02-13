@@ -1,0 +1,304 @@
+html {
+  font-family: "Raleway", sans-serif;
+  padding: 30px;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #ededed;
+  height: 60px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 110px;
+  padding-right: 24px;
+}
+
+.navigation i {
+  font-size: 24px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  background-color: #ededed;
+  margin-bottom: 30px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  padding: 120px 30px 120px 120px;
+}
+
+.left h1 span {
+  color: #646464;
+  font-weight: 100;
+}
+
+.left p {
+  font-style: italic;
+  width: 50%;
+}
+
+blockquote {
+  height: 75px;
+  border-left: 3px solid gray;
+  font-size: 14px;
+  padding-left: 24px;
+  margin-bottom: 0px;
+  color: gray;
+}
+
+.card2 {
+  flex-direction: row-reverse;
+}
+
+.card2 .left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-left: 0;
+}
+
+.card2 .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.icons {
+  display: flex;
+  width: 180px;
+  justify-content: space-between;
+}
+
+.icon {
+  background-color: #878787;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.hr2 {
+  width: 69px;
+  background-color: #646464;
+  padding: 1px;
+  border: none;
+  margin: 0 18px 0 0;
+}
+
+.card3 {
+  display: block;
+  padding: 0;
+}
+
+.card3 img {
+  width: 100%;
+}
+
+.card4 .left {
+  gap: 30px;
+}
+
+.card4 .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card4 img {
+  width: 60%;
+}
+
+.card5 {
+  gap: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 390px;
+  padding: 60px;
+  position: relative;
+  height: 40vw;
+}
+
+.card5 .middle5 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card6 {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+  margin-bottom: 0;
+}
+
+.top6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top6 h1 span {
+  color: #646464;
+  font-weight: 100;
+}
+
+.top6 p {
+  text-align: center;
+  font-style: italic;
+  width: 75%;
+}
+
+.bottom6 {
+  width: 40%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.personal-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personal-data input {
+  width: 48%;
+  background-color: #ededed;
+  border: 2px solid black;
+}
+
+form textarea {
+  background-color: #ededed;
+  border: 2px solid black;
+}
+
+form button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 8px 0;
+  border: 1px solid black;
+}
+
+form button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #ededed;
+  height: 72px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+@media screen and (max-width: 750px) {
+  .card {
+    padding: 16px;
+  }
+
+  .card1, .card2, .card4 {
+    flex-direction: column;
+  }
+
+  .card .left {
+    padding: 0;
+    width: 100%;
+  }
+
+  .card .left p {
+    width: 100%;
+  }
+
+  .card1 .left {
+    gap: 16px;
+  }
+
+  .card1 {
+    padding-bottom: 0;
+  }
+
+  .title2 {
+    width: 100%;
+  }
+
+  .hr2 {
+    width: 48px;
+    background-color: #646464;
+    padding: 1px;
+    border: none;
+    margin: 0 18px 0 0;
+  }
+
+  .card2 .right {
+    margin: 0 auto;
+  }
+
+  .card3 {
+    padding: 0;
+  }
+
+  blockquote {
+    height: 48px;
+    margin-bottom: 20px;
+  }
+
+  .card4 img {
+    width: 96%;
+  }
+
+  .card5 {
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    position: static;
+    height: auto;
+
+    flex-direction: column;
+  }
+  
+  .card5 .middle5 {
+    position: static;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+  }
+
+  .bottom6 {
+    width: 100%;
+  }
+}

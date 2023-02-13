@@ -1,0 +1,112 @@
+/* TODO: Add responsive styles here... */
+
+@media screen and (max-width: 600px) {
+  #home > section.container > nav > a {
+    display: block;
+    margin: 0 auto;
+  }
+
+  #navbarSupportedContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: 0;
+  }
+
+  #home > section.container-fluid.hero {
+    margin-top: -150px;
+  }
+
+  #about-us {
+    margin-top: -270px;
+  }
+
+  #about-us > div > div.container > div > div:nth-child(2) {
+    margin-top: -300px;
+  }
+
+  #contact-us > div {
+    margin-top: -90px;
+  }
+
+  #home > section.container-fluid.hero > img {
+    display: none;
+    width: 1%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #home > section.container-fluid.hero {
+    display: block;
+  }
+
+  #home > section.container-fluid.hero > article > h1 {
+    font-size: 60px;
+    text-align: center;
+  }
+
+  #home > section.container-fluid.hero > article > p {
+    text-align: center;
+  }
+
+  #home > section.container-fluid.hero > article > article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #home > section.container-fluid.hero > article > article > a:nth-child(1) {
+    width: 60%;
+    text-align: center;
+  }
+
+  #about-us {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #about-us > div > div.container > div > div.col-12.col-sm-12.col-lg-4.service-txt > h2 {
+    text-align: center;
+  }
+
+  #about-us > div > div.container > div > div.col-12.col-sm-12.col-lg-4.service-txt > div > a {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
+  body > section.about > div > div > div:nth-child(2) > h5 {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  body > section.about > div > div > div:nth-child(2) > h2 {
+    text-align: center;
+  }
+
+  body > section.about > div > div > div:nth-child(2) > p {
+    text-align: center;
+  }
+
+  #contact-us > div > div:nth-child(1) > div > h5 {
+    text-align: center;
+  }
+
+  #contact-us > div > div:nth-child(1) > div > h2 {
+    text-align: center;
+  }
+
+  #contact-us > div > div:nth-child(3) > div:nth-child(2) > div > a {
+    display: none;
+  }
+
+  body > footer > div > div > div > ul {
+    display: flex;
+    flex-direction: column;
+  }
+}

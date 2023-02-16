@@ -13,8 +13,9 @@ body {
   display: flex;
   justify-content: space-between;
   background-color: #f5f7f8;
-  padding: 44px;
+  /* padding: 44px; */
   width: 50vw;
+  border-radius: 8px;
 }
 
 .left {
@@ -22,11 +23,17 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 44px;
 }
 
 .smaller {
   font-size: x-small;
   font-weight: bold;
+}
+
+.title h1,
+.title p {
+  font-weight: normal;
 }
 
 .left > p {
@@ -46,10 +53,10 @@ button {
 }
 
 button:hover {
-    background-color: white;
-    color: #6b6dfc;
-    cursor: pointer;
-  }
+  background-color: white;
+  color: #6b6dfc;
+  cursor: pointer;
+}
 
 .learn-more {
   background-color: white;
@@ -58,10 +65,10 @@ button:hover {
 }
 
 .learn-more:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
-  }
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
 
 @media (max-width: 800px) {
   .wrapper {

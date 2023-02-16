@@ -1,0 +1,44 @@
+@media (max-width: 600px) {
+  body {
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  body > section.banner > h2 {
+    width: 60%;
+    margin: 0 auto 8% auto;
+    font-size: 24px;
+  }
+
+  .banner {
+    padding: 2em 0 2em 0;
+  }
+
+  .wrapper > .inner {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  header h2 {
+    font-size: 20px;
+  }
+
+  .feature {
+    padding: 2em 8px 0.1em 8px;
+}
+
+.wrapper {
+    padding: 4em 0px 4em;
+    position: relative;
+}
+
+body > section.wrapper.style2.special > div > form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+body > section.wrapper.style2.special > div > form > ul > li > input[type=submit] {
+    font-size: 12px;
+}
+
+}

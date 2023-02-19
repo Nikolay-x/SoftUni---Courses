@@ -1,0 +1,139 @@
+@media (max-width: 600px) {
+  body > div > div > div.home-navbar > header > div > div.home-container01 {
+    display: none;
+  }
+
+  body
+    > div
+    > div
+    > div.home-navbar
+    > header
+    > div
+    > div.home-middle
+    > div.home-left {
+    display: none;
+  }
+
+  body
+    > div
+    > div
+    > div.home-navbar
+    > header
+    > div
+    > div.home-middle
+    > div.home-right {
+    display: none;
+  }
+
+  body > div > div > div.home-navbar > header > div > div.home-middle > span {
+    margin-left: 0;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div.home-hero.section-container
+    > div
+    > div
+    > div
+    > div.home-info {
+    margin-left: 210px;
+    width: 120px;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div.home-hero.section-container
+    > div
+    > div {
+    flex-direction: column;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div.home-hero.section-container
+    > div
+    > div
+    > div {
+    /* padding-right: 0; */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .category-card-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 16px;
+    object-position: bottom;
+
+    width: 260px;
+    height: 260px;
+  }
+
+  .section-container {
+    flex-direction: column;
+  }
+
+  .home-left4 {
+    padding: 20px 0;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div.home-full-width-banner.section-container
+    > img {
+    width: 100%;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div:nth-child(4)
+    > div
+    > div.home-container08
+    > div.blog-post-card-blog-post-card.blog-post-card-root-class-name
+    > img {
+    width: 550px;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div:nth-child(4)
+    > div
+    > div.home-container08
+    > div:nth-child(2)
+    > img {
+    width: 550px;
+  }
+
+  body
+    > div
+    > div
+    > div.home-main
+    > div:nth-child(4)
+    > div
+    > div.home-container08
+    > div:nth-child(3)
+    > img {
+    width: 550px;
+  }
+
+  body > div > div > div.home-footer > div > footer {
+    flex-direction: column;
+  }
+
+  body > div > div > div.home-footer > div > footer > div.home-links-container {
+    flex-direction: column;
+  }
+}

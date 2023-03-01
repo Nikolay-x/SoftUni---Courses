@@ -22,7 +22,18 @@ function checkMultiplication(a, b, c) {
   }
 }
 
+function signCheck(...numbers) {
+  return numbers.filter((a) => a < 0).length % 2 === 0
+    ? "Positive"
+    : "Negative";
+}
+
 checkMultiplication(5, 12, -15);
 checkMultiplication(-6, -12, 14);
 checkMultiplication(-1, -2, -3);
 checkMultiplication(-5, 1, 1);
+
+console.log(signCheck(5, 12, -15));
+console.log(signCheck(-6, -12, 14));
+console.log(signCheck(-1, -2, -3));
+console.log(signCheck(-5, 1, 1));

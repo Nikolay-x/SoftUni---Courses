@@ -36,3 +36,12 @@ console.log(value2);
 // regex interpolation
 // let regexInterpolation = new RegExp(`${text}, 'g`);
 // console.log(regexInterpolation.test);
+
+// Sort Dictionary by Values- ascending order
+const dict = { a: 5, b: 2, c: 9, d: 1 };
+
+const sorted = Object.entries(dict).sort((a, b) => a[1] - b[1]);
+
+const result = Object.fromEntries(sorted);
+
+console.log(result); // {d: 1, b: 2, a: 5, c: 9}

@@ -26,13 +26,17 @@ function factorialDivisionRecursion(num1, num2) {
 }
 
 function factorialDivisionMath(num1, num2) {
-  let start = Math.max(num1, num2);
-  let end = Math.min(num1, num2);
   let result = 1;
-  for (let i = start; i > end; i--) {
-    result *= i;
+  if (num1 >= num2) {
+    for (let i = num1; i > num2; i--) {
+      result *= i;
+    }
+  } else {
+    for (let i = num1; i < num2; i++) {
+      result *= i;
+    }
+    result = 1 / result;
   }
-
   console.log(result.toFixed(2));
 }
 
@@ -47,3 +51,11 @@ factorialDivisionRecursion(7, 3);
 factorialDivisionMath(5, 2);
 factorialDivisionMath(6, 2);
 factorialDivisionMath(7, 3);
+
+factorialDivision(1, 12);
+factorialDivision(10, 12);
+factorialDivision(12, 13);
+
+factorialDivisionMath(1, 12);
+factorialDivisionMath(10, 12);
+factorialDivisionMath(12, 13);

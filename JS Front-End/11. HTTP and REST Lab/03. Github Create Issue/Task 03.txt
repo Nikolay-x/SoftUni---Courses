@@ -10,7 +10,7 @@ POST request:
 
 
 GitHub Personal access tokens (classic) valid till 29-Mar-2023:
-???
+***
 
 
 After the POST request

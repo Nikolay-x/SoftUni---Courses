@@ -47,6 +47,8 @@ function attachEvents() {
     } catch (error) {}
   }
 
+  loadStudents();
+
   async function submitHandler() {
     const firstName = firstNameInput.value;
     const lastName = lastNameInput.value;

@@ -1,0 +1,196 @@
+PS C:\Users\NB\MyWebsite> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\MyWebsite\
+   2 notepad Dockerfile
+   3 dir
+   4 docker ps -a
+   5 docker cp . beautiful_williams:/app/
+   6 notepad Dockerfile
+   7 docker mv .\Dockerfile.txt .\Dockerfile
+   8 docker -mv .\Dockerfile.txt .\Dockerfile
+   9 Get-History
+
+PS C:\Users\NB\wordpress> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\wordpress\
+   2 docker network ls
+   3 docker network ls
+
+PS C:\Users\NB\wordpress> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 docker images
+   2 docker images --help
+   3 docker pull alpine
+   4 mkdir enrtypoint
+   5 cd entrypoint
+   6 dir
+   7 cd enrtypoint
+   8 notepad Dockerfile
+   9 docker image
+  10 docker image ls
+  11 docker image ls -a
+  12 move .\Dockerfile.txt .\Dockerfile
+  13 dir
+  14 docker build -t entrypoint
+  15 docker build -t entrypoint .
+  16 docker image
+  17 docker image ls
+  18 docker run -it entrypoint
+  19 docker run -it entrypoint
+  20 docker run -it entrypoint Niki
+  21 cd ..
+  22 clear
+  23 cd '.\MyWebsite\'
+  24 dir
+  25 docker run -it node:16 bash
+  26 docker ps
+  27 docker ps -a
+  28 docker rm 66
+  29 cat .\Dockerfile
+  30 docker build -t mywebsite .
+  31 docker image ls -a
+  32 docker run -d -p 8080:8080 mywebsite
+  33 notepad .\Dockerfile
+  34 docker run -d -p 8080:8080 mywebsite:1.0 .
+  35 docker build -t mywebsite:1.0 .
+  36 docker ps -a
+  37 docker rm fb
+  38 docker rm fb -f
+  39 docker ps -a
+  40 docker run -d mywebsite:1.0
+  41 docker ps -a
+  42 docker rm 86 -f
+  43 docker run -d -p 8080:8080 mywebsite:1.0
+  44 docker ps
+  45 docker rm 0d -f
+  46 docker run -d -P mywebsite:1.0
+  47 docker ps
+  48 docker ps
+  49 Get-History
+  50 docker login -u nikolayx
+  51 docker tag
+  52 docker image ls -a
+  53 docker tag mywebsite:1.0 nikolayx/mywebsite:1.0
+  54 docker image ls -a
+  55 docker push nikolayx/mywebsite:1.0
+  56 docker tag mywebsite:1.0 nikolayx/mywebsite
+  57 docker push nikolayx/mywebsite
+  58 docker image ls -a
+  59 docker rmi nikolayx/mywebsite:1.0
+  60 docker image ls -a
+  61 docker rmi nikolayx/mywebsite
+  62 docker rmi mywebsite
+  63 docker image ls -a
+  64 docker pull nikolayx/mywebsite
+  65 docker image ls -a
+  66 docker run -d nikolayx/mywebsite:latest
+  67 docker ps -a
+  68 docker ps
+  69 docker rm 2d -f
+  70 Get-History
+  71 docker run --help
+  72 docker -e --env-file list
+  73 docker -e --env-file list
+  74 docker --env-file list
+  75 Get-History
+  76 docker run -d nikolayx/mywebsite:latest
+  77 docker image inspect
+  78 docker image inspect nikolayx/mywebsite:latest
+  79 docker ps
+  80 docker exec -it frosty_austin bash
+  81 ping 172.17.0.2
+  82 docker run -d nikolayx/mywebsite:latest
+  83 docker ps
+  84 docker exec -it compassionate_germain bash
+  85 notepad .\Dockerfile
+  86 docker build -t mywebsite_noexpose .
+  87 docker run -d mywebsite_noexpose
+  88 docker ps
+  89 docker exec -it agitated_northcutt bash
+  90 docker ps -a
+  91 docker exec -it compassionate_germain bash
+  92 docker run -P -d nikolayx/mywebsite:latest
+  93 docker ps
+  94 docker run -p 1234:8080 -d nikolayx/mywebsite:latest
+  95 docker ps
+  96 Get-H
+  97 Get-History
+  98 clear
+  99 Get-History
+ 100 cd ..
+ 101 mkdir wordpress
+ 102 cd .\wordpress\
+ 103 dir
+ 104 docker network create mynetwork
+ 105 docker network ls
+ 106 docker run -dit `...
+ 107 docker ps
+ 108 dir
+ 109 dir data
+ 110 docker run -dit `...
+ 111 dir
+ 112 dir .\wp-data\
+ 113 docker run -dit `...
+ 114 dir
+ 115 dir .\wp-data\
+ 116 clear
+ 117 docker run -dit `...
+ 118 dir
+ 119 dir .\wp-data\
+ 120 docker ps -a
+ 121 docker logs f0
+ 122 docker logs f0 -f
+ 123 docker run -dit `...
+ 124 dir
+ 125 dir .\wp-data\
+ 126 dir
+ 127 docker run -dit `...
+ 128 docker ps
+ 129 docker network ls
+ 130 docker network inspect mynetwork
+ 131 Get-History
+ 132 sudo lsof -i :80
+ 133 netstat -ano | findstr :80...
+ 134 netstat -ano | findstr :82...
+ 135 netstat -ano...
+ 136 dir
+ 137 dir
+ 138 docker ps
+ 139 docker rm 6a 58
+ 140 docker rm 6a 58 -f
+ 141 docker ps
+ 142 docker-compose up
+ 143 docker ps
+ 144 docker ps -a
+ 145 docker network rm mynetwork
+ 146 docker-compose up
+ 147 docker-compose up
+ 148 docker-compose up
+ 149 docker-compose up
+ 150 docker-compose up
+ 151 docker-compose --help
+ 152 docker-compose rm
+ 153 dir
+ 154 dir data
+ 155 docker ps -a
+ 156 docker-compose up -d
+ 157 docker-compose up -d
+ 158 docker-compose up -d
+ 159 docker-compose rm
+ 160 docker-compose rm
+ 161 clear
+ 162 docker-compose up -d
+ 163 docker-compose up -d
+ 164 Get-History
+ 165 docker-compose ps
+ 166 docker-compose down --rmi all --volumes
+ 167 docker-compose up -d
+ 168 Get-History
+ 169 docker run -p 1234:8080 -d nikolayx/mywebsite:latest
+ 170 ipconfig

@@ -1,0 +1,11 @@
+npm install -g @vue/cli
+npm i -g @vue/cli-init
+notepad .\package.json
+
+C:\Users\NB>docker run ^
+More? -p 27017:27017 ^
+More? -v %cd%/data:/etc/mongo ^
+More? -d ^
+More? -e MONGO_INITDB_ROOT_USERNAME=mongoadmin ^
+More? -e MONGO_INITDB_ROOT_PASSWORD=secret ^
+More? mongo:4.4.21

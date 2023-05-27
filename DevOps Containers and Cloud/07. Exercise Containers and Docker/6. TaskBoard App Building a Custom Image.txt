@@ -1,0 +1,122 @@
+PS C:\Users\NB\Exercise Containers and Docker> dir
+
+
+    Directory: C:\Users\NB\Exercise Containers and Docker
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         27-May-23     09:30                06-08-10.TaskBoard-ASP.NET-App
+d-----         27-May-23     09:30                07.Tracker-App
+d-----         27-May-23     09:30                09.TODO-App
+d-----         27-May-23     09:30                11.Blue-VS-Green-App
+d-----         27-May-23     10:26                apache
+
+
+PS C:\Users\NB\Exercise Containers and Docker> cd .\06-08-10.TaskBoard-ASP.NET-App\
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> dir
+
+
+    Directory: C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         27-May-23     12:50                .vs
+d-----         27-May-23     12:47                TaskBoard.Data
+d-----         27-May-23     12:51                TaskBoard.WebApp
+-a----         27-May-23     12:51            340 .dockerignore
+-a----         01-Dec-22     17:02           1650 TaskBoard.sln
+
+
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> cd .\TaskBoard.WebApp\
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App\TaskBoard.WebApp> docker build -t nikolayx/taskboard_app .
+[+] Building 2.0s (12/18)
+ => [internal] load build definition from Dockerfile                                                                             0.0s
+ => => transferring dockerfile: 913B                                                                                             0.0s
+ => [internal] load .dockerignore                                                                                                0.1s
+ => => transferring context: 2B                                                                                                  0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                1.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                             0.0s
+ => [internal] load build context                                                                                                0.8s
+ => => transferring context: 5.78MB                                                                                              0.8s
+ => CANCELED [build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083  0.9s
+ => => resolve mcr.microsoft.com/dotnet/sdk:6.0@sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e          0.0s
+ => => sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e 1.82kB / 1.82kB                                   0.0s
+ => => sha256:24de6e2623991e3e5253a2e0b347dd70cde3abd9686ef9c152082d70eb788507 2.01kB / 2.01kB                                   0.0s
+ => => sha256:541f4bb5cf223fdeec460025550c7925cef409b08566e0e336e782a763afb777 7.17kB / 7.17kB                                   0.0s
+ => => sha256:0c7e41386c8eadde46a3290f80435c97d8a7a726709984d2588d6eef7568287b 0B / 25.37MB                                      0.9s
+ => => sha256:c7e16202c1e1c56776fbbd6eaa0b1c547be1f4ee6f0285d5678c30bc81826185 0B / 148.55MB                                     0.9s
+ => => sha256:0a870562846b4eee6cc58b0c4467e1777896158c4b00d4e4838fb871f9e18c37 1.05MB / 13.61MB                                  0.9s
+ => [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                          0.0s
+ => CACHED [base 2/2] WORKDIR /app                                                                                               0.0s
+ => [final 1/2] WORKDIR /app                                                                                                     0.0s
+ => CACHED [build 2/8] WORKDIR /src                                                                                              0.0s
+ => ERROR [build 3/8] COPY [TaskBoard.WebApp/TaskBoard.WebApp.csproj, TaskBoard.WebApp/]                                         0.0s
+ => ERROR [build 4/8] COPY [TaskBoard.Data/TaskBoard.Data.csproj, TaskBoard.Data/]                                               0.0s
+------
+ > [build 3/8] COPY [TaskBoard.WebApp/TaskBoard.WebApp.csproj, TaskBoard.WebApp/]:
+------
+------
+ > [build 4/8] COPY [TaskBoard.Data/TaskBoard.Data.csproj, TaskBoard.Data/]:
+------
+Dockerfile:11
+--------------------
+   9 |     WORKDIR /src
+  10 |     COPY ["TaskBoard.WebApp/TaskBoard.WebApp.csproj", "TaskBoard.WebApp/"]
+  11 | >>> COPY ["TaskBoard.Data/TaskBoard.Data.csproj", "TaskBoard.Data/"]
+  12 |     RUN dotnet restore "TaskBoard.WebApp/TaskBoard.WebApp.csproj"
+  13 |     COPY . .
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::vrwt06sorj7n7zcy3tdveowrd: "/TaskBoard.Data/TaskBoard.Data.csproj": not found
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App\TaskBoard.WebApp> cd..
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker build -t nikolayx/taskboard_app -f .\TaskBoard.WebApp\Dockerfile .
+[+] Building 153.3s (19/19) FINISHED
+ => [internal] load .dockerignore                                                                                                0.0s
+ => => transferring context: 382B                                                                                                0.0s
+ => [internal] load build definition from Dockerfile                                                                             0.0s
+ => => transferring dockerfile: 913B                                                                                             0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                0.3s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                             0.0s
+ => [build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e   64.1s
+ => => resolve mcr.microsoft.com/dotnet/sdk:6.0@sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e          0.0s
+ => => sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e 1.82kB / 1.82kB                                   0.0s
+ => => sha256:24de6e2623991e3e5253a2e0b347dd70cde3abd9686ef9c152082d70eb788507 2.01kB / 2.01kB                                   0.0s
+ => => sha256:541f4bb5cf223fdeec460025550c7925cef409b08566e0e336e782a763afb777 7.17kB / 7.17kB                                   0.0s
+ => => sha256:0c7e41386c8eadde46a3290f80435c97d8a7a726709984d2588d6eef7568287b 25.37MB / 25.37MB                                18.5s
+ => => sha256:c7e16202c1e1c56776fbbd6eaa0b1c547be1f4ee6f0285d5678c30bc81826185 148.55MB / 148.55MB                              56.9s
+ => => sha256:0a870562846b4eee6cc58b0c4467e1777896158c4b00d4e4838fb871f9e18c37 13.61MB / 13.61MB                                11.7s
+ => => extracting sha256:0c7e41386c8eadde46a3290f80435c97d8a7a726709984d2588d6eef7568287b                                        0.9s
+ => => extracting sha256:c7e16202c1e1c56776fbbd6eaa0b1c547be1f4ee6f0285d5678c30bc81826185                                        3.8s
+ => => extracting sha256:0a870562846b4eee6cc58b0c4467e1777896158c4b00d4e4838fb871f9e18c37                                        0.4s
+ => [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                          0.0s
+ => [internal] load build context                                                                                                0.2s
+ => => transferring context: 4.41MB                                                                                              0.1s
+ => CACHED [base 2/2] WORKDIR /app                                                                                               0.0s
+ => CACHED [final 1/2] WORKDIR /app                                                                                              0.0s
+ => [build 2/8] WORKDIR /src                                                                                                     4.8s
+ => [build 3/8] COPY [TaskBoard.WebApp/TaskBoard.WebApp.csproj, TaskBoard.WebApp/]                                               0.0s
+ => [build 4/8] COPY [TaskBoard.Data/TaskBoard.Data.csproj, TaskBoard.Data/]                                                     0.1s
+ => [build 5/8] RUN dotnet restore "TaskBoard.WebApp/TaskBoard.WebApp.csproj"                                                   54.0s
+ => [build 6/8] COPY . .                                                                                                         0.1s
+ => [build 7/8] WORKDIR /src/TaskBoard.WebApp                                                                                    0.0s
+ => [build 8/8] RUN dotnet build "TaskBoard.WebApp.csproj" -c Release -o /app/build                                             11.4s
+ => [publish 1/1] RUN dotnet publish "TaskBoard.WebApp.csproj" -c Release -o /app/publish /p:UseAppHost=false                   16.7s
+ => [final 2/2] COPY --from=publish /app/publish .                                                                               0.5s
+ => exporting to image                                                                                                           0.8s
+ => => exporting layers                                                                                                          0.6s
+ => => writing image sha256:8b38189894cbc56be47542f7fa42384e5035a0b46547188363169f05de267ed4                                     0.0s
+ => => naming to docker.io/nikolayx/taskboard_app                                                                                0.1s
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker push nikolayx/taskboard_app
+Using default tag: latest
+The push refers to repository [docker.io/nikolayx/taskboard_app]
+5732452b6576: Pushed
+5f70bf18a086: Mounted from redis/redis-stack-server
+6c9e0aac4ac0: Pushed
+87edbcd48e4d: Pushed
+4cf15d404e20: Pushed
+847d60aa4ab2: Pushed
+b681f1ff1a0f: Pushed
+8cbe4b54fa88: Mounted from library/httpd
+latest: digest: sha256:35a4e987b2dd4f1d2fa8cf88604ffaacaa552558c9673c306bce66bc016041dc size: 1996
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App>

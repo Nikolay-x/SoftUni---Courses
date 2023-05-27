@@ -1,0 +1,148 @@
+PS C:\Users\NB\Exercise Containers and Docker\11.Blue-VS-Green-App> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 docker ps -a
+   2 docker ps -a
+   3 cd '.\Exercise Containers and Docker\'
+   4 docker run -d -p 80:8080 --name ls-server lightstreamer:latest
+   5 docker run -d -p 82:8080 --name ls-server lightstreamer:latest
+   6 docker run -d -p 82:8080 --name ls-server lightstreamer:latest
+   7 Get-History
+   8 docker run -d -p 3001:2368 --name ghost-container -e NODE_ENV=development ghost:latest
+   9 clear
+  10 docker run -d -p 8080:80 --name my-apache-app -v .\apache:/usr/local/apache2/htdocs/ httpd:latest
+  11 dir .\apache\
+  12 dir
+  13 cd apache
+  14 cd
+  15 cd .
+  16 cd \
+  17 cd C:\Users\NB\Exercise Containers and Docker
+  18 cd \Users\NB\Exercise Containers and Docker
+  19 cd .\Users\NB\Exercise Containers and Docker
+  20 cd .\Users\
+  21 cd NB
+  22 cd '.\Exercise Containers and Docker\'
+  23 dir
+  24 echo 'this is a test' > .\apache\test.txt
+  25 dir apache
+  26 dir .\apache
+  27 docker run -d -p 8080:80 --name my-apache-app -v ./apache:/usr/local/apache2/htdocs/ httpd:latest
+  28 docker ps
+  29 docker stop 72
+  30 docker rm 72
+  31 docker run -d -p 8080:80 --name my-apache-app -v ./apache:/root httpd:latest
+  32 Get-History
+  33 clear
+  34 docker run `...
+  35 docker ps
+  36 docker network ls
+  37 docker network create mariadb_network
+  38 docker network ls
+  39 docker run -d --name mariadb_server --network mariadb_network --env MARIADB_USER=softuni-user --env MARIADB_PASSWORD=softuni_...
+  40 docker run -d --name mariadb_client --network mariadb_network --env MARIADB_ROOT_PASSWORD=test mariadb
+  41 docker ps
+  42 docker network inspect mariadb_network
+  43 docker exec -it mariadb_client bash
+  44 clear
+  45 get-history
+  46 docker network ls
+  47 docker network -rm mariadb_network
+  48 docker network -rm mariadb_network
+  49 docker network -rm ef
+  50 docker network rm ef
+  51 docker network ls
+  52 clear
+  53 Get-History
+  54 clear
+  55 dir
+  56 cd .\06-08-10.TaskBoard-ASP.NET-App\
+  57 dir
+  58 cd .\TaskBoard.WebApp\
+  59 docker build -t nikolayx/taskboard_app .
+  60 cd..
+  61 docker build -t nikolayx/taskboard_app -f .\TaskBoard.WebApp\Dockerfile .
+  62 docker push nikolayx/taskboard_app
+  63 clear
+  64 get-his
+  65 Get-History
+  66 clear
+  67 cd ..
+  68 dir
+  69 cd .\07.Tracker-App\
+  70 dir
+  71 cat .\Dockerfile
+  72 docker build -t tasker_app .
+  73 docker ps -a
+  74 docker run -d -p 8080:80 tasker_app
+  75 docker ps -a
+  76 get-his
+  77 Get-History
+  78 clear
+  79 cd ..
+  80 dir
+  81 cd .\06-08-10.TaskBoard-ASP.NET-App\
+  82 docker image ls -a
+  83 docker network create taskboard_network
+  84 docker network ls
+  85 docker run `...
+  86 docker run `...
+  87 docker run `...
+  88 docker ps
+  89 docker build -t nikolayx/taskboard_app .
+  90 docker build -t nikolayx/taskboard_app .
+  91 docker run `...
+  92 docker network ls
+  93 docker network rm taskboard_network
+  94 Get-History
+  95 cd ..
+  96 dir
+  97 cd .\09.TODO-App\
+  98 clear
+  99 cat .\backend\Dockerfile
+ 100 cat .\frontend\Dockerfile
+ 101 cd .\frontend\
+ 102 docker build -t frontend .
+ 103 cd..
+ 104 cd .\backend\
+ 105 docker build -t backend .
+ 106 get-his
+ 107 Get-History
+ 108 cd ..
+ 109 cd..
+ 110 cd .\11.Blue-VS-Green-App\
+ 111 clear
+ 112 cd .\result\
+ 113 docker build -t result .
+ 114 docker build -t worker .
+ 115 docker build -t result .
+ 116 cd..
+ 117 cd .\worker\
+ 118 docker build -t worker .
+ 119 cd..
+ 120 cd .\vote\
+ 121 docker build -t vote .
+ 122 cd..
+ 123 dir
+ 124 docker-compose build
+ 125 docker-compose up -d
+ 126 docker logs result -f
+ 127 docker logs postgres -f
+ 128 docker logs vote -f
+ 129 docker logs worker -f
+ 130 docker-compose down --volumes
+ 131 docker-compose build
+ 132 docker-compose up -d
+ 133 docker-compose down --volumes
+ 134 docker-compose build
+ 135 docker-compose up
+ 136 clear
+ 137 cd..
+ 138 cd .\11.Blue-VS-Green-App\
+ 139 dir
+ 140 cd..
+ 141 dir
+ 142 cd .\11.Blue-VS-Green-App\
+ 143 docker-compose build
+ 144 docker-compose up -d

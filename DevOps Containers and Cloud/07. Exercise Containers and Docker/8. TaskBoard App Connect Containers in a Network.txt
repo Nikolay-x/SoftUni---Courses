@@ -1,0 +1,21 @@
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker network create taskboard_network
+99e85bbca08c35c8322a83318738b2bcd6cd3b18a860ceb8d71041da45315159
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker network ls
+NETWORK ID     NAME                   DRIVER    SCOPE
+4462f3c24930   bridge                 bridge    local
+a56dc3e22efd   host                   host      local
+e23d27e2cd29   none                   null      local
+99e85bbca08c   taskboard_network      bridge    local
+4510b3b35f58   wordpress_my_network   bridge    local
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker run `
+>> -e ACCEPT_EULA=Y `
+>> -e MSSQL_SA_PASSWORD=yourStrongPassword12# `
+>> -v sqldata:/var/opt/mssql `
+>> --rm --network taskboard_network --name sqlserver `
+>> -d mcr.microsoft.com/mssql/server
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker build -t nikolayx/taskboard_app .
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> docker run `
+>> -p 5000:80 --rm `
+>> --name web_app `
+>> --network taskboard_network `
+>> nikolayx/taskboard_app

@@ -1,0 +1,83 @@
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> cat .\backend\Dockerfile
+FROM node:lts-buster-slim AS development
+
+# Create app directory
+WORKDIR /usr/src/app
+
+COPY package.json /usr/src/app/package.json
+COPY package-lock.json /usr/src/app/package-lock.json
+RUN npm ci
+
+COPY . /usr/src/app
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "dev" ]
+
+FROM development as dev-envs
+RUN apt-get update && apt-get install -y git
+
+RUN useradd -s /bin/bash -m vscode && groupadd docker && usermod -aG docker vscode
+
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
+CMD [ "npm", "run", "dev" ]
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> cat .\frontend\Dockerfile
+# Create image based on the official Node image from dockerhub
+FROM node:lts-buster AS development
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Copy dependency definitions
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
+
+# Install dependecies
+#RUN npm set progress=false \
+#    && npm config set depth 0 \
+#    && npm i install
+RUN npm ci
+
+# Get all the code needed to run the app
+COPY . /usr/src/app
+
+# Expose the port the app runs in
+EXPOSE 3000
+
+# Serve the app
+CMD ["npm", "start"]
+
+RUN apt-get update && apt-get install -y git
+
+FROM development as dev-envs
+RUN apt-get update && apt-get install -y git
+
+RUN useradd -s /bin/bash -m vscode && groupadd docker && usermod -aG docker vscode
+
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
+CMD [ "npm", "start" ]
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App\frontend> docker build -t frontend .
+PS C:\Users\NB> docker network ls
+NETWORK ID     NAME                   DRIVER    SCOPE
+4462f3c24930   bridge                 bridge    local
+a56dc3e22efd   host                   host      local
+e23d27e2cd29   none                   null      local
+4510b3b35f58   wordpress_my_network   bridge    local
+PS C:\Users\NB> docker network create react-express
+8c320ddec49e9791a09f7a7da762ac7450259742a374b94cfc2b96bdca7b9769
+PS C:\Users\NB> docker network create express-mongo
+d349ad86818e074eceda08547b5e0e47eab24b9517543ddbb8ae21530b59eab3
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> docker run -d -v .\data:/data/db --network express-mongo --name mongo mongo:latest
+9e5209d990fc4712f50d6dc46066328c93424102216fb3eff11ef7f785943c8f
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> docker run -d --name frontend --network react-express -p 3000:3000 frontend
+95164b6f30bb5fb027d77caa05f8e564720a19a76966271f7fe72fe158885557
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> docker run -d --name backend --network react-express backend
+b7c8e0eeaf829957ba7b10123d902198cac13b81a048ab7b4de1557edec18a54
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                    NAMES
+b7c8e0eeaf82   backend        "docker-entrypoint.s…"   5 seconds ago   Up 3 seconds   3000/tcp                 backend
+95164b6f30bb   frontend       "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   0.0.0.0:3000->3000/tcp   frontend
+9e5209d990fc   mongo:latest   "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes   27017/tcp                mongo
+PS C:\Users\NB\Exercise Containers and Docker\09.TODO-App> docker network connect express-mongo backend

@@ -1,0 +1,52 @@
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> cd ..
+PS C:\Users\NB\Exercise Containers and Docker> dir
+
+
+    Directory: C:\Users\NB\Exercise Containers and Docker
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         27-May-23     12:51                06-08-10.TaskBoard-ASP.NET-App
+d-----         27-May-23     09:30                07.Tracker-App
+d-----         27-May-23     09:30                09.TODO-App
+d-----         27-May-23     09:30                11.Blue-VS-Green-App
+d-----         27-May-23     10:26                apache
+
+
+PS C:\Users\NB\Exercise Containers and Docker> cd .\07.Tracker-App\
+PS C:\Users\NB\Exercise Containers and Docker\07.Tracker-App> dir
+
+
+    Directory: C:\Users\NB\Exercise Containers and Docker\07.Tracker-App
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         27-May-23     09:30                public
+d-----         27-May-23     09:30                src
+d-----         27-May-23     09:30                store
+d-----         27-May-23     09:30                use
+-a----         02-Dec-22     15:45             73 babel.config.js
+-a----         02-Dec-22     15:45            285 Dockerfile
+-a----         02-Dec-22     15:45         504358 package-lock.json
+-a----         02-Dec-22     15:45            851 package.json
+-a----         02-Dec-22     15:45         382930 yarn.lock
+
+
+PS C:\Users\NB\Exercise Containers and Docker\07.Tracker-App> cat .\Dockerfile
+# build stage
+FROM node:14-alpine as build-stage
+WORKDIR /vue_app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# production stage
+FROM nginx as production-stage
+COPY --from=build-stage /vue_app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+PS C:\Users\NB\Exercise Containers and Docker\07.Tracker-App> docker build -t tasker_app .
+PS C:\Users\NB\Exercise Containers and Docker\07.Tracker-App> docker run -d -p 8080:80 tasker_app

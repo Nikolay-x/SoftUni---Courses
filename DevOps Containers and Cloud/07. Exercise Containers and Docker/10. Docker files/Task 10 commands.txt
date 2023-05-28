@@ -1,0 +1,17 @@
+PS C:\Users\NB\Exercise Containers and Docker\06-08-10.TaskBoard-ASP.NET-App> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise Containers and Docker\'
+   2 dir
+   3 cd .\06-08-10.TaskBoard-ASP.NET-App\
+   4 docker compose build
+   5 docker-compose build
+   6 docker network ls
+   7 docker compose build
+   8 docker compose build
+   9 docker compose up
+  10 docker compose build
+  11 docker compose up
+  12 docker compose down --rmi all --volumes
+  13 docker network ls

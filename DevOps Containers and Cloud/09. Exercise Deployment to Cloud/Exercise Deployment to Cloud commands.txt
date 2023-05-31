@@ -1,0 +1,124 @@
+PS C:\Windows\System32> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 dir
+   2 cd '.\Exercise Deployment to Cloud\'
+   3 az --version
+   4 git --version
+   5 git update
+   6 git --version
+   7 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-P...
+   8 az --version
+   9 clear
+  10 cd..
+  11 cd..
+  12 cd..
+  13 cd .\Windows\
+  14 cd .\System32\
+  15 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-P...
+  16 az --version
+
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 az --version
+   2 git --version
+   3 git --version
+   4 az --version
+   5 cd '.\Exercise Deployment to Cloud'
+   6 docker login azure
+   7 docker context ls
+   8 docker context create aci nginxacicontext
+   9 docker context ls
+  10 docker context use nginxacicontext
+  11 docker context ls
+  12 docker run -p 80:80 nginxdemos/hello
+  13 docker rm jolly-dhawan -f
+  14 docker context use default
+  15 docker context ls
+  16 docker context rm nginxacicontext
+  17 docker context ls
+  18 Get-History
+  19 dir
+  20 cd .\05.Tracker-App
+  21 dir
+  22 cat .\Dockerfile
+  23 docker build -t tasker-app-image .
+  24 docker build -t tasker-app-image .
+  25 docker run -d --name tasker tasker-app-iamge
+  26 docker run -d --name tasker tasker-app-image
+  27 docker ps
+  28 docker rm 66 -f
+  29 docker run -d -p 80:80 --name tasker tasker-app-image
+  30 docker run -d -p 82:80 --name tasker tasker-app-image
+  31 docker run -d -p 82:80 --name tasker tasker-app-image
+  32 az login
+  33 az group create --name trackerapprg --location westeurope
+  34 az arc create --resource-group trackerapprg --name trackerappcr --sku Basic
+  35 az acr create --resource-group trackerapprg --name trackerappcr --sku Basic
+  36 az acr login --name trackerapp
+  37 az acr login --name trackerappcr
+  38 az acr show --name trackerappcr --query loginServer --output table
+  39 az acr show --name trackerappcr
+  40 docker image ls
+  41 az acr show --name trackerappcr --query loginServer --output table
+  42 docker tag tasker-app-image trackerappcr.azurecr.io/tasker-app-image:v1
+  43 docker image ls
+  44 docker push trackerappcr.azurecr.io/tasker-app-image
+  45 docker push trackerappcr.azurecr.io/tasker-app-image:v1
+  46 az acr repository list --name trackerappcr
+  47 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  48 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  49 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  50 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  51 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  52 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  53 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  54 az container create --resource-group trackerapprg --name trackerapp --image trackerappcr.azurecr.io/tasker-app-image:v1 --cpu 1 --m...
+  55 clear
+  56 cat .\Dockerfile
+  57 docker build -t tasker-app-image .
+  58 docker build -t tasker-app-image .
+  59 docker run -d -p 82:80 --name tasker tasker-app-image
+  60 docker ps
+  61 docker login
+  62 az login
+  63 az group create --name trackerapprg --location westeurope
+  64 az acr create --resource-group trackerapprg --name trackerappcrnb --sku Basic
+  65 az acr login --name trackerappcrnb
+  66 az acr show --name trackerappcrnb --query loginServer --output table
+  67 az acr show --name trackerappcrnb
+  68 docker image ls
+  69 az acr show --name trackerappcrnb --query loginServer --output table
+  70 docker tag tasker-app-image trackerappcrnb.azurecr.io/tasker-app-image:v1
+  71 docker image ls
+  72 docker push trackerappcrnb.azurecr.io/tasker-app-image:v1
+  73 az acr repository list --name trackerappcrnb
+  74 az container create --resource-group trackerapprg --name trackerapp --image trackerappcrnb.azurecr.io/tasker-app-image:v1 --cpu 1 -...
+  75 az container create --resource-group trackerapprg --name trackerapp --image trackerappcrnb.azurecr.io/tasker-app-image:v1 --cpu 1 -...
+  76 docker login -u test05 -p Sv+C3D60MkgNkcNZePbxUQPDjfOdrJUPLJ0iU93FC5+ACRCwjtwq trackerappcrnb.azurecr.io
+  77 az container create --resource-group trackerapprg --name trackerapp --image trackerappcrnb.azurecr.io/tasker-app-image:v1 --cpu 1 -...
+  78 clear
+  79 cat .\Dockerfile
+  80 docker build -t tasker-app-image .
+  81 docker run -d --name tasker tasker-app-image
+  82 docker run -d -p 82:80 --name tasker tasker-app-image
+  83 az login
+  84 az group create --name trackerapprg --location westeurope
+  85 az acr create --resource-group trackerapprg --name trackerappcrnb --sku Basic
+  86 az acr login --name trackerappcrnb
+  87 az acr show --name trackerappcrnb --query loginServer --output table
+  88 az acr show --name trackerappcrnb
+  89 docker tag tasker-app-image trackerappcrnb.azurecr.io/tasker-app-image:v1
+  90 docker push trackerappcrnb.azurecr.io/tasker-app-image:v1
+  91 az acr repository list --name trackerappcrnb
+  92 az container create --resource-group trackerapprg --name trackerapp --image trackerappcrnb.azurecr.io/tasker-app-image:v1 --cpu 1 -...
+  93 clear
+  94 az container logs --resource-group trackapprg --name trackerapp
+  95 az container --help
+  96 az container delete --resource-group trackerapprg --name trackerapp
+  97 az group delete --name trackerapprg
+  98 clear
+

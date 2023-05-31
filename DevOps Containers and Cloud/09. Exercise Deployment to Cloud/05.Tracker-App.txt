@@ -1,0 +1,370 @@
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> cat .\Dockerfile
+# build stage
+FROM node:14-alpine as build-stage
+WORKDIR /vue_app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# production stage
+FROM nginx as production-stage
+COPY --from=build-stage /vue_app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> docker build -t tasker-app-image .
+[+] Building 2.3s (16/16) FINISHED
+ => [internal] load .dockerignore                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                        0.0s
+ => [internal] load build definition from Dockerfile                                                                                   0.0s
+ => => transferring dockerfile: 324B                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/nginx:latest                                                                        2.2s
+ => [internal] load metadata for docker.io/library/node:14-alpine                                                                      1.7s
+ => [auth] library/nginx:pull token for registry-1.docker.io                                                                           0.0s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                            0.0s
+ => [build-stage 1/6] FROM docker.io/library/node:14-alpine@sha256:434215b487a329c9e867202ff89e704d3a75e554822e07f3e0c0f9e606121b33    0.0s
+ => [internal] load build context                                                                                                      0.0s
+ => => transferring context: 1.65kB                                                                                                    0.0s
+ => [production-stage 1/2] FROM docker.io/library/nginx@sha256:af296b188c7b7df99ba960ca614439c99cb7cf252ed7bbc23e90cfda59092305        0.0s
+ => CACHED [build-stage 2/6] WORKDIR /vue_app                                                                                          0.0s
+ => CACHED [build-stage 3/6] COPY package.json ./                                                                                      0.0s
+ => CACHED [build-stage 4/6] RUN npm install                                                                                           0.0s
+ => CACHED [build-stage 5/6] COPY . .                                                                                                  0.0s
+ => CACHED [build-stage 6/6] RUN npm run build                                                                                         0.0s
+ => CACHED [production-stage 2/2] COPY --from=build-stage /vue_app/dist /usr/share/nginx/html                                          0.0s
+ => exporting to image                                                                                                                 0.0s
+ => => exporting layers                                                                                                                0.0s
+ => => writing image sha256:abce00f42c06ca2e302424141c7f9cc67d09a153b091ea8824dfe8dae46fa894                                           0.0s
+ => => naming to docker.io/library/tasker-app-image                                                                                    0.0s
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> docker run -d --name tasker tasker-app-image
+f1831ce9014c756a49436e69aa7f5476f2697b08783ed400d11e98cde854943c
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> docker run -d -p 82:80 --name tasker tasker-app-image
+3d2201777309696ef762b54e270647d388a93b26b6d2830834189c2fdceba659
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az login
+A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow with `az login --use-device-code`.
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "id": "56f5a8d7-2b04-4e50-80ad-0d999a5a881a",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure for Students",
+    "state": "Enabled",
+    "tenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "user": {
+      "name": "Nikolay_x@students.softuni.bg",
+      "type": "user"
+    }
+  }
+]
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az group create --name trackerapprg --location westeurope
+{
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/trackerapprg",
+  "location": "westeurope",
+  "managedBy": null,
+  "name": "trackerapprg",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az acr create --resource-group trackerapprg --name trackerappcrnb --sku Basic
+{
+  "adminUserEnabled": false,
+  "anonymousPullEnabled": false,
+  "creationDate": "2023-05-31T14:08:20.868881+00:00",
+  "dataEndpointEnabled": false,
+  "dataEndpointHostNames": [],
+  "encryption": {
+    "keyVaultProperties": null,
+    "status": "disabled"
+  },
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/trackerapprg/providers/Microsoft.ContainerRegistry/registries/trackerappcrnb",
+  "identity": null,
+  "location": "westeurope",
+  "loginServer": "trackerappcrnb.azurecr.io",
+  "name": "trackerappcrnb",
+  "networkRuleBypassOptions": "AzureServices",
+  "networkRuleSet": null,
+  "policies": {
+    "azureAdAuthenticationAsArmPolicy": {
+      "status": "enabled"
+    },
+    "exportPolicy": {
+      "status": "enabled"
+    },
+    "quarantinePolicy": {
+      "status": "disabled"
+    },
+    "retentionPolicy": {
+      "days": 7,
+      "lastUpdatedTime": "2023-05-31T14:08:29.344714+00:00",
+      "status": "disabled"
+    },
+    "softDeletePolicy": {
+      "lastUpdatedTime": "2023-05-31T14:08:29.344714+00:00",
+      "retentionDays": 7,
+      "status": "disabled"
+    },
+    "trustPolicy": {
+      "status": "disabled",
+      "type": "Notary"
+    }
+  },
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": "Enabled",
+  "resourceGroup": "trackerapprg",
+  "sku": {
+    "name": "Basic",
+    "tier": "Basic"
+  },
+  "status": null,
+  "systemData": {
+    "createdAt": "2023-05-31T14:08:20.868881+00:00",
+    "createdBy": "Nikolay_x@students.softuni.bg",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-05-31T14:08:20.868881+00:00",
+    "lastModifiedBy": "Nikolay_x@students.softuni.bg",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries",
+  "zoneRedundancy": "Disabled"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az acr login --name trackerappcrnb
+Login Succeeded
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az acr show --name trackerappcrnb --query loginServer --output table
+Result
+-------------------------
+trackerappcrnb.azurecr.io
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az acr show --name trackerappcrnb
+{
+  "adminUserEnabled": false,
+  "anonymousPullEnabled": false,
+  "creationDate": "2023-05-31T14:08:20.868881+00:00",
+  "dataEndpointEnabled": false,
+  "dataEndpointHostNames": [],
+  "encryption": {
+    "keyVaultProperties": null,
+    "status": "disabled"
+  },
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/trackerapprg/providers/Microsoft.ContainerRegistry/registries/trackerappcrnb",
+  "identity": null,
+  "location": "westeurope",
+  "loginServer": "trackerappcrnb.azurecr.io",
+  "name": "trackerappcrnb",
+  "networkRuleBypassOptions": "AzureServices",
+  "networkRuleSet": null,
+  "policies": {
+    "azureAdAuthenticationAsArmPolicy": {
+      "status": "enabled"
+    },
+    "exportPolicy": {
+      "status": "enabled"
+    },
+    "quarantinePolicy": {
+      "status": "disabled"
+    },
+    "retentionPolicy": {
+      "days": 7,
+      "lastUpdatedTime": "2023-05-31T14:08:29.344714+00:00",
+      "status": "disabled"
+    },
+    "softDeletePolicy": {
+      "lastUpdatedTime": "2023-05-31T14:08:29.344714+00:00",
+      "retentionDays": 7,
+      "status": "disabled"
+    },
+    "trustPolicy": {
+      "status": "disabled",
+      "type": "Notary"
+    }
+  },
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": "Enabled",
+  "resourceGroup": "trackerapprg",
+  "sku": {
+    "name": "Basic",
+    "tier": "Basic"
+  },
+  "status": null,
+  "systemData": {
+    "createdAt": "2023-05-31T14:08:20.868881+00:00",
+    "createdBy": "Nikolay_x@students.softuni.bg",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-05-31T14:08:20.868881+00:00",
+    "lastModifiedBy": "Nikolay_x@students.softuni.bg",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries",
+  "zoneRedundancy": "Disabled"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> docker tag tasker-app-image trackerappcrnb.azurecr.io/tasker-app-image:v1
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> docker push trackerappcrnb.azurecr.io/tasker-app-image:v1
+The push refers to repository [trackerappcrnb.azurecr.io/tasker-app-image]
+bddba3fe50cf: Pushed
+4fd834341303: Pushed
+5e099cf3f3c8: Pushed
+7daac92f43be: Pushed
+e60266289ce4: Pushed
+4b8862fe7056: Pushed
+8cbe4b54fa88: Pushed
+v1: digest: sha256:925ccd28e9eb5db4d5fe334d1fda94423e0371564c4bbff1c160f24575e8fea8 size: 1781
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az acr repository list --name trackerappcrnb
+[
+  "tasker-app-image"
+]
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az container create --resource-group trackerapprg --name trackerapp --image trackerappcrnb.azurecr.io/tasker-app-image:v1 --cpu 1 --memory 1 --registry-login-server trackerappcrnb.azurecr.io --registry-username trackerappcrnb --registry-password T5DuFqj2Ike0rhyW+M7acMJBv/H3+L0NhA86kEmI8I+ACRAdKt1a --ip-address Public --dns-name-label trackerappdnsnb --ports 80
+{
+  "confidentialComputeProperties": null,
+  "containers": [
+    {
+      "command": null,
+      "environmentVariables": [],
+      "image": "trackerappcrnb.azurecr.io/tasker-app-image:v1",
+      "instanceView": {
+        "currentState": {
+          "detailStatus": "",
+          "exitCode": null,
+          "finishTime": null,
+          "startTime": "2023-05-31T14:29:16.073000+00:00",
+          "state": "Running"
+        },
+        "events": [
+          {
+            "count": 1,
+            "firstTimestamp": "2023-05-31T14:28:55+00:00",
+            "lastTimestamp": "2023-05-31T14:28:55+00:00",
+            "message": "pulling image \"trackerappcrnb.azurecr.io/tasker-app-image@sha256:925ccd28e9eb5db4d5fe334d1fda94423e0371564c4bbff1c160f24575e8fea8\"",
+            "name": "Pulling",
+            "type": "Normal"
+          },
+          {
+            "count": 1,
+            "firstTimestamp": "2023-05-31T14:29:04+00:00",
+            "lastTimestamp": "2023-05-31T14:29:04+00:00",
+            "message": "Successfully pulled image \"trackerappcrnb.azurecr.io/tasker-app-image@sha256:925ccd28e9eb5db4d5fe334d1fda94423e0371564c4bbff1c160f24575e8fea8\"",
+            "name": "Pulled",
+            "type": "Normal"
+          },
+          {
+            "count": 1,
+            "firstTimestamp": "2023-05-31T14:29:16+00:00",
+            "lastTimestamp": "2023-05-31T14:29:16+00:00",
+            "message": "Started container",
+            "name": "Started",
+            "type": "Normal"
+          }
+        ],
+        "previousState": null,
+        "restartCount": 0
+      },
+      "livenessProbe": null,
+      "name": "trackerapp",
+      "ports": [
+        {
+          "port": 80,
+          "protocol": "TCP"
+        }
+      ],
+      "readinessProbe": null,
+      "resources": {
+        "limits": null,
+        "requests": {
+          "cpu": 1.0,
+          "gpu": null,
+          "memoryInGb": 1.0
+        }
+      },
+      "securityContext": null,
+      "volumeMounts": null
+    }
+  ],
+  "diagnostics": null,
+  "dnsConfig": null,
+  "encryptionProperties": null,
+  "extensions": null,
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/trackerapprg/providers/Microsoft.ContainerInstance/containerGroups/trackerapp",
+  "identity": null,
+  "imageRegistryCredentials": [
+    {
+      "identity": null,
+      "identityUrl": null,
+      "password": null,
+      "server": "trackerappcrnb.azurecr.io",
+      "username": "trackerappcrnb"
+    }
+  ],
+  "initContainers": [],
+  "instanceView": {
+    "events": [],
+    "state": "Running"
+  },
+  "ipAddress": {
+    "autoGeneratedDomainNameLabelScope": "Unsecure",
+    "dnsNameLabel": "trackerappdnsnb",
+    "fqdn": "trackerappdnsnb.westeurope.azurecontainer.io",
+    "ip": "20.238.229.142",
+    "ports": [
+      {
+        "port": 80,
+        "protocol": "TCP"
+      }
+    ],
+    "type": "Public"
+  },
+  "location": "westeurope",
+  "name": "trackerapp",
+  "osType": "Linux",
+  "priority": null,
+  "provisioningState": "Succeeded",
+  "resourceGroup": "trackerapprg",
+  "restartPolicy": "Always",
+  "sku": "Standard",
+  "subnetIds": null,
+  "tags": {},
+  "type": "Microsoft.ContainerInstance/containerGroups",
+  "volumes": null,
+  "zones": null
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az container logs --resource-group trackapprg --name trackerapp
+(ResourceGroupNotFound) Resource group 'trackapprg' could not be found.
+Code: ResourceGroupNotFound
+Message: Resource group 'trackapprg' could not be found.
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az container --help
+
+Group
+    az container : Manage Azure Container Instances.
+
+Commands:
+    attach  : Attach local standard output and error streams to a container in a container group.
+              This command provides diagnostic information during container startup. Once the
+              container has started, it streams STDOUT and STDERR to your local console.
+    create  : Create a container group.
+    delete  : Delete a container group.
+    exec    : Execute a command from within a running container of a container group.
+    export  : Export a container group in yaml format.
+    list    : List container groups.
+    logs    : Examine the logs for a container in a container group.
+    restart : Restarts all containers in a container group.
+    show    : Get the details of a container group.
+    start   : Starts all containers in a container group.
+    stop    : Stops all containers in a container group.
+
+To search AI knowledge base for examples, use: az find "az container"
+
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az container delete --resource-group trackerapprg --name trackerapp
+Are you sure you want to perform this operation? (y/n): y
+(ResourceGroupNotFound) Resource group 'trackerapprg' could not be found.
+Code: ResourceGroupNotFound
+Message: Resource group 'trackerapprg' could not be found.
+PS C:\Users\NB\Exercise Deployment to Cloud\05.Tracker-App> az group delete --name trackerapprg
+Are you sure you want to perform this operation? (y/n): y
+(ResourceGroupNotFound) Resource group 'trackerapprg' could not be found.
+Code: ResourceGroupNotFound
+Message: Resource group 'trackerapprg' could not be found.

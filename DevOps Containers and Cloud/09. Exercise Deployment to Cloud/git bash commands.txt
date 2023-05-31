@@ -1,0 +1,34 @@
+ssh-keygen -t ed25519 -C "nikolay_x@abv.bg"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+git config --global user.email "nikolay_x@abv.bg"
+git clone git@github.com:Nikolay-x/TODO-App.git
+cd TODO-App
+git add .
+git commit -m "Initial commit"
+git push
+
+$ history
+  122  cd 'Exercise Deployment to Cloud'
+  123  clear
+  124  git clone git@github.com:Nikolay-x/TODO-App.git
+  131  mkdir .ssh
+  133  cd .ssh
+  134  ssh-keygen -t ed25519 -C "nikolay_x@abv.bg"
+  135  ls
+  136  cat id_ed25519.pub
+  137  eval "$(ssh-agent -s)"
+  138  ssh-add ~/.ssh/id_ed25519
+  139  git config --global user.email "nikolay_x@abv.bg"
+  140  cd users
+  141  cd ~
+  145  cd C:/Users/NB/'Exercise Deployment to Cloud'
+  147  git clone git@github.com:Nikolay-x/TODO-App.git
+  148  dir
+  151  cd TODO-App
+  152  git add .
+  153  git commit -m "Initial commit"
+  154  git push
+  155  history
+  156  git pull
+  157  history

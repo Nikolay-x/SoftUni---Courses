@@ -1,0 +1,33 @@
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 dir
+   2 cd '.\Exercise Deployment to Cloud\'
+   3 dir
+   4 cd .\06.TaskBoard-ASP.NET-App\
+   5 dir
+   6 type .\docker-compose.yaml
+   7 docker-compose up -d
+   8 docker context ls
+   9 docker context use default
+  10 docker context ls
+  11 docker context rm taskboardcontext
+  12 docker context ls
+  13 docker-compose up -d
+  14 az group create --name taskBoardResourceGroup --location westeurope
+  15 az acr create --resource-group taskBoardResourceGroup --name taskboardcrnb --sku Basic
+  16 az acr login --name taskboardcrnb
+  17 az login
+  18 az acr login --name taskboardcrnb
+  19 docker-compose build
+  20 docker-compose push
+  21 az acr repository show --name taskboardcrnb --repository taskboard-image
+  22 docker context create aci taskboardcontext
+  23 docker context use taskboardcontext
+  24 docker context ls
+  25 docker compose up
+  26 docker compose up
+  27 docker compose up
+  28 docker compose up
+  29 docker compose up

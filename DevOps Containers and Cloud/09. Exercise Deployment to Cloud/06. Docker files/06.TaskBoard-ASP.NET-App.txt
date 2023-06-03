@@ -1,0 +1,355 @@
+PS C:\Users\NB> dir
+
+
+    Directory: C:\Users\NB
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         03-Jun-23     13:28                .azure
+d-----         03-Jun-23     13:37                .docker
+d-----         27-May-23     12:44                .dotnet
+d-----         12-Oct-21     12:03                .idlerc
+d-----         27-May-23     14:59                .librarymanager
+d-----         17-Jun-22     18:08                .ms-ad
+d-----         27-May-23     12:48                .nuget
+d-----         10-Apr-23     14:59                .ssh
+d-----         27-May-23     12:47                .templateengine
+d-----         24-Jan-22     18:45                .vscode
+d-----         20-May-23     17:58                .vscode-cli
+d-----         17-May-23     16:20                .vue-templates
+d-r---         03-Oct-21     14:45                3D Objects
+d-r---         03-Oct-21     14:45                Contacts
+d-----         17-May-23     17:17                data
+d-r---         27-May-23     09:27                Desktop
+d-r---         27-May-23     12:41                Documents
+d-r---         03-Jun-23     14:50                Downloads
+d-----         20-May-23     12:52                entrypoint
+d-----         27-May-23     17:58                Exercise Containers and Docker
+d-----         03-Jun-23     14:49                Exercise Deployment to Cloud
+d-r---         13-Nov-21     13:45                Favorites
+d-----         14-Sep-22     11:36                getting-started
+d-----         08-Apr-22     13:00                https
+d-----         08-Apr-22     13:00                httpsgithub.com
+d-r---         03-Oct-21     14:45                Links
+d-r---         29-May-23     09:57                Music
+d-----         20-May-23     13:41                MyWebsite
+dar--l         26-Nov-19     18:51                OneDrive
+d-r---         25-Feb-22     20:07                Pictures
+d-----         17-Jan-22     12:16                Postman
+d-----         10-Apr-23     11:02                PycharmProjects
+d-r---         03-Oct-21     14:45                Saved Games
+d-r---         03-Oct-21     14:45                Searches
+d-----         27-May-23     09:24                source
+d-----         01-Aug-22     10:47                Tracing
+d-r---         03-Oct-21     14:45                Videos
+d-----         24-Jan-22     20:05                Visual studio code- test 1
+d-----         27-May-23     12:52                vsdbg
+d-----         20-May-23     17:59                wordpress
+-a----         19-Jul-21     10:34           7138 -1.14-windows.xml
+-a----         31-May-23     18:43           3858 .bash_history
+-a----         31-May-23     12:08             87 .gitconfig
+-a----         17-May-23     15:50              0 .node_repl_history
+-a----         08-Apr-22     12:02          12288 .test.txt.swp
+-a----         11-Dec-22     11:07           2875 .viminfo
+-a----         17-May-23     15:35             15 copy.txt
+-a----         08-Apr-22     12:04             22 test.txt
+
+
+PS C:\Users\NB> cd '.\Exercise Deployment to Cloud\'
+PS C:\Users\NB\Exercise Deployment to Cloud> dir
+
+
+    Directory: C:\Users\NB\Exercise Deployment to Cloud
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         31-May-23     09:52                05.Tracker-App
+d-----         03-Jun-23     14:49                06.TaskBoard-ASP.NET-App
+d-----         03-Jun-23     14:49                07.Posio-App
+d-----         31-May-23     13:13                TODO-App
+
+
+PS C:\Users\NB\Exercise Deployment to Cloud> cd .\06.TaskBoard-ASP.NET-App\
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> dir
+
+
+    Directory: C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         03-Jun-23     14:49                TaskBoard.Data
+d-----         03-Jun-23     14:49                TaskBoard.WebApp
+-a----         09-Feb-23     11:37            548 docker-compose.yaml
+-a----         01-Dec-22     17:02           1650 TaskBoard.sln
+
+
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> type .\docker-compose.yaml
+version: "3.8"
+
+services:
+    sqlserver:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server
+        ports:
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=yourStrongPassword12#
+        volumes:
+            - sqldata:/var/opt/mssql
+    web-app:
+        container_name: web-app
+        build:
+            dockerfile: ./TaskBoard.WebApp/Dockerfile
+        ports:
+            - "5000:80"
+        restart: on-failure
+
+volumes:
+    sqldata:
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker-compose up -d
+cannot use ACI volume, required driver is "azure_file", found ""
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context ls
+NAME                 TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default              moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                               
+desktop-linux        moby                                                          npipe:////./pipe/dockerDesktopLinuxEngine                    
+taskboardcontext *   aci                 taskBoardResourceGroup@westeurope                                                                      
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context use default
+default
+Current context is now "default"
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                                
+desktop-linux       moby                                                          npipe:////./pipe/dockerDesktopLinuxEngine                     
+taskboardcontext    aci                 taskBoardResourceGroup@westeurope                                                                       
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context rm taskboardcontext
+taskboardcontext
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                                
+desktop-linux       moby                                                          npipe:////./pipe/dockerDesktopLinuxEngine                     
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker-compose up -d
+[+] Building 18.3s (19/19) FINISHED
+ => [internal] load .dockerignore                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                            0.0s
+ => [internal] load build definition from Dockerfile                                                                                       0.0s
+ => => transferring dockerfile: 875B                                                                                                       0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                          0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                       0.0s
+ => [build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e              0.0s
+ => [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                                    0.0s
+ => [internal] load build context                                                                                                          0.0s
+ => => transferring context: 9.41kB                                                                                                        0.0s
+ => CACHED [build 2/8] WORKDIR /src                                                                                                        0.0s
+ => CACHED [build 3/8] COPY [TaskBoard.WebApp/TaskBoard.WebApp.csproj, TaskBoard.WebApp/]                                                  0.0s
+ => CACHED [build 4/8] COPY [TaskBoard.Data/TaskBoard.Data.csproj, TaskBoard.Data/]                                                        0.0s
+ => CACHED [build 5/8] RUN dotnet restore "TaskBoard.WebApp/TaskBoard.WebApp.csproj"                                                       0.0s
+ => [build 6/8] COPY . .                                                                                                                   0.1s
+ => [build 7/8] WORKDIR /src/TaskBoard.WebApp                                                                                              0.0s
+ => [build 8/8] RUN dotnet build "TaskBoard.WebApp.csproj" -c Release -o /app/build                                                        9.3s
+ => [publish 1/1] RUN dotnet publish "TaskBoard.WebApp.csproj" -c Release -o /app/publish /p:UseAppHost=false                              8.0s
+ => CACHED [base 2/2] WORKDIR /app                                                                                                         0.0s
+ => CACHED [final 1/2] WORKDIR /app                                                                                                        0.0s
+ => CACHED [final 2/2] COPY --from=publish /app/publish .                                                                                  0.0s
+ => exporting to image                                                                                                                     0.0s
+ => => exporting layers                                                                                                                    0.0s
+ => => writing image sha256:84311215fba5cf2c814de29ba643c88994c7f74d1e35e8eb8e78a3e011d342c6                                               0.0s
+ => => naming to docker.io/library/06taskboard-aspnet-app-web-app                                                                          0.0s
+[+] Running 3/3
+ ✔ Network 06taskboard-aspnet-app_default  Created                                                                                         0.8s
+ ✔ Container sqlserver                     Started                                                                                         2.3s
+ ✔ Container web-app                       Started                                                                                         2.2s
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> az group create --name taskBoardResourceGroup --location westeurope
+{
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/taskBoardResourceGroup",
+  "location": "westeurope",
+  "managedBy": null,
+  "name": "taskBoardResourceGroup",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> az acr create --resource-group taskBoardResourceGroup --name taskboardcrnb --sku Basic
+{
+  "adminUserEnabled": false,
+  "anonymousPullEnabled": false,
+  "creationDate": "2023-06-03T11:56:44.839764+00:00",
+  "dataEndpointEnabled": false,
+  "dataEndpointHostNames": [],
+  "encryption": {
+    "keyVaultProperties": null,
+    "status": "disabled"
+  },
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/taskBoardResourceGroup/providers/Microsoft.ContainerRegistry/registries/taskboardcrnb",
+  "identity": null,
+  "location": "westeurope",
+  "loginServer": "taskboardcrnb.azurecr.io",
+  "name": "taskboardcrnb",
+  "networkRuleBypassOptions": "AzureServices",
+  "networkRuleSet": null,
+  "policies": {
+    "azureAdAuthenticationAsArmPolicy": {
+      "status": "enabled"
+    },
+    "exportPolicy": {
+      "status": "enabled"
+    },
+    "quarantinePolicy": {
+      "status": "disabled"
+    },
+    "retentionPolicy": {
+      "days": 7,
+      "lastUpdatedTime": "2023-06-03T11:56:52.888156+00:00",
+      "status": "disabled"
+    },
+    "softDeletePolicy": {
+      "lastUpdatedTime": "2023-06-03T11:56:52.888156+00:00",
+      "retentionDays": 7,
+      "status": "disabled"
+    },
+    "trustPolicy": {
+      "status": "disabled",
+      "type": "Notary"
+    }
+  },
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": "Enabled",
+  "resourceGroup": "taskBoardResourceGroup",
+  "sku": {
+    "name": "Basic",
+    "tier": "Basic"
+  },
+  "status": null,
+  "systemData": {
+    "createdAt": "2023-06-03T11:56:44.839764+00:00",
+    "createdBy": "Nikolay_x@students.softuni.bg",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-06-03T11:56:44.839764+00:00",
+    "lastModifiedBy": "Nikolay_x@students.softuni.bg",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries",
+  "zoneRedundancy": "Disabled"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> az acr login --name taskboardcrnb
+Could not connect to the registry login server 'taskboardcrnb.azurecr.io'. Please verify that the registry exists and the URL 'https://taskboardcrnb.azurecr.io/v2/' is reachable from your environment.
+Try running 'az acr check-health -n taskboardcrnb --yes' to diagnose this issue.
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> az login
+A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow with `az login --use-device-code`.
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "id": "56f5a8d7-2b04-4e50-80ad-0d999a5a881a",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure for Students",
+    "state": "Enabled",
+    "tenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "user": {
+      "name": "Nikolay_x@students.softuni.bg",
+      "type": "user"
+    }
+  }
+]
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> az acr login --name taskboardcrnb
+Login Succeeded
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker-compose build
+[+] Building 16.6s (19/19) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                       0.0s
+ => => transferring dockerfile: 875B                                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                            0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                          0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                       0.0s
+ => [build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:525bad260e88b16bc32adf5ea4e392e883a7a038163758e0a70664083f7bb37e              0.0s
+ => [internal] load build context                                                                                                          0.0s
+ => => transferring context: 9.23kB                                                                                                        0.0s
+ => [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                                    0.0s
+ => CACHED [build 2/8] WORKDIR /src                                                                                                        0.0s
+ => CACHED [build 3/8] COPY [TaskBoard.WebApp/TaskBoard.WebApp.csproj, TaskBoard.WebApp/]                                                  0.0s
+ => CACHED [build 4/8] COPY [TaskBoard.Data/TaskBoard.Data.csproj, TaskBoard.Data/]                                                        0.0s
+ => CACHED [build 5/8] RUN dotnet restore "TaskBoard.WebApp/TaskBoard.WebApp.csproj"                                                       0.0s
+ => [build 6/8] COPY . .                                                                                                                   0.1s
+ => [build 7/8] WORKDIR /src/TaskBoard.WebApp                                                                                              0.0s
+ => [build 8/8] RUN dotnet build "TaskBoard.WebApp.csproj" -c Release -o /app/build                                                        7.8s
+ => [publish 1/1] RUN dotnet publish "TaskBoard.WebApp.csproj" -c Release -o /app/publish /p:UseAppHost=false                              7.9s
+ => CACHED [base 2/2] WORKDIR /app                                                                                                         0.0s
+ => CACHED [final 1/2] WORKDIR /app                                                                                                        0.0s
+ => CACHED [final 2/2] COPY --from=publish /app/publish .                                                                                  0.0s
+ => exporting to image                                                                                                                     0.0s
+ => => exporting layers                                                                                                                    0.0s
+ => => writing image sha256:d0fea3edc73e5d5eb8474a4ba0c1ae44ea660fd877b5972b454d8f8db0feb280                                               0.0s
+ => => naming to taskboardcrnb.azurecr.io/taskboard-image                                                                                  0.0s
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker-compose push
+[+] Running 9/9
+ ✔ sqlserver Skipped                                                                                                                       0.0s
+ ✔ Pushing web-app: 039478cd5bcc Pushed                                                                                                   22.6s
+ ✔ Pushing web-app: 5f70bf18a086 Pushed                                                                                                    2.5s
+ ✔ Pushing web-app: 6c9e0aac4ac0 Pushed                                                                                                    2.5s
+ ✔ Pushing web-app: 87edbcd48e4d Pushed                                                                                                    6.8s
+ ✔ Pushing web-app: 4cf15d404e20 Pushed                                                                                                    2.6s
+ ✔ Pushing web-app: 847d60aa4ab2 Pushed                                                                                                   22.5s
+ ✔ Pushing web-app: b681f1ff1a0f Pushed                                                                                                   21.4s
+ ✔ Pushing web-app: 8cbe4b54fa88 Pushed                                                                                                   26.1s
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> az acr repository show --name taskboardcrnb --repository taskboard-image
+{
+  "changeableAttributes": {
+    "deleteEnabled": true,
+    "listEnabled": true,
+    "readEnabled": true,
+    "teleportEnabled": false,
+    "writeEnabled": true
+  },
+  "createdTime": "2023-06-03T12:08:24.4591798Z",
+  "imageName": "taskboard-image",
+  "lastUpdateTime": "2023-06-03T12:08:24.5276093Z",
+  "manifestCount": 1,
+  "registry": "taskboardcrnb.azurecr.io",
+  "tagCount": 1
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context create aci taskboardcontext
+Using only available subscription : Azure for Students (56f5a8d7-2b04-4e50-80ad-0d999a5a881a)
+? Select a resource group taskBoardResourceGroup (westeurope)
+Successfully created aci context "taskboardcontext"
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context use taskboardcontext
+taskboardcontext
+Current context is now "taskboardcontext"
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker context ls
+NAME                 TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default              moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                               
+desktop-linux        moby                                                          npipe:////./pipe/dockerDesktopLinuxEngine                    
+taskboardcontext *   aci                 taskBoardResourceGroup@westeurope                                                                      
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker compose up
+storage.FileSharesClient#Get: Invalid input: autorest/validation: validation failed: parameter=accountName constraint=MaxLength value="taskboardstorageaccountnb" details: value length must be less than or equal to 24
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker compose up
+[+] Running 0/1
+ - taskboardstaccnb  Error                                                                                                                 0.2s
+storage.AccountsClient#CheckNameAvailability: Failure responding to request: StatusCode=404 -- Original Error: autorest/azure: Service returned an error. Status=404 Code="SubscriptionNotFound" Message="Subscription 56f5a8d7-2b04-4e50-80ad-0d999a5a881a was not found."
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker compose up
+[+] Running 5/5
+ - taskboardstaccnb              Use existing                                                                                              0.1s
+ - sql-volume                    Created                                                                                                   0.6s
+ - Group 06taskboard-aspnet-app  Created                                                                                                   4.6s
+ - sqlserver                     Created                                                                                                  71.9s
+ - web-app                       Created                                                                                                  71.9s
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker compose up
+[+] Running 1/2
+ - taskboardstaccnb  Created                                                                                                              23.0s
+ - sql-volume        Error                                                                                                                 0.6s
+storage.FileSharesClient#Create: Failure responding to request: StatusCode=404 -- Original Error: autorest/azure: Service returned an error. Status=404 Code="ResourceNotFound" Message="The specified resource does not exist.\nRequestId:24bca33e-801a-0079-5e18-961846000000\nTime:2023-06-03T12:40:13.7493845Z"
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App> docker compose up
+[+] Running 5/5
+ - taskboardstaccnb              Use existing                                                                                              0.1s
+ - sql-volume                    Created                                                                                                   0.8s
+ - Group 06taskboard-aspnet-app  Created                                                                                                   4.8s
+ - sqlserver                     Created                                                                                                  70.4s
+ - web-app                       Created                                                                                                  70.4s
+PS C:\Users\NB\Exercise Deployment to Cloud\06.TaskBoard-ASP.NET-App>

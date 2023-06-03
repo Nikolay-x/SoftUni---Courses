@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    app:
+      container_name: app
+      build:
+        dockerfile: ./Dockerfile
+      volumes:
+        - posiovol:/posio
+      environment:
+        - POSIO_SETTINGS=/app/config.py
+      ports:
+        - 5000:5000
+      deploy:
+        resources:
+            reservations:
+                cpus: '2'
+                memory: 2GB
+      image: posiocrnb.azurecr.io/posio-image
+volumes:
+    posiovol:

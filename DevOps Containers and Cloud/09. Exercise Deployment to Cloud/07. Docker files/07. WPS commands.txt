@@ -1,0 +1,20 @@
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise Deployment to Cloud\'
+   2 cd .\07.Posio-App\
+   3 type .\docker-compose.yml
+   4 docker-compose up -d
+   5 docker context ls
+   6 az login
+   7 az group create --name posiorg --location westeurope
+   8 az acr create --resource-group posiorg --name posiocrnb --sku Basic
+   9 az acr login --name posiocrnb
+  10 docker-compose build
+  11 docker-compose push
+  12 az acr repository show --name posiocrnb --repository posio-image
+  13 docker context create aci posiocontext
+  14 docker context use posiocontext
+  15 docker context ls
+  16 docker compose up

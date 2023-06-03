@@ -1,0 +1,164 @@
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> az login
+A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow with `az login --use-device-code`.
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "id": "56f5a8d7-2b04-4e50-80ad-0d999a5a881a",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure for Students",
+    "state": "Enabled",
+    "tenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "user": {
+      "name": "Nikolay_x@students.softuni.bg",
+      "type": "user"
+    }
+  }
+]
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> az group create --name posiorg --location westeurope
+{
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/posiorg",
+  "location": "westeurope",
+  "managedBy": null,
+  "name": "posiorg",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> az acr create --resource-group posiorg --name posiocrnb --sku Basic
+{
+  "adminUserEnabled": false,
+  "anonymousPullEnabled": false,
+  "creationDate": "2023-06-03T15:31:05.069857+00:00",
+  "dataEndpointEnabled": false,
+  "dataEndpointHostNames": [],
+  "encryption": {
+    "keyVaultProperties": null,
+    "status": "disabled"
+  },
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/posiorg/providers/Microsoft.ContainerRegistry/registries/posiocrnb",
+  "identity": null,
+  "location": "westeurope",
+  "loginServer": "posiocrnb.azurecr.io",
+  "name": "posiocrnb",
+  "networkRuleBypassOptions": "AzureServices",
+  "networkRuleSet": null,
+  "policies": {
+    "azureAdAuthenticationAsArmPolicy": {
+      "status": "enabled"
+    },
+    "exportPolicy": {
+      "status": "enabled"
+    },
+    "quarantinePolicy": {
+      "status": "disabled"
+    },
+    "retentionPolicy": {
+      "days": 7,
+      "lastUpdatedTime": "2023-06-03T15:31:13.014522+00:00",
+      "status": "disabled"
+    },
+    "softDeletePolicy": {
+      "lastUpdatedTime": "2023-06-03T15:31:13.014522+00:00",
+      "retentionDays": 7,
+      "status": "disabled"
+    },
+    "trustPolicy": {
+      "status": "disabled",
+      "type": "Notary"
+    }
+  },
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": "Enabled",
+  "resourceGroup": "posiorg",
+  "sku": {
+    "name": "Basic",
+    "tier": "Basic"
+  },
+  "status": null,
+  "systemData": {
+    "createdAt": "2023-06-03T15:31:05.069857+00:00",
+    "createdBy": "Nikolay_x@students.softuni.bg",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-06-03T15:31:05.069857+00:00",
+    "lastModifiedBy": "Nikolay_x@students.softuni.bg",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries",
+  "zoneRedundancy": "Disabled"
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> az acr login --name posiocrnb
+Login Succeeded
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> docker-compose build
+[+] Building 3.8s (14/14) FINISHED
+ => [internal] load .dockerignore                                                                                                        0.0s
+ => => transferring context: 2B                                                                                                          0.0s
+ => [internal] load build definition from Dockerfile                                                                                     0.0s
+ => => transferring dockerfile: 240B                                                                                                     0.0s
+ => resolve image config for docker.io/docker/dockerfile:1                                                                               2.0s
+ => [auth] docker/dockerfile:pull token for registry-1.docker.io                                                                         0.0s
+ => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:39b85bbfa7536a5feceb7372a0817649ecb2724562a38360f4d6a7782a409b14          0.0s
+ => [internal] load metadata for docker.io/library/python:3.8-slim-buster                                                                1.5s
+ => [auth] library/python:pull token for registry-1.docker.io                                                                            0.0s
+ => [1/5] FROM docker.io/library/python:3.8-slim-buster@sha256:eb48d017c5e117d9fbcbe991b4dbc61339734e01578d8d350b38fe2033a67199          0.0s
+ => [internal] load build context                                                                                                        0.1s
+ => => transferring context: 18.77kB                                                                                                     0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                            0.0s
+ => CACHED [3/5] COPY requirements.txt requirements.txt                                                                                  0.0s
+ => CACHED [4/5] RUN pip3 install -r requirements.txt                                                                                    0.0s
+ => CACHED [5/5] COPY . .                                                                                                                0.0s
+ => exporting to image                                                                                                                   0.0s
+ => => exporting layers                                                                                                                  0.0s
+ => => writing image sha256:b3bcd0982373cc7dc545cdc6ef377f75ac04c93cc2aad02e6c2e64bcdc12c4e1                                             0.0s
+ => => naming to posiocrnb.azurecr.io/posio-image                                                                                        0.0s
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> docker-compose push
+[+] Running 9/9
+ ✔ Pushing app: a546cd540e18 Pushed                                                                                                      3.4s
+ ✔ Pushing app: dec16a69f444 Pushed                                                                                                      4.3s
+ ✔ Pushing app: 11757b93aaf8 Pushed                                                                                                      2.3s
+ ✔ Pushing app: 7a7e52a61bc3 Pushed                                                                                                      2.2s
+ ✔ Pushing app: c0212dc63007 Pushed                                                                                                      4.2s
+ ✔ Pushing app: d8b06e4bca9a Pushed                                                                                                      4.7s
+ ✔ Pushing app: 5f87a6d48234 Pushed                                                                                                      9.5s
+ ✔ Pushing app: 37b14643f733 Pushed                                                                                                      7.9s
+ ✔ Pushing app: d85b356ec3b5 Pushed                                                                                                     12.9s
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> az acr repository show --name posiocrnb --repository posio-image
+{
+  "changeableAttributes": {
+    "deleteEnabled": true,
+    "listEnabled": true,
+    "readEnabled": true,
+    "teleportEnabled": false,
+    "writeEnabled": true
+  },
+  "createdTime": "2023-06-03T15:32:10.0899429Z",
+  "imageName": "posio-image",
+  "lastUpdateTime": "2023-06-03T15:32:10.1542553Z",
+  "manifestCount": 1,
+  "registry": "posiocrnb.azurecr.io",
+  "tagCount": 1
+}
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> docker context create aci posiocontext
+Using only available subscription : Azure for Students (56f5a8d7-2b04-4e50-80ad-0d999a5a881a)
+? Select a resource group posiorg (westeurope)
+Successfully created aci context "posiocontext"
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> docker context use posiocontext
+posiocontext
+Current context is now "posiocontext"
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default             moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                              
+desktop-linux       moby                                                          npipe:////./pipe/dockerDesktopLinuxEngine                   
+posiocontext *      aci                 posiorg@westeurope                                                                                    
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App> docker compose up
+[+] Running 4/4
+ - posioaccnb         Created                                                                                                           21.9s
+ - posio-volume       Created                                                                                                            0.8s
+ - Group 07posio-app  Created                                                                                                            2.7s
+ - app                Created                                                                                                           31.0s
+PS C:\Users\NB\Exercise Deployment to Cloud\07.Posio-App>

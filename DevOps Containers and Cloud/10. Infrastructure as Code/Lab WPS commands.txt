@@ -1,0 +1,37 @@
+PS C:\Users\NB\Infrastructure as Code Lab> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 terraform -help
+   2 cd '.\Infrastructure as Code Lab\'
+   3 explorer .
+   4 docker context ls
+   5 docker ps
+   6 dir
+   7 terrafrom init
+   8 terraform init
+   9 dir
+  10 terraform fmt
+  11 terraform fmt
+  12 terraform fmt
+  13 terraform fmt
+  14 terraform validate
+  15 terraform validate
+  16 terraform validate
+  17 terraform validate
+  18 terraform apply
+  19 docker ps
+  20 terraform apply
+  21 terraform destroy
+  22 dir
+  23 terraform apply
+  24 terraform apply
+  25 terraform apply
+  26 terraform destroy
+  27 docker ps
+  28 docker image ls -a |findstr nginx
+  29 terraform apply
+  30 docker image ls -a |findstr nginx
+  31 terraform destroy
+  32 docker ps
+  33 docker image ls -a |findstr nginx

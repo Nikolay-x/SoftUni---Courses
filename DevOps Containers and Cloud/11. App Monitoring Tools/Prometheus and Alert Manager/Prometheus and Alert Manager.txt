@@ -1,0 +1,208 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Lab App Monitoring Tools\'
+PS C:\Users\NB\Lab App Monitoring Tools> cd .\prometheus\
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> docker run -p 9115:9115 quay.io/prometheus/blackbox-exporter
+ts=2023-06-07T08:31:21.173Z caller=main.go:78 level=info msg="Starting blackbox_exporter" version="(version=0.24.0, branch=HEAD, revision=0b0467473916fd9e8526e2635c2a0b1c56011dff)"
+ts=2023-06-07T08:31:21.173Z caller=main.go:79 level=info build_context="(go=go1.20.4, platform=linux/amd64, user=root@e5bbfcc8184e, date=20230516-11:07:25, tags=netgo)"
+ts=2023-06-07T08:31:21.176Z caller=main.go:91 level=info msg="Loaded config file"
+ts=2023-06-07T08:31:21.178Z caller=tls_config.go:274 level=info msg="Listening on" address=[::]:9115
+ts=2023-06-07T08:31:21.178Z caller=tls_config.go:277 level=info msg="TLS is disabled." http2=false address=[::]:9115
+
+
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Lab App Monitoring Tools\'
+PS C:\Users\NB\Lab App Monitoring Tools> cd .\prometheus\
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> .\prometheus.exe --config.file prometheus-blackbox.yml
+ts=2023-06-07T08:32:20.191Z caller=main.go:531 level=info msg="No time or size retention was set so using the default time retention" duration=15d
+ts=2023-06-07T08:32:20.191Z caller=main.go:575 level=info msg="Starting Prometheus Server" mode=server version="(version=2.44.0, branch=HEAD, revision=1ac5131f698ebc60f13fe2727f89b115a41f6558)"
+ts=2023-06-07T08:32:20.191Z caller=main.go:580 level=info build_context="(go=go1.20.4, platform=windows/amd64, user=root@5be246f61ac8, date=20230514-06:23:08, tags=builtinassets,stringlabels)"
+ts=2023-06-07T08:32:20.191Z caller=main.go:581 level=info host_details=(windows)
+ts=2023-06-07T08:32:20.191Z caller=main.go:582 level=info fd_limits=N/A
+ts=2023-06-07T08:32:20.191Z caller=main.go:583 level=info vm_limits=N/A
+ts=2023-06-07T08:32:20.201Z caller=web.go:562 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090
+ts=2023-06-07T08:32:20.201Z caller=main.go:1016 level=info msg="Starting TSDB ..."
+ts=2023-06-07T08:32:20.201Z caller=tls_config.go:232 level=info component=web msg="Listening on" address=[::]:9090
+ts=2023-06-07T08:32:20.201Z caller=tls_config.go:235 level=info component=web msg="TLS is disabled." http2=false address=[::]:9090
+ts=2023-06-07T08:32:20.201Z caller=head.go:588 level=info component=tsdb msg="Replaying on-disk memory mappable chunks if any"
+ts=2023-06-07T08:32:20.201Z caller=head.go:669 level=info component=tsdb msg="On-disk memory mappable chunks replay completed" duration=0s
+ts=2023-06-07T08:32:20.201Z caller=head.go:677 level=info component=tsdb msg="Replaying WAL, this may take a while"
+ts=2023-06-07T08:32:20.211Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=0 maxSegment=1
+ts=2023-06-07T08:32:20.221Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=1 maxSegment=1
+ts=2023-06-07T08:32:20.221Z caller=head.go:785 level=info component=tsdb msg="WAL replay completed" checkpoint_replay_duration=0s wal_replay_duration=20.1733ms wbl_replay_duration=0s total_replay_duration=20.1733ms
+ts=2023-06-07T08:32:20.221Z caller=main.go:1037 level=info fs_type=unknown
+ts=2023-06-07T08:32:20.221Z caller=main.go:1040 level=info msg="TSDB started"
+ts=2023-06-07T08:32:20.221Z caller=main.go:1220 level=info msg="Loading configuration file" filename=prometheus-blackbox.yml
+ts=2023-06-07T08:32:20.231Z caller=main.go:1257 level=info msg="Completed loading of configuration file" filename=prometheus-blackbox.yml totalDuration=10.0803ms db_storage=0s remote_storage=0s web_handler=0s query_engine=0s scrape=10.0803ms scrape_sd=0s notify=0s notify_sd=0s rules=0s tracing=0s
+ts=2023-06-07T08:32:20.231Z caller=main.go:1001 level=info msg="Server is ready to receive web requests."
+ts=2023-06-07T08:32:20.231Z caller=manager.go:995 level=info component="rule manager" msg="Starting rule manager..."
+ts=2023-06-07T09:00:40.562Z caller=main.go:851 level=warn msg="Received SIGTERM, exiting gracefully..."
+ts=2023-06-07T09:00:40.562Z caller=main.go:875 level=info msg="Stopping scrape discovery manager..."
+ts=2023-06-07T09:00:40.564Z caller=main.go:889 level=info msg="Stopping notify discovery manager..."
+ts=2023-06-07T09:00:40.564Z caller=main.go:871 level=info msg="Scrape discovery manager stopped"
+ts=2023-06-07T09:00:40.564Z caller=manager.go:1009 level=info component="rule manager" msg="Stopping rule manager..."
+ts=2023-06-07T09:00:40.565Z caller=manager.go:1019 level=info component="rule manager" msg="Rule manager stopped"
+ts=2023-06-07T09:00:40.565Z caller=main.go:926 level=info msg="Stopping scrape manager..."
+ts=2023-06-07T09:00:40.564Z caller=main.go:885 level=info msg="Notify discovery manager stopped"
+ts=2023-06-07T09:00:40.565Z caller=main.go:918 level=info msg="Scrape manager stopped"
+ts=2023-06-07T09:00:40.568Z caller=notifier.go:606 level=info component=notifier msg="Stopping notification manager..."
+ts=2023-06-07T09:00:40.568Z caller=main.go:1146 level=info msg="Notifier manager stopped"
+ts=2023-06-07T09:00:40.569Z caller=main.go:1158 level=info msg="See you next time!"
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> .\prometheus.exe --config.file prometheus-blackbox.yml
+ts=2023-06-07T09:00:45.029Z caller=main.go:531 level=info msg="No time or size retention was set so using the default time retention" duration=15d
+ts=2023-06-07T09:00:45.029Z caller=main.go:575 level=info msg="Starting Prometheus Server" mode=server version="(version=2.44.0, branch=HEAD, revision=1ac5131f698ebc60f13fe2727f89b115a41f6558)"
+ts=2023-06-07T09:00:45.030Z caller=main.go:580 level=info build_context="(go=go1.20.4, platform=windows/amd64, user=root@5be246f61ac8, date=20230514-06:23:08, tags=builtinassets,stringlabels)"
+ts=2023-06-07T09:00:45.030Z caller=main.go:581 level=info host_details=(windows)
+ts=2023-06-07T09:00:45.033Z caller=main.go:582 level=info fd_limits=N/A
+ts=2023-06-07T09:00:45.033Z caller=main.go:583 level=info vm_limits=N/A
+ts=2023-06-07T09:00:45.042Z caller=web.go:562 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090
+ts=2023-06-07T09:00:45.043Z caller=main.go:1016 level=info msg="Starting TSDB ..."
+ts=2023-06-07T09:00:45.045Z caller=tls_config.go:232 level=info component=web msg="Listening on" address=[::]:9090
+ts=2023-06-07T09:00:45.045Z caller=tls_config.go:235 level=info component=web msg="TLS is disabled." http2=false address=[::]:9090
+ts=2023-06-07T09:00:45.048Z caller=head.go:588 level=info component=tsdb msg="Replaying on-disk memory mappable chunks if any"
+ts=2023-06-07T09:00:45.048Z caller=head.go:669 level=info component=tsdb msg="On-disk memory mappable chunks replay completed" duration=0s
+ts=2023-06-07T09:00:45.048Z caller=head.go:677 level=info component=tsdb msg="Replaying WAL, this may take a while"
+ts=2023-06-07T09:00:45.053Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=0 maxSegment=2
+ts=2023-06-07T09:00:45.064Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=1 maxSegment=2
+ts=2023-06-07T09:00:45.064Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=2 maxSegment=2
+ts=2023-06-07T09:00:45.064Z caller=head.go:785 level=info component=tsdb msg="WAL replay completed" checkpoint_replay_duration=0s wal_replay_duration=16.587ms wbl_replay_duration=0s total_replay_duration=16.587ms
+ts=2023-06-07T09:00:45.064Z caller=main.go:1037 level=info fs_type=unknown
+ts=2023-06-07T09:00:45.064Z caller=main.go:1040 level=info msg="TSDB started"
+ts=2023-06-07T09:00:45.064Z caller=main.go:1220 level=info msg="Loading configuration file" filename=prometheus-blackbox.yml
+ts=2023-06-07T09:00:45.088Z caller=manager.go:1032 level=error component="rule manager" msg="loading groups failed" err="alert-rules-blackbox-exporter.yml: yaml: unmarshal errors:\n  line 2: field global not found in type rulefmt.RuleGroups"
+ts=2023-06-07T09:00:45.088Z caller=main.go:1246 level=error msg="Failed to apply configuration" err="error loading rules, previous rule set restored"
+ts=2023-06-07T09:00:45.088Z caller=main.go:875 level=info msg="Stopping scrape discovery manager..."
+ts=2023-06-07T09:00:45.091Z caller=main.go:889 level=info msg="Stopping notify discovery manager..."
+ts=2023-06-07T09:00:45.088Z caller=manager.go:995 level=info component="rule manager" msg="Starting rule manager..."
+ts=2023-06-07T09:00:45.091Z caller=main.go:871 level=info msg="Scrape discovery manager stopped"
+ts=2023-06-07T09:00:45.091Z caller=manager.go:1009 level=info component="rule manager" msg="Stopping rule manager..."
+ts=2023-06-07T09:00:45.091Z caller=main.go:885 level=info msg="Notify discovery manager stopped"
+ts=2023-06-07T09:00:45.093Z caller=manager.go:1019 level=info component="rule manager" msg="Rule manager stopped"
+ts=2023-06-07T09:00:45.094Z caller=main.go:926 level=info msg="Stopping scrape manager..."
+ts=2023-06-07T09:00:45.095Z caller=main.go:918 level=info msg="Scrape manager stopped"
+ts=2023-06-07T09:00:45.096Z caller=notifier.go:606 level=info component=notifier msg="Stopping notification manager..."
+ts=2023-06-07T09:00:45.099Z caller=main.go:1146 level=info msg="Notifier manager stopped"
+ts=2023-06-07T09:00:45.099Z caller=main.go:1155 level=error err="error loading config from \"prometheus-blackbox.yml\": one or more errors occurred while applying the new configuration (--config.file=\"prometheus-blackbox.yml\")"
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> .\prometheus.exe --config.file prometheus-blackbox.yml
+ts=2023-06-07T09:08:58.925Z caller=main.go:531 level=info msg="No time or size retention was set so using the default time retention" duration=15d
+ts=2023-06-07T09:08:58.926Z caller=main.go:575 level=info msg="Starting Prometheus Server" mode=server version="(version=2.44.0, branch=HEAD, revision=1ac5131f698ebc60f13fe2727f89b115a41f6558)"
+ts=2023-06-07T09:08:58.926Z caller=main.go:580 level=info build_context="(go=go1.20.4, platform=windows/amd64, user=root@5be246f61ac8, date=20230514-06:23:08, tags=builtinassets,stringlabels)"
+ts=2023-06-07T09:08:58.926Z caller=main.go:581 level=info host_details=(windows)
+ts=2023-06-07T09:08:58.926Z caller=main.go:582 level=info fd_limits=N/A
+ts=2023-06-07T09:08:58.926Z caller=main.go:583 level=info vm_limits=N/A
+ts=2023-06-07T09:08:58.937Z caller=web.go:562 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090
+ts=2023-06-07T09:08:58.938Z caller=main.go:1016 level=info msg="Starting TSDB ..."
+ts=2023-06-07T09:08:58.939Z caller=tls_config.go:232 level=info component=web msg="Listening on" address=[::]:9090
+ts=2023-06-07T09:08:58.939Z caller=tls_config.go:235 level=info component=web msg="TLS is disabled." http2=false address=[::]:9090
+ts=2023-06-07T09:08:58.944Z caller=head.go:588 level=info component=tsdb msg="Replaying on-disk memory mappable chunks if any"
+ts=2023-06-07T09:08:58.945Z caller=head.go:669 level=info component=tsdb msg="On-disk memory mappable chunks replay completed" duration=521.7µs
+ts=2023-06-07T09:08:58.945Z caller=head.go:677 level=info component=tsdb msg="Replaying WAL, this may take a while"
+ts=2023-06-07T09:08:58.952Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=0 maxSegment=3
+ts=2023-06-07T09:08:58.956Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=1 maxSegment=3
+ts=2023-06-07T09:08:58.957Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=2 maxSegment=3
+ts=2023-06-07T09:08:58.959Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=3 maxSegment=3
+ts=2023-06-07T09:08:58.959Z caller=head.go:785 level=info component=tsdb msg="WAL replay completed" checkpoint_replay_duration=550.5µs wal_replay_duration=13.1892ms wbl_replay_duration=0s total_replay_duration=14.2614ms
+ts=2023-06-07T09:08:58.960Z caller=main.go:1037 level=info fs_type=unknown
+ts=2023-06-07T09:08:58.960Z caller=main.go:1040 level=info msg="TSDB started"
+ts=2023-06-07T09:08:58.961Z caller=main.go:1220 level=info msg="Loading configuration file" filename=prometheus-blackbox.yml
+ts=2023-06-07T09:08:58.973Z caller=main.go:1257 level=info msg="Completed loading of configuration file" filename=prometheus-blackbox.yml totalDuration=12.432ms db_storage=0s remote_storage=0s web_handler=0s query_engine=0s scrape=10.7789ms scrape_sd=0s notify=530.8µs notify_sd=11.6µs rules=0s tracing=0s
+ts=2023-06-07T09:08:58.974Z caller=main.go:1001 level=info msg="Server is ready to receive web requests."
+ts=2023-06-07T09:08:58.974Z caller=manager.go:995 level=info component="rule manager" msg="Starting rule manager..."
+ts=2023-06-07T09:17:55.201Z caller=main.go:851 level=warn msg="Received SIGTERM, exiting gracefully..."
+ts=2023-06-07T09:17:55.201Z caller=main.go:875 level=info msg="Stopping scrape discovery manager..."
+ts=2023-06-07T09:17:55.206Z caller=main.go:889 level=info msg="Stopping notify discovery manager..."
+ts=2023-06-07T09:17:55.206Z caller=main.go:871 level=info msg="Scrape discovery manager stopped"
+ts=2023-06-07T09:17:55.207Z caller=manager.go:1009 level=info component="rule manager" msg="Stopping rule manager..."
+ts=2023-06-07T09:17:55.207Z caller=main.go:885 level=info msg="Notify discovery manager stopped"
+ts=2023-06-07T09:17:55.208Z caller=manager.go:1019 level=info component="rule manager" msg="Rule manager stopped"
+ts=2023-06-07T09:17:55.210Z caller=main.go:926 level=info msg="Stopping scrape manager..."
+ts=2023-06-07T09:17:55.211Z caller=main.go:918 level=info msg="Scrape manager stopped"
+ts=2023-06-07T09:17:55.215Z caller=notifier.go:606 level=info component=notifier msg="Stopping notification manager..."
+ts=2023-06-07T09:17:55.215Z caller=main.go:1146 level=info msg="Notifier manager stopped"
+ts=2023-06-07T09:17:55.216Z caller=main.go:1158 level=info msg="See you next time!"
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> .\prometheus.exe --config.file prometheus-blackbox.yml
+ts=2023-06-07T09:18:00.531Z caller=main.go:531 level=info msg="No time or size retention was set so using the default time retention" duration=15d
+ts=2023-06-07T09:18:00.532Z caller=main.go:575 level=info msg="Starting Prometheus Server" mode=server version="(version=2.44.0, branch=HEAD, revision=1ac5131f698ebc60f13fe2727f89b115a41f6558)"
+ts=2023-06-07T09:18:00.533Z caller=main.go:580 level=info build_context="(go=go1.20.4, platform=windows/amd64, user=root@5be246f61ac8, date=20230514-06:23:08, tags=builtinassets,stringlabels)"
+ts=2023-06-07T09:18:00.536Z caller=main.go:581 level=info host_details=(windows)
+ts=2023-06-07T09:18:00.536Z caller=main.go:582 level=info fd_limits=N/A
+ts=2023-06-07T09:18:00.537Z caller=main.go:583 level=info vm_limits=N/A
+ts=2023-06-07T09:18:00.549Z caller=web.go:562 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090
+ts=2023-06-07T09:18:00.552Z caller=main.go:1016 level=info msg="Starting TSDB ..."
+ts=2023-06-07T09:18:00.553Z caller=tls_config.go:232 level=info component=web msg="Listening on" address=[::]:9090
+ts=2023-06-07T09:18:00.553Z caller=tls_config.go:235 level=info component=web msg="TLS is disabled." http2=false address=[::]:9090
+ts=2023-06-07T09:18:00.556Z caller=head.go:588 level=info component=tsdb msg="Replaying on-disk memory mappable chunks if any"
+ts=2023-06-07T09:18:00.556Z caller=head.go:669 level=info component=tsdb msg="On-disk memory mappable chunks replay completed" duration=0s
+ts=2023-06-07T09:18:00.556Z caller=head.go:677 level=info component=tsdb msg="Replaying WAL, this may take a while"
+ts=2023-06-07T09:18:00.562Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=0 maxSegment=4
+ts=2023-06-07T09:18:00.572Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=1 maxSegment=4
+ts=2023-06-07T09:18:00.572Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=2 maxSegment=4
+ts=2023-06-07T09:18:00.572Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=3 maxSegment=4
+ts=2023-06-07T09:18:00.578Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=4 maxSegment=4
+ts=2023-06-07T09:18:00.578Z caller=head.go:785 level=info component=tsdb msg="WAL replay completed" checkpoint_replay_duration=0s wal_replay_duration=22.0844ms wbl_replay_duration=0s total_replay_duration=22.0844ms
+ts=2023-06-07T09:18:00.581Z caller=main.go:1037 level=info fs_type=unknown
+ts=2023-06-07T09:18:00.581Z caller=main.go:1040 level=info msg="TSDB started"
+ts=2023-06-07T09:18:00.581Z caller=main.go:1220 level=info msg="Loading configuration file" filename=prometheus-blackbox.yml
+ts=2023-06-07T09:18:00.599Z caller=main.go:1257 level=info msg="Completed loading of configuration file" filename=prometheus-blackbox.yml totalDuration=18.6237ms db_storage=0s remote_storage=0s web_handler=0s query_engine=0s scrape=12.8212ms scrape_sd=0s notify=530.8µs notify_sd=0s rules=5.2717ms tracing=0s
+ts=2023-06-07T09:18:00.599Z caller=main.go:1001 level=info msg="Server is ready to receive web requests."
+ts=2023-06-07T09:18:00.599Z caller=manager.go:995 level=info component="rule manager" msg="Starting rule manager..."
+
+
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Lab App Monitoring Tools\'
+PS C:\Users\NB\Lab App Monitoring Tools> cd .\alertmanager\
+PS C:\Users\NB\Lab App Monitoring Tools\alertmanager> dir
+
+
+    Directory: C:\Users\NB\Lab App Monitoring Tools\alertmanager
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         07-Jun-23     10:10       34881536 alertmanager.exe
+-a----         07-Jun-23     10:10            356 alertmanager.yml
+-a----         07-Jun-23     10:10       28198400 amtool.exe
+-a----         07-Jun-23     10:10          11357 LICENSE
+-a----         07-Jun-23     10:10            457 NOTICE
+
+
+PS C:\Users\NB\Lab App Monitoring Tools\alertmanager> dir
+
+
+    Directory: C:\Users\NB\Lab App Monitoring Tools\alertmanager
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         07-Jun-23     11:39            391 alertmanager-blackbox.yml
+-a----         07-Jun-23     10:10       34881536 alertmanager.exe
+-a----         07-Jun-23     10:10            356 alertmanager.yml
+-a----         07-Jun-23     10:10       28198400 amtool.exe
+-a----         07-Jun-23     10:10          11357 LICENSE
+-a----         07-Jun-23     10:10            457 NOTICE
+
+
+PS C:\Users\NB\Lab App Monitoring Tools\alertmanager> .\alertmanager.exe --config.file .\alertmanager-blackbox.yml
+ts=2023-06-07T09:11:52.924Z caller=main.go:240 level=info msg="Starting Alertmanager" version="(version=0.25.0, branch=HEAD, revision=258fab7cdd551f2cf251ed0348f0ad7289aee789)"
+ts=2023-06-07T09:11:52.925Z caller=main.go:241 level=info build_context="(go=go1.19.4, user=root@0dd4f853dffb, date=20221222-14:50:08)"
+ts=2023-06-07T09:11:53.185Z caller=cluster.go:185 level=info component=cluster msg="setting advertise address explicitly" addr=192.168.100.7 port=9094
+ts=2023-06-07T09:11:53.189Z caller=cluster.go:681 level=info component=cluster msg="Waiting for gossip to settle..." interval=2s
+ts=2023-06-07T09:11:53.239Z caller=coordinator.go:113 level=info component=configuration msg="Loading configuration file" file=.\alertmanager-blackbox.yml
+ts=2023-06-07T09:11:53.240Z caller=coordinator.go:126 level=info component=configuration msg="Completed loading of configuration file" file=.\alertmanager-blackbox.yml
+ts=2023-06-07T09:11:53.245Z caller=tls_config.go:232 level=info msg="Listening on" address=[::]:9093
+ts=2023-06-07T09:11:53.245Z caller=tls_config.go:235 level=info msg="TLS is disabled." http2=false address=[::]:9093
+ts=2023-06-07T09:11:55.190Z caller=cluster.go:706 level=info component=cluster msg="gossip not settled" polls=0 before=0 now=1 elapsed=2.0010545s
+ts=2023-06-07T09:12:03.213Z caller=cluster.go:698 level=info component=cluster msg="gossip settled; proceeding" elapsed=10.0240056s

@@ -1,0 +1,268 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Lab App Monitoring Tools\'
+PS C:\Users\NB\Lab App Monitoring Tools> cd .\prometheus\
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> docker ps
+error during connect: this error may indicate that the docker daemon is not running: Get "http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/containers/json": open //./pipe/docker_engine: The system cannot find the file specified.
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                                 
+desktop-linux       moby                                                          npipe:////./pipe/dockerDesktopLinuxEngine                      
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> docker run -p 9115:9115 quay.io/prometheus/blackbox-exporter
+Unable to find image 'quay.io/prometheus/blackbox-exporter:latest' locally
+latest: Pulling from prometheus/blackbox-exporter
+e6b9e25f5d01: Pull complete
+0c6a06713be8: Pull complete
+b4bd2c7f1f55: Pull complete
+f1b939a4905b: Pull complete
+Digest: sha256:3af31f8bd1ad2907b4b0f7c485fde3de0a8ee0b498d42fc971f0698885c03acb
+Status: Downloaded newer image for quay.io/prometheus/blackbox-exporter:latest
+ts=2023-06-07T07:36:54.931Z caller=main.go:78 level=info msg="Starting blackbox_exporter" version="(version=0.24.0, branch=HEAD, revision=0b0467473916fd9e8526e2635c2a0b1c56011dff)"
+ts=2023-06-07T07:36:54.931Z caller=main.go:79 level=info build_context="(go=go1.20.4, platform=linux/amd64, user=root@e5bbfcc8184e, date=20230516-11:07:25, tags=netgo)"
+ts=2023-06-07T07:36:54.932Z caller=main.go:91 level=info msg="Loaded config file"
+ts=2023-06-07T07:36:54.933Z caller=tls_config.go:274 level=info msg="Listening on" address=[::]:9115
+ts=2023-06-07T07:36:54.933Z caller=tls_config.go:277 level=info msg="TLS is disabled." http2=false address=[::]:9115
+ts=2023-06-07T08:10:40.406Z caller=main.go:255 level=info msg="Received SIGTERM, exiting gracefully..."
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> prometheus -h
+prometheus : The term 'prometheus' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of
+the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ prometheus -h
++ ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (prometheus:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+
+Suggestion [3,General]: The command prometheus was not found, but does exist in the current location. Windows PowerShell does not load commands from the current location by default. If you trust this command, instead type: ".\prometheus". See "get-help about_Command_Precedence" for more details.
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> ./prometheus -h
+usage: prometheus.exe [<flags>]
+
+The Prometheus monitoring server
+
+
+Flags:
+  -h, --[no-]help                Show context-sensitive help (also try
+                                 --help-long and --help-man).
+      --[no-]version             Show application version.
+      --config.file="prometheus.yml"
+                                 Prometheus configuration file path.
+      --web.listen-address="0.0.0.0:9090"
+                                 Address to listen on for UI, API, and
+                                 telemetry.
+      --web.config.file=""       [EXPERIMENTAL] Path to configuration file that
+                                 can enable TLS or authentication.
+      --web.read-timeout=5m      Maximum duration before timing out read of the
+                                 request, and closing idle connections.
+      --web.max-connections=512  Maximum number of simultaneous connections.
+      --web.external-url=<URL>   The URL under which Prometheus is externally
+                                 reachable (for example, if Prometheus is served
+                                 via a reverse proxy). Used for generating
+                                 relative and absolute links back to Prometheus
+                                 itself. If the URL has a path portion, it will
+                                 be used to prefix all HTTP endpoints served by
+                                 Prometheus. If omitted, relevant URL components
+                                 will be derived automatically.
+      --web.route-prefix=<path>  Prefix for the internal routes of
+                                 web endpoints. Defaults to path of
+                                 --web.external-url.
+      --web.user-assets=<path>   Path to static asset directory, available at
+                                 /user.
+      --[no-]web.enable-lifecycle
+                                 Enable shutdown and reload via HTTP request.
+      --[no-]web.enable-admin-api
+                                 Enable API endpoints for admin control actions.
+      --[no-]web.enable-remote-write-receiver
+                                 Enable API endpoint accepting remote write
+                                 requests.
+      --web.console.templates="consoles"
+                                 Path to the console template directory,
+                                 available at /consoles.
+      --web.console.libraries="console_libraries"
+                                 Path to the console library directory.
+      --web.page-title="Prometheus Time Series Collection and Processing Server"
+                                 Document title of Prometheus instance.
+      --web.cors.origin=".*"     Regex for CORS origin. It is fully anchored.
+                                 Example: 'https?://(domain1|domain2)\.com'
+      --storage.tsdb.path="data/"
+                                 Base path for metrics storage. Use with server
+                                 mode only.
+      --storage.tsdb.retention=STORAGE.TSDB.RETENTION
+                                 [DEPRECATED] How long to retain samples in
+                                 storage. This flag has been deprecated,
+                                 use "storage.tsdb.retention.time" instead.
+                                 Use with server mode only.
+      --storage.tsdb.retention.time=STORAGE.TSDB.RETENTION.TIME
+                                 How long to retain samples in storage.
+                                 When this flag is set it overrides
+                                 "storage.tsdb.retention". If neither this
+                                 flag nor "storage.tsdb.retention" nor
+                                 "storage.tsdb.retention.size" is set,
+                                 the retention time defaults to 15d. Units
+                                 Supported: y, w, d, h, m, s, ms. Use with
+                                 server mode only.
+      --storage.tsdb.retention.size=STORAGE.TSDB.RETENTION.SIZE
+                                 Maximum number of bytes that can be stored for
+                                 blocks. A unit is required, supported units: B,
+                                 KB, MB, GB, TB, PB, EB. Ex: "512MB". Based on
+                                 powers-of-2, so 1KB is 1024B. Use with server
+                                 mode only.
+      --[no-]storage.tsdb.no-lockfile
+                                 Do not create lockfile in data directory.
+                                 Use with server mode only.
+      --storage.tsdb.head-chunks-write-queue-size=0
+                                 Size of the queue through which head chunks
+                                 are written to the disk to be m-mapped,
+                                 0 disables the queue completely. Experimental.
+                                 Use with server mode only.
+      --storage.agent.path="data-agent/"
+                                 Base path for metrics storage. Use with agent
+                                 mode only.
+      --[no-]storage.agent.wal-compression
+                                 Compress the agent WAL. Use with agent mode
+                                 only.
+      --storage.agent.retention.min-time=STORAGE.AGENT.RETENTION.MIN-TIME
+                                 Minimum age samples may be before being
+                                 considered for deletion when the WAL is
+                                 truncated Use with agent mode only.
+      --storage.agent.retention.max-time=STORAGE.AGENT.RETENTION.MAX-TIME
+                                 Maximum age samples may be before being
+                                 forcibly deleted when the WAL is truncated Use
+                                 with agent mode only.
+      --[no-]storage.agent.no-lockfile
+                                 Do not create lockfile in data directory.
+                                 Use with agent mode only.
+      --storage.remote.flush-deadline=<duration>
+                                 How long to wait flushing sample on shutdown or
+                                 config reload.
+      --storage.remote.read-sample-limit=5e7
+                                 Maximum overall number of samples to return via
+                                 the remote read interface, in a single query.
+                                 0 means no limit. This limit is ignored for
+                                 streamed response types. Use with server mode
+                                 only.
+      --storage.remote.read-concurrent-limit=10
+                                 Maximum number of concurrent remote read calls.
+                                 0 means no limit. Use with server mode only.
+      --storage.remote.read-max-bytes-in-frame=1048576
+                                 Maximum number of bytes in a single frame for
+                                 streaming remote read response types before
+                                 marshalling. Note that client might have limit
+                                 on frame size as well. 1MB as recommended by
+                                 protobuf by default. Use with server mode only.
+      --rules.alert.for-outage-tolerance=1h
+                                 Max time to tolerate prometheus outage for
+                                 restoring "for" state of alert. Use with server
+                                 mode only.
+      --rules.alert.for-grace-period=10m
+                                 Minimum duration between alert and restored
+                                 "for" state. This is maintained only for alerts
+                                 with configured "for" time greater than grace
+                                 period. Use with server mode only.
+      --rules.alert.resend-delay=1m
+                                 Minimum amount of time to wait before resending
+                                 an alert to Alertmanager. Use with server mode
+                                 only.
+      --alertmanager.notification-queue-capacity=10000
+                                 The capacity of the queue for pending
+                                 Alertmanager notifications. Use with server
+                                 mode only.
+      --query.lookback-delta=5m  The maximum lookback duration for retrieving
+                                 metrics during expression evaluations and
+                                 federation. Use with server mode only.
+      --query.timeout=2m         Maximum time a query may take before being
+                                 aborted. Use with server mode only.
+      --query.max-concurrency=20
+                                 Maximum number of queries executed
+                                 concurrently. Use with server mode only.
+      --query.max-samples=50000000
+                                 Maximum number of samples a single query can
+                                 load into memory. Note that queries will fail
+                                 if they try to load more samples than this
+                                 into memory, so this also limits the number
+                                 of samples a query can return. Use with server
+                                 mode only.
+      --enable-feature= ...      Comma separated feature names
+                                 to enable. Valid options: agent,
+                                 exemplar-storage, expand-external-labels,
+                                 memory-snapshot-on-shutdown,
+                                 promql-at-modifier, promql-negative-offset,
+                                 promql-per-step-stats, remote-write-receiver
+                                 (DEPRECATED), extra-scrape-metrics,
+                                 new-service-discovery-manager, auto-gomaxprocs,
+                                 no-default-scrape-port, native-histograms. See
+                                 https://prometheus.io/docs/prometheus/latest/feature_flags/
+                                 for more details.
+      --log.level=info           Only log messages with the given severity or
+                                 above. One of: [debug, info, warn, error]
+      --log.format=logfmt        Output format of log messages. One of: [logfmt,
+                                 json]
+
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus>
+
+
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Lab App Monitoring Tools\'
+PS C:\Users\NB\Lab App Monitoring Tools> cd .\prometheus\
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> dir
+
+
+    Directory: C:\Users\NB\Lab App Monitoring Tools\prometheus
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         07-Jun-23     10:10                consoles
+d-----         07-Jun-23     10:10                console_libraries
+-a----         07-Jun-23     10:10          11357 LICENSE
+-a----         07-Jun-23     10:10           3773 NOTICE
+-a----         07-Jun-23     10:56            870 prometheus-blackbox.yml
+-a----         07-Jun-23     10:10      119161344 prometheus.exe
+-a----         07-Jun-23     10:10            934 prometheus.yml
+-a----         07-Jun-23     10:10      113179136 promtool.exe
+
+
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> .\prometheus.exe --config.file prometheus-blackbox.yml
+ts=2023-06-07T08:01:55.803Z caller=main.go:531 level=info msg="No time or size retention was set so using the default time retention" duration=15d
+ts=2023-06-07T08:01:55.803Z caller=main.go:575 level=info msg="Starting Prometheus Server" mode=server version="(version=2.44.0, branch=HEAD, revision=1ac5131f698ebc60f13fe2727f89b115a41f6558)"
+ts=2023-06-07T08:01:55.803Z caller=main.go:580 level=info build_context="(go=go1.20.4, platform=windows/amd64, user=root@5be246f61ac8, date=20230514-06:23:08, tags=builtinassets,stringlabels)"
+ts=2023-06-07T08:01:55.803Z caller=main.go:581 level=info host_details=(windows)
+ts=2023-06-07T08:01:55.803Z caller=main.go:582 level=info fd_limits=N/A
+ts=2023-06-07T08:01:55.803Z caller=main.go:583 level=info vm_limits=N/A
+ts=2023-06-07T08:01:55.813Z caller=web.go:562 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090
+ts=2023-06-07T08:01:55.823Z caller=main.go:1016 level=info msg="Starting TSDB ..."
+ts=2023-06-07T08:01:55.833Z caller=tls_config.go:232 level=info component=web msg="Listening on" address=[::]:9090
+ts=2023-06-07T08:01:55.833Z caller=tls_config.go:235 level=info component=web msg="TLS is disabled." http2=false address=[::]:9090
+ts=2023-06-07T08:01:55.844Z caller=head.go:588 level=info component=tsdb msg="Replaying on-disk memory mappable chunks if any"
+ts=2023-06-07T08:01:55.844Z caller=head.go:669 level=info component=tsdb msg="On-disk memory mappable chunks replay completed" duration=0s
+ts=2023-06-07T08:01:55.844Z caller=head.go:677 level=info component=tsdb msg="Replaying WAL, this may take a while"
+ts=2023-06-07T08:01:55.855Z caller=head.go:748 level=info component=tsdb msg="WAL segment loaded" segment=0 maxSegment=0
+ts=2023-06-07T08:01:55.855Z caller=head.go:785 level=info component=tsdb msg="WAL replay completed" checkpoint_replay_duration=0s wal_replay_duration=10.9413ms wbl_replay_duration=0s total_replay_duration=10.9413ms
+ts=2023-06-07T08:01:55.855Z caller=main.go:1037 level=info fs_type=unknown
+ts=2023-06-07T08:01:55.855Z caller=main.go:1040 level=info msg="TSDB started"
+ts=2023-06-07T08:01:55.855Z caller=main.go:1220 level=info msg="Loading configuration file" filename=prometheus-blackbox.yml
+ts=2023-06-07T08:01:55.885Z caller=main.go:1257 level=info msg="Completed loading of configuration file" filename=prometheus-blackbox.yml totalDuration=30.1316ms db_storage=0s remote_storage=0s web_handler=0s query_engine=0s scrape=18.968ms scrape_sd=1.0465ms notify=0s notify_sd=0s rules=0s tracing=1.5998ms
+ts=2023-06-07T08:01:55.885Z caller=main.go:1001 level=info msg="Server is ready to receive web requests."
+ts=2023-06-07T08:01:55.885Z caller=manager.go:995 level=info component="rule manager" msg="Starting rule manager..."
+ts=2023-06-07T08:10:50.448Z caller=main.go:851 level=warn msg="Received SIGTERM, exiting gracefully..."
+ts=2023-06-07T08:10:50.449Z caller=main.go:875 level=info msg="Stopping scrape discovery manager..."
+ts=2023-06-07T08:10:50.449Z caller=main.go:889 level=info msg="Stopping notify discovery manager..."
+ts=2023-06-07T08:10:50.450Z caller=manager.go:1009 level=info component="rule manager" msg="Stopping rule manager..."
+ts=2023-06-07T08:10:50.449Z caller=main.go:871 level=info msg="Scrape discovery manager stopped"
+ts=2023-06-07T08:10:50.450Z caller=main.go:885 level=info msg="Notify discovery manager stopped"
+ts=2023-06-07T08:10:50.450Z caller=manager.go:1019 level=info component="rule manager" msg="Rule manager stopped"
+ts=2023-06-07T08:10:50.451Z caller=main.go:926 level=info msg="Stopping scrape manager..."
+ts=2023-06-07T08:10:50.453Z caller=main.go:918 level=info msg="Scrape manager stopped"
+ts=2023-06-07T08:10:50.457Z caller=notifier.go:606 level=info component=notifier msg="Stopping notification manager..."
+ts=2023-06-07T08:10:50.458Z caller=main.go:1146 level=info msg="Notifier manager stopped"
+ts=2023-06-07T08:10:50.458Z caller=main.go:1158 level=info msg="See you next time!"
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus>

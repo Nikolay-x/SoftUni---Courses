@@ -1,0 +1,28 @@
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Lab App Monitoring Tools\'
+   2 cd .\prometheus\
+   3 docker run -p 9115:9115 quay.io/prometheus/blackbox-exporter
+
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Lab App Monitoring Tools\'
+   2 cd .\prometheus\
+   3 .\prometheus.exe --config.file prometheus-blackbox.yml
+   4 .\prometheus.exe --config.file prometheus-blackbox.yml
+   5 .\prometheus.exe --config.file prometheus-blackbox.yml
+   6 .\prometheus.exe --config.file prometheus-blackbox.yml
+
+PS C:\Users\NB\Lab App Monitoring Tools\alertmanager> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Lab App Monitoring Tools\'
+   2 cd .\alertmanager\
+   3 dir
+   4 dir
+   5 .\alertmanager.exe --config.file .\alertmanager-blackbox.yml

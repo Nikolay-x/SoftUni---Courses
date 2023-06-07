@@ -1,0 +1,25 @@
+browser commands:
+http://localhost:9115/probe?target=https://softuni.org
+http://localhost:9090/
+
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Lab App Monitoring Tools\'
+   2 cd .\prometheus\
+   3 docker ps
+   4 docker ps
+   5 docker context ls
+   6 docker run -p 9115:9115 quay.io/prometheus/blackbox-exporter
+   7 prometheus -h
+   8 ./prometheus -h
+
+PS C:\Users\NB\Lab App Monitoring Tools\prometheus> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Lab App Monitoring Tools\'
+   2 cd .\prometheus\
+   3 dir
+   4 .\prometheus.exe --config.file prometheus-blackbox.yml

@@ -1,0 +1,389 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Exercise IaaC and Monitoring\'
+PS C:\Users\NB\Exercise IaaC and Monitoring> cd .\TaskBoard\
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> dir
+
+
+    Directory: C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10-Jun-23     14:14                .terraform
+d-----         10-Jun-23     12:19                TaskBoard.Data
+d-----         10-Jun-23     12:19                TaskBoard.WebApp
+-a----         10-Jun-23     14:15           2232 .terraform.lock.hcl
+-a----         10-Jun-23     15:13           2993 main.tf
+-a----         02-May-23     17:04           1650 TaskBoard.sln
+-a----         10-Jun-23     14:56          17131 terraform.tfstate
+-a----         10-Jun-23     14:50            181 terraform.tfstate.backup
+-a----         10-Jun-23     15:05           1088 variables.tf
+
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> dir
+
+
+    Directory: C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10-Jun-23     14:14                .terraform
+d-----         10-Jun-23     12:19                TaskBoard.Data
+d-----         10-Jun-23     12:19                TaskBoard.WebApp
+-a----         10-Jun-23     14:15           2232 .terraform.lock.hcl
+-a----         10-Jun-23     15:17           2981 main.tf
+-a----         10-Jun-23     15:29            179 outputs.tf
+-a----         02-May-23     17:04           1650 TaskBoard.sln
+-a----         10-Jun-23     14:56          17131 terraform.tfstate
+-a----         10-Jun-23     14:50            181 terraform.tfstate.backup
+-a----         10-Jun-23     15:28            464 values.tfvars
+-a----         10-Jun-23     15:05           1088 variables.tf
+
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> terraform apply -var-file="values.tfvars"
+random_integer.ri: Refreshing state... [id=796200]
+azurerm_resource_group.rg: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200]
+azurerm_mssql_server.sqlserver: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200]
+azurerm_service_plan.appsp: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/serverfarms/task-board-plan-796200]
+azurerm_mssql_firewall_rule.example: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFW796200]
+azurerm_mssql_database.sql: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/databases/TaskBoardDB796200]
+azurerm_linux_web_app.appservice: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200]
+azurerm_app_service_source_control.sourcecontrol: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # azurerm_mssql_firewall_rule.example must be replaced
+-/+ resource "azurerm_mssql_firewall_rule" "example" {
+      ~ id               = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFW796200" -> (known after apply)
+      ~ name             = "TaskBoardFW796200" -> "TaskBoardFirewallRule796200" # forces replacement
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  + webapp_ips = "20.73.125.85,20.73.126.190,20.73.127.172,20.73.127.189,20.76.65.146,20.76.68.173,20.105.224.24"
+  + webapp_url = "task-board-796200.azurewebsites.net"
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+azurerm_mssql_firewall_rule.example: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFW796200]
+azurerm_mssql_firewall_rule.example: Destruction complete after 4s
+azurerm_mssql_firewall_rule.example: Creating...
+azurerm_mssql_firewall_rule.example: Creation complete after 2s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFirewallRule796200]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+webapp_ips = "20.73.125.85,20.73.126.190,20.73.127.172,20.73.127.189,20.76.65.146,20.76.68.173,20.105.224.24"
+webapp_url = "task-board-796200.azurewebsites.net"
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\TaskBoard\
+   3 dir
+   4 dir
+   5 terraform apply -var-file="values.tfvars"
+
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> terraform destroy -var-file="values.tfvars"
+random_integer.ri: Refreshing state... [id=796200]
+azurerm_resource_group.rg: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200]
+azurerm_service_plan.appsp: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/serverfarms/task-board-plan-796200]
+azurerm_mssql_server.sqlserver: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200]
+azurerm_mssql_firewall_rule.example: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFirewallRule796200]
+azurerm_mssql_database.sql: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/databases/TaskBoardDB796200]
+azurerm_linux_web_app.appservice: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200]
+azurerm_app_service_source_control.sourcecontrol: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # azurerm_app_service_source_control.sourcecontrol will be destroyed
+  - resource "azurerm_app_service_source_control" "sourcecontrol" {
+      - app_id                 = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200" -> null
+      - branch                 = "main" -> null
+      - id                     = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200" -> null
+      - repo_url               = "https://github.com/Nikolay-x/TaskBoard" -> null
+      - rollback_enabled       = false -> null
+      - scm_type               = "ExternalGit" -> null
+      - use_local_git          = false -> null
+      - use_manual_integration = true -> null
+      - use_mercurial          = false -> null
+      - uses_github_action     = false -> null
+    }
+
+  # azurerm_linux_web_app.appservice will be destroyed
+  - resource "azurerm_linux_web_app" "appservice" {
+      - app_settings                      = {} -> null
+      - client_affinity_enabled           = false -> null
+      - client_certificate_enabled        = false -> null
+      - client_certificate_mode           = "Required" -> null
+      - custom_domain_verification_id     = (sensitive value) -> null
+      - default_hostname                  = "task-board-796200.azurewebsites.net" -> null
+      - enabled                           = true -> null
+      - https_only                        = false -> null
+      - id                                = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200" -> null
+      - key_vault_reference_identity_id   = "SystemAssigned" -> null
+      - kind                              = "app,linux" -> null
+      - location                          = "westeurope" -> null
+      - name                              = "task-board-796200" -> null
+      - outbound_ip_address_list          = [
+          - "20.73.125.85",
+          - "20.73.126.190",
+          - "20.73.127.172",
+          - "20.73.127.189",
+          - "20.76.65.146",
+          - "20.76.68.173",
+          - "20.105.224.24",
+        ] -> null
+      - outbound_ip_addresses             = "20.73.125.85,20.73.126.190,20.73.127.172,20.73.127.189,20.76.65.146,20.76.68.173,20.105.224.24" -> null
+      - possible_outbound_ip_address_list = [
+          - "20.73.125.85",
+          - "20.73.126.190",
+          - "20.73.127.172",
+          - "20.73.127.189",
+          - "20.76.65.146",
+          - "20.76.68.173",
+          - "20.76.69.71",
+          - "20.76.69.77",
+          - "20.76.65.250",
+          - "20.76.69.108",
+          - "20.76.69.138",
+          - "20.76.69.166",
+          - "20.76.69.196",
+          - "20.76.70.55",
+          - "20.76.70.80",
+          - "20.76.70.109",
+          - "20.76.69.184",
+          - "20.76.70.155",
+          - "20.76.70.159",
+          - "20.76.70.169",
+          - "20.76.70.136",
+          - "20.76.70.174",
+          - "20.76.70.189",
+          - "20.76.70.192",
+          - "20.105.224.24",
+        ] -> null
+      - possible_outbound_ip_addresses    = "20.73.125.85,20.73.126.190,20.73.127.172,20.73.127.189,20.76.65.146,20.76.68.173,20.76.69.71,20.76.69.77,20.76.65.250,20.76.69.108,20.76.69.138,20.76.69.166,20.76.69.196,20.76.70.55,20.76.70.80,20.76.70.109,20.76.69.184,20.76.70.155,20.76.70.159,20.76.70.169,20.76.70.136,20.76.70.174,20.76.70.189,20.76.70.192,20.105.224.24" -> null
+      - resource_group_name               = "TaskBoardRG796200" -> null
+      - service_plan_id                   = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/serverfarms/task-board-plan-796200" -> null
+      - site_credential                   = (sensitive value) -> null
+      - tags                              = {} -> null
+
+      - connection_string {
+          # At least one attribute in this block is (or was) sensitive,
+          # so its contents will not be displayed.
+        }
+
+      - site_config {
+          - always_on                               = false -> null
+          - auto_heal_enabled                       = false -> null
+          - container_registry_use_managed_identity = false -> null
+          - default_documents                       = [
+              - "Default.htm",
+              - "Default.html",
+              - "Default.asp",
+              - "index.htm",
+              - "index.html",
+              - "iisstart.htm",
+              - "default.aspx",
+              - "index.php",
+              - "hostingstart.html",
+            ] -> null
+          - detailed_error_logging_enabled          = false -> null
+          - ftps_state                              = "Disabled" -> null
+          - health_check_eviction_time_in_min       = 0 -> null
+          - http2_enabled                           = false -> null
+          - linux_fx_version                        = "DOTNETCORE|6.0" -> null
+          - load_balancing_mode                     = "LeastRequests" -> null
+          - local_mysql_enabled                     = false -> null
+          - managed_pipeline_mode                   = "Integrated" -> null
+          - minimum_tls_version                     = "1.2" -> null
+          - remote_debugging_enabled                = false -> null
+          - remote_debugging_version                = "VS2019" -> null
+          - scm_minimum_tls_version                 = "1.2" -> null
+          - scm_type                                = "ExternalGit" -> null
+          - scm_use_main_ip_restriction             = false -> null
+          - use_32_bit_worker                       = true -> null
+          - vnet_route_all_enabled                  = false -> null
+          - websockets_enabled                      = false -> null
+          - worker_count                            = 1 -> null
+
+          - application_stack {
+              - dotnet_version = "6.0" -> null
+            }
+        }
+    }
+
+  # azurerm_mssql_database.sql will be destroyed
+  - resource "azurerm_mssql_database" "sql" {
+      - auto_pause_delay_in_minutes         = 0 -> null
+      - collation                           = "SQL_Latin1_General_CP1_CI_AS" -> null
+      - create_mode                         = "Default" -> null
+      - geo_backup_enabled                  = true -> null
+      - id                                  = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/databases/TaskBoardDB796200" -> null
+      - ledger_enabled                      = false -> null
+      - license_type                        = "LicenseIncluded" -> null
+      - maintenance_configuration_name      = "SQL_Default" -> null
+      - max_size_gb                         = 250 -> null
+      - min_capacity                        = 0 -> null
+      - name                                = "TaskBoardDB796200" -> null
+      - read_replica_count                  = 0 -> null
+      - read_scale                          = false -> null
+      - server_id                           = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200" -> null
+      - sku_name                            = "S0" -> null
+      - storage_account_type                = "Geo" -> null
+      - tags                                = {} -> null
+      - transparent_data_encryption_enabled = true -> null
+      - zone_redundant                      = false -> null
+
+      - long_term_retention_policy {
+          - monthly_retention = "PT0S" -> null
+          - week_of_year      = 1 -> null
+          - weekly_retention  = "PT0S" -> null
+          - yearly_retention  = "PT0S" -> null
+        }
+
+      - short_term_retention_policy {
+          - backup_interval_in_hours = 24 -> null
+          - retention_days           = 7 -> null
+        }
+
+      - threat_detection_policy {
+          - disabled_alerts      = [] -> null
+          - email_account_admins = "Disabled" -> null
+          - email_addresses      = [] -> null
+          - retention_days       = 0 -> null
+          - state                = "Disabled" -> null
+        }
+    }
+
+  # azurerm_mssql_firewall_rule.example will be destroyed
+  - resource "azurerm_mssql_firewall_rule" "example" {
+      - end_ip_address   = "0.0.0.0" -> null
+      - id               = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFirewallRule796200" -> null
+      - name             = "TaskBoardFirewallRule796200" -> null
+      - server_id        = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200" -> null
+      - start_ip_address = "0.0.0.0" -> null
+    }
+
+  # azurerm_mssql_server.sqlserver will be destroyed
+  - resource "azurerm_mssql_server" "sqlserver" {
+      - administrator_login                  = "4dm1n157r470r" -> null
+      - administrator_login_password         = (sensitive value) -> null
+      - connection_policy                    = "Default" -> null
+      - fully_qualified_domain_name          = "task-board-sql-796200.database.windows.net" -> null
+      - id                                   = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200" -> null
+      - location                             = "westeurope" -> null
+      - minimum_tls_version                  = "1.2" -> null
+      - name                                 = "task-board-sql-796200" -> null
+      - outbound_network_restriction_enabled = false -> null
+      - public_network_access_enabled        = true -> null
+      - resource_group_name                  = "TaskBoardRG796200" -> null
+      - restorable_dropped_database_ids      = [] -> null
+      - tags                                 = {} -> null
+      - version                              = "12.0" -> null
+    }
+
+  # azurerm_resource_group.rg will be destroyed
+  - resource "azurerm_resource_group" "rg" {
+      - id       = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200" -> null
+      - location = "westeurope" -> null
+      - name     = "TaskBoardRG796200" -> null
+      - tags     = {} -> null
+    }
+
+  # azurerm_service_plan.appsp will be destroyed
+  - resource "azurerm_service_plan" "appsp" {
+      - id                           = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/serverfarms/task-board-plan-796200" -> null
+      - kind                         = "linux" -> null
+      - location                     = "westeurope" -> null
+      - maximum_elastic_worker_count = 1 -> null
+      - name                         = "task-board-plan-796200" -> null
+      - os_type                      = "Linux" -> null
+      - per_site_scaling_enabled     = false -> null
+      - reserved                     = true -> null
+      - resource_group_name          = "TaskBoardRG796200" -> null
+      - sku_name                     = "F1" -> null
+      - tags                         = {} -> null
+      - worker_count                 = 1 -> null
+      - zone_balancing_enabled       = false -> null
+    }
+
+  # random_integer.ri will be destroyed
+  - resource "random_integer" "ri" {
+      - id     = "796200" -> null
+      - max    = 999999 -> null
+      - min    = 100000 -> null
+      - result = 796200 -> null
+    }
+
+Plan: 0 to add, 0 to change, 8 to destroy.
+
+Changes to Outputs:
+  - webapp_ips = "20.73.125.85,20.73.126.190,20.73.127.172,20.73.127.189,20.76.65.146,20.76.68.173,20.105.224.24" -> null
+  - webapp_url = "task-board-796200.azurewebsites.net" -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+azurerm_mssql_firewall_rule.example: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/firewallRules/TaskBoardFirewallRule796200]
+azurerm_app_service_source_control.sourcecontrol: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200]
+azurerm_mssql_firewall_rule.example: Destruction complete after 1s
+azurerm_app_service_source_control.sourcecontrol: Destruction complete after 6s
+azurerm_linux_web_app.appservice: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/sites/task-board-796200]
+azurerm_linux_web_app.appservice: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-.../Microsoft.Web/sites/task-board-796200, 10s elapsed]
+azurerm_linux_web_app.appservice: Destruction complete after 12s
+azurerm_service_plan.appsp: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Web/serverfarms/task-board-plan-796200]
+azurerm_mssql_database.sql: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200/databases/TaskBoardDB796200]
+azurerm_service_plan.appsp: Destruction complete after 5s
+azurerm_mssql_database.sql: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...sql-796200/databases/TaskBoardDB796200, 10s elapsed]
+azurerm_mssql_database.sql: Destruction complete after 16s
+azurerm_mssql_server.sqlserver: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200/providers/Microsoft.Sql/servers/task-board-sql-796200]
+azurerm_mssql_server.sqlserver: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...soft.Sql/servers/task-board-sql-796200, 10s elapsed]
+azurerm_mssql_server.sqlserver: Destruction complete after 16s
+azurerm_resource_group.rg: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/TaskBoardRG796200]
+azurerm_resource_group.rg: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...a881a/resourceGroups/TaskBoardRG796200, 10s elapsed]
+azurerm_resource_group.rg: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...a881a/resourceGroups/TaskBoardRG796200, 20s elapsed]
+azurerm_resource_group.rg: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...a881a/resourceGroups/TaskBoardRG796200, 30s elapsed]
+azurerm_resource_group.rg: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...a881a/resourceGroups/TaskBoardRG796200, 40s elapsed]
+azurerm_resource_group.rg: Destruction complete after 47s
+random_integer.ri: Destroying... [id=796200]
+random_integer.ri: Destruction complete after 0s
+
+Destroy complete! Resources: 8 destroyed.
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\TaskBoard\
+   3 dir
+   4 dir
+   5 terraform apply -var-file="values.tfvars"
+   6 Get-History
+   7 terraform destroy -var-file="values.tfvars"
+
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard>

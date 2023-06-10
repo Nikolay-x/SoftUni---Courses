@@ -1,0 +1,16 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\Terraform-Actions-Azure> az ad sp create-for-rbac --name "Azure-Terraform-GitHub-Actions-NB" --role contributor --scopes /subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a --sdk-auth
+Option '--sdk-auth' has been deprecated and will be removed in a future release.
+Creating 'contributor' role assignment under scope '/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a'
+The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
+{
+  "clientId": "9bd6a0fd-e269-4476-8fbd-db0ff15e2a75",
+  "clientSecret": "nzh8Q~MmcKg0esU8kkX4LiznrBUPXOC1HUZ8Kary",
+  "subscriptionId": "56f5a8d7-2b04-4e50-80ad-0d999a5a881a",
+  "tenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}

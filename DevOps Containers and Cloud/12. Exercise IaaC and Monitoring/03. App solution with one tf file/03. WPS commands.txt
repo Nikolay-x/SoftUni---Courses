@@ -1,0 +1,18 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\03.Azure-Web-App-with-Database-TaskBoard\
+   3 dir
+   4 cd..
+   5 git clone git@github.com:Nikolay-x/TaskBoard.git
+   6 cd .\TaskBoard\
+   7 git add .
+   8 git commit -m "Initial commit"
+   9 git push
+  10 terraform init
+  11 terraform fmt
+  12 terraform validate
+  13 terraform apply
+  14 terraform apply

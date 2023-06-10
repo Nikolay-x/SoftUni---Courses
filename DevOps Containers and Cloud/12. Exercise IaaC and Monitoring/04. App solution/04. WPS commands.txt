@@ -1,0 +1,28 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\Terraform-Actions-Azure> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 git clone https://github.com/Nikolay-x/Terraform-Actions-Azure.git
+   3 cd .\Terraform-Actions-Azure\
+   4 dir
+   5 git add .
+   6 git commit -m "Initial commit"
+   7 git push
+   8 git add .
+   9 git commit -m "Initial commit1"
+  10 git push
+  11 terraform version
+  12 az ad sp create-for-rbac --name "Azure-Terraform-GitHub-Actions" --role contributor --scopes /subscriptions/56f5a8d7-2b04-4e50-80ad-0d99...
+  13 az login
+  14 az ad sp create-for-rbac --name "Azure-Terraform-GitHub-Actions" --role contributor --scopes /subscriptions/56f5a8d7-2b04-4e50-80ad-0d99...
+  15 az ad sp create-for-rbac --name "Azure-Terraform-GitHub-Actions" --role contributor --scopes /subscriptions/56f5a8d7-2b04-4e50-80ad-0d99...
+  16 az ad sp create-for-rbac --name "Azure-Terraform-GitHub-Actions" --role contributor --scopes /subscriptions/56f5a8d7-2b04-4e50-80ad-0d99...
+  17 az ad sp create-for-rbac --name "Azure-Terraform-GitHub-Actions-NB" --role contributor --scopes /subscriptions/56f5a8d7-2b04-4e50-80ad-0...
+  18 az storage account create --name taskboardstoragenb --resource-group StorageRG --location westeurope --sku Standard_LRS --kind StorageV2
+  19 az storage container create -n taskboardcontainernb --account-name taskboardstoragenb
+  20 git pull
+  21 git add .
+  22 git commit -m "Adding persistent storage"
+  23 git push
+  24 git pull

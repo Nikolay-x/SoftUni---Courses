@@ -1,0 +1,371 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Exercise IaaC and Monitoring\'
+PS C:\Users\NB\Exercise IaaC and Monitoring> cd .\02\
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> terraform fmt
+main.tf
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding hashicorp/azurerm versions matching "3.60.0"...
+- Finding latest version of hashicorp/random...
+- Installing hashicorp/azurerm v3.60.0...
+- Installed hashicorp/azurerm v3.60.0 (signed by HashiCorp)
+- Installing hashicorp/random v3.5.1...
+- Installed hashicorp/random v3.5.1 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> terraform fmt
+main.tf
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> terraform validate
+Success! The configuration is valid.
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_app_service_source_control.git will be created
+  + resource "azurerm_app_service_source_control" "git" {
+      + app_id                 = (known after apply)
+      + branch                 = "master"
+      + id                     = (known after apply)
+      + repo_url               = "https://github.com/nakov/ContactBook"
+      + rollback_enabled       = false
+      + scm_type               = (known after apply)
+      + use_local_git          = false
+      + use_manual_integration = true
+      + use_mercurial          = false
+      + uses_github_action     = (known after apply)
+    }
+
+  # azurerm_linux_web_app.appservice will be created
+  + resource "azurerm_linux_web_app" "appservice" {
+      + client_affinity_enabled           = false
+      + client_certificate_enabled        = false
+      + client_certificate_mode           = "Required"
+      + custom_domain_verification_id     = (sensitive value)
+      + default_hostname                  = (known after apply)
+      + enabled                           = true
+      + hosting_environment_id            = (known after apply)
+      + https_only                        = false
+      + id                                = (known after apply)
+      + key_vault_reference_identity_id   = (known after apply)
+      + kind                              = (known after apply)
+      + location                          = "westeurope"
+      + name                              = (known after apply)
+      + outbound_ip_address_list          = (known after apply)
+      + outbound_ip_addresses             = (known after apply)
+      + possible_outbound_ip_address_list = (known after apply)
+      + possible_outbound_ip_addresses    = (known after apply)
+      + resource_group_name               = (known after apply)
+      + service_plan_id                   = (known after apply)
+      + site_credential                   = (sensitive value)
+      + zip_deploy_file                   = (known after apply)
+
+      + site_config {
+          + always_on                               = false
+          + container_registry_use_managed_identity = false
+          + default_documents                       = (known after apply)
+          + detailed_error_logging_enabled          = (known after apply)
+          + ftps_state                              = "Disabled"
+          + health_check_eviction_time_in_min       = (known after apply)
+          + http2_enabled                           = false
+          + linux_fx_version                        = (known after apply)
+          + load_balancing_mode                     = "LeastRequests"
+          + local_mysql_enabled                     = false
+          + managed_pipeline_mode                   = "Integrated"
+          + minimum_tls_version                     = "1.2"
+          + remote_debugging_enabled                = false
+          + remote_debugging_version                = (known after apply)
+          + scm_minimum_tls_version                 = "1.2"
+          + scm_type                                = (known after apply)
+          + scm_use_main_ip_restriction             = false
+          + use_32_bit_worker                       = true
+          + vnet_route_all_enabled                  = false
+          + websockets_enabled                      = false
+          + worker_count                            = (known after apply)
+
+          + application_stack {
+              + node_version = "16-lts"
+            }
+        }
+    }
+
+  # azurerm_resource_group.rg will be created
+  + resource "azurerm_resource_group" "rg" {
+      + id       = (known after apply)
+      + location = "westeurope"
+      + name     = (known after apply)
+    }
+
+  # azurerm_service_plan.appsp will be created
+  + resource "azurerm_service_plan" "appsp" {
+      + id                           = (known after apply)
+      + kind                         = (known after apply)
+      + location                     = "westeurope"
+      + maximum_elastic_worker_count = (known after apply)
+      + name                         = (known after apply)
+      + os_type                      = "Linux"
+      + per_site_scaling_enabled     = false
+      + reserved                     = (known after apply)
+      + resource_group_name          = (known after apply)
+      + sku_name                     = "F1"
+      + worker_count                 = (known after apply)
+    }
+
+  # random_integer.ri will be created
+  + resource "random_integer" "ri" {
+      + id     = (known after apply)
+      + max    = 999999
+      + min    = 100000
+      + result = (known after apply)
+    }
+
+Plan: 5 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_integer.ri: Creating...
+random_integer.ri: Creation complete after 0s [id=121137]
+azurerm_resource_group.rg: Creating...
+azurerm_resource_group.rg: Creation complete after 7s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137]
+azurerm_service_plan.appsp: Creating...
+azurerm_service_plan.appsp: Still creating... [10s elapsed]
+azurerm_service_plan.appsp: Creation complete after 11s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/serverfarms/Contact-book-plan-121137]
+azurerm_linux_web_app.appservice: Creating...
+azurerm_linux_web_app.appservice: Still creating... [10s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [20s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [30s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [40s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [50s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [1m0s elapsed]
+azurerm_linux_web_app.appservice: Creation complete after 1m2s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137]
+azurerm_app_service_source_control.git: Creating...
+azurerm_app_service_source_control.git: Still creating... [10s elapsed]
+azurerm_app_service_source_control.git: Still creating... [20s elapsed]
+azurerm_app_service_source_control.git: Creation complete after 22s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137]
+
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> terraform destroy
+random_integer.ri: Refreshing state... [id=121137]
+azurerm_resource_group.rg: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137]
+azurerm_service_plan.appsp: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/serverfarms/Contact-book-plan-121137]
+azurerm_linux_web_app.appservice: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137]
+azurerm_app_service_source_control.git: Refreshing state... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # azurerm_app_service_source_control.git will be destroyed
+  - resource "azurerm_app_service_source_control" "git" {
+      - app_id                 = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137" -> null
+      - branch                 = "master" -> null
+      - id                     = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137" -> null
+      - repo_url               = "https://github.com/nakov/ContactBook" -> null
+      - rollback_enabled       = false -> null
+      - scm_type               = "ExternalGit" -> null
+      - use_local_git          = false -> null
+      - use_manual_integration = true -> null
+      - use_mercurial          = false -> null
+      - uses_github_action     = false -> null
+    }
+
+  # azurerm_linux_web_app.appservice will be destroyed
+  - resource "azurerm_linux_web_app" "appservice" {
+      - app_settings                      = {} -> null
+      - client_affinity_enabled           = false -> null
+      - client_certificate_enabled        = false -> null
+      - client_certificate_mode           = "Required" -> null
+      - custom_domain_verification_id     = (sensitive value) -> null
+      - default_hostname                  = "contact-book-121137.azurewebsites.net" -> null
+      - enabled                           = true -> null
+      - https_only                        = false -> null
+      - id                                = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137" -> null
+      - key_vault_reference_identity_id   = "SystemAssigned" -> null
+      - kind                              = "app,linux" -> null
+      - location                          = "westeurope" -> null
+      - name                              = "contact-book-121137" -> null
+      - outbound_ip_address_list          = [
+          - "20.31.120.12",
+          - "20.31.125.126",
+          - "20.31.125.193",
+          - "20.31.125.217",
+          - "20.31.126.58",
+          - "20.31.126.88",
+          - "20.126.201.182",
+          - "20.126.207.22",
+          - "20.126.205.191",
+          - "20.126.207.109",
+          - "20.126.207.205",
+          - "20.31.122.75",
+          - "20.105.216.32",
+        ] -> null
+      - outbound_ip_addresses             = "20.31.120.12,20.31.125.126,20.31.125.193,20.31.125.217,20.31.126.58,20.31.126.88,20.126.201.182,20.126.207.22,20.126.205.191,20.126.207.109,20.126.207.205,20.31.122.75,20.105.216.32" -> null
+      - possible_outbound_ip_address_list = [
+          - "20.31.120.12",
+          - "20.31.125.126",
+          - "20.31.125.193",
+          - "20.31.125.217",
+          - "20.31.126.58",
+          - "20.31.126.88",
+          - "20.126.201.182",
+          - "20.126.207.22",
+          - "20.126.205.191",
+          - "20.126.207.109",
+          - "20.126.207.205",
+          - "20.31.122.75",
+          - "20.31.122.121",
+          - "20.31.122.133",
+          - "20.31.122.136",
+          - "20.31.122.229",
+          - "20.31.122.230",
+          - "20.31.122.239",
+          - "20.31.120.10",
+          - "20.31.120.235",
+          - "20.31.123.101",
+          - "20.31.124.126",
+          - "20.31.125.71",
+          - "20.31.125.124",
+          - "20.31.120.12",
+          - "20.31.125.126",
+          - "20.31.125.193",
+          - "20.31.125.217",
+          - "20.31.126.58",
+          - "20.31.126.88",
+          - "20.31.126.114",
+          - "20.31.126.185",
+          - "20.31.127.23",
+          - "20.126.204.58",
+          - "20.31.127.86",
+          - "20.31.127.158",
+          - "20.105.216.32",
+        ] -> null
+      - possible_outbound_ip_addresses    = "20.31.120.12,20.31.125.126,20.31.125.193,20.31.125.217,20.31.126.58,20.31.126.88,20.126.201.182,20.126.207.22,20.126.205.191,20.126.207.109,20.126.207.205,20.31.122.75,20.31.122.121,20.31.122.133,20.31.122.136,20.31.122.229,20.31.122.230,20.31.122.239,20.31.120.10,20.31.120.235,20.31.123.101,20.31.124.126,20.31.125.71,20.31.125.124,20.31.120.12,20.31.125.126,20.31.125.193,20.31.125.217,20.31.126.58,20.31.126.88,20.31.126.114,20.31.126.185,20.31.127.23,20.126.204.58,20.31.127.86,20.31.127.158,20.105.216.32" -> null
+      - resource_group_name               = "ContactBookRG121137" -> null
+      - service_plan_id                   = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/serverfarms/Contact-book-plan-121137" -> null
+      - site_credential                   = (sensitive value) -> null
+      - tags                              = {} -> null
+
+      - site_config {
+          - always_on                               = false -> null
+          - auto_heal_enabled                       = false -> null
+          - container_registry_use_managed_identity = false -> null
+          - default_documents                       = [
+              - "Default.htm",
+              - "Default.html",
+              - "Default.asp",
+              - "index.htm",
+              - "index.html",
+              - "iisstart.htm",
+              - "default.aspx",
+              - "index.php",
+              - "hostingstart.html",
+            ] -> null
+          - detailed_error_logging_enabled          = false -> null
+          - ftps_state                              = "Disabled" -> null
+          - health_check_eviction_time_in_min       = 0 -> null
+          - http2_enabled                           = false -> null
+          - linux_fx_version                        = "NODE|16-lts" -> null
+          - load_balancing_mode                     = "LeastRequests" -> null
+          - local_mysql_enabled                     = false -> null
+          - managed_pipeline_mode                   = "Integrated" -> null
+          - minimum_tls_version                     = "1.2" -> null
+          - remote_debugging_enabled                = false -> null
+          - remote_debugging_version                = "VS2019" -> null
+          - scm_minimum_tls_version                 = "1.2" -> null
+          - scm_type                                = "ExternalGit" -> null
+          - scm_use_main_ip_restriction             = false -> null
+          - use_32_bit_worker                       = true -> null
+          - vnet_route_all_enabled                  = false -> null
+          - websockets_enabled                      = false -> null
+          - worker_count                            = 1 -> null
+
+          - application_stack {
+              - node_version = "16-lts" -> null
+            }
+        }
+    }
+
+  # azurerm_resource_group.rg will be destroyed
+  - resource "azurerm_resource_group" "rg" {
+      - id       = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137" -> null
+      - location = "westeurope" -> null
+      - name     = "ContactBookRG121137" -> null
+      - tags     = {} -> null
+    }
+
+  # azurerm_service_plan.appsp will be destroyed
+  - resource "azurerm_service_plan" "appsp" {
+      - id                           = "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/serverfarms/Contact-book-plan-121137" -> null
+      - kind                         = "linux" -> null
+      - location                     = "westeurope" -> null
+      - maximum_elastic_worker_count = 1 -> null
+      - name                         = "Contact-book-plan-121137" -> null
+      - os_type                      = "Linux" -> null
+      - per_site_scaling_enabled     = false -> null
+      - reserved                     = true -> null
+      - resource_group_name          = "ContactBookRG121137" -> null
+      - sku_name                     = "F1" -> null
+      - tags                         = {} -> null
+      - worker_count                 = 1 -> null
+      - zone_balancing_enabled       = false -> null
+    }
+
+  # random_integer.ri will be destroyed
+  - resource "random_integer" "ri" {
+      - id     = "121137" -> null
+      - max    = 999999 -> null
+      - min    = 100000 -> null
+      - result = 121137 -> null
+    }
+
+Plan: 0 to add, 0 to change, 5 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+azurerm_app_service_source_control.git: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137]
+azurerm_app_service_source_control.git: Destruction complete after 8s
+azurerm_linux_web_app.appservice: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/sites/contact-book-121137]
+azurerm_linux_web_app.appservice: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...icrosoft.Web/sites/contact-book-121137, 10s elapsed]
+azurerm_linux_web_app.appservice: Destruction complete after 17s
+azurerm_service_plan.appsp: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137/providers/Microsoft.Web/serverfarms/Contact-book-plan-121137]
+azurerm_service_plan.appsp: Destruction complete after 6s
+azurerm_resource_group.rg: Destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/ContactBookRG121137]
+azurerm_resource_group.rg: Still destroying... [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-...81a/resourceGroups/ContactBookRG121137, 10s elapsed]
+azurerm_resource_group.rg: Destruction complete after 17s
+random_integer.ri: Destroying... [id=121137]
+random_integer.ri: Destruction complete after 0s
+
+Destroy complete! Resources: 5 destroyed.
+PS C:\Users\NB\Exercise IaaC and Monitoring\02>

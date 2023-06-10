@@ -1,0 +1,11 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\TaskBoard> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\TaskBoard\
+   3 dir
+   4 dir
+   5 terraform apply -var-file="values.tfvars"
+   6 Get-History
+   7 terraform destroy -var-file="values.tfvars"

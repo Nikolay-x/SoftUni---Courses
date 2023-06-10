@@ -1,0 +1,14 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\01> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 dir
+   2 cd '.\Exercise IaaC and Monitoring\'
+   3 cd .\01\
+   4 az login
+   5 dir
+   6 terraform init
+   7 terraform fmt
+   8 terraform fmt
+   9 terraform validate
+  10 terraform apply

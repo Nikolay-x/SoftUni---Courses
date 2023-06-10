@@ -1,0 +1,12 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\02> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\02\
+   3 terraform fmt
+   4 terraform init
+   5 terraform fmt
+   6 terraform validate
+   7 terraform apply
+   8 terraform destroy

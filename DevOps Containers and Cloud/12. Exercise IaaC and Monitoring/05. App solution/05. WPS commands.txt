@@ -1,0 +1,36 @@
+PS C:\Users\NB\Exercise IaaC and Monitoring\prometheus> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\05-06.ContactBook-NodeJS-App\
+   3 cd..
+   4 cd .\prometheus\
+   5 .\prometheus --config.file .\prometheus-contact-book.yml
+   6 .\prometheus --config.file .\prometheus-contact-book-alerts.yml
+
+
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\alertmanager> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exercise IaaC and Monitoring\'
+   2 cd .\alertmanager\
+   3 .\alertmanager --config.file .\alertmanager-contact-book.yml
+
+
+
+PS C:\Users\NB\Exercise IaaC and Monitoring\05-06.ContactBook-NodeJS-App> history
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workb... 
+   2 npm install
+   3 npm start
+   4 cat (Get-PSReadlineOption).HistorySavePath
+   5 cat (Get-PSReadlineOption).HistorySavePath > vsc_history.txt
+   6 npm install prom-client
+   7 npm start
+   8 npm start
+   9 npm start

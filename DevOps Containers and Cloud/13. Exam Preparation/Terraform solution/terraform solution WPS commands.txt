@@ -1,0 +1,20 @@
+PS C:\Users\NB\Exam Preparation\Terraform solution> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 docker context ls
+   2 docker context use default
+   3 docker context rm librarycontext
+   4 docker context ls
+   5 cd '.\Exam Preparation\'
+   6 git clone https://github.com/Nikolay-x/Library.git
+   7 cd .\Library\
+   8 git add .
+   9 git commit -m "Initial commit"
+  10 git push
+  11 cd ..
+  12 cd '.\Terraform solution\'
+  13 terraform init
+  14 terraform fmt
+  15 terraform validate
+  16 terraform apply -var-file="values.tfvars" -auto-approve

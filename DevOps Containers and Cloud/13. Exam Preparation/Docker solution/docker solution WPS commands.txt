@@ -1,0 +1,24 @@
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exam Preparation\'
+   2 cd .\11-Exam-Preparation-Library\
+   3 docker build -t test123 .
+   4 docker image ls
+   5 docker context ls
+   6 docker run -d test123
+   7 docker-compose up -d
+   8 docker-compose down --volumes
+   9 az login
+  10 az group create --name nikolayxlibraryrg --location westeurope
+  11 az acr create --resource-group nikolayxlibraryrg --name nikolayxlibrarycr --sku Basic
+  12 docker-compose up -d
+  13 docker tag test123 nikolayxlibrarycr.azurecr.io/library
+  14 az acr login --name nikolayxlibrarycr
+  15 docker push nikolayxlibrarycr.azurecr.io/library
+  16 docker context create aci librarycontext
+  17 docker context use librarycontext
+  18 docker context ls
+  19 docker-compose up -d
+  20 az version

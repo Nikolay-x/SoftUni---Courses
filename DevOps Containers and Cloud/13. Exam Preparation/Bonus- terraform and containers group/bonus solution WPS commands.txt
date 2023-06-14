@@ -1,0 +1,16 @@
+PS C:\Users\NB\Exam Preparation\Bonus- terraform and containers group> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 docker context ls
+   2 cd '.\Exam Preparation\'
+   3 cd '.\Bonus- terraform and containers group\'
+   4 dir
+   5 docker build -t nikolayx/library .
+   6 docker push nikolayx/library
+   7 dir
+   8 terraform init
+   9 terraform fmt
+  10 terraform validate
+  11 terraform apply
+  12 $connectTestResult = Test-NetConnection -ComputerName librarynb.file.core.windows.net -Port 445...

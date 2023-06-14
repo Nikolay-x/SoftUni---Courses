@@ -1,0 +1,429 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> docker context ls
+Docker Compose's integration for ECS and ACI will be retired in November 2023. Learn more: https://docs.docker.com/go/compose-ecs-eol/
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default             moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                                  
+desktop-linux       moby                Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine                       
+librarycontext *    aci                 nikolayxlibraryrg@westeurope                                                                              
+PS C:\Users\NB> docker context use default
+Docker Compose's integration for ECS and ACI will be retired in November 2023. Learn more: https://docs.docker.com/go/compose-ecs-eol/
+default
+Current context is now "default"
+PS C:\Users\NB> docker context rm librarycontext
+librarycontext
+PS C:\Users\NB> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                                  
+desktop-linux       moby                Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine                       
+PS C:\Users\NB> cd '.\Exam Preparation\'
+PS C:\Users\NB\Exam Preparation> git clone https://github.com/Nikolay-x/Library.git
+Cloning into 'Library'...
+warning: You appear to have cloned an empty repository.
+PS C:\Users\NB\Exam Preparation> cd .\Library\
+PS C:\Users\NB\Exam Preparation\Library> git add .
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/js/bootstrap.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/jquery-validation/dist/jquery.validate.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/jquery/dist/jquery.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Library/wwwroot/lib/jquery/dist/jquery.min.js', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\NB\Exam Preparation\Library> git commit -m "Initial commit"
+[main (root-commit) 001512e] Initial commit
+ 108 files changed, 76832 insertions(+)
+ create mode 100644 Library.Data/DataConstants.cs
+ create mode 100644 Library.Data/Library.Data.csproj
+ create mode 100644 Library.Data/LibraryDbContext.cs
+ create mode 100644 Library.Data/Models/Book.cs
+ create mode 100644 Library.Data/Models/Category.cs
+ create mode 100644 Library.Data/Models/IdentityUserBook.cs
+ create mode 100644 Library.sln
+ create mode 100644 Library/Areas/Identity/Pages/Account/Login.cshtml
+ create mode 100644 Library/Areas/Identity/Pages/Account/Login.cshtml.cs
+ create mode 100644 Library/Areas/Identity/Pages/Account/Logout.cshtml
+ create mode 100644 Library/Areas/Identity/Pages/Account/Logout.cshtml.cs
+ create mode 100644 Library/Areas/Identity/Pages/Account/Register.cshtml
+ create mode 100644 Library/Areas/Identity/Pages/Account/Register.cshtml.cs
+ create mode 100644 Library/Areas/Identity/Pages/Account/_ViewImports.cshtml
+ create mode 100644 Library/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml
+ create mode 100644 Library/Areas/Identity/Pages/_ViewStart.cshtml
+ create mode 100644 Library/Controllers/BookController.cs
+ create mode 100644 Library/Controllers/HomeController.cs
+ create mode 100644 Library/Data/Migrations/00000000000000_CreateIdentitySchema.Designer.cs
+ create mode 100644 Library/Data/Migrations/00000000000000_CreateIdentitySchema.cs
+ create mode 100644 Library/Data/Migrations/20230517080646_Inital.Designer.cs
+ create mode 100644 Library/Data/Migrations/20230517080646_Inital.cs
+ create mode 100644 Library/Data/Migrations/ApplicationDbContextModelSnapshot.cs
+ create mode 100644 Library/Library.csproj
+ create mode 100644 Library/Library.csproj.user
+ create mode 100644 Library/Models/Book/AllBookQueryModel.cs
+ create mode 100644 Library/Models/Book/BookCategoryModel.cs
+ create mode 100644 Library/Models/Book/BookDetailsViewModel.cs
+ create mode 100644 Library/Models/Book/BookFormModel.cs
+ create mode 100644 Library/Models/ErrorViewModel.cs
+ create mode 100644 Library/Program.cs
+ create mode 100644 Library/Properties/launchSettings.json
+ create mode 100644 Library/Properties/serviceDependencies.json
+ create mode 100644 Library/Properties/serviceDependencies.local.json
+ create mode 100644 Library/Properties/serviceDependencies.local.json.user
+ create mode 100644 Library/Views/Book/Add.cshtml
+ create mode 100644 Library/Views/Book/All.cshtml
+ create mode 100644 Library/Views/Book/Mine.cshtml
+ create mode 100644 Library/Views/Home/Index.cshtml
+ create mode 100644 Library/Views/Shared/Error.cshtml
+ create mode 100644 Library/Views/Shared/_Layout.cshtml
+ create mode 100644 Library/Views/Shared/_Layout.cshtml.css
+ create mode 100644 Library/Views/Shared/_LoginPartial.cshtml
+ create mode 100644 Library/Views/Shared/_ValidationScriptsPartial.cshtml
+ create mode 100644 Library/Views/_ViewImports.cshtml
+ create mode 100644 Library/Views/_ViewStart.cshtml
+ create mode 100644 Library/appsettings.Development.json
+ create mode 100644 Library/appsettings.json
+ create mode 100644 Library/wwwroot/css/site.css
+ create mode 100644 Library/wwwroot/favicon.ico
+ create mode 100644 Library/wwwroot/js/site.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/LICENSE
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js
+ create mode 100644 Library/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map
+ create mode 100644 Library/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt
+ create mode 100644 Library/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js
+ create mode 100644 Library/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js
+ create mode 100644 Library/wwwroot/lib/jquery-validation/LICENSE.md
+ create mode 100644 Library/wwwroot/lib/jquery-validation/dist/additional-methods.js
+ create mode 100644 Library/wwwroot/lib/jquery-validation/dist/additional-methods.min.js
+ create mode 100644 Library/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+ create mode 100644 Library/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js
+ create mode 100644 Library/wwwroot/lib/jquery/LICENSE.txt
+ create mode 100644 Library/wwwroot/lib/jquery/dist/jquery.js
+ create mode 100644 Library/wwwroot/lib/jquery/dist/jquery.min.js
+ create mode 100644 Library/wwwroot/lib/jquery/dist/jquery.min.map
+PS C:\Users\NB\Exam Preparation\Library> git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 140, done.
+Counting objects: 100% (140/140), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (133/133), done.
+Writing objects: 100% (140/140), 962.09 KiB | 4.03 MiB/s, done.
+Total 140 (delta 40), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (40/40), done.
+To https://github.com/Nikolay-x/Library.git
+ * [new branch]      main -> main
+PS C:\Users\NB\Exam Preparation\Library> cd ..
+PS C:\Users\NB\Exam Preparation> cd '.\Terraform solution\'
+PS C:\Users\NB\Exam Preparation\Terraform solution> terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/random...
+- Finding hashicorp/azurerm versions matching ">= 3.60.0"...
+- Installing hashicorp/random v3.5.1...
+- Installed hashicorp/random v3.5.1 (signed by HashiCorp)
+- Installing hashicorp/azurerm v3.61.0...
+- Installed hashicorp/azurerm v3.61.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+PS C:\Users\NB\Exam Preparation\Terraform solution> terraform fmt
+PS C:\Users\NB\Exam Preparation\Terraform solution> terraform validate
+Success! The configuration is valid.
+
+PS C:\Users\NB\Exam Preparation\Terraform solution> terraform apply -var-file="values.tfvars" -auto-approve
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_app_service_source_control.sourcecontrol will be created
+  + resource "azurerm_app_service_source_control" "sourcecontrol" {
+      + app_id                 = (known after apply)
+      + branch                 = "main"
+      + id                     = (known after apply)
+      + repo_url               = "https://github.com/Nikolay-x/Library"
+      + rollback_enabled       = false
+      + scm_type               = (known after apply)
+      + use_local_git          = false
+      + use_manual_integration = true
+      + use_mercurial          = false
+      + uses_github_action     = (known after apply)
+    }
+
+  # azurerm_linux_web_app.appservice will be created
+  + resource "azurerm_linux_web_app" "appservice" {
+      + client_affinity_enabled           = false
+      + client_certificate_enabled        = false
+      + client_certificate_mode           = "Required"
+      + custom_domain_verification_id     = (sensitive value)
+      + default_hostname                  = (known after apply)
+      + enabled                           = true
+      + hosting_environment_id            = (known after apply)
+      + https_only                        = false
+      + id                                = (known after apply)
+      + key_vault_reference_identity_id   = (known after apply)
+      + kind                              = (known after apply)
+      + location                          = "westeurope"
+      + name                              = (known after apply)
+      + outbound_ip_address_list          = (known after apply)
+      + outbound_ip_addresses             = (known after apply)
+      + possible_outbound_ip_address_list = (known after apply)
+      + possible_outbound_ip_addresses    = (known after apply)
+      + resource_group_name               = (known after apply)
+      + service_plan_id                   = (known after apply)
+      + site_credential                   = (sensitive value)
+      + zip_deploy_file                   = (known after apply)
+
+      + connection_string {
+          # At least one attribute in this block is (or was) sensitive,
+          # so its contents will not be displayed.
+        }
+
+      + site_config {
+          + always_on                               = false
+          + container_registry_use_managed_identity = false
+          + default_documents                       = (known after apply)
+          + detailed_error_logging_enabled          = (known after apply)
+          + ftps_state                              = "Disabled"
+          + health_check_eviction_time_in_min       = (known after apply)
+          + http2_enabled                           = false
+          + linux_fx_version                        = (known after apply)
+          + load_balancing_mode                     = "LeastRequests"
+          + local_mysql_enabled                     = false
+          + managed_pipeline_mode                   = "Integrated"
+          + minimum_tls_version                     = "1.2"
+          + remote_debugging_enabled                = false
+          + remote_debugging_version                = (known after apply)
+          + scm_minimum_tls_version                 = "1.2"
+          + scm_type                                = (known after apply)
+          + scm_use_main_ip_restriction             = false
+          + use_32_bit_worker                       = true
+          + vnet_route_all_enabled                  = false
+          + websockets_enabled                      = false
+          + worker_count                            = (known after apply)
+
+          + application_stack {
+              + dotnet_version = "6.0"
+            }
+        }
+    }
+
+  # azurerm_mssql_database.sql will be created
+  + resource "azurerm_mssql_database" "sql" {
+      + auto_pause_delay_in_minutes         = (known after apply)
+      + collation                           = "SQL_Latin1_General_CP1_CI_AS"
+      + create_mode                         = "Default"
+      + creation_source_database_id         = (known after apply)
+      + geo_backup_enabled                  = true
+      + id                                  = (known after apply)
+      + ledger_enabled                      = (known after apply)
+      + license_type                        = "LicenseIncluded"
+      + maintenance_configuration_name      = (known after apply)
+      + max_size_gb                         = (known after apply)
+      + min_capacity                        = (known after apply)
+      + name                                = (known after apply)
+      + read_replica_count                  = (known after apply)
+      + read_scale                          = (known after apply)
+      + restore_point_in_time               = (known after apply)
+      + sample_name                         = (known after apply)
+      + server_id                           = (known after apply)
+      + sku_name                            = "S0"
+      + storage_account_type                = "Geo"
+      + transparent_data_encryption_enabled = true
+      + zone_redundant                      = false
+    }
+
+  # azurerm_mssql_firewall_rule.example will be created
+  + resource "azurerm_mssql_firewall_rule" "example" {
+      + end_ip_address   = "0.0.0.0"
+      + id               = (known after apply)
+      + name             = (known after apply)
+      + server_id        = (known after apply)
+      + start_ip_address = "0.0.0.0"
+    }
+
+  # azurerm_mssql_server.sqlserver will be created
+  + resource "azurerm_mssql_server" "sqlserver" {
+      + administrator_login                  = "4dm1n157r470r"
+      + administrator_login_password         = (sensitive value)
+      + connection_policy                    = "Default"
+      + fully_qualified_domain_name          = (known after apply)
+      + id                                   = (known after apply)
+      + location                             = "westeurope"
+      + minimum_tls_version                  = "1.2"
+      + name                                 = (known after apply)
+      + outbound_network_restriction_enabled = false
+      + primary_user_assigned_identity_id    = (known after apply)
+      + public_network_access_enabled        = true
+      + resource_group_name                  = (known after apply)
+      + restorable_dropped_database_ids      = (known after apply)
+      + version                              = "12.0"
+    }
+
+  # azurerm_resource_group.rg will be created
+  + resource "azurerm_resource_group" "rg" {
+      + id       = (known after apply)
+      + location = "westeurope"
+      + name     = (known after apply)
+    }
+
+  # azurerm_service_plan.appsp will be created
+  + resource "azurerm_service_plan" "appsp" {
+      + id                           = (known after apply)
+      + kind                         = (known after apply)
+      + location                     = "westeurope"
+      + maximum_elastic_worker_count = (known after apply)
+      + name                         = (known after apply)
+      + os_type                      = "Linux"
+      + per_site_scaling_enabled     = false
+      + reserved                     = (known after apply)
+      + resource_group_name          = (known after apply)
+      + sku_name                     = "F1"
+      + worker_count                 = (known after apply)
+    }
+
+  # random_integer.ri will be created
+  + resource "random_integer" "ri" {
+      + id     = (known after apply)
+      + max    = 999999
+      + min    = 100000
+      + result = (known after apply)
+    }
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + webapp_ips = (known after apply)
+  + webapp_url = (known after apply)
+random_integer.ri: Creating...
+random_integer.ri: Creation complete after 0s [id=425062]
+azurerm_resource_group.rg: Creating...
+azurerm_resource_group.rg: Creation complete after 1s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062]
+azurerm_service_plan.appsp: Creating...
+azurerm_mssql_server.sqlserver: Creating...
+azurerm_service_plan.appsp: Creation complete after 6s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062/providers/Microsoft.Web/serverfarms/nikolayx-library-plan-425062]
+azurerm_mssql_server.sqlserver: Still creating... [10s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [20s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [30s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [40s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [50s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [1m0s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [1m10s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [1m20s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [1m30s elapsed]
+azurerm_mssql_server.sqlserver: Creation complete after 1m39s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062/providers/Microsoft.Sql/servers/nikolayx-library-sql-425062]
+azurerm_mssql_firewall_rule.example: Creating...
+azurerm_mssql_database.sql: Creating...
+azurerm_mssql_firewall_rule.example: Creation complete after 2s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062/providers/Microsoft.Sql/servers/nikolayx-library-sql-425062/firewallRules/nikolayxLibraryFW425062]
+azurerm_mssql_database.sql: Still creating... [10s elapsed]
+azurerm_mssql_database.sql: Still creating... [20s elapsed]
+azurerm_mssql_database.sql: Still creating... [30s elapsed]
+azurerm_mssql_database.sql: Still creating... [40s elapsed]
+azurerm_mssql_database.sql: Still creating... [50s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m0s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m10s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m20s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m30s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m40s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m50s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m0s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m10s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m20s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m30s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m40s elapsed]
+azurerm_mssql_database.sql: Creation complete after 2m47s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062/providers/Microsoft.Sql/servers/nikolayx-library-sql-425062/databases/nikolayx-libraryDB425062]
+azurerm_linux_web_app.appservice: Creating...
+azurerm_linux_web_app.appservice: Still creating... [10s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [20s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [30s elapsed]
+azurerm_linux_web_app.appservice: Creation complete after 34s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062/providers/Microsoft.Web/sites/nikolayx-library-425062]
+azurerm_app_service_source_control.sourcecontrol: Creating...
+azurerm_app_service_source_control.sourcecontrol: Still creating... [10s elapsed]
+azurerm_app_service_source_control.sourcecontrol: Creation complete after 18s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg425062/providers/Microsoft.Web/sites/nikolayx-library-425062]
+
+Apply complete! Resources: 8 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+webapp_ips = "20.73.205.48,20.73.205.98,20.73.205.251,20.73.206.81,20.73.207.10,20.73.207.102,20.73.135.74,20.73.135.154,20.73.135.236,20.73.200.35,20.73.200.86,20.73.200.135,20.105.232.40"
+webapp_url = "nikolayx-library-425062.azurewebsites.net"
+PS C:\Users\NB\Exam Preparation\Terraform solution>

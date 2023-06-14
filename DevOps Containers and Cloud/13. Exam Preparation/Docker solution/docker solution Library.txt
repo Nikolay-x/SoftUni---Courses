@@ -1,0 +1,304 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Exam Preparation\'
+PS C:\Users\NB\Exam Preparation> cd .\11-Exam-Preparation-Library\
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker build -t test123 .
+[+] Building 286.9s (19/19) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                         0.1s
+ => => transferring dockerfile: 826B                                                                                                         0.0s
+ => [internal] load .dockerignore                                                                                                            0.1s
+ => => transferring context: 382B                                                                                                            0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                            1.6s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                         0.0s
+ => [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                                      0.0s
+ => [internal] load build context                                                                                                            1.6s
+ => => transferring context: 8.23MB                                                                                                          1.3s
+ => [build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:a3bbff689a86ba7f3ddcee5089a729b20e20e3b4dbfb9d0a43bb3284d9081023              102.9s
+ => => resolve mcr.microsoft.com/dotnet/sdk:6.0@sha256:a3bbff689a86ba7f3ddcee5089a729b20e20e3b4dbfb9d0a43bb3284d9081023                      0.0s
+ => => sha256:a3bbff689a86ba7f3ddcee5089a729b20e20e3b4dbfb9d0a43bb3284d9081023 1.82kB / 1.82kB                                               0.0s
+ => => sha256:c4631f0689929f4195743b9fa4bba3a4661b6f3ffd25513f5541d98bfdeb0ee2 2.01kB / 2.01kB                                               0.0s
+ => => sha256:d5ba51a50ad2b19d4f1299ef7a7347121079e2e36af873521c59ce57dba89d00 7.17kB / 7.17kB                                               0.0s
+ => => sha256:759700526b7894aa9c150feb2ebfcd00cf06d2890df739e71555edcfd13669e3 31.42MB / 31.42MB                                            30.9s
+ => => sha256:9e65f86790b6536830d80a8375d99d246155964368261d04852bb23fb2625d3b 31.65MB / 31.65MB                                            31.6s
+ => => sha256:cafd06d60458695633c8b4c35586ce6b913510f073837db6a9c72edd95b48a38 14.97MB / 14.97MB                                            14.2s
+ => => sha256:217953d5b22071bd9537899b2fca68afd4ab9c47bec1b0dffde674e0476048f8 154B / 154B                                                  14.5s
+ => => sha256:9abf5ceb3cbb36260f824678219b587f2fc8b56b540e284cd1046d090fde73f8 9.46MB / 9.46MB                                              30.9s
+ => => sha256:b14bfd45ff9c8a47bec3b136a1e7daf8245869e67f9790532a511273c72dcae4 25.37MB / 25.37MB                                            49.8s
+ => => sha256:c54b90e5d4b71517e37767e3d90f4b3012e81c786efbd133c8e99584b4145167 148.73MB / 148.73MB                                          88.4s
+ => => extracting sha256:759700526b7894aa9c150feb2ebfcd00cf06d2890df739e71555edcfd13669e3                                                    7.3s
+ => => sha256:21e7e09b3ced73c38640bc578950c6d931c6e8587177bc247f47527b7818723f 13.61MB / 13.61MB                                            42.6s
+ => => extracting sha256:cafd06d60458695633c8b4c35586ce6b913510f073837db6a9c72edd95b48a38                                                    1.8s
+ => => extracting sha256:9e65f86790b6536830d80a8375d99d246155964368261d04852bb23fb2625d3b                                                    2.4s
+ => => extracting sha256:217953d5b22071bd9537899b2fca68afd4ab9c47bec1b0dffde674e0476048f8                                                    0.0s
+ => => extracting sha256:9abf5ceb3cbb36260f824678219b587f2fc8b56b540e284cd1046d090fde73f8                                                    0.6s
+ => => extracting sha256:b14bfd45ff9c8a47bec3b136a1e7daf8245869e67f9790532a511273c72dcae4                                                   21.9s
+ => => extracting sha256:c54b90e5d4b71517e37767e3d90f4b3012e81c786efbd133c8e99584b4145167                                                   12.3s
+ => => extracting sha256:21e7e09b3ced73c38640bc578950c6d931c6e8587177bc247f47527b7818723f                                                    1.6s
+ => [base 2/2] WORKDIR /app                                                                                                                  0.6s
+ => [final 1/2] WORKDIR /app                                                                                                                 0.2s
+ => [build 2/8] WORKDIR /src                                                                                                                13.6s
+ => [build 3/8] COPY [Library/Library.csproj, Library/]                                                                                      6.2s
+ => [build 4/8] COPY [Library.Data/Library.Data.csproj, Library.Data/]                                                                       0.2s
+ => [build 5/8] RUN dotnet restore "Library/Library.csproj"                                                                                 76.5s
+ => [build 6/8] COPY . .                                                                                                                     0.6s
+ => [build 7/8] WORKDIR /src/Library                                                                                                         0.1s
+ => [build 8/8] RUN dotnet build "Library.csproj" -c Release -o /app/build                                                                  37.5s
+ => [publish 1/1] RUN dotnet publish "Library.csproj" -c Release -o /app/publish /p:UseAppHost=false                                        40.6s
+ => [final 2/2] COPY --from=publish /app/publish .                                                                                           0.5s
+ => exporting to image                                                                                                                       0.5s
+ => => exporting layers                                                                                                                      0.5s
+ => => writing image sha256:e1518614fd4eea71158e4f5491f15f3473ec827cd3d518840e077019f4d081da                                                 0.0s
+ => => naming to docker.io/library/test123                                                                                                   0.0s
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker image ls
+REPOSITORY                                   TAG       IMAGE ID       CREATED          SIZE
+test123                                      latest    e1518614fd4e   25 seconds ago   290MB
+nikolayx/todo-image                          latest    cde7bf49da07   47 hours ago     405MB
+dockertutorial-image                         latest    59ea57e6826e   2 days ago       46.8MB
+posiocrnb.azurecr.io/posio-image             latest    b3bcd0982373   10 days ago      138MB
+taskboardcrnb.azurecr.io/taskboard-image     latest    d0fea3edc73e   10 days ago      286MB
+06taskboard-aspnet-app-web-app               latest    84311215fba5   10 days ago      286MB
+11blue-vs-green-app-worker                   latest    c0e25409636f   2 weeks ago      211MB
+11blue-vs-green-app-vote                     latest    6af39f539e13   2 weeks ago      938MB
+backend                                      latest    bade802b6037   2 weeks ago      616MB
+frontend                                     latest    c4e40e587b06   2 weeks ago      1.52GB
+nikolayx/taskboard_app                       latest    2d8ade31e8fe   2 weeks ago      286MB
+trackerappcrnb.azurecr.io/tasker-app-image   v1        abce00f42c06   2 weeks ago      143MB
+tasker-app-image                             latest    abce00f42c06   2 weeks ago      143MB
+taskboardwebapp                              dev       bf3d1fb59675   2 weeks ago      209MB
+mcr.microsoft.com/dotnet/aspnet              6.0       6c69a5833bf4   3 weeks ago      209MB
+nikolayx/mywebsite                           latest    c31bf0d85d9e   3 weeks ago      1.02GB
+wordpress                                    latest    b8ee07adfa91   4 weeks ago      616MB
+quay.io/prometheus/blackbox-exporter         latest    10f8ea10f4fc   4 weeks ago      23.9MB
+mariadb                                      latest    4af0c16be4b1   4 weeks ago      403MB
+alpine                                       latest    5e2b554c1c45   5 weeks ago      7.33MB
+entrypoint                                   latest    94b273ca307f   5 weeks ago      7.33MB
+lightstreamer                                latest    f8bbd5273a2e   5 weeks ago      522MB
+node                                         16        9b7ab79e69b7   5 weeks ago      909MB
+mongo                                        latest    8b33e239cde6   5 weeks ago      651MB
+mongo                                        4.4.21    6dcde8b068de   6 weeks ago      432MB
+mcr.microsoft.com/mssql/server               latest    e22cb0ce9bfe   6 weeks ago      1.58GB
+mysql                                        latest    8189e588b0e8   8 weeks ago      564MB
+redis/redis-stack                            latest    0ac5d4d8535e   6 months ago     562MB
+redis/redis-stack-server                     latest    6995ce67ff74   7 months ago     321MB
+redis                                        latest    c2342258f8ca   7 months ago     117MB
+docker101tutorial                            latest    8c74225ecfb6   9 months ago     28.9MB
+postgres                                     latest    75993dd36176   9 months ago     376MB
+alpine/git                                   latest    692618a0d74d   9 months ago     43.4MB
+dpage/pgadmin4                               latest    49bfabd8d3a8   9 months ago     370MB
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine
+desktop-linux       moby                Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker run -d test123
+e38808f536f6840044ce2534002890b6d436f4759c09061ac658b861da41d1dd
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker-compose up -d
+[+] Building 1.6s (19/19) FINISHED
+ => [web-app internal] load .dockerignore                                                                                                    0.1s
+ => => transferring context: 382B                                                                                                            0.0s
+ => [web-app internal] load build definition from Dockerfile                                                                                 0.1s
+ => => transferring dockerfile: 826B                                                                                                         0.0s
+ => [web-app internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                    0.6s
+ => [web-app internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                 0.0s
+ => [web-app build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:a3bbff689a86ba7f3ddcee5089a729b20e20e3b4dbfb9d0a43bb3284d9081023        0.0s
+ => [web-app internal] load build context                                                                                                    0.6s
+ => => transferring context: 8.23MB                                                                                                          0.6s
+ => [web-app base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                              0.0s
+ => CACHED [web-app base 2/2] WORKDIR /app                                                                                                   0.0s
+ => CACHED [web-app final 1/2] WORKDIR /app                                                                                                  0.0s
+ => CACHED [web-app build 2/8] WORKDIR /src                                                                                                  0.0s
+ => CACHED [web-app build 3/8] COPY [Library/Library.csproj, Library/]                                                                       0.0s
+ => CACHED [web-app build 4/8] COPY [Library.Data/Library.Data.csproj, Library.Data/]                                                        0.0s
+ => CACHED [web-app build 5/8] RUN dotnet restore "Library/Library.csproj"                                                                   0.0s
+ => CACHED [web-app build 6/8] COPY . .                                                                                                      0.0s
+ => CACHED [web-app build 7/8] WORKDIR /src/Library                                                                                          0.0s
+ => CACHED [web-app build 8/8] RUN dotnet build "Library.csproj" -c Release -o /app/build                                                    0.0s
+ => CACHED [web-app publish 1/1] RUN dotnet publish "Library.csproj" -c Release -o /app/publish /p:UseAppHost=false                          0.0s
+ => CACHED [web-app final 2/2] COPY --from=publish /app/publish .                                                                            0.0s
+ => [web-app] exporting to image                                                                                                             0.0s
+ => => exporting layers                                                                                                                      0.0s
+ => => writing image sha256:f0565bbad537af0231eb139772db61424a9bc266e04e4219900a9ca09d326ac1                                                 0.0s
+ => => naming to docker.io/library/11-exam-preparation-library-web-app                                                                       0.0s
+[+] Running 4/4
+ ✔ Network 11-exam-preparation-library_default   Created                                                                                     0.8s
+ ✔ Volume "11-exam-preparation-library_sqldata"  Created                                                                                     0.0s
+ ✔ Container sqlserver                           Started                                                                                     4.4s
+ ✔ Container web-app                             Started                                                                                     4.4s
+[+] Running 4/4Exam Preparation\11-Exam-Preparation-Library> docker-compose down --volumes
+ ✔ Container web-app                            Removed                                                                                      1.0s
+ ✔ Container sqlserver                          Removed                                                                                      1.3s
+ ✔ Volume 11-exam-preparation-library_sqldata   Removed                                                                                      0.0s
+ ✔ Network 11-exam-preparation-library_default  Removed                                                                                      0.6s
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> az login
+A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow with `az login --use-device-code`.
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "id": "56f5a8d7-2b04-4e50-80ad-0d999a5a881a",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure for Students",
+    "state": "Enabled",
+    "tenantId": "4a06d40c-e447-42be-baef-dd0421ed10bd",
+    "user": {
+      "name": "Nikolay_x@students.softuni.bg",
+      "type": "user"
+    }
+  }
+]
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> az group create --name nikolayxlibraryrg --location westeurope
+{
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg",
+  "location": "westeurope",
+  "managedBy": null,
+  "name": "nikolayxlibraryrg",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> az acr create --resource-group nikolayxlibraryrg --name nikolayxlibrarycr --sku Basic
+{
+  "adminUserEnabled": false,
+  "anonymousPullEnabled": false,
+  "creationDate": "2023-06-14T06:58:17.648578+00:00",
+  "dataEndpointEnabled": false,
+  "dataEndpointHostNames": [],
+  "encryption": {
+    "keyVaultProperties": null,
+    "status": "disabled"
+  },
+  "id": "/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxlibraryrg/providers/Microsoft.ContainerRegistry/registries/nikolayxlibrarycr",
+  "identity": null,
+  "location": "westeurope",
+  "loginServer": "nikolayxlibrarycr.azurecr.io",
+  "name": "nikolayxlibrarycr",
+  "networkRuleBypassOptions": "AzureServices",
+  "networkRuleSet": null,
+  "policies": {
+    "azureAdAuthenticationAsArmPolicy": {
+      "status": "enabled"
+    },
+    "exportPolicy": {
+      "status": "enabled"
+    },
+    "quarantinePolicy": {
+      "status": "disabled"
+    },
+    "retentionPolicy": {
+      "days": 7,
+      "lastUpdatedTime": "2023-06-14T06:58:32.214410+00:00",
+      "status": "disabled"
+    },
+    "softDeletePolicy": {
+      "lastUpdatedTime": "2023-06-14T06:58:32.214410+00:00",
+      "retentionDays": 7,
+      "status": "disabled"
+    },
+    "trustPolicy": {
+      "status": "disabled",
+      "type": "Notary"
+    }
+  },
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": "Enabled",
+  "resourceGroup": "nikolayxlibraryrg",
+  "sku": {
+    "name": "Basic",
+    "tier": "Basic"
+  },
+  "status": null,
+  "systemData": {
+    "createdAt": "2023-06-14T06:58:17.648578+00:00",
+    "createdBy": "Nikolay_x@students.softuni.bg",
+    "createdByType": "User",
+    "lastModifiedAt": "2023-06-14T06:58:17.648578+00:00",
+    "lastModifiedBy": "Nikolay_x@students.softuni.bg",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries",
+  "zoneRedundancy": "Disabled"
+}
+[+] Running 1/1Exam Preparation\11-Exam-Preparation-Library> docker-compose up -d
+ ! web-app Warning                                                                                                                           1.0s
+[+] Building 0.6s (19/19) FINISHED
+ => [web-app internal] load build definition from Dockerfile                                                                                 0.0s
+ => => transferring dockerfile: 826B                                                                                                         0.0s
+ => [web-app internal] load .dockerignore                                                                                                    0.0s
+ => => transferring context: 382B                                                                                                            0.0s
+ => [web-app internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                 0.0s
+ => [web-app internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                    0.4s
+ => [web-app internal] load build context                                                                                                    0.0s
+ => => transferring context: 8.94kB                                                                                                          0.0s
+ => [web-app build 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:a3bbff689a86ba7f3ddcee5089a729b20e20e3b4dbfb9d0a43bb3284d9081023        0.0s
+ => [web-app base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0                                                                              0.0s
+ => CACHED [web-app base 2/2] WORKDIR /app                                                                                                   0.0s
+ => CACHED [web-app final 1/2] WORKDIR /app                                                                                                  0.0s
+ => CACHED [web-app build 2/8] WORKDIR /src                                                                                                  0.0s
+ => CACHED [web-app build 3/8] COPY [Library/Library.csproj, Library/]                                                                       0.0s
+ => CACHED [web-app build 4/8] COPY [Library.Data/Library.Data.csproj, Library.Data/]                                                        0.0s
+ => CACHED [web-app build 5/8] RUN dotnet restore "Library/Library.csproj"                                                                   0.0s
+ => CACHED [web-app build 6/8] COPY . .                                                                                                      0.0s
+ => CACHED [web-app build 7/8] WORKDIR /src/Library                                                                                          0.0s
+ => CACHED [web-app build 8/8] RUN dotnet build "Library.csproj" -c Release -o /app/build                                                    0.0s
+ => CACHED [web-app publish 1/1] RUN dotnet publish "Library.csproj" -c Release -o /app/publish /p:UseAppHost=false                          0.0s
+ => CACHED [web-app final 2/2] COPY --from=publish /app/publish .                                                                            0.0s
+ => [web-app] exporting to image                                                                                                             0.0s
+ => => exporting layers                                                                                                                      0.0s
+ => => writing image sha256:f0565bbad537af0231eb139772db61424a9bc266e04e4219900a9ca09d326ac1                                                 0.0s
+ => => naming to nikolayxlibrarycr.azurecr.io/library                                                                                        0.0s
+[+] Running 2/2
+ ✔ Network 11-exam-preparation-library_default   Created                                                                                     0.9s
+ ✘ Volume "11-exam-preparation-library_sqldata"  Error                                                                                      15.0s
+Error response from daemon: create 11-exam-preparation-library_sqldata: error looking up volume plugin azure_file: plugin "azure_file" not found
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker tag test123 nikolayxlibrarycr.azurecr.io/library
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> az acr login --name nikolayxlibrarycr
+Login Succeeded
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker push nikolayxlibrarycr.azurecr.io/library
+Using default tag: latest
+The push refers to repository [nikolayxlibrarycr.azurecr.io/library]
+850f0454764f: Pushed
+5f70bf18a086: Pushed
+7accb6a3c5fe: Pushed
+87edbcd48e4d: Pushed
+4cf15d404e20: Pushed
+847d60aa4ab2: Pushed
+b681f1ff1a0f: Pushed
+8cbe4b54fa88: Pushed
+latest: digest: sha256:513e29f067220358930181eb81d6cfcf34653f222e01f7bdc4567f35a9f036e3 size: 1996
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker context create aci librarycontext
+Docker Compose's integration for ECS and ACI will be retired in November 2023. Learn more: https://docs.docker.com/go/compose-ecs-eol/
+Using only available subscription : Azure for Students (56f5a8d7-2b04-4e50-80ad-0d999a5a881a)
+? Select a resource group nikolayxlibraryrg (westeurope)
+Successfully created aci context "librarycontext"
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker context use librarycontext
+librarycontext
+Current context is now "librarycontext"
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker context ls
+Docker Compose's integration for ECS and ACI will be retired in November 2023. Learn more: https://docs.docker.com/go/compose-ecs-eol/
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default             moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine                                  
+desktop-linux       moby                Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine                       
+librarycontext *    aci                 nikolayxlibraryrg@westeurope                                                                              
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> docker-compose up -d
+Docker Compose's integration for ECS and ACI will be retired in November 2023. Learn more: https://docs.docker.com/go/compose-ecs-eol/
+[+] Running 5/5
+ - nikolayxlibrarystracc              Created                                                                                               22.6s
+ - sql-volume                         Created                                                                                                0.8s
+ - Group 11-exam-preparation-library  Created                                                                                                6.7s
+ - sqlserver                          Created                                                                                               82.6s
+ - web-app                            Created                                                                                               82.6s
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library> az version
+{
+  "azure-cli": "2.49.0",
+  "azure-cli-core": "2.49.0",
+  "azure-cli-telemetry": "1.0.8",
+  "extensions": {}
+}
+PS C:\Users\NB\Exam Preparation\11-Exam-Preparation-Library>

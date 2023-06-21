@@ -1,0 +1,30 @@
+PS C:\Users\NB\Exam Regular\Terraform solution> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd '.\Exam Regular\'
+   2 docker context ls
+   3 git clone https://github.com/Nikolay-x/contactsexam.git
+   4 cd .\contactsexam\
+   5 git add .
+   6 git commit -m "Initial commit"
+   7 git push
+   8 cd ..
+   9 dir
+  10 cd '.\Terraform solution\'
+  11 terraform init
+  12 terraform fmt
+  13 terraform validate
+  14 terraform apply -var-file="values.tfvars" -auto-approve
+  15 terraform init
+  16 cd ..
+  17 cd '.\Terraform solution state\'
+  18 terraform init
+  19 terraform init
+  20 cd ..
+  21 cd '.\Terraform solution\'
+  22 terraform init
+  23 terraform init
+  24 terraform fmt
+  25 terraform validate
+  26 terraform apply -var-file="values.tfvars" -auto-approve

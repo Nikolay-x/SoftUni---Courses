@@ -1,0 +1,836 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd '.\Exam Regular\'
+PS C:\Users\NB\Exam Regular> docker context ls
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                             KUBERNETES ENDPOINT   ORCHESTRATOR
+default *           moby                Current DOCKER_HOST based configuration   npipe:////./pipe/docker_engine
+desktop-linux       moby                Docker Desktop                            npipe:////./pipe/dockerDesktopLinuxEngine
+PS C:\Users\NB\Exam Regular> git clone https://github.com/Nikolay-x/contactsexam.git
+Cloning into 'contactsexam'...
+warning: You appear to have cloned an empty repository.
+PS C:\Users\NB\Exam Regular> cd .\contactsexam\
+PS C:\Users\NB\Exam Regular\contactsexam> git add .
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/jquery-validation/dist/jquery.validate.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/jquery/dist/jquery.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Contacts/wwwroot/lib/jquery/dist/jquery.min.js', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\NB\Exam Regular\contactsexam> git commit -m "Initial commit"
+[main (root-commit) d681193] Initial commit
+ 157 files changed, 90387 insertions(+)
+ create mode 100644 .dockerignore
+ create mode 100644 .vs/Contacts/FileContentIndex/9283c669-b1da-4912-895c-833ccbcab679.vsidx
+ create mode 100644 .vs/Contacts/FileContentIndex/9b97558d-1391-479c-aafe-8f311387be3d.vsidx
+ create mode 100644 .vs/Contacts/FileContentIndex/ff288c8c-aad2-4205-baa0-88a8ab29f565.vsidx
+ create mode 100644 .vs/Contacts/FileContentIndex/read.lock
+ create mode 100644 .vs/Contacts/v17/.suo
+ create mode 100644 Contacts.Data/Contacts.Data.csproj
+ create mode 100644 Contacts.Data/ContactsDbContext.cs
+ create mode 100644 Contacts.Data/DataConstants.cs
+ create mode 100644 Contacts.Data/Entities/ApplicationUser.cs
+ create mode 100644 Contacts.Data/Entities/ApplicationUserContact.cs
+ create mode 100644 Contacts.Data/Entities/Contact.cs
+ create mode 100644 Contacts.Data/obj/Contacts.Data.csproj.nuget.dgspec.json
+ create mode 100644 Contacts.Data/obj/Contacts.Data.csproj.nuget.g.props
+ create mode 100644 Contacts.Data/obj/Contacts.Data.csproj.nuget.g.targets
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/Contacts.Data.AssemblyInfo.cs
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/Contacts.Data.AssemblyInfoInputs.cache
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/Contacts.Data.GeneratedMSBuildEditorConfig.editorconfig
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/Contacts.Data.GlobalUsings.g.cs
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/Contacts.Data.assets.cache
+ create mode 100644 Contacts.Data/obj/Debug/net6.0/Contacts.Data.csproj.AssemblyReference.cache
+ create mode 100644 Contacts.Data/obj/project.assets.json
+ create mode 100644 Contacts.Data/obj/project.nuget.cache
+ create mode 100644 Contacts.sln
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/Login.cshtml
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/Login.cshtml.cs
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/Logout.cshtml
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/Logout.cshtml.cs
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/Register.cshtml
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/Register.cshtml.cs
+ create mode 100644 Contacts/Areas/Identity/Pages/Account/_ViewImports.cshtml
+ create mode 100644 Contacts/Areas/Identity/Pages/_ViewStart.cshtml
+ create mode 100644 Contacts/Contacts.csproj
+ create mode 100644 Contacts/Contacts.csproj.user
+ create mode 100644 Contacts/Controllers/ContactsController.cs
+ create mode 100644 Contacts/Controllers/HomeController.cs
+ create mode 100644 Contacts/Data/Migrations/20230109011518_initial.Designer.cs
+ create mode 100644 Contacts/Data/Migrations/20230109011518_initial.cs
+ create mode 100644 Contacts/Data/Migrations/ContactsDbContextModelSnapshot.cs
+ create mode 100644 Contacts/Dockerfile
+ create mode 100644 Contacts/Models/AllContactsQueryModel.cs
+ create mode 100644 Contacts/Models/ContactFormModel.cs
+ create mode 100644 Contacts/Models/ContactViewModel.cs
+ create mode 100644 Contacts/Models/ErrorViewModel.cs
+ create mode 100644 Contacts/Program.cs
+ create mode 100644 Contacts/Properties/launchSettings.json
+ create mode 100644 Contacts/Properties/serviceDependencies.json
+ create mode 100644 Contacts/Properties/serviceDependencies.local.json
+ create mode 100644 Contacts/Properties/serviceDependencies.local.json.user
+ create mode 100644 Contacts/ScaffoldingReadMe.txt
+ create mode 100644 Contacts/Views/Contacts/Add.cshtml
+ create mode 100644 Contacts/Views/Contacts/All.cshtml
+ create mode 100644 Contacts/Views/Contacts/Edit.cshtml
+ create mode 100644 Contacts/Views/Contacts/Team.cshtml
+ create mode 100644 Contacts/Views/Home/Index.cshtml
+ create mode 100644 Contacts/Views/Shared/Error.cshtml
+ create mode 100644 Contacts/Views/Shared/_Layout.cshtml
+ create mode 100644 Contacts/Views/Shared/_Layout.cshtml.css
+ create mode 100644 Contacts/Views/Shared/_LoginPartial.cshtml
+ create mode 100644 Contacts/Views/Shared/_ValidationScriptsPartial.cshtml
+ create mode 100644 Contacts/Views/_ViewImports.cshtml
+ create mode 100644 Contacts/Views/_ViewStart.cshtml
+ create mode 100644 Contacts/appsettings.Development.json
+ create mode 100644 Contacts/appsettings.json
+ create mode 100644 Contacts/obj/Contacts.csproj.nuget.dgspec.json
+ create mode 100644 Contacts/obj/Contacts.csproj.nuget.g.props
+ create mode 100644 Contacts/obj/Contacts.csproj.nuget.g.targets
+ create mode 100644 Contacts/obj/Container/AbsoluteOutputAssemblyPath.cache
+ create mode 100644 Contacts/obj/Container/AdditionalProbingPaths.cache
+ create mode 100644 Contacts/obj/Container/ContainerDevelopmentMode.cache
+ create mode 100644 Contacts/obj/Container/ContainerId.cache
+ create mode 100644 Contacts/obj/Container/ContainerName.cache
+ create mode 100644 Contacts/obj/Container/ContainerOperatingSystemFlavor.cache
+ create mode 100644 Contacts/obj/Container/ContainerRunContext.cache
+ create mode 100644 Contacts/obj/Container/DebuggeeArguments.cache
+ create mode 100644 Contacts/obj/Container/DebuggeeKillProcessCommand.cache
+ create mode 100644 Contacts/obj/Container/DebuggeeProgram.cache
+ create mode 100644 Contacts/obj/Container/DebuggeeWorkingDirectory.cache
+ create mode 100644 Contacts/obj/Container/FastModeProjectMountDirectory.cache
+ create mode 100644 Contacts/obj/Container/ImageBuildContext.cache
+ create mode 100644 Contacts/obj/Container/ImageId.cache
+ create mode 100644 Contacts/obj/Container/OperatingSystemName.cache
+ create mode 100644 Contacts/obj/Container/TargetFramework.cache
+ create mode 100644 Contacts/obj/Container/VolumeMappings.cache
+ create mode 100644 Contacts/obj/Container/VsDbgScript.cache
+ create mode 100644 Contacts/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.AssemblyInfo.cs
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.AssemblyInfoInputs.cache
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.GeneratedMSBuildEditorConfig.editorconfig
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.GlobalUsings.g.cs
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.RazorAssemblyInfo.cache
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.RazorAssemblyInfo.cs
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.assets.cache
+ create mode 100644 Contacts/obj/Debug/net6.0/Contacts.csproj.AssemblyReference.cache
+ create mode 100644 Contacts/obj/project.assets.json
+ create mode 100644 Contacts/obj/project.nuget.cache
+ create mode 100644 Contacts/wwwroot/css/site.css
+ create mode 100644 Contacts/wwwroot/favicon.ico
+ create mode 100644 Contacts/wwwroot/js/site.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/LICENSE
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js
+ create mode 100644 Contacts/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation/LICENSE.md
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation/dist/additional-methods.js
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation/dist/additional-methods.min.js
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation/dist/jquery.validate.js
+ create mode 100644 Contacts/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js
+ create mode 100644 Contacts/wwwroot/lib/jquery/LICENSE.txt
+ create mode 100644 Contacts/wwwroot/lib/jquery/dist/jquery.js
+ create mode 100644 Contacts/wwwroot/lib/jquery/dist/jquery.min.js
+ create mode 100644 Contacts/wwwroot/lib/jquery/dist/jquery.min.map
+PS C:\Users\NB\Exam Regular\contactsexam> git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 193, done.
+Counting objects: 100% (193/193), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (170/170), done.
+Writing objects: 100% (193/193), 1.45 MiB | 1.72 MiB/s, done.
+Total 193 (delta 49), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (49/49), done.
+To https://github.com/Nikolay-x/contactsexam.git
+ * [new branch]      main -> main
+PS C:\Users\NB\Exam Regular\contactsexam> cd ..
+PS C:\Users\NB\Exam Regular> dir
+
+
+    Directory: C:\Users\NB\Exam Regular
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         18-Jun-23     09:14                Contacts
+d-----         18-Jun-23     09:20                contactsexam
+d-----         18-Jun-23     09:25                Terraform solution
+
+
+PS C:\Users\NB\Exam Regular> cd '.\Terraform solution\'
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding hashicorp/azurerm versions matching ">= 3.60.0"...
+- Finding latest version of hashicorp/random...
+- Installing hashicorp/azurerm v3.61.0...
+- Installed hashicorp/azurerm v3.61.0 (signed by HashiCorp)
+- Installing hashicorp/random v3.5.1...
+- Installed hashicorp/random v3.5.1 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform fmt
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform validate
+Success! The configuration is valid.
+
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform apply -var-file="values.tfvars" -auto-approve
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_app_service_source_control.sourcecontrol will be created
+  + resource "azurerm_app_service_source_control" "sourcecontrol" {
+      + app_id                 = (known after apply)
+      + branch                 = "main"
+      + id                     = (known after apply)
+      + repo_url               = "https://github.com/Nikolay-x/contactsexam"
+      + rollback_enabled       = false
+      + scm_type               = (known after apply)
+      + use_local_git          = false
+      + use_manual_integration = true
+      + use_mercurial          = false
+      + uses_github_action     = (known after apply)
+    }
+
+  # azurerm_linux_web_app.appservice will be created
+  + resource "azurerm_linux_web_app" "appservice" {
+      + client_affinity_enabled           = false
+      + client_certificate_enabled        = false
+      + client_certificate_mode           = "Required"
+      + custom_domain_verification_id     = (sensitive value)
+      + default_hostname                  = (known after apply)
+      + enabled                           = true
+      + hosting_environment_id            = (known after apply)
+      + https_only                        = false
+      + id                                = (known after apply)
+      + key_vault_reference_identity_id   = (known after apply)
+      + kind                              = (known after apply)
+      + location                          = "westeurope"
+      + name                              = (known after apply)
+      + outbound_ip_address_list          = (known after apply)
+      + outbound_ip_addresses             = (known after apply)
+      + possible_outbound_ip_address_list = (known after apply)
+      + possible_outbound_ip_addresses    = (known after apply)
+      + resource_group_name               = (known after apply)
+      + service_plan_id                   = (known after apply)
+      + site_credential                   = (sensitive value)
+      + zip_deploy_file                   = (known after apply)
+
+      + connection_string {
+          # At least one attribute in this block is (or was) sensitive,
+          # so its contents will not be displayed.
+        }
+
+      + site_config {
+          + always_on                               = false
+          + container_registry_use_managed_identity = false
+          + default_documents                       = (known after apply)
+          + detailed_error_logging_enabled          = (known after apply)
+          + ftps_state                              = "Disabled"
+          + health_check_eviction_time_in_min       = (known after apply)
+          + http2_enabled                           = false
+          + linux_fx_version                        = (known after apply)
+          + load_balancing_mode                     = "LeastRequests"
+          + local_mysql_enabled                     = false
+          + managed_pipeline_mode                   = "Integrated"
+          + minimum_tls_version                     = "1.2"
+          + remote_debugging_enabled                = false
+          + remote_debugging_version                = (known after apply)
+          + scm_minimum_tls_version                 = "1.2"
+          + scm_type                                = (known after apply)
+          + scm_use_main_ip_restriction             = false
+          + use_32_bit_worker                       = true
+          + vnet_route_all_enabled                  = false
+          + websockets_enabled                      = false
+          + worker_count                            = (known after apply)
+
+          + application_stack {
+              + dotnet_version = "6.0"
+            }
+        }
+    }
+
+  # azurerm_mssql_database.sql will be created
+  + resource "azurerm_mssql_database" "sql" {
+      + auto_pause_delay_in_minutes         = (known after apply)
+      + collation                           = "SQL_Latin1_General_CP1_CI_AS"
+      + create_mode                         = "Default"
+      + creation_source_database_id         = (known after apply)
+      + geo_backup_enabled                  = true
+      + id                                  = (known after apply)
+      + ledger_enabled                      = (known after apply)
+      + license_type                        = "LicenseIncluded"
+      + maintenance_configuration_name      = (known after apply)
+      + max_size_gb                         = (known after apply)
+      + min_capacity                        = (known after apply)
+      + name                                = (known after apply)
+      + read_replica_count                  = (known after apply)
+      + read_scale                          = (known after apply)
+      + restore_point_in_time               = (known after apply)
+      + sample_name                         = (known after apply)
+      + server_id                           = (known after apply)
+      + sku_name                            = "S0"
+      + storage_account_type                = "Geo"
+      + transparent_data_encryption_enabled = true
+      + zone_redundant                      = false
+    }
+
+  # azurerm_mssql_firewall_rule.example will be created
+  + resource "azurerm_mssql_firewall_rule" "example" {
+      + end_ip_address   = "0.0.0.0"
+      + id               = (known after apply)
+      + name             = (known after apply)
+      + server_id        = (known after apply)
+      + start_ip_address = "0.0.0.0"
+    }
+
+  # azurerm_mssql_server.sqlserver will be created
+  + resource "azurerm_mssql_server" "sqlserver" {
+      + administrator_login                  = "4dm1n157r470r"
+      + administrator_login_password         = (sensitive value)
+      + connection_policy                    = "Default"
+      + fully_qualified_domain_name          = (known after apply)
+      + id                                   = (known after apply)
+      + location                             = "westeurope"
+      + minimum_tls_version                  = "1.2"
+      + name                                 = (known after apply)
+      + outbound_network_restriction_enabled = false
+      + primary_user_assigned_identity_id    = (known after apply)
+      + public_network_access_enabled        = true
+      + resource_group_name                  = (known after apply)
+      + restorable_dropped_database_ids      = (known after apply)
+      + version                              = "12.0"
+    }
+
+  # azurerm_resource_group.rg will be created
+  + resource "azurerm_resource_group" "rg" {
+      + id       = (known after apply)
+      + location = "westeurope"
+      + name     = (known after apply)
+    }
+
+  # azurerm_service_plan.appsp will be created
+  + resource "azurerm_service_plan" "appsp" {
+      + id                           = (known after apply)
+      + kind                         = (known after apply)
+      + location                     = "westeurope"
+      + maximum_elastic_worker_count = (known after apply)
+      + name                         = (known after apply)
+      + os_type                      = "Linux"
+      + per_site_scaling_enabled     = false
+      + reserved                     = (known after apply)
+      + resource_group_name          = (known after apply)
+      + sku_name                     = "F1"
+      + worker_count                 = (known after apply)
+    }
+
+  # random_integer.ri will be created
+  + resource "random_integer" "ri" {
+      + id     = (known after apply)
+      + max    = 999999
+      + min    = 100000
+      + result = (known after apply)
+    }
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + webapp_ips = (known after apply)
+  + webapp_url = (known after apply)
+random_integer.ri: Creating...
+random_integer.ri: Creation complete after 0s [id=238057]
+azurerm_resource_group.rg: Creating...
+azurerm_resource_group.rg: Creation complete after 1s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057]
+azurerm_service_plan.appsp: Creating...
+azurerm_mssql_server.sqlserver: Creating...
+azurerm_service_plan.appsp: Creation complete after 6s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057/providers/Microsoft.Web/serverfarms/nikolayx-contacts-plan-238057]
+azurerm_mssql_server.sqlserver: Still creating... [10s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [20s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [30s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [40s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [50s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [1m0s elapsed]
+azurerm_mssql_server.sqlserver: Creation complete after 1m9s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057/providers/Microsoft.Sql/servers/nikolayx-contacts-sql-238057]
+azurerm_mssql_firewall_rule.example: Creating...
+azurerm_mssql_database.sql: Creating...
+azurerm_mssql_firewall_rule.example: Creation complete after 2s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057/providers/Microsoft.Sql/servers/nikolayx-contacts-sql-238057/firewallRules/nikolayxcontactsFW238057]
+azurerm_mssql_database.sql: Still creating... [10s elapsed]
+azurerm_mssql_database.sql: Still creating... [20s elapsed]
+azurerm_mssql_database.sql: Still creating... [30s elapsed]
+azurerm_mssql_database.sql: Still creating... [40s elapsed]
+azurerm_mssql_database.sql: Still creating... [50s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m0s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m10s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m20s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m30s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m40s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m50s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m0s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m10s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m20s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m30s elapsed]
+azurerm_mssql_database.sql: Creation complete after 2m40s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057/providers/Microsoft.Sql/servers/nikolayx-contacts-sql-238057/databases/nikolayx-contactsDB238057]
+azurerm_linux_web_app.appservice: Creating...
+azurerm_linux_web_app.appservice: Still creating... [10s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [20s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [30s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [40s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [50s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [1m0s elapsed]
+azurerm_linux_web_app.appservice: Creation complete after 1m6s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057/providers/Microsoft.Web/sites/nikolayx-contacts-238057]
+azurerm_app_service_source_control.sourcecontrol: Creating...
+azurerm_app_service_source_control.sourcecontrol: Still creating... [10s elapsed]
+azurerm_app_service_source_control.sourcecontrol: Creation complete after 15s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg238057/providers/Microsoft.Web/sites/nikolayx-contacts-238057]
+
+Apply complete! Resources: 8 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+webapp_ips = "20.238.237.150,20.238.237.237,20.238.237.241,20.238.237.246,20.238.238.7,20.123.230.214,20.238.232.223,20.31.35.218,20.238.233.16,20.238.234.131,20.238.234.214,20.238.235.37,20.105.216.41"
+webapp_url = "nikolayx-contacts-238057.azurewebsites.net"
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform init
+
+Initializing the backend...
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 12, in terraform:
+│   12:     resource_group_name  = azurerm_resource_group.rg.name
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 13, in terraform:
+│   13:     storage_account_name = "${var.storage_account_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 13, in terraform:
+│   13:     storage_account_name = "${var.storage_account_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 14, in terraform:
+│   14:     container_name       = "${var.container_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 14, in terraform:
+│   14:     container_name       = "${var.container_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+PS C:\Users\NB\Exam Regular\Terraform solution> cd ..
+PS C:\Users\NB\Exam Regular> cd '.\Terraform solution state\'
+PS C:\Users\NB\Exam Regular\Terraform solution state> terraform init
+
+Initializing the backend...
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 12, in terraform:
+│   12:     resource_group_name  = azurerm_resource_group.rg.name
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 13, in terraform:
+│   13:     storage_account_name = "${var.storage_account_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 13, in terraform:
+│   13:     storage_account_name = "${var.storage_account_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 14, in terraform:
+│   14:     container_name       = "${var.container_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+╷
+│ Error: Variables not allowed
+│
+│   on main.tf line 14, in terraform:
+│   14:     container_name       = "${var.container_name}-${random_integer.ri.result}"
+│
+│ Variables may not be used here.
+╵
+
+PS C:\Users\NB\Exam Regular\Terraform solution state> terraform init
+PS C:\Users\NB\Exam Regular\Terraform solution state> cd ..
+PS C:\Users\NB\Exam Regular> cd '.\Terraform solution\'
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform init
+
+Initializing the backend...
+╷
+│ Error: Failed to get existing workspaces: Error retrieving keys for Storage Account "nikolayxstacc": storage.AccountsClient#ListKeys: Failure responding to request: StatusCode=404 -- Original Error: autorest/azure: Service returned an error. Status=404 Code="ResourceGroupNotFound" Message="Resource group 'nikolayxcontactsrg' could not be found."
+│
+│
+╵
+
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/random...
+- Finding hashicorp/azurerm versions matching ">= 3.60.0"...
+- Installing hashicorp/random v3.5.1...
+- Installed hashicorp/random v3.5.1 (signed by HashiCorp)
+- Installing hashicorp/azurerm v3.61.0...
+- Installed hashicorp/azurerm v3.61.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform fmt
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform validate
+Success! The configuration is valid.
+
+PS C:\Users\NB\Exam Regular\Terraform solution> terraform apply -var-file="values.tfvars" -auto-approve
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_app_service_source_control.sourcecontrol will be created
+  + resource "azurerm_app_service_source_control" "sourcecontrol" {
+      + app_id                 = (known after apply)
+      + branch                 = "main"
+      + id                     = (known after apply)
+      + repo_url               = "https://github.com/Nikolay-x/contactsexam"
+      + rollback_enabled       = false
+      + scm_type               = (known after apply)
+      + use_local_git          = false
+      + use_manual_integration = true
+      + use_mercurial          = false
+      + uses_github_action     = (known after apply)
+    }
+
+  # azurerm_linux_web_app.appservice will be created
+  + resource "azurerm_linux_web_app" "appservice" {
+      + client_affinity_enabled           = false
+      + client_certificate_enabled        = false
+      + client_certificate_mode           = "Required"
+      + custom_domain_verification_id     = (sensitive value)
+      + default_hostname                  = (known after apply)
+      + enabled                           = true
+      + hosting_environment_id            = (known after apply)
+      + https_only                        = false
+      + id                                = (known after apply)
+      + key_vault_reference_identity_id   = (known after apply)
+      + kind                              = (known after apply)
+      + location                          = "westeurope"
+      + name                              = (known after apply)
+      + outbound_ip_address_list          = (known after apply)
+      + outbound_ip_addresses             = (known after apply)
+      + possible_outbound_ip_address_list = (known after apply)
+      + possible_outbound_ip_addresses    = (known after apply)
+      + resource_group_name               = (known after apply)
+      + service_plan_id                   = (known after apply)
+      + site_credential                   = (sensitive value)
+      + zip_deploy_file                   = (known after apply)
+
+      + connection_string {
+          # At least one attribute in this block is (or was) sensitive,
+          # so its contents will not be displayed.
+        }
+
+      + site_config {
+          + always_on                               = false
+          + container_registry_use_managed_identity = false
+          + default_documents                       = (known after apply)
+          + detailed_error_logging_enabled          = (known after apply)
+          + ftps_state                              = "Disabled"
+          + health_check_eviction_time_in_min       = (known after apply)
+          + http2_enabled                           = false
+          + linux_fx_version                        = (known after apply)
+          + load_balancing_mode                     = "LeastRequests"
+          + local_mysql_enabled                     = false
+          + managed_pipeline_mode                   = "Integrated"
+          + minimum_tls_version                     = "1.2"
+          + remote_debugging_enabled                = false
+          + remote_debugging_version                = (known after apply)
+          + scm_minimum_tls_version                 = "1.2"
+          + scm_type                                = (known after apply)
+          + scm_use_main_ip_restriction             = false
+          + use_32_bit_worker                       = true
+          + vnet_route_all_enabled                  = false
+          + websockets_enabled                      = false
+          + worker_count                            = (known after apply)
+
+          + application_stack {
+              + dotnet_version = "6.0"
+            }
+        }
+    }
+
+  # azurerm_mssql_database.sql will be created
+  + resource "azurerm_mssql_database" "sql" {
+      + auto_pause_delay_in_minutes         = (known after apply)
+      + collation                           = "SQL_Latin1_General_CP1_CI_AS"
+      + create_mode                         = "Default"
+      + creation_source_database_id         = (known after apply)
+      + geo_backup_enabled                  = true
+      + id                                  = (known after apply)
+      + ledger_enabled                      = (known after apply)
+      + license_type                        = "LicenseIncluded"
+      + maintenance_configuration_name      = (known after apply)
+      + max_size_gb                         = (known after apply)
+      + min_capacity                        = (known after apply)
+      + name                                = (known after apply)
+      + read_replica_count                  = (known after apply)
+      + read_scale                          = (known after apply)
+      + restore_point_in_time               = (known after apply)
+      + sample_name                         = (known after apply)
+      + server_id                           = (known after apply)
+      + sku_name                            = "S0"
+      + storage_account_type                = "Geo"
+      + transparent_data_encryption_enabled = true
+      + zone_redundant                      = false
+    }
+
+  # azurerm_mssql_firewall_rule.example will be created
+  + resource "azurerm_mssql_firewall_rule" "example" {
+      + end_ip_address   = "0.0.0.0"
+      + id               = (known after apply)
+      + name             = (known after apply)
+      + server_id        = (known after apply)
+      + start_ip_address = "0.0.0.0"
+    }
+
+  # azurerm_mssql_server.sqlserver will be created
+  + resource "azurerm_mssql_server" "sqlserver" {
+      + administrator_login                  = "4dm1n157r470r"
+      + administrator_login_password         = (sensitive value)
+      + connection_policy                    = "Default"
+      + fully_qualified_domain_name          = (known after apply)
+      + id                                   = (known after apply)
+      + location                             = "westeurope"
+      + minimum_tls_version                  = "1.2"
+      + name                                 = (known after apply)
+      + outbound_network_restriction_enabled = false
+      + primary_user_assigned_identity_id    = (known after apply)
+      + public_network_access_enabled        = true
+      + resource_group_name                  = (known after apply)
+      + restorable_dropped_database_ids      = (known after apply)
+      + version                              = "12.0"
+    }
+
+  # azurerm_resource_group.rg will be created
+  + resource "azurerm_resource_group" "rg" {
+      + id       = (known after apply)
+      + location = "westeurope"
+      + name     = (known after apply)
+    }
+
+  # azurerm_service_plan.appsp will be created
+  + resource "azurerm_service_plan" "appsp" {
+      + id                           = (known after apply)
+      + kind                         = (known after apply)
+      + location                     = "westeurope"
+      + maximum_elastic_worker_count = (known after apply)
+      + name                         = (known after apply)
+      + os_type                      = "Linux"
+      + per_site_scaling_enabled     = false
+      + reserved                     = (known after apply)
+      + resource_group_name          = (known after apply)
+      + sku_name                     = "F1"
+      + worker_count                 = (known after apply)
+    }
+
+  # random_integer.ri will be created
+  + resource "random_integer" "ri" {
+      + id     = (known after apply)
+      + max    = 999999
+      + min    = 100000
+      + result = (known after apply)
+    }
+
+Plan: 8 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + webapp_ips = (known after apply)
+  + webapp_url = (known after apply)
+random_integer.ri: Creating...
+random_integer.ri: Creation complete after 0s [id=975943]
+azurerm_resource_group.rg: Creating...
+azurerm_resource_group.rg: Creation complete after 2s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943]
+azurerm_service_plan.appsp: Creating...
+azurerm_mssql_server.sqlserver: Creating...
+azurerm_service_plan.appsp: Creation complete after 6s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943/providers/Microsoft.Web/serverfarms/nikolayx-contacts-plan-975943]
+azurerm_mssql_server.sqlserver: Still creating... [10s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [20s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [30s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [40s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [50s elapsed]
+azurerm_mssql_server.sqlserver: Still creating... [1m0s elapsed]
+azurerm_mssql_server.sqlserver: Creation complete after 1m9s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943/providers/Microsoft.Sql/servers/nikolayx-contacts-sql-975943]
+azurerm_mssql_firewall_rule.example: Creating...
+azurerm_mssql_database.sql: Creating...
+azurerm_mssql_firewall_rule.example: Creation complete after 2s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943/providers/Microsoft.Sql/servers/nikolayx-contacts-sql-975943/firewallRules/nikolayxcontactsFW975943]
+azurerm_mssql_database.sql: Still creating... [10s elapsed]
+azurerm_mssql_database.sql: Still creating... [20s elapsed]
+azurerm_mssql_database.sql: Still creating... [30s elapsed]
+azurerm_mssql_database.sql: Still creating... [40s elapsed]
+azurerm_mssql_database.sql: Still creating... [50s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m0s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m10s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m20s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m30s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m40s elapsed]
+azurerm_mssql_database.sql: Still creating... [1m50s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m0s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m10s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m20s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m30s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m40s elapsed]
+azurerm_mssql_database.sql: Still creating... [2m50s elapsed]
+azurerm_mssql_database.sql: Creation complete after 2m54s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943/providers/Microsoft.Sql/servers/nikolayx-contacts-sql-975943/databases/nikolayx-contactsDB975943]
+azurerm_linux_web_app.appservice: Creating...
+azurerm_linux_web_app.appservice: Still creating... [10s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [20s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [30s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [40s elapsed]
+azurerm_linux_web_app.appservice: Still creating... [50s elapsed]
+azurerm_linux_web_app.appservice: Creation complete after 56s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943/providers/Microsoft.Web/sites/nikolayx-contacts-975943]
+azurerm_app_service_source_control.sourcecontrol: Creating...
+azurerm_app_service_source_control.sourcecontrol: Still creating... [10s elapsed]
+azurerm_app_service_source_control.sourcecontrol: Creation complete after 15s [id=/subscriptions/56f5a8d7-2b04-4e50-80ad-0d999a5a881a/resourceGroups/nikolayxcontactsrg975943/providers/Microsoft.Web/sites/nikolayx-contacts-975943]
+
+Apply complete! Resources: 8 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+webapp_ips = "20.71.14.202,20.71.14.235,20.71.15.64,20.71.15.67,20.73.128.133,20.73.128.169,20.71.8.16,20.71.8.178,20.71.9.47,20.71.9.98,20.71.9.113,20.71.9.196,20.105.232.31"
+webapp_url = "nikolayx-contacts-975943.azurewebsites.net"
+PS C:\Users\NB\Exam Regular\Terraform solution>

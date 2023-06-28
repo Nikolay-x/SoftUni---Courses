@@ -1,0 +1,20 @@
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\DevOps\
+   2 cd '.\05. Source Control Systems, Git and GitHub\'
+   3 git clone https://github.com/SoftUni/playgorund
+   4 git init
+   5 git clone https://github.com/SoftUni/playgorund
+   6 git clone https://github.com/SoftUni/playground
+   7 git status
+   8 git add .
+   9 git commit -m "adding new file"
+  10 git push
+  11 cd .\playground\
+  12 git status
+  13 git add .
+  14 git commit -m "adding new file"
+  15 git push
+  16 vi test123.txt

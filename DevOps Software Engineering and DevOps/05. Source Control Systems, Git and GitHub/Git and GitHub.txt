@@ -1,0 +1,92 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\DevOps\
+PS C:\Users\NB\DevOps> cd '.\05. Source Control Systems, Git and GitHub\'
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git clone https://github.com/SoftUni/playgorund
+Cloning into 'playgorund'...
+remote: Repository not found.
+fatal: repository 'https://github.com/SoftUni/playgorund/' not found
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git init
+Initialized empty Git repository in C:/Users/NB/DevOps/05. Source Control Systems, Git and GitHub/.git/
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git clone https://github.com/SoftUni/playgorund
+Cloning into 'playgorund'...
+remote: Repository not found.
+fatal: repository 'https://github.com/SoftUni/playgorund/' not found
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git clone https://github.com/SoftUni/playground
+Cloning into 'playground'...
+remote: Enumerating objects: 491, done.
+remote: Counting objects: 100% (155/155), done.
+remote: Compressing objects: 100% (46/46), done.
+Receiving objects:  73% (359/491), 2.80 MiB | 2.59 MiB/sack-reused 336
+Receiving objects: 100% (491/491), 3.29 MiB | 2.69 MiB/s, done.
+Resolving deltas: 100% (205/205), done.
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        playground/
+
+nothing added to commit but untracked files present (use "git add" to track)
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git add .
+warning: adding embedded git repository: playground
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint:   git submodule add <url> playground
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached playground
+hint:
+hint: See "git help submodule" for more information.
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git commit -m "adding new file"
+[master (root-commit) 4f4d984] adding new file
+ 1 file changed, 1 insertion(+)
+ create mode 160000 playground
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> git push
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub> cd .\playground\
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground> git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        NB.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground> git add .
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground> git commit -m "adding new file"
+[master c156ba8] adding new file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 NB.txt
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground> git push
+remote: Permission to SoftUni/playground.git denied to Nikolay-x.
+fatal: unable to access 'https://github.com/SoftUni/playground/': The requested URL returned error: 403
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground> vi test123.txt
+vi : The term 'vi' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if
+a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ vi test123.txt
++ ~~
+    + CategoryInfo          : ObjectNotFound: (vi:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\NB\DevOps\05. Source Control Systems, Git and GitHub\playground>

@@ -1,0 +1,56 @@
+###############################################################
+#                          WARNING!!!!                        #
+# This is a sandbox environment. Using personal credentials   #
+# is HIGHLY! discouraged. Any consequences of doing so are    #
+# completely the user's responsibilites.                      #
+#                                                             #
+# The PWD team.                                               #
+###############################################################
+[node1] (local) root@192.168.0.13 ~
+$ vi test123.txt
+[node1] (local) root@192.168.0.13 ~
+$ ls
+test123.txt
+[node1] (local) root@192.168.0.13 ~
+$ ls -l
+total 4
+-rw-r--r--    1 root     root            21 Jun 28 06:09 test123.txt
+[node1] (local) root@192.168.0.13 ~
+$ cat test123
+cat: can't open 'test123': No such file or directory
+[node1] (local) root@192.168.0.13 ~
+$ cat test123.txt
+line 1
+line 2
+line 3
+[node1] (local) root@192.168.0.13 ~
+$ vi test123
+[node1] (local) root@192.168.0.13 ~
+$ ls
+test123.txt
+[node1] (local) root@192.168.0.13 ~
+$ cat test123.txt 
+line 1
+line 2
+line 3
+[node1] (local) root@192.168.0.13 ~
+$ vi test123.txt 
+[node1] (local) root@192.168.0.13 ~
+$ cat test123.txt 
+line 4
+line 2
+line 3
+[node1] (local) root@192.168.0.13 ~
+$ history
+    1  vi test123.txt
+    2  ls
+    3  ls -l
+    4  cat test123
+    5  cat test123.txt
+    6  vi test123
+    7  ls
+    8  cat test123.txt 
+    9  vi test123.txt 
+   10  cat test123.txt 
+   11  history
+[node1] (local) root@192.168.0.13 ~

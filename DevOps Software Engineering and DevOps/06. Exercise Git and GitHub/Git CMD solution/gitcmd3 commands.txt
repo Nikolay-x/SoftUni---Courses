@@ -1,0 +1,11 @@
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3\Towns>doskey /history
+cd DevOps
+cd "06. Exercise Git and GitHub"
+cd gitcmd3
+git clone https://github.com/Nikolay-x/Towns.git
+cd Towns
+git pull
+git commit -a -m "Improved visual styles"
+git push
+git pull
+doskey /history

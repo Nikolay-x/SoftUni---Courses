@@ -1,0 +1,575 @@
+
+C:\Users\NB>cd DevOps
+
+C:\Users\NB\DevOps>cd "06. Exercise Git and GitHub"
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub>cd gitcmd
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd>git clone https://github.com/Nikolay-x/Towns.git
+Cloning into 'Towns'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (6/6), done.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd>git log
+fatal: not a git repository (or any of the parent directories): .git
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd>git show
+fatal: not a git repository (or any of the parent directories): .git
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd>cd Towns
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git log
+commit a842e7ccae778e31baeb5fe13bb0b11b98ee3c83 (HEAD -> main, origin/main, origin/HEAD)
+Author: SUContent <134996680+SUContent@users.noreply.github.com>
+Date:   Wed Jun 28 13:27:58 2023 +0300
+
+    added initial code
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git show
+commit a842e7ccae778e31baeb5fe13bb0b11b98ee3c83 (HEAD -> main, origin/main, origin/HEAD)
+Author: SUContent <134996680+SUContent@users.noreply.github.com>
+Date:   Wed Jun 28 13:27:58 2023 +0300
+
+    added initial code
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..4abcf1f
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,2 @@
++# Towns for SoftUni^M
++Code for the Git and GitHub Exercise^M
+diff --git a/towns.css b/towns.css
+new file mode 100644
+index 0000000..3f23d97
+--- /dev/null
++++ b/towns.css
+@@ -0,0 +1,3 @@
++select, input {^M
++       width: 100px;^M
++}
+\ No newline at end of file
+diff --git a/towns.html b/towns.html
+new file mode 100644
+index 0000000..d7a7960
+--- /dev/null
++++ b/towns.html
+:...skipping...
+commit a842e7ccae778e31baeb5fe13bb0b11b98ee3c83 (HEAD -> main, origin/main, origin/HEAD)
+Author: SUContent <134996680+SUContent@users.noreply.github.com>
+Date:   Wed Jun 28 13:27:58 2023 +0300
+
+    added initial code
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..4abcf1f
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,2 @@
++# Towns for SoftUni^M
++Code for the Git and GitHub Exercise^M
+diff --git a/towns.css b/towns.css
+new file mode 100644
+index 0000000..3f23d97
+--- /dev/null
++++ b/towns.css
+@@ -0,0 +1,3 @@
++select, input {^M
++       width: 100px;^M
++}
+\ No newline at end of file
+diff --git a/towns.html b/towns.html
+new file mode 100644
+index 0000000..d7a7960
+--- /dev/null
++++ b/towns.html
+@@ -0,0 +1,29 @@
++<!DOCTYPE html>^M
++<html>^M
++^M
++<head>^M
++    <title>Towns</title>^M
++       <link rel="stylesheet" href="towns.css" />^M
++    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>^M
++    <script src="towns.js"></script>^M
++</head>^M
++^M
++<body>^M
++^M
++<h1>Towns</h1>^M
++<select id="towns" size="4">^M
++    <option>Sofia</option>^M
++    <option>Plovdiv</option>^M
++    <option>Varna</option>^M
++    <option>Bourgas</option>^M
++</select>^M
++^M
++<div>^M
++    <input type="text" id="townName" />^M
++    <button id="btnDelete">Delete</button>^M
++</div>^M
++<div id="result"></div>^M
++^M
++</body>^M
++^M
++</html>
+\ No newline at end of file
+diff --git a/towns.js b/towns.js
+new file mode 100644
+index 0000000..6f50af6
+--- /dev/null
++++ b/towns.js
+@@ -0,0 +1,19 @@
++$(document).ready(function() {^M
++       $('#btnDelete').click(deleteTown)^M
++});^M
++^M
++function deleteTown() {^M
++       let townName = $('#townName').val();^M
++       $('#townName').val('');^M
++       let removed = false;^M
++       for (let option of $('#towns option')) {^M
+:
+Author: SUContent <134996680+SUContent@users.noreply.github.com>
+Date:   Wed Jun 28 13:27:58 2023 +0300
+
+    added initial code
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..4abcf1f
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,2 @@
++# Towns for SoftUni^M
++Code for the Git and GitHub Exercise^M
+diff --git a/towns.css b/towns.css
+new file mode 100644
+index 0000000..3f23d97
+--- /dev/null
++++ b/towns.css
+@@ -0,0 +1,3 @@
++select, input {^M
++       width: 100px;^M
++}
+\ No newline at end of file
+diff --git a/towns.html b/towns.html
+new file mode 100644
+index 0000000..d7a7960
+--- /dev/null
++++ b/towns.html
+@@ -0,0 +1,29 @@
++<!DOCTYPE html>^M
++<html>^M
++^M
++<head>^M
++    <title>Towns</title>^M
++       <link rel="stylesheet" href="towns.css" />^M
++    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>^M
++    <script src="towns.js"></script>^M
++</head>^M
++^M
++<body>^M
++^M
++<h1>Towns</h1>^M
++<select id="towns" size="4">^M
++    <option>Sofia</option>^M
++    <option>Plovdiv</option>^M
++    <option>Varna</option>^M
++    <option>Bourgas</option>^M
++</select>^M
++^M
++<div>^M
++    <input type="text" id="townName" />^M
++    <button id="btnDelete">Delete</button>^M
++</div>^M
++<div id="result"></div>^M
++^M
++</body>^M
++^M
++</html>
+\ No newline at end of file
+diff --git a/towns.js b/towns.js
+new file mode 100644
+index 0000000..6f50af6
+--- /dev/null
++++ b/towns.js
+@@ -0,0 +1,19 @@
++$(document).ready(function() {^M
++       $('#btnDelete').click(deleteTown)^M
++});^M
++^M
++function deleteTown() {^M
++       let townName = $('#townName').val();^M
++       $('#townName').val('');^M
++       let removed = false;^M
++       for (let option of $('#towns option')) {^M
++               if (option.textContent == townName) {^M
++                       removed = true;^M
++                       option.remove();^M
++               }^M
++       }^M
++       if (removed)^M
++               $('#result').text(townName + " deleted.");^M
++       else^M
++               $('#result').text(townName + " not found.");^M
++}^M
+@@ -0,0 +1,2 @@
++# Towns for SoftUni^M
++Code for the Git and GitHub Exercise^M
+diff --git a/towns.css b/towns.css
+new file mode 100644
+index 0000000..3f23d97
+--- /dev/null
++++ b/towns.css
+@@ -0,0 +1,3 @@
++select, input {^M
++       width: 100px;^M
++}
+\ No newline at end of file
+diff --git a/towns.html b/towns.html
+new file mode 100644
+index 0000000..d7a7960
+--- /dev/null
++++ b/towns.html
+@@ -0,0 +1,29 @@
++<!DOCTYPE html>^M
++<html>^M
++^M
++<head>^M
++    <title>Towns</title>^M
++       <link rel="stylesheet" href="towns.css" />^M
++    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>^M
++    <script src="towns.js"></script>^M
++</head>^M
++^M
++<body>^M
++^M
++<h1>Towns</h1>^M
++<select id="towns" size="4">^M
++    <option>Sofia</option>^M
++    <option>Plovdiv</option>^M
++    <option>Varna</option>^M
++    <option>Bourgas</option>^M
++</select>^M
++^M
++<div>^M
++    <input type="text" id="townName" />^M
++    <button id="btnDelete">Delete</button>^M
++</div>^M
++<div id="result"></div>^M
++^M
++</body>^M
++^M
++</html>
+\ No newline at end of file
+diff --git a/towns.js b/towns.js
+new file mode 100644
+index 0000000..6f50af6
+--- /dev/null
++++ b/towns.js
+@@ -0,0 +1,19 @@
++$(document).ready(function() {^M
++       $('#btnDelete').click(deleteTown)^M
++});^M
++^M
++function deleteTown() {^M
++       let townName = $('#townName').val();^M
++       $('#townName').val('');^M
++       let removed = false;^M
++       for (let option of $('#towns option')) {^M
++               if (option.textContent == townName) {^M
++                       removed = true;^M
++                       option.remove();^M
++               }^M
++       }^M
++       if (removed)^M
++               $('#result').text(townName + " deleted.");^M
++       else^M
++               $('#result').text(townName + " not found.");^M
++}^M
+@@ -0,0 +1,2 @@
++# Towns for SoftUni^M
++Code for the Git and GitHub Exercise^M
+diff --git a/towns.css b/towns.css
+new file mode 100644
+index 0000000..3f23d97
+--- /dev/null
++++ b/towns.css
+@@ -0,0 +1,3 @@
++select, input {^M
++       width: 100px;^M
++}
+\ No newline at end of file
+diff --git a/towns.html b/towns.html
+new file mode 100644
+index 0000000..d7a7960
+--- /dev/null
++++ b/towns.html
+@@ -0,0 +1,29 @@
++<!DOCTYPE html>^M
++<html>^M
++^M
++<head>^M
++    <title>Towns</title>^M
++       <link rel="stylesheet" href="towns.css" />^M
++    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>^M
++    <script src="towns.js"></script>^M
++</head>^M
++^M
++<body>^M
++^M
++<h1>Towns</h1>^M
++<select id="towns" size="4">^M
++    <option>Sofia</option>^M
++    <option>Plovdiv</option>^M
++    <option>Varna</option>^M
++    <option>Bourgas</option>^M
++</select>^M
++^M
++<div>^M
++    <input type="text" id="townName" />^M
++    <button id="btnDelete">Delete</button>^M
++</div>^M
++<div id="result"></div>^M
++^M
++</body>^M
++^M
++</html>
+\ No newline at end of file
+diff --git a/towns.js b/towns.js
+new file mode 100644
+index 0000000..6f50af6
+--- /dev/null
++++ b/towns.js
+@@ -0,0 +1,19 @@
++$(document).ready(function() {^M
++       $('#btnDelete').click(deleteTown)^M
++});^M
++^M
++function deleteTown() {^M
++       let townName = $('#townName').val();^M
++       $('#townName').val('');^M
++       let removed = false;^M
++       for (let option of $('#towns option')) {^M
++               if (option.textContent == townName) {^M
++                       removed = true;^M
++                       option.remove();^M
++               }^M
++       }^M
++       if (removed)^M
++               $('#result').text(townName + " deleted.");^M
++       else^M
++               $('#result').text(townName + " not found.");^M
++}^M
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>history
+'history' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>$git log
+'$git' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git log
+commit a842e7ccae778e31baeb5fe13bb0b11b98ee3c83 (HEAD -> main, origin/main, origin/HEAD)
+Author: SUContent <134996680+SUContent@users.noreply.github.com>
+Date:   Wed Jun 28 13:27:58 2023 +0300
+
+    added initial code
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>dir
+ Volume in drive C has no label.
+ Volume Serial Number is 0484-2798
+
+ Directory of C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns
+
+01-Jul-23  10:33    <DIR>          .
+01-Jul-23  10:33    <DIR>          ..
+01-Jul-23  10:33                59 README.md
+01-Jul-23  10:33                34 towns.css
+01-Jul-23  10:33               558 towns.html
+01-Jul-23  10:33               441 towns.js
+               4 File(s)          1,092 bytes
+               2 Dir(s)  15,461,982,208 bytes free
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git pull
+remote: Enumerating objects: 25, done.
+remote: Counting objects: 100% (25/25), done.
+remote: Compressing objects: 100% (18/18), done.
+remote: Total 25 (delta 9), reused 17 (delta 7), pack-reused 0
+Unpacking objects: 100% (25/25), 4.59 KiB | 69.00 KiB/s, done.
+From https://github.com/Nikolay-x/Towns
+   a842e7c..01c33e1  main       -> origin/main
+Updating a842e7c..01c33e1
+Fast-forward
+ README.md  |  6 ++++++
+ towns.css  | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ towns.html | 34 ++++++++++++++++++++++++----------
+ towns.js   | 36 ++++++++++++++++++++++++++++++++++--
+ 4 files changed, 119 insertions(+), 14 deletions(-)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>history
+'history' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>help
+For more information on a specific command, type HELP command-name
+ASSOC          Displays or modifies file extension associations.
+ATTRIB         Displays or changes file attributes.
+BREAK          Sets or clears extended CTRL+C checking.
+BCDEDIT        Sets properties in boot database to control boot loading.
+CACLS          Displays or modifies access control lists (ACLs) of files.
+CALL           Calls one batch program from another.
+CD             Displays the name of or changes the current directory.
+CHCP           Displays or sets the active code page number.
+CHDIR          Displays the name of or changes the current directory.
+CHKDSK         Checks a disk and displays a status report.
+CHKNTFS        Displays or modifies the checking of disk at boot time.
+CLS            Clears the screen.
+CMD            Starts a new instance of the Windows command interpreter.
+COLOR          Sets the default console foreground and background colors.
+COMP           Compares the contents of two files or sets of files.
+COMPACT        Displays or alters the compression of files on NTFS partitions.
+CONVERT        Converts FAT volumes to NTFS.  You cannot convert the
+               current drive.
+COPY           Copies one or more files to another location.
+DATE           Displays or sets the date.
+DEL            Deletes one or more files.
+DIR            Displays a list of files and subdirectories in a directory.
+DISKPART       Displays or configures Disk Partition properties.
+DOSKEY         Edits command lines, recalls Windows commands, and
+               creates macros.
+DRIVERQUERY    Displays current device driver status and properties.
+ECHO           Displays messages, or turns command echoing on or off.
+ENDLOCAL       Ends localization of environment changes in a batch file.
+ERASE          Deletes one or more files.
+EXIT           Quits the CMD.EXE program (command interpreter).
+FC             Compares two files or sets of files, and displays the
+               differences between them.
+FIND           Searches for a text string in a file or files.
+FINDSTR        Searches for strings in files.
+FOR            Runs a specified command for each file in a set of files.
+FORMAT         Formats a disk for use with Windows.
+FSUTIL         Displays or configures the file system properties.
+FTYPE          Displays or modifies file types used in file extension
+               associations.
+GOTO           Directs the Windows command interpreter to a labeled line in
+               a batch program.
+GPRESULT       Displays Group Policy information for machine or user.
+GRAFTABL       Enables Windows to display an extended character set in
+               graphics mode.
+HELP           Provides Help information for Windows commands.
+ICACLS         Display, modify, backup, or restore ACLs for files and
+               directories.
+IF             Performs conditional processing in batch programs.
+LABEL          Creates, changes, or deletes the volume label of a disk.
+MD             Creates a directory.
+MKDIR          Creates a directory.
+MKLINK         Creates Symbolic Links and Hard Links
+MODE           Configures a system device.
+MORE           Displays output one screen at a time.
+MOVE           Moves one or more files from one directory to another
+               directory.
+OPENFILES      Displays files opened by remote users for a file share.
+PATH           Displays or sets a search path for executable files.
+PAUSE          Suspends processing of a batch file and displays a message.
+POPD           Restores the previous value of the current directory saved by
+               PUSHD.
+PRINT          Prints a text file.
+PROMPT         Changes the Windows command prompt.
+PUSHD          Saves the current directory then changes it.
+RD             Removes a directory.
+RECOVER        Recovers readable information from a bad or defective disk.
+REM            Records comments (remarks) in batch files or CONFIG.SYS.
+REN            Renames a file or files.
+RENAME         Renames a file or files.
+REPLACE        Replaces files.
+RMDIR          Removes a directory.
+ROBOCOPY       Advanced utility to copy files and directory trees
+SET            Displays, sets, or removes Windows environment variables.
+SETLOCAL       Begins localization of environment changes in a batch file.
+SC             Displays or configures services (background processes).
+SCHTASKS       Schedules commands and programs to run on a computer.
+SHIFT          Shifts the position of replaceable parameters in batch files.
+SHUTDOWN       Allows proper local or remote shutdown of machine.
+SORT           Sorts input.
+START          Starts a separate window to run a specified program or command.
+SUBST          Associates a path with a drive letter.
+SYSTEMINFO     Displays machine specific properties and configuration.
+TASKLIST       Displays all currently running tasks including services.
+TASKKILL       Kill or stop a running process or application.
+TIME           Displays or sets the system time.
+TITLE          Sets the window title for a CMD.EXE session.
+TREE           Graphically displays the directory structure of a drive or
+               path.
+TYPE           Displays the contents of a text file.
+VER            Displays the Windows version.
+VERIFY         Tells Windows whether to verify that your files are written
+               correctly to a disk.
+VOL            Displays a disk volume label and serial number.
+XCOPY          Copies files and directory trees.
+WMIC           Displays WMI information inside interactive command shell.
+
+For more information on tools see the command-line reference in the online help.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>doskey /history
+cd DevOps
+cd "06. Exercise Git and GitHub"
+cd gitcmd
+git clone https://github.com/Nikolay-x/Towns.git
+git log
+git show
+cd Towns
+git log
+git show
+history
+$git log
+git log
+dir
+git pull
+history
+help
+doskey /history
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git push
+remote: Repository not found.
+fatal: repository 'https://github.com/Nikolay-x/Towns.git/' not found
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git init
+Reinitialized existing Git repository in C:/Users/NB/DevOps/06. Exercise Git and GitHub/gitcmd/Towns/.git/
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git push
+remote: Repository not found.
+fatal: repository 'https://github.com/Nikolay-x/Towns.git/' not found
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git add .
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git remote add origin git@github.com:Nikolay-x/Towns.git
+error: remote origin already exists.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 31, done.
+Counting objects: 100% (31/31), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (30/30), done.
+Writing objects: 100% (31/31), 5.36 KiB | 1.79 MiB/s, done.
+Total 31 (delta 11), reused 3 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (11/11), done.
+To https://github.com/Nikolay-x/Towns.git
+ * [new branch]      main -> main
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>

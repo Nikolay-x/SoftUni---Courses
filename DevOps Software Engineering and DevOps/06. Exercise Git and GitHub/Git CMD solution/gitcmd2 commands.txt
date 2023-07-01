@@ -1,0 +1,18 @@
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>doskey /history
+cd Desktop
+cd..
+cd DevOps
+cd "06. Exercise Git and GitHub"
+cd gitcmd2
+git clone https://github.com/Nikolay-x/Towns.git
+cd Towns
+git status
+git commit -a -m "Implemented functionality to shuffle the existing towns"
+git push
+git pull
+git status
+git commit -a -m "Implemented functionality to shuffle the existing towns"
+git push
+git status
+git pull
+doskey /history

@@ -1,0 +1,120 @@
+
+C:\Users\NB>cd Desktop
+
+C:\Users\NB\Desktop>cd..
+
+C:\Users\NB>cd DevOps
+
+C:\Users\NB\DevOps>cd "06. Exercise Git and GitHub"
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub>cd gitcmd2
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2>git clone https://github.com/Nikolay-x/Towns.git
+Cloning into 'Towns'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (6/6), done.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2>cd Towns
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   towns.html
+        modified:   towns.js
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git commit -a -m "Implemented functionality to shuffle the existing towns"
+[main f1ad90c] Implemented functionality to shuffle the existing towns
+ 2 files changed, 21 insertions(+), 1 deletion(-)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+To https://github.com/Nikolay-x/Towns.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/Nikolay-x/Towns.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git pull
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 12 (delta 2), reused 5 (delta 1), pack-reused 0
+Unpacking objects: 100% (12/12), 2.56 KiB | 77.00 KiB/s, done.
+From https://github.com/Nikolay-x/Towns
+   a842e7c..b2ffd6e  main       -> origin/main
+Auto-merging towns.html
+CONFLICT (content): Merge conflict in towns.html
+Auto-merging towns.js
+CONFLICT (content): Merge conflict in towns.js
+Automatic merge failed; fix conflicts and then commit the result.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git status
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 4 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+        modified:   README.md
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   towns.html
+        both modified:   towns.js
+
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git commit -a -m "Implemented functionality to shuffle the existing towns"
+[main 8ea6ee9] Implemented functionality to shuffle the existing towns
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 14, done.
+Counting objects: 100% (14/14), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 1.09 KiB | 1.09 MiB/s, done.
+Total 8 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 2 local objects.
+To https://github.com/Nikolay-x/Towns.git
+   b2ffd6e..8ea6ee9  main -> main
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>git pull
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 5 (delta 2), reused 5 (delta 2), pack-reused 0
+Unpacking objects: 100% (5/5), 1.13 KiB | 82.00 KiB/s, done.
+From https://github.com/Nikolay-x/Towns
+   8ea6ee9..01c33e1  main       -> origin/main
+Updating 8ea6ee9..01c33e1
+Fast-forward
+ towns.css  | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ towns.html | 27 ++++++++++++++++-----------
+ towns.js   | 11 +++++++++--
+ 3 files changed, 80 insertions(+), 15 deletions(-)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd2\Towns>

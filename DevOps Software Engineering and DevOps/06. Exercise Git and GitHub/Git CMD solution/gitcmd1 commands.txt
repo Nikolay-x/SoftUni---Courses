@@ -1,0 +1,20 @@
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>doskey /history
+cd DevOps
+cd "06. Exercise Git and GitHub"
+cd gitcmd1
+git clone https://github.com/Nikolay-x/Towns.git
+cd Towns
+git status
+git add .
+git status
+git commit -m "Implemented functionality to add a new town"
+git config user.name "Nikolay-x1"
+git config user.email "nikolay-x1@abv.bg"
+git commit -m "Implemented functionality to add a new town"
+git status
+git push
+git pull
+git push
+git status
+git pull
+doskey /history

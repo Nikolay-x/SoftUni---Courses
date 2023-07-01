@@ -1,0 +1,26 @@
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd\Towns>doskey /history
+cd DevOps
+cd "06. Exercise Git and GitHub"
+cd gitcmd
+git clone https://github.com/Nikolay-x/Towns.git
+git log
+git show
+cd Towns
+git log
+git show
+history
+$git log
+git log
+dir
+git pull
+history
+help
+doskey /history
+git push
+git init
+git push
+git status
+git add .
+git remote add origin git@github.com:Nikolay-x/Towns.git
+git push
+doskey /history

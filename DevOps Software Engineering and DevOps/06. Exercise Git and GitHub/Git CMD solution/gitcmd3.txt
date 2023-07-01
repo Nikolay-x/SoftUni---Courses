@@ -1,0 +1,53 @@
+
+C:\Users\NB>cd DevOps
+
+C:\Users\NB\DevOps>cd "06. Exercise Git and GitHub"
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub>cd gitcmd3
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3>git clone https://github.com/Nikolay-x/Towns.git
+Cloning into 'Towns'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (6/6), done.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3>cd Towns
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3\Towns>git pull
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 20 (delta 7), reused 12 (delta 5), pack-reused 0
+Unpacking objects: 100% (20/20), 3.50 KiB | 73.00 KiB/s, done.
+From https://github.com/Nikolay-x/Towns
+   a842e7c..8ea6ee9  main       -> origin/main
+Updating a842e7c..8ea6ee9
+Fast-forward
+ README.md  |  6 ++++++
+ towns.html |  9 +++++++++
+ towns.js   | 25 +++++++++++++++++++++++++
+ 3 files changed, 40 insertions(+)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3\Towns>git commit -a -m "Improved visual styles"
+[main 01c33e1] Improved visual styles
+ 3 files changed, 80 insertions(+), 15 deletions(-)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3\Towns>git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.15 KiB | 1.15 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Nikolay-x/Towns.git
+   8ea6ee9..01c33e1  main -> main
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3\Towns>git pull
+Already up to date.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd3\Towns>

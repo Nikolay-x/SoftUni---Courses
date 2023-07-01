@@ -1,0 +1,122 @@
+
+C:\Users\NB>cd DevOps
+
+C:\Users\NB\DevOps>cd "06. Exercise Git and GitHub"
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub>cd gitcmd1
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1>git clone https://github.com/Nikolay-x/Towns.git
+Cloning into 'Towns'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (6/6), done.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1>cd Towns
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   towns.html
+        modified:   towns.js
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git add .
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   towns.html
+        modified:   towns.js
+
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git commit -m "Implemented functionality to add a new town"
+[main d2a2027] Implemented functionality to add a new town
+ 2 files changed, 13 insertions(+)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git config user.name "Nikolay-x1"
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git config user.email "nikolay-x1@abv.bg"
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git commit -m "Implemented functionality to add a new town"
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+To https://github.com/Nikolay-x/Towns.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/Nikolay-x/Towns.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git pull
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 6 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (6/6), 1.53 KiB | 91.00 KiB/s, done.
+From https://github.com/Nikolay-x/Towns
+   a842e7c..4a48aee  main       -> origin/main
+Merge made by the 'ort' strategy.
+ README.md | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 12, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 967 bytes | 967.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Nikolay-x/Towns.git
+   4a48aee..b2ffd6e  main -> main
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>git pull
+remote: Enumerating objects: 21, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 13 (delta 6), reused 13 (delta 6), pack-reused 0
+Unpacking objects: 100% (13/13), 2.16 KiB | 63.00 KiB/s, done.
+From https://github.com/Nikolay-x/Towns
+   b2ffd6e..01c33e1  main       -> origin/main
+Updating b2ffd6e..01c33e1
+Fast-forward
+ towns.css  | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ towns.html | 29 +++++++++++++++++++----------
+ towns.js   | 28 ++++++++++++++++++++++++++--
+ 3 files changed, 100 insertions(+), 14 deletions(-)
+
+C:\Users\NB\DevOps\06. Exercise Git and GitHub\gitcmd1\Towns>

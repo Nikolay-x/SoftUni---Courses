@@ -1,0 +1,176 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\DevOps\
+PS C:\Users\NB\DevOps> cd '.\08. Git Branching and Pull Requests\'
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests> git clone https://github.com/Nikolay-x/git_branching_demo.git
+Cloning into 'git_branching_demo'...
+warning: You appear to have cloned an empty repository.
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests> cd .\git_branching_demo\
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+        styles.css
+
+nothing added to commit but untracked files present (use "git add" to track)
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git add .
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git commit -m "adding initial files"
+[main (root-commit) 65143e6] adding initial files
+ 2 files changed, 22 insertions(+)
+ create mode 100644 index.html
+ create mode 100644 styles.css
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git status
+On branch main
+Your branch is based on 'origin/main', but the upstream is gone.
+  (use "git branch --unset-upstream" to fixup)
+
+nothing to commit, working tree clean
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 637 bytes | 637.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Nikolay-x/git_branching_demo.git
+ * [new branch]      main -> main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch add-title
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch
+  add-title
+* main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git checkout add-title
+Switched to branch 'add-title'
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch
+* add-title
+  main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git status
+On branch add-title
+nothing to commit, working tree clean
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git add .
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git commit -m "Added title"
+On branch add-title
+nothing to commit, working tree clean
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push
+fatal: The current branch add-title has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin add-title
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git status
+On branch add-title
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git add .
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git commit -m "Added title"
+[add-title f3d0149] Added title
+ 1 file changed, 1 insertion(+)
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git status
+On branch add-title
+nothing to commit, working tree clean
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push
+fatal: The current branch add-title has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin add-title
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push --set-upstream origin add-title
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 330 bytes | 330.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'add-title' on GitHub by visiting:
+remote:      https://github.com/Nikolay-x/git_branching_demo/pull/new/add-title
+remote:
+To https://github.com/Nikolay-x/git_branching_demo.git
+ * [new branch]      add-title -> add-title
+branch 'add-title' set up to track 'origin/add-title'.
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch
+  add-title
+* main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git merge add-title
+Updating 65143e6..f3d0149
+Fast-forward
+ index.html | 1 +
+ 1 file changed, 1 insertion(+)
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Nikolay-x/git_branching_demo.git
+   65143e6..f3d0149  main -> main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch -d add-title
+Deleted branch add-title (was f3d0149).
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch
+* main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git checkout -b add-form
+Switched to a new branch 'add-form'
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git branch
+* add-form
+  main
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git status
+On branch add-form
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git add .
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git commit -m "adding form"
+[add-form c1fceeb] adding form
+ 1 file changed, 4 insertions(+)
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push
+fatal: The current branch add-form has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin add-form
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> git push --set-upstream origin add-form
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 437 bytes | 218.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'add-form' on GitHub by visiting:
+remote:      https://github.com/Nikolay-x/git_branching_demo/pull/new/add-form
+remote:
+To https://github.com/Nikolay-x/git_branching_demo.git
+ * [new branch]      add-form -> add-form
+branch 'add-form' set up to track 'origin/add-form'.
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> 

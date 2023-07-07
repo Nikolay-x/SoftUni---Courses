@@ -1,0 +1,40 @@
+PS C:\Users\NB\DevOps\08. Git Branching and Pull Requests\git_branching_demo> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\DevOps\
+   2 cd '.\08. Git Branching and Pull Requests\'
+   3 git clone https://github.com/Nikolay-x/git_branching_demo.git
+   4 cd .\git_branching_demo\
+   5 git status
+   6 git add .
+   7 git commit -m "adding initial files"
+   8 git status
+   9 git push
+  10 git branch add-title
+  11 git branch
+  12 git checkout add-title
+  13 git branch
+  14 git status
+  15 git add .
+  16 git commit -m "Added title"
+  17 git push
+  18 git status
+  19 git add .
+  20 git commit -m "Added title"
+  21 git status
+  22 git push
+  23 git push --set-upstream origin add-title
+  24 git checkout main
+  25 git branch
+  26 git merge add-title
+  27 git push
+  28 git branch -d add-title
+  29 git branch
+  30 git checkout -b add-form
+  31 git branch
+  32 git status
+  33 git add .
+  34 git commit -m "adding form"
+  35 git push
+  36 git push --set-upstream origin add-form

@@ -1,0 +1,19 @@
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\DevOps\
+   2 cd '.\09. Exercise Git Branching and Pull Requests\'
+   3 cd .\Offerer\
+   4 git clone git@github.com:Nikolay-x/hotel.git
+   5 cd .\hotel\
+   6 git config user.name "Nikolay-x2"
+   7 git config user.email "nikolay-x2@abv.bg"
+   8 git pull
+   9 git branch our-offers-form
+  10 git checkout our-offers-form
+  11 git branch
+  12 git status
+  13 git commit -a -m "Implemented Our Offers form functionality"
+  14 git push
+  15 git push --set-upstream origin our-offers-form

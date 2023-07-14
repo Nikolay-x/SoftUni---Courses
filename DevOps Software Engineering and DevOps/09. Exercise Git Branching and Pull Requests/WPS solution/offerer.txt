@@ -1,0 +1,66 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\DevOps\
+PS C:\Users\NB\DevOps> cd '.\09. Exercise Git Branching and Pull Requests\'
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests> cd .\Offerer\
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer> git clone git@github.com:Nikolay-x/hotel.git
+Cloning into 'hotel'...
+warning: You appear to have cloned an empty repository.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer> cd .\hotel\
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git config user.name "Nikolay-x2"
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git config user.email "nikolay-x2@abv.bg"
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git pull
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 12 (delta 0), reused 12 (delta 0), pack-reused 0
+Unpacking objects: 100% (12/12), 2.56 MiB | 2.71 MiB/s, done.
+From github.com:Nikolay-x/hotel
+ * [new branch]      main       -> origin/main
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git branch our-offers-form
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git checkout our-offers-form
+Switched to branch 'our-offers-form'
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git branch
+  main
+* our-offers-form
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git status
+On branch our-offers-form
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+        modified:   solution.js
+        modified:   static/css/styles.css
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git commit -a -m "Implemented Our Offers form functionality"
+[our-offers-form 1041eb8] Implemented Our Offers form functionality
+ 3 files changed, 217 insertions(+)
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git push
+fatal: The current branch our-offers-form has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin our-offers-form
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel> git push --set-upstream origin our-offers-form
+Enumerating objects: 19, done.
+Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (17/17), done.
+Writing objects: 100% (19/19), 2.56 MiB | 2.79 MiB/s, done.
+Total 19 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), done.
+remote:
+remote: Create a pull request for 'our-offers-form' on GitHub by visiting:
+remote:      https://github.com/Nikolay-x/hotel/pull/new/our-offers-form
+remote:
+To github.com:Nikolay-x/hotel.git
+ * [new branch]      our-offers-form -> our-offers-form
+branch 'our-offers-form' set up to track 'origin/our-offers-form'.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Offerer\hotel>

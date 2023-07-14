@@ -1,0 +1,143 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\DevOps\
+PS C:\Users\NB\DevOps> dir
+
+
+    Directory: C:\Users\NB\DevOps
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         28-Jun-23     08:56                05. Source Control Systems, Git and GitHub
+d-----         01-Jul-23     16:05                06. Exercise Git and GitHub
+d-----         07-Jul-23     12:05                08. Git Branching and Pull Requests
+d-----         14-Jul-23     07:57                09. Exercise Git Branching and Pull Requests
+
+
+PS C:\Users\NB\DevOps> cd '.\09. Exercise Git Branching and Pull Requests\'
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests> cd .\Admin\
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin> git clone git@github.com:Nikolay-x/hotel.git
+Cloning into 'hotel'...
+warning: You appear to have cloned an empty repository.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin> cd .\hotel\
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git config user.name "Nikolay-x"
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git config user.email "nikolay-x@abv.bg"
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+        solution.js
+        static/
+
+nothing added to commit but untracked files present (use "git add" to track)
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git add .
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git commit -m "Adding initial files"
+[main (root-commit) b71b8e1] Adding initial files
+ 7 files changed, 251 insertions(+)
+ create mode 100644 index.html
+ create mode 100644 solution.js
+ create mode 100644 static/css/styles.css
+ create mode 100644 static/img/budgetRoom.jpg
+ create mode 100644 static/img/familyRoom.jpg
+ create mode 100644 static/img/kingRoom.jpg
+ create mode 100644 static/img/zero.jpg
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git push
+Enumerating objects: 12, done.
+Counting objects: 100% (12/12), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (12/12), 2.56 MiB | 2.79 MiB/s, done.
+Total 12 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Nikolay-x/hotel.git
+ * [new branch]      main -> main
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git pull
+remote: Enumerating objects: 14, done.
+remote: Counting objects: 100% (14/14), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 8 (delta 2), reused 7 (delta 2), pack-reused 0
+Unpacking objects: 100% (8/8), 1.99 KiB | 107.00 KiB/s, done.
+From github.com:Nikolay-x/hotel
+   b71b8e1..c968ae6  main        -> origin/main
+ * [new branch]      search-form -> origin/search-form
+Updating b71b8e1..c968ae6
+Fast-forward
+ index.html            | 22 ++++++++++++
+ solution.js           | 19 ++++++++++
+ static/css/styles.css | 99 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 140 insertions(+)
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git pull
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 12 (delta 4), reused 4 (delta 0), pack-reused 0
+Unpacking objects: 100% (12/12), 3.31 KiB | 102.00 KiB/s, done.
+From github.com:Nikolay-x/hotel
+   c968ae6..ea4171e  main            -> origin/main
+ * [new branch]      our-offers-form -> origin/our-offers-form
+Updating c968ae6..ea4171e
+Fast-forward
+ index.html            | 27 +++++++++++++++++++++++++++
+ solution.js           | 40 ++++++++++++++++++++++++++++++++++++++++
+ static/css/styles.css | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 116 insertions(+)
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git checkout -b guest-details-form
+Switched to a new branch 'guest-details-form'
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git branch
+* guest-details-form
+  main
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git status
+On branch guest-details-form
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+        modified:   solution.js
+        modified:   static/css/styles.css
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git commit -a -m "Implemented Guest Details form functionality"
+[guest-details-form 7ed36e2] Implemented Guest Details form functionality
+ 3 files changed, 173 insertions(+)
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git push
+fatal: The current branch guest-details-form has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin guest-details-form
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git push --set-upstream origin guest-details-form
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 1.21 KiB | 1.21 MiB/s, done.
+Total 7 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote:
+remote: Create a pull request for 'guest-details-form' on GitHub by visiting:
+remote:      https://github.com/Nikolay-x/hotel/pull/new/guest-details-form
+remote:
+To github.com:Nikolay-x/hotel.git
+ * [new branch]      guest-details-form -> guest-details-form
+branch 'guest-details-form' set up to track 'origin/guest-details-form'.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> git pull
+remote: Enumerating objects: 40, done.
+remote: Counting objects: 100% (40/40), done.
+remote: Compressing objects: 100% (20/20), done.
+remote: Total 22 (delta 8), reused 4 (delta 0), pack-reused 0
+Unpacking objects: 100% (22/22), 4.56 KiB | 89.00 KiB/s, done.
+From github.com:Nikolay-x/hotel
+ * [new branch]      confirm-reservation-form -> origin/confirm-reservation-form
+   ea4171e..eb9f055  main       -> origin/main
+Already up to date.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel>

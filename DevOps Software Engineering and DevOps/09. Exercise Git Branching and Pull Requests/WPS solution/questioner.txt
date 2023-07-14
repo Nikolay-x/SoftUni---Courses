@@ -1,0 +1,73 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\DevOps\
+PS C:\Users\NB\DevOps> cd '.\09. Exercise Git Branching and Pull Requests\'
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests> cd .\Questioner\
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner> git config user.name "Nikolay-x1"
+fatal: not in a git directory
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner> git clone git@github.com:Nikolay-x/hotel.git
+Cloning into 'hotel'...
+warning: You appear to have cloned an empty repository.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner> git config user.name "Nikolay-x1"
+fatal: not in a git directory
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner> cd .\hotel\
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git config user.name "Nikolay-x1"
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git config user.email "nikolay-x1@abv.bg"
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git pull
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 12 (delta 0), reused 12 (delta 0), pack-reused 0
+Unpacking objects: 100% (12/12), 2.56 MiB | 2.91 MiB/s, done.
+From github.com:Nikolay-x/hotel
+ * [new branch]      main       -> origin/main
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git branch search-form
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git branch
+* main
+  search-form
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git checkout search-form
+Switched to branch 'search-form'
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git branch
+  main
+* search-form
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git status
+On branch search-form
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+        modified:   solution.js
+        modified:   static/css/styles.css
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git commit -a -m "Implemented Search form functionality"
+[search-form a9dcc3f] Implemented Search form functionality
+ 3 files changed, 140 insertions(+)
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git push
+fatal: The current branch search-form has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin search-form
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> git push --set-upstream origin search-form
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 1.40 KiB | 1.40 MiB/s, done.
+Total 7 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for 'search-form' on GitHub by visiting:
+remote:      https://github.com/Nikolay-x/hotel/pull/new/search-form
+remote:
+To github.com:Nikolay-x/hotel.git
+ * [new branch]      search-form -> search-form
+branch 'search-form' set up to track 'origin/search-form'.
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel>

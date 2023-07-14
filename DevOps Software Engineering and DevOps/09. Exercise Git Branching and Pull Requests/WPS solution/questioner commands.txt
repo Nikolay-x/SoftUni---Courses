@@ -1,0 +1,22 @@
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Questioner\hotel> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\DevOps\
+   2 cd '.\09. Exercise Git Branching and Pull Requests\'
+   3 cd .\Questioner\
+   4 git config user.name "Nikolay-x1"
+   5 git clone git@github.com:Nikolay-x/hotel.git
+   6 git config user.name "Nikolay-x1"
+   7 cd .\hotel\
+   8 git config user.name "Nikolay-x1"
+   9 git config user.email "nikolay-x1@abv.bg"
+  10 git pull
+  11 git branch search-form
+  12 git branch
+  13 git checkout search-form
+  14 git branch
+  15 git status
+  16 git commit -a -m "Implemented Search form functionality"
+  17 git push
+  18 git push --set-upstream origin search-form

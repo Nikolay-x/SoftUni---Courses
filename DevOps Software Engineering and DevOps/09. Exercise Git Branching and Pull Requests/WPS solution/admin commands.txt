@@ -1,0 +1,25 @@
+PS C:\Users\NB\DevOps\09. Exercise Git Branching and Pull Requests\Admin\hotel> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\DevOps\
+   2 dir
+   3 cd '.\09. Exercise Git Branching and Pull Requests\'
+   4 cd .\Admin\
+   5 git clone git@github.com:Nikolay-x/hotel.git
+   6 cd .\hotel\
+   7 git config user.name "Nikolay-x"
+   8 git config user.email "nikolay-x@abv.bg"
+   9 git status
+  10 git add .
+  11 git commit -m "Adding initial files"
+  12 git push
+  13 git pull
+  14 git pull
+  15 git checkout -b guest-details-form
+  16 git branch
+  17 git status
+  18 git commit -a -m "Implemented Guest Details form functionality"
+  19 git push
+  20 git push --set-upstream origin guest-details-form
+  21 git pull

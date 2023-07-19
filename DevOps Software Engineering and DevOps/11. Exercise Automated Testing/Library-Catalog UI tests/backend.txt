@@ -1,0 +1,177 @@
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< GET /data/books/2b2127d3-61e0-4fb2-b8d7-7c34f2532d71
+Authorized as peter@abv.bg
+<< GET /data/likes?where=bookId%3D%222b2127d3-61e0-4fb2-b8d7-7c34f2532d71%22&distinct=_ownerId&count
+Authorized as peter@abv.bg
+<< OPTIONS /data/likes?where=bookId%3D%222b2127d3-61e0-4fb2-b8d7-7c34f2532d71%22%20and%20_ownerId%3D%2235c62d76-8152-4626-8712-eeb96381bea8%22&count
+<< GET /data/likes?where=bookId%3D%222b2127d3-61e0-4fb2-b8d7-7c34f2532d71%22%20and%20_ownerId%3D%2235c62d76-8152-4626-8712-eeb96381bea8%22&count
+Authorized as peter@abv.bg
+<< DELETE /data/books/2b2127d3-61e0-4fb2-b8d7-7c34f2532d71
+Authorized as peter@abv.bg
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /data/books
+<< POST /data/books
+Authorized as peter@abv.bg
+Request body:
+ {
+  title: 'Test Book',
+  description: 'This is a test book description',
+  imageUrl: 'https://example.com/book-image.jpg',
+  type: 'Fiction'
+}
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog\server> node server.js
+Server started on port 3030. You can make requests to http://localhost:3030/
+Admin panel located at http://localhost:3030/admin
+<< GET /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?where=_ownerId%3D%2235c62d76-8152-4626-8712-eeb96381bea8%22&sortBy=_createdOn%20desc
+<< GET /users/logout
+<< GET /users/logout
+<< GET /data/books?sortBy=_createdOn%20desc
+
+ *  History restored 
+
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\... 
+
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> node server.js     
+node:internal/modules/cjs/loader:1042
+  throw err;
+  ^
+
+log\server.js'
+    at Module._load (node:internal/modules/cjs/loader:885:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)    at node:internal/main/run_main_module:23:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v18.13.0
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> cd server
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog\server> node server.js
+Server started on port 3030. You can make requests to http://localhost:3030/
+Admin panel located at http://localhost:3030/admin
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /data/books
+<< POST /data/books
+Authorized as peter@abv.bg
+Request body:
+ {
+  title: 'Test Book',
+  description: 'This is a test book description',
+  imageUrl: 'https://example.com/book-image.jpg',
+  type: 'Fiction'
+}
+<< GET /data/books?sortBy=_createdOn%20desc
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+<< OPTIONS /users/login
+<< POST /users/login
+<< OPTIONS /data/books?sortBy=_createdOn%20desc
+<< GET /data/books?sortBy=_createdOn%20desc
+Authorized as peter@abv.bg
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog\server> Get-History 
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\... 
+   2 Get-History
+   3 node server.js
+   4 cd server
+   5 node server.js
+
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog\server> 

@@ -1,0 +1,120 @@
+Running 10 tests using 1 worker
+
+  ✓  1 tests\ui.test.js:3:1 › Verify "All Books" link is visible (351ms)
+  ✓  2 tests\ui.test.js:13:1 › Verify "Login" button is visible (274ms)
+  ✓  3 tests\ui.test.js:23:1 › Verify "Register" button is visible (271ms)
+  ✓  4 …sts\ui.test.js:33:1 › Verify "All Books" link is visible after user login (377ms)  ✓  5 tests\ui.test.js:46:1 › Login with valid credentials (367ms)
+  ✓  6 tests\ui.test.js:58:1 › Submit the login form with empty input fields (348ms)     
+  ✓  7 tests\ui.test.js:73:1 › Add book with correct data (573ms)
+  ✓  8 tests\ui.test.js:99:1 › Add book with empty title field (491ms)
+  ✓  9 tests\ui.test.js:128:1 › Login and verify all books are displayed (415ms)
+  ✘  10 tests\ui.test.js:146:1 › Login and verify no books are displayed (30.0s)
+
+
+  1) tests\ui.test.js:146:1 › Login and verify no books are displayed ───────────────────
+    Test timeout of 30000ms exceeded.
+
+    Error: page.textContent: Target closed
+    =========================== logs ===========================
+    waiting for locator('.no-books')
+    ============================================================
+
+      157 |     // await page.waitForSelector('.dashboard');
+      158 |
+    > 159 |     const noBooksMessage = await page.textContent('.no-books');
+          |                                       ^
+      160 |
+      161 |     expect(noBooksMessage).toBe('No books in database!');
+      162 | });
+
+        at C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog\tests\ui.test.js:159:39
+    Pending operations:
+      - page.textContent at tests\ui.test.js:159:39
+
+
+  Slow test file: tests\ui.test.js (33.5s)
+  Consider splitting slow test files to speed up parallel execution
+  1 failed
+    tests\ui.test.js:146:1 › Login and verify no books are displayed ────────────────────  9 passed (34.6s)
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> npx playwright test tests/ui.test.js
+
+Running 9 tests using 1 worker
+
+  ✓  1 tests\ui.test.js:3:1 › Verify "All Books" link is visible (347ms)
+  ✓  2 tests\ui.test.js:13:1 › Verify "Login" button is visible (276ms)
+  ✓  3 tests\ui.test.js:23:1 › Verify "Register" button is visible (270ms)
+  ✓  4 …sts\ui.test.js:33:1 › Verify "All Books" link is visible after user login (393ms)  ✓  5 tests\ui.test.js:46:1 › Login with valid credentials (402ms)
+  ✓  6 tests\ui.test.js:58:1 › Submit the login form with empty input fields (354ms)     
+  ✓  7 tests\ui.test.js:99:1 › Add book with empty title field (526ms)
+  ✘  8 tests\ui.test.js:128:1 › Login and verify all books are displayed (376ms)
+  ✓  9 tests\ui.test.js:146:1 › Login and verify no books are displayed (435ms)
+
+
+  1) tests\ui.test.js:128:1 › Login and verify all books are displayed ──────────────────
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      141 |     const bookElements = await page.$$('.other-books-list li');
+      142 |
+    > 143 |     expect(bookElements.length).toBeGreaterThan(0);
+          |                                 ^
+      145 |
+      146 | test('Login and verify no books are displayed', async ({ page }) => {        
+
+        at C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog\tests\ui.test.js:143:33
+
+  1 failed
+    tests\ui.test.js:128:1 › Login and verify all books are displayed ───────────────────  8 passed (5.5s)
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> npx playwright test tests/ui.test.js
+
+Running 8 tests using 1 worker
+
+  ✓  2 tests\ui.test.js:13:1 › Verify "Login" button is visible (267ms)
+  ✓  3 tests\ui.test.js:23:1 › Verify "Register" button is visible (305ms)
+  ✓  4 …sts\ui.test.js:33:1 › Verify "All Books" link is visible after user login (370ms)  ✓  5 tests\ui.test.js:46:1 › Login with valid credentials (360ms)
+  ✓  6 tests\ui.test.js:58:1 › Submit the login form with empty input fields (336ms)     
+  ✓  7 tests\ui.test.js:99:1 › Add book with empty title field (517ms)
+  ✓  8 tests\ui.test.js:146:1 › Login and verify no books are displayed (373ms)
+
+  8 passed (3.9s)
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> npx playwright test tests/ui.test.js
+
+Running 9 tests using 1 worker
+
+  ✓  1 tests\ui.test.js:3:1 › Verify "All Books" link is visible (354ms)
+  ✓  2 tests\ui.test.js:13:1 › Verify "Login" button is visible (289ms)
+  ✓  3 tests\ui.test.js:23:1 › Verify "Register" button is visible (293ms)
+  ✓  4 …sts\ui.test.js:33:1 › Verify "All Books" link is visible after user login (356ms)  ✓  5 tests\ui.test.js:46:1 › Login with valid credentials (352ms)
+  ✓  6 tests\ui.test.js:58:1 › Submit the login form with empty input fields (366ms)     
+  ✓  7 tests\ui.test.js:73:1 › Add book with correct data (558ms)
+  ✓  8 tests\ui.test.js:99:1 › Add book with empty title field (513ms)
+  ✓  9 tests\ui.test.js:128:1 › Login and verify all books are displayed (379ms)
+
+  9 passed (4.5s)
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> 
+ *  History restored 
+
+ tests/ui.test.js
+
+Running 9 tests using 1 worker
+
+  ✓  2 tests\ui.test.js:13:1 › Verify "Login" button is visible (292ms)
+  ✓  3 tests\ui.test.js:23:1 › Verify "Register" button is visible (286ms)
+  ✓  4 …sts\ui.test.js:33:1 › Verify "All Books" link is visible after user login (391ms)  ✓  5 tests\ui.test.js:46:1 › Login with valid credentials (374ms)
+  ✓  6 tests\ui.test.js:58:1 › Submit the login form with empty input fields (396ms)     
+  ✓  7 tests\ui.test.js:73:1 › Add book with correct data (613ms)
+  ✓  8 tests\ui.test.js:99:1 › Add book with empty title field (2.7s)
+  ✓  9 tests\ui.test.js:128:1 › Login and verify all books are displayed (407ms)
+
+  9 passed (6.9s)
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> Get-History        
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\... 
+   2 npx playwright test tests/ui.test.js
+
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog>

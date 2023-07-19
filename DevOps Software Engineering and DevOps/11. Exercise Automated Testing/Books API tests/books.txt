@@ -1,0 +1,479 @@
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npm install express
+
+added 58 packages in 2s
+8 packages are looking for funding
+  run `npm fund` for details
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npm install body-parser
+
+added 2 packages, changed 2 packages, and audited 61 packages in 1s
+
+8 packages are looking for funding
+
+found 0 vulnerabilities
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npm install mocha
+
+added 75 packages, and audited 136 packages in 3s
+
+27 packages are looking for funding
+
+found 0 vulnerabilities
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npm install chai
+
+added 8 packages, and audited 144 packages in 2s
+
+27 packages are looking for funding
+
+found 0 vulnerabilities
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npm install chai-http
+
+added 27 packages, and audited 171 packages in 3s
+
+29 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> node server.js
+node:events:491
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1733:16)
+    at listenInCluster (node:net:1781:12)
+    at Server.listen (node:net:1869:7)
+    at Function.listen (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\server.js:45:8)
+    at Module._compile (node:internal/modules/cjs/loader:1218:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1272:10)
+    at Module.load (node:internal/modules/cjs/loader:1081:32)
+    at Module._load (node:internal/modules/cjs/loader:922:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)        
+    at emitErrorNT (node:net:1760:8)
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v18.13.0
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> node server.js
+Server is up and running
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> node server.js
+node:events:491
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1733:16)
+    at listenInCluster (node:net:1781:12)
+    at Server.listen (node:net:1869:7)
+    at Function.listen (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\server.js:45:8)
+    at Module._compile (node:internal/modules/cjs/loader:1218:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1272:10)
+    at Module.load (node:internal/modules/cjs/loader:1081:32)
+    at Module._load (node:internal/modules/cjs/loader:922:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)        
+    at emitErrorNT (node:net:1760:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v18.13.0
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> node server.js
+node:events:491
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1733:16)
+    at listenInCluster (node:net:1781:12)
+    at Server.listen (node:net:1869:7)
+    at Function.listen (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\server.js:45:8)
+    at Module._compile (node:internal/modules/cjs/loader:1218:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1272:10)
+    at Module.load (node:internal/modules/cjs/loader:1081:32)
+    at Module._load (node:internal/modules/cjs/loader:922:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)        
+    at emitErrorNT (node:net:1760:8)
+  code: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+Node.js v18.13.0
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> node server.js
+Server is up and running
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Error: No test files found: "api.test.js"
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+  0 passing (2ms)
+
+Server is up and running
+
+
+  Books API
+    ✔ should POST a book (45ms)
+
+
+  1 passing (51ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+  1) Uncaught error outside test suite
+
+  0 passing (3ms)
+  1 failing
+
+  1) Uncaught error outside test suite:
+     Uncaught Error: listen EADDRINUSE: address already in use :::3000
+      at Server.setupListenHandle [as _listen2] (node:net:1733:16)
+      at listenInCluster (node:net:1781:12)
+      at Server.listen (node:net:1869:7)
+      at Function.listen (node_modules\express\lib\application.js:635:24)
+      at Object.<anonymous> (server.js:45:8)
+      at Module._compile (node:internal/modules/cjs/loader:1218:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1272:10)
+      at Module.load (node:internal/modules/cjs/loader:1081:32)
+      at Module._load (node:internal/modules/cjs/loader:922:12)
+      at Module.require (node:internal/modules/cjs/loader:1105:19)
+      at require (node:internal/modules/cjs/helpers:103:18)
+      at Object.<anonymous> (api.test.js:3:16)
+      at Module._compile (node:internal/modules/cjs/loader:1218:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1272:10)
+      at Module.load (node:internal/modules/cjs/loader:1081:32)
+      at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:169:29)
+      at ModuleJob.run (node:internal/modules/esm/module_job:194:25)
+
+
+
+
+
+  Books API
+    ✔ should POST a book (42ms)
+
+Server is up and running
+
+
+  Books API
+    ✔ should POST a book (38ms)
+
+
+  1 passing (45ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+  Books API
+    ✔ should POST a book
+    ✔ should GET all books
+
+
+  2 passing (49ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+  Books API
+    ✔ should POST a book
+    ✔ should GET all books
+    1) should GET a single book
+
+
+  2 passing (58ms)
+  1 failing
+
+  1) Books API
+       should GET a single book:
+
+      Uncaught AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 404
+      + expected - actual
+
+      -404
+      +200
+
+      at C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\api.test.js:44:37
+      at C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\node_modules\superagent\lib\node\index.js:1070:18
+      at IncomingMessage.<anonymous> (node_modules\superagent\lib\node\parsers\json.js:21:7)     
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+  Books API
+    ✔ should POST a book (39ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+
+
+  3 passing (58ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+  Books API
+    ✔ should POST a book
+    ✔ should GET all books
+    ✔ should GET a single book
+    1) should PUT an existing book
+
+
+  3 passing (63ms)
+  1 failing
+
+  1) Books API
+       should PUT an existing book:
+
+      Uncaught AssertionError: expected 'Updated Test Book' to equal 'Updated Test Author'       
+      + expected - actual
+
+      -Updated Test Book
+      +Updated Test Author
+
+      at C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\api.test.js:64:43
+      at C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\node_modules\superagent\lib\node\index.js:1070:18
+      at IncomingMessage.<anonymous> (node_modules\superagent\lib\node\parsers\json.js:21:7)     
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+  Books API
+    ✔ should POST a book (39ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+
+
+  4 passing (64ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+  Books API
+    ✔ should POST a book (40ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    1) should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  4 passing (2s)
+  1 failing
+  1) Books API
+       should return 404 when trying to GET, PUT or DELETE a non-existing book:
+     Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning 
+a Promise, ensure it resolves. (C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\api.test.js)       
+      at listOnTimeout (node:internal/timers:564:17)
+      at process.processTimers (node:internal/timers:507:7)
+
+
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+    ✔ should POST a book (42ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  5 passing (80ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+  Books API
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (83ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+  Books API
+    ✔ should POST a book
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    1) should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  5 passing (84ms)
+  1 failing
+
+  1) Books API
+       should DELETE an existing book:
+
+      Uncaught AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 204
+      + expected - actual
+
+      -204
+      +200
+      at C:\Users\NB\DevOps\11. Exercise Automated Testing\Books\api.test.js:77:37
+      at Request.callback (node_modules\superagent\lib\node\index.js:857:12)
+      at IncomingMessage.<anonymous> (node_modules\superagent\lib\node\index.js:1070:18)
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+Server is up and running
+
+
+  Books API
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (86ms)
+
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+    ✔ should POST a book (42ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (86ms)
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+    ✔ should POST a book (48ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (102ms)
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+    ✔ should POST a book (43ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (92ms)
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+    ✔ should POST a book (43ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (91ms)
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> npx mocha api.test.js
+
+
+    ✔ should POST a book (46ms)
+    ✔ should GET all books
+    ✔ should GET a single book
+    ✔ should PUT an existing book
+    ✔ should DELETE an existing book
+    ✔ should return 404 when trying to GET, PUT or DELETE a non-existing book
+
+
+  6 passing (99ms)
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\contr... 
+   2 npm install express
+   3 npm install body-parser
+   4 npm install mocha
+   5 npm install chai
+   6 npm install chai-http
+   7 node server.js
+   8 node server.js
+   9 node server.js
+  10 node server.js
+  11 node server.js
+  12 npx mocha api.test.js
+  13 npx mocha api.test.js
+  14 npx mocha api.test.js
+  15 npx mocha api.test.js
+  16 npx mocha api.test.js
+  17 npx mocha api.test.js
+  18 npx mocha api.test.js
+  19 npx mocha api.test.js
+  20 npx mocha api.test.js
+  21 npx mocha api.test.js
+  22 npx mocha api.test.js
+  23 npx mocha api.test.js
+  24 npx mocha api.test.js
+  25 npx mocha api.test.js
+  26 npx mocha api.test.js
+  27 npx mocha api.test.js
+  28 npx mocha api.test.js
+  29 npx mocha api.test.js
+  30 npx mocha api.test.js
+  31 npx mocha api.test.js
+
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books>

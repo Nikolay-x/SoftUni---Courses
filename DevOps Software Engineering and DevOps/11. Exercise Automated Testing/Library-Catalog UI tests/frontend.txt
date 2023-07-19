@@ -1,0 +1,479 @@
+[2023-07-19T08:47:51.987Z]  "GET /node_modules/lit-html/lib/template-factory.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:47:51.990Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:47:51.995Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:47:51.998Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:02.171Z]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) 
+Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.182Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.185Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; 
+rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.191Z]  "GET /images/favicon.ico" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.208Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.212Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.215Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.216Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.219Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.223Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.226Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.229Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.232Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.234Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.237Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.240Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.243Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.245Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.248Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"     
+[2023-07-19T08:48:04.251Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.253Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.256Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.258Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.261Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.263Z]  "GET /node_modules/lit-html/lib/template-factory.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.265Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.267Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.270Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.273Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:04.276Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:07.624Z]  "GET /images/book3.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:07.626Z]  "GET /images/book2.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:48:07.628Z]  "GET /images/book1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+
+ *  History restored 
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> Get-History
+
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\... 
+
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> npm run start
+
+> online-book-library@1.0.0 start
+> http-server -a localhost -p 5000 -P http://localhost:5000? -c-1
+
+Starting up http-server, serving ./
+Available on:
+  http://localhost:5000
+Unhandled requests will be served from: http://localhost:5000?
+Hit CTRL-C to stop the server
+[2023-07-19T08:54:55.390Z]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+(node:9048) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)       
+[2023-07-19T08:54:55.437Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.442Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.452Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.454Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.461Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.464Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.467Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.469Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.473Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.477Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.482Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.485Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.487Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.489Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.491Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.494Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.497Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.500Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"[2023-07-19T08:54:55.502Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"      
+[2023-07-19T08:54:55.506Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.508Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.510Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.512Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.515Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.517Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.519Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"       
+[2023-07-19T08:54:55.521Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:54:55.526Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+[2023-07-19T08:57:39.537Z]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36" 
+[2023-07-19T08:57:39.546Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.549Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.555Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.557Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.559Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.563Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.565Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.566Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.572Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.574Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.577Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.579Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.581Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.582Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.587Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.589Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.591Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.601Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.604Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.606Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.609Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.611Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.614Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.620Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.622Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.625Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.628Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.629Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:39.833Z]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36" 
+[2023-07-19T08:57:39.841Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.843Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.849Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.851Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.854Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.857Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.859Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.861Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.864Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.866Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.868Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.871Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.874Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.876Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.879Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.883Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.885Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.887Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.890Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.893Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.894Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.897Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.900Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.902Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.904Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.909Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.911Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:39.918Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:40.125Z]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36" 
+[2023-07-19T08:57:40.133Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.136Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.142Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.144Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.147Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.150Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.153Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.155Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.156Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.158Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.160Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.164Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.167Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.169Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.171Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.173Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.175Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.195Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.197Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.199Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.202Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.204Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.207Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.213Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.216Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.218Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.220Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.221Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:40.402Z]  "GET /login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.410Z]  "GET /?/login" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.422Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.424Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.429Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.431Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.434Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.437Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.439Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.440Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.445Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.448Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.450Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.452Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.454Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.455Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.461Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.462Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.464Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.475Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.478Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.482Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.485Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.487Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.489Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.494Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.496Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.498Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.501Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.503Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:40.789Z]  "GET /login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.794Z]  "GET /?/login" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.802Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.804Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.810Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.812Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.815Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.819Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.821Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.823Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.826Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.828Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.830Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.832Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.835Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.837Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.839Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.841Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.844Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.862Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.864Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.866Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.869Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.871Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.873Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.879Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.881Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.884Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.887Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:40.888Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:41.044Z]  "GET /images/book3.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.046Z]  "GET /images/book2.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.047Z]  "GET /images/book1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.176Z]  "GET /login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.181Z]  "GET /?/login" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.196Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.198Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.212Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.215Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.217Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.221Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.223Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.225Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.231Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.234Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.236Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.238Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.240Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.242Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.248Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.250Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.251Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.263Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.265Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.268Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.270Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.273Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.275Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.282Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.284Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.287Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.288Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.290Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:41.574Z]  "GET /login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.577Z]  "GET /?/login" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.586Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.588Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.593Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.595Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.598Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.601Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.603Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.606Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.610Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.612Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.614Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.616Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.618Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.620Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.627Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.629Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.631Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.642Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.644Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.646Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.648Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.651Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.653Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.660Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.662Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.665Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.667Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.669Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:41.843Z]  "GET /images/book3.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.845Z]  "GET /images/book2.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:41.847Z]  "GET /images/book1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:42.057Z]  "GET /images/book3.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:42.060Z]  "GET /images/book2.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:42.062Z]  "GET /images/book1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.344Z]  "GET /login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.348Z]  "GET /?/login" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.359Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.361Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.365Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.367Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.370Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.373Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.375Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.376Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.381Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.383Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.385Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.388Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.390Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.392Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.398Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.400Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.402Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.414Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.416Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.418Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.421Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.424Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.426Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.435Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.437Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.440Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.442Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.443Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+Safari/537.36"
+[2023-07-19T08:57:44.615Z]  "GET /images/book3.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.617Z]  "GET /images/book2.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.619Z]  "GET /images/book1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.875Z]  "GET /login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.879Z]  "GET /?/login" "Mozilla/5.0 (Windows NT 10.0; Win64; 
+x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.888Z]  "GET /styles/styles.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.890Z]  "GET /src/app.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.895Z]  "GET /styles/typography.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.898Z]  "GET /styles/forms.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.900Z]  "GET /styles/navigation.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.904Z]  "GET /styles/all.css" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.911Z]  "GET /node_modules/lit-html/lit-html.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.912Z]  "GET /node_modules/page/page.mjs" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.917Z]  "GET /src/api/api.js" "Mozilla/5.0 (Windows NT 10.0; 
+Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.919Z]  "GET /src/views/login.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.921Z]  "GET /src/views/register.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.923Z]  "GET /src/views/create.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.926Z]  "GET /src/views/catalog.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.927Z]  "GET /src/views/details.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.933Z]  "GET /src/views/edit.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.935Z]  "GET /src/views/profile.js" "Mozilla/5.0 (Windows NT 
+10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.937Z]  "GET /images/background1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.953Z]  "GET /node_modules/lit-html/lib/default-template-processor.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.955Z]  "GET /node_modules/lit-html/lib/template-result.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
+HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.957Z]  "GET /node_modules/lit-html/lib/directive.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.959Z]  "GET /node_modules/lit-html/lib/dom.js" "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.961Z]  "GET /node_modules/lit-html/lib/part.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.963Z]  "GET /node_modules/lit-html/lib/parts.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.969Z]  "GET /node_modules/lit-html/lib/render.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.971Z]  "GET /node_modules/lit-html/lib/template-factory.js" 
+"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.973Z]  "GET /node_modules/lit-html/lib/template-instance.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.975Z]  "GET /node_modules/lit-html/lib/template.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:44.977Z]  "GET /src/api/data.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 
+; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:45.123Z]  "GET /images/book2.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+[2023-07-19T08:57:45.124Z]  "GET /images/book1.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/115.0.5790.75 Safari/537.36"
+http-server stopped.
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog> Get-History
+
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\... 
+   2 Get-History
+   3 npm run start
+
+
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Library-Catalog>

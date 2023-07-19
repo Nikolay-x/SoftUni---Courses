@@ -1,0 +1,35 @@
+PS C:\Users\NB\DevOps\11. Exercise Automated Testing\Books> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\contr... 
+   2 npm install express
+   3 npm install body-parser
+   4 npm install mocha
+   5 npm install chai
+   6 npm install chai-http
+   7 node server.js
+   8 node server.js
+   9 node server.js
+  10 node server.js
+  11 node server.js
+  12 npx mocha api.test.js
+  13 npx mocha api.test.js
+  14 npx mocha api.test.js
+  15 npx mocha api.test.js
+  16 npx mocha api.test.js
+  17 npx mocha api.test.js
+  18 npx mocha api.test.js
+  19 npx mocha api.test.js
+  20 npx mocha api.test.js
+  21 npx mocha api.test.js
+  22 npx mocha api.test.js
+  23 npx mocha api.test.js
+  24 npx mocha api.test.js
+  25 npx mocha api.test.js
+  26 npx mocha api.test.js
+  27 npx mocha api.test.js
+  28 npx mocha api.test.js
+  29 npx mocha api.test.js
+  30 npx mocha api.test.js
+  31 npx mocha api.test.js

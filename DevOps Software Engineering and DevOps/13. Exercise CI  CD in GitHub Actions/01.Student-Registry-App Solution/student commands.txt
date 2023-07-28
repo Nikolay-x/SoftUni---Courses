@@ -1,0 +1,12 @@
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workb...
+   2 npm start
+   3 npm test
+   4 Get-History
+   5 git init
+   6 git branch main
+   7 git remote add origin git@github.com:Nikolay-x/student-app.git
+   8 node -v

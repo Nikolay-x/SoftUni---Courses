@@ -1,0 +1,58 @@
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> npm start
+
+> start        
+> node index.js
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> npm test
+
+> test
+> mocha tests/*.js
+
+
+
+  About page
+    √ Page title (416ms)
+
+  Add Students page
+    √ Page title
+    √ Students HTML form
+    √ Add valid student (45ms)
+    √ Add invalid student
+
+    √ Page title
+    √ Students count
+
+  View Students page
+    √ Page title
+    √ Students list
+
+
+
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> Get-History
+  Id CommandLine
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\cont...
+
+
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> git init
+Initialized empty Git repository in C:/Users/NB/DevOps/13. Exercise CI  CD in GitHub Actions/student-app/.git/
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> git branch main         ent-app/.git/      
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> git remote add origin git@github.com:Nikolay-x/student-app.git                                                           t@github.com:Nikola
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> node -v
+v18.13.0
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workb...
+   2 npm start
+   3 npm test
+   4 Get-History
+   5 git init
+   6 git branch main
+   7 git remote add origin git@github.com:Nikolay-x/student-app.git
+   8 node -v
+
+
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\student-app>

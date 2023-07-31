@@ -1,0 +1,17 @@
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\server> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\...
+   2 cd server
+   3 node server.js
+   4 cd /
+   5 cd .\Users\
+   6 cd NB
+   7 cd .\DevOps\
+   8 cd '.\13. Exercise CI  CD in GitHub Actions\'
+   9 cd .\library-app\
+  10 cd .\server\
+  11 cd .
+  12 cd ..
+  13 cd server

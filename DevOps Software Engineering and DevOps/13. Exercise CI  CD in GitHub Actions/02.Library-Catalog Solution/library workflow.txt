@@ -1,0 +1,8 @@
+Initialized empty Git repository in C:/Users/NB/DevOps/13. Exercise CI  CD in GitHub Actions/library-app/.git/      ons/library-app/.git/                                                                    r
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> git branch master                                                                                        fatal: not a valid object n
+fatal: not a valid object name: 'master'
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> git branch main in
+fatal: not a valid object name: 'master'                                                 rigin git@github.com:Nikola
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> git branch -M main
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> git remote add origin git@github.com:Nikolay-x/library-app.git
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app>

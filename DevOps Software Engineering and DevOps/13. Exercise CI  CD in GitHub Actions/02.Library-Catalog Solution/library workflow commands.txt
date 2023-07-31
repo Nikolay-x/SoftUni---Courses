@@ -1,0 +1,10 @@
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> Get-History     
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\...
+   2 git init
+   3 git branch master
+   4 git branch main
+   5 git branch -M main
+   6 git remote add origin git@github.com:Nikolay-x/library-app.git

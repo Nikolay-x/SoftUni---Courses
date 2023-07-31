@@ -1,0 +1,180 @@
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app>
+Oops, something went wrong.  Please report this bug with the details below.
+Report on GitHub: https://github.com/lzybkr/PSReadLine/issues/new
+-----------------------------------------------------------------------
+Last 1 Keys:
+ Ctrl+v
+
+Exception:
+System.ArgumentOutOfRangeException: The value must be greater than or equal to zero and less than the console's buffer size in that dimension.
+Parameter name: top
+Actual value was -1.
+   at System.Console.SetCursorPosition(Int32 left, Int32 top)
+efaultColor)
+   at Microsoft.PowerShell.PSConsoleReadLine.ForceRender()
+   at Microsoft.PowerShell.PSConsoleReadLine.Paste(Nullable`1 key, Object arg)
+   at Microsoft.PowerShell.PSConsoleReadLine.ProcessOneKey(ConsoleKeyInfo key, Dictionary`2 dispatchTable, Boolean ignoreIfNoAction, Object arg)
+   at Microsoft.PowerShell.PSConsoleReadLine.InputLoop()
+   at Microsoft.PowerShell.PSConsoleReadLine.ReadLine(Runspace runspace, EngineIntrinsics engineIntrinsics)
+-----------------------------------------------------------------------
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> npx playwright test tests/ui.test.js
+
+Running 11 tests using 1 worker
+
+  ✓  1 tests\ui.test.js:3:1 › Verify "All Books" link is visible (365ms)
+  ✓  2 tests\ui.test.js:14:1 › Verify "Login" button is visible (286ms)
+  ✓  3 …sts\ui.test.js:26:1 › Verify "All Books" link is visible after user login (345ms)  ✘  4 tests\ui.test.js:39:1 › Login with valid credentials (358ms)
+  ✓  5 tests\ui.test.js:51:1 › Login with empty input fields (442ms)
+  ✘  6 tests\ui.test.js:65:1 › Add book with correct data (30.0s)
+  ✘  7 tests\ui.test.js:92:1 › Add book with empty title field (30.0s)
+  ✘  8 tests\ui.test.js:123:1 › Login and verify all books are displayed (30.0s)
+  ✘  9 tests\ui.test.js:141:1 › Login and navigate to Details page (30.0s)
+  ✘  10 …s\ui.test.js:164:1 › Verify visibility of Logout button after user login (442ms)  ✘  11 …ts\ui.test.js:178:1 › Verify redirection of Logout link after user login (30.0s)
+
+  1) tests\ui.test.js:39:1 › Login with valid credentials ───────────────────────────────
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "http://localhost:3000/catalog"
+    Received: "http://localhost:3000/login"
+
+      46 |
+      47 |   await page.$('a[href="/catalog"]');
+    > 48 |   expect(page.url()).toBe('http://localhost:3000/catalog');
+         |                      ^
+      49 | });
+      50 |
+      51 | test('Login with empty input fields', async ({ page }) => {
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:48:22
+
+  2) tests\ui.test.js:65:1 › Add book with correct data ─────────────────────────────────
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForURL: Navigation failed because page was closed!
+    =========================== logs ===========================
+    waiting for navigation to "http://localhost:3000/catalog" until "load"
+    ============================================================
+
+      71 |   await Promise.all([
+      72 |     page.click('input[type="submit"]'),
+    > 73 |     page.waitForURL('http://localhost:3000/catalog')
+         |          ^
+      74 |   ]);
+      75 |
+      76 |   await page.click('a[href="/create"]');
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:73:10
+
+  3) tests\ui.test.js:92:1 › Add book with empty title field ────────────────────────────
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForURL: Navigation failed because page was closed!
+    =========================== logs ===========================
+    waiting for navigation to "http://localhost:3000/catalog" until "load"
+    ============================================================
+
+       98 |   await Promise.all([
+       99 |     page.click('input[type="submit"]'),
+    > 100 |     page.waitForURL('http://localhost:3000/catalog')
+          |          ^
+      101 |   ]);
+      102 |
+      103 |   await page.click('a[href="/create"]');
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:100:10
+
+  4) tests\ui.test.js:123:1 › Login and verify all books are displayed ──────────────────
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForURL: Navigation failed because page was closed!
+    =========================== logs ===========================
+    waiting for navigation to "http://localhost:3000/catalog" until "load"
+    ============================================================
+
+      129 |   await Promise.all([
+      130 |     page.click('input[type="submit"]'),
+    > 131 |     page.waitForURL('http://localhost:3000/catalog')
+          |          ^
+      132 |   ]);
+      133 |
+      134 |   await page.waitForSelector('.dashboard');
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:131:10
+
+  5) tests\ui.test.js:141:1 › Login and navigate to Details page ────────────────────────
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForURL: Navigation failed because page was closed!
+    =========================== logs ===========================
+    waiting for navigation to "http://localhost:3000/catalog" until "load"
+    ============================================================
+
+      147 |   await Promise.all([
+      148 |     page.click('input[type="submit"]'),
+    > 149 |     page.waitForURL('http://localhost:3000/catalog')
+          |          ^
+      150 |   ]);
+      151 |
+      152 |   await page.click('a[href="/catalog"]');
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:149:10
+
+  6) tests\ui.test.js:164:1 › Verify visibility of Logout button after user login ───────
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      173 |   const isLogoutLinkVisible = await logoutLink.isVisible();
+      174 |
+    > 175 |   expect(isLogoutLinkVisible).toBe(true);
+          |                               ^
+      176 | });
+      177 |
+      178 | test('Verify redirection of Logout link after user login', async ({ page }) => {
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:175:31
+
+  7) tests\ui.test.js:178:1 › Verify redirection of Logout link after user login ────────
+    Test timeout of 30000ms exceeded.
+
+    Error: elementHandle.click: Target closed
+    =========================== logs ===========================
+    attempting click action
+      waiting for element to be visible, enabled and stable
+        element is not visible - waiting...
+    ============================================================
+
+      184 |
+      185 |   const logoutLink = await page.$('a[href="javascript:void(0)"]');
+    > 186 |   await logoutLink.click();
+          |                    ^
+      187 |
+      188 |   const redirectedURL = page.url();
+      189 |   expect(redirectedURL).toBe('http://localhost:3000/catalog');
+
+        at C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app\tests\ui.test.js:186:20
+
+    Pending operations:
+      - elementHandle.click at tests\ui.test.js:186:20
+
+
+  Slow test file: tests\ui.test.js (2.5m)
+  7 failed
+    tests\ui.test.js:39:1 › Login with valid credentials ────────────────────────────────    tests\ui.test.js:65:1 › Add book with correct data ──────────────────────────────────    tests\ui.test.js:92:1 › Add book with empty title field ─────────────────────────────    tests\ui.test.js:123:1 › Login and verify all books are displayed ───────────────────    tests\ui.test.js:141:1 › Login and navigate to Details page ─────────────────────────    tests\ui.test.js:164:1 › Verify visibility of Logout button after user login ────────    tests\ui.test.js:178:1 › Verify redirection of Logout link after user login ─────────  4 passed (2.7m)
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app> npx playwright test tests/ui.test.js
+
+Running 11 tests using 1 worker
+
+  ✓  1 tests\ui.test.js:3:1 › Verify "All Books" link is visible (375ms)
+  ✓  2 tests\ui.test.js:14:1 › Verify "Login" button is visible (283ms)
+  ✓  3 …sts\ui.test.js:26:1 › Verify "All Books" link is visible after user login (402ms)  ✓  4 tests\ui.test.js:39:  ✓  4 tests\ui.test.js:39:1 › Login with valid credentials (424ms)
+  ✓  5 tests\ui.test.js:51:1 › Login with empty input fields (359ms)
+  ✓  6 tests\ui.test.js:65:1 › Add book with correct data (572ms)
+  ✓  7 tests\ui.test.js:92:1 › Add book with empty title field (2.8s)
+  ✓  8 tests\ui.test.js:123:1 › Login and verify all books are displayed (432ms)
+  ✓  9 tests\ui.test.js:141:1 › Login and navigate to Details page (562ms)
+  ✓  10 …s\ui.test.js:164:1 › Verify visibility of Logout button after user login (488ms)  ✓  11 …ts\ui.test.js:178:  ✓  11 …ts\ui.test.js:178:1 › Verify redirection of Logout link after user login (427ms)
+
+  11 passed (8.2s)
+PS C:\Users\NB\DevOps\13. Exercise CI  CD in GitHub Actions\library-app>

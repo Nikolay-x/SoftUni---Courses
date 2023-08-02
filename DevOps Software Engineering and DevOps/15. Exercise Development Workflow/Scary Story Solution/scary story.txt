@@ -1,0 +1,32 @@
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git init
+Initialized empty Git repository in C:/Users/NB/DevOps/15. Exercise Development Workflow/scary-story-app/.git/
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git branch -M main
+com:Nikolay-x/scary-story-app.git
+* main
+ main
+Switched to a new branch 'change-background'
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git branch
+* change-background
+  main
+error: pathspec 'staging' did not match any file(s) known to git
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git branch checkout staging      
+fatal: not a valid object name: 'staging'
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git branch                       
+* change-background
+  main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git checkout -b add-genre-field main
+Switched to a new branch 'add-genre-field'
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git branch
+* add-genre-field
+  change-background
+  main
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git checkout -b add-field-icons main       
+Switched to a new branch 'add-field-icons'
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app> git branch
+* add-field-icons
+  add-genre-field
+  change-background
+  main
+PS C:\Users\NB\DevOps\15. Exercise Development Workflow\scary-story-app>

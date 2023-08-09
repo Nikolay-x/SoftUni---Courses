@@ -1,0 +1,22 @@
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm install
+
+added 181 packages, and audited 182 packages in 3s
+
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run start
+
+> movies@1.0.0 start
+> node index.js
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run start
+
+> movies@1.0.0 start
+> node index.js
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app>

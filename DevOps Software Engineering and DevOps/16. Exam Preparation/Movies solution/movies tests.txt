@@ -1,0 +1,268 @@
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:unit
+
+> movies@1.0.0 test:unit        
+> mocha -u tdd 'tests/unit/*.js'
+
+
+
+  About page
+    ✔ Page title (257ms)
+
+  Add Movies page
+    ✔ Page title
+    ✔ Movie HTML form
+    ✔ Add valid movie (44ms)
+    ✔ Add invalid movie
+
+    ✔ Movies count
+
+  View Movies page
+    ✔ Page title
+    ✔ Movies list
+
+
+  9 passing (632ms)
+
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npx playwright install
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\header.test.js:3:1 › Check header (634ms)
+  ✘  2 tests\ui\about.test.js:3:1 › Check about page (611ms)
+  ✘  3 tests\ui\footer.test.js:3:1 › Check footer (653ms)
+  ✓  4 tests\ui\add-movie.test.js:3:1 › Check add movie page (713ms)
+  ✘  5 tests\ui\movies.test.js:3:1 › Check movies page (342ms)
+  ✘  6 tests\ui\home.test.js:3:1 › Check home page (375ms)
+
+
+  1) tests\ui\about.test.js:3:1 › Check about page ──────────────────────────────────────
+    TypeError: Cannot read properties of null (reading 'textContent')
+
+      4 |   await page.goto('http://localhost:8080/about');
+      5 |   const heading = await page.$('h2');
+    > 6 |   const text = await heading.textContent();
+        |                              ^
+      7 |   expect(text).toBe('About');
+      8 | });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:6:30
+  2) tests\ui\footer.test.js:3:1 › Check footer ─────────────────────────────────────────
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "© 2023 - Software Engineеring and DevOps exam preparation"      
+    Received string:    "© 2023 - Software Engineering and DevOps exam preparation"      
+
+      5 |     const footer = await page.$('footer');
+      6 |     const text = await footer.textContent();
+    > 7 |     expect(text).toContain('© 2023 - Software Engineеring and DevOps exam preparation');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:7:18
+
+  3) tests\ui\header.test.js:3:1 › Check header ─────────────────────────────────────────
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Movie Collection"
+    Received: "Home"
+
+      5 |     const homeLink = await page.$('a[href="/"]');
+      6 |     const text = await homeLink.textContent();
+    > 7 |     expect(text).toBe('Movie Collection');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:7:18
+
+  4) tests\ui\home.test.js:3:1 › Check home page ────────────────────────────────────────
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Welcome"
+    Received string:    "Movies Collection"
+
+      5 |     const heading = await page.$('h1');
+      6 |     const text = await heading.textContent();
+    > 7 |     expect(text).toContain('Welcome');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:7:18 
+
+  5) tests\ui\movies.test.js:3:1 › Check movies page ────────────────────────────────────
+    Error: expect(received).toBeTruthy()
+
+    Received: null
+
+      4 |     await page.goto('http://localhost:8080/collection');
+      5 |     const list = await page.$('ul');
+    > 6 |     expect(list).toBeTruthy();
+        |                  ^
+      7 |   });
+      8 |
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:6:18
+
+  5 failed
+    tests\ui\about.test.js:3:1 › Check about page ───────────────────────────────────────    tests\ui\footer.test.js:3:1 › Check footer ──────────────────────────────────────────    tests\ui\header.test.js:3:1 › Check header ──────────────────────────────────────────    tests\ui\home.test.js:3:1 › Check home page ─────────────────────────────────────────    tests\ui\movies.test.js:3:1 › Check movies page ─────────────────────────────────────  1 passed (5.7s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\about.test.js:3:1 › Check about page (603ms)
+  ✓  2 tests\ui\add-movie.test.js:3:1 › Check add movie page (597ms)
+  ✘  3 tests\ui\header.test.js:3:1 › Check header (727ms)
+  ✘  4 tests\ui\footer.test.js:3:1 › Check footer (653ms)
+  ✘  5 tests\ui\home.test.js:3:1 › Check home page (302ms)
+  ✘  6 tests\ui\movies.test.js:3:1 › Check movies page (227ms)
+
+
+  1) tests\ui\footer.test.js:3:1 › Check footer ─────────────────────────────────────────
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "© 2023 - Software Engineеring and DevOps exam preparation"      
+    Received string:    "© 2023 - Software Engineering and DevOps exam preparation"      
+
+      5 |     const footer = await page.$('footer');
+      6 |     const text = await footer.textContent();
+    > 7 |     expect(text).toContain('© 2023 - Software Engineеring and DevOps exam preparation');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:7:18
+
+  2) tests\ui\header.test.js:3:1 › Check header ─────────────────────────────────────────
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Movie Collection"
+    Received: "Home"
+
+      5 |     const homeLink = await page.$('a[href="/"]');
+      6 |     const text = await homeLink.textContent();
+    > 7 |     expect(text).toBe('Movie Collection');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:7:18
+
+  3) tests\ui\home.test.js:3:1 › Check home page ────────────────────────────────────────
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Welcome"
+    Received string:    "Movies Collection"
+
+      5 |     const heading = await page.$('h1');
+      6 |     const text = await heading.textContent();
+    > 7 |     expect(text).toContain('Welcome');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:7:18 
+
+  4) tests\ui\movies.test.js:3:1 › Check movies page ────────────────────────────────────
+    Error: expect(received).toBeTruthy()
+
+    Received: null
+
+      4 |     await page.goto('http://localhost:8080/collection');
+      5 |     const list = await page.$('ul');
+    > 6 |     expect(list).toBeTruthy();
+        |                  ^
+      7 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:6:18
+
+  4 failed
+    tests\ui\footer.test.js:3:1 › Check footer ──────────────────────────────────────────    tests\ui\header.test.js:3:1 › Check header ──────────────────────────────────────────    tests\ui\home.test.js:3:1 › Check home page ─────────────────────────────────────────    tests\ui\movies.test.js:3:1 › Check movies page ─────────────────────────────────────  2 passed (3.1s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\footer.test.js:3:1 › Check footer (540ms)
+  ✓  2 tests\ui\add-movie.test.js:3:1 › Check add movie page (636ms)
+  ✓  3 tests\ui\about.test.js:3:1 › Check about page (565ms)
+  ✘  4 tests\ui\header.test.js:3:1 › Check header (649ms)
+  ✘  5 tests\ui\home.test.js:3:1 › Check home page (315ms)
+  ✘  6 tests\ui\movies.test.js:3:1 › Check movies page (226ms)
+
+
+  1) tests\ui\header.test.js:3:1 › Check header ─────────────────────────────────────────
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Movie Collection"
+    Received: "Home"
+
+      5 |     const homeLink = await page.$('a[href="/"]');
+      6 |     const text = await homeLink.textContent();
+    > 7 |     expect(text).toBe('Movie Collection');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:7:18
+
+  2) tests\ui\home.test.js:3:1 › Check home page ────────────────────────────────────────
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Welcome"
+    Received string:    "Movies Collection"
+
+      5 |     const heading = await page.$('h1');
+      6 |     const text = await heading.textContent();
+    > 7 |     expect(text).toContain('Welcome');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:7:18 
+
+  3) tests\ui\movies.test.js:3:1 › Check movies page ────────────────────────────────────
+    Error: expect(received).toBeTruthy()
+
+    Received: null
+
+      4 |     await page.goto('http://localhost:8080/collection');
+      5 |     const list = await page.$('ul');
+    > 6 |     expect(list).toBeTruthy();
+        |                  ^
+      8 |
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:6:18
+
+  3 failed
+    tests\ui\header.test.js:3:1 › Check header ──────────────────────────────────────────    tests\ui\home.test.js:3:1 › Check home page ─────────────────────────────────────────    tests\ui\movies.test.js:3:1 › Check movies page ─────────────────────────────────────  3 passed (3.9s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\about.test.js:3:1 › Check about page (648ms)
+  ✓  2 tests\ui\add-movie.test.js:3:1 › Check add movie page (619ms)
+  ✓  3 tests\ui\footer.test.js:3:1 › Check footer (671ms)
+  ✓  4 tests\ui\header.test.js:3:1 › Check header (777ms)
+  ✓  5 tests\ui\home.test.js:3:1 › Check home page (316ms)
+  ✓  6 tests\ui\movies.test.js:3:1 › Check movies page (283ms)
+
+  6 passed (3.5s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app>

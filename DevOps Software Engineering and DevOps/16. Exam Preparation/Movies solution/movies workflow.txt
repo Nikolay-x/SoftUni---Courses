@@ -1,0 +1,46 @@
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git init
+Initialized empty Git repository in C:/Users/NB/DevOps/16. Exam Preparation/movies-app/.git/
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git add .
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git commit -m "first commit"
+[master (root-commit) 12ef087] first commit
+ 24 files changed, 2212 insertions(+)      
+ create mode 100644 .gitignore
+ create mode 100644 controllers/movies-controller.js
+ create mode 100644 index.js
+ create mode 100644 models/movies-model.js
+ create mode 100644 models/movies.json
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+ create mode 100644 tests/ui/about.test.js
+ create mode 100644 tests/ui/add-movie.test.js
+ create mode 100644 tests/ui/footer.test.js
+ create mode 100644 tests/ui/header.test.js
+ create mode 100644 tests/ui/home.test.js
+ create mode 100644 tests/ui/movies.test.js
+ create mode 100644 tests/unit/add-movies.tests.js
+ create mode 100644 tests/unit/view-movies.tests.js
+ create mode 100644 views/about.pug
+ create mode 100644 views/add-movie.pug
+ create mode 100644 views/footer.pug
+ create mode 100644 views/header.pug
+ create mode 100644 views/home.pug
+ create mode 100644 views/movies.pug
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git branch -M main
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git remote add origin https://github.com/Nikolay-x/nikolay-x-exam-prep.git
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git push -u origin main
+warning: git-credential-manager-core was renamed to git-credential-manager
+Enumerating objects: 32, done.
+Counting objects: 100% (32/32), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (30/30), done.
+Writing objects: 100% (32/32), 25.26 KiB | 2.30 MiB/s, done.
+Total 32 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), done.
+To https://github.com/Nikolay-x/nikolay-x-exam-prep.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> git pull
+Already up to date.
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app>

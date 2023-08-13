@@ -1,0 +1,7 @@
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> Get-History  
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\... 
+   2 npm install
+   3 npm run start

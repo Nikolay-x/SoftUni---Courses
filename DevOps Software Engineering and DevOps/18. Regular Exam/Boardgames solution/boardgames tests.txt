@@ -1,0 +1,242 @@
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npx playwright install
+Downloading Chromium 110.0.5481.38 (playwright build v1045) from https://playwright.azureedge.net/builds/chromium/1045/chromium-win64.zip
+111.5 Mb [====================] 100% 0.0s
+Chromium 110.0.5481.38 (playwright build v1045) downloaded to C:\Users\NB\AppData\Local\ms-playwright\chromium-1045
+Downloading FFMPEG playwright build v1008 from https://playwright.azureedge.net/builds/ffmpeg/1008/ffmpeg-win64.zip
+1.4 Mb [====================] 100% 0.0s
+FFMPEG playwright build v1008 downloaded to C:\Users\NB\AppData\Local\ms-playwright\ffmpeDownloading Firefox 108.0.2 (playwright build v1372) from https://playwright.azureedge.net/builds/firefox/1372/firefox-win64.zip
+78.5 Mb [====================] 100% 0.0s
+Firefox 108.0.2 (playwright build v1372) downloaded to C:\Users\NB\AppData\Local\ms-playwright\firefox-1372
+Downloading Webkit 16.4 (playwright build v1767) from https://playwright.azureedge.net/builds/webkit/1767/webkit-win64.zip
+45.1 Mb [====================] 100% 0.0s
+Webkit 16.4 (playwright build v1767) downloaded to C:\Users\NB\AppData\Local\ms-playwright\webkit-1767
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npm run test:unit
+
+> boardgames@1.0.0 test:unit
+> mocha -u tdd 'tests/unit/*.js'
+
+
+
+  About page
+    ✔ Page title (257ms)
+
+  Add Boardgames page
+    ✔ Page title
+    ✔ Boardgame HTML form
+    ✔ Add valid boardgame (43ms)
+    ✔ Add invalid boardgame
+
+    ✔ Page title
+    ✔ Boardgames count
+
+  View Boardgames page
+    ✔ Page title
+    ✔ Boardgames list
+
+
+  9 passing (627ms)
+
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npm run test:ui
+
+> boardgames@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\add-boardgame.test.js:3:1 › Check add boardgame page (602ms)
+  ✘  2 tests\ui\boardgames.test.js:3:1 › Check boardgames page (517ms)
+  ✘  3 tests\ui\about.test.js:3:1 › Check about page (481ms)
+  ✘  4 tests\ui\footer.test.js:3:1 › Check footer (500ms)
+  ✘  5 tests\ui\home.test.js:3:1 › Check home page (297ms)
+  ✘  6 tests\ui\header.test.js:3:1 › Check header (282ms)
+
+
+  1) tests\ui\about.test.js:3:1 › Check about page =================================================
+
+    TypeError: Cannot read properties of null (reading 'textContent')
+
+      4 |   await page.goto('http://localhost:8080/about');
+      5 |   const heading = await page.$('h2');
+    > 6 |   const text = await heading.textContent();
+        |                              ^
+      7 |   expect(text).toBe('About');
+      8 | });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\about.test.js:6:30    
+
+  2) tests\ui\boardgames.test.js:3:1 › Check boardgames page =======================================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: null
+
+      4 |     await page.goto('http://localhost:8080/collection');
+      5 |     const list = await page.$('ul');
+    > 6 |     expect(list).toBeTruthy();
+        |                  ^
+      7 |   });
+      8 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\boardgames.test.js:6:18
+
+  3) tests\ui\footer.test.js:3:1 › Check footer ====================================================
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "© 2023 - Software Engineеring and DevOps exam preparation"      
+    Received string:    "© 2023 - Software Engineering and DevOps regular exam"
+
+      5 |     const footer = await page.$('footer');
+      6 |     const text = await footer.textContent();
+    > 7 |     expect(text).toContain('© 2023 - Software Engineеring and DevOps exam preparation');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\footer.test.js:7:18   
+
+  4) tests\ui\header.test.js:3:1 › Check header ====================================================
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Boardgame Collection"
+    Received: "Home"
+
+      5 |     const homeLink = await page.$('a[href="/"]');
+      6 |     const text = await homeLink.textContent();
+    > 7 |     expect(text).toBe('Boardgame Collection');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\header.test.js:7:18   
+
+  5) tests\ui\home.test.js:3:1 › Check home page ===================================================
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Welcome"
+    Received string:    "Boardgames Collection"
+
+      5 |     const heading = await page.$('h1');
+      6 |     const text = await heading.textContent();
+    > 7 |     expect(text).toContain('Welcome');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\home.test.js:7:18     
+
+
+  5 failed
+===========
+    tests\ui\boardgames.test.js:3:1 › Check boardgames page ========================================
+    tests\ui\footer.test.js:3:1 › Check footer =====================================================
+    tests\ui\header.test.js:3:1 › Check header =====================================================
+    tests\ui\home.test.js:3:1 › Check home page ====================================================
+  1 passed (5.3s)
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npm run test:ui
+
+> boardgames@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\add-boardgame.test.js:3:1 › Check add boardgame page (529ms)
+  ✘  2 tests\ui\boardgames.test.js:3:1 › Check boardgames page (375ms)
+  ✘  3 tests\ui\footer.test.js:3:1 › Check footer (564ms)
+  ✓  4 tests\ui\about.test.js:3:1 › Check about page (497ms)
+  ✘  5 tests\ui\header.test.js:3:1 › Check header (260ms)
+  ✘  6 tests\ui\home.test.js:3:1 › Check home page (242ms)
+
+
+  1) tests\ui\boardgames.test.js:3:1 › Check boardgames page =======================================
+
+    Error: expect(received).toBeTruthy()
+
+    Received: null
+
+      4 |     await page.goto('http://localhost:8080/collection');
+      5 |     const list = await page.$('ul');
+    > 6 |     expect(list).toBeTruthy();
+        |                  ^
+      7 |   });
+      8 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\boardgames.test.js:6:18
+
+  2) tests\ui\footer.test.js:3:1 › Check footer ====================================================
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "© 2023 - Software Engineеring and DevOps exam preparation"      
+    Received string:    "© 2023 - Software Engineering and DevOps regular exam"
+
+      5 |     const footer = await page.$('footer');
+      6 |     const text = await footer.textContent();
+    > 7 |     expect(text).toContain('© 2023 - Software Engineеring and DevOps exam preparation');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\footer.test.js:7:18   
+
+  3) tests\ui\header.test.js:3:1 › Check header ====================================================
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Boardgame Collection"
+    Received: "Home"
+
+      5 |     const homeLink = await page.$('a[href="/"]');
+      6 |     const text = await homeLink.textContent();
+    > 7 |     expect(text).toBe('Boardgame Collection');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\header.test.js:7:18   
+
+  4) tests\ui\home.test.js:3:1 › Check home page ===================================================
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Welcome"
+    Received string:    "Boardgames Collection"
+
+      5 |     const heading = await page.$('h1');
+      6 |     const text = await heading.textContent();
+    > 7 |     expect(text).toContain('Welcome');
+        |                  ^
+      8 |   });
+      9 |
+
+        at C:\Users\NB\DevOps\18. Regular Exam\boardgames\tests\ui\home.test.js:7:18     
+
+  4 failed
+    tests\ui\boardgames.test.js:3:1 › Check boardgames page ========================================
+    tests\ui\footer.test.js:3:1 › Check footer =====================================================
+    tests\ui\header.test.js:3:1 › Check header =====================================================
+    tests\ui\home.test.js:3:1 › Check home page ====================================================
+  2 passed (3.1s)
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npm run test:ui
+
+> boardgames@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\add-boardgame.test.js:3:1 › Check add boardgame page (534ms)
+  ✓  2 tests\ui\about.test.js:3:1 › Check about page (522ms)
+  ✓  3 tests\ui\footer.test.js:3:1 › Check footer (532ms)
+  ✓  4 tests\ui\boardgames.test.js:3:1 › Check boardgames page (499ms)
+  ✓  5 tests\ui\header.test.js:3:1 › Check header (294ms)
+  ✓  6 tests\ui\home.test.js:3:1 › Check home page (272ms)
+
+
+  6 passed (3.1s)
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> 

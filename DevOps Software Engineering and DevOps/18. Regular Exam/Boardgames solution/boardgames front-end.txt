@@ -1,0 +1,20 @@
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npm install
+
+
+32 packages are looking for funding
+  run `npm fund` for details
+
+1 high severity vulnerability
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> npm run start
+
+> boardgames@1.0.0 start
+> node index.js
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> 

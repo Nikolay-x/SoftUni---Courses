@@ -1,0 +1,45 @@
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> git init
+Initialized empty Git repository in C:/Users/NB/DevOps/18. Regular Exam/boardgames/.git/
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> git add .
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> git commit -m "first commit"
+[master (root-commit) 8dbead0] first commit
+ 24 files changed, 2304 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 controllers/boardgames-controller.js
+ create mode 100644 index.js
+ create mode 100644 models/boardgames-model.js
+ create mode 100644 models/boardgames.json
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+ create mode 100644 tests/ui/about.test.js
+ create mode 100644 tests/ui/add-boardgame.test.js
+ create mode 100644 tests/ui/boardgames.test.js
+ create mode 100644 tests/ui/footer.test.js
+ create mode 100644 tests/ui/header.test.js
+ create mode 100644 tests/ui/home.test.js
+ create mode 100644 tests/unit/add-boardgames.tests.js
+ create mode 100644 tests/unit/view-boardgames.tests.js
+ create mode 100644 views/about.pug
+ create mode 100644 views/add-boardgame.pug
+ create mode 100644 views/boardgames.pug
+ create mode 100644 views/footer.pug
+ create mode 100644 views/header.pug
+ create mode 100644 views/home.pug
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> git branch -M main
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> git remote add origin https://github.com/Nikolay-x/nikolay_x-exam.git
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> git push -u origin main
+warning: git-credential-manager-core was renamed to git-credential-manager
+warning: see https://aka.ms/gcm/rename for more information
+Enumerating objects: 32, done.
+Counting objects: 100% (32/32), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (31/31), done.
+Writing objects: 100% (32/32), 25.56 KiB | 2.32 MiB/s, done.
+Total 32 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), done.
+To https://github.com/Nikolay-x/nikolay_x-exam.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+PS C:\Users\NB\DevOps\18. Regular Exam\boardgames> 

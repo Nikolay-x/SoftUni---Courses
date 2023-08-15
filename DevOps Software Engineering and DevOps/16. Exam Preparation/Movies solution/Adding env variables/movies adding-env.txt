@@ -1,0 +1,43 @@
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm install -D dotenv
+
+added 1 package, and audited 183 packages in 1s
+
+33 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities     
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test 
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\about.test.js:3:1 › Check about page (3.4s)
+  ✓  2 tests\ui\footer.test.js:3:1 › Check footer (3.2s)
+  ✓  3 tests\ui\header.test.js:3:1 › Check header (3.3s)
+  ✓  4 tests\ui\add-movie.test.js:3:1 › Check add movie page (3.2s)
+  ✓  6 tests\ui\movies.test.js:3:1 › Check movies page (869ms)
+
+  6 passed (7.4s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run start
+
+> movies@1.0.0 start
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run start
+
+> movies@1.0.0 start
+> node index.js
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run start
+
+> movies@1.0.0 start
+> node index.js
+
+App started. Listening at http://localhost:8080
+Terminate batch job (Y/N)? y
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> 

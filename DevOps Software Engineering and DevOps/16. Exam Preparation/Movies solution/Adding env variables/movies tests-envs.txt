@@ -1,0 +1,801 @@
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test 
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\add-movie.test.js:3:1 › Check add movie page (400ms)
+  ✘  2 tests\ui\about.test.js:5:1 › Check about page (463ms)
+  ✘  3 tests\ui\header.test.js:3:1 › Check header (477ms)
+  ✘  4 tests\ui\footer.test.js:3:1 › Check footer (447ms)
+  ✘  5 tests\ui\movies.test.js:3:1 › Check movies page (253ms)
+  ✘  6 tests\ui\home.test.js:3:1 › Check home page (239ms)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/about", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(process.env.DEPOLYED_URL + '/about');
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:3:1 › Check add movie page ─────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/add-movie", waiting until "load"
+    ============================================================
+
+      4 |     // await page.goto('http://localhost:8080/add-movie');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    > 6 |     await page.goto(process.env.DEPOLYED_URL + '/add-movie');
+        |                ^
+      7 |     const form = await page.$('form');
+      8 |     expect(form).toBeTruthy();
+      9 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:6:16
+
+  3) tests\ui\footer.test.js:3:1 › Check footer ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080');  
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const footer = await page.$('footer');
+      8 |     const text = await footer.textContent();
+      9 |     expect(text).toContain('© 2023 - Software Engineering and DevOps exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:6:16
+
+  4) tests\ui\header.test.js:3:1 › Check header ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080');  // you can replace this URL with any page that includes the header
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const homeLink = await page.$('a[href="/"]');
+      8 |     const text = await homeLink.textContent();
+      9 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:6:16
+
+  5) tests\ui\home.test.js:3:1 › Check home page ───────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080/');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const heading = await page.$('h1');
+      8 |     const text = await heading.textContent();
+      9 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:6:16
+
+  6) tests\ui\movies.test.js:3:1 › Check movies page ───────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/movies", waiting until "load"
+    ============================================================
+
+      4 |     // await page.goto('http://localhost:8080/movies');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    > 6 |     await page.goto(process.env.DEPOLYED_URL + '/movies');
+        |                ^
+      7 |     const list = await page.$('ul');
+      8 |     expect(list).toBeTruthy();
+      9 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:6:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:3:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:3:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:3:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:3:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:3:1 › Check movies page ────────────────────────────PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\about.test.js:5:1 › Check about page (526ms)
+  ✘  2 tests\ui\add-movie.test.js:3:1 › Check add movie page (498ms)
+  ✘  3 tests\ui\footer.test.js:3:1 › Check footer (390ms)
+  ✘  4 tests\ui\header.test.js:3:1 › Check header (464ms)
+  ✘  5 tests\ui\home.test.js:3:1 › Check home page (245ms)
+  ✘  6 tests\ui\movies.test.js:3:1 › Check movies page (251ms)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/about", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(process.env.DEPOLYED_URL + '/about');
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:3:1 › Check add movie page ─────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/add-movie", waiting until "load"
+    ============================================================
+
+      4 |     // await page.goto('http://localhost:8080/add-movie');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    > 6 |     await page.goto(process.env.DEPOLYED_URL + '/add-movie');
+        |                ^
+      7 |     const form = await page.$('form');
+      8 |     expect(form).toBeTruthy();
+      9 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:6:16
+
+  3) tests\ui\footer.test.js:3:1 › Check footer ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080');  
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const footer = await page.$('footer');
+      8 |     const text = await footer.textContent();
+      9 |     expect(text).toContain('© 2023 - Software Engineering and DevOps exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:6:16
+
+  4) tests\ui\header.test.js:3:1 › Check header ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080');  // you can replace this URL with any page that includes the header
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const homeLink = await page.$('a[href="/"]');
+      8 |     const text = await homeLink.textContent();
+      9 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:6:16
+
+  5) tests\ui\home.test.js:3:1 › Check home page ───────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080/');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const heading = await page.$('h1');
+      8 |     const text = await heading.textContent();
+      9 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:6:16
+
+  6) tests\ui\movies.test.js:3:1 › Check movies page ───────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/movies", waiting until "load"
+    ============================================================
+
+      4 |     // await page.goto('http://localhost:8080/movies');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    > 6 |     await page.goto(process.env.DEPOLYED_URL + '/movies');
+        |                ^
+      7 |     const list = await page.$('ul');
+      8 |     expect(list).toBeTruthy();
+      9 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:6:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:3:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:3:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:3:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:3:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:3:1 › Check movies page ────────────────────────────PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\about.test.js:5:1 › Check about page (458ms)
+  ✘  2 tests\ui\add-movie.test.js:3:1 › Check add movie page (493ms)
+  ✘  3 tests\ui\header.test.js:3:1 › Check header (484ms)
+  ✘  4 tests\ui\footer.test.js:3:1 › Check footer (465ms)
+  ✘  5 tests\ui\home.test.js:3:1 › Check home page (261ms)
+  ✘  6 tests\ui\movies.test.js:3:1 › Check movies page (269ms)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/about", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(process.env.DEPOLYED_URL + '/about');
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:3:1 › Check add movie page ─────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/add-movie", waiting until "load"
+    ============================================================
+
+      4 |     // await page.goto('http://localhost:8080/add-movie');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    > 6 |     await page.goto(process.env.DEPOLYED_URL + '/add-movie');
+        |                ^
+      7 |     const form = await page.$('form');
+      8 |     expect(form).toBeTruthy();
+      9 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:6:16
+
+  3) tests\ui\footer.test.js:3:1 › Check footer ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080');  
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const footer = await page.$('footer');
+      8 |     const text = await footer.textContent();
+      9 |     expect(text).toContain('© 2023 - Software Engineering and DevOps exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:6:16
+
+  4) tests\ui\header.test.js:3:1 › Check header ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080');  // you can replace this URL with any page that includes the header
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const homeLink = await page.$('a[href="/"]');
+      8 |     const text = await homeLink.textContent();
+      9 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:6:16
+
+  5) tests\ui\home.test.js:3:1 › Check home page ───────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+      4 |     // await page.goto('http://localhost:8080/');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com');      
+    > 6 |     await page.goto(process.env.DEPOLYED_URL);
+        |                ^
+      7 |     const heading = await page.$('h1');
+      8 |     const text = await heading.textContent();
+      9 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:6:16
+
+  6) tests\ui\movies.test.js:3:1 › Check movies page ───────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/movies", waiting until "load"
+    ============================================================
+
+      4 |     // await page.goto('http://localhost:8080/movies');
+      5 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    > 6 |     await page.goto(process.env.DEPOLYED_URL + '/movies');
+        |                ^
+      7 |     const list = await page.$('ul');
+      8 |     expect(list).toBeTruthy();
+      9 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:6:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:3:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:3:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:3:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:3:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:3:1 › Check movies page ────────────────────────────PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\header.test.js:5:1 › Check header (453ms)
+  ✘  2 tests\ui\add-movie.test.js:5:1 › Check add movie page (532ms)
+  ✘  3 tests\ui\about.test.js:5:1 › Check about page (457ms)
+  ✘  4 tests\ui\footer.test.js:5:1 › Check footer (441ms)
+  ✘  5 tests\ui\home.test.js:5:1 › Check home page (250ms)
+  ✘  6 tests\ui\movies.test.js:5:1 › Check movies page (251ms)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/about", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(process.env.DEPOLYED_URL + '/about');
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:5:1 › Check add movie page ─────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/add-movie", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/add-movie');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    >  8 |     await page.goto(process.env.DEPOLYED_URL + '/add-movie');        
+         |                ^
+       9 |     const form = await page.$('form');
+      10 |     expect(form).toBeTruthy();
+      11 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:8:16
+
+  3) tests\ui\footer.test.js:5:1 › Check footer ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080');  
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const footer = await page.$('footer');
+      10 |     const text = await footer.textContent();
+      11 |     expect(text).toContain('© 2023 - Software Engineering and DevOps 
+exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:8:16
+
+  4) tests\ui\header.test.js:5:1 › Check header ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080');  // you can replace 
+this URL with any page that includes the header
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const homeLink = await page.$('a[href="/"]');
+      10 |     const text = await homeLink.textContent();
+      11 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:8:16
+
+  5) tests\ui\home.test.js:5:1 › Check home page ───────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080/');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const heading = await page.$('h1');
+      10 |     const text = await heading.textContent();
+      11 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:8:16
+
+  6) tests\ui\movies.test.js:5:1 › Check movies page ───────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/movies", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/movies');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    >  8 |     await page.goto(process.env.DEPOLYED_URL + '/movies');
+         |                ^
+       9 |     const list = await page.$('ul');
+      10 |     expect(list).toBeTruthy();
+      11 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:8:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:5:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:5:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:5:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:5:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:5:1 › Check movies page ────────────────────────────PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\header.test.js:5:1 › Check header (397ms)
+  ✘  2 tests\ui\about.test.js:5:1 › Check about page (480ms)
+  ✘  3 tests\ui\add-movie.test.js:5:1 › Check add movie page (426ms)
+  ✘  4 tests\ui\footer.test.js:5:1 › Check footer (400ms)
+  ✘  5 tests\ui\home.test.js:5:1 › Check home page (257ms)
+  ✘  6 tests\ui\movies.test.js:5:1 › Check movies page (256ms)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/about", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(process.env.DEPOLYED_URL + '/about');
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:5:1 › Check add movie page ─────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/add-movie", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/add-movie');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    >  8 |     await page.goto(process.env.DEPOLYED_URL + '/add-movie');        
+         |                ^
+       9 |     const form = await page.$('form');
+      10 |     expect(form).toBeTruthy();
+      11 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:8:16
+
+  3) tests\ui\footer.test.js:5:1 › Check footer ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080');  
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const footer = await page.$('footer');
+      10 |     const text = await footer.textContent();
+      11 |     expect(text).toContain('© 2023 - Software Engineering and DevOps 
+exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:8:16
+
+  4) tests\ui\header.test.js:5:1 › Check header ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080');  // you can replace 
+this URL with any page that includes the header
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const homeLink = await page.$('a[href="/"]');
+      10 |     const text = await homeLink.textContent();
+      11 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:8:16
+
+  5) tests\ui\home.test.js:5:1 › Check home page ───────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080/');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const heading = await page.$('h1');
+      10 |     const text = await heading.textContent();
+      11 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:8:16
+
+  6) tests\ui\movies.test.js:5:1 › Check movies page ───────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/movies", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/movies');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    >  8 |     await page.goto(process.env.DEPOLYED_URL + '/movies');
+         |                ^
+       9 |     const list = await page.$('ul');
+      10 |     expect(list).toBeTruthy();
+      11 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:8:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:5:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:5:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:5:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:5:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:5:1 › Check movies page ────────────────────────────PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\footer.test.js:5:1 › Check footer (417ms)
+  ✘  2 tests\ui\about.test.js:5:1 › Check about page (495ms)
+  ✘  3 tests\ui\add-movie.test.js:5:1 › Check add movie page (519ms)
+  ✘  4 tests\ui\header.test.js:5:1 › Check header (487ms)
+  ✘  5 tests\ui\home.test.js:5:1 › Check home page (245ms)
+  ✘  6 tests\ui\movies.test.js:5:1 › Check movies page (249ms)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined + '/about'", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(`${ process.env.DEPOLYED_URL } + '/about'`);       
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:5:1 › Check add movie page ─────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/add-movie", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/add-movie');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    >  8 |     await page.goto(process.env.DEPOLYED_URL + '/add-movie');        
+         |                ^
+       9 |     const form = await page.$('form');
+      10 |     expect(form).toBeTruthy();
+      11 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:8:16
+
+  3) tests\ui\footer.test.js:5:1 › Check footer ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080');  
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const footer = await page.$('footer');
+      10 |     const text = await footer.textContent();
+      11 |     expect(text).toContain('© 2023 - Software Engineering and DevOps 
+exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:8:16
+
+  4) tests\ui\header.test.js:5:1 › Check header ────────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080');  // you can replace 
+this URL with any page that includes the header
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const homeLink = await page.$('a[href="/"]');
+      10 |     const text = await homeLink.textContent();
+      11 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:8:16
+
+  5) tests\ui\home.test.js:5:1 › Check home page ───────────────────────────────
+    Error: page.goto: url: expected string, got undefined
+
+       6 |     // await page.goto('http://localhost:8080/');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPOLYED_URL);
+         |                ^
+       9 |     const heading = await page.$('h1');
+      10 |     const text = await heading.textContent();
+      11 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:8:16
+
+  6) tests\ui\movies.test.js:5:1 › Check movies page ───────────────────────────
+    Error: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL
+    =========================== logs ===========================
+    navigating to "undefined/movies", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/movies');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    >  8 |     await page.goto(process.env.DEPOLYED_URL + '/movies');
+         |                ^
+       9 |     const list = await page.$('ul');
+      10 |     expect(list).toBeTruthy();
+      11 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:8:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:5:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:5:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:5:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:5:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:5:1 › Check movies page ────────────────────────────PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\footer.test.js:5:1 › Check footer (909ms)
+  ✓  2 tests\ui\add-movie.test.js:5:1 › Check add movie page (869ms)
+  ✓  3 tests\ui\about.test.js:5:1 › Check about page (841ms)
+  ✓  4 tests\ui\header.test.js:5:1 › Check header (891ms)
+  ✓  5 tests\ui\home.test.js:5:1 › Check home page (307ms)
+  ✓  6 tests\ui\movies.test.js:5:1 › Check movies page (288ms)
+
+  6 passed (3.5s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\add-movie.test.js:5:1 › Check add movie page (657ms)
+  ✓  2 tests\ui\about.test.js:5:1 › Check about page (596ms)
+  ✓  3 tests\ui\header.test.js:5:1 › Check header (735ms)
+  ✓  4 tests\ui\footer.test.js:5:1 › Check footer (619ms)
+  ✓  5 tests\ui\home.test.js:5:1 › Check home page (347ms)
+  ✓  6 tests\ui\movies.test.js:5:1 › Check movies page (305ms)
+
+  6 passed (3.4s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+
+Running 6 tests using 4 workers
+
+  ✘  1 tests\ui\header.test.js:5:1 › Check header (2.9s)
+  ✘  2 tests\ui\footer.test.js:5:1 › Check footer (2.8s)
+  ✘  3 tests\ui\add-movie.test.js:5:1 › Check add movie page (2.8s)
+  ✘  4 tests\ui\about.test.js:5:1 › Check about page (2.8s)
+  ✘  5 tests\ui\home.test.js:5:1 › Check home page (2.6s)
+  ✘  6 tests\ui\movies.test.js:5:1 › Check movies page (2.6s)
+
+
+  1) tests\ui\about.test.js:5:1 › Check about page ─────────────────────────────
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/about    =========================== logs ===========================
+    navigating to "http://localhost:8080/about", waiting until "load"
+    ============================================================
+
+       6 |   // await page.goto('http://localhost:8080/about');
+       7 |   // await page.goto('https://nikolay-x-movies.onrender.com/about'); 
+    >  8 |   await page.goto(process.env.DEPLOYED_URL + '/about');
+         |              ^
+       9 |   const heading = await page.$('h1');
+      10 |   const text = await heading.textContent();
+      11 |   expect(text).toBe('About');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\about.test.js:8:14
+
+  2) tests\ui\add-movie.test.js:5:1 › Check add movie page ─────────────────────
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/add-movie
+    =========================== logs ===========================
+    navigating to "http://localhost:8080/add-movie", waiting until "load"       
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/add-movie');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/add-movie');
+    >  8 |     await page.goto(process.env.DEPLOYED_URL + '/add-movie');        
+         |                ^
+       9 |     const form = await page.$('form');
+      10 |     expect(form).toBeTruthy();
+      11 |   });
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\add-movie.test.js:8:16
+
+  3) tests\ui\footer.test.js:5:1 › Check footer ────────────────────────────────
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/     
+    =========================== logs ===========================
+    navigating to "http://localhost:8080/", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080');  
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPLOYED_URL);
+         |                ^
+       9 |     const footer = await page.$('footer');
+      10 |     const text = await footer.textContent();
+      11 |     expect(text).toContain('© 2023 - Software Engineering and DevOps 
+exam preparation');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\footer.test.js:8:16
+
+  4) tests\ui\header.test.js:5:1 › Check header ────────────────────────────────
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/     
+    =========================== logs ===========================
+    navigating to "http://localhost:8080/", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080');  // you can replace 
+this URL with any page that includes the header
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPLOYED_URL);
+         |                ^
+       9 |     const homeLink = await page.$('a[href="/"]');
+      10 |     const text = await homeLink.textContent();
+      11 |     expect(text).toBe('Home');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\header.test.js:8:16
+
+  5) tests\ui\home.test.js:5:1 › Check home page ───────────────────────────────
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/     
+    =========================== logs ===========================
+    navigating to "http://localhost:8080/", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com');     
+    >  8 |     await page.goto(process.env.DEPLOYED_URL);
+         |                ^
+       9 |     const heading = await page.$('h1');
+      10 |     const text = await heading.textContent();
+      11 |     expect(text).toContain('Movies Collection');
+
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\home.test.js:8:16
+
+  6) tests\ui\movies.test.js:5:1 › Check movies page ───────────────────────────
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8080/movies
+    =========================== logs ===========================
+    navigating to "http://localhost:8080/movies", waiting until "load"
+    ============================================================
+
+       6 |     // await page.goto('http://localhost:8080/movies');
+       7 |     // await page.goto('https://nikolay-x-movies.onrender.com/movies');
+    >  8 |     await page.goto(process.env.DEPLOYED_URL + '/movies');
+         |                ^
+       9 |     const list = await page.$('ul');
+      10 |     expect(list).toBeTruthy();
+      11 |   });
+        at C:\Users\NB\DevOps\16. Exam Preparation\movies-app\tests\ui\movies.test.js:8:16
+
+  6 failed
+    tests\ui\about.test.js:5:1 › Check about page ──────────────────────────────    tests\ui\add-movie.test.js:5:1 › Check add movie page ──────────────────────    tests\ui\footer.test.js:5:1 › Check footer ─────────────────────────────────    tests\ui\header.test.js:5:1 › Check header ─────────────────────────────────    tests\ui\home.test.js:5:1 › Check home page ────────────────────────────────    tests\ui\movies.test.js:5:1 › Check movies page ────────────────────────────
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> npm run test:ui
+
+> movies@1.0.0 test:ui
+> npx playwright test
+
+Running 6 tests using 4 workers
+
+  ✓  1 tests\ui\header.test.js:5:1 › Check header (854ms)
+  ✓  2 tests\ui\about.test.js:5:1 › Check about page (831ms)
+  ✓  3 tests\ui\add-movie.test.js:5:1 › Check add movie page (982ms)
+  ✓  4 tests\ui\footer.test.js:5:1 › Check footer (931ms)
+  ✓  5 tests\ui\home.test.js:5:1 › Check home page (329ms)
+  ✓  6 tests\ui\movies.test.js:5:1 › Check movies page (337ms)
+
+  6 passed (3.4s)
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources... 
+   2 npm run test:ui
+   3 npm run test:ui
+   4 npm run test:ui
+   5 npm run test:ui
+   6 npm run test:ui
+   7 npm run test:ui
+   8 npm run test:ui
+   9 npm run test:ui
+  10 npm run test:ui
+  11 npm run test:ui
+
+
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app>

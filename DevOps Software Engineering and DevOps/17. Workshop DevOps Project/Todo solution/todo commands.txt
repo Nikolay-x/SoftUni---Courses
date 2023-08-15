@@ -1,0 +1,27 @@
+PS C:\Users\NB\DevOps\17. Workshop DevOps Project\todo-dockerhub> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workb... 
+   2 docker --version
+   3 docker ps
+   4 docker ps
+   5 docker ps -a
+   6 docker ps
+   7 docker-compose up -d
+   8 docker ps
+   9 docker-compose up -d
+  10 docker-compose stop
+  11 git init
+  12 git add .
+  13 git commit -m "first commit"
+  14 git branch -M main
+  15 git remote add origin https://github.com/Nikolay-x/todo-app.git
+  16 git push -u origin main
+  17 docker-compose down --rmi all --volumes
+  18 docker-compose up -d
+  19 docker-compose down --rmi all --volumes
+  20 cd ..
+  21 cd .\todo-dockerhub\
+  22 docker-compose up -d
+  23 docker-compose down --rmi all --volumes

@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  frontend:
+    image: nikolayx/frontend:latest
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    networks:
+      - react-express
+
+  backend:
+    image: nikolayx/backend:latest
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - react-express
+      - express-mongo
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    networks:
+      - express-mongo
+
+networks:
+  react-express:
+  express-mongo:

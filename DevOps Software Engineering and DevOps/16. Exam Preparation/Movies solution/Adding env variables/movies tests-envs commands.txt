@@ -1,0 +1,15 @@
+PS C:\Users\NB\DevOps\16. Exam Preparation\movies-app> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\NB\AppData\Local\Programs\Microsoft VS Code\resources... 
+   2 npm run test:ui
+   3 npm run test:ui
+   4 npm run test:ui
+   5 npm run test:ui
+   6 npm run test:ui
+   7 npm run test:ui
+   8 npm run test:ui
+   9 npm run test:ui
+  10 npm run test:ui
+  11 npm run test:ui

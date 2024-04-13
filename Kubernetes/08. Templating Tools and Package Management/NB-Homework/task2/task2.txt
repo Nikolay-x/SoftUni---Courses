@@ -1,0 +1,561 @@
+vagrant@node1:~$ vagrant@node1:~$
+vagrant@node1:~$ kustomize version
+v5.2.1
+vagrant@node1:~$ tree homework/
+homework/
+└── task1
+    └── task1-sed.yaml
+
+1 directory, 1 file
+vagrant@node1:~$ mkdir -p homework/task2
+vagrant@node1:~$ tree homework/
+homework/
+├── task1
+│   └── task1-sed.yaml
+└── task2
+
+2 directories, 1 file
+vagrant@node1:~$ mkdir -p homework/task2/base
+vagrant@node1:~$ tree homework/
+homework/
+├── task1
+│   └── task1-sed.yaml
+└── task2
+    └── base
+
+3 directories, 1 file
+vagrant@node1:~$ cat > homework/task2/base/task2-kst.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homework
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hw
+  template:
+    metadata:
+      labels:
+        app: hw
+    spec:
+      containers:
+      - image: shekeriev/k8s-oracle
+        name: homework
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hw
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - port: 5000
+    nodePort: 32000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hw
+  type: NodePort
+vagrant@node1:~$ cat > homework/task2/base/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - task2-kst.yaml
+vagrant@node1:~$ tree homework/
+homework/
+├── task1
+│   └── task1-sed.yaml
+└── task2
+    └── base
+        ├── kustomization.yaml
+        └── task2-kst.yaml
+
+3 directories, 3 files
+vagrant@node1:~$ kustomize build homework/task2/base/
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homework
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hw
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - nodePort: 32000
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hw
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hw
+  template:
+    metadata:
+      labels:
+        app: hw
+    spec:
+      containers:
+      - image: shekeriev/k8s-oracle
+        name: homework
+vagrant@node1:~$ cd homework/
+vagrant@node1:~/homework$ cd task2
+vagrant@node1:~/homework/task2$ tree
+.
+└── base
+    ├── kustomization.yaml
+    └── task2-kst.yaml
+
+1 directory, 2 files
+vagrant@node1:~/homework/task2$ mkdir -p overlays/{test,production}
+vagrant@node1:~/homework/task2$ tree
+.
+├── base
+│   ├── kustomization.yaml
+│   └── task2-kst.yaml
+└── overlays
+    ├── production
+    └── test
+
+4 directories, 2 files
+vagrant@node1:~/homework/task2$ cat > overlays/test/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: test-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: test
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-rs.yaml
+vagrant@node1:~/homework/task2$ cat > overlays/production/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: production-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: production
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-rs.yaml
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  template:
+    spec:
+      containers:
+      - name: main
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (TEST)"
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: main
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (TEST)"
+vagrant@node1:~/homework/task2$ cat overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: main
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (TEST)"
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-rs.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  replicas: 3
+vagrant@node1:~/homework/task2$ cat > overlays/production/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: main
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (PRODUCTION)"
+vagrant@node1:~/homework/task2$ cat > overlays/production/custom-np.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: homework-svc
+spec:
+  ports:
+  - nodePort: 30002
+    port: 80
+    protocol: TCP
+vagrant@node1:~/homework/task2$ cd ../..
+vagrant@node1:~$ tree homework/
+homework/
+├── task1
+│   └── task1-sed.yaml
+└── task2
+    ├── base
+    │   ├── kustomization.yaml
+    │   └── task2-kst.yaml
+    └── overlays
+        ├── production
+        │   ├── custom-env.yaml
+        │   ├── custom-np.yaml
+        │   └── kustomization.yaml
+        └── test
+            ├── custom-env.yaml
+            ├── custom-rs.yaml
+            └── kustomization.yaml
+
+6 directories, 9 files
+vagrant@node1:~$ cd homework
+vagrant@node1:~/homework$ cd task2
+vagrant@node1:~/homework/task2$ kustomize build overlays/test
+Error: no resource matches strategic merge patch "Deployment.v1.apps/homework.[noNs]": no matches for Id Deployment.v1.apps/homework.[noNs]; failed to find unique target for patch Deployment.v1.apps/homework.[noNs]
+vagrant@node1:~/homework/task2$ kustomize build overlays/production
+Error: trouble configuring builtin PatchTransformer with config: `
+path: custom-rs.yaml
+`: failed to get the patch file from path(custom-rs.yaml): evalsymlink failure on '/home/vagrant/homework/task2/overlays/production/custom-rs.yaml' : lstat /home/vagrant/homework/task2/overlays/production/custom-rs.yaml: no such file or directory
+vagrant@node1:~/homework/task2$ kustomize build overlays/test
+Error: no resource matches strategic merge patch "Deployment.v1.apps/homework.[noNs]": no matches for Id Deployment.v1.apps/homework.[noNs]; failed to find unique target for patch Deployment.v1.apps/homework.[noNs]
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: homework
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (TEST)"
+vagrant@node1:~/homework/task2$ cat overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: homework
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (TEST)"
+vagrant@node1:~/homework/task2$ kustomize build overlays/test
+Error: no resource matches strategic merge patch "Deployment.v1.apps/homework.[noNs]": no matches for Id Deployment.v1.apps/homework.[noNs]; failed to find unique target for patch Deployment.v1.apps/homework.[noNs]
+vagrant@node1:~/homework/task2$ tree
+.
+├── base
+│   ├── kustomization.yaml
+│   └── task2-kst.yaml
+└── overlays
+    ├── production
+    │   ├── custom-env.yaml
+    │   ├── custom-np.yaml
+    │   └── kustomization.yaml
+    └── test
+        ├── custom-env.yaml
+        ├── custom-rs.yaml
+        └── kustomization.yaml
+
+4 directories, 8 files
+vagrant@node1:~/homework/task2$ cat overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: homework
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (TEST)"
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: homework
+vagrant@node1:~/homework/task2$ kustomize build overlays/test
+Error: no resource matches strategic merge patch "Deployment.v1.apps/homework.[noNs]": no matches for Id Deployment.v1.apps/homework.[noNs]; failed to find unique target for patch Deployment.v1.apps/homework.[noNs]
+vagrant@node1:~/homework/task2$ tree
+.
+├── base
+│   ├── kustomization.yaml
+│   └── task2-kst.yaml
+└── overlays
+    ├── production
+    │   ├── custom-env.yaml
+    │   ├── custom-np.yaml
+    │   └── kustomization.yaml
+    └── test
+        ├── custom-env.yaml
+        ├── custom-rs.yaml
+        └── kustomization.yaml
+
+4 directories, 8 files
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: homework
+vagrant@node1:~/homework/task2$ cat > overlays/test/custom-rs.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  replicas: 3
+vagrant@node1:~/homework/task2$ kustomize build overlays/test
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    variant: test
+  name: homework
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hw
+    variant: test
+  name: test-homework-svc
+  namespace: homework
+spec:
+  ports:
+  - nodePort: 32000
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hw
+    variant: test
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    variant: test
+  name: test-homework
+  namespace: homework
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hw
+      variant: test
+  template:
+    metadata:
+      labels:
+        app: hw
+        variant: test
+    spec:
+      containers:
+      - image: shekeriev/k8s-oracle
+        name: homework
+vagrant@node1:~/homework/task2$ cat > overlays/production/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  template:
+    spec:
+      containers:
+      - name: homework
+vagrant@node1:~/homework/task2$ cat > overlays/production/custom-np.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - nodePort: 30002
+    port: 80
+    protocol: TCP
+vagrant@node1:~/homework/task2$ kustomize build overlays/production
+Error: trouble configuring builtin PatchTransformer with config: `
+path: custom-rs.yaml
+`: failed to get the patch file from path(custom-rs.yaml): evalsymlink failure on '/home/vagrant/homework/task2/overlays/production/custom-rs.yaml' : lstat /home/vagrant/homework/task2/overlays/production/custom-rs.yaml: no such file or directory
+vagrant@node1:~/homework/task2$ cat > overlays/production/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: production-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: production
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-np.yaml
+vagrant@node1:~/homework/task2$ kustomize build overlays/production
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    variant: production
+  name: homework
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hw
+    variant: production
+  name: production-homework-svc
+  namespace: homework
+spec:
+  ports:
+  - nodePort: 30002
+    port: 80
+    protocol: TCP
+  - nodePort: 32000
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hw
+    variant: production
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    variant: production
+  name: production-homework
+  namespace: homework
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hw
+      variant: production
+  template:
+    metadata:
+      labels:
+        app: hw
+        variant: production
+    spec:
+      containers:
+      - image: shekeriev/k8s-oracle
+        name: homework
+vagrant@node1:~/homework/task2$ kustomize build overlays/test | kubectl apply -f -
+namespace/homework created
+service/test-homework-svc created
+deployment.apps/test-homework created
+vagrant@node1:~/homework/task2$ kubectl apply -k overlays/production
+namespace/homework configured
+deployment.apps/production-homework created
+The Service "production-homework-svc" is invalid: spec.ports[1].nodePort: Invalid value: 32000: provided port is already allocated
+vagrant@node1:~/homework/task2$ kubectl delete -k overlays/production
+namespace "homework" deleted
+deployment.apps "production-homework" deleted
+Error from server (NotFound): error when deleting "overlays/production": services "production-homework-svc" not found
+vagrant@node1:~/homework/task2$ cat > overlays/production/custom-np.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - nodePort: 32001
+    port: 80
+    protocol: TCP
+vagrant@node1:~/homework/task2$ kubectl apply -k overlays/production
+namespace/homework created
+deployment.apps/production-homework created
+The Service "production-homework-svc" is invalid:
+* spec.ports[0].name: Required value
+* spec.ports[1].name: Required value
+vagrant@node1:~/homework/task2$ kubectl delete -k overlays/production
+namespace "homework" deleted
+deployment.apps "production-homework" deleted
+Error from server (NotFound): error when deleting "overlays/production": services "production-homework-svc" not found
+vagrant@node1:~/homework/task2$ cat > overlays/production/custom-np.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - port: 5000
+    nodePort: 32001
+    protocol: TCP
+vagrant@node1:~/homework/task2$ kubectl apply -k overlays/production
+namespace/homework created
+service/production-homework-svc created
+deployment.apps/production-homework created
+vagrant@node1:~/homework/task2$ cd ../..

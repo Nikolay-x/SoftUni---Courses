@@ -1,0 +1,274 @@
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 cd '.\04. Security and Policies\'
+   3 cd .\lab\
+   4 vagrant up
+   5 vagrant ssh node1
+   6 vagrant ssh node1
+   7 vagrant ssh node1
+   8 Get-History
+   9 vagrant ssh node1
+  10 vagrant up
+  11 vagrant ssh node1
+
+
+
+vagrant@node1:~$ history
+    1  cd .kube
+    2  cd..
+    3  cd.
+    4  cdexit
+    5  exit
+    6  cd .kube
+    7  ls
+    8  cat ~/.kube/config
+    9  sudo useradd -m -s /bin/bash ivan
+   10  sudo passwd ivan
+   11  cd /home/ivan
+   12  sudo mkdir .certs && cd .certs
+   13  sudo openssl genrsa -out ivan.key 2048
+   14  ls
+   15  sudo openssl req -new -key ivan.key -out ivan.csr -subj "/CN=ivan"
+   16  ls
+   17  sudo openssl x509 -req -in ivan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out ivan.crt -days 365
+   18  ls
+   19  cd
+   20  sudo mkdir -p /home/ivan/.kube
+   21  cat /etc/kubernetes/admin.conf
+   22  sudo cat /etc/kubernetes/admin.conf
+   23  sudo vi /home/ivan/.kube/config
+   24  sudo chown -R ivan: /home/ivan
+   25  kubectl create namespace demo-dev
+   26  kubectl create namespace demo-prod
+   27  kubectl get ns
+   28  su - ivan
+   29  ls
+   30  mkdir part1
+   31  mkdir part2
+   32  mkdir part3
+   33  ls
+   34  cd part1
+   35  cat > ivan-rb.yaml
+   36  ls
+   37  cat ivan-rb.yaml
+   38  sed -i s/john/ivan/g ivan-rb.yaml
+   39  cat ivan-rb.yaml
+   40  ls
+   41  kubectl apply -f ivan-rb.yaml
+   42  kubectl get rolebinding -n demo-dev
+   43  kubectl get rolebinding -n demo-prod
+   44  kubectl run pod-prod --image=shekeriev/k8s-oracle --labels=app=oracle --namespace demo-prod
+   45  kubectl run pod-dev --image=shekeriev/k8s-oracle --labels=app=oracle --namespace demo-dev
+   46  kubectl get pods -n demo-prod
+   47  kubectl get pods -n demo-dev
+   48  su - ivan
+   49  kubectl auth can-i create pods
+   50  kubectl auth can-i create services
+   51  kubectl auth can-i create pods -n demo-prod
+   52  kubectl auth can-i create pods -n demo-dev
+   53  kubectl auth can-i create pods --as ivan
+   54  kubectl auth can-i create pods -n demo-prod --as ivan
+   55  kubectl auth can-i create pods -n demo-dev --as ivan
+   56  kubectl auth can-i --list --namespace demo-dev --as ivan
+   57  kubectl delete ns demo-prod demo-dev
+   58  cd ..
+   59  kubectl create namespace rbac-ns
+   60  kubectl run rbac-pod --image=shekeriev/k8s-oracle --namespace=rbac-ns
+   61  kubectl expose pod rbac-pod --port=5000 --name=rbac-svc --namespace=rbac-ns
+   62  kubectl get serviceaccount -n rbac-ns
+   63  kubectl get pod rbac-pod -n rbac-ns -o yaml | grep serviceAccount
+   64  kubectl exec -it rbac-pod -n rbac-ns -- bash
+   65  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   66  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   67  kubectl get serviceaccount -n rbac-ns
+   68  kubectl get serviceaccount -n rbac-nw
+   69  kubectl create role view-pods--verb=get,list,watch --resource=pods --namespace=rbac-ns
+   70  kubectl create role view-pods --verb=get,list,watch --resource=pods --namespace=rbac-ns
+   71  kubectl create rolebinding view-pods --role=view-pods --serviceaccount=rbac-ns:default --namespace=rbac-ns
+   72  kubectl exec -it rbac-pod -n rbac-ns -- bash
+   73  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   74  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   75  kubectl get role view-pods -n rbac-ns -o yaml
+   76  kubectl edit role view-pods -n rbac-ns
+   77  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   78  kubectl create serviceaccount demo-sa --namespace rbac-ns
+   79  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   80  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   81  kubectl get serviceaccount -n rbac-ns
+   82  cd part1
+   83  cat > demo-role.yaml
+   84  ls
+   85  cat > demo-role.yaml
+   86  cat demo-role.yaml
+   87  ls
+   88  cat > demo-role.yaml
+   89  ls
+   90  cat demo-role.yaml
+   91  cat > demo-role.yaml
+   92  cat demo-role.yaml
+   93  kubectl apply -f demo-role.yaml
+   94  kubectl create rolebinding demo-role --role=demo-role --serviceaccount=rbac-ns:demo-sa --namespace=rbac-ns
+   95  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   96  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   97  kubectl auth can-i delete pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   98  kubectl auth can-i delete services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   99  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  100  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  101  kubectl auth can-i delete pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  102  kubectl auth can-i delete services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  103  cat > demo-pod.yaml
+  104  cat demo-pod.yaml
+  105  kubectl apply -f demo-pod.yaml
+  106  kubectl exec -it demo-pod -n rbac-ns -- bash
+  107  kubectl get pods,svc -n rbac-ns
+  108  kubectl delete namespace rbac-ns
+  109  cd ..
+  110  ls
+  111  kubectl describe nodes
+  112  kubectl create namespace reslim
+  113  kubectl run pod-1 --image=alpine --restart=Never --namespace reslim -- dd if=/dev/zero of=/dev/null bs=16M
+  114  kubectl get pods -n reslim -o wide
+  115  kubectl describe node node3
+  116  kubectl exec -it pod-1 -n reslim -- top
+  117  kubectl describe node node3
+  118  kubectl delete pod pod-1 -n reslim
+  119  cat > pod-2.yaml
+  120  cat pod-2.yaml
+  121  kubectl apply -f part2/pod-2.yaml
+  122  kubectl apply -f pod-2.yaml
+  123  kubectl get pods -n reslim -o wide
+  124  kubectl exec -it pod-2 -n reslim -- top
+  125  kubectl describe node node3
+  126  cd part2
+  127  cat > deployment-res.yaml
+  128  cat deployment-res.yaml
+  129  kubectl apply -f part2/deployment-res.yaml
+  130  kubectl apply -f deployment-res.yaml
+  131  kubectl get pods -n reslim -o wide
+  132  kubectl describe node node2
+  133  kubectl scale deployment res -n reslim --replicas=5
+  134  kubectl get deployment -n reslim
+  135  kubectl get pods -n reslim -o wide
+  136  kubectl describe pod res-66767bc74-2nwb4 -n reslim
+  137  kubectl scale deployment res -n reslim --replicas=8
+  138  kubectl get pods -n reslim -o wide
+  139  kubectl get pods -n reslim res-66767bc74-s756s
+  140  kubectl describe pods -n reslim res-66767bc74-s756s
+  141  kubectl describe nodes node2
+  142  kubectl describe nodes node3
+  143  kubectl delete -f deployment-res.yaml
+  144  kubectl delete -f pod-2.yaml
+  145  cd ..
+  146  kubectl delete -f pod-2.yaml
+  147  kubectl get pods
+  148  kubectl get pods -n reslim -o wide
+  149  kubectl delete namespace reslim
+  150  kubectl get ns
+  151  exit
+  152  kubectl get ns
+  153  kubectl delete namespace reslim
+  154  kubectl get ns
+  155  kubectl get pods -n reslim -o wide
+  156  history
+  157  exit
+  158  kubectl get pods -n reslim -o wide
+  159  exit
+  160  kubectl get pods -n reslim -o wide
+  161  kubectl get ns
+  162  kubectl create ns reslim
+  163  kubectl get ns
+  164  kubectl get pods -n reslim -o wide
+  165  cd part2
+  166  ls
+  167  cat > pod-3a.yaml
+  168  cat pod-3a.yaml
+  169  kubectl apply -f part2/pod-3a.yaml
+  170  kubectl apply -f pod-3a.yaml
+  171  kubectl get pods -n reslim -o wide
+  172  kubectl describe node node3
+  173  kubectl exec -it pod-3a -n reslim -- top
+  174  kubectl delete pod pod-3a -n reslim
+  175  cat > pod-3b.yaml
+  176  cat pod-3b.yaml
+  177  kubectl get pods -n reslim -o wide -w
+  178  kubectl apply -f part2/pod-3b.yaml
+  179  kubectl apply -f pod-3b.yaml
+  180  kubectl get pods -n reslim -o wide -w
+  181  kubectl delete -f pod-3b.yaml
+  182  kubectl get pods -n reslim -o wide
+  183  cat > limits.yaml
+  184  cat limits.yaml
+  185  kubectl apply -f part2/limits.yaml
+  186  kubectl apply -f limits.yaml
+  187  kubectl describe limitrange limits -n reslim
+  188  cat > pod-4a.yaml
+  189  cat pod-4a.yaml
+  190  kubectl apply -f pod-4a.yaml
+  191  kubectl decribe pod pod-4a -n reslim
+  192  kubectl describe pod pod-4a -n reslim
+  193  kubectl delete pod pod-4a -n reslim
+  194  kubectl delete -f limits.yaml
+  195  ls
+  196  cat > quota.yaml
+  197  cat quota.yaml
+  198  kubectl apply -f quota.yaml
+  199  kubectl get quota -n reslim
+  200  kubectl describe quota quota -n reslim
+  201  cat > pod-5b.yaml
+  202  kubectl apply -f pod-5b.yaml
+  203  kubectl delete namespace reslim
+  204  cd
+  205  kubectl get pods -A
+  206  kubectl get ns
+  207  kubectl create namespace basicnp
+  208  kubectl create deployment oracle --image=shekeriev/k8s-oracle --namespace basicnp
+  209  kubectl expose deployment oracle --port=5000 --namespace basicnp
+  210  kubectl get svc,pod -n basicnp
+  211  kubectl run tester --image=alpine --namespace basicnp -- sleep 1d
+  212  kubectl exec -it tester --namespace basicnp -- sh
+  213  cd part3
+  214  cat > oracle-policy.yaml
+  215  cat oracle-policy.yaml
+  216  cd ..
+  217  kubectl apply -f part3/oracle-policy.yaml
+  218  kubectl describe netpol access-oracle -n basicnp
+  219  kubectl exec -it tester --namespace basicnp -- sh
+  220  kubectl run tester --image=alpine -- sleep 1d
+  221  kubectl exec -it tester -- sh
+  222  kubectl label pods tester --namespace basicnp access=true
+  223  kubectl exec -it tester --namespace basicnp -- sh
+  224  kubectl exec -it tester -- sh
+  225  kubectl label pods tester access=true
+  226  kubectl exec -it tester -- sh
+  227  kubectl edit netpol access-oracle -n basicnp
+  228  kubectl exec -it tester -- sh
+  229  kubectl label pod tester access-
+  230  kubectl exec -it tester -- sh
+  231  kubectl describe netpol access-oracle -n basicnp
+  232  kubectl edit netpol access-oracle -n basicnp
+  233  kubectl describe netpol access-oracle -n basicnp
+  234  kubectl exec -it tester -- sh
+  235  kubectl delete pod tester
+  236  kubectl delete namespace basicnp
+  237  kubectl create -f https://docs.tigera.io/files/00-namespace.yaml
+  238  kubectl create -f https://docs.tigera.io/files/01-management-ui.yaml
+  239  kubectl create -f https://docs.tigera.io/files/02-backend.yaml
+  240  kubectl create -f https://docs.tigera.io/files/03-frontend.yaml
+  241  kubectl create -f https://docs.tigera.io/files/04-client.yaml
+  242  kubectl get ns
+  243  kubectl get pods --all-namespaces --watch
+  244  kubectl get all -n management-ui
+  245  kubectl create -n stars -f https://docs.tigera.io/files/default-deny.yaml
+  246  kubectl create -n client -f https://docs.tigera.io/files/default-deny.yaml
+  247  kubectl create -f https://docs.tigera.io/files/allow-ui.yaml
+  248  kubectl create -f https://docs.tigera.io/files/allow-ui-client.yaml
+  249  kubectl create -f https://docs.tigera.io/files/backend-policy.yaml
+  250  kubectl create -f https://docs.tigera.io/files/frontend-policy.yaml
+  251  kubectl delete ns client stars management-ui
+  252  kubectl get ns
+  253  kubectl get nodes
+  254  kubectl get pods
+  255  history

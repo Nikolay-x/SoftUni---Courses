@@ -1,0 +1,42 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\WINDOWS\system32> Set-Location -Path 'C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2'
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl apply -f namespace.yaml
+namespace/homework created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl apply -f pod-1.yaml
+pod/homework-1 created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl label pod/homework-1 -n homework tier-
+pod/homework-1 unlabeled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl apply -f pod-2.yaml
+pod/homework-2 created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl label pod/homework-2 -n homework app=hw
+pod/homework-2 not labeled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl get pods --show-labels
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl config set-context --current --namespace=homework
+Context "minikube" modified.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl get pods --show-labels
+NAME         READY   STATUS    RESTARTS   AGE    LABELS
+homework-1   1/1     Running   0          3m5s   app=hw
+homework-2   1/1     Running   0          92s    app=hw
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl annotate pod/homework-1 -n homework purpose=homework
+pod/homework-1 annotated
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl annotate pod/homework-2 -n homework purpose=homework
+pod/homework-2 annotated
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl apply -f service.yaml
+service/homework-svc created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> minikube service list
+|-------------|--------------|--------------|-----|
+|  NAMESPACE  |     NAME     | TARGET PORT  | URL |
+|-------------|--------------|--------------|-----|
+| default     | kubernetes   | No node port |     |
+| homework    | homework-svc | No node port |     |
+| kube-system | kube-dns     | No node port |     |
+|-------------|--------------|--------------|-----|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> kubectl get service -n homework
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+homework-svc   ClusterIP   10.101.62.106   <none>        32000/TCP   43s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2>

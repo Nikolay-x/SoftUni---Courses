@@ -1,0 +1,2964 @@
+        done
+  - name: cont-adapter
+    image: alpine
+    volumeMounts:
+    - name: log
+      mountPath: /var/log
+    command: ["/bin/sh", "-c"]
+    args:
+      - tail -f /var/log/app.log | sed -e 's/^/MSG:/' -e 's/OP0/GET/' -e 's/OP1/SET/' -e 's/RE0/OK/' -e 's/RE1/ER/' > /var/log/out.log
+  volumes:
+  - name: log
+    emptyDir: {}vagrant@node1:~$
+vagrant@node1:~$ cat 3-adapter.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: adapter
+spec:
+  containers:
+  - name: cont-main
+    image: alpine
+    volumeMounts:
+    - name: log
+      mountPath: /var/log
+    command: ["/bin/sh", "-c"]
+    args:
+      - while true; do
+          echo $(date +'%Y-%m-%d %H:%M:%S') $(uname) OP$(tr -cd 0-1 </dev/urandom | head -c 1) $(tr -cd a-z </dev/urandom | head -c 5).html RE$(tr -cd 0-1 </dev/urandom | head -c 1) >> /var/log/app.log;
+          sleep 3;
+        done
+  - name: cont-adapter
+    image: alpine
+    volumeMounts:
+    - name: log
+      mountPath: /var/log
+    command: ["/bin/sh", "-c"]
+    args:
+      - tail -f /var/log/app.log | sed -e 's/^/MSG:/' -e 's/OP0/GET/' -e 's/OP1/SET/' -e 's/RE0/OK/' -e 's/RE1/ER/' > /var/log/out.log
+  volumes:
+  - name: log
+    emptyDir: {}vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 3-adapter.yaml
+pod/adapter created
+vagrant@node1:~$ kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+adapter   2/2     Running   0          20s
+vagrant@node1:~$ kubectl exec -it adapter -c cont-main -- cat /var/log/app.log
+2023-11-18 09:59:18 Linux OP0 qbqre.html RE1
+2023-11-18 09:59:21 Linux OP1 vwowu.html RE0
+2023-11-18 09:59:24 Linux OP0 vdrwo.html RE1
+2023-11-18 09:59:27 Linux OP1 uljzu.html RE0
+2023-11-18 09:59:30 Linux OP1 kqhhp.html RE1
+2023-11-18 09:59:33 Linux OP1 pomaj.html RE0
+2023-11-18 09:59:36 Linux OP0 yxfqo.html RE0
+2023-11-18 09:59:39 Linux OP1 fnejt.html RE1
+2023-11-18 09:59:42 Linux OP0 ccsxw.html RE1
+2023-11-18 09:59:45 Linux OP1 awzab.html RE0
+2023-11-18 09:59:48 Linux OP0 ttnvp.html RE0
+2023-11-18 09:59:51 Linux OP0 howpr.html RE1
+2023-11-18 09:59:54 Linux OP0 sbejl.html RE1
+2023-11-18 09:59:57 Linux OP1 zunck.html RE0
+2023-11-18 10:00:00 Linux OP0 swmxe.html RE0
+2023-11-18 10:00:03 Linux OP1 nupdc.html RE1
+2023-11-18 10:00:06 Linux OP1 fzvth.html RE0
+vagrant@node1:~$ kubectl exec -it adapter -c cont-adapter -- cat /var/log/out.log
+MSG:2023-11-18 09:59:18 Linux GET qbqre.html ER
+MSG:2023-11-18 09:59:21 Linux SET vwowu.html OK
+MSG:2023-11-18 09:59:24 Linux GET vdrwo.html ER
+MSG:2023-11-18 09:59:27 Linux SET uljzu.html OK
+MSG:2023-11-18 09:59:30 Linux SET kqhhp.html ER
+MSG:2023-11-18 09:59:33 Linux SET pomaj.html OK
+MSG:2023-11-18 09:59:36 Linux GET yxfqo.html OK
+MSG:2023-11-18 09:59:39 Linux SET fnejt.html ER
+MSG:2023-11-18 09:59:42 Linux GET ccsxw.html ER
+MSG:2023-11-18 09:59:45 Linux SET awzab.html OK
+MSG:2023-11-18 09:59:48 Linux GET ttnvp.html OK
+MSG:2023-11-18 09:59:51 Linux GET howpr.html ER
+MSG:2023-11-18 09:59:54 Linux GET sbejl.html ER
+MSG:2023-11-18 09:59:57 Linux SET zunck.html OK
+MSG:2023-11-18 10:00:00 Linux GET swmxe.html OK
+MSG:2023-11-18 10:00:03 Linux SET nupdc.html ER
+MSG:2023-11-18 10:00:06 Linux SET fzvth.html OK
+MSG:2023-11-18 10:00:09 Linux SET jgmpi.html ER
+MSG:2023-11-18 10:00:12 Linux GET ujlas.html OK
+MSG:2023-11-18 10:00:15 Linux GET juunt.html ER
+MSG:2023-11-18 10:00:18 Linux SET ncdgg.html OK
+MSG:2023-11-18 10:00:21 Linux GET yyacz.html ER
+MSG:2023-11-18 10:00:25 Linux SET giwat.html ERvagrant@node1:~$
+vagrant@node1:~$ kubectl delete -f 3-adapter.yaml
+pod "adapter" deleted
+vagrant@node1:~$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~$ cat > 4-init-container.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-init
+  labels:
+    app: pod-init
+spec:
+  containers:
+  - name: cont-main
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: data
+      mountPath: /usr/share/nginx/html
+  initContainers:
+  - name: cont-init
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - for i in $(seq 1 5); do
+          echo $(date +'%Y-%m-%d %H:%M:%S') '<br />' >> /data/index.html;
+          sleep 5;
+        done
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-init
+  labels:
+    app: svc-init
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: pod-initvagrant@node1:~$
+vagrant@node1:~$ cat 4-init-container.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-init
+  labels:
+    app: pod-init
+spec:
+  containers:
+  - name: cont-main
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: data
+      mountPath: /usr/share/nginx/html
+  initContainers:
+  - name: cont-init
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - for i in $(seq 1 5); do
+          echo $(date +'%Y-%m-%d %H:%M:%S') '<br />' >> /data/index.html;
+          sleep 5;
+        done
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-init
+  labels:
+    app: svc-init
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: pod-initvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 4-init-container.yaml
+pod/pod-init created
+service/svc-init created
+vagrant@node1:~$ kubectl get pods,svc
+NAME           READY   STATUS     RESTARTS   AGE
+pod/pod-init   0/1     Init:0/1   0          9s
+
+NAME                 TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1     <none>        443/TCP        7d
+service/svc-init     NodePort    10.98.22.24   <none>        80:30001/TCP   9s
+vagrant@node1:~$ kubectl get pods -w
+NAME       READY   STATUS            RESTARTS   AGE
+pod-init   0/1     PodInitializing   0          40s
+pod-init   1/1     Running           0          60s
+^Cvagrant@node1:~$
+vagrant@node1:~$ kubectl describe pod pod-init
+Name:             pod-init
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Sat, 18 Nov 2023 12:03:43 +0200
+Labels:           app=pod-init
+Annotations:      cni.projectcalico.org/containerID: bd1405544474291a3f64c59cb8f1ba42fd2c122af91027c5220beeae899c5dc2
+                  cni.projectcalico.org/podIP: 10.244.104.23/32
+                  cni.projectcalico.org/podIPs: 10.244.104.23/32
+Status:           Running
+IP:               10.244.104.23
+IPs:
+  IP:  10.244.104.23
+Init Containers:
+  cont-init:
+    Container ID:  containerd://bd0ff1195fa50ee1d14d6fda23d76d42f35be1fe558d4e953785f2e5b7578b48
+    Image:         alpine
+    Image ID:      docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -c
+    Args:
+      for i in $(seq 1 5); do echo $(date +'%Y-%m-%d %H:%M:%S') '<br />' >> /data/index.html; sleep 5; done
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sat, 18 Nov 2023 12:03:46 +0200
+      Finished:     Sat, 18 Nov 2023 12:04:11 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8fz2x (ro)
+Containers:
+  cont-main:
+    Container ID:   containerd://5469d1a359a420958f8d887eb89515360c29f261433a9c028cd4dcaa0312ef67
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:86e53c4c16a6a276b204b0fd3a8143d86547c967dc8258b3d47c3a21bb68d3c6
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sat, 18 Nov 2023 12:04:43 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /usr/share/nginx/html from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8fz2x (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  data:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-8fz2x:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  81s   default-scheduler  Successfully assigned default/pod-init to node2
+  Normal  Pulling    81s   kubelet            Pulling image "alpine"
+  Normal  Pulled     79s   kubelet            Successfully pulled image "alpine" in 1.438090887s (1.438098279s including waiting)
+  Normal  Created    79s   kubelet            Created container cont-init
+  Normal  Started    79s   kubelet            Started container cont-init
+  Normal  Pulling    53s   kubelet            Pulling image "nginx"
+  Normal  Pulled     23s   kubelet            Successfully pulled image "nginx" in 30.640869455s (30.640875133s including waiting)
+  Normal  Created    23s   kubelet            Created container cont-main
+  Normal  Started    22s   kubelet            Started container cont-main
+vagrant@node1:~$ kubectl delete -f 4-init-container.yaml
+pod "pod-init" deleted
+service "svc-init" deleted
+vagrant@node1:~$ kubectl get pods,svc
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d
+vagrant@node1:~$ hostname
+node1
+vagrant@node1:~$ wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -O metrics-server.yaml
+--2023-11-18 12:56:39--  https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+Resolving github.com (github.com)... 140.82.121.4
+Connecting to github.com (github.com)|140.82.121.4|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.4/components.yaml [following]
+--2023-11-18 12:56:39--  https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.4/components.yaml
+Reusing existing connection to github.com:443.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/92132038/c1b398f6-c513-424f-abf2-98ed261447af?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20231118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231118T105056Z&X-Amz-Expires=300&X-Amz-Signature=6a23883ce4ad82c31d5aec95b4ae61d352310c5a478a938dc7eacf08bb4d87d7&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=92132038&response-content-disposition=attachment%3B%20filename%3Dcomponents.yaml&response-content-type=application%2Foctet-stream [following]
+--2023-11-18 12:56:40--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/92132038/c1b398f6-c513-424f-abf2-98ed261447af?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20231118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231118T105056Z&X-Amz-Expires=300&X-Amz-Signature=6a23883ce4ad82c31d5aec95b4ae61d352310c5a478a938dc7eacf08bb4d87d7&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=92132038&response-content-disposition=attachment%3B%20filename%3Dcomponents.yaml&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.109.133, 185.199.110.133, 185.199.111.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.109.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4186 (4.1K) [application/octet-stream]
+Saving to: ‘metrics-server.yaml’
+
+metrics-server.yaml                 100%[===================================================================>]   4.09K  --.-KB/s    in 0s
+
+2023-11-18 12:56:40 (10.7 MB/s) - ‘metrics-server.yaml’ saved [4186/4186]
+
+vagrant@node1:~$ vi metrics-server.yaml
+vagrant@node1:~$ vi metrics-server.yaml
+vagrant@node1:~$ vagrant@node1:~$
+vagrant@node1:~$ cat metrics-server.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: metrics-server
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    k8s-app: metrics-server
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: system:aggregated-metrics-reader
+rules:
+- apiGroups:
+  - metrics.k8s.io
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: system:metrics-server
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes/metrics
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: metrics-server-auth-reader
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: metrics-server:system:auth-delegator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: system:metrics-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:metrics-server
+subjects:
+- kind: ServiceAccount
+  name: metrics-server
+  namespace: kube-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: metrics-server
+  namespace: kube-system
+spec:
+  ports:
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: https
+  selector:
+    k8s-app: metrics-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: metrics-server
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      k8s-app: metrics-server
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        k8s-app: metrics-server
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+        image: registry.k8s.io/metrics-server/metrics-server:v0.6.4
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /livez
+            port: https
+            scheme: HTTPS
+          periodSeconds: 10
+        name: metrics-server
+        ports:
+        - containerPort: 4443
+          name: https
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: https
+            scheme: HTTPS
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-dir
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-cluster-critical
+      serviceAccountName: metrics-server
+      volumes:
+      - emptyDir: {}
+        name: tmp-dir
+---
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  labels:
+    k8s-app: metrics-server
+  name: v1beta1.metrics.k8s.io
+spec:
+  group: metrics.k8s.io
+  groupPriorityMinimum: 100
+  insecureSkipTLSVerify: true
+  service:
+    name: metrics-server
+    namespace: kube-system
+  version: v1beta1
+  versionPriority: 100
+vagrant@node1:~$ kubectl apply -f metrics-server.yaml
+serviceaccount/metrics-server created
+clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/system:metrics-server created
+rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
+clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
+clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
+service/metrics-server created
+deployment.apps/metrics-server created
+apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
+vagrant@node1:~$ kubectl get all -A
+NAMESPACE          NAME                                          READY   STATUS    RESTARTS       AGE
+calico-apiserver   pod/calico-apiserver-6858b7bdf8-h4qlj         1/1     Running   2 (110m ago)   7d1h
+calico-apiserver   pod/calico-apiserver-6858b7bdf8-mnb42         1/1     Running   2 (109m ago)   7d1h
+calico-system      pod/calico-kube-controllers-c5c45b65c-8649d   1/1     Running   2 (110m ago)   7d1h
+calico-system      pod/calico-node-6mm8n                         1/1     Running   2 (110m ago)   7d1h
+calico-system      pod/calico-node-b59v7                         1/1     Running   2 (110m ago)   7d1h
+calico-system      pod/calico-node-n69r9                         1/1     Running   2 (109m ago)   7d1h
+calico-system      pod/calico-typha-9478779dd-hnhxb              1/1     Running   4 (108m ago)   7d1h
+calico-system      pod/calico-typha-9478779dd-kgbkk              1/1     Running   3 (110m ago)   7d1h
+calico-system      pod/csi-node-driver-4ppsc                     2/2     Running   4 (110m ago)   7d1h
+calico-system      pod/csi-node-driver-p6lc6                     2/2     Running   4 (109m ago)   7d1h
+calico-system      pod/csi-node-driver-wz9jq                     2/2     Running   4 (110m ago)   7d1h
+kube-system        pod/coredns-5d78c9869d-4mqgb                  1/1     Running   2 (110m ago)   7d1h
+kube-system        pod/coredns-5d78c9869d-jl8j2                  1/1     Running   2 (110m ago)   7d1h
+kube-system        pod/etcd-node1                                1/1     Running   2 (110m ago)   7d1h
+kube-system        pod/kube-apiserver-node1                      1/1     Running   2 (110m ago)   7d1h
+kube-system        pod/kube-controller-manager-node1             1/1     Running   4 (110m ago)   7d1h
+kube-system        pod/kube-proxy-ftp8m                          1/1     Running   2 (110m ago)   7d1h
+kube-system        pod/kube-proxy-k625j                          1/1     Running   2 (110m ago)   7d1h
+kube-system        pod/kube-proxy-sksbx                          1/1     Running   2 (109m ago)   7d1h
+kube-system        pod/kube-scheduler-node1                      1/1     Running   4 (110m ago)   7d1h
+kube-system        pod/metrics-server-566f657b9b-67phv           1/1     Running   0              42s
+tigera-operator    pod/tigera-operator-f6bb878c4-whkkz           1/1     Running   5 (109m ago)   7d1h
+
+NAMESPACE          NAME                                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
+calico-apiserver   service/calico-api                        ClusterIP   10.105.75.196    <none>        443/TCP                  7d1h
+calico-system      service/calico-kube-controllers-metrics   ClusterIP   None             <none>        9094/TCP                 7d1h
+calico-system      service/calico-typha                      ClusterIP   10.105.108.244   <none>        5473/TCP                 7d1h
+default            service/kubernetes                        ClusterIP   10.96.0.1        <none>        443/TCP                  7d1h
+kube-system        service/kube-dns                          ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP   7d1h
+kube-system        service/metrics-server                    ClusterIP   10.104.105.137   <none>        443/TCP                  44s
+
+NAMESPACE       NAME                             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+calico-system   daemonset.apps/calico-node       3         3         3       3            3           kubernetes.io/os=linux   7d1h
+calico-system   daemonset.apps/csi-node-driver   3         3         3       3            3           kubernetes.io/os=linux   7d1h
+kube-system     daemonset.apps/kube-proxy        3         3         3       3            3           kubernetes.io/os=linux   7d1h
+
+NAMESPACE          NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+calico-apiserver   deployment.apps/calico-apiserver          2/2     2            2           7d1h
+calico-system      deployment.apps/calico-kube-controllers   1/1     1            1           7d1h
+calico-system      deployment.apps/calico-typha              2/2     2            2           7d1h
+kube-system        deployment.apps/coredns                   2/2     2            2           7d1h
+kube-system        deployment.apps/metrics-server            1/1     1            1           43s
+tigera-operator    deployment.apps/tigera-operator           1/1     1            1           7d1h
+
+NAMESPACE          NAME                                                DESIRED   CURRENT   READY   AGE
+calico-apiserver   replicaset.apps/calico-apiserver-6858b7bdf8         2         2         2       7d1h
+calico-system      replicaset.apps/calico-kube-controllers-c5c45b65c   1         1         1       7d1h
+calico-system      replicaset.apps/calico-typha-9478779dd              2         2         2       7d1h
+kube-system        replicaset.apps/coredns-5d78c9869d                  2         2         2       7d1h
+kube-system        replicaset.apps/metrics-server-566f657b9b           1         1         1       43s
+tigera-operator    replicaset.apps/tigera-operator-f6bb878c4           1         1         1       7d1h
+vagrant@node1:~$ kubectl get all -n kube-system
+NAME                                  READY   STATUS    RESTARTS       AGE
+pod/coredns-5d78c9869d-4mqgb          1/1     Running   2 (111m ago)   7d1h
+pod/coredns-5d78c9869d-jl8j2          1/1     Running   2 (111m ago)   7d1h
+pod/etcd-node1                        1/1     Running   2 (111m ago)   7d1h
+pod/kube-apiserver-node1              1/1     Running   2 (111m ago)   7d1h
+pod/kube-controller-manager-node1     1/1     Running   4 (111m ago)   7d1h
+pod/kube-proxy-ftp8m                  1/1     Running   2 (111m ago)   7d1h
+pod/kube-proxy-k625j                  1/1     Running   2 (111m ago)   7d1h
+pod/kube-proxy-sksbx                  1/1     Running   2 (110m ago)   7d1h
+pod/kube-scheduler-node1              1/1     Running   4 (111m ago)   7d1h
+pod/metrics-server-566f657b9b-67phv   1/1     Running   0              105s
+
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
+service/kube-dns         ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP   7d1h
+service/metrics-server   ClusterIP   10.104.105.137   <none>        443/TCP                  106s
+
+NAME                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+daemonset.apps/kube-proxy   3         3         3       3            3           kubernetes.io/os=linux   7d1h
+
+NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/coredns          2/2     2            2           7d1h
+deployment.apps/metrics-server   1/1     1            1           105s
+
+NAME                                        DESIRED   CURRENT   READY   AGE
+replicaset.apps/coredns-5d78c9869d          2         2         2       7d1h
+replicaset.apps/metrics-server-566f657b9b   1         1         1       105s
+vagrant@node1:~$ cat > 1-auto-scale.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auto-scale-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: auto-scale
+  template:
+    metadata:
+      labels:
+        app: auto-scale
+    spec:
+      containers:
+      - name: auto-scale-container
+        image: shekeriev/terraform-docker
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auto-scale-svc
+  labels:
+    app: auto-scale
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: auto-scalevagrant@node1:~$
+vagrant@node1:~$ cat 1-auto-scale.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auto-scale-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: auto-scale
+  template:
+    metadata:
+      labels:
+        app: auto-scale
+    spec:
+      containers:
+      - name: auto-scale-container
+        image: shekeriev/terraform-docker
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auto-scale-svc
+  labels:
+    app: auto-scale
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: auto-scalevagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 1-auto-scale.yaml
+deployment.apps/auto-scale-deploy created
+service/auto-scale-svc created
+vagrant@node1:~$ kubectl get pods
+NAME                                 READY   STATUS              RESTARTS   AGE
+auto-scale-deploy-7c8d5555ff-4ktf4   0/1     ContainerCreating   0          8s
+auto-scale-deploy-7c8d5555ff-jlkr4   0/1     ContainerCreating   0          8s
+auto-scale-deploy-7c8d5555ff-p8v2g   0/1     ContainerCreating   0          8s
+vagrant@node1:~$ kubectl get pods
+NAME                                 READY   STATUS              RESTARTS   AGE
+auto-scale-deploy-7c8d5555ff-4ktf4   0/1     ContainerCreating   0          28s
+auto-scale-deploy-7c8d5555ff-jlkr4   0/1     ContainerCreating   0          28s
+auto-scale-deploy-7c8d5555ff-p8v2g   0/1     ContainerCreating   0          28s
+vagrant@node1:~$ kubectl get pods
+NAME                                 READY   STATUS              RESTARTS   AGE
+auto-scale-deploy-7c8d5555ff-4ktf4   0/1     ContainerCreating   0          49s
+auto-scale-deploy-7c8d5555ff-jlkr4   1/1     Running             0          49s
+auto-scale-deploy-7c8d5555ff-p8v2g   1/1     Running             0          49s
+vagrant@node1:~$ kubectl get pods
+NAME                                 READY   STATUS    RESTARTS   AGE
+auto-scale-deploy-7c8d5555ff-4ktf4   1/1     Running   0          61s
+auto-scale-deploy-7c8d5555ff-jlkr4   1/1     Running   0          61s
+auto-scale-deploy-7c8d5555ff-p8v2g   1/1     Running   0          61s
+vagrant@node1:~$ cat > 1-auto-scale-hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: auto-scale-deploy
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: auto-scale-deploy
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 10vagrant@node1:~$
+vagrant@node1:~$ cat 1-auto-scale-hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: auto-scale-deploy
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: auto-scale-deploy
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 10vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 1-auto-scale-hpa.yaml
+horizontalpodautoscaler.autoscaling/auto-scale-deploy created
+vagrant@node1:~$ kubectl get horizontalpodautoscalers auto-scale-deploy
+NAME                REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auto-scale-deploy   Deployment/auto-scale-deploy   0%/10%    1         5         3          21s
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                                 READY   STATUS    RESTARTS   AGE     IP              NODE    NOMINATED NODE   READINESS GATES
+auto-scale-deploy-7c8d5555ff-4ktf4   1/1     Running   0          3m46s   10.244.104.26   node2   <none>           <none>
+auto-scale-deploy-7c8d5555ff-jlkr4   1/1     Running   0          3m46s   10.244.135.13   node3   <none>           <none>
+auto-scale-deploy-7c8d5555ff-p8v2g   1/1     Running   0          3m46s   10.244.104.25   node2   <none>           <none>
+vagrant@node1:~$ kubectl get deployments
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+auto-scale-deploy   3/3     3            3           3m58s
+vagrant@node1:~$ kubectl get horizontalpodautoscalers auto-scale-deploy
+NAME                REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auto-scale-deploy   Deployment/auto-scale-deploy   0%/10%    1         5         3          2m39s
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                                 READY   STATUS    RESTARTS   AGE    IP              NODE    NOMINATED NODE   READINESS GATES
+auto-scale-deploy-7c8d5555ff-4ktf4   1/1     Running   0          5m4s   10.244.104.26   node2   <none>           <none>
+auto-scale-deploy-7c8d5555ff-jlkr4   1/1     Running   0          5m4s   10.244.135.13   node3   <none>           <none>
+auto-scale-deploy-7c8d5555ff-p8v2g   1/1     Running   0          5m4s   10.244.104.25   node2   <none>           <none>
+vagrant@node1:~$ kubectl get deployments
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+auto-scale-deploy   1/1     1            1           10m
+vagrant@node1:~$ kubectl delete -f 1-auto-scale-hpa.yaml
+horizontalpodautoscaler.autoscaling "auto-scale-deploy" deleted
+vagrant@node1:~$ kubectl delete -f 1-auto-scale.yaml
+deployment.apps "auto-scale-deploy" deleted
+service "auto-scale-svc" deleted
+vagrant@node1:~$ kubectl delete -f metrics-server.yaml
+serviceaccount "metrics-server" deleted
+clusterrole.rbac.authorization.k8s.io "system:aggregated-metrics-reader" deleted
+clusterrole.rbac.authorization.k8s.io "system:metrics-server" deleted
+rolebinding.rbac.authorization.k8s.io "metrics-server-auth-reader" deleted
+clusterrolebinding.rbac.authorization.k8s.io "metrics-server:system:auth-delegator" deleted
+clusterrolebinding.rbac.authorization.k8s.io "system:metrics-server" deleted
+service "metrics-server" deleted
+deployment.apps "metrics-server" deleted
+apiservice.apiregistration.k8s.io "v1beta1.metrics.k8s.io" deleted
+vagrant@node1:~$ kubectl get nodes --show-labels
+NAME    STATUS   ROLES           AGE    VERSION   LABELS
+node1   Ready    control-plane   7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node1,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+node2   Ready    <none>          7d1h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node2,kubernetes.io/os=linux
+node3   Ready    <none>          7d1h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node3,kubernetes.io/os=linux
+vagrant@node1:~$ kubectl describe node k8s1
+Error from server (NotFound): nodes "k8s1" not found
+vagrant@node1:~$ kubectl label node node2 disk=hitachi --overwrite
+node/node2 labeled
+vagrant@node1:~$ kubectl label node node3 disk=hitachi --overwrite
+node/node3 labeled
+vagrant@node1:~$ kubectl get nodes --show-labels
+NAME    STATUS   ROLES           AGE    VERSION   LABELS
+node1   Ready    control-plane   7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node1,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+node2   Ready    <none>          7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=hitachi,kubernetes.io/arch=amd64,kubernetes.io/hostname=node2,kubernetes.io/os=linux
+node3   Ready    <none>          7d1h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=hitachi,kubernetes.io/arch=amd64,kubernetes.io/hostname=node3,kubernetes.io/os=linux
+vagrant@node1:~$ kubectl describe node | grep Taints
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+Taints:             <none>
+Taints:             <none>
+vagrant@node1:~$ kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule-
+node/node1 untainted
+vagrant@node1:~$ kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule
+node/node1 tainted
+vagrant@node1:~$ kubectl describe node | grep Taints
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+Taints:             <none>
+Taints:             <none>
+vagrant@node1:~$ kubectl get pods -n kube-system -o wide
+NAME                            READY   STATUS    RESTARTS       AGE    IP               NODE    NOMINATED NODE   READINESS GATES
+coredns-5d78c9869d-4mqgb        1/1     Running   2 (133m ago)   7d2h   10.244.166.137   node1   <none>           <none>
+coredns-5d78c9869d-jl8j2        1/1     Running   2 (133m ago)   7d2h   10.244.166.138   node1   <none>           <none>
+etcd-node1                      1/1     Running   2 (133m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-apiserver-node1            1/1     Running   2 (133m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-controller-manager-node1   1/1     Running   4 (133m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-proxy-ftp8m                1/1     Running   2 (132m ago)   7d2h   192.168.99.102   node2   <none>           <none>
+kube-proxy-k625j                1/1     Running   2 (133m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-proxy-sksbx                1/1     Running   2 (131m ago)   7d2h   192.168.99.103   node3   <none>           <none>
+kube-scheduler-node1            1/1     Running   4 (133m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+vagrant@node1:~$ kubectl describe pod coredns-5d78c9869d-4mqgb -n kube-system
+Name:                 coredns-5d78c9869d-4mqgb
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      coredns
+Node:                 node1/192.168.99.101
+Start Time:           Sat, 11 Nov 2023 11:20:51 +0200
+Labels:               k8s-app=kube-dns
+                      pod-template-hash=5d78c9869d
+Annotations:          cni.projectcalico.org/containerID: 4a01fcefaaae8072eb8b6e53ef4862dafbcc33beef8b8d5833a545f2de0f7334
+                      cni.projectcalico.org/podIP: 10.244.166.137/32
+                      cni.projectcalico.org/podIPs: 10.244.166.137/32
+Status:               Running
+IP:                   10.244.166.137
+IPs:
+  IP:           10.244.166.137
+Controlled By:  ReplicaSet/coredns-5d78c9869d
+Containers:
+  coredns:
+    Container ID:  containerd://a256aebb4ce9ebc12c4f5b953a3479be2639df1c8a006f54dfc70b3ff5aeeab1
+    Image:         registry.k8s.io/coredns/coredns:v1.10.1
+    Image ID:      registry.k8s.io/coredns/coredns@sha256:a0ead06651cf580044aeb0a0feba63591858fb2e43ade8c9dea45a6a89ae7e5e
+    Ports:         53/UDP, 53/TCP, 9153/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Running
+      Started:      Sat, 18 Nov 2023 11:14:04 +0200
+    Last State:     Terminated
+      Reason:       Unknown
+      Exit Code:    255
+      Started:      Sun, 12 Nov 2023 10:14:00 +0200
+      Finished:     Sat, 18 Nov 2023 11:13:12 +0200
+    Ready:          True
+    Restart Count:  2
+    Limits:
+      memory:  170Mi
+    Requests:
+      cpu:        100m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-5lk82 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      coredns
+    Optional:  false
+  kube-api-access-5lk82:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 CriticalAddonsOnly op=Exists
+                             node-role.kubernetes.io/control-plane:NoSchedule
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:                      <none>
+vagrant@node1:~$ kubectl get pods -n kube-system -o wide
+NAME                            READY   STATUS    RESTARTS       AGE    IP               NODE    NOMINATED NODE   READINESS GATES
+coredns-5d78c9869d-4mqgb        1/1     Running   2 (136m ago)   7d2h   10.244.166.137   node1   <none>           <none>
+coredns-5d78c9869d-jl8j2        1/1     Running   2 (136m ago)   7d2h   10.244.166.138   node1   <none>           <none>
+etcd-node1                      1/1     Running   2 (136m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-apiserver-node1            1/1     Running   2 (136m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-controller-manager-node1   1/1     Running   4 (136m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-proxy-ftp8m                1/1     Running   2 (136m ago)   7d2h   192.168.99.102   node2   <none>           <none>
+kube-proxy-k625j                1/1     Running   2 (136m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+kube-proxy-sksbx                1/1     Running   2 (135m ago)   7d2h   192.168.99.103   node3   <none>           <none>
+kube-scheduler-node1            1/1     Running   4 (136m ago)   7d2h   192.168.99.101   node1   <none>           <none>
+vagrant@node1:~$ kubectl describe pod etcd-node1 -n kube-system
+Name:                 etcd-node1
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Node:                 node1/192.168.99.101
+Start Time:           Sat, 18 Nov 2023 11:13:14 +0200
+Labels:               component=etcd
+                      tier=control-plane
+Annotations:          kubeadm.kubernetes.io/etcd.advertise-client-urls: https://192.168.99.101:2379
+                      kubernetes.io/config.hash: 68c5d386965495c943ccaeb42b844463
+                      kubernetes.io/config.mirror: 68c5d386965495c943ccaeb42b844463
+                      kubernetes.io/config.seen: 2023-11-11T11:16:31.771501040+02:00
+                      kubernetes.io/config.source: file
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   192.168.99.101
+IPs:
+  IP:           192.168.99.101
+Controlled By:  Node/node1
+Containers:
+  etcd:
+    Container ID:  containerd://43a0f8a6725ff2d7f3ec3ee6a1ecfd08d4de7bdf8deb29464c0784e466f97b96
+    Image:         registry.k8s.io/etcd:3.5.7-0
+    Image ID:      registry.k8s.io/etcd@sha256:51eae8381dcb1078289fa7b4f3df2630cdc18d09fb56f8e56b41c40e191d6c83
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      etcd
+      --advertise-client-urls=https://192.168.99.101:2379
+      --cert-file=/etc/kubernetes/pki/etcd/server.crt
+      --client-cert-auth=true
+      --data-dir=/var/lib/etcd
+      --experimental-initial-corrupt-check=true
+      --experimental-watch-progress-notify-interval=5s
+      --initial-advertise-peer-urls=https://192.168.99.101:2380
+      --initial-cluster=node1=https://192.168.99.101:2380
+      --key-file=/etc/kubernetes/pki/etcd/server.key
+      --listen-client-urls=https://127.0.0.1:2379,https://192.168.99.101:2379
+      --listen-metrics-urls=http://127.0.0.1:2381
+      --listen-peer-urls=https://192.168.99.101:2380
+      --name=node1
+      --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+      --peer-client-cert-auth=true
+      --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+      --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+      --snapshot-count=10000
+      --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    State:          Running
+      Started:      Sat, 18 Nov 2023 11:13:17 +0200
+    Last State:     Terminated
+      Reason:       Unknown
+      Exit Code:    255
+      Started:      Sun, 12 Nov 2023 10:13:10 +0200
+      Finished:     Sat, 18 Nov 2023 11:13:12 +0200
+    Ready:          True
+    Restart Count:  2
+    Requests:
+      cpu:        100m
+      memory:     100Mi
+    Liveness:     http-get http://127.0.0.1:2381/health%3Fexclude=NOSPACE&serializable=true delay=10s timeout=15s period=10s #success=1 #failure=8
+    Startup:      http-get http://127.0.0.1:2381/health%3Fserializable=false delay=10s timeout=15s period=10s #success=1 #failure=24
+    Environment:  <none>
+    Mounts:
+      /etc/kubernetes/pki/etcd from etcd-certs (rw)
+      /var/lib/etcd from etcd-data (rw)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  etcd-certs:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/kubernetes/pki/etcd
+    HostPathType:  DirectoryOrCreate
+  etcd-data:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/etcd
+    HostPathType:  DirectoryOrCreate
+QoS Class:         Burstable
+Node-Selectors:    <none>
+Tolerations:       :NoExecute op=Exists
+Events:            <none>
+vagrant@node1:~$ kubectl taint node node2 demo-taint=nomorework:NoSchedule
+node/node2 tainted
+vagrant@node1:~$ kubectl describe node | grep Taints
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+Taints:             demo-taint=nomorework:NoSchedule
+Taints:             <none>
+vagrant@node1:~$ cat > 2-schedule.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: schedule
+  template:
+    metadata:
+      labels:
+        app: schedule
+    spec:
+      containers:
+      - name: schedule-container
+        image: shekeriev/terraform-docker
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+vagrant@node1:~$
+vagrant@node1:~$ cat 2-schedule.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: schedule
+  template:
+    metadata:
+      labels:
+        app: schedule
+    spec:
+      containers:
+      - name: schedule-container
+        image: shekeriev/terraform-docker
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+vagrant@node1:~$ kubectl apply -f 2-schedule.yaml
+deployment.apps/schedule-deploy created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+schedule-deploy-56f647df77-4zwj6   1/1     Running   0          11s   10.244.135.16   node3   <none>           <none>
+schedule-deploy-56f647df77-m9sz5   1/1     Running   0          11s   10.244.135.15   node3   <none>           <none>
+schedule-deploy-56f647df77-s94w2   1/1     Running   0          11s   10.244.135.14   node3   <none>           <none>
+vagrant@node1:~$ kubectl delete -f 2-schedule.yaml
+deployment.apps "schedule-deploy" deleted
+vagrant@node1:~$ cat > 2-schedule-toleration.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: schedule
+  template:
+    metadata:
+      labels:
+        app: schedule
+    spec:
+      containers:
+      - name: schedule-container
+        image: shekeriev/terraform-docker
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+      tolerations:
+      - key: demo-taint
+        operator: Equal
+        value: nomorework
+        effect: NoSchedule
+vagrant@node1:~$ cat 2-schedule-toleration.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: schedule
+  template:
+    metadata:
+      labels:
+        app: schedule
+    spec:
+      containers:
+      - name: schedule-container
+        image: shekeriev/terraform-docker
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+      tolerations:
+      - key: demo-taint
+        operator: Equal
+        value: nomorework
+        effect: NoSchedule
+vagrant@node1:~$ kubectl apply -f 2-schedule-toleration.yaml
+deployment.apps/schedule-deploy created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                              READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+schedule-deploy-994c5796c-6l5rf   1/1     Running   0          7s    10.244.104.27   node2   <none>           <none>
+schedule-deploy-994c5796c-j85xg   1/1     Running   0          7s    10.244.104.28   node2   <none>           <none>
+schedule-deploy-994c5796c-mrcd2   1/1     Running   0          7s    10.244.135.17   node3   <none>           <none>
+vagrant@node1:~$ kubectl taint node node2 demo-taint-
+node/node2 untainted
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                              READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+schedule-deploy-994c5796c-6l5rf   1/1     Running   0          51s   10.244.104.27   node2   <none>           <none>
+schedule-deploy-994c5796c-j85xg   1/1     Running   0          51s   10.244.104.28   node2   <none>           <none>
+schedule-deploy-994c5796c-mrcd2   1/1     Running   0          51s   10.244.135.17   node3   <none>           <none>
+vagrant@node1:~$ kubectl delete -f 2-schedule-toleration.yaml
+deployment.apps "schedule-deploy" deleted
+vagrant@node1:~$ cat > 3-daemon-set.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemon-set
+spec:
+  selector:
+    matchLabels:
+      app: daemon-set
+  template:
+    metadata:
+      labels:
+        app: daemon-set
+    spec:
+      nodeSelector:
+        disk: samsung
+      containers:
+      - name: main
+        image: shekeriev/k8s-appa:v1
+        ports:
+        - containerPort: 80
+vagrant@node1:~$
+vagrant@node1:~$ cat 3-daemon-set.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemon-set
+spec:
+  selector:
+    matchLabels:
+      app: daemon-set
+  template:
+    metadata:
+      labels:
+        app: daemon-set
+    spec:
+      nodeSelector:
+        disk: samsung
+      containers:
+      - name: main
+        image: shekeriev/k8s-appa:v1
+        ports:
+        - containerPort: 80
+vagrant@node1:~$ cp 3-daemon-set.yaml pure-ds.yaml
+vagrant@node1:~$ vi pure-ds.yaml
+vagrant@node1:~$  18L, 316B written
+vagrant@node1:~$ cat pure-ds.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemon-set
+spec:
+  selector:
+    matchLabels:
+      app: daemon-set
+  template:
+    metadata:
+      labels:
+        app: daemon-set
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/k8s-appa:v1
+        ports:
+        - containerPort: 80
+vagrant@node1:~$ kubectl apply -f pure-ds.yaml
+daemonset.apps/daemon-set created
+vagrant@node1:~$ kubectl get ds
+NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemon-set   2         2         2       2            2           <none>          15s
+vagrant@node1:~$ kubectl get pods -o wide
+NAME               READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+daemon-set-cx854   1/1     Running   0          41s   10.244.104.29   node2   <none>           <none>
+daemon-set-dslcm   1/1     Running   0          41s   10.244.135.18   node3   <none>           <none>
+vagrant@node1:~$ kubectl delete -f pure-ds.yaml
+daemonset.apps "daemon-set" deleted
+vagrant@node1:~$ cat 3-daemon-set.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemon-set
+spec:
+  selector:
+    matchLabels:
+      app: daemon-set
+  template:
+    metadata:
+      labels:
+        app: daemon-set
+    spec:
+      nodeSelector:
+        disk: samsung
+      containers:
+      - name: main
+        image: shekeriev/k8s-appa:v1
+        ports:
+        - containerPort: 80
+vagrant@node1:~$ kubectl apply -f 3-daemon-set.yaml
+daemonset.apps/daemon-set created
+vagrant@node1:~$ kubectl get ds
+NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemon-set   0         0         0       0            0           disk=samsung    21s
+vagrant@node1:~$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~$ kubectl get nodes --show-labels
+NAME    STATUS   ROLES           AGE    VERSION   LABELS
+node1   Ready    control-plane   7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node1,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+node2   Ready    <none>          7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=hitachi,kubernetes.io/arch=amd64,kubernetes.io/hostname=node2,kubernetes.io/os=linux
+node3   Ready    <none>          7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=hitachi,kubernetes.io/arch=amd64,kubernetes.io/hostname=node3,kubernetes.io/os=linux
+vagrant@node1:~$ kubectl label node node2 disk=samsung
+error: 'disk' already has a value (hitachi), and --overwrite is false
+vagrant@node1:~$ kubectl label node node2 disk=samsung --overwrite
+node/node2 labeled
+vagrant@node1:~$ kubectl get nodes --show-labels
+NAME    STATUS   ROLES           AGE    VERSION   LABELS
+node1   Ready    control-plane   7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node1,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+node2   Ready    <none>          7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=samsung,kubernetes.io/arch=amd64,kubernetes.io/hostname=node2,kubernetes.io/os=linux
+node3   Ready    <none>          7d2h   v1.27.5   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=hitachi,kubernetes.io/arch=amd64,kubernetes.io/hostname=node3,kubernetes.io/os=linux
+vagrant@node1:~$ kubectl get ds
+NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemon-set   1         1         1       1            1           disk=samsung    2m20s
+vagrant@node1:~$ kubectl get pods -o wide
+NAME               READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+daemon-set-qg5g2   1/1     Running   0          35s   10.244.104.30   node2   <none>           <none>
+vagrant@node1:~$ kubectl label node node3 disk=samsung
+error: 'disk' already has a value (hitachi), and --overwrite is false
+vagrant@node1:~$ kubectl label node node3 disk=samsung --overwrite
+node/node3 labeled
+vagrant@node1:~$ kubectl get pods -o wide
+NAME               READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+daemon-set-5gbzf   1/1     Running   0          9s    10.244.135.19   node3   <none>           <none>
+daemon-set-qg5g2   1/1     Running   0          84s   10.244.104.30   node2   <none>           <none>
+vagrant@node1:~$ kubectl get ds
+NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemon-set   2         2         2       2            2           disk=samsung    3m27s
+vagrant@node1:~$ kubectl label node node2 disk=wdc --overwrite
+node/node2 labeled
+vagrant@node1:~$ kubectl get ds
+NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemon-set   1         1         1       1            1           disk=samsung    4m12s
+vagrant@node1:~$ kubectl get pods -o wide
+NAME               READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+daemon-set-5gbzf   1/1     Running   0          65s   10.244.135.19   node3   <none>           <none>
+vagrant@node1:~$ kubectl delete -f 3-daemon-set.yaml
+daemonset.apps "daemon-set" deleted
+vagrant@node1:~$ kubectl get ds
+No resources found in default namespace.
+vagrant@node1:~$ cat > 4-batch-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: main
+        image: shekeriev/sleeper
+vagrant@node1:~$
+vagrant@node1:~$ cat 4-batch-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: main
+        image: shekeriev/sleeper
+vagrant@node1:~$ kubectl apply -f 4-batch-job.yaml
+job.batch/batch-job created
+vagrant@node1:~$ kubectl get jobs
+NAME        COMPLETIONS   DURATION   AGE
+batch-job   0/1           10s        10s
+vagrant@node1:~$ kubectl get jobs -o wide
+NAME        COMPLETIONS   DURATION   AGE   CONTAINERS   IMAGES              SELECTOR
+batch-job   0/1           52s        52s   main         shekeriev/sleeper   batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+vagrant@node1:~$ kubectl get pods
+NAME              READY   STATUS      RESTARTS   AGE
+batch-job-ffszk   0/1     Completed   0          70s
+vagrant@node1:~$ kubectl describe job batch-job
+Name:             batch-job
+Namespace:        default
+Selector:         batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+Labels:           app=batch-job
+                  batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+                  batch.kubernetes.io/job-name=batch-job
+                  controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+                  job-name=batch-job
+Annotations:      batch.kubernetes.io/job-tracking:
+Parallelism:      1
+Completions:      1
+Completion Mode:  NonIndexed
+Start Time:       Sat, 18 Nov 2023 13:55:10 +0200
+Completed At:     Sat, 18 Nov 2023 13:56:17 +0200
+Duration:         67s
+Pods Statuses:    0 Active (0 Ready) / 1 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=batch-job
+           batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+           batch.kubernetes.io/job-name=batch-job
+           controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+           job-name=batch-job
+  Containers:
+   main:
+    Image:        shekeriev/sleeper
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From            Message
+  ----    ------            ----  ----            -------
+  Normal  SuccessfulCreate  89s   job-controller  Created pod: batch-job-ffszk
+  Normal  Completed         22s   job-controller  Job completed
+vagrant@node1:~$ kubectl get jobs -o wide
+NAME        COMPLETIONS   DURATION   AGE     CONTAINERS   IMAGES              SELECTOR
+batch-job   1/1           67s        3m32s   main         shekeriev/sleeper   batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+vagrant@node1:~$ kubectl get pods
+NAME              READY   STATUS      RESTARTS   AGE
+batch-job-ffszk   0/1     Completed   0          3m39s
+vagrant@node1:~$ kubectl get jobs -o wide
+NAME        COMPLETIONS   DURATION   AGE     CONTAINERS   IMAGES              SELECTOR
+batch-job   1/1           67s        3m57s   main         shekeriev/sleeper   batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+vagrant@node1:~$ kubectl describe job batch-job
+Name:             batch-job
+Namespace:        default
+Selector:         batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+Labels:           app=batch-job
+                  batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+                  batch.kubernetes.io/job-name=batch-job
+                  controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+                  job-name=batch-job
+Annotations:      batch.kubernetes.io/job-tracking:
+Parallelism:      1
+Completions:      1
+Completion Mode:  NonIndexed
+Start Time:       Sat, 18 Nov 2023 13:55:10 +0200
+Completed At:     Sat, 18 Nov 2023 13:56:17 +0200
+Duration:         67s
+Pods Statuses:    0 Active (0 Ready) / 1 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=batch-job
+           batch.kubernetes.io/controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+           batch.kubernetes.io/job-name=batch-job
+           controller-uid=d8b8117a-d622-4b87-a931-8534f58760d3
+           job-name=batch-job
+  Containers:
+   main:
+    Image:        shekeriev/sleeper
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From            Message
+  ----    ------            ----   ----            -------
+  Normal  SuccessfulCreate  4m1s   job-controller  Created pod: batch-job-ffszk
+  Normal  Completed         2m54s  job-controller  Job completed
+vagrant@node1:~$ kubectl delete -f 4-batch-job.yaml
+job.batch "batch-job" deleted
+vagrant@node1:~$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~$ cat > 4-batch-job-serial.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job-serial
+spec:
+  completions: 3
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/sleeper
+      restartPolicy: Never
+vagrant@node1:~$ cat 4-batch-job-serial.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job-serial
+spec:
+  completions: 3
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/sleeper
+      restartPolicy: Never
+vagrant@node1:~$ kubectl apply -f 4-batch-job-serial.yaml
+job.batch/batch-job-serial created
+vagrant@node1:~$ kubectl get jobs
+NAME               COMPLETIONS   DURATION   AGE
+batch-job-serial   0/3           13s        13s
+vagrant@node1:~$ kubectl describe job batch-job-serial
+Name:             batch-job-serial
+Namespace:        default
+Selector:         batch.kubernetes.io/controller-uid=308fbe8f-ab45-45f6-9ade-44d2649dbd68
+Labels:           app=batch-job
+                  batch.kubernetes.io/controller-uid=308fbe8f-ab45-45f6-9ade-44d2649dbd68
+                  batch.kubernetes.io/job-name=batch-job-serial
+                  controller-uid=308fbe8f-ab45-45f6-9ade-44d2649dbd68
+                  job-name=batch-job-serial
+Annotations:      batch.kubernetes.io/job-tracking:
+Parallelism:      1
+Completions:      3
+Completion Mode:  NonIndexed
+Start Time:       Sat, 18 Nov 2023 14:02:04 +0200
+Pods Statuses:    1 Active (0 Ready) / 1 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=batch-job
+           batch.kubernetes.io/controller-uid=308fbe8f-ab45-45f6-9ade-44d2649dbd68
+           batch.kubernetes.io/job-name=batch-job-serial
+           controller-uid=308fbe8f-ab45-45f6-9ade-44d2649dbd68
+           job-name=batch-job-serial
+  Containers:
+   main:
+    Image:        shekeriev/sleeper
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From            Message
+  ----    ------            ----  ----            -------
+  Normal  SuccessfulCreate  67s   job-controller  Created pod: batch-job-serial-v4tvz
+  Normal  SuccessfulCreate  2s    job-controller  Created pod: batch-job-serial-km48z
+vagrant@node1:~$ kubectl get pods
+NAME                     READY   STATUS      RESTARTS   AGE
+batch-job-serial-km48z   1/1     Running     0          29s
+batch-job-serial-v4tvz   0/1     Completed   0          94s
+vagrant@node1:~$ kubectl delete -f 4-batch-job-serial.yaml
+job.batch "batch-job-serial" deleted
+vagrant@node1:~$ kubectl get pods
+NAME                     READY   STATUS        RESTARTS   AGE
+batch-job-serial-km48z   1/1     Terminating   0          53s
+vagrant@node1:~$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~$ cat > 4-batch-job-parallel.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job-parallel
+spec:
+  completions: 4
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/sleeper
+      restartPolicy: Never
+vagrant@node1:~$ cat 4-batch-job-parallel.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job-parallel
+spec:
+  completions: 4
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/sleeper
+      restartPolicy: Never
+vagrant@node1:~$ kubectl apply -f 4-batch-job-parallel.yaml
+job.batch/batch-job-parallel created
+vagrant@node1:~$ kubectl get jobs
+NAME                 COMPLETIONS   DURATION   AGE
+batch-job-parallel   0/4           11s        11s
+vagrant@node1:~$ kubectl get jobs -o wide
+NAME                 COMPLETIONS   DURATION   AGE   CONTAINERS   IMAGES              SELECTOR
+batch-job-parallel   0/4           29s        29s   main         shekeriev/sleeper   batch.kubernetes.io/controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                       READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+batch-job-parallel-6bmkg   1/1     Running   0          43s   10.244.135.20   node3   <none>           <none>
+batch-job-parallel-7drxl   1/1     Running   0          43s   10.244.104.34   node2   <none>           <none>
+vagrant@node1:~$ kubectl describe job batch-job-parallel
+Name:             batch-job-parallel
+Namespace:        default
+Selector:         batch.kubernetes.io/controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+Labels:           app=batch-job
+                  batch.kubernetes.io/controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+                  batch.kubernetes.io/job-name=batch-job-parallel
+                  controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+                  job-name=batch-job-parallel
+Annotations:      batch.kubernetes.io/job-tracking:
+Parallelism:      2
+Completions:      4
+Completion Mode:  NonIndexed
+Start Time:       Sat, 18 Nov 2023 14:05:16 +0200
+Pods Statuses:    2 Active (2 Ready) / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=batch-job
+           batch.kubernetes.io/controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+           batch.kubernetes.io/job-name=batch-job-parallel
+           controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+           job-name=batch-job-parallel
+  Containers:
+   main:
+    Image:        shekeriev/sleeper
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From            Message
+  ----    ------            ----  ----            -------
+  Normal  SuccessfulCreate  52s   job-controller  Created pod: batch-job-parallel-7drxl
+  Normal  SuccessfulCreate  52s   job-controller  Created pod: batch-job-parallel-6bmkg
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                       READY   STATUS      RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+batch-job-parallel-29h8h   1/1     Running     0          13s   10.244.135.21   node3   <none>           <none>
+batch-job-parallel-6bmkg   0/1     Completed   0          81s   10.244.135.20   node3   <none>           <none>
+batch-job-parallel-7drxl   0/1     Completed   0          81s   10.244.104.34   node2   <none>           <none>
+batch-job-parallel-hsm88   1/1     Running     0          14s   10.244.104.35   node2   <none>           <none>
+vagrant@node1:~$ kubectl get jobs -o wide
+NAME                 COMPLETIONS   DURATION   AGE   CONTAINERS   IMAGES              SELECTOR
+batch-job-parallel   2/4           95s        95s   main         shekeriev/sleeper   batch.kubernetes.io/controller-uid=3eb492bf-af15-4e63-8279-7408629c2eb6
+vagrant@node1:~$ kubectl delete -f 4-batch-job-parallel.yaml
+job.batch "batch-job-parallel" deleted
+vagrant@node1:~$ cat > 4-batch-job-serial.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: batch-job-cron
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: batch-job-cron
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: main
+            image: shekeriev/sleeper
+vagrant@node1:~$ sudo rm 4-batch-job-serial.yaml
+vagrant@node1:~$ ls
+1-auto-scale-hpa.yaml       3-daemon-set.yaml          hwcm.yaml            part1                 pvc10gb.yaml        ss.yaml
+1-auto-scale.yaml           4-batch-job-parallel.yaml  hwpod.yaml           pod-cm-env-vars.yaml  pv-deployment.yaml  svc-environ.yaml
+1-static-pod.yaml           4-batch-job.yaml           hwsec.yaml           pod-cm-env-var.yaml   pvnfs10gb.yaml      svcssnp.yaml
+2-schedule-toleration.yaml  4-init-container.yaml      main.crt             pod-no-env.yaml       pvssa.yaml          svcss.yaml
+2-schedule.yaml             cm.yaml                    main.key             pod-secret.yaml       pvssb.yaml
+2-sidecar.yaml              data                       metrics-server.yaml  pod-w-env.yaml        pvssc.yaml
+3-adapter.yaml              hostpath-deployment.yaml   nfs-deployment.yaml  pure-ds.yaml          secrets.yaml
+vagrant@node1:~$ cat > 4-batch-job-cron.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: batch-job-cron
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: batch-job-cron
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: main
+            image: shekeriev/sleeper
+vagrant@node1:~$ cat 4-batch-job-cron.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: batch-job-cron
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: batch-job-cron
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: main
+            image: shekeriev/sleeper
+vagrant@node1:~$ kubectl apply -f 4-batch-job-cron.yaml
+cronjob.batch/batch-job-cron created
+vagrant@node1:~$ kubectl get cronjobs
+NAME             SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+batch-job-cron   */2 * * * *   False     0        <none>          9s
+vagrant@node1:~$ kubectl get cronjobs -o wide
+NAME             SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE   CONTAINERS   IMAGES              SELECTOR
+batch-job-cron   */2 * * * *   False     0        <none>          18s   main         shekeriev/sleeper   <none>
+vagrant@node1:~$ kubectl get pods -o wide
+No resources found in default namespace.
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS      RESTARTS   AGE     IP              NODE    NOMINATED NODE   READINESS GATES
+batch-job-cron-28338492-fzfds   0/1     Completed   0          2m29s   10.244.104.36   node2   <none>           <none>
+batch-job-cron-28338494-wwnq7   1/1     Running     0          29s     10.244.104.37   node2   <none>           <none>
+vagrant@node1:~$ kubectl delete -f 4-batch-job-cron.yaml
+cronjob.batch "batch-job-cron" deleted
+vagrant@node1:~$ ls
+1-auto-scale-hpa.yaml       3-daemon-set.yaml          hostpath-deployment.yaml  nfs-deployment.yaml   pure-ds.yaml        secrets.yaml
+1-auto-scale.yaml           4-batch-job-cron.yaml      hwcm.yaml                 part1                 pvc10gb.yaml        ss.yaml
+1-static-pod.yaml           4-batch-job-parallel.yaml  hwpod.yaml                pod-cm-env-vars.yaml  pv-deployment.yaml  svc-environ.yaml
+2-schedule-toleration.yaml  4-batch-job.yaml           hwsec.yaml                pod-cm-env-var.yaml   pvnfs10gb.yaml      svcssnp.yaml
+2-schedule.yaml             4-init-container.yaml      main.crt                  pod-no-env.yaml       pvssa.yaml          svcss.yaml
+2-sidecar.yaml              cm.yaml                    main.key                  pod-secret.yaml       pvssb.yaml
+3-adapter.yaml              data                       metrics-server.yaml       pod-w-env.yaml        pvssc.yaml
+vagrant@node1:~$ ls -a
+.                           3-daemon-set.yaml          data                      nfs-deployment.yaml   pvc10gb.yaml        svc-environ.yaml
+..                          4-batch-job-cron.yaml      hostpath-deployment.yaml  part1                 pv-deployment.yaml  svcssnp.yaml
+1-auto-scale-hpa.yaml       4-batch-job-parallel.yaml  hwcm.yaml                 pod-cm-env-vars.yaml  pvnfs10gb.yaml      svcss.yaml
+1-auto-scale.yaml           4-batch-job.yaml           hwpod.yaml                pod-cm-env-var.yaml   pvssa.yaml          .viminfo
+1-static-pod.yaml           4-init-container.yaml      hwsec.yaml                pod-no-env.yaml       pvssb.yaml          .wget-hsts
+2-schedule-toleration.yaml  .bash_history              .kube                     pod-secret.yaml       pvssc.yaml
+2-schedule.yaml             .bash_logout               main.crt                  pod-w-env.yaml        secrets.yaml
+2-sidecar.yaml              .bashrc                    main.key                  .profile              .ssh
+3-adapter.yaml              cm.yaml                    metrics-server.yaml       pure-ds.yaml          ss.yaml
+vagrant@node1:~$ git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.3.2
+Cloning into 'kubernetes-ingress'...
+remote: Enumerating objects: 55355, done.
+remote: Counting objects: 100% (815/815), done.
+remote: Compressing objects: 100% (539/539), done.
+remote: Total 55355 (delta 451), reused 534 (delta 247), pack-reused 54540
+Receiving objects: 100% (55355/55355), 66.30 MiB | 2.54 MiB/s, done.
+Resolving deltas: 100% (34408/34408), done.
+Note: switching to 'd239c207534aaa4fc524fb276f8d44330dbe8571'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+vagrant@node1:~$ cd kubernetes-ingress/deployments
+vagrant@node1:~/kubernetes-ingress/deployments$ ls
+common  daemon-set  deployment  helm-chart  rbac  README.md  service
+vagrant@node1:~/kubernetes-ingress/deployments$ cd ..
+vagrant@node1:~/kubernetes-ingress$ cd ..
+vagrant@node1:~$ apt-get install tree
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+vagrant@node1:~$ sudo apt-get install tree
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  tree
+0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+Need to get 49.6 kB of archives.
+After this operation, 118 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main amd64 tree amd64 1.8.0-1+b1 [49.6 kB]
+Fetched 49.6 kB in 0s (225 kB/s)
+Selecting previously unselected package tree.
+(Reading database ... 55224 files and directories currently installed.)
+Preparing to unpack .../tree_1.8.0-1+b1_amd64.deb ...
+Unpacking tree (1.8.0-1+b1) ...
+Setting up tree (1.8.0-1+b1) ...
+Processing triggers for man-db (2.9.4-2) ...
+vagrant@node1:~$ cd kubernetes-ingress/deployments
+vagrant@node1:~/kubernetes-ingress/deployments$ tree .
+.
+├── common
+│   ├── crds
+│   │   ├── appprotectdos.f5.com_apdoslogconfs.yaml
+│   │   ├── appprotectdos.f5.com_apdospolicy.yaml
+│   │   ├── appprotectdos.f5.com_dosprotectedresources.yaml
+│   │   ├── appprotect.f5.com_aplogconfs.yaml
+│   │   ├── appprotect.f5.com_appolicies.yaml
+│   │   ├── appprotect.f5.com_apusersigs.yaml
+│   │   ├── externaldns.nginx.org_dnsendpoints.yaml
+│   │   ├── k8s.nginx.org_globalconfigurations.yaml
+│   │   ├── k8s.nginx.org_policies.yaml
+│   │   ├── k8s.nginx.org_transportservers.yaml
+│   │   ├── k8s.nginx.org_virtualserverroutes.yaml
+│   │   └── k8s.nginx.org_virtualservers.yaml
+│   ├── ingress-class.yaml
+│   ├── nginx-config.yaml
+│   └── ns-and-sa.yaml
+├── daemon-set
+│   ├── nginx-ingress.yaml
+│   └── nginx-plus-ingress.yaml
+├── deployment
+│   ├── appprotect-dos-arb.yaml
+│   ├── nginx-ingress.yaml
+│   └── nginx-plus-ingress.yaml
+├── helm-chart
+│   ├── chart-icon.png
+│   ├── Chart.yaml
+│   ├── crds
+│   │   ├── appprotectdos.f5.com_apdoslogconfs.yaml
+│   │   ├── appprotectdos.f5.com_apdospolicy.yaml
+│   │   ├── appprotectdos.f5.com_dosprotectedresources.yaml
+│   │   ├── appprotect.f5.com_aplogconfs.yaml
+│   │   ├── appprotect.f5.com_appolicies.yaml
+│   │   ├── appprotect.f5.com_apusersigs.yaml
+│   │   ├── externaldns.nginx.org_dnsendpoints.yaml
+│   │   ├── k8s.nginx.org_globalconfigurations.yaml
+│   │   ├── k8s.nginx.org_policies.yaml
+│   │   ├── k8s.nginx.org_transportservers.yaml
+│   │   ├── k8s.nginx.org_virtualserverroutes.yaml
+│   │   └── k8s.nginx.org_virtualservers.yaml
+│   ├── README.md
+│   ├── templates
+│   │   ├── controller-configmap.yaml
+│   │   ├── controller-daemonset.yaml
+│   │   ├── controller-deployment.yaml
+│   │   ├── controller-globalconfiguration.yaml
+│   │   ├── controller-hpa.yaml
+│   │   ├── controller-ingress-class.yaml
+│   │   ├── controller-leader-election-configmap.yaml
+│   │   ├── controller-pdb.yaml
+│   │   ├── controller-prometheus-service.yaml
+│   │   ├── controller-secret.yaml
+│   │   ├── controller-serviceaccount.yaml
+│   │   ├── controller-servicemonitor.yaml
+│   │   ├── controller-service.yaml
+│   │   ├── controller-wildcard-secret.yaml
+│   │   ├── _helpers.tpl
+│   │   ├── NOTES.txt
+│   │   └── rbac.yaml
+│   ├── values-icp.yaml
+│   ├── values-nsm.yaml
+│   ├── values-plus.yaml
+│   ├── values.schema.json
+│   └── values.yaml
+├── rbac
+│   ├── apdos-rbac.yaml
+│   ├── ap-rbac.yaml
+│   └── rbac.yaml
+├── README.md
+└── service
+    ├── appprotect-dos-arb-svc.yaml
+    ├── loadbalancer-aws-elb.yaml
+    ├── loadbalancer.yaml
+    └── nodeport.yaml
+
+9 directories, 65 files
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/ns-and-sa.yaml
+namespace/nginx-ingress created
+serviceaccount/nginx-ingress created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f rbac/rbac.yaml
+clusterrole.rbac.authorization.k8s.io/nginx-ingress created
+clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f ../examples/shared-examples/default-server-secret/default-server-secret.yaml
+secret/default-server-secret created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/nginx-config.yaml
+configmap/nginx-config created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/ingress-class.yaml
+ingressclass.networking.k8s.io/nginx created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
+customresourcedefinition.apiextensions.k8s.io/virtualservers.k8s.nginx.org created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
+customresourcedefinition.apiextensions.k8s.io/virtualserverroutes.k8s.nginx.org created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
+customresourcedefinition.apiextensions.k8s.io/transportservers.k8s.nginx.org created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+customresourcedefinition.apiextensions.k8s.io/policies.k8s.nginx.org created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl apply -f deployment/nginx-ingress.yaml
+deployment.apps/nginx-ingress created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl get pods --namespace=nginx-ingress -w
+NAME                             READY   STATUS              RESTARTS   AGE
+nginx-ingress-5544df5466-k4trj   0/1     ContainerCreating   0          15s
+nginx-ingress-5544df5466-k4trj   0/1     Running             0          25s
+nginx-ingress-5544df5466-k4trj   0/1     Running             0          25s
+nginx-ingress-5544df5466-k4trj   1/1     Running             0          26s
+^Cvagrant@node1:~/kubernetes-ingress/deployments$ ls -al service/
+total 24
+drwxr-xr-x 2 vagrant vagrant 4096 Nov 18 14:35 .
+drwxr-xr-x 8 vagrant vagrant 4096 Nov 18 14:35 ..
+-rw-r--r-- 1 vagrant vagrant  246 Nov 18 14:35 appprotect-dos-arb-svc.yaml
+-rw-r--r-- 1 vagrant vagrant  439 Nov 18 14:35 loadbalancer-aws-elb.yaml
+-rw-r--r-- 1 vagrant vagrant  323 Nov 18 14:35 loadbalancer.yaml
+-rw-r--r-- 1 vagrant vagrant  288 Nov 18 14:35 nodeport.yaml
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl create -f service/nodeport.yaml
+service/nginx-ingress created
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl get service -n nginx-ingress
+NAME            TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+nginx-ingress   NodePort   10.111.235.238   <none>        80:32733/TCP,443:30669/TCP   16s
+vagrant@node1:~/kubernetes-ingress/deployments$ cd ..
+vagrant@node1:~/kubernetes-ingress$ cd ..
+vagrant@node1:~$ cat > pod-svc-1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  labels:
+    app: pod1
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: main
+    env:
+    - name: TOPOLOGY
+      value: "POD1 -> SERVICE1"
+    - name: FOCUSON
+      value: "TOPOLOGY"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: pod1
+vagrant@node1:~$ cat pod-svc-1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  labels:
+    app: pod1
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: main
+    env:
+    - name: TOPOLOGY
+      value: "POD1 -> SERVICE1"
+    - name: FOCUSON
+      value: "TOPOLOGY"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: pod1
+vagrant@node1:~$ kubectl get ingressclass
+NAME    CONTROLLER                     PARAMETERS   AGE
+nginx   nginx.org/ingress-controller   <none>       10m
+vagrant@node1:~$ kubectl apply -f pod-svc-1.yaml
+pod/pod1 created
+service/service1 created
+vagrant@node1:~$ kubectl get pod,svc
+NAME       READY   STATUS    RESTARTS   AGE
+pod/pod1   1/1     Running   0          10s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP   7d3h
+service/service1     ClusterIP   10.107.33.11   <none>        80/TCP    10s
+vagrant@node1:~$ cat > 1-nginx-single.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+vagrant@node1:~$ cat 1-nginx-single.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+vagrant@node1:~$ kubectl apply -f 1-nginx-single.yaml
+ingress.networking.k8s.io/ingress-ctrl created
+vagrant@node1:~$ kubectl get ingress
+NAME           CLASS   HOSTS      ADDRESS   PORTS   AGE
+ingress-ctrl   nginx   demo.lab             80      11s
+vagrant@node1:~$ kubectl describe ingress ingress-ctrl
+Name:             ingress-ctrl
+Labels:           <none>
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  demo.lab
+              /   service1:80 (10.244.104.39:80)
+Annotations:  <none>
+Events:
+  Type    Reason          Age   From                      Message
+  ----    ------          ----  ----                      -------
+  Normal  AddedOrUpdated  27s   nginx-ingress-controller  Configuration for default/ingress-ctrl was added or updated
+vagrant@node1:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:10:cb:2e brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+       valid_lft 73041sec preferred_lft 73041sec
+    inet6 fe80::a00:27ff:fe10:cb2e/64 scope link
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:cd:9b:42 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.99.101/24 brd 192.168.99.255 scope global enp0s8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fecd:9b42/64 scope link
+       valid_lft forever preferred_lft forever
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+    link/ether 02:42:15:97:2b:55 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+5: calib7909a24c77@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-44dad5e0-f272-0ee9-51ce-14d5af901b3d
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+6: cali8e05c65ec31@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-e43160f2-5db2-d421-9fa4-8caa2d7b9e9b
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+7: cali04637b64a15@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-c5ede6b3-fbbc-3a8d-322c-a483ede5c95f
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+10: vxlan.calico: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 66:f9:37:c3:7e:94 brd ff:ff:ff:ff:ff:ff
+    inet 10.244.166.128/32 scope global vxlan.calico
+       valid_lft forever preferred_lft forever
+    inet6 fe80::64f9:37ff:fec3:7e94/64 scope link
+       valid_lft forever preferred_lft forever
+11: cali6d83383600b@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-facf8b17-5449-5610-5242-98feeb8a5bda
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+vagrant@node1:~$ sudo vi /etc/hosts
+vagrant@node1:~$ vagrant@node1:~$
+vagrant@node1:~$ ping demo.lab
+PING demo.lab (192.168.99.101) 56(84) bytes of data.
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=1 ttl=64 time=1.34 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=2 ttl=64 time=0.069 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=3 ttl=64 time=0.057 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=4 ttl=64 time=0.077 ms
+^C
+--- demo.lab ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3042ms
+rtt min/avg/max/mdev = 0.057/0.386/1.343/0.552 ms
+vagrant@node1:~$ kubectl get svc nginx-ingress -n nginx-ingress
+NAME            TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+nginx-ingress   NodePort   10.111.235.238   <none>        80:32733/TCP,443:30669/TCP   17m
+vagrant@node1:~$ cat > 2-nginx-custom-path-a.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - path: /service1
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 2-nginx-custom-path-a.yaml
+ingress.networking.k8s.io/ingress-ctrl configured
+vagrant@node1:~$ kubectl describe ingress ingress-ctrl
+Name:             ingress-ctrl
+Labels:           <none>
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  demo.lab
+              /service1   service1:80 (10.244.104.39:80)
+Annotations:  <none>
+Events:
+  Type    Reason          Age                From                      Message
+  ----    ------          ----               ----                      -------
+  Normal  AddedOrUpdated  18s (x2 over 14m)  nginx-ingress-controller  Configuration for default/ingress-ctrl was added or updated
+vagrant@node1:~$ kubectl logs pod1
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 10.244.104.39. Set the 'ServerName' directive globally to suppress this message
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 10.244.104.39. Set the 'ServerName' directive globally to suppress this message
+[Sat Nov 18 12:51:19.427276 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/8.0.12 configured -- resuming normal operations
+[Sat Nov 18 12:51:19.427859 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+vagrant@node1:~$ cat > 2-nginx-custom-path-b.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+  annotations:
+    nginx.org/rewrites: "serviceName=service1 rewrite=/"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - path: /service1
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+vagrant@node1:~$ kubectl apply -f 2-nginx-custom-path-b.yaml
+ingress.networking.k8s.io/ingress-ctrl configured
+vagrant@node1:~$ kubectl describe ingress ingress-ctrl
+Name:             ingress-ctrl
+Labels:           <none>
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  demo.lab
+              /service1   service1:80 (10.244.104.39:80)
+Annotations:  nginx.org/rewrites: serviceName=service1 rewrite=/
+Events:
+  Type    Reason          Age                From                      Message
+  ----    ------          ----               ----                      -------
+  Normal  AddedOrUpdated  11s (x3 over 17m)  nginx-ingress-controller  Configuration for default/ingress-ctrl was added or updated
+vagrant@node1:~$ cat > pod-svc-d.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podd
+  labels:
+    app: podd
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: main
+    env:
+    - name: TOPOLOGY
+      value: "PODd -> SERVICEd (default backend)"
+    - name: FOCUSON
+      value: "TOPOLOGY"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serviced
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: podd
+vagrant@node1:~$ kubectl apply -f pod-svc-d.yaml
+pod/podd created
+service/serviced created
+vagrant@node1:~$ cat > 3-nginx-default-back.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+  annotations:
+    nginx.org/rewrites: "serviceName=service1 rewrite=/"
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: serviced
+      port:
+        number: 80
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - path: /service1
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 3-nginx-default-back.yaml
+ingress.networking.k8s.io/ingress-ctrl configured
+vagrant@node1:~$ kubectl describe ingress ingress-ctrl
+Name:             ingress-ctrl
+Labels:           <none>
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  serviced:80 (10.244.135.22:80)
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  demo.lab
+              /service1   service1:80 (10.244.104.39:80)
+Annotations:  nginx.org/rewrites: serviceName=service1 rewrite=/
+Events:
+  Type    Reason          Age               From                      Message
+  ----    ------          ----              ----                      -------
+  Normal  AddedOrUpdated  9s (x4 over 21m)  nginx-ingress-controller  Configuration for default/ingress-ctrl was added or updated
+vagrant@node1:~$ cat > pod-svc-2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+  labels:
+    app: pod2
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: main
+    env:
+    - name: TOPOLOGY
+      value: "POD2 -> SERVICE2"
+    - name: FOCUSON
+      value: "TOPOLOGY"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: pod2
+vagrant@node1:~$ cat pod-svc-2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+  labels:
+    app: pod2
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: main
+    env:
+    - name: TOPOLOGY
+      value: "POD2 -> SERVICE2"
+    - name: FOCUSON
+      value: "TOPOLOGY"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: pod2
+vagrant@node1:~$ kubectl apply -f pod-svc-2.yaml
+pod/pod2 created
+service/service2 created
+vagrant@node1:~$ cat > 4-nginx-fan-out.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+  annotations:
+    nginx.org/rewrites: "serviceName=service1 rewrite=/;serviceName=service2 rewrite=/"
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: serviced
+      port:
+        number: 80
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - path: /service1
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+      - path: /service2
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80
+vagrant@node1:~$ ^C
+
+-bash: ubectl: command not found
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f 4-nginx-fan-out.yaml
+ingress.networking.k8s.io/ingress-ctrl configured
+vagrant@node1:~$ kubectl describe ingress ingress-ctrl
+Name:             ingress-ctrl
+Labels:           <none>
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  serviced:80 (10.244.135.22:80)
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  demo.lab
+              /service1   service1:80 (10.244.104.39:80)
+              /service2   service2:80 (10.244.104.40:80)
+Annotations:  nginx.org/rewrites: serviceName=service1 rewrite=/;serviceName=service2 rewrite=/
+Events:
+  Type    Reason          Age                From                      Message
+  ----    ------          ----               ----                      -------
+  Normal  AddedOrUpdated  10s (x5 over 25m)  nginx-ingress-controller  Configuration for default/ingress-ctrl was added or updated
+vagrant@node1:~$ cat > 5-nginx-name-vhost.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-ctrl
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.lab
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+  - host: awesome.lab
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80
+vagrant@node1:~$ kubectl apply -f 5-nginx-name-vhost.yaml
+ingress.networking.k8s.io/ingress-ctrl configured
+vagrant@node1:~$ kubectl describe ingress ingress-ctrl
+Name:             ingress-ctrl
+Labels:           <none>
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host         Path  Backends
+  ----         ----  --------
+  demo.lab
+               /   service1:80 (10.244.104.39:80)
+  awesome.lab
+               /   service2:80 (10.244.104.40:80)
+Annotations:   <none>
+Events:
+  Type    Reason          Age               From                      Message
+  ----    ------          ----              ----                      -------
+  Normal  AddedOrUpdated  9s (x6 over 26m)  nginx-ingress-controller  Configuration for default/ingress-ctrl was added or updated
+vagrant@node1:~$ kubectl delete pods podd pod1 pod2
+pod "podd" deleted
+pod "pod1" deleted
+pod "pod2" deleted
+vagrant@node1:~$ kubectl delete svc serviced service1 service2
+service "serviced" deleted
+service "service1" deleted
+service "service2" deleted
+vagrant@node1:~$ kubectl delete ingress ingress-ctrl
+ingress.networking.k8s.io "ingress-ctrl" deleted
+vagrant@node1:~$ kubectl delete namespace nginx-ingress
+namespace "nginx-ingress" deleted
+vagrant@node1:~$ kubectl delete clusterrolebinding nginx-ingress
+clusterrolebinding.rbac.authorization.k8s.io "nginx-ingress" deleted
+vagrant@node1:~$ kubectl delete clusterrole nginx-ingress
+clusterrole.rbac.authorization.k8s.io "nginx-ingress" deleted
+vagrant@node1:~$ cd /kubernetes-ingress/deployments
+-bash: cd: /kubernetes-ingress/deployments: No such file or directory
+vagrant@node1:~$ cd kubernetes-ingress/deployments
+vagrant@node1:~/kubernetes-ingress/deployments$ kubectl delete -f common/crds/
+customresourcedefinition.apiextensions.k8s.io "policies.k8s.nginx.org" deleted
+customresourcedefinition.apiextensions.k8s.io "transportservers.k8s.nginx.org" deleted
+customresourcedefinition.apiextensions.k8s.io "virtualserverroutes.k8s.nginx.org" deleted
+customresourcedefinition.apiextensions.k8s.io "virtualservers.k8s.nginx.org" deleted
+Error from server (NotFound): error when deleting "common/crds/appprotect.f5.com_aplogconfs.yaml": customresourcedefinitions.apiextensions.k8s.io "aplogconfs.appprotect.f5.com" not found
+Error from server (NotFound): error when deleting "common/crds/appprotect.f5.com_appolicies.yaml": customresourcedefinitions.apiextensions.k8s.io "appolicies.appprotect.f5.com" not found
+Error from server (NotFound): error when deleting "common/crds/appprotect.f5.com_apusersigs.yaml": customresourcedefinitions.apiextensions.k8s.io "apusersigs.appprotect.f5.com" not found
+Error from server (NotFound): error when deleting "common/crds/appprotectdos.f5.com_apdoslogconfs.yaml": customresourcedefinitions.apiextensions.k8s.io "apdoslogconfs.appprotectdos.f5.com" not found
+Error from server (NotFound): error when deleting "common/crds/appprotectdos.f5.com_apdospolicy.yaml": customresourcedefinitions.apiextensions.k8s.io "apdospolicies.appprotectdos.f5.com" not found
+Error from server (NotFound): error when deleting "common/crds/appprotectdos.f5.com_dosprotectedresources.yaml": customresourcedefinitions.apiextensions.k8s.io "dosprotectedresources.appprotectdos.f5.com" not found
+Error from server (NotFound): error when deleting "common/crds/externaldns.nginx.org_dnsendpoints.yaml": customresourcedefinitions.apiextensions.k8s.io "dnsendpoints.externaldns.nginx.org" not found
+Error from server (NotFound): error when deleting "common/crds/k8s.nginx.org_globalconfigurations.yaml": customresourcedefinitions.apiextensions.k8s.io "globalconfigurations.k8s.nginx.org" not found
+vagrant@node1:~/kubernetes-ingress/deployments$ cd ..
+vagrant@node1:~/kubernetes-ingress$ cd ..
+vagrant@node1:~$ history
+    1  mkdir part1
+    2  cd part1
+    3  cat > emptydir-pod.yaml
+    4  cat emptydir-pod.yaml
+    5  kubectl apply -f part1/emptydir-pod.yaml
+    6  cat > service.yaml
+    7  cat service.yaml
+    8  kubectl apply -f emptydir-pod.yaml
+    9  kubectl apply -f service.yaml
+   10  kubectl get pods,svc
+   11  kubectl describe pod pod-ed
+   12  kubectl exec -it pod-ed -- bash
+   13  kubectl exec -it pod-ed -- /bin/bash -c "kill 1"
+   14  kubectl get pods,svc
+   15  kubectl describe pod pod-ed
+   16  kubectl delete pod pod-ed
+   17  kubectl get pods,svc
+   18  kubectl apply -f emptydir-pod.yaml
+   19  kubectl get pods,svc
+   20  cat > git-pod.yaml
+   21  cat git-pod.yaml
+   22  kubectl apply -f git-pod.yaml
+   23  kubectl exec -it pod-git -- bash
+   24  kubectl delete pod pod-git
+   25  cat > hostpath-deployment.yaml
+   26  cat hostpath-deployment.yaml
+   27  mkdir --mode=777 /tmp/data
+   28  ls -al /tmp
+   29  exit
+   30  kubectl apply -f hostpath-deployment.yaml
+   31  cat hostpath-deployment.yaml
+   32  cat > hostpath-deployment.yaml
+   33  cat hostpath-deployment.yaml
+   34  kubectl apply -f hostpath-deployment.yaml
+   35  kubectl get pods -o wide
+   36  kubectl delete -f hostpath-deployment.yaml
+   37  kubectl get pods -o wide
+   38  cat pod-ed.yaml
+   39  kubectl pod delete pod-ed
+   40  kubectl delete pods pod-ed
+   41  kubectl get pods -o wide
+   42  kubectl apply -f hostpath-deployment.yaml
+   43  kubectl get pods -o wide
+   44  kubectl delete -f hostpath-deployment.yaml
+   45  kubectl get pods -o wide
+   46  ssh vagrant@node2
+   47  exit
+   48  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+   49  sudo apt-get update && apt-get install -y nfs-common
+   50  chmod -R 777 /data/nfs/k8sdata
+   51  cat > nfs-deployment.yaml
+   52  cat nfs-deployment.yaml
+   53  kubectl apply -f nfs-deployment.yaml
+   54  kubectl get pods -o wide
+   55  sudo chmod -R 777 /data/nfs/k8sdata
+   56  mkdir --mode=777 /data/nfs/k8sdata
+   57  mkdir --mode=777 /data/nfs
+   58  sudo mkdir --mode=777 /data/nfs/k8sdata
+   59  sudo mkdir --mode=777 /data
+   60  sudo mkdir --mode=777 /data/nfs
+   61  sudo mkdir --mode=777 /data/nfs/k8sdata
+   62  kubectl delete -f nfs-deployment.yaml
+   63  exit
+   64  chmod -R 777 /data/nfs/k8sdata
+   65  sudo chmod -R 777 /data/nfs/k8sdata
+   66  exit
+   67  kubectl delete -f hostpath-deployment.yaml
+   68  cat nfs-deployment.yaml
+   69  kubectl apply -f hostpath-deployment.yaml
+   70  kubectl get pods -o wide
+   71  kubectl describe pod notes-deploy-5485bf6fdd-jspsp
+   72  kubectl delete -f nfs-deployment.yaml
+   73  kubectl get pods -o wide
+   74  cat > pvc10gb.yaml
+   75  cat pvc10gb.yaml
+   76  kubectl apply -f pvnfs10gb.yaml
+   77  cat > pvnfs10gb.yaml
+   78  cat pvnfs10gb.yaml
+   79  kubectl apply -f pvnfs10gb.yaml
+   80  kubectl get pv
+   81  kubectl describe pv pvnfs10gb
+   82  cat pvc10gb.yaml
+   83  kubectl apply -f pvc10gb.yaml
+   84  kubectl get pv
+   85  kubectl get pvc
+   86  kubectl describe pvc pvc10gb
+   87  cat > pv-deployment.yaml
+   88  cat pv-deployment.yaml
+   89  kubectl apply -f pv-deployment.yaml
+   90  kubectl get pods -o wide -w
+   91  kubectl describe pvc pvc10gb
+   92  kubectl describe pod notes-deploy-845b59c97f-pf76h
+   93  kubectl get pods -o wide -w
+   94  kubectl delete -f pv-deployment.yaml
+   95  kubectl delete -f pvc10gb.yaml
+   96  kubectl apply -f pvc10gb.yaml
+   97  kubectl apply -f pv-deployment.yaml
+   98  kubectl get pods -o wide -w
+   99  kubectl scale --replicas=2 deployment notes-deploy
+  100  kubectl delete -f pv-deployment.yaml
+  101  kubectl delete -f service.yaml
+  102  kubectl delete -f part1/service.yaml
+  103  kubectl delete -f pvc10gb.yaml
+  104  kubectl delete -f pvnfs10gb.yaml
+  105  history
+  106  kubectl get pods -o wide -w
+  107  kubectl get pods -o wide
+  108  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+  109  ip a
+  110  hostname -I
+  111  cat > pod-no-env.yaml
+  112  cat pod-no-env.yaml
+  113  kubectl apply -f pod-no-env.yaml
+  114  cat > svc-environ.yaml
+  115  cat svc-environ.yaml
+  116  kubectl apply -f svc-environ.yaml
+  117  kubectl get pods,svc
+  118  kubectl describe pod pod-no-env
+  119  kubectl delete -f pod-no-env.yaml
+  120  cat > pod-w-env.yaml
+  121  cat pod-w-env.yaml
+  122  kubectl apply -f pod-w-env.yaml
+  123  kubectl describe pod pod-w-env
+  124  kubectl delete -f pod-w-env.yaml
+  125  kubectl create configmap environ-map-a --from-literal=XYZ1=VALUE1
+  126  kubectl get cm
+  127  kubectl describe cm environ-map-a
+  128  kubectl get cm environ-map-a -o yaml
+  129  kubectl create configmap environ-map-b --from-literal=XYZ2=42 --from-literal=XYZ3=3.14
+  130  kubectl get cm
+  131  kubectl delete cm environ-map-a environ-map-b
+  132  cat > cm.yaml
+  133  cat cm.yaml
+  134  kubectl apply -f cm.yaml
+  135  kubectl get cm
+  136  cat > variables.conf << EOF
+  137  XYZ_FF1=VALUE1
+  138  XYZ_FF2=42
+  139  EOF
+  140  cat variables.conf
+  141  kubectl create configmap environ-map-a --from-file=variables.conf
+  142  kubectl get cm
+  143  kubectl get cm environ-map-a -o yaml
+  144  cat > flag.conf << EOF
+  145  true
+  146  EOF
+  147  kubectl create configmap environ-map-b --from-file=debug=flag.conf
+  148  kubectl get cm
+  149  kubectl get cm environ-map-b -o yaml
+  150  kubectl delete cm environ-map-a environ-map-b
+  151  rm variables.conf flag.conf
+  152  mkdir variables
+  153  echo 'production' > variables/mode
+  154  echo 'false' > variables/debug
+  155  tree variables/
+  156  kubectl create configmap environ-map-a --from-file=variables/
+  157  kubectl get cm
+  158  kubectl get cm environ-map-a -o yaml
+  159  kubectl delete cm environ-map-a
+  160  rm -rf variables/
+  161  cat > pod-cm-env-var.yaml
+  162  cat pod-cm-env-var.yaml
+  163  kubectl apply -f pod-cm-env-var.yaml
+  164  kubectl get cm environ-map-1 -o yaml
+  165  kubectl delete pod pod-cm-env-var
+  166  cat > pod-cm-env-vars.yaml
+  167  cat pod-cm-env-vars.yaml
+  168  kubectl apply -f pod-cm-env-vars.yaml
+  169  kubectl delete pod pod-cm-env-vars
+  170  kubectl delete cm environ-map-1
+  171  kubectl get secret
+  172  kubectl create secret generic secret-a --from-literal=password='Parolka1'
+  173  echo 'DrugaParolka1' > password.conf
+  174  kubectl create secret generic secret-b --from-file=password=password.conf
+  175  kubectl get secret
+  176  kubectl get secret secret-a -o yaml
+  177  kubectl get secret secret-b -o yaml
+  178  echo UGFyb2xrYTE= | base64 --decode
+  179  kubectl delete secret secret-a secret-b
+  180  cat > secrets.yaml
+  181  cat secrets.yaml
+  182  kubectl apply -f secrets.yaml
+  183  kubectl get secrets
+  184  cat > pod-secret.yaml
+  185  cat pod-secret.yaml
+  186  kubectl apply -f pod-secret.yaml
+  187  kubectl delete pod/pod-secret service/svc-environ secret/mysecrets
+  188  rm password.conf
+  189  ls data/nfs
+  190  sudo ls data/nfs
+  191  sudo apt-get update
+  192  sudo apt-get install nfs-kernel-server
+  193  ls data
+  194  mkdir data
+  195  ls data
+  196  cd data
+  197  mkdir nfs
+  198  cd nfs
+  199  sudo mkdir k8spva
+  200  sudo mkdir k8spvb
+  201  sudo mkdir k8spvc
+  202  ls
+  203  cd ..
+  204  ls /etc/exports
+  205  cd etc
+  206  cd /etc
+  207  cd /exports
+  208  ls
+  209  sudo vi /etc/exports
+  210  mkdir data
+  211  sudo mkdir data
+  212  cd data
+  213  sudo mkdir nfs
+  214  cd ..
+  215  ls
+  216  cd data
+  217  ls
+  218  cd ..
+  219  sudo service nfs-kernel-server restart
+  220  sudo nano /etc/hosts
+  221  ip a
+  222  hostname -I
+  223  sudo nano /etc/hosts
+  224  ping nfs-server
+  225  cd etc
+  226  cd data
+  227  cd nfs
+  228  sudo mkdir k8spva
+  229  sudo mkdir k8spvb
+  230  sudo mkdir k8spvc
+  231  ls
+  232  sudo chmod 777 k8spv(a,b,c)
+  233  sudo chmod 777 k8spva
+  234  sudo chmod 777 k8spvb
+  235  sudo chmod 777 k8spvc
+  236  cd /etc
+  237  sudo vi exports
+  238  sudo export
+  239  sudo exportfs -rav
+  240  cd ..
+  241  cat > pvssa.yaml
+  242  sudo cat > pvssa.yaml
+  243  sudo cat pvssa.yaml
+  244  cat > pvssa.yaml
+  245  sudo cat > pvssa.yaml
+  246  exit
+  247  cat > pvssa.yaml
+  248  cat > pvssb.yaml
+  249  cat > pvssc.yaml
+  250  cat pvssa.yaml
+  251  cat pvssb.yaml
+  252  cat pvssc.yaml
+  253  ping nfs-server
+  254  kubectl apply -f pvssa.yaml
+  255  kubectl apply -f pvssb.yaml
+  256  kubectl apply -f pvssc.yaml
+  257  kubectl get pv
+  258  cat > svcss.yaml
+  259  cat svcss.yaml
+  260  kubectl apply -f svcss.yaml
+  261  kubectl get svc
+  262  cat > ss.yaml
+  263  cat ss.yaml
+  264  kubectl apply -f ss.yaml
+  265  kubectl get pod,svc,statefulset,pv,pvc
+  266  cat > svcssnp.yaml
+  267  kubectl apply -f svcssnp.yaml
+  268  kubectl get pod,svc,statefulset,pv,pvc
+  269  kubectl get pods,pvc -o wide
+  270  kubectl delete pod facts-0
+  271  kubect get pods,pvc -o wide
+  272  kubectl get pods,pvc -o wide
+  273  kubectl scale --replicas=1 statefulset/facts
+  274  kubectl get pod,svc,statefulset,pv,pvc
+  275  kubectl scale --replicas=3 statefulset/facts
+  276  kubectl get pod,svc,statefulset,pv,pvc
+  277  kubectl delete statefulset.apps/facts
+  278  kubectl delete service/facts service/factsnp
+  279  kubectl delete persistentvolumeclaim facts-data-facts-0 facts-data-facts-1 facts-data-facts-2
+  280  kubectl delete persistentvolume pvssa pvssb pvssc
+  281  history
+  282  exit
+  283  kubectl version --short
+  284  uname -a
+  285  openssl genrsa -out main.key 4096
+  286  openssl req -new -x509 -key main.key -out main.crt -days 365 -subj /CN=www.hw.lab
+  287  cat main.key
+  288  cat main.crt
+  289  cat > hwcm.yaml
+  290  cat hwcm.yaml
+  291  cat > hwpod.yaml
+  292  cat hwpod.yaml
+  293  cat > hwsec.yaml
+  294  cat hwsec.yaml
+  295  kubectl apply -f hwcm.yaml
+  296  kubectl apply -f hwsec.yaml
+  297  cat > hwsec.yaml
+  298  cat hwsec.yaml
+  299  kubectl apply -f hwsec.yaml
+  300  base64 main.key
+  301  base64 main.crt
+  302  kubectl apply -f hwsec.yaml
+  303  cat > hwsec.yaml
+  304  kubectl apply -f hwsec.yaml
+  305  cat > hwsec.yaml
+  306  cat hwsec.yaml
+  307  kubectl apply -f hwsec.yaml
+  308  kubectl apply -f hwpod.yaml
+  309  kubectl get pods
+  310  kubectl get secrets
+  311  kubectl get configmaps
+  312  cat > hwsec.yaml
+  313  cat hwsec.yaml
+  314  kubectl apply -f hwsec.yaml
+  315  kubectl get pods
+  316  kubectl get configmaps
+  317  kubectl get secrets
+  318  history
+  319  kubectl delete configmap hwcm
+  320  kubectl delete secret hwsec
+  321  kubectl delete pod hwpod
+  322  kubectl get configmaps
+  323  kubectl get secrets
+  324  kubectl get pods
+  325  history
+  326  exit
+  327  kubectl get nodes
+  328  ps ax | grep /usr/bin/kubelet
+  329  cat /var/lib/kubelet/config.yaml
+  330  ls -l /etc/kubernetes/manifests
+  331  sudo cat /etc/kubernetes/manifests/etcd.yaml
+  332  cat > 1-static-pod.yaml
+  333  cat 1-static-pod.yaml
+  334  sudo cp part1/1-static-pod.yaml /etc/kubernetes/manifests/
+  335  sudo cp 1-static-pod.yaml /etc/kubernetes/manifests/
+  336  ls -l /etc/kubernetes/manifests
+  337  kubectl get pods -o wide
+  338  kubectl get nodes
+  339  kubectl get pods -n kube-system
+  340  kubectl delete pod static-pod-node1
+  341  kubectl get pods -o wide
+  342  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  343  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock rm --force d174a2d6759b5
+  344  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  345  kubectl get pods -o wide
+  346  sudo rm /etc/kubernetes/manifests/1-static-pod.yaml
+  347  kubectl get pods -o wide -w
+  348  kubectl get pods -o wide
+  349  cat > 2-sidecar.yaml
+  350  cat 2-sidecar.yaml
+  351  kubectl apply -f 2-sidecar.yaml
+  352  kubectl get pods -o wide
+  353  kubectl get pods -o wide -w
+  354  kubectl get pods -o wide
+  355  kubectl get pods,svc -o wide
+  356  kubectl describe pod/sidecar-6d89497788-8j2mb
+  357  kubectl get pods,svc -o wide
+  358  kubectl exec -it pod/sidecar-pod/sidecar-6d89497788-6rgcz -- sh
+  359  kubectl exec -it pod/sidecar-6d89497788-6rgcz -- sh
+  360  kubectl exec -it deploy/sidecar -c cont-sidecar -- sh
+  361  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- bash
+  362  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- kill 1
+  363  kubectl get pods
+  364  kubectl delete -f 2-sidecar.yaml
+  365  kubectl get pods
+  366  cat > 3-adapter.yaml
+  367  cat 3-adapter.yaml
+  368  kubectl apply -f 3-adapter.yaml
+  369  kubectl get pods
+  370  kubectl exec -it adapter -c cont-main -- cat /var/log/app.log
+  371  kubectl exec -it adapter -c cont-adapter -- cat /var/log/out.log
+  372  kubectl delete -f 3-adapter.yaml
+  373  kubectl get pods
+  374  cat > 4-init-container.yaml
+  375  cat 4-init-container.yaml
+  376  kubectl apply -f 4-init-container.yaml
+  377  kubectl get pods,svc
+  378  kubectl get pods -w
+  379  kubectl describe pod pod-init
+  380  kubectl delete -f 4-init-container.yaml
+  381  kubectl get pods,svc
+  382  hostname
+  383  wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -O metrics-server.yaml
+  384  vi metrics-server.yaml
+  385  cat metrics-server.yaml
+  386  kubectl apply -f metrics-server.yaml
+  387  kubectl get all -A
+  388  kubectl get all -n kube-system
+  389  cat > 1-auto-scale.yaml
+  390  cat 1-auto-scale.yaml
+  391  kubectl apply -f 1-auto-scale.yaml
+  392  kubectl get pods
+  393  cat > 1-auto-scale-hpa.yaml
+  394  cat 1-auto-scale-hpa.yaml
+  395  kubectl apply -f 1-auto-scale-hpa.yaml
+  396  kubectl get horizontalpodautoscalers auto-scale-deploy
+  397  kubectl get pods -o wide
+  398  kubectl get deployments
+  399  kubectl get horizontalpodautoscalers auto-scale-deploy
+  400  kubectl get pods -o wide
+  401  kubectl get deployments
+  402  kubectl delete -f 1-auto-scale-hpa.yaml
+  403  kubectl delete -f 1-auto-scale.yaml
+  404  kubectl delete -f metrics-server.yaml
+  405  kubectl get nodes --show-labels
+  406  kubectl describe node k8s1
+  407  kubectl label node node2 disk=hitachi --overwrite
+  408  kubectl label node node3 disk=hitachi --overwrite
+  409  kubectl get nodes --show-labels
+  410  kubectl describe node | grep Taints
+  411  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule-
+  412  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule
+  413  kubectl describe node | grep Taints
+  414  kubectl get pods -n kube-system -o wide
+  415  kubectl describe pod coredns-5d78c9869d-4mqgb -n kube-system
+  416  kubectl get pods -n kube-system -o wide
+  417  kubectl describe pod etcd-node1 -n kube-system
+  418  kubectl taint node node2 demo-taint=nomorework:NoSchedule
+  419  kubectl describe node | grep Taints
+  420  cat > 2-schedule.yaml
+  421  cat 2-schedule.yaml
+  422  kubectl apply -f 2-schedule.yaml
+  423  kubectl get pods -o wide
+  424  kubectl delete -f 2-schedule.yaml
+  425  cat > 2-schedule-toleration.yaml
+  426  cat 2-schedule-toleration.yaml
+  427  kubectl apply -f 2-schedule-toleration.yaml
+  428  kubectl get pods -o wide
+  429  kubectl taint node node2 demo-taint-
+  430  kubectl get pods -o wide
+  431  kubectl delete -f 2-schedule-toleration.yaml
+  432  cat > 3-daemon-set.yaml
+  433  cat 3-daemon-set.yaml
+  434  cp 3-daemon-set.yaml pure-ds.yaml
+  435  vi pure-ds.yaml
+  436  cat pure-ds.yaml
+  437  kubectl apply -f pure-ds.yaml
+  438  kubectl get ds
+  439  kubectl get pods -o wide
+  440  kubectl delete -f pure-ds.yaml
+  441  cat 3-daemon-set.yaml
+  442  kubectl apply -f 3-daemon-set.yaml
+  443  kubectl get ds
+  444  kubectl get pods
+  445  kubectl get nodes --show-labels
+  446  kubectl label node node2 disk=samsung
+  447  kubectl label node node2 disk=samsung --overwrite
+  448  kubectl get nodes --show-labels
+  449  kubectl get ds
+  450  kubectl get pods -o wide
+  451  kubectl label node node3 disk=samsung
+  452  kubectl label node node3 disk=samsung --overwrite
+  453  kubectl get pods -o wide
+  454  kubectl get ds
+  455  kubectl label node node2 disk=wdc --overwrite
+  456  kubectl get ds
+  457  kubectl get pods -o wide
+  458  kubectl delete -f 3-daemon-set.yaml
+  459  kubectl get ds
+  460  cat > 4-batch-job.yaml
+  461  cat 4-batch-job.yaml
+  462  kubectl apply -f 4-batch-job.yaml
+  463  kubectl get jobs
+  464  kubectl get jobs -o wide
+  465  kubectl get pods
+  466  kubectl describe job batch-job
+  467  kubectl get jobs -o wide
+  468  kubectl get pods
+  469  kubectl get jobs -o wide
+  470  kubectl describe job batch-job
+  471  kubectl delete -f 4-batch-job.yaml
+  472  kubectl get pods
+  473  cat > 4-batch-job-serial.yaml
+  474  cat 4-batch-job-serial.yaml
+  475  kubectl apply -f 4-batch-job-serial.yaml
+  476  kubectl get jobs
+  477  kubectl describe job batch-job-serial
+  478  kubectl get pods
+  479  kubectl delete -f 4-batch-job-serial.yaml
+  480  kubectl get pods
+  481  cat > 4-batch-job-parallel.yaml
+  482  cat 4-batch-job-parallel.yaml
+  483  kubectl apply -f 4-batch-job-parallel.yaml
+  484  kubectl get jobs
+  485  kubectl get jobs -o wide
+  486  kubectl get pods -o wide
+  487  kubectl describe job batch-job-parallel
+  488  kubectl get pods -o wide
+  489  kubectl get jobs -o wide
+  490  kubectl delete -f 4-batch-job-parallel.yaml
+  491  cat > 4-batch-job-serial.yaml
+  492  sudo rm 4-batch-job-serial.yaml
+  493  ls
+  494  cat > 4-batch-job-cron.yaml
+  495  cat 4-batch-job-cron.yaml
+  496  kubectl apply -f 4-batch-job-cron.yaml
+  497  kubectl get cronjobs
+  498  kubectl get cronjobs -o wide
+  499  kubectl get pods -o wide
+  500  kubectl delete -f 4-batch-job-cron.yaml
+  501  ls
+  502  ls -a
+  503  git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.3.2
+  504  cd kubernetes-ingress/deployments
+  505  ls
+  506  cd ..
+  507  apt-get install tree
+  508  sudo apt-get install tree
+  509  cd kubernetes-ingress/deployments
+  510  tree .
+  511  kubectl apply -f common/ns-and-sa.yaml
+  512  kubectl apply -f rbac/rbac.yaml
+  513  kubectl apply -f ../examples/shared-examples/default-server-secret/default-server-secret.yaml
+  514  kubectl apply -f common/nginx-config.yaml
+  515  kubectl apply -f common/ingress-class.yaml
+  516  kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
+  517  kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
+  518  kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
+  519  kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+  520  kubectl apply -f deployment/nginx-ingress.yaml
+  521  kubectl get pods --namespace=nginx-ingress -w
+  522  ls -al service/
+  523  kubectl create -f service/nodeport.yaml
+  524  kubectl get service -n nginx-ingress
+  525  cd ..
+  526  cat > pod-svc-1.yaml
+  527  cat pod-svc-1.yaml
+  528  kubectl get ingressclass
+  529  kubectl apply -f pod-svc-1.yaml
+  530  kubectl get pod,svc
+  531  cat > 1-nginx-single.yaml
+  532  cat 1-nginx-single.yaml
+  534  kubectl get ingress
+  535  kubectl describe ingress ingress-ctrl
+  536  ip a
+  537  sudo vi /etc/hosts
+  538  ping demo.lab
+  539  kubectl get svc nginx-ingress -n nginx-ingress
+  540  cat > 2-nginx-custom-path-a.yaml
+  541  kubectl apply -f 2-nginx-custom-path-a.yaml
+  542  kubectl describe ingress ingress-ctrl
+  543  kubectl logs pod1
+  544  cat > 2-nginx-custom-path-b.yaml
+  545  kubectl apply -f 2-nginx-custom-path-b.yaml
+  546  kubectl describe ingress ingress-ctrl
+  547  cat > pod-svc-d.yaml
+  548  kubectl apply -f pod-svc-d.yaml
+  549  cat > 3-nginx-default-back.yaml
+  550  kubectl apply -f 3-nginx-default-back.yaml
+  551  kubectl describe ingress ingress-ctrl
+  552  cat > pod-svc-2.yaml
+  553  cat pod-svc-2.yaml
+  554  kubectl apply -f pod-svc-2.yaml
+  555  cat > 4-nginx-fan-out.yaml
+  556  ubectl apply -f part3/4-nginx-fan-out.yaml
+  557  kubectl apply -f 4-nginx-fan-out.yaml
+  558  kubectl describe ingress ingress-ctrl
+  559  cat > 5-nginx-name-vhost.yaml
+  560  kubectl apply -f 5-nginx-name-vhost.yaml
+  561  kubectl describe ingress ingress-ctrl
+  562  kubectl delete pods podd pod1 pod2
+  563  kubectl delete svc serviced service1 service2
+  564  kubectl delete ingress ingress-ctrl
+  565  kubectl delete namespace nginx-ingress
+  566  kubectl delete clusterrolebinding nginx-ingress
+  567  kubectl delete clusterrole nginx-ingress
+  568  cd /kubernetes-ingress/deployments
+  569  cd kubernetes-ingress/deployments
+  570  kubectl delete -f common/crds/
+  571  cd ..
+  572  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant up
+   4 vagrant ssh node1
+
+
+PS C:\Users\NB\Kubernetes>

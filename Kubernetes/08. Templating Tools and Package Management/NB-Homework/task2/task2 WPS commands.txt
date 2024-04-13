@@ -1,0 +1,57 @@
+vagrant@node1:~$ history
+  ...
+  368  kustomize version
+  369  tree homework/
+  370  mkdir -p homework/task2
+  371  tree homework/
+  372  mkdir -p homework/task2/base
+  373  tree homework/
+  374  cat > homework/task2/base/task2-kst.yaml
+  375  cat > homework/task2/base/kustomization.yaml
+  376  tree homework/
+  377  kustomize build homework/task2/base/
+  378  cd homework/
+  379  cd task2
+  380  tree
+  381  mkdir -p overlays/{test,production}
+  382  tree
+  383  cat > overlays/test/kustomization.yaml
+  384  cat > overlays/production/kustomization.yaml
+  385  cat > overlays/test/custom-env.yaml
+  386  cat overlays/test/custom-env.yaml
+  387  cat > overlays/test/custom-rs.yaml
+  388  cat > overlays/production/custom-env.yaml
+  389  cat > overlays/production/custom-np.yaml
+  390  cd ../..
+  391  tree homework/
+  392  cd homework
+  393  cd task2
+  394  kustomize build overlays/test
+  395  kustomize build overlays/production
+  396  kustomize build overlays/test
+  397  cat > overlays/test/custom-env.yaml
+  398  cat overlays/test/custom-env.yaml
+  399  kustomize build overlays/test
+  400  tree
+  401  cat overlays/test/custom-env.yaml
+  402  cat > overlays/test/custom-env.yaml
+  403  kustomize build overlays/test
+  404  tree
+  405  cat > overlays/test/custom-env.yaml
+  406  cat > overlays/test/custom-rs.yaml
+  407*
+  408  cat > overlays/production/custom-env.yaml
+  409  cat > overlays/production/custom-np.yaml
+  410  kustomize build overlays/production
+  411  cat > overlays/production/kustomization.yaml
+  412  kustomize build overlays/production
+  413  kustomize build overlays/test | kubectl apply -f -
+  414  kubectl apply -k overlays/production
+  415  kubectl delete -k overlays/production
+  416  cat > overlays/production/custom-np.yaml
+  417  kubectl apply -k overlays/production
+  418  kubectl delete -k overlays/production
+  419  cat > overlays/production/custom-np.yaml
+  420  kubectl apply -k overlays/production
+  421  cd ../..
+  422  history

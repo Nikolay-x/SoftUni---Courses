@@ -1,0 +1,721 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant up
+   3 vagrant ssh node1
+   4 vagrant halt
+
+
+
+vagrant@node1:~$ history
+    1  mkdir part1
+    2  cd part1
+    3  cat > emptydir-pod.yaml
+    4  cat emptydir-pod.yaml
+    5  kubectl apply -f part1/emptydir-pod.yaml
+    6  cat > service.yaml
+    7  cat service.yaml
+    8  kubectl apply -f emptydir-pod.yaml
+    9  kubectl apply -f service.yaml
+   10  kubectl get pods,svc
+   11  kubectl describe pod pod-ed
+   12  kubectl exec -it pod-ed -- bash
+   13  kubectl exec -it pod-ed -- /bin/bash -c "kill 1"
+   14  kubectl get pods,svc
+   15  kubectl describe pod pod-ed
+   16  kubectl delete pod pod-ed
+   17  kubectl get pods,svc
+   18  kubectl apply -f emptydir-pod.yaml
+   19  kubectl get pods,svc
+   20  cat > git-pod.yaml
+   21  cat git-pod.yaml
+   22  kubectl apply -f git-pod.yaml
+   23  kubectl exec -it pod-git -- bash
+   24  kubectl delete pod pod-git
+   25  cat > hostpath-deployment.yaml
+   26  cat hostpath-deployment.yaml
+   27  mkdir --mode=777 /tmp/data
+   28  ls -al /tmp
+   29  exit
+   30  kubectl apply -f hostpath-deployment.yaml
+   31  cat hostpath-deployment.yaml
+   32  cat > hostpath-deployment.yaml
+   33  cat hostpath-deployment.yaml
+   34  kubectl apply -f hostpath-deployment.yaml
+   35  kubectl get pods -o wide
+   36  kubectl delete -f hostpath-deployment.yaml
+   37  kubectl get pods -o wide
+   38  cat pod-ed.yaml
+   39  kubectl pod delete pod-ed
+   40  kubectl delete pods pod-ed
+   41  kubectl get pods -o wide
+   42  kubectl apply -f hostpath-deployment.yaml
+   43  kubectl get pods -o wide
+   44  kubectl delete -f hostpath-deployment.yaml
+   45  kubectl get pods -o wide
+   46  ssh vagrant@node2
+   47  exit
+   48  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+   49  sudo apt-get update && apt-get install -y nfs-common
+   50  chmod -R 777 /data/nfs/k8sdata
+   51  cat > nfs-deployment.yaml
+   52  cat nfs-deployment.yaml
+   53  kubectl apply -f nfs-deployment.yaml
+   54  kubectl get pods -o wide
+   55  sudo chmod -R 777 /data/nfs/k8sdata
+   56  mkdir --mode=777 /data/nfs/k8sdata
+   57  mkdir --mode=777 /data/nfs
+   58  sudo mkdir --mode=777 /data/nfs/k8sdata
+   59  sudo mkdir --mode=777 /data
+   60  sudo mkdir --mode=777 /data/nfs
+   61  sudo mkdir --mode=777 /data/nfs/k8sdata
+   62  kubectl delete -f nfs-deployment.yaml
+   63  exit
+   64  chmod -R 777 /data/nfs/k8sdata
+   65  sudo chmod -R 777 /data/nfs/k8sdata
+   66  exit
+   67  kubectl delete -f hostpath-deployment.yaml
+   68  cat nfs-deployment.yaml
+   69  kubectl apply -f hostpath-deployment.yaml
+   70  kubectl get pods -o wide
+   71  kubectl describe pod notes-deploy-5485bf6fdd-jspsp
+   72  kubectl delete -f nfs-deployment.yaml
+   73  kubectl get pods -o wide
+   74  cat > pvc10gb.yaml
+   75  cat pvc10gb.yaml
+   76  kubectl apply -f pvnfs10gb.yaml
+   77  cat > pvnfs10gb.yaml
+   78  cat pvnfs10gb.yaml
+   79  kubectl apply -f pvnfs10gb.yaml
+   80  kubectl get pv
+   81  kubectl describe pv pvnfs10gb
+   82  cat pvc10gb.yaml
+   83  kubectl apply -f pvc10gb.yaml
+   84  kubectl get pv
+   85  kubectl get pvc
+   86  kubectl describe pvc pvc10gb
+   87  cat > pv-deployment.yaml
+   88  cat pv-deployment.yaml
+   89  kubectl apply -f pv-deployment.yaml
+   90  kubectl get pods -o wide -w
+   91  kubectl describe pvc pvc10gb
+   92  kubectl describe pod notes-deploy-845b59c97f-pf76h
+   93  kubectl get pods -o wide -w
+   94  kubectl delete -f pv-deployment.yaml
+   95  kubectl delete -f pvc10gb.yaml
+   96  kubectl apply -f pvc10gb.yaml
+   97  kubectl apply -f pv-deployment.yaml
+   98  kubectl get pods -o wide -w
+   99  kubectl scale --replicas=2 deployment notes-deploy
+  100  kubectl delete -f pv-deployment.yaml
+  101  kubectl delete -f service.yaml
+  102  kubectl delete -f part1/service.yaml
+  103  kubectl delete -f pvc10gb.yaml
+  104  kubectl delete -f pvnfs10gb.yaml
+  105  history
+  106  kubectl get pods -o wide -w
+  107  kubectl get pods -o wide
+  108  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+  109  ip a
+  110  hostname -I
+  111  cat > pod-no-env.yaml
+  112  cat pod-no-env.yaml
+  113  kubectl apply -f pod-no-env.yaml
+  114  cat > svc-environ.yaml
+  115  cat svc-environ.yaml
+  116  kubectl apply -f svc-environ.yaml
+  117  kubectl get pods,svc
+  118  kubectl describe pod pod-no-env
+  119  kubectl delete -f pod-no-env.yaml
+  120  cat > pod-w-env.yaml
+  121  cat pod-w-env.yaml
+  122  kubectl apply -f pod-w-env.yaml
+  123  kubectl describe pod pod-w-env
+  124  kubectl delete -f pod-w-env.yaml
+  125  kubectl create configmap environ-map-a --from-literal=XYZ1=VALUE1
+  126  kubectl get cm
+  127  kubectl describe cm environ-map-a
+  128  kubectl get cm environ-map-a -o yaml
+  129  kubectl create configmap environ-map-b --from-literal=XYZ2=42 --from-literal=XYZ3=3.14
+  130  kubectl get cm
+  131  kubectl delete cm environ-map-a environ-map-b
+  132  cat > cm.yaml
+  133  cat cm.yaml
+  134  kubectl apply -f cm.yaml
+  135  kubectl get cm
+  136  cat > variables.conf << EOF
+  137  XYZ_FF1=VALUE1
+  138  XYZ_FF2=42
+  139  EOF
+  140  cat variables.conf
+  141  kubectl create configmap environ-map-a --from-file=variables.conf
+  142  kubectl get cm
+  143  kubectl get cm environ-map-a -o yaml
+  144  cat > flag.conf << EOF
+  145  true
+  146  EOF
+  147  kubectl create configmap environ-map-b --from-file=debug=flag.conf
+  148  kubectl get cm
+  149  kubectl get cm environ-map-b -o yaml
+  150  kubectl delete cm environ-map-a environ-map-b
+  151  rm variables.conf flag.conf
+  152  mkdir variables
+  153  echo 'production' > variables/mode
+  154  echo 'false' > variables/debug
+  155  tree variables/
+  156  kubectl create configmap environ-map-a --from-file=variables/
+  157  kubectl get cm
+  158  kubectl get cm environ-map-a -o yaml
+  159  kubectl delete cm environ-map-a
+  160  rm -rf variables/
+  161  cat > pod-cm-env-var.yaml
+  162  cat pod-cm-env-var.yaml
+  163  kubectl apply -f pod-cm-env-var.yaml
+  164  kubectl get cm environ-map-1 -o yaml
+  165  kubectl delete pod pod-cm-env-var
+  166  cat > pod-cm-env-vars.yaml
+  167  cat pod-cm-env-vars.yaml
+  168  kubectl apply -f pod-cm-env-vars.yaml
+  169  kubectl delete pod pod-cm-env-vars
+  170  kubectl delete cm environ-map-1
+  171  kubectl get secret
+  172  kubectl create secret generic secret-a --from-literal=password='Parolka1'
+  173  echo 'DrugaParolka1' > password.conf
+  174  kubectl create secret generic secret-b --from-file=password=password.conf
+  175  kubectl get secret
+  176  kubectl get secret secret-a -o yaml
+  177  kubectl get secret secret-b -o yaml
+  178  echo UGFyb2xrYTE= | base64 --decode
+  179  kubectl delete secret secret-a secret-b
+  180  cat > secrets.yaml
+  181  cat secrets.yaml
+  182  kubectl apply -f secrets.yaml
+  183  kubectl get secrets
+  184  cat > pod-secret.yaml
+  185  cat pod-secret.yaml
+  186  kubectl apply -f pod-secret.yaml
+  187  kubectl delete pod/pod-secret service/svc-environ secret/mysecrets
+  188  rm password.conf
+  189  ls data/nfs
+  190  sudo ls data/nfs
+  191  sudo apt-get update
+  192  sudo apt-get install nfs-kernel-server
+  193  ls data
+  194  mkdir data
+  195  ls data
+  196  cd data
+  197  mkdir nfs
+  198  cd nfs
+  199  sudo mkdir k8spva
+  200  sudo mkdir k8spvb
+  201  sudo mkdir k8spvc
+  202  ls
+  203  cd ..
+  204  ls /etc/exports
+  205  cd etc
+  206  cd /etc
+  207  cd /exports
+  208  ls
+  209  sudo vi /etc/exports
+  210  mkdir data
+  211  sudo mkdir data
+  212  cd data
+  213  sudo mkdir nfs
+  214  cd ..
+  215  ls
+  216  cd data
+  217  ls
+  218  cd ..
+  219  sudo service nfs-kernel-server restart
+  220  sudo nano /etc/hosts
+  221  ip a
+  222  hostname -I
+  223  sudo nano /etc/hosts
+  224  ping nfs-server
+  225  cd etc
+  226  cd data
+  227  cd nfs
+  228  sudo mkdir k8spva
+  229  sudo mkdir k8spvb
+  230  sudo mkdir k8spvc
+  231  ls
+  232  sudo chmod 777 k8spv(a,b,c)
+  233  sudo chmod 777 k8spva
+  234  sudo chmod 777 k8spvb
+  235  sudo chmod 777 k8spvc
+  236  cd /etc
+  237  sudo vi exports
+  238  sudo export
+  239  sudo exportfs -rav
+  240  cd ..
+  241  cat > pvssa.yaml
+  242  sudo cat > pvssa.yaml
+  243  sudo cat pvssa.yaml
+  244  cat > pvssa.yaml
+  245  sudo cat > pvssa.yaml
+  246  exit
+  247  cat > pvssa.yaml
+  248  cat > pvssb.yaml
+  249  cat > pvssc.yaml
+  250  cat pvssa.yaml
+  251  cat pvssb.yaml
+  252  cat pvssc.yaml
+  253  ping nfs-server
+  254  kubectl apply -f pvssa.yaml
+  255  kubectl apply -f pvssb.yaml
+  256  kubectl apply -f pvssc.yaml
+  257  kubectl get pv
+  258  cat > svcss.yaml
+  259  cat svcss.yaml
+  260  kubectl apply -f svcss.yaml
+  261  kubectl get svc
+  262  cat > ss.yaml
+  263  cat ss.yaml
+  264  kubectl apply -f ss.yaml
+  265  kubectl get pod,svc,statefulset,pv,pvc
+  266  cat > svcssnp.yaml
+  267  kubectl apply -f svcssnp.yaml
+  268  kubectl get pod,svc,statefulset,pv,pvc
+  269  kubectl get pods,pvc -o wide
+  270  kubectl delete pod facts-0
+  271  kubect get pods,pvc -o wide
+  272  kubectl get pods,pvc -o wide
+  273  kubectl scale --replicas=1 statefulset/facts
+  274  kubectl get pod,svc,statefulset,pv,pvc
+  275  kubectl scale --replicas=3 statefulset/facts
+  276  kubectl get pod,svc,statefulset,pv,pvc
+  277  kubectl delete statefulset.apps/facts
+  278  kubectl delete service/facts service/factsnp
+  279  kubectl delete persistentvolumeclaim facts-data-facts-0 facts-data-facts-1 facts-data-facts-2
+  280  kubectl delete persistentvolume pvssa pvssb pvssc
+  281  history
+  282  exit
+  283  kubectl version --short
+  284  uname -a
+  285  openssl genrsa -out main.key 4096
+  286  openssl req -new -x509 -key main.key -out main.crt -days 365 -subj /CN=www.hw.lab
+  287  cat main.key
+  288  cat main.crt
+  289  cat > hwcm.yaml
+  290  cat hwcm.yaml
+  291  cat > hwpod.yaml
+  292  cat hwpod.yaml
+  293  cat > hwsec.yaml
+  294  cat hwsec.yaml
+  295  kubectl apply -f hwcm.yaml
+  296  kubectl apply -f hwsec.yaml
+  297  cat > hwsec.yaml
+  298  cat hwsec.yaml
+  299  kubectl apply -f hwsec.yaml
+  300  base64 main.key
+  301  base64 main.crt
+  302  kubectl apply -f hwsec.yaml
+  303  cat > hwsec.yaml
+  304  kubectl apply -f hwsec.yaml
+  305  cat > hwsec.yaml
+  306  cat hwsec.yaml
+  307  kubectl apply -f hwsec.yaml
+  308  kubectl apply -f hwpod.yaml
+  309  kubectl get pods
+  310  kubectl get secrets
+  311  kubectl get configmaps
+  312  cat > hwsec.yaml
+  313  cat hwsec.yaml
+  314  kubectl apply -f hwsec.yaml
+  315  kubectl get pods
+  316  kubectl get configmaps
+  317  kubectl get secrets
+  318  history
+  319  kubectl delete configmap hwcm
+  320  kubectl delete secret hwsec
+  321  kubectl delete pod hwpod
+  322  kubectl get configmaps
+  323  kubectl get secrets
+  324  kubectl get pods
+  325  history
+  326  exit
+  327  kubectl get nodes
+  328  ps ax | grep /usr/bin/kubelet
+  329  cat /var/lib/kubelet/config.yaml
+  330  ls -l /etc/kubernetes/manifests
+  331  sudo cat /etc/kubernetes/manifests/etcd.yaml
+  332  cat > 1-static-pod.yaml
+  333  cat 1-static-pod.yaml
+  334  sudo cp part1/1-static-pod.yaml /etc/kubernetes/manifests/
+  335  sudo cp 1-static-pod.yaml /etc/kubernetes/manifests/
+  336  ls -l /etc/kubernetes/manifests
+  337  kubectl get pods -o wide
+  338  kubectl get nodes
+  339  kubectl get pods -n kube-system
+  340  kubectl delete pod static-pod-node1
+  341  kubectl get pods -o wide
+  342  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  343  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock rm --force d174a2d6759b5
+  344  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  345  kubectl get pods -o wide
+  346  sudo rm /etc/kubernetes/manifests/1-static-pod.yaml
+  347  kubectl get pods -o wide -w
+  348  kubectl get pods -o wide
+  349  cat > 2-sidecar.yaml
+  350  cat 2-sidecar.yaml
+  351  kubectl apply -f 2-sidecar.yaml
+  352  kubectl get pods -o wide
+  353  kubectl get pods -o wide -w
+  354  kubectl get pods -o wide
+  355  kubectl get pods,svc -o wide
+  356  kubectl describe pod/sidecar-6d89497788-8j2mb
+  357  kubectl get pods,svc -o wide
+  358  kubectl exec -it pod/sidecar-pod/sidecar-6d89497788-6rgcz -- sh
+  359  kubectl exec -it pod/sidecar-6d89497788-6rgcz -- sh
+  360  kubectl exec -it deploy/sidecar -c cont-sidecar -- sh
+  361  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- bash
+  362  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- kill 1
+  363  kubectl get pods
+  364  kubectl delete -f 2-sidecar.yaml
+  365  kubectl get pods
+  366  cat > 3-adapter.yaml
+  367  cat 3-adapter.yaml
+  368  kubectl apply -f 3-adapter.yaml
+  369  kubectl get pods
+  370  kubectl exec -it adapter -c cont-main -- cat /var/log/app.log
+  371  kubectl exec -it adapter -c cont-adapter -- cat /var/log/out.log
+  372  kubectl delete -f 3-adapter.yaml
+  373  kubectl get pods
+  374  cat > 4-init-container.yaml
+  375  cat 4-init-container.yaml
+  376  kubectl apply -f 4-init-container.yaml
+  377  kubectl get pods,svc
+  378  kubectl get pods -w
+  379  kubectl describe pod pod-init
+  380  kubectl delete -f 4-init-container.yaml
+  381  kubectl get pods,svc
+  382  hostname
+  383  wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -O metrics-server.yaml
+  384  vi metrics-server.yaml
+  385  cat metrics-server.yaml
+  386  kubectl apply -f metrics-server.yaml
+  387  kubectl get all -A
+  388  kubectl get all -n kube-system
+  389  cat > 1-auto-scale.yaml
+  390  cat 1-auto-scale.yaml
+  391  kubectl apply -f 1-auto-scale.yaml
+  392  kubectl get pods
+  393  cat > 1-auto-scale-hpa.yaml
+  394  cat 1-auto-scale-hpa.yaml
+  395  kubectl apply -f 1-auto-scale-hpa.yaml
+  396  kubectl get horizontalpodautoscalers auto-scale-deploy
+  397  kubectl get pods -o wide
+  398  kubectl get deployments
+  399  kubectl get horizontalpodautoscalers auto-scale-deploy
+  400  kubectl get pods -o wide
+  401  kubectl get deployments
+  402  kubectl delete -f 1-auto-scale-hpa.yaml
+  403  kubectl delete -f 1-auto-scale.yaml
+  404  kubectl delete -f metrics-server.yaml
+  405  kubectl get nodes --show-labels
+  406  kubectl describe node k8s1
+  407  kubectl label node node2 disk=hitachi --overwrite
+  408  kubectl label node node3 disk=hitachi --overwrite
+  409  kubectl get nodes --show-labels
+  410  kubectl describe node | grep Taints
+  411  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule-
+  412  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule
+  413  kubectl describe node | grep Taints
+  414  kubectl get pods -n kube-system -o wide
+  415  kubectl describe pod coredns-5d78c9869d-4mqgb -n kube-system
+  416  kubectl get pods -n kube-system -o wide
+  417  kubectl describe pod etcd-node1 -n kube-system
+  418  kubectl taint node node2 demo-taint=nomorework:NoSchedule
+  419  kubectl describe node | grep Taints
+  420  cat > 2-schedule.yaml
+  421  cat 2-schedule.yaml
+  422  kubectl apply -f 2-schedule.yaml
+  423  kubectl get pods -o wide
+  424  kubectl delete -f 2-schedule.yaml
+  425  cat > 2-schedule-toleration.yaml
+  426  cat 2-schedule-toleration.yaml
+  427  kubectl apply -f 2-schedule-toleration.yaml
+  428  kubectl get pods -o wide
+  429  kubectl taint node node2 demo-taint-
+  430  kubectl get pods -o wide
+  431  kubectl delete -f 2-schedule-toleration.yaml
+  432  cat > 3-daemon-set.yaml
+  433  cat 3-daemon-set.yaml
+  434  cp 3-daemon-set.yaml pure-ds.yaml
+  435  vi pure-ds.yaml
+  436  cat pure-ds.yaml
+  437  kubectl apply -f pure-ds.yaml
+  438  kubectl get ds
+  439  kubectl get pods -o wide
+  440  kubectl delete -f pure-ds.yaml
+  441  cat 3-daemon-set.yaml
+  442  kubectl apply -f 3-daemon-set.yaml
+  443  kubectl get ds
+  444  kubectl get pods
+  445  kubectl get nodes --show-labels
+  446  kubectl label node node2 disk=samsung
+  447  kubectl label node node2 disk=samsung --overwrite
+  448  kubectl get nodes --show-labels
+  449  kubectl get ds
+  450  kubectl get pods -o wide
+  451  kubectl label node node3 disk=samsung
+  452  kubectl label node node3 disk=samsung --overwrite
+  453  kubectl get pods -o wide
+  454  kubectl get ds
+  455  kubectl label node node2 disk=wdc --overwrite
+  456  kubectl get ds
+  457  kubectl get pods -o wide
+  458  kubectl delete -f 3-daemon-set.yaml
+  459  kubectl get ds
+  460  cat > 4-batch-job.yaml
+  461  cat 4-batch-job.yaml
+  462  kubectl apply -f 4-batch-job.yaml
+  463  kubectl get jobs
+  464  kubectl get jobs -o wide
+  465  kubectl get pods
+  466  kubectl describe job batch-job
+  467  kubectl get jobs -o wide
+  468  kubectl get pods
+  469  kubectl get jobs -o wide
+  470  kubectl describe job batch-job
+  471  kubectl delete -f 4-batch-job.yaml
+  472  kubectl get pods
+  473  cat > 4-batch-job-serial.yaml
+  474  cat 4-batch-job-serial.yaml
+  475  kubectl apply -f 4-batch-job-serial.yaml
+  476  kubectl get jobs
+  477  kubectl describe job batch-job-serial
+  478  kubectl get pods
+  479  kubectl delete -f 4-batch-job-serial.yaml
+  480  kubectl get pods
+  481  cat > 4-batch-job-parallel.yaml
+  482  cat 4-batch-job-parallel.yaml
+  483  kubectl apply -f 4-batch-job-parallel.yaml
+  484  kubectl get jobs
+  485  kubectl get jobs -o wide
+  486  kubectl get pods -o wide
+  487  kubectl describe job batch-job-parallel
+  488  kubectl get pods -o wide
+  489  kubectl get jobs -o wide
+  490  kubectl delete -f 4-batch-job-parallel.yaml
+  491  cat > 4-batch-job-serial.yaml
+  492  sudo rm 4-batch-job-serial.yaml
+  493  ls
+  494  cat > 4-batch-job-cron.yaml
+  495  cat 4-batch-job-cron.yaml
+  496  kubectl apply -f 4-batch-job-cron.yaml
+  497  kubectl get cronjobs
+  498  kubectl get cronjobs -o wide
+  499  kubectl get pods -o wide
+  500  kubectl delete -f 4-batch-job-cron.yaml
+  501  ls
+  502  ls -a
+  503  git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.3.2
+  504  cd kubernetes-ingress/deployments
+  505  ls
+  506  cd ..
+  507  apt-get install tree
+  508  sudo apt-get install tree
+  509  cd kubernetes-ingress/deployments
+  510  tree .
+  511  kubectl apply -f common/ns-and-sa.yaml
+  512  kubectl apply -f rbac/rbac.yaml
+  513  kubectl apply -f ../examples/shared-examples/default-server-secret/default-server-secret.yaml
+  514  kubectl apply -f common/nginx-config.yaml
+  515  kubectl apply -f common/ingress-class.yaml
+  516  kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
+  517  kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
+  518  kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
+  519  kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+  520  kubectl apply -f deployment/nginx-ingress.yaml
+  521  kubectl get pods --namespace=nginx-ingress -w
+  522  ls -al service/
+  523  kubectl create -f service/nodeport.yaml
+  524  kubectl get service -n nginx-ingress
+  525  cd ..
+  526  cat > pod-svc-1.yaml
+  527  cat pod-svc-1.yaml
+  528  kubectl get ingressclass
+  529  kubectl apply -f pod-svc-1.yaml
+  530  kubectl get pod,svc
+  531  cat > 1-nginx-single.yaml
+  532  cat 1-nginx-single.yaml
+  533  kubectl apply -f 1-nginx-single.yaml
+  534  kubectl get ingress
+  535  kubectl describe ingress ingress-ctrl
+  536  ip a
+  537  sudo vi /etc/hosts
+  538  ping demo.lab
+  539  kubectl get svc nginx-ingress -n nginx-ingress
+  540  cat > 2-nginx-custom-path-a.yaml
+  541  kubectl apply -f 2-nginx-custom-path-a.yaml
+  542  kubectl describe ingress ingress-ctrl
+  543  kubectl logs pod1
+  544  cat > 2-nginx-custom-path-b.yaml
+  545  kubectl apply -f 2-nginx-custom-path-b.yaml
+  546  kubectl describe ingress ingress-ctrl
+  547  cat > pod-svc-d.yaml
+  548  kubectl apply -f pod-svc-d.yaml
+  549  cat > 3-nginx-default-back.yaml
+  550  kubectl apply -f 3-nginx-default-back.yaml
+  551  kubectl describe ingress ingress-ctrl
+  552  cat > pod-svc-2.yaml
+  553  cat pod-svc-2.yaml
+  554  kubectl apply -f pod-svc-2.yaml
+  555  cat > 4-nginx-fan-out.yaml
+  556  ubectl apply -f part3/4-nginx-fan-out.yaml
+  557  kubectl apply -f 4-nginx-fan-out.yaml
+  558  kubectl describe ingress ingress-ctrl
+  559  cat > 5-nginx-name-vhost.yaml
+  560  kubectl apply -f 5-nginx-name-vhost.yaml
+  561  kubectl describe ingress ingress-ctrl
+  562  kubectl delete pods podd pod1 pod2
+  563  kubectl delete svc serviced service1 service2
+  564  kubectl delete ingress ingress-ctrl
+  565  kubectl delete namespace nginx-ingress
+  566  kubectl delete clusterrolebinding nginx-ingress
+  567  kubectl delete clusterrole nginx-ingress
+  568  cd /kubernetes-ingress/deployments
+  569  cd kubernetes-ingress/deployments
+  570  kubectl delete -f common/crds/
+  571  cd ..
+  572  history
+  573  exit
+  574  mkdir debian-nfs
+  575  cd debian-nfs/
+  576  cd ..
+  577  exit
+  578  cat > 1-app-init-init.yaml
+  579  cat 1-app-init-init.yaml
+  580  cat > 1-app-init-init.yaml
+  581  cat 1-app-init-init.yaml
+  582  kubectl apply -f 1-app-init-init.yaml
+  583  kubectl get pods -o wide
+  584  kubectl delete -f 1-app-init-init.yaml
+  585  kubectl get pods -o wide
+  586  cat > 1-app-init-init.yaml
+  587  cat 1-app-init-init.yaml
+  588  kubectl apply -f 1-app-init-init.yaml
+  589  kubectl get pods -o wide
+  590  kubectl delete -f 1-app-init-init.yaml
+  591  history
+  592  exit
+  593  cat > 1-liveness-cmd.yaml
+  594  cat > 2-liveness-http.yaml
+  595  cat > 3-readiness-cmd.yaml
+  596  cat > 4-readiness-http.yaml
+  597  cat > 5-startup-liveness-same.yaml
+  598  cat > 6-startup-liveness-mixed.yaml
+  599  cat 1-liveness-cmd.yaml
+  600  kubectl apply -f 1-liveness-cmd.yaml
+  601  kubectl describe pod liveness-cmd
+  602  kubectl get pod liveness-cmd
+  603  kubectl delete -f 1-liveness-cmd.yaml
+  604  cat 2-liveness-http.yaml
+  605  kubectl apply -f 2-liveness-http.yaml
+  606  kubectl describe pod liveness-http
+  607  kubectl get pod liveness-http
+  608  kubectl delete -f 2-liveness-http.yaml
+  609  cat 3-readiness-cmd.yaml
+  610  kubectl apply -f 3-readiness-cmd.yaml
+  611  kubectl describe pod readiness-cmd
+  612  kubectl describe svc readiness-cmd
+  613  watch -n 2 kubectl get pods,svc -o wide
+  614  kubectl delete -f 3-readiness-cmd.yaml
+  615  cat 4-readiness-http.yaml
+  616  kubectl apply -f 4-readiness-http.yaml
+  617  kubectl describe pod readiness-http
+  618  kubectl describe svc readiness-http
+  619  watch -n 2 kubectl get pods,svc -o wide
+  620  kubectl delete -f 4-readiness-http.yaml
+  621  cat 5-startup-liveness-same.yaml
+  622  kubectl apply -f 5-startup-liveness-same.yaml
+  623  kubectl logs startup-same
+  624  kubectl describe pod startup-same
+  625  kubectl get pod startup-same
+  626  kubectl describe pod startup-same
+  627  kubectl get pod startup-same
+  628  kubectl describe pod startup-same
+  629  kubectl get pod startup-same
+  630  kubectl delete -f 5-startup-liveness-same.yaml
+  631  cat 6-startup-liveness-mixed.yaml
+  632  kubectl apply -f 6-startup-liveness-mixed.yaml
+  633  kubectl describe pod startup-mixed
+  634  kubectl describe svc startup-mixed
+  635  kubectl describe pod startup-mixed
+  636  kubectl describe svc startup-mixed
+  637  kubectl describe pod startup-mixed
+  638  kubectl describe svc startup-mixed
+  639  kubectl describe pod startup-mixed
+  640  kubectl describe svc startup-mixed
+  641  watch -n 2 kubectl get pods,svc -o wide
+  642  kubectl delete -f 6-startup-liveness-mixed.yaml
+  643  cat > 1-additions.yaml
+  644  cat > 1-audit-simple.yaml
+  645  cat > 2-audit.yaml
+  646  cat > 3-basic-logging.yaml
+  647  cat > 4-streaming-sidecar.yaml
+  648  cat 1-audit-simple.yaml
+  649  sudo mkdir /var/lib/k8s-audit
+  650  sudo cp 1-audit-simple.yaml /var/lib/k8s-audit/
+  651  sudo mkdir /var/log/k8s-audit
+  652  sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+  653  kubectl get pods -n kube-system -w
+  654  kubectl run logtest1 --image=alpine -- sleep 1d
+  655  kubectl get pods
+  656  cat /var/log/k8s-audit/audit.log | grep logtest1
+  657  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+  658  cat /var/log/k8s-audit/audit.log
+  659  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+  660  cat /var/log/k8s-audit/audit.log | grep logtest1
+  661  sudo apk update
+  662  sudo apt update
+  663  sudo apk add jq
+  664  sudo apk install jq
+  665  sudo apt install jq
+  666  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+  667  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq -s length
+  668  kubectl delete pod logtest1
+  670  cat > 1-audit-simple.yaml
+  671  kubectl get pods -n kube-system -w
+  672  kubectl run logtest2 --image=alpine -- sleep 1d
+  673  kubectl get pods
+  674  cat /var/log/k8s-audit/audit.log | grep logtest2 | jq
+  675  cat /var/log/k8s-audit/audit.log | grep logtest2 | jq -s length
+  676  kubectl delete pod logtest2
+  677  sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+  678  cat 3-basic-logging.yaml
+  679  kubectl get pods -n kube-system -w
+  680  cat 3-basic-logging.yaml
+  681  sudo rm -rf /var/log/k8s-audit/
+  682  sudo rm -rf /var/lib/k8s-audit/
+  683  cat 3-basic-logging.yaml
+  684  kubectl apply -f 3-basic-logging.yaml
+  685  kubectl get pods
+  686  kubectl logs counter
+  687  kubectl logs counter --follow
+  688  kubectl get pods
+  689  kubectl describe pods
+  690  kubectl get pods -o wide
+  691  kubectl delete pod counter
+  692  kubectl logs counter
+  693  kubectl logs counter --previous
+  694  kubectl apply -f 3-basic-logging.yaml
+  695  kubectl get pods -o wide
+  696  kubectl logs counter
+  697  kubectl exec counter -- touch /stop.file
+  698  kubectl get pods -o wide
+  699  kubectl logs counter
+  700  kubectl logs counter --previous
+  701  kubectl delete pod counter
+  702  cat 4-streaming-sidecar.yaml
+  703  kubectl apply -f 4-streaming-sidecar.yaml
+  704  kubectl get pods
+  705  kubectl exec counter -c main -- cat /var/log/1.log
+  706  kubectl exec counter -c main -- cat /var/log/2.log
+  707  kubectl logs counter -c sidecar-1
+  708  kubectl logs counter -c sidecar-2
+  709  kubectl delete -f 4-streaming-sidecar.yaml
+  710  history

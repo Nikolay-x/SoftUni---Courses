@@ -1,0 +1,355 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant up
+   3 vagrant ssh node1
+   4 vagrant halt
+
+
+
+vagrant@node1:~$ history
+    1  kubectl get pod,svc,statefulset,pv,pvc
+    2  exit
+    3  cat > 1-appa.yaml
+    4  cat > 2-appa.yaml
+    5  cat 2-appa.yaml
+    6  sed 's/%replicas%/3/ ; s@%image%@shekeriev/k8s-environ@ ; s/%tag%/green/ ; s/%approach%/MANUAL/ ; s/%nodeport%/30001/' 2-appa.yaml | kubectl apply -f -
+    7  cat 2-appa.yaml
+    8  sed 's/%replicas%/3/ ; s@%image%@shekeriev/k8s-environ@ ; s/%tag%/latest/ ; s/%approach%/MANUAL/ ; s/%nodeport%/30001/' part1/1-manual/2-appa.yaml | kubectl apply -f -
+    9  sed 's/%replicas%/3/ ; s@%image%@shekeriev/k8s-environ@ ; s/%tag%/latest/ ; s/%approach%/MANUAL/ ; s/%nodeport%/30001/' 2-appa.yaml | kubectl apply -f -
+   10  kubectl delete deployment appa
+   11  kubectl delete service appa
+   12  curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+   13  kustomize version
+   14  sudo mv kustomize /usr/local/bin
+   15  kustomize version
+   16  DEMO=/tmp/hello
+   17  BASE=$DEMO/base
+   18  mkdir -p $BASE
+   19  curl -s -o "$BASE/#1.yaml" "https://raw.githubusercontent.com\
+/kubernetes-sigs/kustomize\
+/master/examples/helloWorld\
+/{configMap,deployment,kustomization,service}.yaml"
+   20  tree $DEMO
+   21  apt update && sudo apt upgrade
+   22  apt update
+   23  sudo apt update && sudo apt upgrade
+   24  apt install tree
+   25  sudo apt install tree
+   26  tree $DEMO
+   27  cat $BASE/kustomization.yaml
+   28  cat $BASE/deployment.yaml
+   29  kustomize build $BASE
+   30  kustomize build $BASE | kubectl apply -f -
+   31  kubectl get services
+   32  cat $BASE/kustomization.yaml
+   33  kustomize build $BASE | kubectl delete -f -
+   34  sed -i.bak 's/app: hello/app: my-hello/' $BASE/kustomization.yaml
+   35  kustomize build $BASE
+   36  tree $DEMO
+   37  OVERLAYS=$DEMO/overlays
+   38  mkdir -p $OVERLAYS/staging
+   39  mkdir -p $OVERLAYS/production
+   40  tree $DEMO
+   41  cat <<'EOF' >$OVERLAYS/staging/kustomization.yaml
+namePrefix: staging-
+labels:
+- includeSelectors: true
+  pairs:
+    org: acmeCorporation
+    variant: staging
+commonAnnotations:
+  note: Hello, I am staging!
+resources:
+- ../../base
+patches:
+
+   42  cat <<'EOF' >$OVERLAYS/staging/kustomization.yaml
+namePrefix: staging-
+labels:
+- includeSelectors: true
+  pairs:
+    org: acmeCorporation
+    variant: staging
+commonAnnotations:
+  note: Hello, I am staging!
+resources:
+- ../../base
+patches:
+- path: map.yaml
+EOF
+
+   43  cat <<EOF >$OVERLAYS/staging/map.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: the-map
+data:
+  altGreeting: "Have a pineapple!"
+  enableRisky: "true"
+EOF
+
+   44  tree $DEMO
+   45  cat <<EOF >$OVERLAYS/production/kustomization.yaml
+namePrefix: production-
+labels:
+- includeSelectors: true
+  pairs:
+    org: acmeCorporation
+    variant: production
+commonAnnotations:
+  note: Hello, I am production!
+resources:
+- ../../base
+patches:
+- path: deployment.yaml
+EOF
+
+   46  cat <<EOF >$OVERLAYS/production/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-deployment
+spec:
+  replicas: 5
+EOF
+
+   47  tree $DEMO
+   48  cat \$BASE/deployment.yaml
+   49  cat $BASE/deployment.yaml
+   50  cat $OVERLAYS/production/deployment.yaml
+   51  diff <(kustomize build $OVERLAYS/staging) <(kustomize build $OVERLAYS/production) | more
+   52  kustomize build $OVERLAYS/staging
+   53  kustomize build $OVERLAYS/production
+   54  kubectl apply -k $OVERLAYS/staging
+   55  kubectl get services
+   56  kubectl apply -k $OVERLAYS/production
+   57  kubectl get services
+   58  kustomize build $OVERLAYS/staging | kubectl delete -f -
+   59  kustomize build $OVERLAYS/production | kubectl delete -f -
+   60  clear
+   61  mkdir part1
+   62  ls
+   63  cd part1
+   64  mkdir 2-kustomize
+   65  cd 2-kustomize/
+   66  mkdir base
+   67  cd base/
+   68  cd ..
+   69  cat > base/appa.yaml
+   70  cat > base/kustomization.yaml
+   71  kustomize build base/
+   72  tree .
+   73  mkdir -p overlays/{blue,green}
+   74  tree .
+   75  cat > overlays/blue/kustomization.yaml
+   76  cat > overlays/green/kustomization.yaml
+   77  tree .
+   78  cat > overlays/blue/custom-env.yaml
+   79  cat > overlays/blue/custom-rs.yaml
+   80  cat > overlays/green/custom-env.yaml
+   81  cat > overlays/green/custom-np.yaml
+   82  tree .
+   83  cd base/
+   84  cd ..
+   85  cd overlays/
+   86  cd blue/
+   87  kustomize edit set image shekeriev/k8s-environ:latest=shekeriev/k8s-environ:blue
+   88  cat kustomization.yaml
+   89  cd ..
+   90  cd green/
+   91  kustomize edit set image shekeriev/k8s-environ:latest=shekeriev/k8s-environ:green
+   92  cat kustomization.yaml
+   93  cd ..
+   94  tree .
+   95  kubectl apply -k overlays/blue
+   96  kubectl apply -k overlays/green
+   97  kubectl get pods,svc
+   98  kubectl delete -k overlays/blue
+   99  kubectl delete -k overlays/green
+  100  clear
+  101  cd ../../
+  102  curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
+  103  skaffold version
+  104  cd part1/
+  105  mkdir 3-skaffold
+  106  cd 3-skaffold/
+  107  cat > code.sh
+  108  cat > Dockerfile
+  109  cat > pod.yaml
+  110  ls
+  111  tree .
+  112  skaffold init
+  113  tree
+  114  cat skaffold.yaml
+  115  docker login
+  116  ls
+  117  chmod +x code.sh
+  118  skaffold run --tail
+  119  skaffold run --tail --default-repo
+  120  skaffold run --help
+  121  skaffold run --tail --default-repo='skaffold'
+  122  docker login
+  123  skaffold run --tail --default-repo='nikolayx/skaffold'
+  124  skaffold run --tail --default-repo=nikolayx/skaffold
+  125  ls
+  126  sudo vi pod.yaml
+  127  sudo vi skaffold.yaml
+  128  cat skaffold.yaml
+  129  cat pod.yaml
+  130  skaffold run --tail
+  131  kubectl delete pod skaffold
+  132  skaffold dev
+  133  vi code.sh
+  134  cat code.sh
+  135  skaffold dev
+  136  kubectl get pods
+  137  clear
+  138  cd ../..
+  139  curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  140  helm version
+  141  helm repo add bitnami https://charts.bitnami.com/bitnami
+  142  helm repo list
+  143  helm env
+  144  helm install my-nginx-1 bitnami/nginx
+  145  ls -al /home/vagrant/.cache/helm/repository
+  146  helm list
+  147  helm status my-nginx-1
+  148  kubectl get pods,svc
+  149  helm get manifest my-nginx-1
+  150  kubectl get secret
+  151  kubectl get pods,svc
+  152  helm get all my-nginx-1
+  153  kubectl get service my-nginx-1
+  154  kubectl create configmap my-nginx-2-index --from-literal=index.html='<h1>Hello from NGINX chart :)</h1>'
+  155  kebectl get cm
+  156  kubectl get cm
+  157  kubectl get cm my-nginx-2-index -o yaml
+  158  helm install my-nginx-2 bitnami/nginx --set staticSiteConfigmap=my-nginx-2-index --dry-run
+  159  helm install my-nginx-2 bitnami/nginx --set staticSiteConfigmap=my-nginx-2-index
+  160  helm list
+  161  kubectl get pods,svc
+  162  helm uninstall my-nginx-1 my-nginx-2
+  163  helm install my-nginx-2 bitnami/nginx --set staticSiteConfigmap=my-nginx-2-index
+  164  kubectl get svc
+  165  helm uninstall my-nginx-2
+  166  kubectl get pods,svc,cm,secret
+  167  kubectl delete cm my-nginx-2-index
+  168  helm search hub wordpress
+  169  helm search repo wordpress
+  170  helm show chart bitnami/wordpress
+  171  helm show readme bitnami/wordpress
+  172  helm install my-wordpress bitnami/wordpress
+  173  helm list
+  174  kubectl get pods,svc
+  175  helm uninstall my-wordpress
+  176  kubectl get pvc
+  177  kubectl delete pvc data-my-wordpress-mariadb-0
+  178  kubectl get pvc
+  179  helm install my-wordpress bitnami/wordpress --set service.type=NodePort --set persistence.enabled=false --set mariadb.primary.persistence.enabled=false
+  180  kubectl get pods,svc,pvc,pv -o wide
+  181  helm status my-wordpress
+  182  export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services my-wordpress)
+  183  export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+  184  echo "WordPress URL: http://$NODE_IP:$NODE_PORT/"
+  185  echo "WordPress Admin URL: http://$NODE_IP:$NODE_PORT/admin"
+  186  echo Username: user
+  187  echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+  188  kubectl get pods,svc,pvc,pv -o wide
+  189  helm uninstall my-wordpress
+  190  kubectl get pods,svc,pvc,pv -o wide
+  191  clear
+  192  helm create mychart
+  193  ls
+  194  tree mychart
+  195  cat mychart/deployment.yaml
+  196  cat mychart/templates/deployment.yaml
+  197  cat mychart/templates/service.yaml
+  198  mkdir -p webchart/templates
+  199  tree webchart
+  200  touch webchart/{Chart.yaml,values.yaml} webchart/templates/{cm.yaml,pod.yaml,svc.yaml}
+  201  tree webchart
+  202  cat > webchart/Chart.yaml
+  203  cat > webchart/templates/cm.yaml
+  204  cat > webchart/templates/pod.yaml
+  205  cat > webchart/templates/svc.yaml
+  206  tree webchart
+  207  helm show chart webchart
+  208  helm install test1 webchart
+  209  cat webchart/Chart.yaml
+  210  cat webchart/templates/cm.yaml
+  211  ls
+  212  rm 1-appa.yaml
+  213  ls
+  214  rm 2-appa.yaml
+  215  ls
+  216  helm install test1 webchart
+  217  cat webchart/templates/pod.yaml
+  218  cat webchart/templates/svc.yaml
+  219  helm show chart webchart
+  220  helm install test1 webchart
+  221  helm list
+  222  tree webchart/
+  223  ls
+  224  helm install test1 webchart
+  225  cat webchart/Chart.yaml
+  226  cat webchart/templates/cm.yaml
+  227  cat webchart/templates/pod.yaml
+  228  cat webchart/templates/svc.yaml
+  229  helm show chart webchart
+  230  helm install test1 webchart
+  231  helm list
+  232  helm get manifest test1
+  233  kubectl get cm,pods,svc
+  234  kubectl delete cm configmap/kube-root-ca.crt
+  235  kubectl delete cm kube-root-ca.crt
+  236  helm install test1 webchart
+  237  helm show chart webchart
+  238  helm install test1 webchart
+  239  helm list
+  240  helm get manifest test1
+  241  kubectl get cm,pods,svc
+  242  helm install test2 webchart
+  243  helm uninstall test1
+  244  cat > webchart/templates/cm.yaml
+  245  cat > webchart/templates/pod.yaml
+  246  cat > webchart/templates/svc.yaml
+  247  helm install test1 webchart
+  248  helm list
+  249  kubectl get cm,pods,svc
+  250  helm install test2 webchart
+  251  helm list
+  252  kubectl get cm,pods,svc
+  253  helm uninstall test1 test2
+  254  ls
+  255  helm package webchart
+  256  ls
+  257  mkdir -p appchart/templates
+  258  tree appchart
+  259  cat > appchart/templates/deployment.yaml
+  260  cat > appchart/templates/service.yaml
+  261  tree appchart
+  262  cat > appchart/Chart.yaml
+  263  cat > appchart/values.yaml file
+  264  cat > appchart/values.yaml
+  265  tree appchart
+  266  cat > appchart/templates/deployment.yaml
+  267  cat > appchart/templates/service.yaml
+  268  cat > appchart/values.yaml
+  269  helm show all appchart
+  270  helm install app1 appchart
+  271  helm list
+  272  kubectl get deployments,pods,svc
+  273  helm install app2 appchart
+  274  kubectl get deployments,pods,svc
+  275  helm uninstall app2
+  276  helm install app2 appchart --set nodePort=30002 --set replicasCount=3
+  277  helm list
+  278  kubectl get deployments,pods,svc
+  279  helm uninstall app1 app2
+  280  ls
+  281  tree appchart
+  282  kubectl get deployments,pods,svc
+  283  history

@@ -1,0 +1,2786 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> Set-Location -Path 'C:\Users\NB\Kubernetes'
+PS C:\Users\NB\Kubernetes> vagrant up
+Bringing machine 'node1' up with 'virtualbox' provider...
+Bringing machine 'node2' up with 'virtualbox' provider...
+Bringing machine 'node3' up with 'virtualbox' provider...
+There are errors in the configuration of this machine. Please fix
+the following errors and try again:
+
+vm:
+* The host path of the shared folder is missing: vagrant/
+
+PS C:\Users\NB\Kubernetes> vagrant up
+Bringing machine 'node1' up with 'virtualbox' provider...
+Bringing machine 'node2' up with 'virtualbox' provider...
+Bringing machine 'node3' up with 'virtualbox' provider...
+==> node1: Importing base box 'shekeriev/debian-11'...
+==> node1: Matching MAC address for NAT networking...
+==> node1: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node1: Setting the name of the VM: Kubernetes_node1_1699081999584_96247
+==> node1: Clearing any previously set network interfaces...
+==> node1: Preparing network interfaces based on configuration...
+    node1: Adapter 1: nat
+    node1: Adapter 2: hostonly
+==> node1: Forwarding ports...
+    node1: 22 (guest) => 2222 (host) (adapter 1)
+==> node1: Running 'pre-boot' VM customizations...
+==> node1: Booting VM...
+==> node1: Waiting for machine to boot. This may take a few minutes...
+    node1: SSH address: 127.0.0.1:2222
+    node1: SSH username: vagrant
+    node1: SSH auth method: private key
+==> node1: Machine booted and ready!
+==> node1: Checking for guest additions in VM...
+==> node1: Setting hostname...
+==> node1: Configuring and enabling network interfaces...
+==> node1: Mounting shared folders...
+    node1: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node1: Running provisioner: shell...
+    node1: Running: inline script
+    node1: * Specified version is 1.27.5
+    node1: ... working with 1.27.5 version from 1.27 branch.
+    node1: * Load br_netfilter on boot ...
+    node1: * Adjust network-related settings and apply them ...
+    node1: net.bridge.bridge-nf-call-ip6tables = 1
+    node1: net.bridge.bridge-nf-call-iptables = 1
+    node1: net.ipv4.ip_forward = 1
+    node1: * Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+    node1: kernel.pid_max = 4194304
+    node1: * Applying /etc/sysctl.d/99-sysctl.conf ...
+    node1: * Applying /etc/sysctl.d/k8s.conf ...
+    node1: net.bridge.bridge-nf-call-ip6tables = 1
+    node1: net.bridge.bridge-nf-call-iptables = 1
+    node1: net.ipv4.ip_forward = 1
+    node1: * Applying /usr/lib/sysctl.d/protect-links.conf ...
+    node1: fs.protected_fifos = 1
+    node1: fs.protected_hardlinks = 1
+    node1: fs.protected_regular = 2
+    node1: fs.protected_symlinks = 1
+    node1: * Applying /etc/sysctl.conf ...
+    node1: * Install iptables and switch it to legacy version ...
+    node1: Get:1 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+    node1: Hit:2 http://deb.debian.org/debian bullseye InRelease
+    node1: Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+    node1: Get:4 http://security.debian.org/debian-security bullseye-security/main Sources [160 kB]
+    node1: Get:5 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [257 kB]
+    node1: Get:6 http://security.debian.org/debian-security bullseye-security/main Translation-en [165 kB]
+    node1: Fetched 675 kB in 1s (875 kB/s)
+    node1: Reading package lists...
+    node1: Reading package lists...
+    node1: Building dependency tree...
+    node1: Reading state information...
+    node1: The following additional packages will be installed:
+    node1:   libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+    node1: Suggested packages:
+    node1:   firewalld
+    node1: The following NEW packages will be installed:
+    node1:   iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+    node1: 0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+    node1: Need to get 472 kB of archives.
+    node1: After this operation, 2,850 kB of additional disk space will be used.
+    node1: Get:1 http://deb.debian.org/debian bullseye/main amd64 libip6tc2 amd64 1.8.7-1 [35.0 kB]
+    node1: Get:2 http://deb.debian.org/debian bullseye/main amd64 libnfnetlink0 amd64 1.0.1-3+b1 [13.9 kB]
+    node1: Get:3 http://deb.debian.org/debian bullseye/main amd64 libnetfilter-conntrack3 amd64 1.0.8-3 [40.6 kB]
+    node1: Get:4 http://deb.debian.org/debian bullseye/main amd64 iptables amd64 1.8.7-1 [382 kB]
+    node1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node1: Fetched 472 kB in 0s (2,089 kB/s)
+    node1: Selecting previously unselected package libip6tc2:amd64.
+(Reading database ... 52841 files and directories currently installed.)
+    node1: Preparing to unpack .../libip6tc2_1.8.7-1_amd64.deb ...
+    node1: Unpacking libip6tc2:amd64 (1.8.7-1) ...
+    node1: Selecting previously unselected package libnfnetlink0:amd64.
+    node1: Preparing to unpack .../libnfnetlink0_1.0.1-3+b1_amd64.deb ...
+    node1: Unpacking libnfnetlink0:amd64 (1.0.1-3+b1) ...
+    node1: Selecting previously unselected package libnetfilter-conntrack3:amd64.
+    node1: Preparing to unpack .../libnetfilter-conntrack3_1.0.8-3_amd64.deb ...
+    node1: Unpacking libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+    node1: Selecting previously unselected package iptables.
+    node1: Preparing to unpack .../iptables_1.8.7-1_amd64.deb ...
+    node1: Unpacking iptables (1.8.7-1) ...
+    node1: Setting up libip6tc2:amd64 (1.8.7-1) ...
+    node1: Setting up libnfnetlink0:amd64 (1.0.1-3+b1) ...
+    node1: Setting up libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+    node1: Setting up iptables (1.8.7-1) ...
+    node1: update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+    node1: update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+    node1: update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+    node1: update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+    node1: update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+    node1: update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+    node1: Processing triggers for man-db (2.9.4-2) ...
+    node1: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node1: update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in manual mode
+    node1: * Turn off the swap ...
+    node1: * Add hosts ...
+    node1: * Install other required packages ...
+    node1: Reading package lists...
+    node1: Building dependency tree...
+    node1: Reading state information...
+    node1: ca-certificates is already the newest version (20210119).
+    node1: lsb-release is already the newest version (11.1.0).
+    node1: lsb-release set to manually installed.
+    node1: curl is already the newest version (7.74.0-1.3+deb11u10).
+    node1: The following additional packages will be installed:
+    node1:   dirmngr gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server
+    node1:   gpgconf gpgsm libassuan0 libksba8 libnpth0 pinentry-curses
+    node1: Suggested packages:
+    node1:   dbus-user-session pinentry-gnome3 tor parcimonie xloadimage scdaemon
+    node1:   pinentry-doc
+    node1: The following NEW packages will be installed:
+    node1:   apt-transport-https dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent
+    node1:   gpg-wks-client gpg-wks-server gpgconf gpgsm libassuan0 libksba8 libnpth0
+    node1:   pinentry-curses
+    node1: 0 upgraded, 15 newly installed, 0 to remove and 0 not upgraded.
+    node1: Need to get 7,825 kB of archives.
+    node1: After this operation, 15.8 MB of additional disk space will be used.
+    node1: Get:1 http://deb.debian.org/debian bullseye/main amd64 apt-transport-https all 2.2.4 [160 kB]
+    node1: Get:2 http://deb.debian.org/debian bullseye/main amd64 libassuan0 amd64 2.5.3-7.1 [50.5 kB]
+    node1: Get:3 http://deb.debian.org/debian bullseye/main amd64 gpgconf amd64 2.2.27-2+deb11u2 [548 kB]
+    node1: Get:4 http://deb.debian.org/debian bullseye/main amd64 libksba8 amd64 1.5.0-3+deb11u2 [123 kB]
+    node1: Get:5 http://deb.debian.org/debian bullseye/main amd64 libnpth0 amd64 1.6-3 [19.0 kB]
+    node1: Get:6 http://deb.debian.org/debian bullseye/main amd64 dirmngr amd64 2.2.27-2+deb11u2 [763 kB]
+    node1: Get:7 http://deb.debian.org/debian bullseye/main amd64 gnupg-l10n all 2.2.27-2+deb11u2 [1,086 kB]
+    node1: Get:8 http://deb.debian.org/debian bullseye/main amd64 gnupg-utils amd64 2.2.27-2+deb11u2 [905 kB]
+    node1: Get:9 http://deb.debian.org/debian bullseye/main amd64 gpg amd64 2.2.27-2+deb11u2 [928 kB]
+    node1: Get:10 http://deb.debian.org/debian bullseye/main amd64 pinentry-curses amd64 1.1.0-4 [64.9 kB]
+    node1: Get:11 http://deb.debian.org/debian bullseye/main amd64 gpg-agent amd64 2.2.27-2+deb11u2 [669 kB]
+    node1: Get:12 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-client amd64 2.2.27-2+deb11u2 [524 kB]
+    node1: Get:13 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-server amd64 2.2.27-2+deb11u2 [516 kB]
+    node1: Get:14 http://deb.debian.org/debian bullseye/main amd64 gpgsm amd64 2.2.27-2+deb11u2 [645 kB]
+    node1: Get:15 http://deb.debian.org/debian bullseye/main amd64 gnupg all 2.2.27-2+deb11u2 [825 kB]
+    node1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node1: Fetched 7,825 kB in 2s (4,449 kB/s)
+    node1: Selecting previously unselected package apt-transport-https.
+(Reading database ... 53061 files and directories currently installed.)
+    node1: Preparing to unpack .../00-apt-transport-https_2.2.4_all.deb ...
+    node1: Unpacking apt-transport-https (2.2.4) ...
+    node1: Selecting previously unselected package libassuan0:amd64.
+    node1: Preparing to unpack .../01-libassuan0_2.5.3-7.1_amd64.deb ...
+    node1: Unpacking libassuan0:amd64 (2.5.3-7.1) ...
+    node1: Selecting previously unselected package gpgconf.
+    node1: Preparing to unpack .../02-gpgconf_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gpgconf (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package libksba8:amd64.
+    node1: Preparing to unpack .../03-libksba8_1.5.0-3+deb11u2_amd64.deb ...
+    node1: Unpacking libksba8:amd64 (1.5.0-3+deb11u2) ...
+    node1: Selecting previously unselected package libnpth0:amd64.
+    node1: Preparing to unpack .../04-libnpth0_1.6-3_amd64.deb ...
+    node1: Unpacking libnpth0:amd64 (1.6-3) ...
+    node1: Selecting previously unselected package dirmngr.
+    node1: Preparing to unpack .../05-dirmngr_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking dirmngr (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gnupg-l10n.
+    node1: Preparing to unpack .../06-gnupg-l10n_2.2.27-2+deb11u2_all.deb ...
+    node1: Unpacking gnupg-l10n (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gnupg-utils.
+    node1: Preparing to unpack .../07-gnupg-utils_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gnupg-utils (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gpg.
+    node1: Preparing to unpack .../08-gpg_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gpg (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package pinentry-curses.
+    node1: Preparing to unpack .../09-pinentry-curses_1.1.0-4_amd64.deb ...
+    node1: Unpacking pinentry-curses (1.1.0-4) ...
+    node1: Selecting previously unselected package gpg-agent.
+    node1: Preparing to unpack .../10-gpg-agent_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gpg-agent (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gpg-wks-client.
+    node1: Preparing to unpack .../11-gpg-wks-client_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gpg-wks-client (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gpg-wks-server.
+    node1: Preparing to unpack .../12-gpg-wks-server_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gpg-wks-server (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gpgsm.
+    node1: Preparing to unpack .../13-gpgsm_2.2.27-2+deb11u2_amd64.deb ...
+    node1: Unpacking gpgsm (2.2.27-2+deb11u2) ...
+    node1: Selecting previously unselected package gnupg.
+    node1: Preparing to unpack .../14-gnupg_2.2.27-2+deb11u2_all.deb ...
+    node1: Unpacking gnupg (2.2.27-2+deb11u2) ...
+    node1: Setting up libksba8:amd64 (1.5.0-3+deb11u2) ...
+    node1: Setting up apt-transport-https (2.2.4) ...
+    node1: Setting up libnpth0:amd64 (1.6-3) ...
+    node1: Setting up libassuan0:amd64 (2.5.3-7.1) ...
+    node1: Setting up gnupg-l10n (2.2.27-2+deb11u2) ...
+    node1: Setting up gpgconf (2.2.27-2+deb11u2) ...
+    node1: Setting up gpg (2.2.27-2+deb11u2) ...
+    node1: Setting up gnupg-utils (2.2.27-2+deb11u2) ...
+    node1: Setting up pinentry-curses (1.1.0-4) ...
+    node1: Setting up gpg-agent (2.2.27-2+deb11u2) ...
+    node1: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-browser.socket → /usr/lib/systemd/user/gpg-agent-browser.socket.
+    node1: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-extra.socket → /usr/lib/systemd/user/gpg-agent-extra.socket.
+    node1: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-ssh.socket → /usr/lib/systemd/user/gpg-agent-ssh.socket.
+    node1: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent.socket → /usr/lib/systemd/user/gpg-agent.socket.
+    node1: Setting up gpgsm (2.2.27-2+deb11u2) ...
+    node1: Setting up dirmngr (2.2.27-2+deb11u2) ...
+    node1: Created symlink /etc/systemd/user/sockets.target.wants/dirmngr.socket → /usr/lib/systemd/user/dirmngr.socket.
+    node1: Setting up gpg-wks-server (2.2.27-2+deb11u2) ...
+    node1: Setting up gpg-wks-client (2.2.27-2+deb11u2) ...
+    node1: Setting up gnupg (2.2.27-2+deb11u2) ...
+    node1: Processing triggers for man-db (2.9.4-2) ...
+    node1: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node1: * Download and install the Docker repository key ...
+    node1: * Add the Docker repository ...
+    node1: * Install the required container runtime packages ...
+    node1: Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+    node1: Hit:2 http://deb.debian.org/debian bullseye InRelease
+    node1: Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+    node1: Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+    node1: Get:5 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [27.8 kB]
+    node1: Fetched 71.2 kB in 1s (99.9 kB/s)
+    node1: Reading package lists...
+    node1: Reading package lists...
+    node1: Building dependency tree...
+    node1: Reading state information...
+    node1: The following additional packages will be installed:
+    node1:   dbus-user-session docker-buildx-plugin docker-ce-rootless-extras
+    node1:   docker-compose-plugin git git-man liberror-perl libglib2.0-0 libglib2.0-data
+    node1:   libltdl7 libslirp0 patch pigz shared-mime-info slirp4netns xdg-user-dirs
+    node1: Suggested packages:
+    node1:   aufs-tools cgroupfs-mount | cgroup-lite git-daemon-run | git-daemon-sysvinit
+    node1:   git-doc git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn
+    node1:   ed diffutils-doc
+    node1: The following NEW packages will be installed:
+    node1:   containerd.io dbus-user-session docker-buildx-plugin docker-ce docker-ce-cli
+    node1:   docker-ce-rootless-extras docker-compose-plugin git git-man liberror-perl
+    node1:   libglib2.0-0 libglib2.0-data libltdl7 libslirp0 patch pigz shared-mime-info
+    node1:   slirp4netns xdg-user-dirs
+    node1: 0 upgraded, 19 newly installed, 0 to remove and 0 not upgraded.
+    node1: Need to get 125 MB of archives.
+    node1: After this operation, 466 MB of additional disk space will be used.
+    node1: Get:1 http://deb.debian.org/debian bullseye/main amd64 pigz amd64 2.6-1 [64.0 kB]
+    node1: Get:2 https://download.docker.com/linux/debian bullseye/stable amd64 containerd.io amd64 1.6.24-1 [28.6 MB]
+    node1: Get:3 http://deb.debian.org/debian bullseye/main amd64 dbus-user-session amd64 1.12.28-0+deb11u1 [100 kB]
+    node1: Get:4 http://deb.debian.org/debian bullseye/main amd64 liberror-perl all 0.17029-1 [31.0 kB]
+    node1: Get:5 http://deb.debian.org/debian bullseye/main amd64 git-man all 1:2.30.2-1+deb11u2 [1,828 kB]
+    node1: Get:6 http://deb.debian.org/debian bullseye/main amd64 git amd64 1:2.30.2-1+deb11u2 [5,518 kB]
+    node1: Get:7 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-0 amd64 2.66.8-1 [1,370 kB]
+    node1: Get:8 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-data all 2.66.8-1 [1,164 kB]
+    node1: Get:9 http://deb.debian.org/debian bullseye/main amd64 libltdl7 amd64 2.4.6-15 [391 kB]
+    node1: Get:10 http://deb.debian.org/debian bullseye/main amd64 libslirp0 amd64 4.4.0-1+deb11u2 [57.9 kB]
+    node1: Get:11 http://deb.debian.org/debian bullseye/main amd64 patch amd64 2.7.6-7 [128 kB]
+    node1: Get:12 http://deb.debian.org/debian bullseye/main amd64 shared-mime-info amd64 2.0-1 [701 kB]
+    node1: Get:13 http://deb.debian.org/debian bullseye/main amd64 slirp4netns amd64 1.0.1-2 [33.4 kB]
+    node1: Get:14 http://deb.debian.org/debian bullseye/main amd64 xdg-user-dirs amd64 0.17-2 [53.8 kB]
+    node1: Get:15 https://download.docker.com/linux/debian bullseye/stable amd64 docker-buildx-plugin amd64 0.11.2-1~debian.11~bullseye [28.2 MB]
+    node1: Get:16 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-cli amd64 5:24.0.7-1~debian.11~bullseye [13.3 MB]
+    node1: Get:17 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce amd64 5:24.0.7-1~debian.11~bullseye [22.6 MB]
+    node1: Get:18 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-rootless-extras amd64 5:24.0.7-1~debian.11~bullseye [9,034 kB]
+    node1: Get:19 https://download.docker.com/linux/debian bullseye/stable amd64 docker-compose-plugin amd64 2.21.0-1~debian.11~bullseye [11.9 MB]
+    node1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node1: Fetched 125 MB in 29s (4,328 kB/s)
+    node1: Selecting previously unselected package pigz.
+(Reading database ... 53316 files and directories currently installed.)
+    node1: Preparing to unpack .../00-pigz_2.6-1_amd64.deb ...
+    node1: Unpacking pigz (2.6-1) ...
+    node1: Selecting previously unselected package containerd.io.
+    node1: Preparing to unpack .../01-containerd.io_1.6.24-1_amd64.deb ...
+    node1: Unpacking containerd.io (1.6.24-1) ...
+    node1: Selecting previously unselected package dbus-user-session.
+    node1: Preparing to unpack .../02-dbus-user-session_1.12.28-0+deb11u1_amd64.deb ...
+    node1: Unpacking dbus-user-session (1.12.28-0+deb11u1) ...
+    node1: Selecting previously unselected package docker-buildx-plugin.
+    node1: Preparing to unpack .../03-docker-buildx-plugin_0.11.2-1~debian.11~bullseye_amd64.deb ...
+    node1: Unpacking docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+    node1: Selecting previously unselected package docker-ce-cli.
+    node1: Preparing to unpack .../04-docker-ce-cli_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node1: Unpacking docker-ce-cli (5:24.0.7-1~debian.11~bullseye) ...
+    node1: Selecting previously unselected package docker-ce.
+    node1: Preparing to unpack .../05-docker-ce_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node1: Unpacking docker-ce (5:24.0.7-1~debian.11~bullseye) ...
+    node1: Selecting previously unselected package docker-ce-rootless-extras.
+    node1: Preparing to unpack .../06-docker-ce-rootless-extras_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node1: Unpacking docker-ce-rootless-extras (5:24.0.7-1~debian.11~bullseye) ...
+    node1: Selecting previously unselected package docker-compose-plugin.
+    node1: Preparing to unpack .../07-docker-compose-plugin_2.21.0-1~debian.11~bullseye_amd64.deb ...
+    node1: Unpacking docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+    node1: Selecting previously unselected package liberror-perl.
+    node1: Preparing to unpack .../08-liberror-perl_0.17029-1_all.deb ...
+    node1: Unpacking liberror-perl (0.17029-1) ...
+    node1: Selecting previously unselected package git-man.
+    node1: Preparing to unpack .../09-git-man_1%3a2.30.2-1+deb11u2_all.deb ...
+    node1: Unpacking git-man (1:2.30.2-1+deb11u2) ...
+    node1: Selecting previously unselected package git.
+    node1: Preparing to unpack .../10-git_1%3a2.30.2-1+deb11u2_amd64.deb ...
+    node1: Unpacking git (1:2.30.2-1+deb11u2) ...
+    node1: Selecting previously unselected package libglib2.0-0:amd64.
+    node1: Preparing to unpack .../11-libglib2.0-0_2.66.8-1_amd64.deb ...
+    node1: Unpacking libglib2.0-0:amd64 (2.66.8-1) ...
+    node1: Selecting previously unselected package libglib2.0-data.
+    node1: Preparing to unpack .../12-libglib2.0-data_2.66.8-1_all.deb ...
+    node1: Unpacking libglib2.0-data (2.66.8-1) ...
+    node1: Selecting previously unselected package libltdl7:amd64.
+    node1: Preparing to unpack .../13-libltdl7_2.4.6-15_amd64.deb ...
+    node1: Unpacking libltdl7:amd64 (2.4.6-15) ...
+    node1: Selecting previously unselected package libslirp0:amd64.
+    node1: Preparing to unpack .../14-libslirp0_4.4.0-1+deb11u2_amd64.deb ...
+    node1: Unpacking libslirp0:amd64 (4.4.0-1+deb11u2) ...
+    node1: Selecting previously unselected package patch.
+    node1: Preparing to unpack .../15-patch_2.7.6-7_amd64.deb ...
+    node1: Unpacking patch (2.7.6-7) ...
+    node1: Selecting previously unselected package shared-mime-info.
+    node1: Preparing to unpack .../16-shared-mime-info_2.0-1_amd64.deb ...
+    node1: Unpacking shared-mime-info (2.0-1) ...
+    node1: Selecting previously unselected package slirp4netns.
+    node1: Preparing to unpack .../17-slirp4netns_1.0.1-2_amd64.deb ...
+    node1: Unpacking slirp4netns (1.0.1-2) ...
+    node1: Selecting previously unselected package xdg-user-dirs.
+    node1: Preparing to unpack .../18-xdg-user-dirs_0.17-2_amd64.deb ...
+    node1: Unpacking xdg-user-dirs (0.17-2) ...
+    node1: Setting up xdg-user-dirs (0.17-2) ...
+    node1: Setting up libglib2.0-0:amd64 (2.66.8-1) ...
+    node1: No schema files found: doing nothing.
+    node1: Setting up liberror-perl (0.17029-1) ...
+    node1: Setting up dbus-user-session (1.12.28-0+deb11u1) ...
+    node1: Setting up docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+    node1: Setting up libglib2.0-data (2.66.8-1) ...
+    node1: Setting up shared-mime-info (2.0-1) ...
+    node1: Setting up containerd.io (1.6.24-1) ...
+    node1: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    node1: Setting up patch (2.7.6-7) ...
+    node1: Setting up docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+    node1: Setting up libltdl7:amd64 (2.4.6-15) ...
+    node1: Setting up docker-ce-cli (5:24.0.7-1~debian.11~bullseye) ...
+    node1: Setting up libslirp0:amd64 (4.4.0-1+deb11u2) ...
+    node1: Setting up pigz (2.6-1) ...
+    node1: Setting up git-man (1:2.30.2-1+deb11u2) ...
+    node1: Setting up docker-ce-rootless-extras (5:24.0.7-1~debian.11~bullseye) ...
+    node1: Setting up slirp4netns (1.0.1-2) ...
+    node1: Setting up docker-ce (5:24.0.7-1~debian.11~bullseye) ...
+    node1: Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+    node1: Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+    node1: Setting up git (1:2.30.2-1+deb11u2) ...
+    node1: Processing triggers for man-db (2.9.4-2) ...
+    node1: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node1: * Add vagrant user to docker group ...
+    node1: * Download and install the Kubernetes repository key ...
+    node1: * Add the Kubernetes repository ...
+    node1: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /
+    node1: * Install the selected (1.27.5) version ...
+    node1: Hit:1 http://deb.debian.org/debian bullseye InRelease
+    node1: Hit:2 http://security.debian.org/debian-security bullseye-security InRelease
+    node1: Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+    node1: Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+    node1: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+    node1: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [12.7 kB]
+    node1: Fetched 13.8 kB in 1s (17.8 kB/s)
+    node1: Reading package lists...
+    node1: Reading package lists...
+    node1: Building dependency tree...
+    node1: Reading state information...
+    node1: The following additional packages will be installed:
+    node1:   conntrack cri-tools ebtables ethtool kubernetes-cni socat
+    node1: The following NEW packages will be installed:
+    node1:   conntrack cri-tools ebtables ethtool kubeadm kubectl kubelet kubernetes-cni
+    node1:   socat
+    node1: 0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+    node1: Need to get 86.6 MB of archives.
+    node1: After this operation, 331 MB of additional disk space will be used.
+    node1: Get:1 http://deb.debian.org/debian bullseye/main amd64 conntrack amd64 1:1.4.6-2 [33.9 kB]
+    node1: Get:2 http://deb.debian.org/debian bullseye/main amd64 ebtables amd64 2.0.11-4+b1 [86.6 kB]
+    node1: Get:3 http://deb.debian.org/debian bullseye/main amd64 ethtool amd64 1:5.9-1 [182 kB]
+    node1: Get:4 http://deb.debian.org/debian bullseye/main amd64 socat amd64 1.7.4.1-3 [370 kB]
+    node1: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  cri-tools 1.27.1-1.1 [19.5 MB]
+    node1: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubernetes-cni 1.2.0-2.1 [27.6 MB]
+    node1: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubelet 1.27.5-1.1 [18.7 MB]
+    node1: Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubectl 1.27.5-1.1 [10.2 MB]
+    node1: Get:9 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubeadm 1.27.5-1.1 [9,923 kB]
+    node1: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node1: Fetched 86.6 MB in 16s (5,424 kB/s)
+    node1: Selecting previously unselected package conntrack.
+(Reading database ... 54931 files and directories currently installed.)
+    node1: Preparing to unpack .../0-conntrack_1%3a1.4.6-2_amd64.deb ...
+    node1: Unpacking conntrack (1:1.4.6-2) ...
+    node1: Selecting previously unselected package cri-tools.
+    node1: Preparing to unpack .../1-cri-tools_1.27.1-1.1_amd64.deb ...
+    node1: Unpacking cri-tools (1.27.1-1.1) ...
+    node1: Selecting previously unselected package ebtables.
+    node1: Preparing to unpack .../2-ebtables_2.0.11-4+b1_amd64.deb ...
+    node1: Unpacking ebtables (2.0.11-4+b1) ...
+    node1: Selecting previously unselected package ethtool.
+    node1: Preparing to unpack .../3-ethtool_1%3a5.9-1_amd64.deb ...
+    node1: Unpacking ethtool (1:5.9-1) ...
+    node1: Selecting previously unselected package kubernetes-cni.
+    node1: Preparing to unpack .../4-kubernetes-cni_1.2.0-2.1_amd64.deb ...
+    node1: Unpacking kubernetes-cni (1.2.0-2.1) ...
+    node1: Selecting previously unselected package socat.
+    node1: Preparing to unpack .../5-socat_1.7.4.1-3_amd64.deb ...
+    node1: Unpacking socat (1.7.4.1-3) ...
+    node1: Selecting previously unselected package kubelet.
+    node1: Preparing to unpack .../6-kubelet_1.27.5-1.1_amd64.deb ...
+    node1: Unpacking kubelet (1.27.5-1.1) ...
+    node1: Selecting previously unselected package kubectl.
+    node1: Preparing to unpack .../7-kubectl_1.27.5-1.1_amd64.deb ...
+    node1: Unpacking kubectl (1.27.5-1.1) ...
+    node1: Selecting previously unselected package kubeadm.
+    node1: Preparing to unpack .../8-kubeadm_1.27.5-1.1_amd64.deb ...
+    node1: Unpacking kubeadm (1.27.5-1.1) ...
+    node1: Setting up conntrack (1:1.4.6-2) ...
+    node1: Setting up kubectl (1.27.5-1.1) ...
+    node1: Setting up ebtables (2.0.11-4+b1) ...
+    node1: Setting up socat (1.7.4.1-3) ...
+    node1: Setting up cri-tools (1.27.1-1.1) ...
+    node1: Setting up kubernetes-cni (1.2.0-2.1) ...
+    node1: Setting up ethtool (1:5.9-1) ...
+    node1: Setting up kubelet (1.27.5-1.1) ...
+    node1: Setting up kubeadm (1.27.5-1.1) ...
+    node1: Processing triggers for man-db (2.9.4-2) ...
+    node1: * Exclude the Kubernetes packages from being updated ...
+    node1: kubelet set on hold.
+    node1: kubeadm set on hold.
+    node1: kubectl set on hold.
+    node1: * Adjust containerd configuration ...
+==> node1: Running provisioner: shell...
+    node1: Running: inline script
+    node1: * Initialize Kubernetes cluster ...
+    node1: [init] Using Kubernetes version: v1.27.5
+    node1: [preflight] Running pre-flight checks
+    node1: [preflight] Pulling images required for setting up a Kubernetes cluster
+    node1: [preflight] This might take a minute or two, depending on the speed of your internet connection
+    node1: [preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+    node1: [certs] Using certificateDir folder "/etc/kubernetes/pki"
+    node1: [certs] Generating "ca" certificate and key
+    node1: [certs] Generating "apiserver" certificate and key
+    node1: [certs] apiserver serving cert is signed for DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local node1] and IPs [10.96.0.1 192.168.99.101]
+    node1: [certs] Generating "apiserver-kubelet-client" certificate and key
+    node1: [certs] Generating "front-proxy-ca" certificate and key
+    node1: [certs] Generating "front-proxy-client" certificate and key
+    node1: [certs] Generating "etcd/ca" certificate and key
+    node1: [certs] Generating "etcd/server" certificate and key
+    node1: [certs] etcd/server serving cert is signed for DNS names [localhost node1] and IPs [192.168.99.101 127.0.0.1 ::1]
+    node1: [certs] Generating "etcd/peer" certificate and key
+    node1: [certs] etcd/peer serving cert is signed for DNS names [localhost node1] and IPs [192.168.99.101 127.0.0.1 ::1]
+    node1: [certs] Generating "etcd/healthcheck-client" certificate and key
+    node1: [certs] Generating "apiserver-etcd-client" certificate and key
+    node1: [certs] Generating "sa" key and public key
+    node1: [kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+    node1: [kubeconfig] Writing "admin.conf" kubeconfig file
+    node1: [kubeconfig] Writing "kubelet.conf" kubeconfig file
+    node1: [kubeconfig] Writing "controller-manager.conf" kubeconfig file
+    node1: [kubeconfig] Writing "scheduler.conf" kubeconfig file
+    node1: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    node1: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    node1: [kubelet-start] Starting the kubelet
+    node1: [control-plane] Using manifest folder "/etc/kubernetes/manifests"
+    node1: [control-plane] Creating static Pod manifest for "kube-apiserver"
+    node1: [control-plane] Creating static Pod manifest for "kube-controller-manager"
+    node1: [control-plane] Creating static Pod manifest for "kube-scheduler"
+    node1: [etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+    node1: [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+    node1: [apiclient] All control plane components are healthy after 17.502495 seconds
+    node1: [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+    node1: [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+    node1: [upload-certs] Skipping phase. Please see --upload-certs
+    node1: [mark-control-plane] Marking the node node1 as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+    node1: [mark-control-plane] Marking the node node1 as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+    node1: [bootstrap-token] Using token: abcdef.0123456789abcdef
+    node1: [bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+    node1: [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+    node1: [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+    node1: [bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+    node1: [bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+    node1: [bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+    node1: [kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+    node1: [addons] Applied essential addon: CoreDNS
+    node1: [addons] Applied essential addon: kube-proxy
+    node1:
+    node1: Your Kubernetes control-plane has initialized successfully!
+    node1:
+    node1: To start using your cluster, you need to run the following as a regular user:
+    node1:
+    node1:   mkdir -p $HOME/.kube
+    node1:   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    node1:   sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    node1:
+    node1: Alternatively, if you are the root user, you can run:
+    node1:
+    node1:   export KUBECONFIG=/etc/kubernetes/admin.conf
+    node1:
+    node1: You should now deploy a pod network to the cluster.
+    node1: Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+    node1:   https://kubernetes.io/docs/concepts/cluster-administration/addons/
+    node1:
+    node1: Then you can join any number of worker nodes by running the following on each as root:
+    node1:
+    node1: kubeadm join 192.168.99.101:6443 --token abcdef.0123456789abcdef \
+    node1:      --discovery-token-ca-cert-hash sha256:42e0766630099c0210616ba48be819c2f02d3149d6aa024eff3d876cb7481051
+    node1: * Save the hash to a file ...
+    node1: * Copy configuration for root ...
+    node1: * Copy configuration for vagrant ...
+    node1: * Install Pod Network plugin (Calico) ...
+    node1: namespace/tigera-operator created
+    node1: customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/bgpfilters.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+    node1: customresourcedefinition.apiextensions.k8s.io/apiservers.operator.tigera.io created
+    node1: customresourcedefinition.apiextensions.k8s.io/imagesets.operator.tigera.io created
+    node1: customresourcedefinition.apiextensions.k8s.io/installations.operator.tigera.io created
+    node1: customresourcedefinition.apiextensions.k8s.io/tigerastatuses.operator.tigera.io created
+    node1: serviceaccount/tigera-operator created
+    node1: clusterrole.rbac.authorization.k8s.io/tigera-operator created
+    node1: clusterrolebinding.rbac.authorization.k8s.io/tigera-operator created
+    node1: deployment.apps/tigera-operator created
+    node1: installation.operator.tigera.io/default created
+    node1: apiserver.operator.tigera.io/default created
+==> node2: Importing base box 'shekeriev/debian-11'...
+==> node2: Matching MAC address for NAT networking...
+==> node2: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node2: Setting the name of the VM: Kubernetes_node2_1699082281508_16999
+==> node2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> node2: Clearing any previously set network interfaces...
+==> node2: Preparing network interfaces based on configuration...
+    node2: Adapter 1: nat
+    node2: Adapter 2: hostonly
+==> node2: Forwarding ports...
+    node2: 22 (guest) => 2200 (host) (adapter 1)
+==> node2: Running 'pre-boot' VM customizations...
+==> node2: Booting VM...
+==> node2: Waiting for machine to boot. This may take a few minutes...
+    node2: SSH address: 127.0.0.1:2200
+    node2: SSH username: vagrant
+    node2: SSH auth method: private key
+==> node2: Machine booted and ready!
+==> node2: Checking for guest additions in VM...
+==> node2: Setting hostname...
+==> node2: Configuring and enabling network interfaces...
+==> node2: Mounting shared folders...
+    node2: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node2: Running provisioner: shell...
+    node2: Running: inline script
+    node2: * Specified version is 1.27.5
+    node2: ... working with 1.27.5 version from 1.27 branch.
+    node2: * Load br_netfilter on boot ...
+    node2: * Adjust network-related settings and apply them ...
+    node2: net.bridge.bridge-nf-call-ip6tables = 1
+    node2: net.bridge.bridge-nf-call-iptables = 1
+    node2: net.ipv4.ip_forward = 1
+    node2: * Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+    node2: kernel.pid_max = 4194304
+    node2: * Applying /etc/sysctl.d/99-sysctl.conf ...
+    node2: * Applying /etc/sysctl.d/k8s.conf ...
+    node2: net.bridge.bridge-nf-call-ip6tables = 1
+    node2: net.bridge.bridge-nf-call-iptables = 1
+    node2: net.ipv4.ip_forward = 1
+    node2: * Applying /usr/lib/sysctl.d/protect-links.conf ...
+    node2: fs.protected_fifos = 1
+    node2: fs.protected_hardlinks = 1
+    node2: fs.protected_regular = 2
+    node2: fs.protected_symlinks = 1
+    node2: * Applying /etc/sysctl.conf ...
+    node2: * Install iptables and switch it to legacy version ...
+    node2: Hit:1 http://deb.debian.org/debian bullseye InRelease
+    node2: Get:2 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+    node2: Get:3 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+    node2: Get:4 http://security.debian.org/debian-security bullseye-security/main Sources [160 kB]
+    node2: Get:5 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [257 kB]
+    node2: Get:6 http://security.debian.org/debian-security bullseye-security/main Translation-en [165 kB]
+    node2: Fetched 675 kB in 1s (954 kB/s)
+    node2: Reading package lists...
+    node2: Reading package lists...
+    node2: Building dependency tree...
+    node2: Reading state information...
+    node2: The following additional packages will be installed:
+    node2:   libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+    node2: Suggested packages:
+    node2:   firewalld
+    node2: The following NEW packages will be installed:
+    node2:   iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+    node2: 0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+    node2: Need to get 472 kB of archives.
+    node2: After this operation, 2,850 kB of additional disk space will be used.
+    node2: Get:1 http://deb.debian.org/debian bullseye/main amd64 libip6tc2 amd64 1.8.7-1 [35.0 kB]
+    node2: Get:2 http://deb.debian.org/debian bullseye/main amd64 libnfnetlink0 amd64 1.0.1-3+b1 [13.9 kB]
+    node2: Get:3 http://deb.debian.org/debian bullseye/main amd64 libnetfilter-conntrack3 amd64 1.0.8-3 [40.6 kB]
+    node2: Get:4 http://deb.debian.org/debian bullseye/main amd64 iptables amd64 1.8.7-1 [382 kB]
+    node2: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node2: Fetched 472 kB in 0s (2,326 kB/s)
+    node2: Selecting previously unselected package libip6tc2:amd64.
+(Reading database ... 52841 files and directories currently installed.)
+    node2: Preparing to unpack .../libip6tc2_1.8.7-1_amd64.deb ...
+    node2: Unpacking libip6tc2:amd64 (1.8.7-1) ...
+    node2: Selecting previously unselected package libnfnetlink0:amd64.
+    node2: Preparing to unpack .../libnfnetlink0_1.0.1-3+b1_amd64.deb ...
+    node2: Unpacking libnfnetlink0:amd64 (1.0.1-3+b1) ...
+    node2: Selecting previously unselected package libnetfilter-conntrack3:amd64.
+    node2: Preparing to unpack .../libnetfilter-conntrack3_1.0.8-3_amd64.deb ...
+    node2: Unpacking libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+    node2: Selecting previously unselected package iptables.
+    node2: Preparing to unpack .../iptables_1.8.7-1_amd64.deb ...
+    node2: Unpacking iptables (1.8.7-1) ...
+    node2: Setting up libip6tc2:amd64 (1.8.7-1) ...
+    node2: Setting up libnfnetlink0:amd64 (1.0.1-3+b1) ...
+    node2: Setting up libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+    node2: Setting up iptables (1.8.7-1) ...
+    node2: update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+    node2: update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+    node2: update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+    node2: update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+    node2: update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+    node2: update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+    node2: Processing triggers for man-db (2.9.4-2) ...
+    node2: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node2: update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in manual mode
+    node2: * Turn off the swap ...
+    node2: * Add hosts ...
+    node2: * Install other required packages ...
+    node2: Reading package lists...
+    node2: Building dependency tree...
+    node2: Reading state information...
+    node2: ca-certificates is already the newest version (20210119).
+    node2: lsb-release is already the newest version (11.1.0).
+    node2: lsb-release set to manually installed.
+    node2: curl is already the newest version (7.74.0-1.3+deb11u10).
+    node2: The following additional packages will be installed:
+    node2:   dirmngr gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server
+    node2:   gpgconf gpgsm libassuan0 libksba8 libnpth0 pinentry-curses
+    node2: Suggested packages:
+    node2:   dbus-user-session pinentry-gnome3 tor parcimonie xloadimage scdaemon
+    node2:   pinentry-doc
+    node2: The following NEW packages will be installed:
+    node2:   apt-transport-https dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent
+    node2:   gpg-wks-client gpg-wks-server gpgconf gpgsm libassuan0 libksba8 libnpth0
+    node2:   pinentry-curses
+    node2: 0 upgraded, 15 newly installed, 0 to remove and 0 not upgraded.
+    node2: Need to get 7,825 kB of archives.
+    node2: After this operation, 15.8 MB of additional disk space will be used.
+    node2: Get:1 http://deb.debian.org/debian bullseye/main amd64 apt-transport-https all 2.2.4 [160 kB]
+    node2: Get:2 http://deb.debian.org/debian bullseye/main amd64 libassuan0 amd64 2.5.3-7.1 [50.5 kB]
+    node2: Get:3 http://deb.debian.org/debian bullseye/main amd64 gpgconf amd64 2.2.27-2+deb11u2 [548 kB]
+    node2: Get:4 http://deb.debian.org/debian bullseye/main amd64 libksba8 amd64 1.5.0-3+deb11u2 [123 kB]
+    node2: Get:5 http://deb.debian.org/debian bullseye/main amd64 libnpth0 amd64 1.6-3 [19.0 kB]
+    node2: Get:6 http://deb.debian.org/debian bullseye/main amd64 dirmngr amd64 2.2.27-2+deb11u2 [763 kB]
+    node2: Get:7 http://deb.debian.org/debian bullseye/main amd64 gnupg-l10n all 2.2.27-2+deb11u2 [1,086 kB]
+    node2: Get:8 http://deb.debian.org/debian bullseye/main amd64 gnupg-utils amd64 2.2.27-2+deb11u2 [905 kB]
+    node2: Get:9 http://deb.debian.org/debian bullseye/main amd64 gpg amd64 2.2.27-2+deb11u2 [928 kB]
+    node2: Get:10 http://deb.debian.org/debian bullseye/main amd64 pinentry-curses amd64 1.1.0-4 [64.9 kB]
+    node2: Get:11 http://deb.debian.org/debian bullseye/main amd64 gpg-agent amd64 2.2.27-2+deb11u2 [669 kB]
+    node2: Get:12 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-client amd64 2.2.27-2+deb11u2 [524 kB]
+    node2: Get:13 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-server amd64 2.2.27-2+deb11u2 [516 kB]
+    node2: Get:14 http://deb.debian.org/debian bullseye/main amd64 gpgsm amd64 2.2.27-2+deb11u2 [645 kB]
+    node2: Get:15 http://deb.debian.org/debian bullseye/main amd64 gnupg all 2.2.27-2+deb11u2 [825 kB]
+    node2: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node2: Fetched 7,825 kB in 2s (3,884 kB/s)
+    node2: Selecting previously unselected package apt-transport-https.
+(Reading database ... 53061 files and directories currently installed.)
+    node2: Preparing to unpack .../00-apt-transport-https_2.2.4_all.deb ...
+    node2: Unpacking apt-transport-https (2.2.4) ...
+    node2: Selecting previously unselected package libassuan0:amd64.
+    node2: Preparing to unpack .../01-libassuan0_2.5.3-7.1_amd64.deb ...
+    node2: Unpacking libassuan0:amd64 (2.5.3-7.1) ...
+    node2: Selecting previously unselected package gpgconf.
+    node2: Preparing to unpack .../02-gpgconf_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gpgconf (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package libksba8:amd64.
+    node2: Preparing to unpack .../03-libksba8_1.5.0-3+deb11u2_amd64.deb ...
+    node2: Unpacking libksba8:amd64 (1.5.0-3+deb11u2) ...
+    node2: Selecting previously unselected package libnpth0:amd64.
+    node2: Preparing to unpack .../04-libnpth0_1.6-3_amd64.deb ...
+    node2: Unpacking libnpth0:amd64 (1.6-3) ...
+    node2: Selecting previously unselected package dirmngr.
+    node2: Preparing to unpack .../05-dirmngr_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking dirmngr (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gnupg-l10n.
+    node2: Preparing to unpack .../06-gnupg-l10n_2.2.27-2+deb11u2_all.deb ...
+    node2: Unpacking gnupg-l10n (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gnupg-utils.
+    node2: Preparing to unpack .../07-gnupg-utils_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gnupg-utils (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gpg.
+    node2: Preparing to unpack .../08-gpg_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gpg (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package pinentry-curses.
+    node2: Preparing to unpack .../09-pinentry-curses_1.1.0-4_amd64.deb ...
+    node2: Unpacking pinentry-curses (1.1.0-4) ...
+    node2: Selecting previously unselected package gpg-agent.
+    node2: Preparing to unpack .../10-gpg-agent_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gpg-agent (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gpg-wks-client.
+    node2: Preparing to unpack .../11-gpg-wks-client_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gpg-wks-client (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gpg-wks-server.
+    node2: Preparing to unpack .../12-gpg-wks-server_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gpg-wks-server (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gpgsm.
+    node2: Preparing to unpack .../13-gpgsm_2.2.27-2+deb11u2_amd64.deb ...
+    node2: Unpacking gpgsm (2.2.27-2+deb11u2) ...
+    node2: Selecting previously unselected package gnupg.
+    node2: Preparing to unpack .../14-gnupg_2.2.27-2+deb11u2_all.deb ...
+    node2: Unpacking gnupg (2.2.27-2+deb11u2) ...
+    node2: Setting up libksba8:amd64 (1.5.0-3+deb11u2) ...
+    node2: Setting up apt-transport-https (2.2.4) ...
+    node2: Setting up libnpth0:amd64 (1.6-3) ...
+    node2: Setting up libassuan0:amd64 (2.5.3-7.1) ...
+    node2: Setting up gnupg-l10n (2.2.27-2+deb11u2) ...
+    node2: Setting up gpgconf (2.2.27-2+deb11u2) ...
+    node2: Setting up gpg (2.2.27-2+deb11u2) ...
+    node2: Setting up gnupg-utils (2.2.27-2+deb11u2) ...
+    node2: Setting up pinentry-curses (1.1.0-4) ...
+    node2: Setting up gpg-agent (2.2.27-2+deb11u2) ...
+    node2: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-browser.socket → /usr/lib/systemd/user/gpg-agent-browser.socket.
+    node2: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-extra.socket → /usr/lib/systemd/user/gpg-agent-extra.socket.
+    node2: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-ssh.socket → /usr/lib/systemd/user/gpg-agent-ssh.socket.
+    node2: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent.socket → /usr/lib/systemd/user/gpg-agent.socket.
+    node2: Setting up gpgsm (2.2.27-2+deb11u2) ...
+    node2: Setting up dirmngr (2.2.27-2+deb11u2) ...
+    node2: Created symlink /etc/systemd/user/sockets.target.wants/dirmngr.socket → /usr/lib/systemd/user/dirmngr.socket.
+    node2: Setting up gpg-wks-server (2.2.27-2+deb11u2) ...
+    node2: Setting up gpg-wks-client (2.2.27-2+deb11u2) ...
+    node2: Setting up gnupg (2.2.27-2+deb11u2) ...
+    node2: Processing triggers for man-db (2.9.4-2) ...
+    node2: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node2: * Download and install the Docker repository key ...
+    node2: * Add the Docker repository ...
+    node2: * Install the required container runtime packages ...
+    node2: Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+    node2: Hit:2 http://deb.debian.org/debian bullseye InRelease
+    node2: Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+    node2: Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+    node2: Get:5 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [27.8 kB]
+    node2: Fetched 71.2 kB in 1s (60.3 kB/s)
+    node2: Reading package lists...
+    node2: Reading package lists...
+    node2: Building dependency tree...
+    node2: Reading state information...
+    node2: The following additional packages will be installed:
+    node2:   dbus-user-session docker-buildx-plugin docker-ce-rootless-extras
+    node2:   docker-compose-plugin git git-man liberror-perl libglib2.0-0 libglib2.0-data
+    node2:   libltdl7 libslirp0 patch pigz shared-mime-info slirp4netns xdg-user-dirs
+    node2: Suggested packages:
+    node2:   aufs-tools cgroupfs-mount | cgroup-lite git-daemon-run | git-daemon-sysvinit
+    node2:   git-doc git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn
+    node2:   ed diffutils-doc
+    node2: The following NEW packages will be installed:
+    node2:   containerd.io dbus-user-session docker-buildx-plugin docker-ce docker-ce-cli
+    node2:   docker-ce-rootless-extras docker-compose-plugin git git-man liberror-perl
+    node2:   libglib2.0-0 libglib2.0-data libltdl7 libslirp0 patch pigz shared-mime-info
+    node2:   slirp4netns xdg-user-dirs
+    node2: 0 upgraded, 19 newly installed, 0 to remove and 0 not upgraded.
+    node2: Need to get 125 MB of archives.
+    node2: After this operation, 466 MB of additional disk space will be used.
+    node2: Get:1 http://deb.debian.org/debian bullseye/main amd64 pigz amd64 2.6-1 [64.0 kB]
+    node2: Get:2 https://download.docker.com/linux/debian bullseye/stable amd64 containerd.io amd64 1.6.24-1 [28.6 MB]
+    node2: Get:3 http://deb.debian.org/debian bullseye/main amd64 dbus-user-session amd64 1.12.28-0+deb11u1 [100 kB]
+    node2: Get:4 http://deb.debian.org/debian bullseye/main amd64 liberror-perl all 0.17029-1 [31.0 kB]
+    node2: Get:5 http://deb.debian.org/debian bullseye/main amd64 git-man all 1:2.30.2-1+deb11u2 [1,828 kB]
+    node2: Get:6 http://deb.debian.org/debian bullseye/main amd64 git amd64 1:2.30.2-1+deb11u2 [5,518 kB]
+    node2: Get:7 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-0 amd64 2.66.8-1 [1,370 kB]
+    node2: Get:8 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-data all 2.66.8-1 [1,164 kB]
+    node2: Get:9 http://deb.debian.org/debian bullseye/main amd64 libltdl7 amd64 2.4.6-15 [391 kB]
+    node2: Get:10 http://deb.debian.org/debian bullseye/main amd64 libslirp0 amd64 4.4.0-1+deb11u2 [57.9 kB]
+    node2: Get:11 http://deb.debian.org/debian bullseye/main amd64 patch amd64 2.7.6-7 [128 kB]
+    node2: Get:12 http://deb.debian.org/debian bullseye/main amd64 shared-mime-info amd64 2.0-1 [701 kB]
+    node2: Get:13 http://deb.debian.org/debian bullseye/main amd64 slirp4netns amd64 1.0.1-2 [33.4 kB]
+    node2: Get:14 http://deb.debian.org/debian bullseye/main amd64 xdg-user-dirs amd64 0.17-2 [53.8 kB]
+    node2: Get:15 https://download.docker.com/linux/debian bullseye/stable amd64 docker-buildx-plugin amd64 0.11.2-1~debian.11~bullseye [28.2 MB]
+    node2: Get:16 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-cli amd64 5:24.0.7-1~debian.11~bullseye [13.3 MB]
+    node2: Get:17 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce amd64 5:24.0.7-1~debian.11~bullseye [22.6 MB]
+    node2: Get:18 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-rootless-extras amd64 5:24.0.7-1~debian.11~bullseye [9,034 kB]
+    node2: Get:19 https://download.docker.com/linux/debian bullseye/stable amd64 docker-compose-plugin amd64 2.21.0-1~debian.11~bullseye [11.9 MB]
+    node2: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node2: Fetched 125 MB in 45s (2,774 kB/s)
+    node2: Selecting previously unselected package pigz.
+(Reading database ... 53316 files and directories currently installed.)
+    node2: Preparing to unpack .../00-pigz_2.6-1_amd64.deb ...
+    node2: Unpacking pigz (2.6-1) ...
+    node2: Selecting previously unselected package containerd.io.
+    node2: Preparing to unpack .../01-containerd.io_1.6.24-1_amd64.deb ...
+    node2: Unpacking containerd.io (1.6.24-1) ...
+    node2: Selecting previously unselected package dbus-user-session.
+    node2: Preparing to unpack .../02-dbus-user-session_1.12.28-0+deb11u1_amd64.deb ...
+    node2: Unpacking dbus-user-session (1.12.28-0+deb11u1) ...
+    node2: Selecting previously unselected package docker-buildx-plugin.
+    node2: Preparing to unpack .../03-docker-buildx-plugin_0.11.2-1~debian.11~bullseye_amd64.deb ...
+    node2: Unpacking docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+    node2: Selecting previously unselected package docker-ce-cli.
+    node2: Preparing to unpack .../04-docker-ce-cli_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node2: Unpacking docker-ce-cli (5:24.0.7-1~debian.11~bullseye) ...
+    node2: Selecting previously unselected package docker-ce.
+    node2: Preparing to unpack .../05-docker-ce_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node2: Unpacking docker-ce (5:24.0.7-1~debian.11~bullseye) ...
+    node2: Selecting previously unselected package docker-ce-rootless-extras.
+    node2: Preparing to unpack .../06-docker-ce-rootless-extras_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node2: Unpacking docker-ce-rootless-extras (5:24.0.7-1~debian.11~bullseye) ...
+    node2: Selecting previously unselected package docker-compose-plugin.
+    node2: Preparing to unpack .../07-docker-compose-plugin_2.21.0-1~debian.11~bullseye_amd64.deb ...
+    node2: Unpacking docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+    node2: Selecting previously unselected package liberror-perl.
+    node2: Preparing to unpack .../08-liberror-perl_0.17029-1_all.deb ...
+    node2: Unpacking liberror-perl (0.17029-1) ...
+    node2: Selecting previously unselected package git-man.
+    node2: Preparing to unpack .../09-git-man_1%3a2.30.2-1+deb11u2_all.deb ...
+    node2: Unpacking git-man (1:2.30.2-1+deb11u2) ...
+    node2: Selecting previously unselected package git.
+    node2: Preparing to unpack .../10-git_1%3a2.30.2-1+deb11u2_amd64.deb ...
+    node2: Unpacking git (1:2.30.2-1+deb11u2) ...
+    node2: Selecting previously unselected package libglib2.0-0:amd64.
+    node2: Preparing to unpack .../11-libglib2.0-0_2.66.8-1_amd64.deb ...
+    node2: Unpacking libglib2.0-0:amd64 (2.66.8-1) ...
+    node2: Selecting previously unselected package libglib2.0-data.
+    node2: Preparing to unpack .../12-libglib2.0-data_2.66.8-1_all.deb ...
+    node2: Unpacking libglib2.0-data (2.66.8-1) ...
+    node2: Selecting previously unselected package libltdl7:amd64.
+    node2: Preparing to unpack .../13-libltdl7_2.4.6-15_amd64.deb ...
+    node2: Unpacking libltdl7:amd64 (2.4.6-15) ...
+    node2: Selecting previously unselected package libslirp0:amd64.
+    node2: Preparing to unpack .../14-libslirp0_4.4.0-1+deb11u2_amd64.deb ...
+    node2: Unpacking libslirp0:amd64 (4.4.0-1+deb11u2) ...
+    node2: Selecting previously unselected package patch.
+    node2: Preparing to unpack .../15-patch_2.7.6-7_amd64.deb ...
+    node2: Unpacking patch (2.7.6-7) ...
+    node2: Selecting previously unselected package shared-mime-info.
+    node2: Preparing to unpack .../16-shared-mime-info_2.0-1_amd64.deb ...
+    node2: Unpacking shared-mime-info (2.0-1) ...
+    node2: Selecting previously unselected package slirp4netns.
+    node2: Preparing to unpack .../17-slirp4netns_1.0.1-2_amd64.deb ...
+    node2: Unpacking slirp4netns (1.0.1-2) ...
+    node2: Selecting previously unselected package xdg-user-dirs.
+    node2: Preparing to unpack .../18-xdg-user-dirs_0.17-2_amd64.deb ...
+    node2: Unpacking xdg-user-dirs (0.17-2) ...
+    node2: Setting up xdg-user-dirs (0.17-2) ...
+    node2: Setting up libglib2.0-0:amd64 (2.66.8-1) ...
+    node2: No schema files found: doing nothing.
+    node2: Setting up liberror-perl (0.17029-1) ...
+    node2: Setting up dbus-user-session (1.12.28-0+deb11u1) ...
+    node2: Setting up docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+    node2: Setting up libglib2.0-data (2.66.8-1) ...
+    node2: Setting up shared-mime-info (2.0-1) ...
+    node2: Setting up containerd.io (1.6.24-1) ...
+    node2: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    node2: Setting up patch (2.7.6-7) ...
+    node2: Setting up docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+    node2: Setting up libltdl7:amd64 (2.4.6-15) ...
+    node2: Setting up docker-ce-cli (5:24.0.7-1~debian.11~bullseye) ...
+    node2: Setting up libslirp0:amd64 (4.4.0-1+deb11u2) ...
+    node2: Setting up pigz (2.6-1) ...
+    node2: Setting up git-man (1:2.30.2-1+deb11u2) ...
+    node2: Setting up docker-ce-rootless-extras (5:24.0.7-1~debian.11~bullseye) ...
+    node2: Setting up slirp4netns (1.0.1-2) ...
+    node2: Setting up docker-ce (5:24.0.7-1~debian.11~bullseye) ...
+    node2: Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+    node2: Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+    node2: Setting up git (1:2.30.2-1+deb11u2) ...
+    node2: Processing triggers for man-db (2.9.4-2) ...
+    node2: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node2: * Add vagrant user to docker group ...
+    node2: * Download and install the Kubernetes repository key ...
+    node2: * Add the Kubernetes repository ...
+    node2: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /
+    node2: * Install the selected (1.27.5) version ...
+    node2: Hit:1 http://deb.debian.org/debian bullseye InRelease
+    node2: Hit:2 http://security.debian.org/debian-security bullseye-security InRelease
+    node2: Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+    node2: Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+    node2: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+    node2: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [12.7 kB]
+    node2: Fetched 13.8 kB in 1s (13.1 kB/s)
+    node2: Reading package lists...
+    node2: Reading package lists...
+    node2: Building dependency tree...
+    node2: Reading state information...
+    node2: The following additional packages will be installed:
+    node2:   conntrack cri-tools ebtables ethtool kubernetes-cni socat
+    node2: The following NEW packages will be installed:
+    node2:   conntrack cri-tools ebtables ethtool kubeadm kubectl kubelet kubernetes-cni
+    node2:   socat
+    node2: 0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+    node2: Need to get 86.6 MB of archives.
+    node2: After this operation, 331 MB of additional disk space will be used.
+    node2: Get:1 http://deb.debian.org/debian bullseye/main amd64 conntrack amd64 1:1.4.6-2 [33.9 kB]
+    node2: Get:2 http://deb.debian.org/debian bullseye/main amd64 ebtables amd64 2.0.11-4+b1 [86.6 kB]
+    node2: Get:3 http://deb.debian.org/debian bullseye/main amd64 ethtool amd64 1:5.9-1 [182 kB]
+    node2: Get:4 http://deb.debian.org/debian bullseye/main amd64 socat amd64 1.7.4.1-3 [370 kB]
+    node2: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  cri-tools 1.27.1-1.1 [19.5 MB]
+    node2: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubernetes-cni 1.2.0-2.1 [27.6 MB]
+    node2: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubelet 1.27.5-1.1 [18.7 MB]
+    node2: Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubectl 1.27.5-1.1 [10.2 MB]
+    node2: Get:9 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubeadm 1.27.5-1.1 [9,923 kB]
+    node2: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node2: Fetched 86.6 MB in 20s (4,420 kB/s)
+    node2: Selecting previously unselected package conntrack.
+(Reading database ... 54931 files and directories currently installed.)
+    node2: Preparing to unpack .../0-conntrack_1%3a1.4.6-2_amd64.deb ...
+    node2: Unpacking conntrack (1:1.4.6-2) ...
+    node2: Selecting previously unselected package cri-tools.
+    node2: Preparing to unpack .../1-cri-tools_1.27.1-1.1_amd64.deb ...
+    node2: Unpacking cri-tools (1.27.1-1.1) ...
+    node2: Selecting previously unselected package ebtables.
+    node2: Preparing to unpack .../2-ebtables_2.0.11-4+b1_amd64.deb ...
+    node2: Unpacking ebtables (2.0.11-4+b1) ...
+    node2: Selecting previously unselected package ethtool.
+    node2: Preparing to unpack .../3-ethtool_1%3a5.9-1_amd64.deb ...
+    node2: Unpacking ethtool (1:5.9-1) ...
+    node2: Selecting previously unselected package kubernetes-cni.
+    node2: Preparing to unpack .../4-kubernetes-cni_1.2.0-2.1_amd64.deb ...
+    node2: Unpacking kubernetes-cni (1.2.0-2.1) ...
+    node2: Selecting previously unselected package socat.
+    node2: Preparing to unpack .../5-socat_1.7.4.1-3_amd64.deb ...
+    node2: Unpacking socat (1.7.4.1-3) ...
+    node2: Selecting previously unselected package kubelet.
+    node2: Preparing to unpack .../6-kubelet_1.27.5-1.1_amd64.deb ...
+    node2: Unpacking kubelet (1.27.5-1.1) ...
+    node2: Selecting previously unselected package kubectl.
+    node2: Preparing to unpack .../7-kubectl_1.27.5-1.1_amd64.deb ...
+    node2: Unpacking kubectl (1.27.5-1.1) ...
+    node2: Selecting previously unselected package kubeadm.
+    node2: Preparing to unpack .../8-kubeadm_1.27.5-1.1_amd64.deb ...
+    node2: Unpacking kubeadm (1.27.5-1.1) ...
+    node2: Setting up conntrack (1:1.4.6-2) ...
+    node2: Setting up kubectl (1.27.5-1.1) ...
+    node2: Setting up ebtables (2.0.11-4+b1) ...
+    node2: Setting up socat (1.7.4.1-3) ...
+    node2: Setting up cri-tools (1.27.1-1.1) ...
+    node2: Setting up kubernetes-cni (1.2.0-2.1) ...
+    node2: Setting up ethtool (1:5.9-1) ...
+    node2: Setting up kubelet (1.27.5-1.1) ...
+    node2: Setting up kubeadm (1.27.5-1.1) ...
+    node2: Processing triggers for man-db (2.9.4-2) ...
+    node2: * Exclude the Kubernetes packages from being updated ...
+    node2: kubelet set on hold.
+    node2: kubeadm set on hold.
+    node2: kubectl set on hold.
+    node2: * Adjust containerd configuration ...
+==> node2: Running provisioner: shell...
+    node2: Running: inline script
+    node2: * Join the worker node ...
+    node2: [preflight] Running pre-flight checks
+    node2: [preflight] Reading configuration from the cluster...
+    node2: [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+    node2: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    node2: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    node2: [kubelet-start] Starting the kubelet
+    node2: [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+    node2:
+    node2: This node has joined the cluster:
+    node2: * Certificate signing request was sent to apiserver and a response was received.
+    node2: * The Kubelet was informed of the new secure connection details.
+    node2:
+    node2: Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+    node2:
+==> node3: Importing base box 'shekeriev/debian-11'...
+==> node3: Matching MAC address for NAT networking...
+==> node3: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node3: Setting the name of the VM: Kubernetes_node3_1699082533046_42384
+==> node3: Fixed port collision for 22 => 2222. Now on port 2201.
+==> node3: Clearing any previously set network interfaces...
+==> node3: Preparing network interfaces based on configuration...
+    node3: Adapter 1: nat
+    node3: Adapter 2: hostonly
+==> node3: Forwarding ports...
+    node3: 22 (guest) => 2201 (host) (adapter 1)
+==> node3: Running 'pre-boot' VM customizations...
+==> node3: Booting VM...
+==> node3: Waiting for machine to boot. This may take a few minutes...
+    node3: SSH address: 127.0.0.1:2201
+    node3: SSH username: vagrant
+    node3: SSH auth method: private key
+==> node3: Machine booted and ready!
+==> node3: Checking for guest additions in VM...
+==> node3: Setting hostname...
+==> node3: Configuring and enabling network interfaces...
+==> node3: Mounting shared folders...
+    node3: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node3: Running provisioner: shell...
+    node3: Running: inline script
+    node3: * Specified version is 1.27.5
+    node3: ... working with 1.27.5 version from 1.27 branch.
+    node3: * Load br_netfilter on boot ...
+    node3: * Adjust network-related settings and apply them ...
+    node3: net.bridge.bridge-nf-call-ip6tables = 1
+    node3: net.bridge.bridge-nf-call-iptables = 1
+    node3: net.ipv4.ip_forward = 1
+    node3: * Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+    node3: kernel.pid_max = 4194304
+    node3: * Applying /etc/sysctl.d/99-sysctl.conf ...
+    node3: * Applying /etc/sysctl.d/k8s.conf ...
+    node3: net.bridge.bridge-nf-call-ip6tables = 1
+    node3: net.bridge.bridge-nf-call-iptables = 1
+    node3: net.ipv4.ip_forward = 1
+    node3: * Applying /usr/lib/sysctl.d/protect-links.conf ...
+    node3: fs.protected_fifos = 1
+    node3: fs.protected_hardlinks = 1
+    node3: fs.protected_regular = 2
+    node3: fs.protected_symlinks = 1
+    node3: * Applying /etc/sysctl.conf ...
+    node3: * Install iptables and switch it to legacy version ...
+    node3: Hit:1 http://deb.debian.org/debian bullseye InRelease
+    node3: Get:2 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+    node3: Get:3 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+    node3: Get:4 http://security.debian.org/debian-security bullseye-security/main Sources [160 kB]
+    node3: Get:5 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [257 kB]
+    node3: Get:6 http://security.debian.org/debian-security bullseye-security/main Translation-en [165 kB]
+    node3: Fetched 675 kB in 2s (433 kB/s)
+    node3: Reading package lists...
+    node3: Reading package lists...
+    node3: Building dependency tree...
+    node3: Reading state information...
+    node3: The following additional packages will be installed:
+    node3:   libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+    node3: Suggested packages:
+    node3:   firewalld
+    node3: The following NEW packages will be installed:
+    node3:   iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+    node3: 0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+    node3: Need to get 472 kB of archives.
+    node3: After this operation, 2,850 kB of additional disk space will be used.
+    node3: Get:1 http://deb.debian.org/debian bullseye/main amd64 libip6tc2 amd64 1.8.7-1 [35.0 kB]
+    node3: Get:2 http://deb.debian.org/debian bullseye/main amd64 libnfnetlink0 amd64 1.0.1-3+b1 [13.9 kB]
+    node3: Get:3 http://deb.debian.org/debian bullseye/main amd64 libnetfilter-conntrack3 amd64 1.0.8-3 [40.6 kB]
+    node3: Get:4 http://deb.debian.org/debian bullseye/main amd64 iptables amd64 1.8.7-1 [382 kB]
+    node3: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node3: Fetched 472 kB in 1s (927 kB/s)
+    node3: Selecting previously unselected package libip6tc2:amd64.
+(Reading database ... 52841 files and directories currently installed.)
+    node3: Preparing to unpack .../libip6tc2_1.8.7-1_amd64.deb ...
+    node3: Unpacking libip6tc2:amd64 (1.8.7-1) ...
+    node3: Selecting previously unselected package libnfnetlink0:amd64.
+    node3: Preparing to unpack .../libnfnetlink0_1.0.1-3+b1_amd64.deb ...
+    node3: Unpacking libnfnetlink0:amd64 (1.0.1-3+b1) ...
+    node3: Selecting previously unselected package libnetfilter-conntrack3:amd64.
+    node3: Preparing to unpack .../libnetfilter-conntrack3_1.0.8-3_amd64.deb ...
+    node3: Unpacking libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+    node3: Selecting previously unselected package iptables.
+    node3: Preparing to unpack .../iptables_1.8.7-1_amd64.deb ...
+    node3: Unpacking iptables (1.8.7-1) ...
+    node3: Setting up libip6tc2:amd64 (1.8.7-1) ...
+    node3: Setting up libnfnetlink0:amd64 (1.0.1-3+b1) ...
+    node3: Setting up libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+    node3: Setting up iptables (1.8.7-1) ...
+    node3: update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+    node3: update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+    node3: update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+    node3: update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+    node3: update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+    node3: update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+    node3: Processing triggers for man-db (2.9.4-2) ...
+    node3: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node3: update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in manual mode
+    node3: * Turn off the swap ...
+    node3: * Add hosts ...
+    node3: * Install other required packages ...
+    node3: Reading package lists...
+    node3: Building dependency tree...
+    node3: Reading state information...
+    node3: ca-certificates is already the newest version (20210119).
+    node3: lsb-release is already the newest version (11.1.0).
+    node3: lsb-release set to manually installed.
+    node3: curl is already the newest version (7.74.0-1.3+deb11u10).
+    node3: The following additional packages will be installed:
+    node3:   dirmngr gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server
+    node3:   gpgconf gpgsm libassuan0 libksba8 libnpth0 pinentry-curses
+    node3: Suggested packages:
+    node3:   dbus-user-session pinentry-gnome3 tor parcimonie xloadimage scdaemon
+    node3:   pinentry-doc
+    node3: The following NEW packages will be installed:
+    node3:   apt-transport-https dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent
+    node3:   gpg-wks-client gpg-wks-server gpgconf gpgsm libassuan0 libksba8 libnpth0
+    node3:   pinentry-curses
+    node3: 0 upgraded, 15 newly installed, 0 to remove and 0 not upgraded.
+    node3: Need to get 7,825 kB of archives.
+    node3: After this operation, 15.8 MB of additional disk space will be used.
+    node3: Get:1 http://deb.debian.org/debian bullseye/main amd64 apt-transport-https all 2.2.4 [160 kB]
+    node3: Get:2 http://deb.debian.org/debian bullseye/main amd64 libassuan0 amd64 2.5.3-7.1 [50.5 kB]
+    node3: Get:3 http://deb.debian.org/debian bullseye/main amd64 gpgconf amd64 2.2.27-2+deb11u2 [548 kB]
+    node3: Get:4 http://deb.debian.org/debian bullseye/main amd64 libksba8 amd64 1.5.0-3+deb11u2 [123 kB]
+    node3: Get:5 http://deb.debian.org/debian bullseye/main amd64 libnpth0 amd64 1.6-3 [19.0 kB]
+    node3: Get:6 http://deb.debian.org/debian bullseye/main amd64 dirmngr amd64 2.2.27-2+deb11u2 [763 kB]
+    node3: Get:7 http://deb.debian.org/debian bullseye/main amd64 gnupg-l10n all 2.2.27-2+deb11u2 [1,086 kB]
+    node3: Get:8 http://deb.debian.org/debian bullseye/main amd64 gnupg-utils amd64 2.2.27-2+deb11u2 [905 kB]
+    node3: Get:9 http://deb.debian.org/debian bullseye/main amd64 gpg amd64 2.2.27-2+deb11u2 [928 kB]
+    node3: Get:10 http://deb.debian.org/debian bullseye/main amd64 pinentry-curses amd64 1.1.0-4 [64.9 kB]
+    node3: Get:11 http://deb.debian.org/debian bullseye/main amd64 gpg-agent amd64 2.2.27-2+deb11u2 [669 kB]
+    node3: Get:12 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-client amd64 2.2.27-2+deb11u2 [524 kB]
+    node3: Get:13 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-server amd64 2.2.27-2+deb11u2 [516 kB]
+    node3: Get:14 http://deb.debian.org/debian bullseye/main amd64 gpgsm amd64 2.2.27-2+deb11u2 [645 kB]
+    node3: Get:15 http://deb.debian.org/debian bullseye/main amd64 gnupg all 2.2.27-2+deb11u2 [825 kB]
+    node3: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node3: Fetched 7,825 kB in 4s (2,004 kB/s)
+    node3: Selecting previously unselected package apt-transport-https.
+(Reading database ... 53061 files and directories currently installed.)
+    node3: Preparing to unpack .../00-apt-transport-https_2.2.4_all.deb ...
+    node3: Unpacking apt-transport-https (2.2.4) ...
+    node3: Selecting previously unselected package libassuan0:amd64.
+    node3: Preparing to unpack .../01-libassuan0_2.5.3-7.1_amd64.deb ...
+    node3: Unpacking libassuan0:amd64 (2.5.3-7.1) ...
+    node3: Selecting previously unselected package gpgconf.
+    node3: Preparing to unpack .../02-gpgconf_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gpgconf (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package libksba8:amd64.
+    node3: Preparing to unpack .../03-libksba8_1.5.0-3+deb11u2_amd64.deb ...
+    node3: Unpacking libksba8:amd64 (1.5.0-3+deb11u2) ...
+    node3: Selecting previously unselected package libnpth0:amd64.
+    node3: Preparing to unpack .../04-libnpth0_1.6-3_amd64.deb ...
+    node3: Unpacking libnpth0:amd64 (1.6-3) ...
+    node3: Selecting previously unselected package dirmngr.
+    node3: Preparing to unpack .../05-dirmngr_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking dirmngr (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gnupg-l10n.
+    node3: Preparing to unpack .../06-gnupg-l10n_2.2.27-2+deb11u2_all.deb ...
+    node3: Unpacking gnupg-l10n (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gnupg-utils.
+    node3: Preparing to unpack .../07-gnupg-utils_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gnupg-utils (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gpg.
+    node3: Preparing to unpack .../08-gpg_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gpg (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package pinentry-curses.
+    node3: Preparing to unpack .../09-pinentry-curses_1.1.0-4_amd64.deb ...
+    node3: Unpacking pinentry-curses (1.1.0-4) ...
+    node3: Selecting previously unselected package gpg-agent.
+    node3: Preparing to unpack .../10-gpg-agent_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gpg-agent (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gpg-wks-client.
+    node3: Preparing to unpack .../11-gpg-wks-client_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gpg-wks-client (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gpg-wks-server.
+    node3: Preparing to unpack .../12-gpg-wks-server_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gpg-wks-server (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gpgsm.
+    node3: Preparing to unpack .../13-gpgsm_2.2.27-2+deb11u2_amd64.deb ...
+    node3: Unpacking gpgsm (2.2.27-2+deb11u2) ...
+    node3: Selecting previously unselected package gnupg.
+    node3: Preparing to unpack .../14-gnupg_2.2.27-2+deb11u2_all.deb ...
+    node3: Unpacking gnupg (2.2.27-2+deb11u2) ...
+    node3: Setting up libksba8:amd64 (1.5.0-3+deb11u2) ...
+    node3: Setting up apt-transport-https (2.2.4) ...
+    node3: Setting up libnpth0:amd64 (1.6-3) ...
+    node3: Setting up libassuan0:amd64 (2.5.3-7.1) ...
+    node3: Setting up gnupg-l10n (2.2.27-2+deb11u2) ...
+    node3: Setting up gpgconf (2.2.27-2+deb11u2) ...
+    node3: Setting up gpg (2.2.27-2+deb11u2) ...
+    node3: Setting up gnupg-utils (2.2.27-2+deb11u2) ...
+    node3: Setting up pinentry-curses (1.1.0-4) ...
+    node3: Setting up gpg-agent (2.2.27-2+deb11u2) ...
+    node3: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-browser.socket → /usr/lib/systemd/user/gpg-agent-browser.socket.
+    node3: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-extra.socket → /usr/lib/systemd/user/gpg-agent-extra.socket.
+    node3: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-ssh.socket → /usr/lib/systemd/user/gpg-agent-ssh.socket.
+    node3: Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent.socket → /usr/lib/systemd/user/gpg-agent.socket.
+    node3: Setting up gpgsm (2.2.27-2+deb11u2) ...
+    node3: Setting up dirmngr (2.2.27-2+deb11u2) ...
+    node3: Created symlink /etc/systemd/user/sockets.target.wants/dirmngr.socket → /usr/lib/systemd/user/dirmngr.socket.
+    node3: Setting up gpg-wks-server (2.2.27-2+deb11u2) ...
+    node3: Setting up gpg-wks-client (2.2.27-2+deb11u2) ...
+    node3: Setting up gnupg (2.2.27-2+deb11u2) ...
+    node3: Processing triggers for man-db (2.9.4-2) ...
+    node3: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node3: * Download and install the Docker repository key ...
+    node3: * Add the Docker repository ...
+    node3: * Install the required container runtime packages ...
+    node3: Hit:1 http://deb.debian.org/debian bullseye InRelease
+    node3: Hit:2 http://deb.debian.org/debian bullseye-updates InRelease
+    node3: Hit:3 http://security.debian.org/debian-security bullseye-security InRelease
+    node3: Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+    node3: Get:5 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [27.8 kB]
+    node3: Fetched 71.2 kB in 2s (38.8 kB/s)
+    node3: Reading package lists...
+    node3: Reading package lists...
+    node3: Building dependency tree...
+    node3: Reading state information...
+    node3: The following additional packages will be installed:
+    node3:   dbus-user-session docker-buildx-plugin docker-ce-rootless-extras
+    node3:   docker-compose-plugin git git-man liberror-perl libglib2.0-0 libglib2.0-data
+    node3:   libltdl7 libslirp0 patch pigz shared-mime-info slirp4netns xdg-user-dirs
+    node3: Suggested packages:
+    node3:   aufs-tools cgroupfs-mount | cgroup-lite git-daemon-run | git-daemon-sysvinit
+    node3:   git-doc git-el git-email git-gui gitk gitweb git-cvs git-mediawiki git-svn
+    node3:   ed diffutils-doc
+    node3: The following NEW packages will be installed:
+    node3:   containerd.io dbus-user-session docker-buildx-plugin docker-ce docker-ce-cli
+    node3:   docker-ce-rootless-extras docker-compose-plugin git git-man liberror-perl
+    node3:   libglib2.0-0 libglib2.0-data libltdl7 libslirp0 patch pigz shared-mime-info
+    node3:   slirp4netns xdg-user-dirs
+    node3: 0 upgraded, 19 newly installed, 0 to remove and 0 not upgraded.
+    node3: Need to get 125 MB of archives.
+    node3: After this operation, 466 MB of additional disk space will be used.
+    node3: Get:1 http://deb.debian.org/debian bullseye/main amd64 pigz amd64 2.6-1 [64.0 kB]
+    node3: Get:2 http://deb.debian.org/debian bullseye/main amd64 dbus-user-session amd64 1.12.28-0+deb11u1 [100 kB]
+    node3: Get:3 https://download.docker.com/linux/debian bullseye/stable amd64 containerd.io amd64 1.6.24-1 [28.6 MB]
+    node3: Get:4 http://deb.debian.org/debian bullseye/main amd64 liberror-perl all 0.17029-1 [31.0 kB]
+    node3: Get:5 http://deb.debian.org/debian bullseye/main amd64 git-man all 1:2.30.2-1+deb11u2 [1,828 kB]
+    node3: Get:6 http://deb.debian.org/debian bullseye/main amd64 git amd64 1:2.30.2-1+deb11u2 [5,518 kB]
+    node3: Get:7 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-0 amd64 2.66.8-1 [1,370 kB]
+    node3: Get:8 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-data all 2.66.8-1 [1,164 kB]
+    node3: Get:9 http://deb.debian.org/debian bullseye/main amd64 libltdl7 amd64 2.4.6-15 [391 kB]
+    node3: Get:10 http://deb.debian.org/debian bullseye/main amd64 libslirp0 amd64 4.4.0-1+deb11u2 [57.9 kB]
+    node3: Get:11 http://deb.debian.org/debian bullseye/main amd64 patch amd64 2.7.6-7 [128 kB]
+    node3: Get:12 http://deb.debian.org/debian bullseye/main amd64 shared-mime-info amd64 2.0-1 [701 kB]
+    node3: Get:13 http://deb.debian.org/debian bullseye/main amd64 slirp4netns amd64 1.0.1-2 [33.4 kB]
+    node3: Get:14 http://deb.debian.org/debian bullseye/main amd64 xdg-user-dirs amd64 0.17-2 [53.8 kB]
+    node3: Get:15 https://download.docker.com/linux/debian bullseye/stable amd64 docker-buildx-plugin amd64 0.11.2-1~debian.11~bullseye [28.2 MB]
+    node3: Get:16 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-cli amd64 5:24.0.7-1~debian.11~bullseye [13.3 MB]
+    node3: Get:17 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce amd64 5:24.0.7-1~debian.11~bullseye [22.6 MB]
+    node3: Get:18 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-rootless-extras amd64 5:24.0.7-1~debian.11~bullseye [9,034 kB]
+    node3: Get:19 https://download.docker.com/linux/debian bullseye/stable amd64 docker-compose-plugin amd64 2.21.0-1~debian.11~bullseye [11.9 MB]
+    node3: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node3: Fetched 125 MB in 39s (3,192 kB/s)
+    node3: Selecting previously unselected package pigz.
+(Reading database ... 53316 files and directories currently installed.)
+    node3: Preparing to unpack .../00-pigz_2.6-1_amd64.deb ...
+    node3: Unpacking pigz (2.6-1) ...
+    node3: Selecting previously unselected package containerd.io.
+    node3: Preparing to unpack .../01-containerd.io_1.6.24-1_amd64.deb ...
+    node3: Unpacking containerd.io (1.6.24-1) ...
+    node3: Selecting previously unselected package dbus-user-session.
+    node3: Preparing to unpack .../02-dbus-user-session_1.12.28-0+deb11u1_amd64.deb ...
+    node3: Unpacking dbus-user-session (1.12.28-0+deb11u1) ...
+    node3: Selecting previously unselected package docker-buildx-plugin.
+    node3: Preparing to unpack .../03-docker-buildx-plugin_0.11.2-1~debian.11~bullseye_amd64.deb ...
+    node3: Unpacking docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+    node3: Selecting previously unselected package docker-ce-cli.
+    node3: Preparing to unpack .../04-docker-ce-cli_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node3: Unpacking docker-ce-cli (5:24.0.7-1~debian.11~bullseye) ...
+    node3: Selecting previously unselected package docker-ce.
+    node3: Preparing to unpack .../05-docker-ce_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node3: Unpacking docker-ce (5:24.0.7-1~debian.11~bullseye) ...
+    node3: Selecting previously unselected package docker-ce-rootless-extras.
+    node3: Preparing to unpack .../06-docker-ce-rootless-extras_5%3a24.0.7-1~debian.11~bullseye_amd64.deb ...
+    node3: Unpacking docker-ce-rootless-extras (5:24.0.7-1~debian.11~bullseye) ...
+    node3: Selecting previously unselected package docker-compose-plugin.
+    node3: Preparing to unpack .../07-docker-compose-plugin_2.21.0-1~debian.11~bullseye_amd64.deb ...
+    node3: Unpacking docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+    node3: Selecting previously unselected package liberror-perl.
+    node3: Preparing to unpack .../08-liberror-perl_0.17029-1_all.deb ...
+    node3: Unpacking liberror-perl (0.17029-1) ...
+    node3: Selecting previously unselected package git-man.
+    node3: Preparing to unpack .../09-git-man_1%3a2.30.2-1+deb11u2_all.deb ...
+    node3: Unpacking git-man (1:2.30.2-1+deb11u2) ...
+    node3: Selecting previously unselected package git.
+    node3: Preparing to unpack .../10-git_1%3a2.30.2-1+deb11u2_amd64.deb ...
+    node3: Unpacking git (1:2.30.2-1+deb11u2) ...
+    node3: Selecting previously unselected package libglib2.0-0:amd64.
+    node3: Preparing to unpack .../11-libglib2.0-0_2.66.8-1_amd64.deb ...
+    node3: Unpacking libglib2.0-0:amd64 (2.66.8-1) ...
+    node3: Selecting previously unselected package libglib2.0-data.
+    node3: Preparing to unpack .../12-libglib2.0-data_2.66.8-1_all.deb ...
+    node3: Unpacking libglib2.0-data (2.66.8-1) ...
+    node3: Selecting previously unselected package libltdl7:amd64.
+    node3: Preparing to unpack .../13-libltdl7_2.4.6-15_amd64.deb ...
+    node3: Unpacking libltdl7:amd64 (2.4.6-15) ...
+    node3: Selecting previously unselected package libslirp0:amd64.
+    node3: Preparing to unpack .../14-libslirp0_4.4.0-1+deb11u2_amd64.deb ...
+    node3: Unpacking libslirp0:amd64 (4.4.0-1+deb11u2) ...
+    node3: Selecting previously unselected package patch.
+    node3: Preparing to unpack .../15-patch_2.7.6-7_amd64.deb ...
+    node3: Unpacking patch (2.7.6-7) ...
+    node3: Selecting previously unselected package shared-mime-info.
+    node3: Preparing to unpack .../16-shared-mime-info_2.0-1_amd64.deb ...
+    node3: Unpacking shared-mime-info (2.0-1) ...
+    node3: Selecting previously unselected package slirp4netns.
+    node3: Preparing to unpack .../17-slirp4netns_1.0.1-2_amd64.deb ...
+    node3: Unpacking slirp4netns (1.0.1-2) ...
+    node3: Selecting previously unselected package xdg-user-dirs.
+    node3: Preparing to unpack .../18-xdg-user-dirs_0.17-2_amd64.deb ...
+    node3: Unpacking xdg-user-dirs (0.17-2) ...
+    node3: Setting up xdg-user-dirs (0.17-2) ...
+    node3: Setting up libglib2.0-0:amd64 (2.66.8-1) ...
+    node3: No schema files found: doing nothing.
+    node3: Setting up liberror-perl (0.17029-1) ...
+    node3: Setting up dbus-user-session (1.12.28-0+deb11u1) ...
+    node3: Setting up docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+    node3: Setting up libglib2.0-data (2.66.8-1) ...
+    node3: Setting up shared-mime-info (2.0-1) ...
+    node3: Setting up containerd.io (1.6.24-1) ...
+    node3: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    node3: Setting up patch (2.7.6-7) ...
+    node3: Setting up docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+    node3: Setting up libltdl7:amd64 (2.4.6-15) ...
+    node3: Setting up docker-ce-cli (5:24.0.7-1~debian.11~bullseye) ...
+    node3: Setting up libslirp0:amd64 (4.4.0-1+deb11u2) ...
+    node3: Setting up pigz (2.6-1) ...
+    node3: Setting up git-man (1:2.30.2-1+deb11u2) ...
+    node3: Setting up docker-ce-rootless-extras (5:24.0.7-1~debian.11~bullseye) ...
+    node3: Setting up slirp4netns (1.0.1-2) ...
+    node3: Setting up docker-ce (5:24.0.7-1~debian.11~bullseye) ...
+    node3: Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+    node3: Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+    node3: Setting up git (1:2.30.2-1+deb11u2) ...
+    node3: Processing triggers for man-db (2.9.4-2) ...
+    node3: Processing triggers for libc-bin (2.31-13+deb11u7) ...
+    node3: * Add vagrant user to docker group ...
+    node3: * Download and install the Kubernetes repository key ...
+    node3: * Add the Kubernetes repository ...
+    node3: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /
+    node3: * Install the selected (1.27.5) version ...
+    node3: Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+    node3: Hit:2 https://download.docker.com/linux/debian bullseye InRelease
+    node3: Hit:3 http://deb.debian.org/debian bullseye InRelease
+    node3: Hit:4 http://deb.debian.org/debian bullseye-updates InRelease
+    node3: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+    node3: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [12.7 kB]
+    node3: Fetched 13.8 kB in 1s (10.6 kB/s)
+    node3: Reading package lists...
+    node3: Reading package lists...
+    node3: Building dependency tree...
+    node3: Reading state information...
+    node3: The following additional packages will be installed:
+    node3:   conntrack cri-tools ebtables ethtool kubernetes-cni socat
+    node3: The following NEW packages will be installed:
+    node3:   conntrack cri-tools ebtables ethtool kubeadm kubectl kubelet kubernetes-cni
+    node3:   socat
+    node3: 0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+    node3: Need to get 86.6 MB of archives.
+    node3: After this operation, 331 MB of additional disk space will be used.
+    node3: Get:1 http://deb.debian.org/debian bullseye/main amd64 conntrack amd64 1:1.4.6-2 [33.9 kB]
+    node3: Get:2 http://deb.debian.org/debian bullseye/main amd64 ebtables amd64 2.0.11-4+b1 [86.6 kB]
+    node3: Get:3 http://deb.debian.org/debian bullseye/main amd64 ethtool amd64 1:5.9-1 [182 kB]
+    node3: Get:4 http://deb.debian.org/debian bullseye/main amd64 socat amd64 1.7.4.1-3 [370 kB]
+    node3: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  cri-tools 1.27.1-1.1 [19.5 MB]
+    node3: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubernetes-cni 1.2.0-2.1 [27.6 MB]
+    node3: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubelet 1.27.5-1.1 [18.7 MB]
+    node3: Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubectl 1.27.5-1.1 [10.2 MB]
+    node3: Get:9 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubeadm 1.27.5-1.1 [9,923 kB]
+    node3: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    node3: Fetched 86.6 MB in 22s (3,924 kB/s)
+    node3: Selecting previously unselected package conntrack.
+(Reading database ... 54931 files and directories currently installed.)
+    node3: Preparing to unpack .../0-conntrack_1%3a1.4.6-2_amd64.deb ...
+    node3: Unpacking conntrack (1:1.4.6-2) ...
+    node3: Selecting previously unselected package cri-tools.
+    node3: Preparing to unpack .../1-cri-tools_1.27.1-1.1_amd64.deb ...
+    node3: Unpacking cri-tools (1.27.1-1.1) ...
+    node3: Selecting previously unselected package ebtables.
+    node3: Preparing to unpack .../2-ebtables_2.0.11-4+b1_amd64.deb ...
+    node3: Unpacking ebtables (2.0.11-4+b1) ...
+    node3: Selecting previously unselected package ethtool.
+    node3: Preparing to unpack .../3-ethtool_1%3a5.9-1_amd64.deb ...
+    node3: Unpacking ethtool (1:5.9-1) ...
+    node3: Selecting previously unselected package kubernetes-cni.
+    node3: Preparing to unpack .../4-kubernetes-cni_1.2.0-2.1_amd64.deb ...
+    node3: Unpacking kubernetes-cni (1.2.0-2.1) ...
+    node3: Selecting previously unselected package socat.
+    node3: Preparing to unpack .../5-socat_1.7.4.1-3_amd64.deb ...
+    node3: Unpacking socat (1.7.4.1-3) ...
+    node3: Selecting previously unselected package kubelet.
+    node3: Preparing to unpack .../6-kubelet_1.27.5-1.1_amd64.deb ...
+    node3: Unpacking kubelet (1.27.5-1.1) ...
+    node3: Selecting previously unselected package kubectl.
+    node3: Preparing to unpack .../7-kubectl_1.27.5-1.1_amd64.deb ...
+    node3: Unpacking kubectl (1.27.5-1.1) ...
+    node3: Selecting previously unselected package kubeadm.
+    node3: Preparing to unpack .../8-kubeadm_1.27.5-1.1_amd64.deb ...
+    node3: Unpacking kubeadm (1.27.5-1.1) ...
+    node3: Setting up conntrack (1:1.4.6-2) ...
+    node3: Setting up kubectl (1.27.5-1.1) ...
+    node3: Setting up ebtables (2.0.11-4+b1) ...
+    node3: Setting up socat (1.7.4.1-3) ...
+    node3: Setting up cri-tools (1.27.1-1.1) ...
+    node3: Setting up kubernetes-cni (1.2.0-2.1) ...
+    node3: Setting up ethtool (1:5.9-1) ...
+    node3: Setting up kubelet (1.27.5-1.1) ...
+    node3: Setting up kubeadm (1.27.5-1.1) ...
+    node3: Processing triggers for man-db (2.9.4-2) ...
+    node3: * Exclude the Kubernetes packages from being updated ...
+    node3: kubelet set on hold.
+    node3: kubeadm set on hold.
+    node3: kubectl set on hold.
+    node3: * Adjust containerd configuration ...
+==> node3: Running provisioner: shell...
+    node3: Running: inline script
+    node3: * Join the worker node ...
+    node3: [preflight] Running pre-flight checks
+    node3: [preflight] Reading configuration from the cluster...
+    node3: [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+    node3: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    node3: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    node3: [kubelet-start] Starting the kubelet
+    node3: [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+    node3:
+    node3: This node has joined the cluster:
+    node3: * Certificate signing request was sent to apiserver and a response was received.
+    node3: * The Kubelet was informed of the new secure connection details.
+    node3:
+    node3: Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+    node3:
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 13:23:29 2023 from 10.0.2.2
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 13:23:29 2023 from 10.0.2.2
+vagrant@node1:~$ cat ~/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJZHUxb3U4RnkwR2t3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFeE1EUXdOekV5TVRKYUZ3MHpNekV4TURFd056RTNNVEphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURWVVpGUkFsMWdta1ZmY1VRMEIrelZYaXRHNy9ac2pjOExxcTlidlVqVWd3WW1VVFQ1ZUtxRm4zencKWUt6Z0ptZzlDcld1OWVRTnVNNHVObUtqcmtrdnFLT3BOem1ML3J2L1NSQTE1eHVObXk5Z2lQYnNUNHZLZEYzSgplejQ4WGtPSXE0bzAzZkxpaTVidFBDRUhBR2VmSElORldDSGpETUhlRnZpNXFZbEVhV0V2ZlVOQTFydXZaSVNDCnRubW9ueWQyNEJWTkUrMGtoUkdPVkhnTjlTS085YStLNHliZFhaTG1NSTd1RzkwSXI3UnZ1Nk9RYWcyZGZWa3kKYTZKZ2VFcUoxcG5ZZXVNVDhDdG9HVjB6czNoenUyRVBuNVIyN3hIKzBTeDZwMDFrZnBEdkYyazBDeVZOM3NSVwpXc2N4OHZMNEV5QVRMYS9jaTJ3ZU14YWJLc1d4QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRekl6YzV5cjNXYjI3MHg0aWRDQmQwT2duYmd6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUwyMFpuajJCZQpVbmEycG16OSszTW1ibTZkdklNN25rMTdaTXFsVzZFd0pjdUNhWHcxS1RMNlhGNXE5ZXdoVlUyMjEyL2V6SWtHCllaN2cyWWZ5NldkQVpQM3lJak91OC93RGZHK21vZFdiSVNPU282MnM0cTJBWkRNMEJtQ21FWnoxMXptNVNqRXkKS1VSeTM3S0tJa3ZkTUNTb0Q2U3RvUlRHdGtJNjNaakFDZ0NUSTdXNnhmeVBBTW0xNy9BeHZoYlVRVzdQUEJHbApIMHMyVGh1UU5WZjVXejJIRWZrTkcrMkRMWm8rWjFIcVpGV0pCYTRMUDBrU1o3RTJaanRiWEROVE13VnU2QWtxCkxjQzM3eld3V1p2TDZrcFRXYmJlcGpsb0Z6Vm8zSmMrVHQwS2VrY2hIa3luUlBnZkhhTFBpd2I3V3VXSHlUQ0sKa01CclN5cmlFNWx6Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.99.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJTmpoSVk1a0ROQ013RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFeE1EUXdOekV5TVRKYUZ3MHlOREV4TURNd056RTNNVFZhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTRQY05zbTlmZXVFV09PcG0KblRyR3J2a1k1QVdoWXRtS0RxeDl3MzJDSjdMcFJGajAvL0w5Y0d1aytmRGNCQzdqYjQrQzh1emgrMUI1N0UwLwplUUdML21lbzJNQ3FmL2xRNFBHRGY4OHdvYUhmOVY3cEZ4OExTWU5aaXY2em5qTWFQSCszUnNFUEZhSkliSGF4CmtvK284MlduOHF5cW55Si9GVUI2WEw5M3hybldxWTVJOTFOeWphYjJnb2ZvR0djbWNTS1EwZHYyTkUvZzN4TDUKRmo4SjBONS9VZWJEb3VKZGthRUt5REQ5a2hNU05pY05YR3BTK0JmMjZKZnhESU9iWFFuWmdwbVI1TTRSMlN4MQpZeW81eU5hcm5BTGt0alI2ODhsR1M1MmlXWG1vOFdyUmxwN3NPQXA0VnpYSC84YW02Z2QxQTl1VGw5bjBscHhsCjVSQ21Jd0lEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JRekl6YzV5cjNXYjI3MHg0aWRDQmQwT2duYgpnekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBZkI3b3FrNnByQXVDejdhd3MvSWFpNXFvQ040M2lqenN5clc1CnFsN2NYc3RXcU1JRW5RQWRXc0UvYUJ2Q3JoS0dVb3N5c2E3RDV2SDM5RmNUTTZCZk1ZODBFQzdIOEpHbkNpZFgKK3o3UGc5Sk8vRHh4SENUQlBuSTJOUU1KL01CL3ZzM08wNlFLd2pqWW50U1o2aGRJSDNsMCtZSUdsUWNobG9MdwpkcElkUHcwaWRDNWtaUU84bUFXUTNueEU1Q2hpamJ3NkRHN2VtL3Y5czJPblF5S1NZK241T2tCNWpUTllNcFdBClhYQVZidUZRR0lnektXY1RBcDU3Qk41a2Zxak5wY1I2NmhGTURqS0twTUsrYWZzL2xSMldJeU5wYzNnd1R3OC8KS2xpdFFmd1NoQ0JNeVFpVWRKU0FjQnBDb2VVQVVNYmxMK01FRCt6cENoZEQ3Zk5Ya0E9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBNFBjTnNtOWZldUVXT09wbW5UckdydmtZNUFXaFl0bUtEcXg5dzMyQ0o3THBSRmowCi8vTDljR3VrK2ZEY0JDN2piNCtDOHV6aCsxQjU3RTAvZVFHTC9tZW8yTUNxZi9sUTRQR0RmODh3b2FIZjlWN3AKRng4TFNZTlppdjZ6bmpNYVBIKzNSc0VQRmFKSWJIYXhrbytvODJXbjhxeXFueUovRlVCNlhMOTN4cm5XcVk1SQo5MU55amFiMmdvZm9HR2NtY1NLUTBkdjJORS9nM3hMNUZqOEowTjUvVWViRG91SmRrYUVLeUREOWtoTVNOaWNOClhHcFMrQmYyNkpmeERJT2JYUW5aZ3BtUjVNNFIyU3gxWXlvNXlOYXJuQUxrdGpSNjg4bEdTNTJpV1htbzhXclIKbHA3c09BcDRWelhILzhhbTZnZDFBOXVUbDluMGxweGw1UkNtSXdJREFRQUJBb0lCQUVWb2MvVmxuMVBPTm9rQQo2UUFCcm1NMXY1UTZtSHhqR2RGRkx0Z3QxUVppa00zaGxGV1RwdFlVb0NYdFJqU1VNdCtzcTM0L3o4azJIeWZrCi9YeGNHZEU0TWtRTnpZMEdZd25EK2dwbzVsdzRFVjBuRjB0bTdKaVZ5ZjYwYnI2VWpiZTB2OXM0bldyVFV2MEQKOGUyQ0hXSmJMdUlVbTkvVlNOaEp1SGI5Sy90SHJ2TGJhU2MwMkE0b3hIZXhVcGlOTW5rNm1MZWx3SzlwZ1I1cApqcTg2OWdVZGM5bExnZm5oWVJkdGN1SlZjWUxEWDE5clpneWsvMWJNRHRKb0FiZ3dSQy85eUhHWjVZZXNGTTFBCkRKclI4cjdocGFlYmRBSHZQNnRtdFRKU0VZMWpHV3VWdmJTY0xpZ0U3L3lKanpLai9qNVpIRGRFUzNoNWFJZmcKajhGSDlnRUNnWUVBNjNSbW1rLzFiSlZRS0tLTlpUOC9leC92WUQ5V05yQzZIQVBKWDlGUVRnT2hJUUdoMG1CdwpYNG1EWlpnZ0pEcGsyNFZaZUJIa1ByWDBjYkJJSjB1R2ZaVm1DMUJGY0l3dGROaG12SklHSzczb3Yvc0JoNjBJCklwb2ZoY1hNT2J6TkwrM25uZXlhcUhJaE9obGo5VUM0U05rUWZNajRUN1p5U3lBdVIxR3VybU1DZ1lFQTlKaFYKcW5mSnpRSm9GMEF0YmM3R21WdmZQL0I4QlR3TXEvM3hxeS9ZSVlyYWdFK1JoaFRmODN6ZHdWa1ZHdDh3bDVYNgpWVG90bXl4NG9YS1EzTmdCa1hIdFZWN1FhMFBYNk14eWl2TGpLVlFuY2FvMVUvUURqcWdVTWljR0ZESjNuZGtJCm9Tek5yL0dnbndCZXhBNnRVd3dQZjc3b1MzZVp5U1lZdlhoSzFVRUNnWUJvMCtnaVo5c0N2dTl6Ui92Znllci8KYkZaczZZWCt6MnZzc1JyazJCSUN5Y2JoSlJMZzBTTDJ4Z2lFSU5pZWlJa0Myem5jSlVzVFNIdE9hb2VWUnlEWApwTDVMNXk4alRxV21VZnBibGorOUZjNGNPeXFSTjA1WjZYaURYRzd5ZmNaMHdsek9pTnJLaUJXWEFscm9oQ29ICjlPeE1Ra1diWjhVM0FWclpVZHFOdFFLQmdBTFFaZHZxT09ZazZ2R3BpVnhFRHNEZzc3YWFtN0tydURHYVlGZHAKMjRDM1NrQkRxaGJ5MG9qSW5QeUdlOW10UzYvU3graUhITk0yTmNVVnZsanNHMGlER1Fuc1oxVjBtRjFUVE5ZUQphVkNtYVRYRGtZMS90ekxDK0VpRGJteDVFQ3MrdmZ5c3VVa1c3SlFudXU5aWc5ZjZ3WXJrdFdONDRzb1BxQ1UxCjV4YUJBb0dBRXdKSVVhSmdwbk96VzYyRUpXRHVSRHkrUzVyZkdnczNBaFNHYjV4d01aOC9BSnhtK2FkV0tQNWIKbEo4QXJyYkFadzZJbW0vZDZrUjBIZlNKbnMwT3ZyS1FFL09XczZsYmtGK3BJcTJraXVnODYxeWhNbDlPNXJ0UwpCZkpjUTNhYlFicEh6aWI1NGY0SDRoMFVWNFA2QWR6LzNndTlrMUc0cWNPVzRyM2piUnc9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+vagrant@node1:~$ sudo useradd -m -s /bin/bash ivan
+vagrant@node1:~$ sudo passwd ivan
+New password:
+Retype new password:
+passwd: password updated successfully
+vagrant@node1:~$ cd /home/ivan
+vagrant@node1:/home/ivan$ sudo mkdir .certs && cd .certs
+vagrant@node1:/home/ivan/.certs$ sudo openssl genrsa -out ivan.key 2048
+Generating RSA private key, 2048 bit long modulus (2 primes)
+........................................................................+++++
+................................+++++
+e is 65537 (0x010001)
+vagrant@node1:/home/ivan/.certs$ sudo openssl req -new -key ivan.key -out ivan.csr -subj "/CN=ivan"
+vagrant@node1:/home/ivan/.certs$ sudo openssl x509 -req -in ivan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -
+out ivan.crt -days 365
+Signature ok
+subject=CN = ivan
+Getting CA Private Key
+vagrant@node1:/home/ivan/.certs$ cd
+vagrant@node1:~$ kubectl config set-credentials ivan --client-certificate=/home/ivan/.certs/ivan.crt --client-key=/home/ivan/.certs/ivan.key
+User "ivan" set.
+vagrant@node1:~$ kubectl config set-context ivan-context --cluster=kubernetes --user=ivan
+Context "ivan-context" created.
+vagrant@node1:~$ kubectl config get-users
+NAME
+ivan
+kubernetes-admin
+vagrant@node1:~$ kubectl config get-contexts
+CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
+          ivan-context                  kubernetes   ivan
+*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
+vagrant@node1:~$ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://192.168.99.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: ivan
+  name: ivan-context
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: ivan
+  user:
+    client-certificate: /home/ivan/.certs/ivan.crt
+    client-key: /home/ivan/.certs/ivan.key
+- name: kubernetes-admin
+  user:
+    client-certificate-data: DATA+OMITTED
+    client-key-data: DATA+OMITTED
+vagrant@node1:~$ sudo mkdir /home/ivan/.kube
+vagrant@node1:~$ sudo cp ~/.kube/config /home/ivan/.kube/config
+vagrant@node1:~$ sudo vi /home/ivan/.kube/config
+vagrant@node1:~$ vagrant@node1:~$ sudo chown -R ivan: /home/ivan/
+vagrant@node1:~$ sudo cat /home/ivan/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJZHUxb3U4RnkwR2t3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFeE1EUXdOekV5TVRKYUZ3MHpNekV4TURFd056RTNNVEphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURWVVpGUkFsMWdta1ZmY1VRMEIrelZYaXRHNy9ac2pjOExxcTlidlVqVWd3WW1VVFQ1ZUtxRm4zencKWUt6Z0ptZzlDcld1OWVRTnVNNHVObUtqcmtrdnFLT3BOem1ML3J2L1NSQTE1eHVObXk5Z2lQYnNUNHZLZEYzSgplejQ4WGtPSXE0bzAzZkxpaTVidFBDRUhBR2VmSElORldDSGpETUhlRnZpNXFZbEVhV0V2ZlVOQTFydXZaSVNDCnRubW9ueWQyNEJWTkUrMGtoUkdPVkhnTjlTS085YStLNHliZFhaTG1NSTd1RzkwSXI3UnZ1Nk9RYWcyZGZWa3kKYTZKZ2VFcUoxcG5ZZXVNVDhDdG9HVjB6czNoenUyRVBuNVIyN3hIKzBTeDZwMDFrZnBEdkYyazBDeVZOM3NSVwpXc2N4OHZMNEV5QVRMYS9jaTJ3ZU14YWJLc1d4QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRekl6YzV5cjNXYjI3MHg0aWRDQmQwT2duYmd6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUwyMFpuajJCZQpVbmEycG16OSszTW1ibTZkdklNN25rMTdaTXFsVzZFd0pjdUNhWHcxS1RMNlhGNXE5ZXdoVlUyMjEyL2V6SWtHCllaN2cyWWZ5NldkQVpQM3lJak91OC93RGZHK21vZFdiSVNPU282MnM0cTJBWkRNMEJtQ21FWnoxMXptNVNqRXkKS1VSeTM3S0tJa3ZkTUNTb0Q2U3RvUlRHdGtJNjNaakFDZ0NUSTdXNnhmeVBBTW0xNy9BeHZoYlVRVzdQUEJHbApIMHMyVGh1UU5WZjVXejJIRWZrTkcrMkRMWm8rWjFIcVpGV0pCYTRMUDBrU1o3RTJaanRiWEROVE13VnU2QWtxCkxjQzM3eld3V1p2TDZrcFRXYmJlcGpsb0Z6Vm8zSmMrVHQwS2VrY2hIa3luUlBnZkhhTFBpd2I3V3VXSHlUQ0sKa01CclN5cmlFNWx6Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.99.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: john
+  name: john-context
+current-context: john-context
+kind: Config
+preferences: {}
+users:
+- name: john
+  user:
+    client-certificate: /home/john/.certs/john.crt
+    client-key: /home/john/.certs/john.key
+vagrant@node1:~$ sudo vi /home/ivan/.kube/config
+vagrant@node1:~$ sudo cat /home/ivan/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJZHUxb3U4RnkwR2t3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFeE1EUXdOekV5TVRKYUZ3MHpNekV4TURFd056RTNNVEphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURWVVpGUkFsMWdta1ZmY1VRMEIrelZYaXRHNy9ac2pjOExxcTlidlVqVWd3WW1VVFQ1ZUtxRm4zencKWUt6Z0ptZzlDcld1OWVRTnVNNHVObUtqcmtrdnFLT3BOem1ML3J2L1NSQTE1eHVObXk5Z2lQYnNUNHZLZEYzSgplejQ4WGtPSXE0bzAzZkxpaTVidFBDRUhBR2VmSElORldDSGpETUhlRnZpNXFZbEVhV0V2ZlVOQTFydXZaSVNDCnRubW9ueWQyNEJWTkUrMGtoUkdPVkhnTjlTS085YStLNHliZFhaTG1NSTd1RzkwSXI3UnZ1Nk9RYWcyZGZWa3kKYTZKZ2VFcUoxcG5ZZXVNVDhDdG9HVjB6czNoenUyRVBuNVIyN3hIKzBTeDZwMDFrZnBEdkYyazBDeVZOM3NSVwpXc2N4OHZMNEV5QVRMYS9jaTJ3ZU14YWJLc1d4QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRekl6YzV5cjNXYjI3MHg0aWRDQmQwT2duYmd6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUwyMFpuajJCZQpVbmEycG16OSszTW1ibTZkdklNN25rMTdaTXFsVzZFd0pjdUNhWHcxS1RMNlhGNXE5ZXdoVlUyMjEyL2V6SWtHCllaN2cyWWZ5NldkQVpQM3lJak91OC93RGZHK21vZFdiSVNPU282MnM0cTJBWkRNMEJtQ21FWnoxMXptNVNqRXkKS1VSeTM3S0tJa3ZkTUNTb0Q2U3RvUlRHdGtJNjNaakFDZ0NUSTdXNnhmeVBBTW0xNy9BeHZoYlVRVzdQUEJHbApIMHMyVGh1UU5WZjVXejJIRWZrTkcrMkRMWm8rWjFIcVpGV0pCYTRMUDBrU1o3RTJaanRiWEROVE13VnU2QWtxCkxjQzM3eld3V1p2TDZrcFRXYmJlcGpsb0Z6Vm8zSmMrVHQwS2VrY2hIa3luUlBnZkhhTFBpd2I3V3VXSHlUQ0sKa01CclN5cmlFNWx6Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.99.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: ivan
+  name: ivan-context
+current-context: ivan-context
+kind: Config
+preferences: {}
+users:
+- name: ivan
+  user:
+    client-certificate: /home/ivan/.certs/ivan.crt
+    client-key: /home/ivan/.certs/ivan.key
+vagrant@node1:~$ sudo chown -R ivan: /home/ivan/
+vagrant@node1:~$ sudo useradd -m -s /bin/bash mariana
+vagrant@node1:~$ sudo passwd mariana
+New password:
+Retype new password:
+passwd: password updated successfully
+vagrant@node1:~$ cd /home/mariana
+vagrant@node1:/home/mariana$ sudo mkdir .certs && cd .certs
+vagrant@node1:/home/mariana/.certs$ sudo openssl genrsa -out mariana.key 2048
+Generating RSA private key, 2048 bit long modulus (2 primes)
+................................+++++
+..............................................................................................+++++
+e is 65537 (0x010001)
+vagrant@node1:/home/mariana/.certs$ sudo openssl req -new -key mariana.key -out mariana.csr -subj "/CN=mariana"
+vagrant@node1:/home/mariana/.certs$ sudo openssl x509 -req -in mariana.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreatese
+rial -out mariana.crt -days 365
+Signature ok
+subject=CN = mariana
+Getting CA Private Key
+vagrant@node1:/home/mariana/.certs$ cd
+vagrant@node1:~$ kubectl config set-credentials mariana --client-certificate=/home/mariana/.certs/mariana.crt --client-key=/home/mariana/.certs/mariana
+.key
+User "mariana" set.
+vagrant@node1:~$ kubectl config set-context mariana-context --cluster=kubernetes --user=mariana
+Context "mariana-context" created.
+vagrant@node1:~$ kubectl config get-users
+NAME
+ivan
+kubernetes-admin
+mariana
+vagrant@node1:~$ kubectl config get-contexts
+CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
+          ivan-context                  kubernetes   ivan
+*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
+          mariana-context               kubernetes   mariana
+vagrant@node1:~$ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://192.168.99.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: ivan
+  name: ivan-context
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+- context:
+    cluster: kubernetes
+    user: mariana
+  name: mariana-context
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: ivan
+  user:
+    client-certificate: /home/ivan/.certs/ivan.crt
+    client-key: /home/ivan/.certs/ivan.key
+- name: kubernetes-admin
+  user:
+    client-certificate-data: DATA+OMITTED
+    client-key-data: DATA+OMITTED
+- name: mariana
+  user:
+    client-certificate: /home/mariana/.certs/mariana.crt
+    client-key: /home/mariana/.certs/mariana.key
+vagrant@node1:~$ sudo mkdir /home/mariana/.kube
+vagrant@node1:~$ sudo cp ~/.kube/config /home/mariana/.kube/config
+vagrant@node1:~$ sudo vi /home/mariana/.kube/config
+vagrant@node1:~$ sudo cat /home/mariana/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJZHUxb3U4RnkwR2t3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFeE1EUXdOekV5TVRKYUZ3MHpNekV4TURFd056RTNNVEphTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURWVVpGUkFsMWdta1ZmY1VRMEIrelZYaXRHNy9ac2pjOExxcTlidlVqVWd3WW1VVFQ1ZUtxRm4zencKWUt6Z0ptZzlDcld1OWVRTnVNNHVObUtqcmtrdnFLT3BOem1ML3J2L1NSQTE1eHVObXk5Z2lQYnNUNHZLZEYzSgplejQ4WGtPSXE0bzAzZkxpaTVidFBDRUhBR2VmSElORldDSGpETUhlRnZpNXFZbEVhV0V2ZlVOQTFydXZaSVNDCnRubW9ueWQyNEJWTkUrMGtoUkdPVkhnTjlTS085YStLNHliZFhaTG1NSTd1RzkwSXI3UnZ1Nk9RYWcyZGZWa3kKYTZKZ2VFcUoxcG5ZZXVNVDhDdG9HVjB6czNoenUyRVBuNVIyN3hIKzBTeDZwMDFrZnBEdkYyazBDeVZOM3NSVwpXc2N4OHZMNEV5QVRMYS9jaTJ3ZU14YWJLc1d4QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJRekl6YzV5cjNXYjI3MHg0aWRDQmQwT2duYmd6QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQUwyMFpuajJCZQpVbmEycG16OSszTW1ibTZkdklNN25rMTdaTXFsVzZFd0pjdUNhWHcxS1RMNlhGNXE5ZXdoVlUyMjEyL2V6SWtHCllaN2cyWWZ5NldkQVpQM3lJak91OC93RGZHK21vZFdiSVNPU282MnM0cTJBWkRNMEJtQ21FWnoxMXptNVNqRXkKS1VSeTM3S0tJa3ZkTUNTb0Q2U3RvUlRHdGtJNjNaakFDZ0NUSTdXNnhmeVBBTW0xNy9BeHZoYlVRVzdQUEJHbApIMHMyVGh1UU5WZjVXejJIRWZrTkcrMkRMWm8rWjFIcVpGV0pCYTRMUDBrU1o3RTJaanRiWEROVE13VnU2QWtxCkxjQzM3eld3V1p2TDZrcFRXYmJlcGpsb0Z6Vm8zSmMrVHQwS2VrY2hIa3luUlBnZkhhTFBpd2I3V3VXSHlUQ0sKa01CclN5cmlFNWx6Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.99.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: mariana
+  name: mariana-context
+current-context: mariana-context
+kind: Config
+preferences: {}
+users:
+- name: mariana
+  user:
+    client-certificate: /home/mariana/.certs/mariana.crt
+    client-key: /home/mariana/.certs/mariana.key
+vagrant@node1:~$ sudo chown -R mariana: /home/mariana/
+vagrant@node1:~$ cat > gurus-clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gurus-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]vagrant@node1:~$
+vagrant@node1:~$ cat gurus-clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gurus-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]vagrant@node1:~$
+vagrant@node1:~$ cat > gurus-clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gurus-clusterrolebinding
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: ClusterRole
+  name: gurus-clusterrole
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ cat gurus-clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gurus-clusterrolebinding
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: ClusterRole
+  name: gurus-clusterrole
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f gurus-clusterrole.yaml
+clusterrole.rbac.authorization.k8s.io/gurus-clusterrole created
+vagrant@node1:~$ kubectl apply -f gurus-clusterrolebinding.yaml
+clusterrolebinding.rbac.authorization.k8s.io/gurus-clusterrolebinding created
+vagrant@node1:~$ kubectl create namespace projectx
+namespace/projectx created
+vagrant@node1:~$ cat > limit-range.yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: projectx-limitrange
+  namespace: projectx
+spec:
+  limits:
+  - type: Container
+    default:
+      memory: 256Mi
+      cpu: 100m
+    defaultRequest:
+      memory: 128Mi
+      cpu: 50m
+    max:
+      memory: 512Mi
+      cpu: 500m
+    min:
+      memory: 64Mi
+      cpu: 10mvagrant@node1:~$
+vagrant@node1:~$ cat limit-range.yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: projectx-limitrange
+  namespace: projectx
+spec:
+  limits:
+  - type: Container
+    default:
+      memory: 256Mi
+      cpu: 100m
+    defaultRequest:
+      memory: 128Mi
+      cpu: 50m
+    max:
+      memory: 512Mi
+      cpu: 500m
+    min:
+      memory: 64Mi
+      cpu: 10mvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f projectx-limitrange.yaml
+error: the path "projectx-limitrange.yaml" does not exist
+vagrant@node1:~$ kubectl apply -f projectx-limitrange.yaml
+error: the path "projectx-limitrange.yaml" does not exist
+vagrant@node1:~$ kubectl apply -f limit-range.yaml
+limitrange/projectx-limitrange created
+vagrant@node1:~$ cat > projectx-resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: projectx-resourcequota
+  namespace: projectx
+spec:
+  hard:
+    requests.cpu: 200m
+    requests.memory: 256Mi
+    limits.cpu: 400m
+    limits.memory: 512Mi
+    pods: 10
+    services: 5
+    replicationcontrollers: 5
+    resourcequotas: 1vagrant@node1:~$
+vagrant@node1:~$ cat projectx-resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: projectx-resourcequota
+  namespace: projectx
+spec:
+  hard:
+    requests.cpu: 200m
+    requests.memory: 256Mi
+    limits.cpu: 400m
+    limits.memory: 512Mi
+    pods: 10
+    services: 5
+    replicationcontrollers: 5
+    resourcequotas: 1vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f projectx-resourcequota.yaml
+resourcequota/projectx-resourcequota created
+vagrant@node1:~$ cat > devguru-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devguru
+  namespace: projectx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devguru-binding
+  namespace: projectx
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: Role
+  name: devguru
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ cat devguru-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devguru
+  namespace: projectx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devguru-binding
+  namespace: projectx
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: Role
+  name: devguru
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f devguru-role.yaml
+Error from server (BadRequest): error when creating "devguru-role.yaml": RoleBinding in version "v1" cannot be handled as a RoleBinding: strict decoding error: unknown field "rules"
+vagrant@node1:~$ cat > devguru-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: devguru
+  namespace: projectx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: devguru-binding
+  namespace: projectx
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: Role
+  name: devguru
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ cat devguru-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: devguru
+  namespace: projectx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: devguru-binding
+  namespace: projectx
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: Role
+  name: devguru
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f devguru-role.yaml
+Error from server (BadRequest): error when creating "devguru-role.yaml": ClusterRoleBinding in version "v1" cannot be handled as a ClusterRoleBinding: strict decoding error: unknown field "rules"
+vagrant@node1:~$ cat > devguru-role.yaml
+vagrant@node1:~$ cat > devguru-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devguru
+  namespace: projectx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]vagrant@node1:~$
+vagrant@node1:~$ cat devguru-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devguru
+  namespace: projectx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f devguru-role.yaml
+role.rbac.authorization.k8s.io/devguru created
+vagrant@node1:~$ cat > devguru-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devguru-binding
+  namespace: projectx
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: Role
+  name: devguru
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ cat devguru-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devguru-binding
+  namespace: projectx
+subjects:
+- kind: User
+  name: ivan
+- kind: User
+  name: mariana
+roleRef:
+  kind: Role
+  name: devguru
+  apiGroup: rbac.authorization.k8s.iovagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f devguru-binding.yaml
+rolebinding.rbac.authorization.k8s.io/devguru-binding created
+vagrant@node1:~$ cat > consumer-to-producer.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-consumer-to-producer
+  namespace: projectx
+spec:
+  podSelector:
+    matchLabels:
+      app: consumer
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: producervagrant@node1:~$
+vagrant@node1:~$ cat consumer-to-producer.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-consumer-to-producer
+  namespace: projectx
+spec:
+  podSelector:
+    matchLabels:
+      app: consumer
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: producervagrant@node1:~$
+vagrant@node1:~$ cat > client-to-consumer.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-client-to-consumer
+  namespace: projectx
+spec:
+  podSelector:
+    matchLabels:
+      app: client
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: consumervagrant@node1:~$
+vagrant@node1:~$ cat client-to-consumer.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-client-to-consumer
+  namespace: projectx
+spec:
+  podSelector:
+    matchLabels:
+      app: client
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: consumervagrant@node1:~$
+vagrant@node1:~$ cat > consumer.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: projectx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: shekeriev/k8s-oracle
+        ports:
+        - containerPort: 82vagrant@node1:~$
+vagrant@node1:~$ cat consumer.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: projectx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: shekeriev/k8s-oracle
+        ports:
+        - containerPort: 82vagrant@node1:~$
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f producer-consumer.yaml
+error: the path "producer-consumer.yaml" does not exist
+vagrant@node1:~$ kubectl apply -f consumer.yaml
+deployment.apps/consumer created
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=256Mi,requests.memory=128Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "128Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "128Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=128Mi,requests.memory=64Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "64Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "10Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "64Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "10Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: minimum memory usage per Container is 64Mi, but request is 10Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "10Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "5Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "10Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "5Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: minimum memory usage per Container is 64Mi, but request is 5Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "80Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "80Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=80Mi,requests.memory=64Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "64Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "64Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=64Mi,requests.memory=64Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "512Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "256Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "512Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "256Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=512Mi,requests.memory=256Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ ls
+Message from syslogd@debian at Nov  4 11:36:29 ...
+ kernel:[ 8574.850990] watchdog: BUG: soft lockup - CPU#1 stuck for 36s! [containerd-shim:67668]
+
+client-to-consumer.yaml  consumer-to-producer.yaml  devguru-binding.yaml  gurus-clusterrolebinding.yaml  limit-range.yaml
+client.yaml              consumer.yaml              devguru-role.yaml     gurus-clusterrole.yaml         projectx-resourcequota.yaml
+vagrant@node1:~$ ls
+client-to-consumer.yaml  consumer-to-producer.yaml  devguru-binding.yaml  gurus-clusterrolebinding.yaml  limit-range.yaml
+client.yaml              consumer.yaml              devguru-role.yaml     gurus-clusterrole.yaml         projectx-resourcequota.yaml
+vagrant@node1:~$ kubectl apply -f consumer-to-producer.yaml
+networkpolicy.networking.k8s.io/allow-consumer-to-producer created
+vagrant@node1:~$ kubectl apply -f client-to-consumer.yaml
+networkpolicy.networking.k8s.io/allow-client-to-consumer created
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=256Mi,requests.memory=128Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ cat > client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "128Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ cat client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "128Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f client.yaml
+Error from server (Forbidden): error when creating "client.yaml": pods "client-pod" is forbidden: exceeded quota: projectx-resourcequota, requested: limits.memory=128Mi,requests.memory=64Mi, used: limits.memory=512Mi,requests.memory=256Mi, limited: limits.memory=512Mi,requests.memory=256Mi
+vagrant@node1:~$ kubectl cluster-info
+Kubernetes control plane is running at https://192.168.99.101:6443
+CoreDNS is running at https://192.168.99.101:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+vagrant@node1:~$ kubectl get all --all-namespaces
+NAMESPACE          NAME                                           READY   STATUS    RESTARTS      AGE
+calico-apiserver   pod/calico-apiserver-7b65c8665d-mxr7f          1/1     Running   0             145m
+calico-apiserver   pod/calico-apiserver-7b65c8665d-p5bql          1/1     Running   0             145m
+calico-system      pod/calico-kube-controllers-66964786dd-9fmtw   1/1     Running   0             148m
+calico-system      pod/calico-node-kp5vx                          1/1     Running   0             144m
+calico-system      pod/calico-node-qz4br                          1/1     Running   0             139m
+calico-system      pod/calico-node-w7xkh                          1/1     Running   0             148m
+calico-system      pod/calico-typha-75b6886f5b-gxbc6              1/1     Running   0             139m
+calico-system      pod/calico-typha-75b6886f5b-w8khp              1/1     Running   0             148m
+calico-system      pod/csi-node-driver-9rx6z                      2/2     Running   0             148m
+calico-system      pod/csi-node-driver-gs5nc                      2/2     Running   0             144m
+calico-system      pod/csi-node-driver-mqcz5                      2/2     Running   0             139m
+kube-system        pod/coredns-5d78c9869d-9xqrk                   1/1     Running   0             148m
+kube-system        pod/coredns-5d78c9869d-cl4f6                   1/1     Running   0             148m
+kube-system        pod/etcd-node1                                 1/1     Running   0             149m
+kube-system        pod/kube-apiserver-node1                       1/1     Running   0             149m
+kube-system        pod/kube-controller-manager-node1              1/1     Running   1 (10m ago)   149m
+kube-system        pod/kube-proxy-2xl29                           1/1     Running   0             139m
+kube-system        pod/kube-proxy-fmt5f                           1/1     Running   0             148m
+kube-system        pod/kube-proxy-hx52m                           1/1     Running   0             144m
+kube-system        pod/kube-scheduler-node1                       1/1     Running   1 (10m ago)   149m
+projectx           pod/consumer-649dfcd79b-92hrr                  1/1     Running   0             26m
+projectx           pod/consumer-649dfcd79b-kqlkf                  1/1     Running   0             26m
+tigera-operator    pod/tigera-operator-f6bb878c4-kw5tk            1/1     Running   0             148m
+
+NAMESPACE          NAME                                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+calico-apiserver   service/calico-api                        ClusterIP   10.99.60.59     <none>        443/TCP                  145m
+calico-system      service/calico-kube-controllers-metrics   ClusterIP   None            <none>        9094/TCP                 145m
+calico-system      service/calico-typha                      ClusterIP   10.104.66.225   <none>        5473/TCP                 148m
+default            service/kubernetes                        ClusterIP   10.96.0.1       <none>        443/TCP                  149m
+kube-system        service/kube-dns                          ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   149m
+
+NAMESPACE       NAME                             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+calico-system   daemonset.apps/calico-node       3         3         3       3            3           kubernetes.io/os=linux   148m
+calico-system   daemonset.apps/csi-node-driver   3         3         3       3            3           kubernetes.io/os=linux   148m
+kube-system     daemonset.apps/kube-proxy        3         3         3       3            3           kubernetes.io/os=linux   149m
+
+NAMESPACE          NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+calico-apiserver   deployment.apps/calico-apiserver          2/2     2            2           145m
+calico-system      deployment.apps/calico-kube-controllers   1/1     1            1           148m
+calico-system      deployment.apps/calico-typha              2/2     2            2           148m
+kube-system        deployment.apps/coredns                   2/2     2            2           149m
+projectx           deployment.apps/consumer                  2/2     2            2           26m
+tigera-operator    deployment.apps/tigera-operator           1/1     1            1           149m
+
+NAMESPACE          NAME                                                 DESIRED   CURRENT   READY   AGE
+calico-apiserver   replicaset.apps/calico-apiserver-7b65c8665d          2         2         2       145m
+calico-system      replicaset.apps/calico-kube-controllers-66964786dd   1         1         1       148m
+calico-system      replicaset.apps/calico-typha-75b6886f5b              2         2         2       148m
+kube-system        replicaset.apps/coredns-5d78c9869d                   2         2         2       148m
+projectx           replicaset.apps/consumer-649dfcd79b                  2         2         2       26m
+tigera-operator    replicaset.apps/tigera-operator-f6bb878c4            1         1         1       148m
+vagrant@node1:~$ kubectl get roles --all-namespaces
+NAMESPACE     NAME                                             CREATED AT
+kube-public   kubeadm:bootstrap-signer-clusterinfo             2023-11-04T07:17:35Z
+kube-public   system:controller:bootstrap-signer               2023-11-04T07:17:33Z
+kube-system   extension-apiserver-authentication-reader        2023-11-04T07:17:33Z
+kube-system   kube-proxy                                       2023-11-04T07:17:35Z
+kube-system   kubeadm:kubelet-config                           2023-11-04T07:17:33Z
+kube-system   kubeadm:nodes-kubeadm-config                     2023-11-04T07:17:33Z
+kube-system   system::leader-locking-kube-controller-manager   2023-11-04T07:17:33Z
+kube-system   system::leader-locking-kube-scheduler            2023-11-04T07:17:33Z
+kube-system   system:controller:bootstrap-signer               2023-11-04T07:17:33Z
+kube-system   system:controller:cloud-provider                 2023-11-04T07:17:33Z
+kube-system   system:controller:token-cleaner                  2023-11-04T07:17:33Z
+projectx      devguru                                          2023-11-04T09:02:27Z
+vagrant@node1:~$ kubectl get clusterroles --all-namespaces
+NAME                                                                   CREATED AT
+admin                                                                  2023-11-04T07:17:32Z
+calico-cni-plugin                                                      2023-11-04T07:18:09Z
+calico-crds                                                            2023-11-04T07:20:54Z
+calico-extension-apiserver-auth-access                                 2023-11-04T07:20:55Z
+calico-kube-controllers                                                2023-11-04T07:18:09Z
+calico-node                                                            2023-11-04T07:18:08Z
+calico-typha                                                           2023-11-04T07:18:08Z
+calico-webhook-reader                                                  2023-11-04T07:20:55Z
+cluster-admin                                                          2023-11-04T07:17:32Z
+edit                                                                   2023-11-04T07:17:32Z
+gurus-clusterrole                                                      2023-11-04T08:36:55Z
+kubeadm:get-nodes                                                      2023-11-04T07:17:35Z
+system:aggregate-to-admin                                              2023-11-04T07:17:32Z
+system:aggregate-to-edit                                               2023-11-04T07:17:32Z
+system:aggregate-to-view                                               2023-11-04T07:17:32Z
+system:auth-delegator                                                  2023-11-04T07:17:32Z
+system:basic-user                                                      2023-11-04T07:17:32Z
+system:certificates.k8s.io:certificatesigningrequests:nodeclient       2023-11-04T07:17:32Z
+system:certificates.k8s.io:certificatesigningrequests:selfnodeclient   2023-11-04T07:17:32Z
+system:certificates.k8s.io:kube-apiserver-client-approver              2023-11-04T07:17:32Z
+system:certificates.k8s.io:kube-apiserver-client-kubelet-approver      2023-11-04T07:17:32Z
+system:certificates.k8s.io:kubelet-serving-approver                    2023-11-04T07:17:32Z
+system:certificates.k8s.io:legacy-unknown-approver                     2023-11-04T07:17:32Z
+system:controller:attachdetach-controller                              2023-11-04T07:17:33Z
+system:controller:certificate-controller                               2023-11-04T07:17:33Z
+system:controller:clusterrole-aggregation-controller                   2023-11-04T07:17:33Z
+system:controller:cronjob-controller                                   2023-11-04T07:17:33Z
+system:controller:daemon-set-controller                                2023-11-04T07:17:33Z
+system:controller:deployment-controller                                2023-11-04T07:17:33Z
+system:controller:disruption-controller                                2023-11-04T07:17:33Z
+system:controller:endpoint-controller                                  2023-11-04T07:17:33Z
+system:controller:endpointslice-controller                             2023-11-04T07:17:33Z
+system:controller:endpointslicemirroring-controller                    2023-11-04T07:17:33Z
+system:controller:ephemeral-volume-controller                          2023-11-04T07:17:33Z
+system:controller:expand-controller                                    2023-11-04T07:17:33Z
+system:controller:generic-garbage-collector                            2023-11-04T07:17:33Z
+system:controller:horizontal-pod-autoscaler                            2023-11-04T07:17:33Z
+system:controller:job-controller                                       2023-11-04T07:17:33Z
+system:controller:namespace-controller                                 2023-11-04T07:17:33Z
+system:controller:node-controller                                      2023-11-04T07:17:33Z
+system:controller:persistent-volume-binder                             2023-11-04T07:17:33Z
+system:controller:pod-garbage-collector                                2023-11-04T07:17:33Z
+system:controller:pv-protection-controller                             2023-11-04T07:17:33Z
+system:controller:pvc-protection-controller                            2023-11-04T07:17:33Z
+system:controller:replicaset-controller                                2023-11-04T07:17:33Z
+system:controller:replication-controller                               2023-11-04T07:17:33Z
+system:controller:resourcequota-controller                             2023-11-04T07:17:33Z
+system:controller:root-ca-cert-publisher                               2023-11-04T07:17:33Z
+system:controller:route-controller                                     2023-11-04T07:17:33Z
+system:controller:service-account-controller                           2023-11-04T07:17:33Z
+system:controller:service-controller                                   2023-11-04T07:17:33Z
+system:controller:statefulset-controller                               2023-11-04T07:17:33Z
+system:controller:ttl-after-finished-controller                        2023-11-04T07:17:33Z
+system:controller:ttl-controller                                       2023-11-04T07:17:33Z
+system:coredns                                                         2023-11-04T07:17:35Z
+system:discovery                                                       2023-11-04T07:17:32Z
+system:heapster                                                        2023-11-04T07:17:32Z
+system:kube-aggregator                                                 2023-11-04T07:17:32Z
+system:kube-controller-manager                                         2023-11-04T07:17:32Z
+system:kube-dns                                                        2023-11-04T07:17:32Z
+system:kube-scheduler                                                  2023-11-04T07:17:33Z
+system:kubelet-api-admin                                               2023-11-04T07:17:32Z
+system:monitoring                                                      2023-11-04T07:17:32Z
+system:node                                                            2023-11-04T07:17:32Z
+system:node-bootstrapper                                               2023-11-04T07:17:32Z
+system:node-problem-detector                                           2023-11-04T07:17:32Z
+system:node-proxier                                                    2023-11-04T07:17:33Z
+system:persistent-volume-provisioner                                   2023-11-04T07:17:32Z
+system:public-info-viewer                                              2023-11-04T07:17:32Z
+system:service-account-issuer-discovery                                2023-11-04T07:17:32Z
+system:volume-scheduler                                                2023-11-04T07:17:32Z
+tigera-operator                                                        2023-11-04T07:17:39Z
+view                                                                   2023-11-04T07:17:32Z
+vagrant@node1:~$ kubectl get all -n projectx
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/consumer-649dfcd79b-92hrr   1/1     Running   0          29m
+pod/consumer-649dfcd79b-kqlkf   1/1     Running   0          29m
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/consumer   2/2     2            2           29m
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/consumer-649dfcd79b   2         2         2       29m
+vagrant@node1:~$ kubectl get clusterroles
+NAME                                                                   CREATED AT
+admin                                                                  2023-11-04T07:17:32Z
+calico-cni-plugin                                                      2023-11-04T07:18:09Z
+calico-crds                                                            2023-11-04T07:20:54Z
+calico-extension-apiserver-auth-access                                 2023-11-04T07:20:55Z
+calico-kube-controllers                                                2023-11-04T07:18:09Z
+calico-node                                                            2023-11-04T07:18:08Z
+calico-typha                                                           2023-11-04T07:18:08Z
+calico-webhook-reader                                                  2023-11-04T07:20:55Z
+cluster-admin                                                          2023-11-04T07:17:32Z
+edit                                                                   2023-11-04T07:17:32Z
+gurus-clusterrole                                                      2023-11-04T08:36:55Z
+kubeadm:get-nodes                                                      2023-11-04T07:17:35Z
+system:aggregate-to-admin                                              2023-11-04T07:17:32Z
+system:aggregate-to-edit                                               2023-11-04T07:17:32Z
+system:aggregate-to-view                                               2023-11-04T07:17:32Z
+system:auth-delegator                                                  2023-11-04T07:17:32Z
+system:basic-user                                                      2023-11-04T07:17:32Z
+system:certificates.k8s.io:certificatesigningrequests:nodeclient       2023-11-04T07:17:32Z
+system:certificates.k8s.io:certificatesigningrequests:selfnodeclient   2023-11-04T07:17:32Z
+system:certificates.k8s.io:kube-apiserver-client-approver              2023-11-04T07:17:32Z
+system:certificates.k8s.io:kube-apiserver-client-kubelet-approver      2023-11-04T07:17:32Z
+system:certificates.k8s.io:kubelet-serving-approver                    2023-11-04T07:17:32Z
+system:certificates.k8s.io:legacy-unknown-approver                     2023-11-04T07:17:32Z
+system:controller:attachdetach-controller                              2023-11-04T07:17:33Z
+system:controller:certificate-controller                               2023-11-04T07:17:33Z
+system:controller:clusterrole-aggregation-controller                   2023-11-04T07:17:33Z
+system:controller:cronjob-controller                                   2023-11-04T07:17:33Z
+system:controller:daemon-set-controller                                2023-11-04T07:17:33Z
+system:controller:deployment-controller                                2023-11-04T07:17:33Z
+system:controller:disruption-controller                                2023-11-04T07:17:33Z
+system:controller:endpoint-controller                                  2023-11-04T07:17:33Z
+system:controller:endpointslice-controller                             2023-11-04T07:17:33Z
+system:controller:endpointslicemirroring-controller                    2023-11-04T07:17:33Z
+system:controller:ephemeral-volume-controller                          2023-11-04T07:17:33Z
+system:controller:expand-controller                                    2023-11-04T07:17:33Z
+system:controller:generic-garbage-collector                            2023-11-04T07:17:33Z
+system:controller:horizontal-pod-autoscaler                            2023-11-04T07:17:33Z
+system:controller:job-controller                                       2023-11-04T07:17:33Z
+system:controller:namespace-controller                                 2023-11-04T07:17:33Z
+system:controller:node-controller                                      2023-11-04T07:17:33Z
+system:controller:persistent-volume-binder                             2023-11-04T07:17:33Z
+system:controller:pod-garbage-collector                                2023-11-04T07:17:33Z
+system:controller:pv-protection-controller                             2023-11-04T07:17:33Z
+system:controller:pvc-protection-controller                            2023-11-04T07:17:33Z
+system:controller:replicaset-controller                                2023-11-04T07:17:33Z
+system:controller:replication-controller                               2023-11-04T07:17:33Z
+system:controller:resourcequota-controller                             2023-11-04T07:17:33Z
+system:controller:root-ca-cert-publisher                               2023-11-04T07:17:33Z
+system:controller:route-controller                                     2023-11-04T07:17:33Z
+system:controller:service-account-controller                           2023-11-04T07:17:33Z
+system:controller:service-controller                                   2023-11-04T07:17:33Z
+system:controller:statefulset-controller                               2023-11-04T07:17:33Z
+system:controller:ttl-after-finished-controller                        2023-11-04T07:17:33Z
+system:controller:ttl-controller                                       2023-11-04T07:17:33Z
+system:coredns                                                         2023-11-04T07:17:35Z
+system:discovery                                                       2023-11-04T07:17:32Z
+system:heapster                                                        2023-11-04T07:17:32Z
+system:kube-aggregator                                                 2023-11-04T07:17:32Z
+system:kube-controller-manager                                         2023-11-04T07:17:32Z
+system:kube-dns                                                        2023-11-04T07:17:32Z
+system:kube-scheduler                                                  2023-11-04T07:17:33Z
+system:kubelet-api-admin                                               2023-11-04T07:17:32Z
+system:monitoring                                                      2023-11-04T07:17:32Z
+system:node                                                            2023-11-04T07:17:32Z
+system:node-bootstrapper                                               2023-11-04T07:17:32Z
+system:node-problem-detector                                           2023-11-04T07:17:32Z
+system:node-proxier                                                    2023-11-04T07:17:33Z
+system:persistent-volume-provisioner                                   2023-11-04T07:17:32Z
+system:public-info-viewer                                              2023-11-04T07:17:32Z
+system:service-account-issuer-discovery                                2023-11-04T07:17:32Z
+system:volume-scheduler                                                2023-11-04T07:17:32Z
+tigera-operator                                                        2023-11-04T07:17:39Z
+view                                                                   2023-11-04T07:17:32Z
+vagrant@node1:~$ kubectl get clusterrolebindings
+NAME                                                   ROLE                                                                               AGE
+calico-apiserver-access-calico-crds                    ClusterRole/calico-crds                                                            149m
+calico-apiserver-delegate-auth                         ClusterRole/system:auth-delegator                                                  149m
+calico-apiserver-webhook-reader                        ClusterRole/calico-webhook-reader                                                  149m
+calico-cni-plugin                                      ClusterRole/calico-cni-plugin                                                      152m
+calico-extension-apiserver-auth-access                 ClusterRole/calico-extension-apiserver-auth-access                                 149m
+calico-kube-controllers                                ClusterRole/calico-kube-controllers                                                152m
+calico-node                                            ClusterRole/calico-node                                                            152m
+calico-typha                                           ClusterRole/calico-typha                                                           152m
+cluster-admin                                          ClusterRole/cluster-admin                                                          153m
+gurus-clusterrolebinding                               ClusterRole/gurus-clusterrole                                                      73m
+kubeadm:get-nodes                                      ClusterRole/kubeadm:get-nodes                                                      153m
+kubeadm:kubelet-bootstrap                              ClusterRole/system:node-bootstrapper                                               153m
+kubeadm:node-autoapprove-bootstrap                     ClusterRole/system:certificates.k8s.io:certificatesigningrequests:nodeclient       153m
+kubeadm:node-autoapprove-certificate-rotation          ClusterRole/system:certificates.k8s.io:certificatesigningrequests:selfnodeclient   153m
+kubeadm:node-proxier                                   ClusterRole/system:node-proxier                                                    153m
+system:basic-user                                      ClusterRole/system:basic-user                                                      153m
+system:controller:attachdetach-controller              ClusterRole/system:controller:attachdetach-controller                              153m
+system:controller:certificate-controller               ClusterRole/system:controller:certificate-controller                               153m
+system:controller:clusterrole-aggregation-controller   ClusterRole/system:controller:clusterrole-aggregation-controller                   153m
+system:controller:cronjob-controller                   ClusterRole/system:controller:cronjob-controller                                   153m
+system:controller:daemon-set-controller                ClusterRole/system:controller:daemon-set-controller                                153m
+system:controller:deployment-controller                ClusterRole/system:controller:deployment-controller                                153m
+system:controller:disruption-controller                ClusterRole/system:controller:disruption-controller                                153m
+system:controller:endpoint-controller                  ClusterRole/system:controller:endpoint-controller                                  153m
+system:controller:endpointslice-controller             ClusterRole/system:controller:endpointslice-controller                             153m
+system:controller:endpointslicemirroring-controller    ClusterRole/system:controller:endpointslicemirroring-controller                    153m
+system:controller:ephemeral-volume-controller          ClusterRole/system:controller:ephemeral-volume-controller                          153m
+system:controller:expand-controller                    ClusterRole/system:controller:expand-controller                                    153m
+system:controller:generic-garbage-collector            ClusterRole/system:controller:generic-garbage-collector                            153m
+system:controller:horizontal-pod-autoscaler            ClusterRole/system:controller:horizontal-pod-autoscaler                            153m
+system:controller:job-controller                       ClusterRole/system:controller:job-controller                                       153m
+system:controller:namespace-controller                 ClusterRole/system:controller:namespace-controller                                 153m
+system:controller:node-controller                      ClusterRole/system:controller:node-controller                                      153m
+system:controller:persistent-volume-binder             ClusterRole/system:controller:persistent-volume-binder                             153m
+system:controller:pod-garbage-collector                ClusterRole/system:controller:pod-garbage-collector                                153m
+system:controller:pv-protection-controller             ClusterRole/system:controller:pv-protection-controller                             153m
+system:controller:pvc-protection-controller            ClusterRole/system:controller:pvc-protection-controller                            153m
+system:controller:replicaset-controller                ClusterRole/system:controller:replicaset-controller                                153m
+system:controller:replication-controller               ClusterRole/system:controller:replication-controller                               153m
+system:controller:resourcequota-controller             ClusterRole/system:controller:resourcequota-controller                             153m
+system:controller:root-ca-cert-publisher               ClusterRole/system:controller:root-ca-cert-publisher                               153m
+system:controller:route-controller                     ClusterRole/system:controller:route-controller                                     153m
+system:controller:service-account-controller           ClusterRole/system:controller:service-account-controller                           153m
+system:controller:service-controller                   ClusterRole/system:controller:service-controller                                   153m
+system:controller:statefulset-controller               ClusterRole/system:controller:statefulset-controller                               153m
+system:controller:ttl-after-finished-controller        ClusterRole/system:controller:ttl-after-finished-controller                        153m
+system:controller:ttl-controller                       ClusterRole/system:controller:ttl-controller                                       153m
+system:coredns                                         ClusterRole/system:coredns                                                         153m
+system:discovery                                       ClusterRole/system:discovery                                                       153m
+system:kube-controller-manager                         ClusterRole/system:kube-controller-manager                                         153m
+system:kube-dns                                        ClusterRole/system:kube-dns                                                        153m
+system:kube-scheduler                                  ClusterRole/system:kube-scheduler                                                  153m
+system:monitoring                                      ClusterRole/system:monitoring                                                      153m
+system:node                                            ClusterRole/system:node                                                            153m
+system:node-proxier                                    ClusterRole/system:node-proxier                                                    153m
+system:public-info-viewer                              ClusterRole/system:public-info-viewer                                              153m
+system:service-account-issuer-discovery                ClusterRole/system:service-account-issuer-discovery                                153m
+system:volume-scheduler                                ClusterRole/system:volume-scheduler                                                153m
+tigera-operator                                        ClusterRole/tigera-operator                                                        153m
+vagrant@node1:~$ kubectl get resourcequotas --all-namespaces
+NAMESPACE   NAME                     AGE   REQUEST                                                                                                                              LIMIT
+projectx    projectx-resourcequota   63m   pods: 2/10, replicationcontrollers: 0/5, requests.cpu: 100m/200m, requests.memory: 256Mi/256Mi, resourcequotas: 1/1, services: 0/5   limits.cpu: 200m/400m, limits.memory: 512Mi/512Mi
+vagrant@node1:~$ history
+    1  cat ~/.kube/config
+    2  sudo useradd -m -s /bin/bash ivan
+    3  sudo passwd ivan
+    4  cd /home/ivan
+    5  sudo mkdir .certs && cd .certs
+    6  sudo openssl genrsa -out ivan.key 2048
+    7  sudo openssl req -new -key ivan.key -out ivan.csr -subj "/CN=ivan"
+    8  sudo openssl x509 -req -in ivan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out ivan.crt -days 365
+    9  cd
+   10  kubectl config set-credentials ivan --client-certificate=/home/ivan/.certs/ivan.crt --client-key=/home/ivan/.certs/ivan.key
+   11  kubectl config set-context ivan-context --cluster=kubernetes --user=ivan
+   12  kubectl config get-users
+   13  kubectl config get-contexts
+   14  kubectl config view
+   15  sudo mkdir /home/ivan/.kube
+   16  sudo cp ~/.kube/config /home/ivan/.kube/config
+   17  sudo vi /home/ivan/.kube/config
+   18  sudo chown -R ivan: /home/ivan/
+   19  sudo cat /home/ivan/.kube/config
+   20  sudo vi /home/ivan/.kube/config
+   21  sudo cat /home/ivan/.kube/config
+   22  sudo chown -R ivan: /home/ivan/
+   23  sudo useradd -m -s /bin/bash mariana
+   24  sudo passwd mariana
+   25  cd /home/mariana
+   26  sudo mkdir .certs && cd .certs
+   27  sudo openssl genrsa -out mariana.key 2048
+   28  sudo openssl req -new -key mariana.key -out mariana.csr -subj "/CN=mariana"
+   29  sudo openssl x509 -req -in mariana.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out mariana.crt -days 365
+   30  cd
+   31  kubectl config set-credentials mariana --client-certificate=/home/mariana/.certs/mariana.crt --client-key=/home/mariana/.certs/mariana.key
+   32  kubectl config set-context mariana-context --cluster=kubernetes --user=mariana
+   33  kubectl config get-users
+   34  kubectl config get-contexts
+   35  kubectl config view
+   36  sudo mkdir /home/mariana/.kube
+   37  sudo cp ~/.kube/config /home/mariana/.kube/config
+   38  sudo vi /home/mariana/.kube/config
+   39  sudo cat /home/mariana/.kube/config
+   40  sudo chown -R mariana: /home/mariana/
+   41  cat > gurus-clusterrole.yaml
+   42  cat gurus-clusterrole.yaml
+   43  cat > gurus-clusterrolebinding.yaml
+   44  cat gurus-clusterrolebinding.yaml
+   45  kubectl apply -f gurus-clusterrole.yaml
+   46  kubectl apply -f gurus-clusterrolebinding.yaml
+   47  kubectl create namespace projectx
+   48  cat > limit-range.yaml
+   49  cat limit-range.yaml
+   50  kubectl apply -f projectx-limitrange.yaml
+   51  kubectl apply -f limit-range.yaml
+   52  cat > projectx-resourcequota.yaml
+   53  cat projectx-resourcequota.yaml
+   54  kubectl apply -f projectx-resourcequota.yaml
+   55  cat > devguru-role.yaml
+   56  cat devguru-role.yaml
+   57  kubectl apply -f devguru-role.yaml
+   58  cat > devguru-role.yaml
+   59  cat devguru-role.yaml
+   60  kubectl apply -f devguru-role.yaml
+   61  cat > devguru-role.yaml
+   62  cat devguru-role.yaml
+   63  kubectl apply -f devguru-role.yaml
+   64  cat > devguru-binding.yaml
+   65  cat devguru-binding.yaml
+   66  kubectl apply -f devguru-binding.yaml
+   67  cat > consumer-to-producer.yaml
+   68  cat consumer-to-producer.yaml
+   69  cat > client-to-consumer.yaml
+   70  cat client-to-consumer.yaml
+   71  cat > consumer.yaml
+   72  cat consumer.yaml
+   73  cat > client.yaml
+   74  cat client.yaml
+   75  kubectl apply -f producer-consumer.yaml
+   76  kubectl apply -f consumer.yaml
+   77  kubectl apply -f client.yaml
+   78  cat > client.yaml
+   79  cat client.yaml
+   80  kubectl apply -f client.yaml
+   81  cat > client.yaml
+   82  cat client.yaml
+   83  kubectl apply -f client.yaml
+   84  cat > client.yaml
+   85  cat client.yaml
+   86  kubectl apply -f client.yaml
+   87  cat > client.yaml
+   88  cat client.yaml
+   89  kubectl apply -f client.yaml
+   90  cat > client.yaml
+   91  cat client.yaml
+   92  kubectl apply -f client.yaml
+   93  cat > client.yaml
+   94  cat client.yaml
+   95  kubectl apply -f client.yaml
+   96  ls
+   97  kubectl apply -f consumer-to-producer.yaml
+   98  kubectl apply -f client-to-consumer.yaml
+   99  cat > client.yaml
+  100  cat client.yaml
+  101  kubectl apply -f client.yaml
+  102  cat > client.yaml
+  103  cat client.yaml
+  104  kubectl apply -f client.yaml
+  105  kubectl cluster-info
+  106  kubectl get all --all-namespaces
+  107  kubectl get roles --all-namespaces
+  108  kubectl get clusterroles --all-namespaces
+  109  kubectl get all -n projectx
+  110  kubectl get clusterroles
+  111  kubectl get clusterrolebindings
+  112  kubectl get resourcequotas --all-namespaces
+  113  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> Get-Process | Out-Clipboard
+Out-Clipboard : The term 'Out-Clipboard' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of
+the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:15
++ Get-Process | Out-Clipboard
++               ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Out-Clipboard:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\NB\Kubernetes> vagrant halt
+==> node3: Attempting graceful shutdown of VM...
+==> node3: Forcing shutdown of VM...
+==> node2: Attempting graceful shutdown of VM...
+==> node2: Forcing shutdown of VM...
+==> node1: Attempting graceful shutdown of VM...
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 Set-Location -Path 'C:\Users\NB\Kubernetes'
+   2 vagrant up
+   3 vagrant up
+   4 vagrant ssh node1
+   5 Get-Process | Out-Clipboard
+   6 vagrant halt
+
+
+PS C:\Users\NB\Kubernetes>

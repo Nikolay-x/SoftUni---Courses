@@ -1,0 +1,15 @@
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 Set-Location -Path 'C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File'
+   2 kubectl apply -f multi-yaml-file.yaml
+   3 kubectl config set-context --current --namespace=homework
+   4 kubectl describe pod homework-1
+   5 kubectl describe pod homework-2
+   6 minikube service list
+   7 kubectl get service -n homework
+   8 kubectl delete namespaces homework
+   9 kubectl config set-context --current --namespace=default
+  10 kubectl get namespaces
+  11 kubectl get pods

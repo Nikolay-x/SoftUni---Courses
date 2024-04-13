@@ -1,0 +1,2763 @@
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"251f86e3-c84f-4fa9-bdf9-a515f20c5d79","stage":"ResponseComplete","requestURI":"/readyz","verb":"get","user":{"username":"system:anonymous","groups":["system:unauthenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-probe/1.27","responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:56.987846Z","stageTimestamp":"2023-11-21T10:24:56.990041Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:public-info-viewer\" of ClusterRole \"system:public-info-viewer\" to Group \"system:unauthenticated\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"35cc2d7e-f510-4e32-9c5c-4faf36020b26","stage":"RequestReceived","requestURI":"/api/v1/namespaces/calico-system/endpoints/calico-typha","verb":"get","user":{"username":"system:serviceaccount:calico-system:calico-typha","uid":"f70a6b3f-c45a-4fec-be7e-3aec7f6fa9f7","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["calico-typha-9478779dd-kgbkk"],"authentication.kubernetes.io/pod-uid":["1f929952-3353-4868-b042-bccbf49930c1"]}},"sourceIPs":["10.0.2.15"],"userAgent":"calico-typha/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"endpoints","namespace":"calico-system","name":"calico-typha","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:57.849025Z","stageTimestamp":"2023-11-21T10:24:57.849025Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"35cc2d7e-f510-4e32-9c5c-4faf36020b26","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/calico-system/endpoints/calico-typha","verb":"get","user":{"username":"system:serviceaccount:calico-system:calico-typha","uid":"f70a6b3f-c45a-4fec-be7e-3aec7f6fa9f7","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["calico-typha-9478779dd-kgbkk"],"authentication.kubernetes.io/pod-uid":["1f929952-3353-4868-b042-bccbf49930c1"]}},"sourceIPs":["10.0.2.15"],"userAgent":"calico-typha/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"endpoints","namespace":"calico-system","name":"calico-typha","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:57.849025Z","stageTimestamp":"2023-11-21T10:24:57.852858Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"calico-typha\" of ClusterRole \"calico-typha\" to ServiceAccount \"calico-typha/calico-system\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"0d92445e-1aba-478f-a132-6c1cd3ddc860","stage":"RequestReceived","requestURI":"/livez","verb":"get","user":{"username":"system:anonymous","groups":["system:unauthenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-probe/1.27","requestReceivedTimestamp":"2023-11-21T10:24:58.007829Z","stageTimestamp":"2023-11-21T10:24:58.007829Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"a0885cc4-0dca-4c8c-ab74-f57c7eeb24f5","stage":"RequestReceived","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-scheduler?timeout=5s","verb":"get","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-scheduler","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.013632Z","stageTimestamp":"2023-11-21T10:24:58.013632Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"0d92445e-1aba-478f-a132-6c1cd3ddc860","stage":"ResponseComplete","requestURI":"/livez","verb":"get","user":{"username":"system:anonymous","groups":["system:unauthenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-probe/1.27","responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.007829Z","stageTimestamp":"2023-11-21T10:24:58.021002Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:public-info-viewer\" of ClusterRole \"system:public-info-viewer\" to Group \"system:unauthenticated\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"a0885cc4-0dca-4c8c-ab74-f57c7eeb24f5","stage":"ResponseComplete","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-scheduler?timeout=5s","verb":"get","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-scheduler","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.013632Z","stageTimestamp":"2023-11-21T10:24:58.027712Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"bdd90e3a-89bb-4e73-91f7-b32e19530387","stage":"RequestReceived","requestURI":"/readyz","verb":"get","user":{"username":"system:anonymous","groups":["system:unauthenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-probe/1.27","requestReceivedTimestamp":"2023-11-21T10:24:58.028315Z","stageTimestamp":"2023-11-21T10:24:58.028315Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"1a303d97-0434-4419-8620-c360200f4c44","stage":"RequestReceived","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-scheduler?timeout=5s","verb":"update","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-scheduler","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.033963Z","stageTimestamp":"2023-11-21T10:24:58.033963Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"01b28205-749c-49c5-b730-dfe7e0b8c7ee","stage":"RequestReceived","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s","verb":"get","user":{"username":"system:kube-controller-manager","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-controller-manager/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-controller-manager","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.047234Z","stageTimestamp":"2023-11-21T10:24:58.047234Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"b702db3f-98af-41b5-a87e-c0c52c80fa54","stage":"RequestReceived","requestURI":"/apis/coordination.k8s.io/v1/namespaces/tigera-operator/leases/operator-lock","verb":"get","user":{"username":"system:serviceaccount:tigera-operator:tigera-operator","uid":"bd1bfcd6-76d6-4eeb-ad88-d2910c034031","groups":["system:serviceaccounts","system:serviceaccounts:tigera-operator","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["tigera-operator-f6bb878c4-whkkz"],"authentication.kubernetes.io/pod-uid":["bfd57024-318d-430c-9fc4-9f2ae7796aff"]}},"sourceIPs":["10.0.2.15"],"userAgent":"operator/v0.0.0 (linux/amd64) kubernetes/$Format/leader-election","objectRef":{"resource":"leases","namespace":"tigera-operator","name":"operator-lock","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.054155Z","stageTimestamp":"2023-11-21T10:24:58.054155Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"01b28205-749c-49c5-b730-dfe7e0b8c7ee","stage":"ResponseComplete","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s","verb":"get","user":{"username":"system:kube-controller-manager","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-controller-manager/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-controller-manager","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.047234Z","stageTimestamp":"2023-11-21T10:24:58.060859Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:kube-controller-manager\" of ClusterRole \"system:kube-controller-manager\" to User \"system:kube-controller-manager\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"bdd90e3a-89bb-4e73-91f7-b32e19530387","stage":"ResponseComplete","requestURI":"/readyz","verb":"get","user":{"username":"system:anonymous","groups":["system:unauthenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-probe/1.27","responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.028315Z","stageTimestamp":"2023-11-21T10:24:58.073155Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:public-info-viewer\" of ClusterRole \"system:public-info-viewer\" to Group \"system:unauthenticated\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"a45c3a69-3780-401c-a8cb-259bdfa1a35f","stage":"RequestReceived","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s","verb":"update","user":{"username":"system:kube-controller-manager","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-controller-manager/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-controller-manager","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.069598Z","stageTimestamp":"2023-11-21T10:24:58.069598Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"1a303d97-0434-4419-8620-c360200f4c44","stage":"ResponseComplete","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-scheduler?timeout=5s","verb":"update","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-scheduler","uid":"9d646d75-9473-4d9e-a76d-109c251a097b","apiGroup":"coordination.k8s.io","apiVersion":"v1","resourceVersion":"101578"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.033963Z","stageTimestamp":"2023-11-21T10:24:58.085193Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"b702db3f-98af-41b5-a87e-c0c52c80fa54","stage":"ResponseComplete","requestURI":"/apis/coordination.k8s.io/v1/namespaces/tigera-operator/leases/operator-lock","verb":"get","user":{"username":"system:serviceaccount:tigera-operator:tigera-operator","uid":"bd1bfcd6-76d6-4eeb-ad88-d2910c034031","groups":["system:serviceaccounts","system:serviceaccounts:tigera-operator","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["tigera-operator-f6bb878c4-whkkz"],"authentication.kubernetes.io/pod-uid":["bfd57024-318d-430c-9fc4-9f2ae7796aff"]}},"sourceIPs":["10.0.2.15"],"userAgent":"operator/v0.0.0 (linux/amd64) kubernetes/$Format/leader-election","objectRef":{"resource":"leases","namespace":"tigera-operator","name":"operator-lock","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.054155Z","stageTimestamp":"2023-11-21T10:24:58.087357Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"tigera-operator\" of ClusterRole \"tigera-operator\" to ServiceAccount \"tigera-operator/tigera-operator\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"2258457e-0a73-4ad7-865d-93e2b05b72f3","stage":"RequestReceived","requestURI":"/apis/coordination.k8s.io/v1/namespaces/tigera-operator/leases/operator-lock","verb":"update","user":{"username":"system:serviceaccount:tigera-operator:tigera-operator","uid":"bd1bfcd6-76d6-4eeb-ad88-d2910c034031","groups":["system:serviceaccounts","system:serviceaccounts:tigera-operator","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["tigera-operator-f6bb878c4-whkkz"],"authentication.kubernetes.io/pod-uid":["bfd57024-318d-430c-9fc4-9f2ae7796aff"]}},"sourceIPs":["10.0.2.15"],"userAgent":"operator/v0.0.0 (linux/amd64) kubernetes/$Format/leader-election","objectRef":{"resource":"leases","namespace":"tigera-operator","name":"operator-lock","apiGroup":"coordination.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.094484Z","stageTimestamp":"2023-11-21T10:24:58.094484Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"b097995b-e040-4a6c-a286-5d8433099813","stage":"ResponseComplete","requestURI":"/apis/rbac.authorization.k8s.io/v1/roles?allowWatchBookmarks=true\u0026resourceVersion=100949\u0026timeout=5m4s\u0026timeoutSeconds=304\u0026watch=true","verb":"watch","user":{"username":"system:apiserver","uid":"f73ee795-8f08-441d-8509-24e13e1fc8d8","groups":["system:masters"]},"sourceIPs":["::1"],"userAgent":"kube-apiserver/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"roles","apiGroup":"rbac.authorization.k8s.io","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:19:54.119349Z","stageTimestamp":"2023-11-21T10:24:58.124495Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"9d2a6e78-ea0e-4918-84dc-ebf6f168f567","stage":"RequestReceived","requestURI":"/apis/rbac.authorization.k8s.io/v1/roles?allowWatchBookmarks=true\u0026resourceVersion=101577\u0026timeout=7m18s\u0026timeoutSeconds=438\u0026watch=true","verb":"watch","user":{"username":"system:apiserver","uid":"f73ee795-8f08-441d-8509-24e13e1fc8d8","groups":["system:masters"]},"sourceIPs":["::1"],"userAgent":"kube-apiserver/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"roles","apiGroup":"rbac.authorization.k8s.io","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:24:58.125279Z","stageTimestamp":"2023-11-21T10:24:58.125279Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"a45c3a69-3780-401c-a8cb-259bdfa1a35f","stage":"ResponseComplete","requestURI":"/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s","verb":"update","user":{"username":"system:kube-controller-manager","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-controller-manager/v1.27.5 (linux/amd64) kubernetes/93e0d71/leader-election","objectRef":{"resource":"leases","namespace":"kube-system","name":"kube-controller-manager","uid":"e860bd39-4947-4446-a8ff-6b2b626cdc92","apiGroup":"coordination.k8s.io","apiVersion":"v1","resourceVersion":"101579"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.069598Z","stageTimestamp":"2023-11-21T10:24:58.126477Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:kube-controller-manager\" of ClusterRole \"system:kube-controller-manager\" to User \"system:kube-controller-manager\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"9d2a6e78-ea0e-4918-84dc-ebf6f168f567","stage":"ResponseStarted","requestURI":"/apis/rbac.authorization.k8s.io/v1/roles?allowWatchBookmarks=true\u0026resourceVersion=101577\u0026timeout=7m18s\u0026timeoutSeconds=438\u0026watch=true","verb":"watch","user":{"username":"system:apiserver","uid":"f73ee795-8f08-441d-8509-24e13e1fc8d8","groups":["system:masters"]},"sourceIPs":["::1"],"userAgent":"kube-apiserver/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"roles","apiGroup":"rbac.authorization.k8s.io","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.125279Z","stageTimestamp":"2023-11-21T10:24:58.133625Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"2258457e-0a73-4ad7-865d-93e2b05b72f3","stage":"ResponseComplete","requestURI":"/apis/coordination.k8s.io/v1/namespaces/tigera-operator/leases/operator-lock","verb":"update","user":{"username":"system:serviceaccount:tigera-operator:tigera-operator","uid":"bd1bfcd6-76d6-4eeb-ad88-d2910c034031","groups":["system:serviceaccounts","system:serviceaccounts:tigera-operator","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["tigera-operator-f6bb878c4-whkkz"],"authentication.kubernetes.io/pod-uid":["bfd57024-318d-430c-9fc4-9f2ae7796aff"]}},"sourceIPs":["10.0.2.15"],"userAgent":"operator/v0.0.0 (linux/amd64) kubernetes/$Format/leader-election","objectRef":{"resource":"leases","namespace":"tigera-operator","name":"operator-lock","uid":"55c256ef-00a1-4d58-be09-1bb0a70c0df3","apiGroup":"coordination.k8s.io","apiVersion":"v1","resourceVersion":"101580"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:24:58.094484Z","stageTimestamp":"2023-11-21T10:24:58.144351Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"tigera-operator\" of ClusterRole \"tigera-operator\" to ServiceAccount \"tigera-operator/tigera-operator\""}}
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+-bash: jq: command not found
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+-bash: jq: command not found
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest1
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"50cb0717-b375-4f75-bc76-4fccde2d0e21","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods?fieldManager=kubectl-run","verb":"create","user":{"username":"kubernetes-admin","groups":["system:masters","system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kubectl/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":201},"requestReceivedTimestamp":"2023-11-21T10:22:15.504335Z","stageTimestamp":"2023-11-21T10:22:15.520509Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"","pod-security.kubernetes.io/enforce-policy":"privileged:latest"}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"090dff08-c312-41be-be68-56d1e1b3ef09","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1/binding","verb":"create","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"binding"},"requestReceivedTimestamp":"2023-11-21T10:22:15.551897Z","stageTimestamp":"2023-11-21T10:22:15.551897Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"090dff08-c312-41be-be68-56d1e1b3ef09","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1/binding","verb":"create","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","uid":"b6201463-4e68-4880-bc9b-f237eaecc229","apiVersion":"v1","subresource":"binding"},"responseStatus":{"metadata":{},"status":"Success","code":201},"requestReceivedTimestamp":"2023-11-21T10:22:15.551897Z","stageTimestamp":"2023-11-21T10:22:15.566169Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"cefc8afa-0c15-4111-af98-78ea07a3ac61","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:22:15.569928Z","stageTimestamp":"2023-11-21T10:22:15.569928Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"cefc8afa-0c15-4111-af98-78ea07a3ac61","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:15.569928Z","stageTimestamp":"2023-11-21T10:22:15.579882Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"4286d55f-6c92-41be-bbf5-f3b251fd2754","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1/status","verb":"patch","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"status"},"requestReceivedTimestamp":"2023-11-21T10:22:15.584402Z","stageTimestamp":"2023-11-21T10:22:15.584402Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"f013c94b-39e4-43de-9f95-c34adfa94613","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/events","verb":"create","user":{"username":"system:kube-scheduler","groups":["system:authenticated"]},"sourceIPs":["192.168.99.101"],"userAgent":"kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler","objectRef":{"resource":"events","namespace":"default","name":"logtest1.17999c4099094432","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":201},"requestReceivedTimestamp":"2023-11-21T10:22:15.571530Z","stageTimestamp":"2023-11-21T10:22:15.604276Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"4286d55f-6c92-41be-bbf5-f3b251fd2754","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1/status","verb":"patch","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"status"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:15.584402Z","stageTimestamp":"2023-11-21T10:22:15.617292Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"785a1bd1-67e4-4ca4-816f-3acc0f507a58","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:serviceaccount:calico-system:calico-cni-plugin","uid":"60c5c2b4-5b1c-4768-b0de-8492e9f85451","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"calico/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:22:16.049483Z","stageTimestamp":"2023-11-21T10:22:16.049483Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"785a1bd1-67e4-4ca4-816f-3acc0f507a58","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:serviceaccount:calico-system:calico-cni-plugin","uid":"60c5c2b4-5b1c-4768-b0de-8492e9f85451","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"calico/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:16.049483Z","stageTimestamp":"2023-11-21T10:22:16.052019Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"6ff5b349-9d99-493e-9a7c-7b6d7b9c6fa0","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:serviceaccount:calico-system:calico-cni-plugin","uid":"60c5c2b4-5b1c-4768-b0de-8492e9f85451","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"calico/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:22:16.064604Z","stageTimestamp":"2023-11-21T10:22:16.064604Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"6ff5b349-9d99-493e-9a7c-7b6d7b9c6fa0","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:serviceaccount:calico-system:calico-cni-plugin","uid":"60c5c2b4-5b1c-4768-b0de-8492e9f85451","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"calico/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:16.064604Z","stageTimestamp":"2023-11-21T10:22:16.067516Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"80419b44-20bc-4c10-897b-f90c43b6c072","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1/status","verb":"patch","user":{"username":"system:serviceaccount:calico-system:calico-cni-plugin","uid":"60c5c2b4-5b1c-4768-b0de-8492e9f85451","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"calico/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"status"},"requestReceivedTimestamp":"2023-11-21T10:22:16.288959Z","stageTimestamp":"2023-11-21T10:22:16.288959Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"80419b44-20bc-4c10-897b-f90c43b6c072","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1/status","verb":"patch","user":{"username":"system:serviceaccount:calico-system:calico-cni-plugin","uid":"60c5c2b4-5b1c-4768-b0de-8492e9f85451","groups":["system:serviceaccounts","system:serviceaccounts:calico-system","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"calico/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"status"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:16.288959Z","stageTimestamp":"2023-11-21T10:22:16.300030Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"39801884-f1b7-4c13-9526-3b373b381216","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/events","verb":"create","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"events","namespace":"default","name":"logtest1.17999c407a98e753","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":201},"requestReceivedTimestamp":"2023-11-21T10:22:16.494451Z","stageTimestamp":"2023-11-21T10:22:16.502025Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"9edf4f9d-1a51-4d23-90a5-4beb15d2aa05","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/events","verb":"create","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"events","namespace":"default","name":"logtest1.17999c40c3a141f3","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":201},"requestReceivedTimestamp":"2023-11-21T10:22:17.718718Z","stageTimestamp":"2023-11-21T10:22:17.728933Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"1ef7ec9c-a6a9-4fd8-9612-574069d86687","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/events","verb":"create","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"events","namespace":"default","name":"logtest1.17999c40c75f7be2","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":201},"requestReceivedTimestamp":"2023-11-21T10:22:17.782265Z","stageTimestamp":"2023-11-21T10:22:17.787950Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"f20c6c4b-25a8-442b-9501-e58d6800cc08","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/events","verb":"create","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"events","namespace":"default","name":"logtest1.17999c40d0c2601c","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":201},"requestReceivedTimestamp":"2023-11-21T10:22:17.941925Z","stageTimestamp":"2023-11-21T10:22:17.950643Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"238fe6c8-8e9b-4452-868d-6d7d6130038a","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"requestReceivedTimestamp":"2023-11-21T10:22:18.417974Z","stageTimestamp":"2023-11-21T10:22:18.417974Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"238fe6c8-8e9b-4452-868d-6d7d6130038a","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1","verb":"get","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:18.417974Z","stageTimestamp":"2023-11-21T10:22:18.421356Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"63af9bfa-ca10-49e8-b69c-2a158fe86371","stage":"RequestReceived","requestURI":"/api/v1/namespaces/default/pods/logtest1/status","verb":"patch","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"status"},"requestReceivedTimestamp":"2023-11-21T10:22:18.424922Z","stageTimestamp":"2023-11-21T10:22:18.424922Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"63af9bfa-ca10-49e8-b69c-2a158fe86371","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/default/pods/logtest1/status","verb":"patch","user":{"username":"system:node:node2","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.99.102"],"userAgent":"kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71","objectRef":{"resource":"pods","namespace":"default","name":"logtest1","apiVersion":"v1","subresource":"status"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2023-11-21T10:22:18.424922Z","stageTimestamp":"2023-11-21T10:22:18.441236Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+vagrant@node1:~$ sudo apk update
+sudo: apk: command not found
+vagrant@node1:~$ sudo apt update
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Get:2 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:3 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+Get:6 http://deb.debian.org/debian bullseye-updates/main Sources.diff/Index [22.9 kB]
+Get:7 http://deb.debian.org/debian bullseye-updates/main amd64 Packages.diff/Index [22.9 kB]
+Get:8 http://deb.debian.org/debian bullseye-updates/main Translation-en.diff/Index [10.6 kB]
+Get:9 http://deb.debian.org/debian bullseye-updates/main Sources T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [1,419 B]
+Get:10 http://deb.debian.org/debian bullseye-updates/main amd64 Packages T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [474 B]
+Get:9 http://deb.debian.org/debian bullseye-updates/main Sources T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [1,419 B]
+Get:10 http://deb.debian.org/debian bullseye-updates/main amd64 Packages T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [474 B]
+Get:11 http://deb.debian.org/debian bullseye-updates/main Translation-en T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [175 B]
+Get:11 http://deb.debian.org/debian bullseye-updates/main Translation-en T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [175 B]
+Get:12 http://security.debian.org/debian-security bullseye-security/main Sources [159 kB]
+Get:13 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [258 kB]
+Get:14 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [28.0 kB]
+Get:15 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [13.9 kB]
+Fetched 655 kB in 2s (299 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+4 packages can be upgraded. Run 'apt list --upgradable' to see them.
+vagrant@node1:~$ sudo apk add jq
+sudo: apk: command not found
+vagrant@node1:~$ sudo apk install jq
+sudo: apk: command not found
+vagrant@node1:~$ sudo apt install jq
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libjq1 libonig5
+The following NEW packages will be installed:
+  jq libjq1 libonig5
+0 upgraded, 3 newly installed, 0 to remove and 4 not upgraded.
+Need to get 384 kB of archives.
+After this operation, 1,148 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bullseye/main amd64 libonig5 amd64 6.9.6-1.1 [185 kB]
+Get:2 http://deb.debian.org/debian bullseye/main amd64 libjq1 amd64 1.6-2.1 [135 kB]
+Get:3 http://deb.debian.org/debian bullseye/main amd64 jq amd64 1.6-2.1 [64.9 kB]
+Fetched 384 kB in 0s (1,160 kB/s)
+Selecting previously unselected package libonig5:amd64.
+(Reading database ... 55233 files and directories currently installed.)
+Preparing to unpack .../libonig5_6.9.6-1.1_amd64.deb ...
+Unpacking libonig5:amd64 (6.9.6-1.1) ...
+Selecting previously unselected package libjq1:amd64.
+Preparing to unpack .../libjq1_1.6-2.1_amd64.deb ...
+Unpacking libjq1:amd64 (1.6-2.1) ...
+Selecting previously unselected package jq.
+Preparing to unpack .../archives/jq_1.6-2.1_amd64.deb ...
+Unpacking jq (1.6-2.1) ...
+Setting up libonig5:amd64 (6.9.6-1.1) ...
+Setting up libjq1:amd64 (1.6-2.1) ...
+Setting up jq (1.6-2.1) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "50cb0717-b375-4f75-bc76-4fccde2d0e21",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods?fieldManager=kubectl-run",
+  "verb": "create",
+  "user": {
+    "username": "kubernetes-admin",
+    "groups": [
+      "system:masters",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kubectl/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.504335Z",
+  "stageTimestamp": "2023-11-21T10:22:15.520509Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "",
+    "pod-security.kubernetes.io/enforce-policy": "privileged:latest"
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "090dff08-c312-41be-be68-56d1e1b3ef09",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/binding",
+  "verb": "create",
+  "user": {
+    "username": "system:kube-scheduler",
+    "groups": [
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "binding"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.551897Z",
+  "stageTimestamp": "2023-11-21T10:22:15.551897Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "090dff08-c312-41be-be68-56d1e1b3ef09",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/binding",
+  "verb": "create",
+  "user": {
+    "username": "system:kube-scheduler",
+    "groups": [
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "uid": "b6201463-4e68-4880-bc9b-f237eaecc229",
+    "apiVersion": "v1",
+    "subresource": "binding"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "status": "Success",
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.551897Z",
+  "stageTimestamp": "2023-11-21T10:22:15.566169Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "cefc8afa-0c15-4111-af98-78ea07a3ac61",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.569928Z",
+  "stageTimestamp": "2023-11-21T10:22:15.569928Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "cefc8afa-0c15-4111-af98-78ea07a3ac61",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.569928Z",
+  "stageTimestamp": "2023-11-21T10:22:15.579882Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "4286d55f-6c92-41be-bbf5-f3b251fd2754",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.584402Z",
+  "stageTimestamp": "2023-11-21T10:22:15.584402Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "f013c94b-39e4-43de-9f95-c34adfa94613",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:kube-scheduler",
+    "groups": [
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest1.17999c4099094432",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.571530Z",
+  "stageTimestamp": "2023-11-21T10:22:15.604276Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "4286d55f-6c92-41be-bbf5-f3b251fd2754",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:15.584402Z",
+  "stageTimestamp": "2023-11-21T10:22:15.617292Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "785a1bd1-67e4-4ca4-816f-3acc0f507a58",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.049483Z",
+  "stageTimestamp": "2023-11-21T10:22:16.049483Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "785a1bd1-67e4-4ca4-816f-3acc0f507a58",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.049483Z",
+  "stageTimestamp": "2023-11-21T10:22:16.052019Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "6ff5b349-9d99-493e-9a7c-7b6d7b9c6fa0",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.064604Z",
+  "stageTimestamp": "2023-11-21T10:22:16.064604Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "6ff5b349-9d99-493e-9a7c-7b6d7b9c6fa0",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.064604Z",
+  "stageTimestamp": "2023-11-21T10:22:16.067516Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "80419b44-20bc-4c10-897b-f90c43b6c072",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.288959Z",
+  "stageTimestamp": "2023-11-21T10:22:16.288959Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "80419b44-20bc-4c10-897b-f90c43b6c072",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.288959Z",
+  "stageTimestamp": "2023-11-21T10:22:16.300030Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "39801884-f1b7-4c13-9526-3b373b381216",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest1.17999c407a98e753",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:16.494451Z",
+  "stageTimestamp": "2023-11-21T10:22:16.502025Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "9edf4f9d-1a51-4d23-90a5-4beb15d2aa05",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest1.17999c40c3a141f3",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:17.718718Z",
+  "stageTimestamp": "2023-11-21T10:22:17.728933Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "1ef7ec9c-a6a9-4fd8-9612-574069d86687",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest1.17999c40c75f7be2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:17.782265Z",
+  "stageTimestamp": "2023-11-21T10:22:17.787950Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "f20c6c4b-25a8-442b-9501-e58d6800cc08",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest1.17999c40d0c2601c",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:17.941925Z",
+  "stageTimestamp": "2023-11-21T10:22:17.950643Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "238fe6c8-8e9b-4452-868d-6d7d6130038a",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:18.417974Z",
+  "stageTimestamp": "2023-11-21T10:22:18.417974Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "238fe6c8-8e9b-4452-868d-6d7d6130038a",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:18.417974Z",
+  "stageTimestamp": "2023-11-21T10:22:18.421356Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "63af9bfa-ca10-49e8-b69c-2a158fe86371",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:18.424922Z",
+  "stageTimestamp": "2023-11-21T10:22:18.424922Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "63af9bfa-ca10-49e8-b69c-2a158fe86371",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest1/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest1",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:22:18.424922Z",
+  "stageTimestamp": "2023-11-21T10:22:18.441236Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest1 | jq -s length
+22
+vagrant@node1:~$ kubectl delete pod logtest1
+pod "logtest1" deleted
+vagrant@node1:~$ cat 2-audit.yaml
+apiVersion: audit.k8s.io/v1 # This is required.
+kind: Policy
+# Don't generate audit events for all requests in RequestReceived stage.
+omitStages:
+  - "RequestReceived"
+rules:
+  # Log pod changes at RequestResponse level
+  - level: RequestResponse
+    resources:
+    - group: ""
+      # Resource "pods" doesn't match requests to any subresource of pods,
+      # which is consistent with the RBAC policy.
+      resources: ["pods"]
+  # Log "pods/log", "pods/status" at Metadata level
+  - level: Metadata
+    resources:
+    - group: ""
+      resources: ["pods/log", "pods/status"]
+
+  # Don't log requests to a configmap called "controller-leader"
+  - level: None
+    resources:
+    - group: ""
+      resources: ["configmaps"]
+      resourceNames: ["controller-leader"]
+
+  # Don't log watch requests by the "system:kube-proxy" on endpoints or services
+  - level: None
+    users: ["system:kube-proxy"]
+    verbs: ["watch"]
+    resources:
+    - group: "" # core API group
+      resources: ["endpoints", "services"]
+
+  # Don't log authenticated requests to certain non-resource URL paths.
+  - level: None
+    userGroups: ["system:authenticated"]
+    nonResourceURLs:
+    - "/api*" # Wildcard matching.
+    - "/version"
+
+  # Log the request body of configmap changes in kube-system.
+  - level: Request
+    resources:
+    - group: "" # core API group
+      resources: ["configmaps"]
+    # This rule only applies to resources in the "kube-system" namespace.
+    # The empty string "" can be used to select non-namespaced resources.
+    namespaces: ["kube-system"]
+
+  # Log configmap and secret changes in all other namespaces at the Metadata level.
+  - level: Metadata
+    resources:
+    - group: "" # core API group
+      resources: ["secrets", "configmaps"]
+
+  # Log all other resources in core and extensions at the Request level.
+  - level: Request
+    resources:
+    - group: "" # core API group
+    - group: "extensions" # Version of group should NOT be included.
+
+  # A catch-all rule to log all other requests at the Metadata level.
+  - level: Metadata
+    # Long-running requests like watches that fall under this rule will not
+    # generate an audit event in RequestReceived.
+    omitStages:
+      - "RequestReceived"
+vagrant@node1:~$ cat > 1-audit-simple.yaml
+apiVersion: audit.k8s.io/v1 # This is required.
+kind: Policy
+# Don't generate audit events for all requests in RequestReceived stage.
+omitStages:
+  - "RequestReceived"
+rules:
+  # Log pod changes at RequestResponse level
+  - level: RequestResponse
+    resources:
+    - group: ""
+      # Resource "pods" doesn't match requests to any subresource of pods,
+      # which is consistent with the RBAC policy.
+      resources: ["pods"]
+  # Log "pods/log", "pods/status" at Metadata level
+  - level: Metadata
+    resources:
+    - group: ""
+      resources: ["pods/log", "pods/status"]
+
+  # Don't log requests to a configmap called "controller-leader"
+  - level: None
+    resources:
+    - group: ""
+      resources: ["configmaps"]
+      resourceNames: ["controller-leader"]
+
+  # Don't log watch requests by the "system:kube-proxy" on endpoints or services
+  - level: None
+    users: ["system:kube-proxy"]
+    verbs: ["watch"]
+    resources:
+    - group: "" # core API group
+      resources: ["endpoints", "services"]
+
+  # Don't log authenticated requests to certain non-resource URL paths.
+  - level: None
+    userGroups: ["system:authenticated"]
+    nonResourceURLs:
+    - "/api*" # Wildcard matching.
+    - "/version"
+
+  # Log the request body of configmap changes in kube-system.
+  - level: Request
+    resources:
+    - group: "" # core API group
+      resources: ["configmaps"]
+    # This rule only applies to resources in the "kube-system" namespace.
+    # The empty string "" can be used to select non-namespaced resources.
+    namespaces: ["kube-system"]
+
+  # Log configmap and secret changes in all other namespaces at the Metadata level.
+  - level: Metadata
+    resources:
+    - group: "" # core API group
+      resources: ["secrets", "configmaps"]
+
+  # Log all other resources in core and extensions at the Request level.
+  - level: Request
+    resources:
+    - group: "" # core API group
+    - group: "extensions" # Version of group should NOT be included.
+
+  # A catch-all rule to log all other requests at the Metadata level.
+  - level: Metadata
+    # Long-running requests like watches that fall under this rule will not
+    # generate an audit event in RequestReceived.
+    omitStages:
+      - "RequestReceived"
+vagrant@node1:~$ kubectl get pods -n kube-system -w
+NAME                            READY   STATUS    RESTARTS        AGE
+coredns-5d78c9869d-4mqgb        1/1     Running   5 (3h58m ago)   10d
+coredns-5d78c9869d-jl8j2        1/1     Running   5 (3h58m ago)   10d
+etcd-node1                      1/1     Running   5 (3h58m ago)   10d
+kube-apiserver-node1            1/1     Running   0               18m
+kube-controller-manager-node1   1/1     Running   9 (18m ago)     10d
+kube-proxy-ftp8m                1/1     Running   5 (3h57m ago)   10d
+kube-proxy-k625j                1/1     Running   5 (3h58m ago)   10d
+kube-proxy-sksbx                1/1     Running   5 (3h56m ago)   10d
+kube-scheduler-node1            1/1     Running   9 (18m ago)     10d
+^Cvagrant@node1:~$ kubectl run logtest2 --image=alpine -- sleep 1d
+pod/logtest2 created
+vagrant@node1:~$ kubectl get pods
+NAME       READY   STATUS    RESTARTS   AGE
+logtest2   1/1     Running   0          8s
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest2 | jq
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "ef04dc92-1a4e-42e0-9f37-22fd5e78ea0d",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods?fieldManager=kubectl-run",
+  "verb": "create",
+  "user": {
+    "username": "kubernetes-admin",
+    "groups": [
+      "system:masters",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kubectl/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.157547Z",
+  "stageTimestamp": "2023-11-21T10:38:37.170074Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "",
+    "pod-security.kubernetes.io/enforce-policy": "privileged:latest"
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "6b9f5da3-b400-435d-a91f-7fb2a4b289f3",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/binding",
+  "verb": "create",
+  "user": {
+    "username": "system:kube-scheduler",
+    "groups": [
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "binding"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.204582Z",
+  "stageTimestamp": "2023-11-21T10:38:37.204582Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "6b9f5da3-b400-435d-a91f-7fb2a4b289f3",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/binding",
+  "verb": "create",
+  "user": {
+    "username": "system:kube-scheduler",
+    "groups": [
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "uid": "79ef74e0-c4c0-405e-bf55-1fbea5325d62",
+    "apiVersion": "v1",
+    "subresource": "binding"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "status": "Success",
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.204582Z",
+  "stageTimestamp": "2023-11-21T10:38:37.212911Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "ab343cff-a32e-438d-bee7-e4bffff38ca9",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.217858Z",
+  "stageTimestamp": "2023-11-21T10:38:37.217858Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "ab343cff-a32e-438d-bee7-e4bffff38ca9",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.217858Z",
+  "stageTimestamp": "2023-11-21T10:38:37.225720Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "64afc68b-e6b8-4860-b4fd-affc0d163513",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.234617Z",
+  "stageTimestamp": "2023-11-21T10:38:37.234617Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "64afc68b-e6b8-4860-b4fd-affc0d163513",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.234617Z",
+  "stageTimestamp": "2023-11-21T10:38:37.245741Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "ff45a83f-4133-472a-9324-5ed91e5f0e81",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:kube-scheduler",
+    "groups": [
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.101"
+  ],
+  "userAgent": "kube-scheduler/v1.27.5 (linux/amd64) kubernetes/93e0d71/scheduler",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest2.17999d2528047e1c",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.229101Z",
+  "stageTimestamp": "2023-11-21T10:38:37.251809Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"system:kube-scheduler\" of ClusterRole \"system:kube-scheduler\" to User \"system:kube-scheduler\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "2b6a226b-c4f9-491a-a8ae-6500b4f2ebc8",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.667609Z",
+  "stageTimestamp": "2023-11-21T10:38:37.667609Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "2b6a226b-c4f9-491a-a8ae-6500b4f2ebc8",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.667609Z",
+  "stageTimestamp": "2023-11-21T10:38:37.669807Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "d16d54a6-38a7-4d23-bcf3-c928ac9c1509",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.682434Z",
+  "stageTimestamp": "2023-11-21T10:38:37.682434Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "d16d54a6-38a7-4d23-bcf3-c928ac9c1509",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.682434Z",
+  "stageTimestamp": "2023-11-21T10:38:37.684578Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "6d827afd-d14a-4d47-9dae-3934830a466e",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.895617Z",
+  "stageTimestamp": "2023-11-21T10:38:37.895617Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "6d827afd-d14a-4d47-9dae-3934830a466e",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:serviceaccount:calico-system:calico-cni-plugin",
+    "uid": "60c5c2b4-5b1c-4768-b0de-8492e9f85451",
+    "groups": [
+      "system:serviceaccounts",
+      "system:serviceaccounts:calico-system",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "calico/v0.0.0 (linux/amd64) kubernetes/$Format",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:37.895617Z",
+  "stageTimestamp": "2023-11-21T10:38:37.908116Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": "RBAC: allowed by ClusterRoleBinding \"calico-cni-plugin\" of ClusterRole \"calico-cni-plugin\" to ServiceAccount \"calico-cni-plugin/calico-system\""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "c95db468-fee4-40b6-b21c-3d99373fd46f",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest2.17999d2508def189",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:38.099638Z",
+  "stageTimestamp": "2023-11-21T10:38:38.105380Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "ad042e3c-3763-42ca-8974-bddd3c0d609d",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest2.17999d254d27bae8",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:39.245747Z",
+  "stageTimestamp": "2023-11-21T10:38:39.252627Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "ae344ae3-4753-45f6-b462-a95ece878766",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest2.17999d25519de165",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:39.320449Z",
+  "stageTimestamp": "2023-11-21T10:38:39.337663Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "950b1cb7-623a-4f5a-8e45-5c3fd6dae905",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/events",
+  "verb": "create",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "events",
+    "namespace": "default",
+    "name": "logtest2.17999d255afaa9da",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:39.478027Z",
+  "stageTimestamp": "2023-11-21T10:38:39.486687Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "70410e92-2bf2-4c19-ba82-279958d0c14c",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:40.377756Z",
+  "stageTimestamp": "2023-11-21T10:38:40.377756Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "70410e92-2bf2-4c19-ba82-279958d0c14c",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2",
+  "verb": "get",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:40.377756Z",
+  "stageTimestamp": "2023-11-21T10:38:40.382867Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "d66dd405-0211-4f55-b63d-f50729beed65",
+  "stage": "RequestReceived",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:40.386650Z",
+  "stageTimestamp": "2023-11-21T10:38:40.386650Z"
+}
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "d66dd405-0211-4f55-b63d-f50729beed65",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods/logtest2/status",
+  "verb": "patch",
+  "user": {
+    "username": "system:node:node2",
+    "groups": [
+      "system:nodes",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "192.168.99.102"
+  ],
+  "userAgent": "kubelet/v1.27.5 (linux/amd64) kubernetes/93e0d71",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "logtest2",
+    "apiVersion": "v1",
+    "subresource": "status"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 200
+  },
+  "requestReceivedTimestamp": "2023-11-21T10:38:40.386650Z",
+  "stageTimestamp": "2023-11-21T10:38:40.395261Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
+vagrant@node1:~$ cat /var/log/k8s-audit/audit.log | grep logtest2 | jq -s length
+22
+vagrant@node1:~$ kubectl delete pod logtest2
+pod "logtest2" deleted
+vagrant@node1:~$ sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+vagrant@node1:~$ cat 3-basic-logging.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+spec:
+  containers:
+  - name: count
+    image: alpine
+    args: [/bin/sh, -c,
+            'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); if [ -f /stop.file ]; then exit; fi; sleep 5; done']
+vagrant@node1:~$ kubectl get pods -n kube-system -w
+NAME                            READY   STATUS    RESTARTS        AGE
+coredns-5d78c9869d-4mqgb        1/1     Running   5 (4h18m ago)   10d
+coredns-5d78c9869d-jl8j2        1/1     Running   5 (4h18m ago)   10d
+etcd-node1                      1/1     Running   5 (4h18m ago)   10d
+kube-apiserver-node1            1/1     Running   0               15m
+kube-controller-manager-node1   1/1     Running   10 (16m ago)    10d
+kube-proxy-ftp8m                1/1     Running   5 (4h18m ago)   10d
+kube-proxy-k625j                1/1     Running   5 (4h18m ago)   10d
+kube-proxy-sksbx                1/1     Running   5 (4h17m ago)   10d
+kube-scheduler-node1            1/1     Running   10 (16m ago)    10d
+kube-proxy-sksbx                1/1     Running   5 (4h17m ago)   10d
+kube-scheduler-node1            1/1     Running   10 (16m ago)    10d
+coredns-5d78c9869d-4mqgb        1/1     Running   5 (4h18m ago)   10d
+etcd-node1                      1/1     Running   5 (4h18m ago)   10d
+coredns-5d78c9869d-jl8j2        1/1     Running   5 (4h18m ago)   10d
+^Cvagrant@node1:~cat 3-basic-logging.yaml-w
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+spec:
+  containers:
+  - name: count
+    image: alpine
+    args: [/bin/sh, -c,
+            'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); if [ -f /stop.file ]; then exit; fi; sleep 5; done']
+vagrant@node1:~$ sudo rm -rf /var/log/k8s-audit/
+vagrant@node1:~$ sudo rm -rf /var/lib/k8s-audit/
+vagrant@node1:~$ cat 3-basic-logging.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+spec:
+  containers:
+  - name: count
+    image: alpine
+    args: [/bin/sh, -c,
+            'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); if [ -f /stop.file ]; then exit; fi; sleep 5; done']
+vagrant@node1:~$ kubectl apply -f 3-basic-logging.yaml
+pod/counter created
+vagrant@node1:~$ kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+counter   1/1     Running   0          11s
+vagrant@node1:~$ kubectl logs counter
+0: Tue Nov 21 11:02:15 UTC 2023
+1: Tue Nov 21 11:02:20 UTC 2023
+2: Tue Nov 21 11:02:25 UTC 2023
+3: Tue Nov 21 11:02:30 UTC 2023
+vagrant@node1:~$ kubectl logs counter --follow
+0: Tue Nov 21 11:02:15 UTC 2023
+1: Tue Nov 21 11:02:20 UTC 2023
+2: Tue Nov 21 11:02:25 UTC 2023
+3: Tue Nov 21 11:02:30 UTC 2023
+4: Tue Nov 21 11:02:35 UTC 2023
+5: Tue Nov 21 11:02:40 UTC 2023
+6: Tue Nov 21 11:02:45 UTC 2023
+^C
+vagrant@node1:~$ kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+counter   1/1     Running   0          41s
+vagrant@node1:~$ kubectl describe pods
+Name:             counter
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Tue, 21 Nov 2023 13:02:13 +0200
+Labels:           <none>
+Annotations:      cni.projectcalico.org/containerID: 09304ae8139a9552d6bd7d87894dc6df14368ce26bbe7c740df715c079c3f03b
+                  cni.projectcalico.org/podIP: 10.244.104.57/32
+                  cni.projectcalico.org/podIPs: 10.244.104.57/32
+Status:           Running
+IP:               10.244.104.57
+IPs:
+  IP:  10.244.104.57
+Containers:
+  count:
+    Container ID:  containerd://49da26c776889602e2e05fd8f085d8173fabd1d6d5057478648dafe3ee403fb9
+    Image:         alpine
+    Image ID:      docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      /bin/sh
+      -c
+      i=0; while true; do echo "$i: $(date)"; i=$((i+1)); if [ -f /stop.file ]; then exit; fi; sleep 5; done
+    State:          Running
+      Started:      Tue, 21 Nov 2023 13:02:15 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hrw75 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-hrw75:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  60s   default-scheduler  Successfully assigned default/counter to node2
+  Normal  Pulling    60s   kubelet            Pulling image "alpine"
+  Normal  Pulled     59s   kubelet            Successfully pulled image "alpine" in 1.242399808s (1.242560022s including waiting)
+  Normal  Created    59s   kubelet            Created container count
+  Normal  Started    59s   kubelet            Started container count
+vagrant@node1:~$ kubectl get pods -o wide
+NAME      READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+counter   1/1     Running   0          84s   10.244.104.57   node2   <none>           <none>
+vagrant@node1:~$ kubectl delete pod counter
+pod "counter" deleted
+vagrant@node1:~$ kubectl logs counter
+Error from server (NotFound): pods "counter" not found
+vagrant@node1:~$ kubectl logs counter --previous
+Error from server (NotFound): pods "counter" not found
+vagrant@node1:~$ kubectl apply -f 3-basic-logging.yaml
+pod/counter created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME      READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+counter   1/1     Running   0          8s    10.244.104.58   node2   <none>           <none>
+vagrant@node1:~$ kubectl logs counter
+0: Tue Nov 21 11:05:07 UTC 2023
+1: Tue Nov 21 11:05:12 UTC 2023
+2: Tue Nov 21 11:05:17 UTC 2023
+vagrant@node1:~$ kubectl exec counter -- touch /stop.file
+vagrant@node1:~$ kubectl get pods -o wide
+NAME      READY   STATUS    RESTARTS      AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+counter   1/1     Running   1 (15s ago)   77s   10.244.104.58   node2   <none>           <none>
+vagrant@node1:~$ kubectl logs counter
+0: Tue Nov 21 11:06:09 UTC 2023
+1: Tue Nov 21 11:06:14 UTC 2023
+2: Tue Nov 21 11:06:19 UTC 2023
+3: Tue Nov 21 11:06:24 UTC 2023
+4: Tue Nov 21 11:06:29 UTC 2023
+vagrant@node1:~$ kubectl logs counter --previous
+0: Tue Nov 21 11:05:07 UTC 2023
+1: Tue Nov 21 11:05:12 UTC 2023
+2: Tue Nov 21 11:05:17 UTC 2023
+3: Tue Nov 21 11:05:22 UTC 2023
+4: Tue Nov 21 11:05:27 UTC 2023
+5: Tue Nov 21 11:05:32 UTC 2023
+6: Tue Nov 21 11:05:37 UTC 2023
+7: Tue Nov 21 11:05:42 UTC 2023
+8: Tue Nov 21 11:05:47 UTC 2023
+9: Tue Nov 21 11:05:52 UTC 2023
+10: Tue Nov 21 11:05:57 UTC 2023
+11: Tue Nov 21 11:06:02 UTC 2023
+12: Tue Nov 21 11:06:07 UTC 2023
+vagrant@node1:~$ kubectl delete pod counter
+pod "counter" deleted
+vagrant@node1:~$ cat 4-streaming-sidecar.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+spec:
+  containers:
+  - name: main
+    image: busybox
+    args:
+    - /bin/sh
+    - -c
+    - >
+      i=0;
+      while true;
+      do
+        echo "$i: $(date)" >> /var/log/1.log;
+        echo "$(date) INFO $i" >> /var/log/2.log;
+        i=$((i+1));
+        if [ -f /stop.file ]; then exit; fi;
+        sleep 5;
+      done
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  - name: sidecar-1
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/1.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  - name: sidecar-2
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/2.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  volumes:
+  - name: varlog
+    emptyDir: {}
+vagrant@node1:~$ kubectl apply -f 4-streaming-sidecar.yaml
+pod/counter created
+vagrant@node1:~$ kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+counter   3/3     Running   0          12s
+vagrant@node1:~$ kubectl exec counter -c main -- cat /var/log/1.log
+0: Tue Nov 21 11:08:33 UTC 2023
+1: Tue Nov 21 11:08:38 UTC 2023
+2: Tue Nov 21 11:08:43 UTC 2023
+3: Tue Nov 21 11:08:48 UTC 2023
+4: Tue Nov 21 11:08:53 UTC 2023
+5: Tue Nov 21 11:08:58 UTC 2023
+6: Tue Nov 21 11:09:04 UTC 2023
+vagrant@node1:~$ kubectl exec counter -c main -- cat /var/log/2.log
+Tue Nov 21 11:08:33 UTC 2023 INFO 0
+Tue Nov 21 11:08:38 UTC 2023 INFO 1
+Tue Nov 21 11:08:43 UTC 2023 INFO 2
+Tue Nov 21 11:08:48 UTC 2023 INFO 3
+Tue Nov 21 11:08:53 UTC 2023 INFO 4
+Tue Nov 21 11:08:59 UTC 2023 INFO 5
+Tue Nov 21 11:09:04 UTC 2023 INFO 6
+Tue Nov 21 11:09:09 UTC 2023 INFO 7
+Tue Nov 21 11:09:14 UTC 2023 INFO 8
+vagrant@node1:~$ kubectl logs counter -c sidecar-1
+0: Tue Nov 21 11:08:33 UTC 2023
+1: Tue Nov 21 11:08:38 UTC 2023
+2: Tue Nov 21 11:08:43 UTC 2023
+3: Tue Nov 21 11:08:48 UTC 2023
+4: Tue Nov 21 11:08:53 UTC 2023
+5: Tue Nov 21 11:08:58 UTC 2023
+6: Tue Nov 21 11:09:04 UTC 2023
+7: Tue Nov 21 11:09:09 UTC 2023
+8: Tue Nov 21 11:09:14 UTC 2023
+9: Tue Nov 21 11:09:19 UTC 2023
+10: Tue Nov 21 11:09:24 UTC 2023
+11: Tue Nov 21 11:09:29 UTC 2023
+vagrant@node1:~$ kubectl logs counter -c sidecar-2
+Tue Nov 21 11:08:33 UTC 2023 INFO 0
+Tue Nov 21 11:08:38 UTC 2023 INFO 1
+Tue Nov 21 11:08:43 UTC 2023 INFO 2
+Tue Nov 21 11:08:48 UTC 2023 INFO 3
+Tue Nov 21 11:08:53 UTC 2023 INFO 4
+Tue Nov 21 11:08:59 UTC 2023 INFO 5
+Tue Nov 21 11:09:04 UTC 2023 INFO 6
+Tue Nov 21 11:09:09 UTC 2023 INFO 7
+Tue Nov 21 11:09:14 UTC 2023 INFO 8
+Tue Nov 21 11:09:19 UTC 2023 INFO 9
+Tue Nov 21 11:09:24 UTC 2023 INFO 10
+Tue Nov 21 11:09:29 UTC 2023 INFO 11
+Tue Nov 21 11:09:34 UTC 2023 INFO 12
+Tue Nov 21 11:09:39 UTC 2023 INFO 13
+vagrant@node1:~$ kubectl delete -f 4-streaming-sidecar.yaml
+pod "counter" deleted
+vagrant@node1:~$ history
+    1  mkdir part1
+    2  cd part1
+    3  cat > emptydir-pod.yaml
+    4  cat emptydir-pod.yaml
+    5  kubectl apply -f part1/emptydir-pod.yaml
+    6  cat > service.yaml
+    7  cat service.yaml
+    8  kubectl apply -f emptydir-pod.yaml
+    9  kubectl apply -f service.yaml
+   10  kubectl get pods,svc
+   11  kubectl describe pod pod-ed
+   12  kubectl exec -it pod-ed -- bash
+   13  kubectl exec -it pod-ed -- /bin/bash -c "kill 1"
+   14  kubectl get pods,svc
+   15  kubectl describe pod pod-ed
+   16  kubectl delete pod pod-ed
+   17  kubectl get pods,svc
+   18  kubectl apply -f emptydir-pod.yaml
+   19  kubectl get pods,svc
+   20  cat > git-pod.yaml
+   21  cat git-pod.yaml
+   22  kubectl apply -f git-pod.yaml
+   23  kubectl exec -it pod-git -- bash
+   24  kubectl delete pod pod-git
+   25  cat > hostpath-deployment.yaml
+   26  cat hostpath-deployment.yaml
+   27  mkdir --mode=777 /tmp/data
+   28  ls -al /tmp
+   29  exit
+   30  kubectl apply -f hostpath-deployment.yaml
+   31  cat hostpath-deployment.yaml
+   32  cat > hostpath-deployment.yaml
+   33  cat hostpath-deployment.yaml
+   34  kubectl apply -f hostpath-deployment.yaml
+   35  kubectl get pods -o wide
+   36  kubectl delete -f hostpath-deployment.yaml
+   37  kubectl get pods -o wide
+   38  cat pod-ed.yaml
+   39  kubectl pod delete pod-ed
+   40  kubectl delete pods pod-ed
+   41  kubectl get pods -o wide
+   42  kubectl apply -f hostpath-deployment.yaml
+   43  kubectl get pods -o wide
+   44  kubectl delete -f hostpath-deployment.yaml
+   45  kubectl get pods -o wide
+   46  ssh vagrant@node2
+   47  exit
+   48  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+   49  sudo apt-get update && apt-get install -y nfs-common
+   50  chmod -R 777 /data/nfs/k8sdata
+   51  cat > nfs-deployment.yaml
+   52  cat nfs-deployment.yaml
+   53  kubectl apply -f nfs-deployment.yaml
+   54  kubectl get pods -o wide
+   55  sudo chmod -R 777 /data/nfs/k8sdata
+   56  mkdir --mode=777 /data/nfs/k8sdata
+   57  mkdir --mode=777 /data/nfs
+   58  sudo mkdir --mode=777 /data/nfs/k8sdata
+   59  sudo mkdir --mode=777 /data
+   60  sudo mkdir --mode=777 /data/nfs
+   61  sudo mkdir --mode=777 /data/nfs/k8sdata
+   62  kubectl delete -f nfs-deployment.yaml
+   63  exit
+   64  chmod -R 777 /data/nfs/k8sdata
+   65  sudo chmod -R 777 /data/nfs/k8sdata
+   66  exit
+   67  kubectl delete -f hostpath-deployment.yaml
+   68  cat nfs-deployment.yaml
+   69  kubectl apply -f hostpath-deployment.yaml
+   70  kubectl get pods -o wide
+   71  kubectl describe pod notes-deploy-5485bf6fdd-jspsp
+   72  kubectl delete -f nfs-deployment.yaml
+   73  kubectl get pods -o wide
+   74  cat > pvc10gb.yaml
+   75  cat pvc10gb.yaml
+   76  kubectl apply -f pvnfs10gb.yaml
+   77  cat > pvnfs10gb.yaml
+   78  cat pvnfs10gb.yaml
+   79  kubectl apply -f pvnfs10gb.yaml
+   80  kubectl get pv
+   81  kubectl describe pv pvnfs10gb
+   82  cat pvc10gb.yaml
+   83  kubectl apply -f pvc10gb.yaml
+   84  kubectl get pv
+   85  kubectl get pvc
+   86  kubectl describe pvc pvc10gb
+   87  cat > pv-deployment.yaml
+   88  cat pv-deployment.yaml
+   89  kubectl apply -f pv-deployment.yaml
+   90  kubectl get pods -o wide -w
+   91  kubectl describe pvc pvc10gb
+   92  kubectl describe pod notes-deploy-845b59c97f-pf76h
+   93  kubectl get pods -o wide -w
+   94  kubectl delete -f pv-deployment.yaml
+   95  kubectl delete -f pvc10gb.yaml
+   96  kubectl apply -f pvc10gb.yaml
+   97  kubectl apply -f pv-deployment.yaml
+   98  kubectl get pods -o wide -w
+   99  kubectl scale --replicas=2 deployment notes-deploy
+  100  kubectl delete -f pv-deployment.yaml
+  101  kubectl delete -f service.yaml
+  102  kubectl delete -f part1/service.yaml
+  103  kubectl delete -f pvc10gb.yaml
+  104  kubectl delete -f pvnfs10gb.yaml
+  105  history
+  106  kubectl get pods -o wide -w
+  107  kubectl get pods -o wide
+  108  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+  109  ip a
+  110  hostname -I
+  111  cat > pod-no-env.yaml
+  112  cat pod-no-env.yaml
+  113  kubectl apply -f pod-no-env.yaml
+  114  cat > svc-environ.yaml
+  115  cat svc-environ.yaml
+  116  kubectl apply -f svc-environ.yaml
+  117  kubectl get pods,svc
+  118  kubectl describe pod pod-no-env
+  119  kubectl delete -f pod-no-env.yaml
+  120  cat > pod-w-env.yaml
+  121  cat pod-w-env.yaml
+  122  kubectl apply -f pod-w-env.yaml
+  123  kubectl describe pod pod-w-env
+  124  kubectl delete -f pod-w-env.yaml
+  125  kubectl create configmap environ-map-a --from-literal=XYZ1=VALUE1
+  126  kubectl get cm
+  127  kubectl describe cm environ-map-a
+  128  kubectl get cm environ-map-a -o yaml
+  129  kubectl create configmap environ-map-b --from-literal=XYZ2=42 --from-literal=XYZ3=3.14
+  130  kubectl get cm
+  131  kubectl delete cm environ-map-a environ-map-b
+  132  cat > cm.yaml
+  133  cat cm.yaml
+  134  kubectl apply -f cm.yaml
+  135  kubectl get cm
+  136  cat > variables.conf << EOF
+  137  XYZ_FF1=VALUE1
+  138  XYZ_FF2=42
+  139  EOF
+  140  cat variables.conf
+  141  kubectl create configmap environ-map-a --from-file=variables.conf
+  142  kubectl get cm
+  143  kubectl get cm environ-map-a -o yaml
+  144  cat > flag.conf << EOF
+  145  true
+  146  EOF
+  147  kubectl create configmap environ-map-b --from-file=debug=flag.conf
+  148  kubectl get cm
+  149  kubectl get cm environ-map-b -o yaml
+  150  kubectl delete cm environ-map-a environ-map-b
+  151  rm variables.conf flag.conf
+  152  mkdir variables
+  153  echo 'production' > variables/mode
+  154  echo 'false' > variables/debug
+  155  tree variables/
+  156  kubectl create configmap environ-map-a --from-file=variables/
+  157  kubectl get cm
+  158  kubectl get cm environ-map-a -o yaml
+  159  kubectl delete cm environ-map-a
+  160  rm -rf variables/
+  161  cat > pod-cm-env-var.yaml
+  162  cat pod-cm-env-var.yaml
+  163  kubectl apply -f pod-cm-env-var.yaml
+  164  kubectl get cm environ-map-1 -o yaml
+  165  kubectl delete pod pod-cm-env-var
+  166  cat > pod-cm-env-vars.yaml
+  167  cat pod-cm-env-vars.yaml
+  168  kubectl apply -f pod-cm-env-vars.yaml
+  169  kubectl delete pod pod-cm-env-vars
+  170  kubectl delete cm environ-map-1
+  171  kubectl get secret
+  172  kubectl create secret generic secret-a --from-literal=password='Parolka1'
+  173  echo 'DrugaParolka1' > password.conf
+  174  kubectl create secret generic secret-b --from-file=password=password.conf
+  175  kubectl get secret
+  176  kubectl get secret secret-a -o yaml
+  177  kubectl get secret secret-b -o yaml
+  178  echo UGFyb2xrYTE= | base64 --decode
+  179  kubectl delete secret secret-a secret-b
+  180  cat > secrets.yaml
+  181  cat secrets.yaml
+  182  kubectl apply -f secrets.yaml
+  183  kubectl get secrets
+  184  cat > pod-secret.yaml
+  185  cat pod-secret.yaml
+  186  kubectl apply -f pod-secret.yaml
+  187  kubectl delete pod/pod-secret service/svc-environ secret/mysecrets
+  188  rm password.conf
+  189  ls data/nfs
+  190  sudo ls data/nfs
+  191  sudo apt-get update
+  192  sudo apt-get install nfs-kernel-server
+  193  ls data
+  194  mkdir data
+  195  ls data
+  196  cd data
+  197  mkdir nfs
+  198  cd nfs
+  199  sudo mkdir k8spva
+  200  sudo mkdir k8spvb
+  201  sudo mkdir k8spvc
+  202  ls
+  203  cd ..
+  204  ls /etc/exports
+  205  cd etc
+  206  cd /etc
+  207  cd /exports
+  208  ls
+  209  sudo vi /etc/exports
+  210  mkdir data
+  211  sudo mkdir data
+  212  cd data
+  213  sudo mkdir nfs
+  214  cd ..
+  215  ls
+  216  cd data
+  217  ls
+  218  cd ..
+  219  sudo service nfs-kernel-server restart
+  220  sudo nano /etc/hosts
+  221  ip a
+  222  hostname -I
+  223  sudo nano /etc/hosts
+  224  ping nfs-server
+  225  cd etc
+  226  cd data
+  227  cd nfs
+  228  sudo mkdir k8spva
+  229  sudo mkdir k8spvb
+  230  sudo mkdir k8spvc
+  231  ls
+  232  sudo chmod 777 k8spv(a,b,c)
+  233  sudo chmod 777 k8spva
+  234  sudo chmod 777 k8spvb
+  235  sudo chmod 777 k8spvc
+  236  cd /etc
+  237  sudo vi exports
+  238  sudo export
+  239  sudo exportfs -rav
+  240  cd ..
+  241  cat > pvssa.yaml
+  242  sudo cat > pvssa.yaml
+  243  sudo cat pvssa.yaml
+  244  cat > pvssa.yaml
+  245  sudo cat > pvssa.yaml
+  246  exit
+  247  cat > pvssa.yaml
+  248  cat > pvssb.yaml
+  249  cat > pvssc.yaml
+  250  cat pvssa.yaml
+  251  cat pvssb.yaml
+  252  cat pvssc.yaml
+  253  ping nfs-server
+  254  kubectl apply -f pvssa.yaml
+  255  kubectl apply -f pvssb.yaml
+  256  kubectl apply -f pvssc.yaml
+  257  kubectl get pv
+  258  cat > svcss.yaml
+  259  cat svcss.yaml
+  260  kubectl apply -f svcss.yaml
+  261  kubectl get svc
+  262  cat > ss.yaml
+  263  cat ss.yaml
+  264  kubectl apply -f ss.yaml
+  265  kubectl get pod,svc,statefulset,pv,pvc
+  266  cat > svcssnp.yaml
+  267  kubectl apply -f svcssnp.yaml
+  268  kubectl get pod,svc,statefulset,pv,pvc
+  269  kubectl get pods,pvc -o wide
+  270  kubectl delete pod facts-0
+  271  kubect get pods,pvc -o wide
+  272  kubectl get pods,pvc -o wide
+  273  kubectl scale --replicas=1 statefulset/facts
+  274  kubectl get pod,svc,statefulset,pv,pvc
+  275  kubectl scale --replicas=3 statefulset/facts
+  276  kubectl get pod,svc,statefulset,pv,pvc
+  277  kubectl delete statefulset.apps/facts
+  278  kubectl delete service/facts service/factsnp
+  279  kubectl delete persistentvolumeclaim facts-data-facts-0 facts-data-facts-1 facts-data-facts-2
+  280  kubectl delete persistentvolume pvssa pvssb pvssc
+  281  history
+  282  exit
+  283  kubectl version --short
+  284  uname -a
+  285  openssl genrsa -out main.key 4096
+  286  openssl req -new -x509 -key main.key -out main.crt -days 365 -subj /CN=www.hw.lab
+  287  cat main.key
+  288  cat main.crt
+  289  cat > hwcm.yaml
+  290  cat hwcm.yaml
+  291  cat > hwpod.yaml
+  292  cat hwpod.yaml
+  293  cat > hwsec.yaml
+  294  cat hwsec.yaml
+  295  kubectl apply -f hwcm.yaml
+  296  kubectl apply -f hwsec.yaml
+  297  cat > hwsec.yaml
+  298  cat hwsec.yaml
+  299  kubectl apply -f hwsec.yaml
+  300  base64 main.key
+  301  base64 main.crt
+  302  kubectl apply -f hwsec.yaml
+  303  cat > hwsec.yaml
+  304  kubectl apply -f hwsec.yaml
+  305  cat > hwsec.yaml
+  306  cat hwsec.yaml
+  307  kubectl apply -f hwsec.yaml
+  308  kubectl apply -f hwpod.yaml
+  309  kubectl get pods
+  310  kubectl get secrets
+  311  kubectl get configmaps
+  312  cat > hwsec.yaml
+  313  cat hwsec.yaml
+  314  kubectl apply -f hwsec.yaml
+  315  kubectl get pods
+  316  kubectl get configmaps
+  317  kubectl get secrets
+  318  history
+  319  kubectl delete configmap hwcm
+  320  kubectl delete secret hwsec
+  321  kubectl delete pod hwpod
+  322  kubectl get configmaps
+  323  kubectl get secrets
+  324  kubectl get pods
+  325  history
+  326  exit
+  327  kubectl get nodes
+  328  ps ax | grep /usr/bin/kubelet
+  329  cat /var/lib/kubelet/config.yaml
+  330  ls -l /etc/kubernetes/manifests
+  331  sudo cat /etc/kubernetes/manifests/etcd.yaml
+  332  cat > 1-static-pod.yaml
+  333  cat 1-static-pod.yaml
+  334  sudo cp part1/1-static-pod.yaml /etc/kubernetes/manifests/
+  335  sudo cp 1-static-pod.yaml /etc/kubernetes/manifests/
+  336  ls -l /etc/kubernetes/manifests
+  337  kubectl get pods -o wide
+  338  kubectl get nodes
+  339  kubectl get pods -n kube-system
+  340  kubectl delete pod static-pod-node1
+  341  kubectl get pods -o wide
+  342  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  343  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock rm --force d174a2d6759b5
+  344  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  345  kubectl get pods -o wide
+  346  sudo rm /etc/kubernetes/manifests/1-static-pod.yaml
+  347  kubectl get pods -o wide -w
+  348  kubectl get pods -o wide
+  349  cat > 2-sidecar.yaml
+  350  cat 2-sidecar.yaml
+  351  kubectl apply -f 2-sidecar.yaml
+  352  kubectl get pods -o wide
+  353  kubectl get pods -o wide -w
+  354  kubectl get pods -o wide
+  355  kubectl get pods,svc -o wide
+  356  kubectl describe pod/sidecar-6d89497788-8j2mb
+  357  kubectl get pods,svc -o wide
+  358  kubectl exec -it pod/sidecar-pod/sidecar-6d89497788-6rgcz -- sh
+  359  kubectl exec -it pod/sidecar-6d89497788-6rgcz -- sh
+  360  kubectl exec -it deploy/sidecar -c cont-sidecar -- sh
+  361  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- bash
+  362  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- kill 1
+  363  kubectl get pods
+  364  kubectl delete -f 2-sidecar.yaml
+  365  kubectl get pods
+  366  cat > 3-adapter.yaml
+  367  cat 3-adapter.yaml
+  368  kubectl apply -f 3-adapter.yaml
+  369  kubectl get pods
+  370  kubectl exec -it adapter -c cont-main -- cat /var/log/app.log
+  371  kubectl exec -it adapter -c cont-adapter -- cat /var/log/out.log
+  372  kubectl delete -f 3-adapter.yaml
+  373  kubectl get pods
+  374  cat > 4-init-container.yaml
+  375  cat 4-init-container.yaml
+  376  kubectl apply -f 4-init-container.yaml
+  377  kubectl get pods,svc
+  378  kubectl get pods -w
+  379  kubectl describe pod pod-init
+  380  kubectl delete -f 4-init-container.yaml
+  381  kubectl get pods,svc
+  382  hostname
+  383  wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -O metrics-server.yaml
+  384  vi metrics-server.yaml
+  385  cat metrics-server.yaml
+  386  kubectl apply -f metrics-server.yaml
+  387  kubectl get all -A
+  388  kubectl get all -n kube-system
+  389  cat > 1-auto-scale.yaml
+  390  cat 1-auto-scale.yaml
+  391  kubectl apply -f 1-auto-scale.yaml
+  392  kubectl get pods
+  393  cat > 1-auto-scale-hpa.yaml
+  394  cat 1-auto-scale-hpa.yaml
+  395  kubectl apply -f 1-auto-scale-hpa.yaml
+  396  kubectl get horizontalpodautoscalers auto-scale-deploy
+  397  kubectl get pods -o wide
+  398  kubectl get deployments
+  399  kubectl get horizontalpodautoscalers auto-scale-deploy
+  400  kubectl get pods -o wide
+  401  kubectl get deployments
+  402  kubectl delete -f 1-auto-scale-hpa.yaml
+  403  kubectl delete -f 1-auto-scale.yaml
+  404  kubectl delete -f metrics-server.yaml
+  405  kubectl get nodes --show-labels
+  406  kubectl describe node k8s1
+  407  kubectl label node node2 disk=hitachi --overwrite
+  408  kubectl label node node3 disk=hitachi --overwrite
+  409  kubectl get nodes --show-labels
+  410  kubectl describe node | grep Taints
+  411  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule-
+  412  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule
+  413  kubectl describe node | grep Taints
+  414  kubectl get pods -n kube-system -o wide
+  415  kubectl describe pod coredns-5d78c9869d-4mqgb -n kube-system
+  416  kubectl get pods -n kube-system -o wide
+  417  kubectl describe pod etcd-node1 -n kube-system
+  418  kubectl taint node node2 demo-taint=nomorework:NoSchedule
+  419  kubectl describe node | grep Taints
+  420  cat > 2-schedule.yaml
+  421  cat 2-schedule.yaml
+  422  kubectl apply -f 2-schedule.yaml
+  423  kubectl get pods -o wide
+  424  kubectl delete -f 2-schedule.yaml
+  425  cat > 2-schedule-toleration.yaml
+  426  cat 2-schedule-toleration.yaml
+  427  kubectl apply -f 2-schedule-toleration.yaml
+  428  kubectl get pods -o wide
+  429  kubectl taint node node2 demo-taint-
+  430  kubectl get pods -o wide
+  431  kubectl delete -f 2-schedule-toleration.yaml
+  432  cat > 3-daemon-set.yaml
+  433  cat 3-daemon-set.yaml
+  434  cp 3-daemon-set.yaml pure-ds.yaml
+  435  vi pure-ds.yaml
+  436  cat pure-ds.yaml
+  437  kubectl apply -f pure-ds.yaml
+  438  kubectl get ds
+  439  kubectl get pods -o wide
+  440  kubectl delete -f pure-ds.yaml
+  441  cat 3-daemon-set.yaml
+  442  kubectl apply -f 3-daemon-set.yaml
+  443  kubectl get ds
+  444  kubectl get pods
+  445  kubectl get nodes --show-labels
+  446  kubectl label node node2 disk=samsung
+  447  kubectl label node node2 disk=samsung --overwrite
+  448  kubectl get nodes --show-labels
+  449  kubectl get ds
+  450  kubectl get pods -o wide
+  451  kubectl label node node3 disk=samsung
+  452  kubectl label node node3 disk=samsung --overwrite
+  453  kubectl get pods -o wide
+  454  kubectl get ds
+  455  kubectl label node node2 disk=wdc --overwrite
+  456  kubectl get ds
+  457  kubectl get pods -o wide
+  458  kubectl delete -f 3-daemon-set.yaml
+  459  kubectl get ds
+  460  cat > 4-batch-job.yaml
+  461  cat 4-batch-job.yaml
+  462  kubectl apply -f 4-batch-job.yaml
+  463  kubectl get jobs
+  464  kubectl get jobs -o wide
+  465  kubectl get pods
+  466  kubectl describe job batch-job
+  467  kubectl get jobs -o wide
+  468  kubectl get pods
+  469  kubectl get jobs -o wide
+  470  kubectl describe job batch-job
+  471  kubectl delete -f 4-batch-job.yaml
+  472  kubectl get pods
+  473  cat > 4-batch-job-serial.yaml
+  474  cat 4-batch-job-serial.yaml
+  475  kubectl apply -f 4-batch-job-serial.yaml
+  476  kubectl get jobs
+  477  kubectl describe job batch-job-serial
+  478  kubectl get pods
+  479  kubectl delete -f 4-batch-job-serial.yaml
+  480  kubectl get pods
+  481  cat > 4-batch-job-parallel.yaml
+  482  cat 4-batch-job-parallel.yaml
+  483  kubectl apply -f 4-batch-job-parallel.yaml
+  484  kubectl get jobs
+  485  kubectl get jobs -o wide
+  486  kubectl get pods -o wide
+  487  kubectl describe job batch-job-parallel
+  488  kubectl get pods -o wide
+  489  kubectl get jobs -o wide
+  490  kubectl delete -f 4-batch-job-parallel.yaml
+  491  cat > 4-batch-job-serial.yaml
+  492  sudo rm 4-batch-job-serial.yaml
+  493  ls
+  494  cat > 4-batch-job-cron.yaml
+  495  cat 4-batch-job-cron.yaml
+  496  kubectl apply -f 4-batch-job-cron.yaml
+  497  kubectl get cronjobs
+  498  kubectl get cronjobs -o wide
+  499  kubectl get pods -o wide
+  500  kubectl delete -f 4-batch-job-cron.yaml
+  501  ls
+  502  ls -a
+  503  git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.3.2
+  504  cd kubernetes-ingress/deployments
+  505  ls
+  506  cd ..
+  507  apt-get install tree
+  508  sudo apt-get install tree
+  509  cd kubernetes-ingress/deployments
+  510  tree .
+  511  kubectl apply -f common/ns-and-sa.yaml
+  512  kubectl apply -f rbac/rbac.yaml
+  513  kubectl apply -f ../examples/shared-examples/default-server-secret/default-server-secret.yaml
+  514  kubectl apply -f common/nginx-config.yaml
+  515  kubectl apply -f common/ingress-class.yaml
+  516  kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
+  517  kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
+  518  kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
+  519  kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+  520  kubectl apply -f deployment/nginx-ingress.yaml
+  521  kubectl get pods --namespace=nginx-ingress -w
+  522  ls -al service/
+  523  kubectl create -f service/nodeport.yaml
+  524  kubectl get service -n nginx-ingress
+  525  cd ..
+  526  cat > pod-svc-1.yaml
+  527  cat pod-svc-1.yaml
+  528  kubectl get ingressclass
+  529  kubectl apply -f pod-svc-1.yaml
+  530  kubectl get pod,svc
+  531  cat > 1-nginx-single.yaml
+  532  cat 1-nginx-single.yaml
+  533  kubectl apply -f 1-nginx-single.yaml
+  534  kubectl get ingress
+  535  kubectl describe ingress ingress-ctrl
+  536  ip a
+  537  sudo vi /etc/hosts
+  538  ping demo.lab
+  539  kubectl get svc nginx-ingress -n nginx-ingress
+  540  cat > 2-nginx-custom-path-a.yaml
+  541  kubectl apply -f 2-nginx-custom-path-a.yaml
+  542  kubectl describe ingress ingress-ctrl
+  543  kubectl logs pod1
+  544  cat > 2-nginx-custom-path-b.yaml
+  545  kubectl apply -f 2-nginx-custom-path-b.yaml
+  546  kubectl describe ingress ingress-ctrl
+  547  cat > pod-svc-d.yaml
+  548  kubectl apply -f pod-svc-d.yaml
+  549  cat > 3-nginx-default-back.yaml
+  550  kubectl apply -f 3-nginx-default-back.yaml
+  551  kubectl describe ingress ingress-ctrl
+  552  cat > pod-svc-2.yaml
+  553  cat pod-svc-2.yaml
+  554  kubectl apply -f pod-svc-2.yaml
+  555  cat > 4-nginx-fan-out.yaml
+  556  ubectl apply -f part3/4-nginx-fan-out.yaml
+  557  kubectl apply -f 4-nginx-fan-out.yaml
+  558  kubectl describe ingress ingress-ctrl
+  559  cat > 5-nginx-name-vhost.yaml
+  560  kubectl apply -f 5-nginx-name-vhost.yaml
+  561  kubectl describe ingress ingress-ctrl
+  562  kubectl delete pods podd pod1 pod2
+  563  kubectl delete svc serviced service1 service2
+  564  kubectl delete ingress ingress-ctrl
+  565  kubectl delete namespace nginx-ingress
+  566  kubectl delete clusterrolebinding nginx-ingress
+  567  kubectl delete clusterrole nginx-ingress
+  568  cd /kubernetes-ingress/deployments
+  569  cd kubernetes-ingress/deployments
+  570  kubectl delete -f common/crds/
+  571  cd ..
+  572  history
+  573  exit
+  574  mkdir debian-nfs
+  575  cd debian-nfs/
+  576  cd ..
+  577  exit
+  578  cat > 1-app-init-init.yaml
+  579  cat 1-app-init-init.yaml
+  580  cat > 1-app-init-init.yaml
+  581  cat 1-app-init-init.yaml
+  582  kubectl apply -f 1-app-init-init.yaml
+  583  kubectl get pods -o wide
+  584  kubectl delete -f 1-app-init-init.yaml
+  585  kubectl get pods -o wide
+  586  cat > 1-app-init-init.yaml
+  587  cat 1-app-init-init.yaml
+  588  kubectl apply -f 1-app-init-init.yaml
+  589  kubectl get pods -o wide
+  590  kubectl delete -f 1-app-init-init.yaml
+  591  history
+  592  exit
+  593  cat > 1-liveness-cmd.yaml
+  594  cat > 2-liveness-http.yaml
+  595  cat > 3-readiness-cmd.yaml
+  596  cat > 4-readiness-http.yaml
+  597  cat > 5-startup-liveness-same.yaml
+  598  cat > 6-startup-liveness-mixed.yaml
+  599  cat 1-liveness-cmd.yaml
+  600  kubectl apply -f 1-liveness-cmd.yaml
+  601  kubectl describe pod liveness-cmd
+  602  kubectl get pod liveness-cmd
+  603  kubectl delete -f 1-liveness-cmd.yaml
+  604  cat 2-liveness-http.yaml
+  605  kubectl apply -f 2-liveness-http.yaml
+  606  kubectl describe pod liveness-http
+  607  kubectl get pod liveness-http
+  608  kubectl delete -f 2-liveness-http.yaml
+  609  cat 3-readiness-cmd.yaml
+  610  kubectl apply -f 3-readiness-cmd.yaml
+  611  kubectl describe pod readiness-cmd
+  612  kubectl describe svc readiness-cmd
+  613  watch -n 2 kubectl get pods,svc -o wide
+  614  kubectl delete -f 3-readiness-cmd.yaml
+  615  cat 4-readiness-http.yaml
+  616  kubectl apply -f 4-readiness-http.yaml
+  617  kubectl describe pod readiness-http
+  618  kubectl describe svc readiness-http
+  619  watch -n 2 kubectl get pods,svc -o wide
+  620  kubectl delete -f 4-readiness-http.yaml
+  621  cat 5-startup-liveness-same.yaml
+  622  kubectl apply -f 5-startup-liveness-same.yaml
+  623  kubectl logs startup-same
+  624  kubectl describe pod startup-same
+  625  kubectl get pod startup-same
+  626  kubectl describe pod startup-same
+  627  kubectl get pod startup-same
+  628  kubectl describe pod startup-same
+  629  kubectl get pod startup-same
+  630  kubectl delete -f 5-startup-liveness-same.yaml
+  631  cat 6-startup-liveness-mixed.yaml
+  632  kubectl apply -f 6-startup-liveness-mixed.yaml
+  633  kubectl describe pod startup-mixed
+  634  kubectl describe svc startup-mixed
+  635  kubectl describe pod startup-mixed
+  636  kubectl describe svc startup-mixed
+  637  kubectl describe pod startup-mixed
+  638  kubectl describe svc startup-mixed
+  639  kubectl describe pod startup-mixed
+  640  kubectl describe svc startup-mixed
+  641  watch -n 2 kubectl get pods,svc -o wide
+  642  kubectl delete -f 6-startup-liveness-mixed.yaml
+  643  cat > 1-additions.yaml
+  644  cat > 1-audit-simple.yaml
+  645  cat > 2-audit.yaml
+  646  cat > 3-basic-logging.yaml
+  647  cat > 4-streaming-sidecar.yaml
+  648  cat 1-audit-simple.yaml
+  649  sudo mkdir /var/lib/k8s-audit
+  650  sudo cp 1-audit-simple.yaml /var/lib/k8s-audit/
+  651  sudo mkdir /var/log/k8s-audit
+  652  sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+  653  kubectl get pods -n kube-system -w
+  654  kubectl run logtest1 --image=alpine -- sleep 1d
+  655  kubectl get pods
+  656  cat /var/log/k8s-audit/audit.log | grep logtest1
+  657  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+  658  cat /var/log/k8s-audit/audit.log
+  659  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+  660  cat /var/log/k8s-audit/audit.log | grep logtest1
+  661  sudo apk update
+  662  sudo apt update
+  663  sudo apk add jq
+  664  sudo apk install jq
+  665  sudo apt install jq
+  666  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq
+  667  cat /var/log/k8s-audit/audit.log | grep logtest1 | jq -s length
+  668  kubectl delete pod logtest1
+  670  cat > 1-audit-simple.yaml
+  671  kubectl get pods -n kube-system -w
+  672  kubectl run logtest2 --image=alpine -- sleep 1d
+  673  kubectl get pods
+  674  cat /var/log/k8s-audit/audit.log | grep logtest2 | jq
+  675  cat /var/log/k8s-audit/audit.log | grep logtest2 | jq -s length
+  676  kubectl delete pod logtest2
+  677  sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+  678  cat 3-basic-logging.yaml
+  679  kubectl get pods -n kube-system -w
+  680  cat 3-basic-logging.yaml
+  681  sudo rm -rf /var/log/k8s-audit/
+  682  sudo rm -rf /var/lib/k8s-audit/
+  683  cat 3-basic-logging.yaml
+  684  kubectl apply -f 3-basic-logging.yaml
+  685  kubectl get pods
+  686  kubectl logs counter
+  687  kubectl logs counter --follow
+  688  kubectl get pods
+  689  kubectl describe pods
+  690  kubectl get pods -o wide
+  691  kubectl delete pod counter
+  692  kubectl logs counter
+  693  kubectl logs counter --previous
+  694  kubectl apply -f 3-basic-logging.yaml
+  695  kubectl get pods -o wide
+  696  kubectl logs counter
+  697  kubectl exec counter -- touch /stop.file
+  698  kubectl get pods -o wide
+  699  kubectl logs counter
+  700  kubectl logs counter --previous
+  701  kubectl delete pod counter
+  702  cat 4-streaming-sidecar.yaml
+  703  kubectl apply -f 4-streaming-sidecar.yaml
+  704  kubectl get pods
+  705  kubectl exec counter -c main -- cat /var/log/1.log
+  706  kubectl exec counter -c main -- cat /var/log/2.log
+  707  kubectl logs counter -c sidecar-1
+  708  kubectl logs counter -c sidecar-2
+  709  kubectl delete -f 4-streaming-sidecar.yaml
+  710  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant halt
+==> node3: Attempting graceful shutdown of VM...
+==> node2: Attempting graceful shutdown of VM...
+    node2: Guest communication could not be established! This is usually because
+    node2: SSH is not running, the authentication information was changed,
+    node2: or some other networking issue. Vagrant will force halt, if
+    node2: capable.
+==> node2: Forcing shutdown of VM...
+==> node1: Attempting graceful shutdown of VM...
+==> node1: Forcing shutdown of VM...
+PS C:\Users\NB\Kubernetes>

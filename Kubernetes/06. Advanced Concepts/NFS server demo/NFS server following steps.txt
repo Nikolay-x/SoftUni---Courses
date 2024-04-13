@@ -1,0 +1,2 @@
+The folder /storage/export1 is open to all machines.
+Needs to be mounted on the other VMs.

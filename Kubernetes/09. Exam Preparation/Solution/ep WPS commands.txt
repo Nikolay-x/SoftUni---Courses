@@ -1,0 +1,297 @@
+exam@station:~$ ping mars-1
+exam@station:~$ ping mars-2
+exam@station:~$ ssh mars-1
+exam@mars1:~$ exit
+exam@station:~$ sudo apt-get update
+exam@station:~$ kubectl
+exam@station:~$ kubectl config get-contexts
+
+------------------ VT301 ------------------
+
+exam@station:~$ tree /files
+exam@station:~$ kubectl config get-contexts
+exam@station:~$ kubectl config use-context venus-admin@venus
+exam@station:~$ kubectl get nodes
+exam@station:~$ ssh venus-2
+exam@venus-2:~$ sudo apt-get update
+exam@venus-2:~$ sudo apt-get install kubelet=1.28.3 kubeadm=1.28.3 kubectl=1.28.3
+exam@venus-2:~$ apt-cache madison kubectl
+exam@venus-2:~$ sudo apt-get install kubelet=1.28.3-1.1 kubeadm=1.28.3-1.1 kubectl=1.28.3-1.1
+exam@venus-2:~$ sudo apt-mark hold kubelet kubeadm kubectl
+exam@venus-2:~$ exit
+
+------------------ VT302 ------------------
+
+exam@station:~$ ssh venus-1
+exam@venus-1:~$ kubeadm token list
+exam@venus-1:~$ kubeadm token create --print-join-command
+exam@venus-1:~$ exit
+exam@station:~$ ssh venus-2
+exam@venus-2:~$ sudo <...outputfrom kubeadm token create --print-join-command...>
+exam@venus-2:~$ exit
+
+------------------ VT303 ------------------
+
+exam@station:~$ kubectl get nodes
+exam@station:~$ kubectl apply -f https://raw.githubusercontent.com/antrea-io/antrea/main/build/yamls/antrea.yml
+exam@station:~$ kubectl get nodes
+
+------------------ VT304 ------------------
+
+exam@station:~$ kubectl describe node | grep Taints
+exam@station:~$ kubectl taint nodes venus-1 node-role.kubernetes.io/control-plane:NoSchedule-
+exam@station:~$ kubectl describe node | grep Taints
+
+------------------ VT305 ------------------
+
+exam@station:~$ tree /files
+exam@station:~$ cp /files/venus/t305-in.yaml /files/venus/t305-out.yaml
+exam@station:~$ vi /files/venus/t305-out.yaml
+exam@station:~$ kubectl apply -f /files/venus/t305-out.yaml
+exam@station:~$ kubectl get pods -o wide
+
+------------------ MT101 ------------------
+
+exam@station:~$ kubectl config get-contexts
+exam@station:~$ kubectl config use-context mars-admin@mars
+exam@station:~$ kubectl config get-contexts
+exam@station:~$ kubectl get nodes
+exam@station:~$ kubectl get ns animals
+exam@station:~$ kubectl get pods,svc -n animals
+exam@station:~$ kubectl get ingressclass
+exam@station:~$ vi /files/mars/t101-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t101-out.yaml
+exam@station:~$ kubectl get ingress -n animals
+exam@station:~$ kubectl describe ingress pets-ingress -n animals
+exam@station:~$ kubectl get service -n haproxy-controller
+exam@station:~$ curl http://pets.lab:<...(31838) port from kubectl get service -n haproxy-controller...>/cat
+exam@station:~$ curl http://pets.lab:<...(31838) port from kubectl get service -n haproxy-controller...>/dog
+exam@station:~$ kubectl logs pod/cat -n animals
+exam@station:~$ vi /files/mars/t101-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t101-out.yaml
+exam@station:~$ kubectl describe ingress pets-ingress -n animals
+exam@station:~$ curl http://pets.lab:<...(31838) port from kubectl get service -n haproxy-controller...>/cat
+exam@station:~$ curl http://pets.lab:<...(31838) port from kubectl get service -n haproxy-controller...>/dog
+
+------------------ MT102 ------------------
+
+exam@station:~$ kubectl get pods -n tiger
+exam@station:~$ kubectl describe pods -n tiger tiger
+exam@station:~$ tree /files
+exam@station:~$ cp /files/mars/t102-in.yaml /files/mars/t102-out.yaml
+exam@station:~$ vi /files/mars/t102-out.yaml
+exam@station:~$ kubectl get pods -n tiger
+exam@station:~$ kubectl delete -f /files/mars/t102-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t102-out.yaml
+exam@station:~$ kubectl get pods -n tiger
+exam@station:~$ vi /files/mars/t102-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t102-out.yaml
+exam@station:~$ kubectl get pods -n tiger
+exam@station:~$ kubectl get pods -n tiger -w
+exam@station:~$ kubectl describe pods -n tiger tiger
+exam@station:~$ vi /files/mars/t102-out.yaml
+exam@station:~$ kubectl delete -f /files/mars/t102-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t102-out.yaml
+exam@station:~$ kubectl describe pods -n tiger tiger
+exam@station:~$ kubectl get pods -n tiger -w
+
+------------------ MT103 ------------------
+
+exam@station:~$ tree /files
+exam@station:~$ mkdir /files/mars/t103
+exam@station:~$ tree /files
+exam@station:~$ mkdir -p /files/mars/t103/{base,overlays}
+exam@station:~$ mkdir -p /files/mars/t103/overlays/{blue,green}
+exam@station:~$ tree /files
+exam@station:~$ cp /files/mars/t103-in.yaml /files/mars/t103/base/
+exam@station:~$ tree /files
+exam@station:~$ cat /files/mars/t103-in.yaml
+exam@station:~$ tree /files
+exam@station:~$ vi /files/mars/t103/base/kustomization.yaml
+exam@station:~$ cd /files/mars/t103
+exam@station:/files/mars/t103$ ls
+exam@station:/files/mars/t103$ kustomize build base/
+exam@station:/files/mars/t103$ vi overlays/blue/kustomization.yaml
+exam@station:/files/mars/t103$ vi overlays/blue/cust-dpl.yaml
+exam@station:/files/mars/t103$ vi overlays/blue/cust-svc.yaml
+exam@station:/files/mars/t103$ cd overlays/blue/
+exam@station:/files/mars/t103/overlays/blue$ kustomize edit set image shekeriev/k8s-environ:latest=shekeriev/k8s-environ:blue
+exam@station:/files/mars/t103/overlays/blue$ cd ..
+exam@station:/files/mars/t103/overlays$ cd ..
+exam@station:/files/mars/t103$ kustomize build overlays/blue/
+exam@station:/files/mars/t103$ cp overlays/blue/kustomization.yaml overlays/green/
+exam@station:/files/mars/t103$ vi overlays/green/kustomization.yaml
+exam@station:/files/mars/t103$ cp overlays/blue/cust-svc.yaml overlays/green/
+exam@station:/files/mars/t103$ vi overlays/green/cust-svc.yaml
+exam@station:/files/mars/t103$ kustomize build overlays/green/
+exam@station:/files/mars/t103$ kustomize build overlays/blue/ | kubectl apply -f -
+exam@station:/files/mars/t103$ kubectl apply -k overlays/green/
+exam@station:/files/mars/t103$ kubectl get pods,svc
+exam@station:/files/mars/t103$ tree /files
+exam@station:/files/mars/t103$ cd
+
+------------------ MT104 ------------------
+
+exam@station:~$ kubectl get pods,deployment,rs -n cherry
+exam@station:~$ tree /files
+exam@station:~$ kubectl get deployment -n cherry cherry -o yaml > t104.yaml
+exam@station:~$ vi t104.yaml
+exam@station:~$ kubectl delete -f t104.yaml
+exam@station:~$ vi t104.yaml
+exam@station:~$ kubectl apply -f t104.yaml
+exam@station:~$ kubectl get pods,deployment,rs -n cherry
+exam@station:~$ kubectl describe deployment -n cherry
+exam@station:~$ kubectl get pods,deployment,rs -n cherry
+exam@station:~$ kubectl describe pod -n cherry <...pod name from kubectl get pods,deployment,rs -n cherry...>
+exam@station:~$ kubectl get quota -n cherry
+exam@station:~$ vi /files/mars/t104-reason.txt
+exam@station:~$ kubectl edit deployment -n cherry
+exam@station:~$ kubectl get pods,deployment,rs -n cherry
+
+------------------ MT105 ------------------
+
+exam@station:~$ tree /files
+exam@station:~$ cp /files/mars/t105-in.yaml /files/mars/t105-out.yaml
+exam@station:~$ vi /files/mars/t105-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t105-out.yaml
+exam@station:~$ kubectl get pods,cronjobs
+
+------------------ MT106 ------------------
+
+exam@station:~$ kubectl get pods,sa,role,rolebinding -n fortress
+exam@station:~$ kubectl create serviceaccount observer -n fortress
+exam@station:~$ kubectl get pods,sa,role,rolebinding -n fortress
+exam@station:~$ kubectl create role looknotouch -n fortress --verb=get --resource=pods
+exam@station:~$ kubectl create rolebinding looknotouch -n fortress --role=looknotouch --serviceaccount=fortress:observer
+exam@station:~$ kubectl get pods,sa,role,rolebinding -n fortress
+exam@station:~$ cp /files/mars/t106-in.yaml /files/mars/t106-out.yaml
+exam@station:~$ vi /files/mars/t106-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t106-out.yaml
+exam@station:~$ kubectl get pods,sa,role,rolebinding -n fortress
+exam@station:~$ kubectl get -n fortress pod/observer -o yaml | grep serviceAccount
+
+------------------ JT201 ------------------
+
+exam@station:~$ kubectl config get-contexts
+exam@station:~$ kubectl config use-context jupiter-admin@jupiter
+exam@station:~$ kubectl config get-contexts
+exam@station:~$ kubectl get pods,svc -n apple
+exam@station:~$ kubectl get pods,svc -n orange
+exam@station:~$ kubectl get pods,svc -n apricot
+exam@station:~$ curl http://jupiter-1:<...(30901) port from kubectl get pods,svc -n apple...>
+exam@station:~$ curl http://jupiter-1:<...(30902) port from kubectl get pods,svc -n orange...>
+exam@station:~$ curl http://jupiter-1:<...(30903) port from kubectl get pods,svc -n apricot...>
+exam@station:~$ kubectl get ns orange --show-labels
+exam@station:~$ vi /files/jupiter/t201-out.yaml
+exam@station:~$ kubectl apply -f /files/mars/t201-out.yaml
+exam@station:~$ kubectl get netpol -n apple
+exam@station:~$ kubectl describe netpol access-apple -n apple
+exam@station:~$ curl --connect-timeout 5 http://jupiter-1:<...(30901) port from kubectl get pods,svc -n apple...>
+exam@station:~$ curl --connect-timeout 5 http://jupiter-1:<...(30902) port from kubectl get pods,svc -n orange...>
+exam@station:~$ curl --connect-timeout 5 http://jupiter-1:<...(30903) port from kubectl get pods,svc -n apricot...>
+
+------------------ JT202 ------------------
+
+exam@station:~$ kubectl get ns
+exam@station:~$ kubectl create ns kiwi
+exam@station:~$ helm repo add bitnami https://charts.bitnami.com/bitnami
+exam@station:~$ kubectl create configmap -n kiwi exam-httpd-cm --from-literal=index.html="Kubernetes+Helm=Fun"
+exam@station:~$ helm install exam-httpd -n kiwi bitnami/apache --set service.type=NodePort --set service.nodePorts.http=32202 --set htdocsConfigMap=exam-httpd-cm
+exam@station:~$ kubectl get pods,svc,cm -n kiwi
+exam@station:~$ kubectl get pods,svc,cm -n kiwi
+exam@station:~$ curl http://jupiter-1:<...(32202) port from kubectl get pods,svc,cm -n kiwi...>
+
+------------------ JT203 ------------------
+
+exam@station:~$ kubectl get pods,secret -n cucumber
+exam@station:~$ kubectl get pod/cucumber -n cucumber -o yaml
+exam@station:~$ kubectl exec -it pod/cucumber -n cucumber -- sh -c set
+exam@station:~$ kubectl get secret -n cucumber cucumber-secret -o jsonpath={.data.scretfact} | base64 --decode
+exam@station:~$ vi /files/jupiter/t203-secret.txt
+exam@station:~$ kubectl edit secret -n cucumber cucumber-secret
+exam@station:~$ echo "Cucumbers are green" | base64
+exam@station:~$ kubectl edit secret -n cucumber cucumber-secret
+exam@station:~$ kubectl get secret -n cucumber cucumber-secret -o jsonpath={.data.scretfact} | base64 --decode
+
+------------------ JT204 ------------------
+
+exam@station:~$ kubectl get nodes --show-labels
+exam@station:~$ kubectl label node jupiter-2 exam=slow
+exam@station:~$ kubectl label node jupiter-3 exam=fast
+exam@station:~$ kubectl get nodes --show-labels
+
+------------------ JT205 ------------------
+
+exam@station:~$ cp /files/jupiter/t205-in.yaml /files/jupiter/t205-out.yaml
+exam@station:~$ vi /files/jupiter/t205-out.yaml
+exam@station:~$ kubectl apply -f /files/jupiter/t205-out.yaml
+exam@station:~$ kubectl get pods -o wide
+
+------------------ JT206 ------------------
+
+exam@station:~$ cp /files/jupiter/t206-in.yaml /files/jupiter/t206-out.yaml
+exam@station:~$ vi /files/jupiter/t206-out.yaml
+exam@station:~$ kubectl apply -f /files/jupiter/t206-out.yaml
+exam@station:~$ kubectl get pods -o wide
+
+------------------ JT207 ------------------
+
+exam@station:~$ kubectl get pods,svc -n banana
+exam@station:~$ kubectl describe -n banana pod/banana-pod-1
+exam@station:~$ cp /files/jupiter/t207-in.yaml /files/jupiter/t207-out.yaml
+exam@station:~$ vi /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl delete -f /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl apply -f /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl get pods,svc -n banana
+exam@station:~$ kubectl describe -n banana service/banana-svc
+exam@station:~$ vi /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl apply -f /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl get pods,svc -n banana
+exam@station:~$ kubectl describe -n banana service/banana-svc
+exam@station:~$ vi /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl apply -f /files/jupiter/t207-out.yaml
+exam@station:~$ kubectl get pods,svc -n banana
+exam@station:~$ kubectl describe -n banana service/banana-svc
+
+------------------ JT208 ------------------
+
+exam@station:~$ cp /files/jupiter/t208-in.yaml /files/jupiter/t208-out.yaml
+exam@station:~$ vi /files/jupiter/t208-out.yaml
+exam@station:~$ kubectl apply -f /files/jupiter/t208-out.yaml
+exam@station:~$ kubectl get pods,svc -n cherry
+exam@station:~$ curl http://jupiter-1:32208
+exam@station:~$ kubectl describe -n cherry service/cherry-svc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

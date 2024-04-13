@@ -1,0 +1,234 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> vagrant up
+Bringing machine 'node1' up with 'virtualbox' provider...
+Bringing machine 'node2' up with 'virtualbox' provider...
+Bringing machine 'node3' up with 'virtualbox' provider...
+==> node1: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node1: Clearing any previously set forwarded ports...
+==> node1: Clearing any previously set network interfaces...
+==> node1: Preparing network interfaces based on configuration...
+    node1: Adapter 1: nat
+    node1: Adapter 2: hostonly
+==> node1: Forwarding ports...
+    node1: 22 (guest) => 2222 (host) (adapter 1)
+==> node1: Running 'pre-boot' VM customizations...
+==> node1: Booting VM...
+==> node1: Waiting for machine to boot. This may take a few minutes...
+    node1: SSH address: 127.0.0.1:2222
+    node1: SSH username: vagrant
+    node1: SSH auth method: private key
+==> node1: Machine booted and ready!
+==> node1: Checking for guest additions in VM...
+==> node1: Setting hostname...
+==> node1: Configuring and enabling network interfaces...
+==> node1: Mounting shared folders...
+    node1: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node1: flag to force provisioning. Provisioners marked to run always will still run.
+==> node2: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node2: Clearing any previously set forwarded ports...
+==> node2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> node2: Clearing any previously set network interfaces...
+==> node2: Preparing network interfaces based on configuration...
+    node2: Adapter 1: nat
+    node2: Adapter 2: hostonly
+==> node2: Forwarding ports...
+    node2: 22 (guest) => 2200 (host) (adapter 1)
+==> node2: Running 'pre-boot' VM customizations...
+==> node2: Booting VM...
+==> node2: Waiting for machine to boot. This may take a few minutes...
+    node2: SSH address: 127.0.0.1:2200
+    node2: SSH username: vagrant
+    node2: SSH auth method: private key
+==> node2: Machine booted and ready!
+==> node2: Checking for guest additions in VM...
+==> node2: Setting hostname...
+==> node2: Configuring and enabling network interfaces...
+==> node2: Mounting shared folders...
+    node2: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node2: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node2: flag to force provisioning. Provisioners marked to run always will still run.
+==> node3: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node3: Clearing any previously set forwarded ports...
+==> node3: Fixed port collision for 22 => 2222. Now on port 2201.
+==> node3: Clearing any previously set network interfaces...
+==> node3: Preparing network interfaces based on configuration...
+    node3: Adapter 1: nat
+    node3: Adapter 2: hostonly
+==> node3: Forwarding ports...
+    node3: 22 (guest) => 2201 (host) (adapter 1)
+==> node3: Running 'pre-boot' VM customizations...
+==> node3: Booting VM...
+==> node3: Waiting for machine to boot. This may take a few minutes...
+    node3: SSH address: 127.0.0.1:2201
+    node3: SSH username: vagrant
+    node3: SSH auth method: private key
+==> node3: Machine booted and ready!
+==> node3: Checking for guest additions in VM...
+==> node3: Setting hostname...
+==> node3: Configuring and enabling network interfaces...
+==> node3: Mounting shared folders...
+    node3: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node3: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node3: flag to force provisioning. Provisioners marked to run always will still run.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 29 12:08:18 2023 from 10.0.2.2
+vagrant@node1:~$ mkdir -p homework/task1
+vagrant@node1:~$ tree homework/
+homework/
+└── task1
+
+1 directory, 0 files
+vagrant@node1:~$ cat > homework/task1/task1-sed
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homework
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  replicas: %replicas%
+  selector:
+    matchLabels:
+      app: hw
+  template:
+    metadata:
+      labels:
+        app: hw
+    spec:
+      containers:
+      - image: shekeriev/k8s-oracle
+        name: homework
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hw
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - port: 5000
+    nodePort: %nodeport%
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hw
+  type: NodePort
+vagrant@node1:~$ tree homework/
+homework/
+└── task1
+    └── task1-sed
+
+1 directory, 1 file
+vagrant@node1:~$ sed 's/%replicas%/3/ ; s/%nodeport%/30001/' homework/task1/task1-sed.yaml | kubectl apply -f -
+sed: can't read homework/task1/task1-sed.yaml: No such file or directory
+error: no objects passed to apply
+vagrant@node1:~$ cd homework/
+vagrant@node1:~/homework$ sed 's/%replicas%/3/ ; s/%nodeport%/30001/' task1/task1-sed.yaml | kubectl apply -f -
+sed: can't read task1/task1-sed.yaml: No such file or directory
+error: no objects passed to apply
+vagrant@node1:~/homework$ cd ..
+vagrant@node1:~$ rm homework/task1/task1-sed
+vagrant@node1:~$ tree homework
+homework
+└── task1
+
+1 directory, 0 files
+vagrant@node1:~$ cat > homework/task1/task1-sed.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homework
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework
+  namespace: homework
+spec:
+  replicas: %replicas%
+  selector:
+    matchLabels:
+      app: hw
+  template:
+    metadata:
+      labels:
+        app: hw
+    spec:
+      containers:
+      - image: shekeriev/k8s-oracle
+        name: homework
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hw
+  name: homework-svc
+  namespace: homework
+spec:
+  ports:
+  - port: 5000
+    nodePort: %nodeport%
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: hw
+  type: NodePort
+vagrant@node1:~$ sed 's/%replicas%/3/ ; s/%nodeport%/30001/' homework/task1/task1-sed.yaml | kubectl apply -f -
+namespace/homework created
+deployment.apps/homework created
+service/homework-svc created
+vagrant@node1:~$ kubectl get pods,svc
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d21h
+vagrant@node1:~$ kubectl get deployments -n homework
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+homework   3/3     3            3           2m6s
+vagrant@node1:~$ kubectl get pods -n homework
+NAME                       READY   STATUS    RESTARTS   AGE
+homework-f5b8df968-2vpl8   1/1     Running   0          2m15s
+homework-f5b8df968-4wnhg   1/1     Running   0          2m15s
+homework-f5b8df968-5qpzq   1/1     Running   0          2m15s
+vagrant@node1:~$ kubectl get services -n homework
+NAME           TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+homework-svc   NodePort   10.105.86.102   <none>        5000:30001/TCP   2m31s
+vagrant@node1:~$ kubectl delete -f homework/task1/task1-sed.yaml
+namespace "homework" deleted
+error: error parsing homework/task1/task1-sed.yaml: error converting YAML to JSON: yaml: line 7: found character that cannot start any token
+vagrant@node1:~$ kubectl get services -n homework
+No resources found in homework namespace.
+vagrant@node1:~$ kubectl get pods -n homework
+NAME                       READY   STATUS        RESTARTS   AGE
+homework-f5b8df968-2vpl8   1/1     Terminating   0          10m
+homework-f5b8df968-4wnhg   1/1     Terminating   0          10m
+homework-f5b8df968-5qpzq   1/1     Terminating   0          10m
+vagrant@node1:~$ kubectl delete pods -n homework
+error: resource(s) were provided, but no name was specified
+vagrant@node1:~$ kubectl get pods -n homework
+No resources found in homework namespace.
+vagrant@node1:~$ kubectl get deployments -n homework
+No resources found in homework namespace.
+vagrant@node1:~$ kubectl get services -n homework
+No resources found in homework namespace.
+vagrant@node1:~$ kubectl get namespace homework
+Error from server (NotFound): namespaces "homework" not found

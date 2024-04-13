@@ -1,0 +1,1220 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 09:25:15 2023 from 10.0.2.2
+vagrant@node1:~$ cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+NAME="Debian GNU/Linux"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+vagrant@node1:~$ sudo apt-get update
+Get:1 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Fetched 92.4 kB in 1s (75.8 kB/s)
+Reading package lists... Done
+vagrant@node1:~$ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages have been kept back:
+  kubeadm kubectl kubelet
+The following packages will be upgraded:
+  containerd.io
+1 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+Need to get 28.7 MB of archives.
+After this operation, 237 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 https://download.docker.com/linux/debian bullseye/stable amd64 containerd.io amd64 1.6.25-1 [28.7 MB]
+Fetched 28.7 MB in 6s (4,589 kB/s)
+Reading changelogs... Done
+(Reading database ... 65925 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.25-1_amd64.deb ...
+Unpacking containerd.io (1.6.25-1) over (1.6.24-1) ...
+Setting up containerd.io (1.6.25-1) ...
+Processing triggers for man-db (2.9.4-2) ...
+vagrant@node1:~$ sudo apt-get install nfs-kernel-server
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+nfs-kernel-server is already the newest version (1:1.3.4-6).
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+vagrant@node1:~$ systemctl status nfs-server.service
+● nfs-server.service - NFS server and services
+     Loaded: loaded (/lib/systemd/system/nfs-server.service; enabled; vendor preset: enabled)
+     Active: active (exited) since Wed 2023-11-22 08:06:11 EET; 2h 25min ago
+   Main PID: 678 (code=exited, status=0/SUCCESS)
+      Tasks: 0 (limit: 2323)
+     Memory: 0B
+        CPU: 0
+     CGroup: /system.slice/nfs-server.service
+
+Warning: some journal files were not opened due to insufficient permissions.
+vagrant@node1:~$ sudo mkdir -p /data/nfs/k8sdata
+vagrant@node1:~$ sudo chmod 777 /data/nfs/k8sdata
+vagrant@node1:~$ sudo nano etc/exports
+vagrant@node1:~$ sudo nano /etc/exports
+vagrant@node1:~$ vagrant@node1:~$ sudo nano /etc/exports
+vagrant@node1:~$ vagrant@node1:~$ cat /etc/exports
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+# /data/nfs *(rw,sync,no_subtree_check)
+/etc/data/nfs/k8spva *(rw)
+/etc/data/nfs/k8spvb *(rw)
+/etc/data/nfs/k8spvc *(rw)
+/data/nfs/k8sdata *(rw)
+vagrant@node1:~$ sudo exportfs -rav
+exportfs: /etc/exports [1]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/etc/data/nfs/k8spva".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [2]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/etc/data/nfs/k8spvb".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [3]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/etc/data/nfs/k8spvc".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [4]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/data/nfs/k8sdata".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exporting *:/data/nfs/k8sdata
+exporting *:/etc/data/nfs/k8spvc
+exporting *:/etc/data/nfs/k8spvb
+exporting *:/etc/data/nfs/k8spva
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:24:32 2023 from 10.0.2.2
+vagrant@node2:~$ sudo apt-get update && apt-get install -y nfs-common
+Get:1 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+Get:6 http://deb.debian.org/debian bullseye-updates/main Sources.diff/Index [22.9 kB]
+Get:7 http://deb.debian.org/debian bullseye-updates/main amd64 Packages.diff/Index [22.9 kB]
+Get:8 http://deb.debian.org/debian bullseye-updates/main Translation-en.diff/Index [10.6 kB]
+Get:9 http://deb.debian.org/debian bullseye-updates/main Sources T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [1,419 B]
+Get:10 http://deb.debian.org/debian bullseye-updates/main amd64 Packages T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [474 B]
+Get:9 http://deb.debian.org/debian bullseye-updates/main Sources T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [1,419 B]
+Get:10 http://deb.debian.org/debian bullseye-updates/main amd64 Packages T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [474 B]
+Get:11 http://security.debian.org/debian-security bullseye-security/main Sources [159 kB]
+Get:12 http://deb.debian.org/debian bullseye-updates/main Translation-en T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [175 B]
+Get:12 http://deb.debian.org/debian bullseye-updates/main Translation-en T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [175 B]
+Get:13 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [258 kB]
+Get:14 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [28.0 kB]
+Get:15 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [13.9 kB]
+Fetched 655 kB in 2s (401 kB/s)
+Reading package lists... Done
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+vagrant@node2:~$ echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+nfs-server-ip   nfs-server
+vagrant@node2:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node3
+Linux node3 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:25:10 2023 from 10.0.2.2
+vagrant@node3:~$ sudo apt-get update && apt-get install -y nfs-common
+Get:1 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+Get:6 http://security.debian.org/debian-security bullseye-security/main Sources [159 kB]
+Get:7 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [258 kB]
+Get:8 http://deb.debian.org/debian bullseye-updates/main Sources.diff/Index [22.9 kB]
+Get:9 http://deb.debian.org/debian bullseye-updates/main amd64 Packages.diff/Index [22.9 kB]
+Get:10 http://deb.debian.org/debian bullseye-updates/main Translation-en.diff/Index [10.6 kB]
+Get:11 http://deb.debian.org/debian bullseye-updates/main Sources T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [1,419 B]
+Get:12 http://deb.debian.org/debian bullseye-updates/main amd64 Packages T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [474 B]
+Get:11 http://deb.debian.org/debian bullseye-updates/main Sources T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [1,419 B]
+Get:12 http://deb.debian.org/debian bullseye-updates/main amd64 Packages T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [474 B]
+Get:13 http://deb.debian.org/debian bullseye-updates/main Translation-en T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [175 B]
+Get:13 http://deb.debian.org/debian bullseye-updates/main Translation-en T-2023-11-13-2005.21-F-2023-11-13-2005.21.pdiff [175 B]
+Get:14 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [28.0 kB]
+Get:15 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [13.9 kB]
+Fetched 655 kB in 1s (514 kB/s)
+Reading package lists... Done
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+vagrant@node3:~$ echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+nfs-server-ip   nfs-server
+vagrant@node3:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 10:29:46 2023 from 10.0.2.2
+vagrant@node1:~$ cd data
+vagrant@node1:~/data$ ls
+nfs
+vagrant@node1:~/data$ cd nfs/
+vagrant@node1:~/data/nfs$ ls
+k8spva  k8spvb  k8spvc
+vagrant@node1:~/data/nfs$ mkdir k8sdata
+vagrant@node1:~/data/nfs$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node1:~/data/nfs$ sudo mkdir k8sdata
+mkdir: cannot create directory ‘k8sdata’: File exists
+vagrant@node1:~/data/nfs$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node1:~/data/nfs$ sudo chmod 777 k8spva
+vagrant@node1:~/data/nfs$ sudo chmod 777 k8spvb
+vagrant@node1:~/data/nfs$ sudo chmod 777 k8spvc
+vagrant@node1:~/data/nfs$ sudo chmod 777 k8sdata
+vagrant@node1:~/data/nfs$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node1:~/data/nfs$ cd /etc
+vagrant@node1:/etc$ sudo nano /etc/exports
+vagrant@node1:/etc$ vagrant@node1:/etc$ cat exports
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+# /data/nfs *(rw,sync,no_subtree_check)
+/data/nfs/k8spva *(rw)
+/data/nfs/k8spvb *(rw)
+/data/nfs/k8spvc *(rw)
+/data/nfs/k8sdata *(rw)
+vagrant@node1:/etc$ sudo exportfs -rav
+exportfs: /etc/exports [1]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/data/nfs/k8spva".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [2]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/data/nfs/k8spvb".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [3]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/data/nfs/k8spvc".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [4]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/data/nfs/k8sdata".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exporting *:/data/nfs/k8sdata
+exporting *:/data/nfs/k8spvc
+exportfs: Failed to stat /data/nfs/k8spvc: No such file or directory
+exporting *:/data/nfs/k8spvb
+exportfs: Failed to stat /data/nfs/k8spvb: No such file or directory
+exporting *:/data/nfs/k8spva
+exportfs: Failed to stat /data/nfs/k8spva: No such file or directory
+vagrant@node1:/etc$ cd ..
+vagrant@node1:/$ cat > sc4-pvss.yaml
+-bash: sc4-pvss.yaml: Permission denied
+vagrant@node1:/$ sudo cat > sc4-pvss.yaml
+-bash: sc4-pvss.yaml: Permission denied
+vagrant@node1:/$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 10:53:06 2023 from 10.0.2.2
+vagrant@node1:~$ sudo cat > sc4-pvss.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssa
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spva
+    server: nfs-server
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssb
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spvb
+    server: nfs-server
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssc
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spvc
+    server: nfs-server
+vagrant@node1:~$ kubectl apply -f sc4-pvss.yaml
+persistentvolume/pvssa created
+persistentvolume/pvssb created
+persistentvolume/pvssc created
+vagrant@node1:~$ kubectl get pv
+NAME    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+pvssa   1Gi        RWO            Recycle          Available                                   60s
+pvssb   1Gi        RWO            Recycle          Available                                   59s
+pvssc   1Gi        RWO            Recycle          Available                                   59s
+vagrant@node1:~$ cat > sc4-svcss.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: facts
+spec:
+  selector:
+    app: facts
+  clusterIP: None
+  ports:
+  - port: 5000
+    protocol: TCP
+vagrant@node1:~$ cat sc4-svcss.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: facts
+spec:
+  selector:
+    app: facts
+  clusterIP: None
+  ports:
+  - port: 5000
+    protocol: TCP
+vagrant@node1:~$ kubectl apply -f sc4-svcss.yaml
+service/facts created
+vagrant@node1:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+facts        ClusterIP   None         <none>        5000/TCP   12s
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    10d
+vagrant@node1:~$ cat > sc4-ss.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: facts
+spec:
+  selector:
+    matchLabels:
+      app: facts
+  serviceName: facts
+  replicas: 2
+  # POD template
+  template:
+    metadata:
+      labels:
+        app: facts
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: main
+        image: shekeriev/k8s-facts
+        ports:
+        - name: app
+          containerPort: 5000
+        volumeMounts:
+        - name: facts-data
+          mountPath: /data
+  # VolumeClaim template
+  volumeClaimTemplates:
+  - metadata:
+      name: facts-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+vagrant@node1:~$ cat sc4-ss.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: facts
+spec:
+  selector:
+    matchLabels:
+      app: facts
+  serviceName: facts
+  replicas: 2
+  # POD template
+  template:
+    metadata:
+      labels:
+        app: facts
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: main
+        image: shekeriev/k8s-facts
+        ports:
+        - name: app
+          containerPort: 5000
+        volumeMounts:
+        - name: facts-data
+          mountPath: /data
+  # VolumeClaim template
+  volumeClaimTemplates:
+  - metadata:
+      name: facts-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+vagrant@node1:~$ kubectl apply -f sc4-ss.yaml
+statefulset.apps/facts created
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          12s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   3m24s
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    10d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     14s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           6m32s
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        6m31s
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        6m31s
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           13s
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          3m51s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   7m3s
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     3m52s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           10m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        10m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        10m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           3m51s
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          4m36s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   7m48s
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     4m37s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           10m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        10m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        10m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           4m36s
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          5m31s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   8m43s
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     5m32s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           11m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        11m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        11m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           5m31s
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          6m24s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   9m36s
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     6m25s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           12m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        12m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        12m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           6m24s
+vagrant@node1:~$ kubectl describe pod facts-0
+Name:             facts-0
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Wed, 22 Nov 2023 11:15:15 +0200
+Labels:           app=facts
+                  controller-revision-hash=facts-6c47977578
+                  statefulset.kubernetes.io/pod-name=facts-0
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    StatefulSet/facts
+Containers:
+  main:
+    Container ID:
+    Image:          shekeriev/k8s-facts
+    Image ID:
+    Port:           5000/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from facts-data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7mpxz (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  facts-data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  facts-data-facts-0
+    ReadOnly:   false
+  kube-api-access-7mpxz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                   From               Message
+  ----     ------            ----                  ----               -------
+  Warning  FailedScheduling  7m18s                 default-scheduler  0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod..
+  Normal   Scheduled         7m17s                 default-scheduler  Successfully assigned default/facts-0 to node2
+  Warning  FailedMount       66s (x11 over 7m18s)  kubelet            MountVolume.SetUp failed for volume "pvssa" : mount failed: exit status 32
+Mounting command: mount
+Mounting arguments: -t nfs -o nfsvers=4.1 nfs-server:/data/nfs/k8spva /var/lib/kubelet/pods/1228ca90-8b64-4229-9d67-5143fba8dbdf/volumes/kubernetes.io~nfs/pvssa
+Output: mount: /var/lib/kubelet/pods/1228ca90-8b64-4229-9d67-5143fba8dbdf/volumes/kubernetes.io~nfs/pvssa: bad option; for several filesystems (e.g. nfs, cifs) you might need a /sbin/mount.<type> helper program.
+  Warning  FailedMount  41s (x3 over 5m15s)  kubelet  Unable to attach or mount volumes: unmounted volumes=[facts-data], unattached volumes=[], failed to process volumes=[]: timed out waiting for the condition
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 10:47:03 2023 from 10.0.2.2
+vagrant@node2:~$ sudo mkdir data
+vagrant@node2:~$ cd data
+vagrant@node2:~/data$ ls
+vagrant@node2:~/data$ sudo chmod 777 k8spv(a,b,c)
+-bash: syntax error near unexpected token `('
+vagrant@node2:~/data$ ls
+vagrant@node2:~/data$ sudo mkdir k8spv(a,b,c)
+-bash: syntax error near unexpected token `('
+vagrant@node2:~/data$ sudo mkdir k8spva
+vagrant@node2:~/data$ sudo mkdir k8spvb
+vagrant@node2:~/data$ sudo mkdir k8spvc
+vagrant@node2:~/data$ sudo mkdir k8sdata
+vagrant@node2:~/data$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node2:~/data$ sudo chmod 777 k8spv(a,b,c)
+-bash: syntax error near unexpected token `('
+vagrant@node2:~/data$ sudo chmod 777 k8spva
+vagrant@node2:~/data$ sudo chmod 777 k8spvb
+vagrant@node2:~/data$ sudo chmod 777 k8spvc
+vagrant@node2:~/data$ sudo chmod 777 k8sdata
+vagrant@node2:~/data$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node2:~/data$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node3
+Linux node3 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 10:47:55 2023 from 10.0.2.2
+vagrant@node3:~$ sudo mkdir data
+vagrant@node3:~$ cd data
+vagrant@node3:~/data$ sudo mkdir k8spva
+vagrant@node3:~/data$ sudo mkdir k8spvb
+vagrant@node3:~/data$ sudo mkdir k8spvc
+vagrant@node3:~/data$ sudo mkdir k8sdata
+vagrant@node3:~/data$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node3:~/data$ sudo chmod 777 k6spva
+chmod: cannot access 'k6spva': No such file or directory
+vagrant@node3:~/data$ sudo chmod 777 k8spva
+vagrant@node3:~/data$ sudo chmod 777 k8spvb
+vagrant@node3:~/data$ sudo chmod 777 k8spvc
+vagrant@node3:~/data$ sudo chmod 777 k8sdata
+vagrant@node3:~/data$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node3:~/data$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 11:06:56 2023 from 10.0.2.2
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          16m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   20m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     16m
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           23m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        23m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        23m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           16m
+vagrant@node1:~$ kubectl describe pod facts-0
+Name:             facts-0
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Wed, 22 Nov 2023 11:15:15 +0200
+Labels:           app=facts
+                  controller-revision-hash=facts-6c47977578
+                  statefulset.kubernetes.io/pod-name=facts-0
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    StatefulSet/facts
+Containers:
+  main:
+    Container ID:
+    Image:          shekeriev/k8s-facts
+    Image ID:
+    Port:           5000/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from facts-data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7mpxz (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  facts-data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  facts-data-facts-0
+    ReadOnly:   false
+  kube-api-access-7mpxz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                 From               Message
+  ----     ------            ----                ----               -------
+  Warning  FailedScheduling  17m                 default-scheduler  0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod..
+  Normal   Scheduled         17m                 default-scheduler  Successfully assigned default/facts-0 to node2
+  Warning  FailedMount       90s (x7 over 15m)   kubelet            Unable to attach or mount volumes: unmounted volumes=[facts-data], unattached volumes=[], failed to process volumes=[]: timed out waiting for the condition
+  Warning  FailedMount       48s (x16 over 17m)  kubelet            MountVolume.SetUp failed for volume "pvssa" : mount failed: exit status 32
+Mounting command: mount
+Mounting arguments: -t nfs -o nfsvers=4.1 nfs-server:/data/nfs/k8spva /var/lib/kubelet/pods/1228ca90-8b64-4229-9d67-5143fba8dbdf/volumes/kubernetes.io~nfs/pvssa
+Output: mount: /var/lib/kubelet/pods/1228ca90-8b64-4229-9d67-5143fba8dbdf/volumes/kubernetes.io~nfs/pvssa: bad option; for several filesystems (e.g. nfs, cifs) you might need a /sbin/mount.<type> helper program.
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          17m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   20m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     17m
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           23m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        23m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        23m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           17m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          18m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   21m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     18m
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           24m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        24m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        24m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           18m
+vagrant@node1:~$ kubectl delete -f sc4-ss.yaml
+statefulset.apps "facts" deleted
+vagrant@node1:~$ kubectl apply -f sc4-ss.yaml
+statefulset.apps/facts created
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS        RESTARTS   AGE
+pod/facts-0   0/1     Terminating   0          19m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   23m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     5s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           26m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        26m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        26m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           19m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS        RESTARTS   AGE
+pod/facts-0   0/1     Terminating   0          20m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   23m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     25s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           26m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        26m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        26m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           20m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   23m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     37s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           26m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        26m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        26m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           20m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          8s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   23m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     51s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           27m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        26m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        26m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           20m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          20s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   24m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     63s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           27m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        27m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        27m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           20m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          26s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   24m
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     69s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           27m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        27m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        27m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           20m
+vagrant@node1:~$ cat > sc4-svcssnp.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: factsnp
+spec:
+  selector:
+    app: facts
+  type: NodePort
+  ports:
+  - port: 5000
+    nodePort: 30001
+    protocol: TCP
+vagrant@node1:~$ kubectl apply -f sc4-svcssnp.yaml
+service/factsnp created
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          3m8s
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None             <none>        5000/TCP         26m
+service/factsnp      NodePort    10.104.233.231   <none>        5000:30001/TCP   15s
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     3m51s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           30m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        29m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        29m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           23m
+vagrant@node1:~$ kubectl describe pod facts-0
+Name:             facts-0
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Wed, 22 Nov 2023 11:35:47 +0200
+Labels:           app=facts
+                  controller-revision-hash=facts-6c47977578
+                  statefulset.kubernetes.io/pod-name=facts-0
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    StatefulSet/facts
+Containers:
+  main:
+    Container ID:
+    Image:          shekeriev/k8s-facts
+    Image ID:
+    Port:           5000/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from facts-data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mnm25 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  facts-data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  facts-data-facts-0
+    ReadOnly:   false
+  kube-api-access-mnm25:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason       Age                  From               Message
+  ----     ------       ----                 ----               -------
+  Normal   Scheduled    3m18s                default-scheduler  Successfully assigned default/facts-0 to node2
+  Warning  FailedMount  76s                  kubelet            Unable to attach or mount volumes: unmounted volumes=[facts-data], unattached volumes=[], failed to process volumes=[]: timed out waiting for the condition
+  Warning  FailedMount  71s (x9 over 3m19s)  kubelet            MountVolume.SetUp failed for volume "pvssa" : mount failed: exit status 32
+Mounting command: mount
+Mounting arguments: -t nfs -o nfsvers=4.1 nfs-server:/data/nfs/k8spva /var/lib/kubelet/pods/76939ceb-18b0-4a0b-9672-aacefff322eb/volumes/kubernetes.io~nfs/pvssa
+Output: mount: /var/lib/kubelet/pods/76939ceb-18b0-4a0b-9672-aacefff322eb/volumes/kubernetes.io~nfs/pvssa: bad option; for several filesystems (e.g. nfs, cifs) you might need a /sbin/mount.<type> helper program.
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          3m36s
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None             <none>        5000/TCP         27m
+service/factsnp      NodePort    10.104.233.231   <none>        5000:30001/TCP   43s
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     4m19s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           30m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        30m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        30m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           24m
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          4m53s
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None             <none>        5000/TCP         28m
+service/factsnp      NodePort    10.104.233.231   <none>        5000:30001/TCP   2m
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     5m36s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           31m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        31m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        31m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           25m
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 11:26:26 2023 from 10.0.2.2
+vagrant@node2:~$ cat /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       debian
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+127.0.2.1 node2.k8s.lab node2
+192.168.99.101 node1.k8s.lab node1
+192.168.99.102 node2.k8s.lab node2
+192.168.99.103 node3.k8s.lab node3
+nfs-server-ip   nfs-server
+vagrant@node2:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node3
+Linux node3 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 11:29:37 2023 from 10.0.2.2
+vagrant@node3:~$ cat /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       debian
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+127.0.2.1 node3.k8s.lab node3
+192.168.99.101 node1.k8s.lab node1
+192.168.99.102 node2.k8s.lab node2
+192.168.99.103 node3.k8s.lab node3
+nfs-server-ip   nfs-server
+vagrant@node3:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 11:32:02 2023 from 10.0.2.2
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          12m
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None             <none>        5000/TCP         36m
+service/factsnp      NodePort    10.104.233.231   <none>        5000:30001/TCP   9m52s
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          11d
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     13m
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           39m
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        39m
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        39m
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           33m
+vagrant@node1:~$ cd data
+vagrant@node1:~/data$ ls
+nfs
+vagrant@node1:~/data$ cd nfs
+vagrant@node1:~/data/nfs$ ls
+k8sdata  k8spva  k8spvb  k8spvc
+vagrant@node1:~/data/nfs$ cd ..
+vagrant@node1:~/data$ cd ..
+vagrant@node1:~$ history
+  ...
+  786  cat /etc/os-release
+  787  sudo apt-get update
+  788  sudo apt-get upgrade
+  789  sudo apt-get install nfs-kernel-server
+  790  systemctl status nfs-server.service
+  791  sudo mkdir -p /data/nfs/k8sdata
+  792  sudo chmod 777 /data/nfs/k8sdata
+  793  sudo nano etc/exports
+  794  sudo nano /etc/exports
+  795  cat /etc/exports
+  796  sudo exportfs -rav
+  797  exit
+  798  cd data
+  799  ls
+  800  cd nfs/
+  801  ls
+  802  mkdir k8sdata
+  803  ls
+  804  sudo mkdir k8sdata
+  805  ls
+  806  sudo chmod 777 k8spva
+  807  sudo chmod 777 k8spvb
+  808  sudo chmod 777 k8spvc
+  809  sudo chmod 777 k8sdata
+  810  ls
+  811  cd /etc
+  812  sudo nano /etc/exports
+  813  cat exports
+  814  sudo exportfs -rav
+  815  cd ..
+  816  cat > sc4-pvss.yaml
+  817  sudo cat > sc4-pvss.yaml
+  818  exit
+  819  sudo cat > sc4-pvss.yaml
+  820  kubectl apply -f sc4-pvss.yaml
+  821  kubectl get pv
+  822  cat > sc4-svcss.yaml
+  823  cat sc4-svcss.yaml
+  824  kubectl apply -f sc4-svcss.yaml
+  825  kubectl get svc
+  826  cat > sc4-ss.yaml
+  827  cat sc4-ss.yaml
+  828  kubectl apply -f sc4-ss.yaml
+  829  kubectl get pod,svc,statefulset,pv,pvc
+  830  kubectl describe pod facts-0
+  831  exit
+  832  kubectl get pod,svc,statefulset,pv,pvc
+  833  kubectl describe pod facts-0
+  834  kubectl get pod,svc,statefulset,pv,pvc
+  835  kubectl delete -f sc4-ss.yaml
+  836  kubectl apply -f sc4-ss.yaml
+  837  kubectl get pod,svc,statefulset,pv,pvc
+  838  cat > sc4-svcssnp.yaml
+  839  kubectl apply -f sc4-svcssnp.yaml
+  840  kubectl get pod,svc,statefulset,pv,pvc
+  841  kubectl describe pod facts-0
+  842  kubectl get pod,svc,statefulset,pv,pvc
+  843  exit
+  844  kubectl get pod,svc,statefulset,pv,pvc
+  845  cd data
+  846  ls
+  847  cd nfs
+  848  ls
+  849  cd ..
+  850  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant halt
+==> node3: Attempting graceful shutdown of VM...
+==> node2: Attempting graceful shutdown of VM...
+==> node1: Attempting graceful shutdown of VM...
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant ssh node2
+   4 vagrant ssh node3
+   5 vagrant ssh node1
+   6 vagrant ssh node1
+   7 vagrant ssh node2
+   8 vagrant ssh node3
+   9 vagrant ssh node1
+  10 vagrant ssh node2
+  11 vagrant ssh node3
+  12 vagrant ssh node1
+  13 vagrant halt
+
+
+PS C:\Users\NB\Kubernetes>

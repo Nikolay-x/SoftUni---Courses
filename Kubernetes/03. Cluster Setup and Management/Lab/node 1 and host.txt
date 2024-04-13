@@ -1,0 +1,1382 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> ssh root@192.168.100.18
+The authenticity of host '192.168.100.18 (192.168.100.18)' can't be established.
+ECDSA key fingerprint is SHA256:XB4VPF4r/4PWwkiLKfmtlZZD0D6Eb+wdERsPxIcy1v4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.100.18' (ECDSA) to the list of known hosts.
+root@192.168.100.18's password:
+Linux debian 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 13:45:11 2023
+Message from syslogd@debian at Oct 24 14:23:52 ...
+ kernel:[ 2516.184832] watchdog: BUG: soft lockup - CPU#1 stuck for 104s! [swapper/1:0]
+
+Message from syslogd@debian at Oct 24 14:32:15 ...
+ kernel:[ 3019.523865] watchdog: BUG: soft lockup - CPU#1 stuck for 134s! [kubelet:2234]
+
+root@debian:~# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:f3:58:67 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.100.18/24 brd 192.168.100.255 scope global enp0s3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fef3:5867/64 scope link
+       valid_lft forever preferred_lft forever
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+    link/ether 02:42:55:9f:85:25 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+root@debian:~# hostnamectl set-hostname node-1.k8s
+root@debian:~#
+root@debian:~# exit
+logout
+Connection to 192.168.100.18 closed.
+PS C:\Users\NB> ssh root@192.168.100.18
+root@192.168.100.18's password:
+Linux node-1.k8s 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 13:53:17 2023 from 192.168.100.7
+root@node-1:~# echo "192.168.100.18  node-1.k8s  node-1" | tee -a /etc/hosts
+echo "192.168.100.19  node-2.k8s  node-2" | tee -a /etc/hosts
+echo "192.168.100.20  node-3.k8s  node-3" | tee -a /etc/hosts
+192.168.100.18  node-1.k8s  node-1
+192.168.100.19  node-2.k8s  node-2
+192.168.100.20  node-3.k8s  node-3
+root@node-1:~#
+root@node-1:~# ping node-3
+PING node-3.k8s (192.168.100.20) 56(84) bytes of data.
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=1 ttl=64 time=5.00 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=2 ttl=64 time=1.04 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=3 ttl=64 time=1.09 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=4 ttl=64 time=1.02 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=5 ttl=64 time=1.05 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=6 ttl=64 time=0.999 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=7 ttl=64 time=1.47 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=8 ttl=64 time=0.838 ms
+64 bytes from node-3.k8s (192.168.100.20): icmp_seq=9 ttl=64 time=1.71 ms
+^C
+--- node-3.k8s ping statistics ---
+9 packets transmitted, 9 received, 0% packet loss, time 8022ms
+rtt min/avg/max/mdev = 0.838/1.580/5.000/1.235 ms
+root@node-1:~# ping node-2
+PING node-2.k8s (192.168.100.19) 56(84) bytes of data.
+64 bytes from node-2.k8s (192.168.100.19): icmp_seq=1 ttl=64 time=4.08 ms
+64 bytes from node-2.k8s (192.168.100.19): icmp_seq=2 ttl=64 time=1.18 ms
+64 bytes from node-2.k8s (192.168.100.19): icmp_seq=3 ttl=64 time=1.01 ms
+64 bytes from node-2.k8s (192.168.100.19): icmp_seq=4 ttl=64 time=1.59 ms
+64 bytes from node-2.k8s (192.168.100.19): icmp_seq=5 ttl=64 time=1.16 ms
+64 bytes from node-2.k8s (192.168.100.19): icmp_seq=6 ttl=64 time=1.09 ms
+^C
+--- node-2.k8s ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5015ms
+rtt min/avg/max/mdev = 1.010/1.685/4.080/1.086 ms
+root@node-1:~# kubeadm init --apiserver-advertise-address=192.168.100.18 --pod-network-cidr 10.244.0.0/16
+I1024 14:51:09.684481    2968 version.go:256] remote version is much newer: v1.28.3; falling back to: stable-1.27
+[init] Using Kubernetes version: v1.27.7
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local node-1.k8s] and IPs [10.96.0.1 192.168.100.18]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [localhost node-1.k8s] and IPs [192.168.100.18 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [localhost node-1.k8s] and IPs [192.168.100.18 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Message from syslogd@debian at Oct 24 14:53:54 ...
+ kernel:[ 4318.829153] watchdog: BUG: soft lockup - CPU#1 stuck for 55s! [etcd:3591]
+[apiclient] All control plane components are healthy after 72.014502 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node node-1.k8s as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node node-1.k8s as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: nxms82.3l03c3s5a8syz02g
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.100.18:6443 --token nxms82.3l03c3s5a8syz02g \
+        --discovery-token-ca-cert-hash sha256:833133171283f3c30176e46c591d04a0fd0824c3f3683d2593ab9ea8035c3636
+root@node-1:~#
+Message from syslogd@debian at Oct 24 14:55:19 ...
+ kernel:[ 4403.691146] watchdog: BUG: soft lockup - CPU#1 stuck for 33s! [kworker/u4:1:2237]
+
+root@node-1:~# mkdir -p $HOME/.kube
+root@node-1:~# cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+root@node-1:~# chown $(id -u):$(id -g) $HOME/.kube/config
+root@node-1:~#
+root@node-1:~# kubectl get nodes
+NAME         STATUS     ROLES           AGE     VERSION
+node-1.k8s   NotReady   control-plane   5m11s   v1.27.5
+root@node-1:~# kubectl get pods -n kube-system
+NAME                                 READY   STATUS    RESTARTS   AGE
+coredns-5d78c9869d-5tnzv             0/1     Pending   0          4m28s
+coredns-5d78c9869d-fhkd9             0/1     Pending   0          4m28s
+etcd-node-1.k8s                      1/1     Running   0          5m44s
+kube-apiserver-node-1.k8s            1/1     Running   0          5m43s
+kube-controller-manager-node-1.k8s   1/1     Running   0          4m46s
+kube-proxy-qkbst                     1/1     Running   0          4m28s
+kube-scheduler-node-1.k8s            1/1     Running   0          4m46s
+root@node-1:~# kubectl describe node node-1
+Name:               node-1.k8s
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node-1.k8s
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 24 Oct 2023 14:52:56 +0300
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+                    node.kubernetes.io/not-ready:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node-1.k8s
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 24 Oct 2023 14:59:26 +0300
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 24 Oct 2023 14:59:16 +0300   Tue, 24 Oct 2023 14:52:53 +0300   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 24 Oct 2023 14:59:16 +0300   Tue, 24 Oct 2023 14:52:53 +0300   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 24 Oct 2023 14:59:16 +0300   Tue, 24 Oct 2023 14:52:53 +0300   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            False   Tue, 24 Oct 2023 14:59:16 +0300   Tue, 24 Oct 2023 14:52:53 +0300   KubeletNotReady              container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized
+Addresses:
+  InternalIP:  192.168.100.18
+  Hostname:    node-1.k8s
+Capacity:
+  cpu:                2
+  ephemeral-storage:  31861548Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  29363602589
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 4ecab4288bed46248461f7ac22b7cad9
+  System UUID:                dc5c3596-ef48-ff4c-b00f-b94d7d333544
+  Boot ID:                    2bd842ba-1930-449a-8a6b-7df5d21f342d
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+Non-terminated Pods:          (5 in total)
+  Namespace                   Name                                  CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                  ------------  ----------  ---------------  -------------  ---
+  kube-system                 etcd-node-1.k8s                       100m (5%)     0 (0%)      100Mi (5%)       0 (0%)         6m29s
+  kube-system                 kube-apiserver-node-1.k8s             250m (12%)    0 (0%)      0 (0%)           0 (0%)         6m28s
+  kube-system                 kube-controller-manager-node-1.k8s    200m (10%)    0 (0%)      0 (0%)           0 (0%)         5m31s
+  kube-system                 kube-proxy-qkbst                      0 (0%)        0 (0%)      0 (0%)           0 (0%)         5m13s
+  kube-system                 kube-scheduler-node-1.k8s             100m (5%)     0 (0%)      0 (0%)           0 (0%)         5m31s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                650m (32%)  0 (0%)
+  memory             100Mi (5%)  0 (0%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                   Age                    From             Message
+  ----     ------                   ----                   ----             -------
+  Normal   Starting                 5m10s                  kube-proxy
+  Normal   NodeAllocatableEnforced  6m40s                  kubelet          Updated Node Allocatable limit across pods
+  Normal   NodeHasSufficientMemory  6m39s (x8 over 6m40s)  kubelet          Node node-1.k8s status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    6m39s (x7 over 6m40s)  kubelet          Node node-1.k8s status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     6m39s (x7 over 6m40s)  kubelet          Node node-1.k8s status is now: NodeHasSufficientPID
+  Normal   Starting                 5m28s                  kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      5m28s                  kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  5m27s                  kubelet          Node node-1.k8s status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    5m27s                  kubelet          Node node-1.k8s status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     5m27s                  kubelet          Node node-1.k8s status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  5m27s                  kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           5m14s                  node-controller  Node node-1.k8s event: Registered Node node-1.k8s in Controller
+
+root@node-1:~#
+Message from syslogd@debian at Oct 24 15:01:41 ...
+ kernel:[ 4785.872996] watchdog: BUG: soft lockup - CPU#1 stuck for 54s! [containerd-shim:3420]
+
+Message from syslogd@debian at Oct 24 15:05:32 ...
+ kernel:[ 5016.181103] watchdog: BUG: soft lockup - CPU#1 stuck for 212s! [containerd-shim:3597]
+
+root@node-1:~# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+namespace/kube-flannel created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds created
+root@node-1:~# kubectl get pods --all-namespaces -w
+NAMESPACE      NAME                                 READY   STATUS    RESTARTS   AGE
+kube-flannel   kube-flannel-ds-45m64                1/1     Running   0          43s
+kube-system    coredns-5d78c9869d-5tnzv             1/1     Running   0          12m
+kube-system    coredns-5d78c9869d-fhkd9             1/1     Running   0          12m
+kube-system    etcd-node-1.k8s                      1/1     Running   0          13m
+kube-system    kube-apiserver-node-1.k8s            1/1     Running   0          13m
+kube-system    kube-controller-manager-node-1.k8s   1/1     Running   0          12m
+kube-system    kube-proxy-qkbst                     1/1     Running   0          12m
+kube-system    kube-scheduler-node-1.k8s            1/1     Running   0          12m
+
+Message from syslogd@debian at Oct 24 15:09:04 ...
+ kernel:[ 5228.835551] watchdog: BUG: soft lockup - CPU#1 stuck for 60s! [containerd-shim:3975]
+kube-system    coredns-5d78c9869d-fhkd9             1/1     Running   0          14m
+kube-system    etcd-node-1.k8s                      1/1     Running   0          16m
+kube-system    kube-apiserver-node-1.k8s            1/1     Running   0          16m
+kube-system    kube-controller-manager-node-1.k8s   1/1     Running   0          15m
+kube-system    kube-scheduler-node-1.k8s            1/1     Running   0          15m
+kube-system    kube-proxy-qkbst                     1/1     Running   0          14m
+kube-flannel   kube-flannel-ds-45m64                1/1     Running   0          3m7s
+kube-system    coredns-5d78c9869d-5tnzv             1/1     Running   0          14m
+kube-flannel   kube-flannel-ds-45m64                1/1     Running   0          3m10s
+kube-system    coredns-5d78c9869d-5tnzv             1/1     Running   0          14m
+kube-system    coredns-5d78c9869d-fhkd9             1/1     Running   0          14m
+kube-system    etcd-node-1.k8s                      1/1     Running   0          16m
+kube-system    kube-scheduler-node-1.k8s            1/1     Running   0          15m
+kube-system    kube-apiserver-node-1.k8s            1/1     Running   0          16m
+kube-system    kube-controller-manager-node-1.k8s   1/1     Running   0          15m
+kube-system    kube-proxy-qkbst                     1/1     Running   0          14m
+^Croot@node-1:~#
+root@node-1:~# kubectl get pods --all-namespaces
+NAMESPACE      NAME                                 READY   STATUS    RESTARTS   AGE
+kube-flannel   kube-flannel-ds-45m64                1/1     Running   0          4m22s
+kube-system    coredns-5d78c9869d-5tnzv             1/1     Running   0          16m
+kube-system    coredns-5d78c9869d-fhkd9             1/1     Running   0          16m
+kube-system    etcd-node-1.k8s                      1/1     Running   0          17m
+kube-system    kube-apiserver-node-1.k8s            1/1     Running   0          17m
+root@node-1:~# kubectl get nodes
+NAME         STATUS   ROLES           AGE   VERSION
+node-1.k8s   Ready    control-plane   17m   v1.27.5
+root@node-1:~# kubectl get nodes
+NAME         STATUS     ROLES           AGE   VERSION
+node-1.k8s   Ready      control-plane   19m   v1.27.5
+node-2.k8s   NotReady   <none>          23s   v1.27.5
+node-3.k8s   NotReady   <none>          6s    v1.27.5
+root@node-1:~# kubectl get nodes
+NAME         STATUS     ROLES           AGE   VERSION
+node-1.k8s   Ready      control-plane   20m   v1.27.5
+node-2.k8s   Ready      <none>          56s   v1.27.5
+node-3.k8s   NotReady   <none>          39s   v1.27.5
+root@node-1:~# kubectl get nodes
+NAME         STATUS   ROLES           AGE   VERSION
+node-1.k8s   Ready    control-plane   20m   v1.27.5
+node-2.k8s   Ready    <none>          78s   v1.27.5
+node-3.k8s   Ready    <none>          61s   v1.27.5
+root@node-1:~# kubectl cluster-info
+Kubernetes control plane is running at https://192.168.100.18:6443
+CoreDNS is running at https://192.168.100.18:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+root@node-1:~# exit
+logout
+Connection to 192.168.100.18 closed.
+PS C:\Users\NB> cd .kube
+PS C:\Users\NB\.kube> cd..
+PS C:\Users\NB> ls
+
+
+    Directory: C:\Users\NB
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         18-Jun-23     10:12                .azure
+d-----         24-Oct-23     11:20                .docker
+d-----         27-May-23     12:44                .dotnet
+d-----         29-Sep-23     13:37                .fontconfig
+d-----         12-Oct-21     12:03                .idlerc
+d-----         21-Oct-23     14:13                .kube
+d-----         27-May-23     14:59                .librarymanager
+d-----         18-Oct-23     12:39                .minikube
+d-----         17-Jun-22     18:08                .ms-ad
+d-----         27-May-23     12:48                .nuget
+d-----         12-Jun-23     10:40                .redhat
+d-----         10-Apr-23     14:59                .ssh
+d-----         27-May-23     12:47                .templateengine
+d-----         24-Oct-23     13:53                .VirtualBox
+d-----         12-Jun-23     10:38                .vscode
+d-----         17-May-23     16:20                .vue-templates
+d-r---         03-Oct-21     14:45                3D Objects
+d-r---         03-Oct-21     14:45                Contacts
+d-----         17-May-23     17:17                data
+d-r---         24-Oct-23     13:16                Desktop
+d-----         15-Aug-23     12:03                DevOps
+d-r---         24-Oct-23     11:26                Documents
+d-----         14-Sep-22     11:36                getting-started
+d-----         08-Apr-22     13:00                https
+d-----         08-Apr-22     13:00                httpsgithub.com
+d-----         24-Oct-23     10:00                Kubernetes
+d-r---         03-Oct-21     14:45                Links
+d-r---         29-May-23     09:57                Music
+d-----         20-May-23     13:41                MyWebsite
+dar--l         26-Nov-19     18:51                OneDrive
+d-r---         29-Sep-23     14:05                Pictures
+d-----         17-Jan-22     12:16                Postman
+d-----         10-Apr-23     11:02                PycharmProjects
+d-----         01-Aug-22     10:47                Tracing
+d-r---         29-Sep-23     14:05                Videos
+d-----         24-Jan-22     20:05                Visual studio code- test 1
+d-----         18-Jun-23     09:15                vsdbg
+-a----         19-Jul-21     10:34           7138 -1.14-windows.xml
+-a----         04-Jun-23     09:37           4393 .bash_history
+-a----         31-May-23     12:08             87 .gitconfig
+-a----         02-Aug-23     12:30             20 .lesshst
+-a----         17-May-23     15:50              0 .node_repl_history
+-a----         08-Apr-22     12:02          12288 .test.txt.swp
+-a----         11-Dec-22     11:07           2875 .viminfo
+
+
+PS C:\Users\NB> cd .kube
+    Directory: C:\Users\NB\.kube
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         18-Oct-23     12:55                cache
+-a----         21-Oct-23     14:13            828 config
+
+
+PS C:\Users\NB\.kube> ren config config.bak
+PS C:\Users\NB\.kube>
+PS C:\Users\NB\.kube> scp root@192.168.100.18:/etc/kubernetes/admin.conf .
+admin.conf                                                            100% 5650     1.4MB/s   00:00
+PS C:\Users\NB\.kube> ls
+
+
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         18-Oct-23     12:55                cache
+-a----         21-Oct-23     14:13            828 config.bak
+
+
+PS C:\Users\NB\.kube> ren .\admin.conf config
+PS C:\Users\NB\.kube>
+PS C:\Users\NB\.kube> ls
+
+    Directory: C:\Users\NB\.kube
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         18-Oct-23     12:55                cache
+-a----         24-Oct-23     15:35           5650 config
+-a----         21-Oct-23     14:13            828 config.bak
+
+
+NAME         STATUS   ROLES           AGE   VERSION
+node-1.k8s   Ready    control-plane   39m   v1.27.5
+node-2.k8s   Ready    <none>          20m   v1.27.5
+node-3.k8s   Ready    <none>          20m   v1.27.5
+PS C:\Users\NB\.kube> kubectl cluster-info
+Kubernetes control plane is running at https://192.168.100.18:6443
+CoreDNS is running at https://192.168.100.18:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+PS C:\Users\NB\.kube> kubectl version --client
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.9", GitCommit:"a1a87a0a2bcd605820920c6b0e618a8ab7d117d4", GitTreeState:"clean", BuildDate:"2023-04-12T12:16:51Z", GoVersion:"go1.19.8", Compiler:"gc", Platform:"windows/amd64"}
+Kustomize Version: v4.5.7
+PS C:\Users\NB\.kube> kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.9", GitCommit:"a1a87a0a2bcd605820920c6b0e618a8ab7d117d4", GitTreeState:"clean", BuildDate:"2023-04-12T12:16:51Z", GoVersion:"go1.19.8", Compiler:"gc", Platform:"windows/amd64"}
+Kustomize Version: v4.5.7
+Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.7", GitCommit:"07a61d861519c45ef5c89bc22dda289328f29343", GitTreeState:"clean", BuildDate:"2023-10-18T11:33:23Z", GoVersion:"go1.20.10", Compiler:"gc", Platform:"linux/amd64"}
+WARNING: version difference between client (1.25) and server (1.27) exceeds the supported minor version skew of +/-1
+PS C:\Users\NB\.kube> cat config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCRENDQWV5Z0F3SUJBZ0lIRVYvclJmK3F6REFOQmdrcWhraUc5dzBCQVFzRkFEQVZNUk13RVFZRFZRUUQKRXdwcmRXSmxjbTVsZEdWek1CNFhEVEl6TVRBeU5ERXhORGMwTUZvWERUTXpNVEF5TVRFeE5USTBNRm93RlRFVApNQkVHQTFVRUF4TUthM1ZpWlhKdVpYUmxjekNDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DCmdnRUJBTjN4V21sdGVSS2svRWRZMitrVHkvaFJheS9sMjNQWVhyd21WK1lCSEY0cHRkMTN5Y0RjMnZEUjNWdXQKY0o0QW10L0w5K2w5d1ZYUmNXRTBlcCtoUFRDdndyUWcyQ1M5OUhVYW1kZkxnRmlrZWd0TkNBSnFDT290MDBsYwpIZ0pocUV4SDA4TnIyQlE4QTFvNUIxNit0Szl0enFpU3pRT1A1S21GR0c3QXB3TTlFcWVScFFMaGZIYTVkaTRlClJUeTJwbUMwNVorQjh3eTc2UWEyT293OUoxaWJtNmxnWUhWbDJ6T3MwaFBSNXV6TjRtYnphdlFEV0VpdVBVWDIKdHVrTkhpZHhIanpHdHJwcmJXVnVlK3dxT2pxS1RMenVWZ2VvbkxQajRJV1BhV3Z4YnI2L1kzaWwwSXVGTHM3dwpJaW1KL3MxT2FwMkRvWTFtdFNCOHdFS1IzQTBDQXdFQUFhTlpNRmN3RGdZRFZSMFBBUUgvQkFRREFnS2tNQThHCkExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkQ4aUYzTVhGV0tTV2R5QU1HcWFUV201UC9OM01CVUcKQTFVZEVRUU9NQXlDQ210MVltVnlibVYwWlhNd0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFJS1RtVFcwM1BLZQp3MFlzbXgvakpZZTYyOUFEQ0ZRQnhwWGJaUk9SWEgveVRHeE45dE8xdUdSVURXdnJ5OFNtaTd0djhCdy9nNVVLCm54WGFoNG5FcDJPZkROdi9SMU82VEszSlhZalJYMjZ5WCtnSDdDcWNNck1ucnhVU0ZaVjBTZjlRQURUeDFyVUwKY0FXaWREYndiRjVJeVhSeDFuejQ4UWkxK2VmcmErUzYvcnZGYXpsb0IxbmNGY2dZdUFDMlJTZVd6VE83b0VlNAp3Vm5PUm90dVg2S0RUZmdxR2N5SWlTa0g1TTBPcktUOXpZME5iOXJmaDZLemFoQWtEa3AvanJHeGRrcWhHNlFVCnBER1pyZ2FYTzF1R0c0QjhmVGdQME90SE5GYy9sZEdwYVBpaXU3VERLc1NMYkZuVk4xZVE2MDFyK2d6dzhBa3kKWjJneWx3Y29NUHc9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.100.18:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJSmRycEJVUlg1ZXN3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFd01qUXhNVFEzTkRCYUZ3MHlOREV3TWpNeE1UVXlORE5hTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTFrZlRjK1lITHgrUlZIbTQKRWVLanhmUnJPQ2p2d0ozWkRueDJITU1ncndGWFZuS0JMby9NdVd4aDhYUWV1bVY5OEZtd1BQMm9JWFIwMlRJeQpsSGJCR3MweVZkWENFd2pqQ1AvS2JHQXY4UGtSNGpLWEJ6UWFLeGZlemk0UUxncGs0QUVpbUNwdnNUSWVRcytzCldVL0FQMGpMLzVJOFFaWVpmdHJtdGQ1RVA1MzhHdWZnTVdxTXpWcWVCbGtzME1Wa1c1RXF5ek94UVJ1MlQ1UkEKY1oreVNydmNTN21JclRTZ0JxOTZPVk1WcUlHSWpESzRlNlU4TzM3VnEra2tVS3lOTjZuT3lWMFpwL0doNFB0bgpVcVNLTTczRnU1bUFod1lnMDgzWXNYZ2hodVhkeHFwS0xnMkhUVWR2dHdCTjlCMTNvRTdYd2FJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JRL0loZHpGeFZpa2xuY2dEQnFtazFwdVQvegpkekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBYStoekhHeHhrK0xuQkJHdWtpSVVSOFBrLzZLSFJNbytFU1FMCnRWNU1SKzNsVkowK29WV05ydnhJQmRGU3VFN2NIaWJPeFA4Zm5PNUZneko5ZWVvcG9tQwowMXRocHJkVlJTK21EcEZubktibElKR05yajR3WnpXOVk1L29HR3NEL0paQUZ0aytyTFZ0bDdyN0ExWWd0eURjMW1HUGg5eDFZWVhxM0ROMEdXaFBMcGc4d2Z3TFNMb3dwWGJnMkE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBMWtmVGMrWUhMeCtSVkhtNEVlS2p4ZlJyT0NqdndKM1pEbngySE1NZ3J3RlhWbktCCkxvL011V3hoOFhRZXVtVjk4Rm13UFAyb0lYUjAyVEl5bEhiQkdzMHlWZFhDRXdqakNQL0tiR0F2OFBrUjRqS1gKQnpRYUt4ZmV6aTRRTGdwazRBRWltQ3B2c1RJZVFzK3NXVS9BUDBqTC81SThRWllaZnRybXRkNUVQNTM4R3VmZwpNV3FNelZxZUJsa3MwTVZrVzVFcXl6T3hRUnUyVDVSQWNaK3lTcnZjUzdtSXJUU2dCcTk2T1ZNVnFJR0lqREs0CmU2VThPMzdWcStra1VLeU5ONm5PeVYwWnAvR2g0UHRuVXFTS003M0Z1NW1BaHdZZzA4M1lzWGdoaHVYZHhxcEsKTGcySFRVZHZ0d0JOOUIxM29FN1h3YXhrRUdIMldKa1g0K2VtV3dJREFRQUJBb0lCQVFDL3gzTVIxTHR6U242SQpxNU81dGkwN3UyREcxNlNVc1BHV1RJQnRoNXBWNXc1aTJZS1N5TExDOWFUSE5GVllJQVBTUElOR1l3TzZSWDlhCjhObGlGTk1KaU1OWEhVUmdRdURucWY5aWRjZ1NsT2lUbVJHZ3Fkb04zWVJVNWRjblRiZ3czL00xV3kyeDJwaEkKMVpOOEw2dHhPRmNUK3E2aFNKU3krM25uSmZIUk9KSWtaRXF5U3EvUy82YUJUS1RnYTdQNnJMUEJxZ29HQlpLaQpHUms1OXNwOVplQWQ5ZkJQQW9pampyazVxbFhuVTE5N2RuTmljQSs4aXo2ZUlYS1pEcTg1U0RsWHBZMFZobWkyCkpiSzl1cm1rT1hLMjdwVFJuRHFMM0U5elVDanFVcnlSdzhmWDlTTmdoLzFsOHJZdHZBODJOVTRVNFRKWkpNY0YKWHhKZnZXcnBBb0dCQU9iL0tQTVZQNEZXOStETnBvUTlwUXk4dXZ2Nm1vUVBwT1Bjc1Y1a0kwR1BmZ0hEYVRQbApyYi8xNDBkR0lCM1plUXRCekJvTTJiTW95aEJldDg0Q0tJdTBLRWQzVDJZaGFLcUZKblRqUHVid3pHYy9PNytrCkFpTTlGMXN2cTd3SXFiNUtvRzJ3dmRiSVpmbThzVXlHbFUvSUtRcWNhaGMyOW1nVkNiRi9DQ3RWQW9HQkFPMTUKZDU5M29pV3dxK3poMENQVCtkbVc0YTFWK241RnVMa2xFcHVDU05ZN1E1YzVTMUN2aTJwMnNiUDhJRjB2UGpyNwpQeHB6WHhrNy83RHE2OWVpTEZrVlVEbDBOd2VxQXcyeG5tVkRiVTMzV1dmeVJzRHMyM3FEZDB5elRvT3hnSGk2ClMvRU1KZ1FLSjFMakxqMmQ1ZlFVZytZWG5VVEFiSkF0NVBRLy9tcnZBb0dCQUtXbzZCMHNaOWJDSUJMQWFXTDkKTXBqbjRORkU3L3MxblBNdEdxYXUrZm5TaG5PTlNLMUhVa3dRYzJaeURDWmNDRXJpYlJWaGtkN0NxZWNEaHAzZgpQbVN5VnhDcHArOStsaWwwUkJnZndNU3VmR2l2R0pKZmRJa0JEdmIrUVJNZ3cxc00rZkN3aC9TNDB5ay9BWWY0CkhLeVN4NXdzZ0lrVmliRXJKVUI5OGNYaEFvR0FEamY3cFp5d0pMbVRVYmVqa3NHYWNDRE1tbWhQZTBnSmEyeUEKMUxiVVRaOTJ5Sk14b3o4ZmhkeGRmMzFWSXI4MVpxcXNlSlQzMkxieTlGRGNsaWlycHhuVGw5MFJmbS83aHRKZgp2WWh2L3Y4VVoxam1TNTdpOVU3eDBiSGF2Wi9mSlZ0aU9LaVZqaUJkZ21ULzI4aWNnQ1RLVVBpUS9oRFhienFRClB0K21DQmtDZ1lBZHRjUm5paEJ4U3B0VU9IbmwvemliR3FwbDYyZW1WU2FsRjR1Vzh0RmtJeVBEYWhRT0dJWGEKaEMyaVBYUUlwTENZU2tiQk1ZYm42ZVpiR0ZNbmNnQjQxZC9WbEpqd3lNdVVYVmVzRjQ5bU5YSE41bVlJQzIveQpNVnYvcTRPbnk1TnZLbjgrZ0ZETmVqc1dzNWlMT2tPVFhmOW5oN1pZV3NicUlCbEhsZUs2ckE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+PS C:\Users\NB\.kube> kubectl get pods -o wide
+No resources found in default namespace.
+PS C:\Users\NB\.kube> Set-Location -Path 'D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files'
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl apply -f producer-deployment.yml
+deployment.apps/producer-deploy created
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS              RESTARTS   AGE   IP       NODE         NOMINATED NODE   READINESS GATES
+producer-deploy-6999d4f5db-f6xdg   0/1     ContainerCreating   0          7s    <none>   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rr8mc   0/1     ContainerCreating   0          7s    <none>   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   0/1     ContainerCreating   0          7s    <none>   node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\  1023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> ge
+
+
+-Management (files)\m2\demo-files> Get-History
+
+  -- -----------
+   1 ssh root@192.168.100.18
+   3 cd .kube
+   4 cd..
+   6 cd .kube
+   7 ls
+   8 ren config config.bak
+   9 scp root@192.168.100.18:/etc/kubernetes/admin.conf .
+  10 ls
+  11 ren .\admin.conf config
+  12 ls
+  13 kubectl get nodes
+  14 kubectl cluster-info
+  15 kubectl version --client
+  16 kubectl version
+  17 cat config
+  18 kubectl get pods -o wide
+  19 Set-Location -Path 'D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files'
+  21 kubectl get pods -o wide
+
+
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl apply -f consumer-deployment.yml
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl apply -f consumer-svc.yml
+service/consumer created
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl apply -f producer-svc.yml
+service/producer created
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE     IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          2m10s   10.244.1.3   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-hphdd    1/1     Running   0          2m10s   10.244.2.4   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Running   0          2m10s   10.244.1.4   node-2.k8s   <none>producer-deploy-6999d4f5db-f6xdg   1/1     Running   0          22m     10.244.2.2   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rr8mc   1/1     Running   0          22m     10.244.2.3   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          22m     10.244.1.2   node-2.k8s   <none>PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get nodes
+NAME         STATUS     ROLES           AGE   VERSION
+node-1.k8s   Ready      control-plane   78m   v1.27.5
+node-2.k8s   Ready      <none>          59m   v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE     IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          4m58s   10.244.1.3   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-hphdd    1/1     Running   0          4m58s   10.244.2.4   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Running   0          4m58s   10.244.1.4   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-f6xdg   1/1     Running   0          25m     10.244.2.2   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rr8mc   1/1     Running   0          25m     10.244.2.3   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          25m     10.244.1.2   node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-andNAME         STATUS     ROLES           AGE   VERSION
+node-1.k8s   Ready      control-plane   79m   v1.27.5
+node-2.k8s   Ready      <none>          60m   v1.27.5
+node-3.k8s   NotReady   <none>          60m   v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get svc
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+consumer     NodePort    10.103.14.46   <none>        5000:30001/TCP   4m22s
+kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP          79m
+producer     ClusterIP   10.96.162.20   <none>        5000/TCP         3m56s
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl describe service producer
+Name:              producer
+Namespace:         default
+Labels:            app=fun-facts
+                   role=producer
+Annotations:       <none>
+Selector:          app=fun-facts,role=producer
+Type:              ClusterIP
+IP Families:       IPv4
+IP:                10.96.162.20
+IPs:               10.96.162.20
+Port:              <unset>  5000/TCP
+TargetPort:        5000/TCP
+Endpoints:         10.244.1.2:5000
+Session Affinity:  None
+Events:            <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl describe service consumer
+Name:                     consumer
+Namespace:                default
+Labels:                   app=fun-facts
+                          role=consumer
+Annotations:              <none>
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.103.14.46
+IPs:                      10.103.14.46
+TargetPort:               5000/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.1.3:5000,10.244.1.4:5000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE     IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          7m54s   10.244.1.3   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-hphdd    1/1     Running   0          7m54s   10.244.2.4   node-3.k8s   <none>           <none>
+           <none>
+producer-deploy-6999d4f5db-f6xdg   1/1     Running   0          28m     10.244.2.2   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rr8mc   1/1     Running   0          28m     10.244.2.3   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          28m     10.244.1.2   node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get nodes
+NAME         STATUS   ROLES           AGE   VERSION
+node-1.k8s   Ready    control-plane   84m   v1.27.5
+node-2.k8s   Ready    <none>          65m   v1.27.5
+node-3.k8s   Ready    <none>          64m   v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get svc
+consumer     NodePort    10.103.14.46   <none>        5000:30001/TCP   8m36s
+kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP          83m
+producer     ClusterIP   10.96.162.20   <none>        5000/TCP         8m10s
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          10m
+consumer-deploy-8c47cf674-rdrlk    1/1     Running   0          10m
+consumer-deploy-8c47cf674-w8l4g    1/1     Running   0          46s
+producer-deploy-6999d4f5db-6hjmc   1/1     Running   0          46s
+producer-deploy-6999d4f5db-tsq8v   1/1     Running   0          46s
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          31m
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          10m   10.244.1.3   node-2.k8s   <none>  consumer-deploy-8c47cf674-rdrlk    1/1     Running   0          10m   10.244.1.4   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Running   0          53s   10.244.1.6   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Running   0          53s   10.244.1.5   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Running   0          53s   10.244.1.7   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          31m   10.244.1.2   node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl describe service producer
+Name:              producer
+Namespace:         default
+Labels:            app=fun-facts
+                   role=producer
+Annotations:       <none>
+Selector:          app=fun-facts,role=producer
+Type:              ClusterIP
+IP Families:       IPv4
+IP:                10.96.162.20
+Port:              <unset>  5000/TCP
+TargetPort:        5000/TCP
+Endpoints:         10.244.1.2:5000,10.244.1.5:5000,10.244.1.7:5000
+Session Affinity:  None
+Events:            <none>
+-Management (files)\m2\demo-files> kubectl describe service consumer
+Namespace:                default
+                          role=consumer
+Selector:                 app=fun-facts,role=consumer
+Type:                     NodePort
+IP Families:              IPv4
+IP:                       10.103.14.46
+IPs:                      10.103.14.46
+Port:                     <unset>  5000/TCP
+TargetPort:               5000/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.1.3:5000,10.244.1.4:5000,10.244.1.6:5000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-andnode/node-3.k8s cordoned
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get nodes
+NAME         STATUS                     ROLES           AGE   VERSION
+node-1.k8s   Ready                      control-plane   87m   v1.27.5
+node-2.k8s   Ready                      <none>          68m   v1.27.5
+node-3.k8s   Ready,SchedulingDisabled   <none>          68m   v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl edit deployment producer-deploy
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl edit deployment producer-deploy
+deployment.apps/producer-deploy edited
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          17m
+consumer-deploy-8c47cf674-rdrlk    1/1     Running   0          17m
+producer-deploy-6999d4f5db-6hjmc   1/1     Running   0          8m
+producer-deploy-6999d4f5db-hczx6   0/1     Pending   0          56s
+producer-deploy-6999d4f5db-tlt5n   0/1     Pending   0          56s
+producer-deploy-6999d4f5db-tsq8v   1/1     Running   0          8m
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          38m
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE    IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Running   0          17m    10.244.1.3   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Running   0          17m    10.244.1.4   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Running   0          8m9s   10.244.1.6   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Running   0          8m9s   10.244.1.5   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-hczx6   0/1     Pending   0          65s    <none>       <none>       <none>           <none>
+producer-deploy-6999d4f5db-r4f25   0/1     Pending   0          65s    <none>       <none>       <none>           <none>
+producer-deploy-6999d4f5db-tlt5n   0/1     Pending   0          65s    <none>       <none>       <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Running   0          8m9s   10.244.1.7   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Running   0          38m    10.244.1.2   node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl uncordon node-3.k8s
+node/node-3.k8s uncordoned
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS              RESTARTS   AGE     IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Terminating         0          18m     10.244.1.3   node-2.k8consumer-deploy-8c47cf674-7x5ks    0/1     ContainerCreating   0          4s      <none>       node-3.k8s   <none>           <none>
+s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Terminating         0          18m     10.244.1.4   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Terminating         0          9m17s   10.244.1.6   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xtflp    0/1     ContainerCreating   0          4s      <none>       node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Terminating         0          9m17s   10.244.1.5   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-hczx6   1/1     Running             0          2m13s   10.244.2.7   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-mnbxv   0/1     ContainerCreating   0          4s      <none>       node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-r4f25   1/1     Running             0          2m13s   10.244.2.6   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rsvwz   0/1     ContainerCreating   0          4s      <none>       node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-sqvpw   0/1     ContainerCreating   0          4s      <none>       node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tlt5n   1/1     Running             0          2m13s   10.244.2.5   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Terminating         0          9m17s   10.244.1.7   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Terminating         0          39m     10.244.1.2   node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl edit deployment producer-deploy
+deployment.apps/producer-deploy edited
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS        RESTARTS   AGE     IP            NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Terminating   0          19m     10.244.1.3    node-2.k8s   <consumer-deploy-8c47cf674-7x5ks    1/1     Running       0          47s     10.244.2.11   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-qzwgz    1/1     Running       0          47s     10.244.2.8    node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Terminating   0          19m     10.244.1.4    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Terminating   0          10m     10.244.1.6    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xtflp    1/1     Running       0          47s     10.244.2.10   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Terminating   0          10m     10.244.1.5    node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-hczx6   1/1     Running       0          2m56s   10.244.2.7    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-mnbxv   1/1     Terminating   0          47s     10.244.2.12   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-r4f25   1/1     Running       0          2m56s   10.244.2.6    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rsvwz   1/1     Terminating   0          47s     10.244.2.9    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-sqvpw   1/1     Terminating   0          47s     10.244.2.13   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tlt5n   1/1     Running       0          2m56s   10.244.2.5    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Terminating   0          10m     10.244.1.7    node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Terminating   0          40m     10.244.1.2    node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS        RESTARTS   AGE     IP            NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Terminating   0          20m     10.244.1.3    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-7x5ks    1/1     Running       0          65s     10.244.2.11   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-qzwgz    1/1     Running       0          65s     10.244.2.8    node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Terminating   0          20m     10.244.1.4    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Terminating   0          10m     10.244.1.6    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xtflp    1/1     Running       0          65s     10.244.2.10   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Terminating   0          10m     10.244.1.5    node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-hczx6   1/1     Running       0          3m14s   10.244.2.7    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-mnbxv   1/1     Terminating   0          65s     10.244.2.12   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-r4f25   1/1     Running       0          3m14s   10.244.2.6    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-rsvwz   1/1     Terminating   0          65s     10.244.2.9    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-sqvpw   1/1     Terminating   0          65s     10.244.2.13   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tlt5n   1/1     Running       0          3m14s   10.244.2.5    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Terminating   0          10m     10.244.1.7    node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Terminating   0          40m     10.244.1.2    node-2.k8s   <-Management (files)\m2\demo-files>
+NAME                               READY   STATUS        RESTARTS   AGE     IP            NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Terminating   0          20m     10.244.1.3    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-7x5ks    1/1     Running       0          82s     10.244.2.11   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-qzwgz    1/1     Running       0          82s     10.244.2.8    node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Terminating   0          20m     10.244.1.4    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Terminating   0          10m     10.244.1.6    node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xtflp    1/1     Running       0          82s     10.244.2.10   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Terminating   0          10m     10.244.1.5    node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-hczx6   1/1     Running       0          3m31s   10.244.2.7    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-r4f25   1/1     Running       0          3m31s   10.244.2.6    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tlt5n   1/1     Running       0          3m31s   10.244.2.5    node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Terminating   0          10m     10.244.1.7    node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Terminating   0          41m     10.244.1.2    node-2.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl drain node-3.k8s --ignore-daemonsets --delete-local-data --force
+Flag --delete-local-data has been deprecated, This option is deprecated and will be deleted. Use --delete-emptydir-data.
+node/node-3.k8s cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-tdx2p, kube-system/kube-proxy-mdsg4
+evicting pod default/consumer-deploy-8c47cf674-xtflp
+evicting pod default/producer-deploy-6999d4f5db-tlt5n
+evicting pod default/producer-deploy-6999d4f5db-r4f25
+evicting pod default/consumer-deploy-8c47cf674-7x5ks
+evicting pod default/producer-deploy-6999d4f5db-hczx6
+evicting pod default/consumer-deploy-8c47cf674-qzwgz
+I1024 16:35:44.789707   13672 request.go:690] Waited for 1.0838654s due to client-side throttling, not priority and fairness, request: GET:https://192.168.100.18:6443/api/v1/namespaces/default/pods/consumer-deploy-8c47cf674-qzwgz
+I1024 16:35:55.789863   13672 request.go:690] Waited for 1.0840082s due to client-side throttling, not priority and fairness, request: GET:https://192.168.100.18:6443/api/v1/namespaces/default/pods/producer-deploy-6999d4f5db-hczx6
+I1024 16:36:05.789869   13672 request.go:690] Waited for 1.0840031s due to client-side throttling, not priority and fairness, request: GET:https://192.168.100.18:6443/api/v1/namespaces/default/pods/producer-deploy-6999d4f5db-hczx6
+pod/consumer-deploy-8c47cf674-7x5ks evicted
+pod/consumer-deploy-8c47cf674-xtflp evicted
+pod/producer-deploy-6999d4f5db-r4f25 evicted
+pod/consumer-deploy-8c47cf674-qzwgz evicted
+pod/producer-deploy-6999d4f5db-tlt5n evicted
+pod/producer-deploy-6999d4f5db-hczx6 evicted
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS        RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Terminating   0          23m   10.244.1.3   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-dtj4m    0/1     Pending       0          41s   <none>       <none>       <none>           <none>
+consumer-deploy-8c47cf674-rdrlk    1/1     Terminating   0          23m   10.244.1.4   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Terminating   0          13m   10.244.1.6   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xrbzl    0/1     Pending       0          41s   <none>       <none>       <none>           <none>
+consumer-deploy-8c47cf674-z8r2w    0/1     Pending       0          41s   <none>       <none>       <none>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Terminating   0          13m   10.244.1.5   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-cq46p   0/1     Pending       0          41s   <none>       <none>       <none>           <none>
+producer-deploy-6999d4f5db-tsq8v   1/1     Terminating   0          13m   10.244.1.7   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Terminating   0          44m   10.244.1.2   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-zsqtw   0/1     Pending       0          41s   <none>       <none>       <none>           <none>
+producer-deploy-6999d4f5db-zw9mw   0/1     Pending       0          41s   <none>       <none>       <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS        RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-2z57f    1/1     Terminating   0          24m   10.244.1.3   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-dtj4m    0/1     Pending       0          83s   <none>       <none>       <none>           <none>
+e>           <none>
+consumer-deploy-8c47cf674-w8l4g    1/1     Terminating   0          14m   10.244.1.6   node-2.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xrbzl    0/1     Pending       0          83s   <none>       <none>       <none>           <none>
+e>           <none>
+producer-deploy-6999d4f5db-6hjmc   1/1     Terminating   0          14m   10.244.1.5   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-cq46p   0/1     Pending       0          83s   <none>       <none>       <none>           <none>
+e>           <none>
+producer-deploy-6999d4f5db-v9ft5   1/1     Terminating   0          44m   10.244.1.2   node-2.k8s   <none>           <none>
+producer-deploy-6999d4f5db-zsqtw   0/1     Pending       0          83s   <none>       <none>       <none>           <none>
+e>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get nodes
+NAME         STATUS                     ROLES           AGE   VERSION
+node-1.k8s   Ready                      control-plane   99m   v1.27.5
+node-2.k8s   NotReady                   <none>          79m   v1.27.5
+node-3.k8s   Ready,SchedulingDisabled   <none>          79m   v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl uncordon node-3.k8s
+node/node-3.k8s uncordoned
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get nodes
+NAME         STATUS     ROLES           AGE    VERSION
+node-1.k8s   Ready      control-plane   100m   v1.27.5
+node-2.k8s   NotReady   <none>          81m    v1.27.5
+NAME         STATUS     ROLES           AGE    VERSION
+node-1.k8s   Ready      control-plane   101m   v1.27.5
+node-2.k8s   NotReady   <none>          81m    v1.27.5
+node-3.k8s   Ready      <none>          81m    v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get nodes
+NAME         STATUS   ROLES           AGE    VERSION
+node-1.k8s   Ready    control-plane   105m   v1.27.5
+node-2.k8s   Ready    <none>          85m    v1.27.5
+node-3.k8s   Ready    <none>          85m    v1.27.5
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> kubectl get pods -o wide
+NAME                               READY   STATUS    RESTARTS   AGE     IP            NODE         NOMINATED NODE   READINESS GATES
+consumer-deploy-8c47cf674-dtj4m    1/1     Running   0          8m39s   10.244.2.19   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-xrbzl    1/1     Running   0          8m39s   10.244.2.14   node-3.k8s   <none>           <none>
+consumer-deploy-8c47cf674-z8r2w    1/1     Running   0          8m39s   10.244.2.15   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-cq46p   1/1     Running   0          8m39s   10.244.2.17   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-zsqtw   1/1     Running   0          8m39s   10.244.2.16   node-3.k8s   <none>           <none>
+producer-deploy-6999d4f5db-zw9mw   1/1     Running   0          8m39s   10.244.2.18   node-3.k8s   <none>           <none>
+PS D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-Practice-Cluster-Setup-and-Management (files)\m2\demo-files> cd\
+PS D:\> Set-Location -Path 'C:\Users\NB'
+PS C:\Users\NB> ssh root@192.168.100.18
+root@192.168.100.18's password:
+Linux node-1.k8s 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 14:36:02 2023 from 192.168.100.7
+root@node-1:~# apt-cache madison kubeadm
+   kubeadm | 1.27.7-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.6-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.5-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.4-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.3-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.2-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubeadm | 1.27.0-2.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# apt-get update
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Hit:2 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:3 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+root@node-1:~# apt-get install -y --allow-change-held-packages kubeadm=1.27.7-1.1
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following held packages will be changed:
+  kubeadm
+The following packages will be upgraded:
+  kubeadm
+1 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Need to get 9,937 kB of archives.
+After this operation, 8,192 B of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubeadm 1.27.7-1.1 [9,937 kB]
+Fetched 9,937 kB in 3s (3,160 kB/s)
+apt-listchanges: Reading changelogs...
+(Reading database ... 31853 files and directories currently installed.)
+Preparing to unpack .../kubeadm_1.27.7-1.1_amd64.deb ...
+Unpacking kubeadm (1.27.7-1.1) over (1.27.5-1.1) ...
+Setting up kubeadm (1.27.7-1.1) ...
+root@node-1:~#
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.7", GitCommit:"07a61d861519c45ef5c89bc22dda289328f29343", GitTreeState:"clean", BuildDate:"2023-10-18T11:40:40Z", GoVersion:"go1.20.10", Compiler:"gc", Platform:"linux/amd64"}
+root@node-1:~# kubeadm upgrade plan
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Running pre-flight checks.
+[upgrade] Running cluster health checks
+[upgrade] Fetching available versions to upgrade to
+[upgrade/versions] Cluster version: v1.27.7
+[upgrade/versions] kubeadm version: v1.27.7
+I1024 16:47:37.499161   29598 version.go:256] remote version is much newer: v1.28.3; falling back to: stable-1.27
+[upgrade/versions] Target version: v1.27.7
+[upgrade/versions] Latest version in the v1.27 series: v1.27.7
+
+root@node-1:~# kubeadm upgrade apply v1.27.7
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Running pre-flight checks.
+[upgrade] Running cluster health checks
+[upgrade/version] You have chosen to change the cluster version to "v1.27.7"
+[upgrade/versions] Cluster version: v1.27.7
+[upgrade/versions] kubeadm version: v1.27.7
+[upgrade] Are you sure you want to proceed? [y/N]: y
+[upgrade/prepull] Pulling images required for setting up a Kubernetes cluster
+[upgrade/prepull] This might take a minute or two, depending on the speed of your internet connection
+[upgrade/prepull] You can also perform this action in beforehand using 'kubeadm config images pull'
+[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.27.7" (timeout: 5m0s)...
+[upgrade/etcd] Upgrading to TLS for etcd
+[upgrade/staticpods] Preparing for "etcd" upgrade
+[upgrade/staticpods] Renewing etcd-server certificate
+[upgrade/staticpods] Renewing etcd-peer certificate
+[upgrade/staticpods] Renewing etcd-healthcheck-client certificate
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/etcd.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2023-10-24-16-49-57/etcd.yaml"
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
+[apiclient] Found 1 Pods for label selector component=etcd
+[upgrade/staticpods] Component "etcd" upgraded successfully!
+[upgrade/etcd] Waiting for etcd to become available
+[upgrade/staticpods] Writing new Static Pod manifests to "/etc/kubernetes/tmp/kubeadm-upgraded-manifests586641974"
+[upgrade/staticpods] Preparing for "kube-apiserver" upgrade
+[upgrade/staticpods] Current and new manifests of kube-apiserver are equal, skipping upgrade
+[upgrade/staticpods] Preparing for "kube-controller-manager" upgrade
+[upgrade/staticpods] Current and new manifests of kube-controller-manager are equal, skipping upgrade
+[upgrade/staticpods] Preparing for "kube-scheduler" upgrade
+[upgrade/staticpods] Current and new manifests of kube-scheduler are equal, skipping upgrade
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upgrade] Backing up kubelet config file to /etc/kubernetes/tmp/kubeadm-kubelet-config3450507603/config.yaml
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.27.7". Enjoy!
+
+[upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
+root@node-1:~#
+root@node-1:~# kubectl drain node-1.k8s --ignore-daemonsets --delete-emptydir-data --force
+node/node-1.k8s cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-45m64, kube-system/kube-proxy-qkbst
+evicting pod kube-system/coredns-5d78c9869d-fhkd9
+evicting pod kube-system/coredns-5d78c9869d-5tnzv
+pod/coredns-5d78c9869d-fhkd9 evicted
+pod/coredns-5d78c9869d-5tnzv evicted
+node/node-1.k8s drained
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# apt-get update
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Hit:2 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:3 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+root@node-1:~# apt-get install -y --allow-change-held-packages kubelet=1.27.7-1.1 kubectl=1.27.7-1.1
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following held packages will be changed:
+  kubectl kubelet
+The following packages will be upgraded:
+  kubectl kubelet
+2 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 29.0 MB of archives.
+After this operation, 28.7 kB of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubectl 1.27.7-1.1 [10.2 MB]
+Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubelet 1.27.7-1.1 [18.7 MB]
+Fetched 29.0 MB in 7s (4,411 kB/s)
+apt-listchanges: Reading changelogs...
+(Reading database ... 31853 files and directories currently installed.)
+Preparing to unpack .../kubectl_1.27.7-1.1_amd64.deb ...
+Unpacking kubectl (1.27.7-1.1) over (1.27.5-1.1) ...
+Preparing to unpack .../kubelet_1.27.7-1.1_amd64.deb ...
+Unpacking kubelet (1.27.7-1.1) over (1.27.5-1.1) ...
+Setting up kubectl (1.27.7-1.1) ...
+Setting up kubelet (1.27.7-1.1) ...
+root@node-1:~# systemctl daemon-reload
+root@node-1:~# systemctl restart kubelet
+root@node-1:~# kubectl uncordon node-1.k8s
+node/node-1.k8s uncordoned
+root@node-1:~# kubectl get nodes
+NAME         STATUS   ROLES           AGE    VERSION
+node-1.k8s   Ready    control-plane   126m   v1.27.7
+node-2.k8s   Ready    <none>          106m   v1.27.5
+node-3.k8s   Ready    <none>          106m   v1.27.5
+root@node-1:~# kubectl drain node-2.k8s --ignore-daemonsets --delete-emptydir-data --force
+node/node-2.k8s cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-9pdfw, kube-system/kube-proxy-9g872
+evicting pod kube-system/coredns-5d78c9869d-tq5g7
+pod/coredns-5d78c9869d-tq5g7 evicted
+node/node-2.k8s drained
+root@node-1:~# kubectl uncordon node-2.k8s
+node/node-2.k8s uncordoned
+root@node-1:~# kubectl get nodes
+NAME         STATUS   ROLES           AGE    VERSION
+node-1.k8s   Ready    control-plane   133m   v1.27.7
+node-2.k8s   Ready    <none>          114m   v1.27.7
+node-3.k8s   Ready    <none>          113m   v1.27.5
+root@node-1:~# kubectl drain node-3.k8s --ignore-daemonsets --delete-emptydir-data --force
+node/node-3.k8s cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-tdx2p, kube-system/kube-proxy-mdsg4
+evicting pod kube-system/coredns-5d78c9869d-c72q6
+evicting pod default/consumer-deploy-8c47cf674-dtj4m
+evicting pod default/producer-deploy-6999d4f5db-cq46p
+evicting pod default/producer-deploy-6999d4f5db-zsqtw
+evicting pod default/producer-deploy-6999d4f5db-zw9mw
+evicting pod default/consumer-deploy-8c47cf674-xrbzl
+evicting pod default/consumer-deploy-8c47cf674-z8r2w
+I1024 17:09:49.288447   36404 request.go:696] Waited for 1.011902064s due to client-side throttling, not priority and fairness, request: GET:https://192.168.100.18:6443/api/v1/namespaces/default/pods/producer-deploy-6999d4f5db-zw9mw
+pod/coredns-5d78c9869d-c72q6 evicted
+I1024 17:10:00.287066   36404 request.go:696] Waited for 1.014579099s due to client-side throttling, not priority and fairness, request: GET:https://192.168.100.18:6443/api/v1/namespaces/default/pods/producer-deploy-6999d4f5db-zw9mw
+I1024 17:10:12.286589   36404 request.go:696] Waited for 1.01236986s due to client-side throttling, not priority and fairness, request: GET:https://192.168.100.18:6443/api/v1/namespaces/default/pods/producer-deploy-6999d4f5db-zw9mw
+pod/consumer-deploy-8c47cf674-z8r2w evicted
+pod/consumer-deploy-8c47cf674-xrbzl evicted
+pod/producer-deploy-6999d4f5db-zsqtw evicted
+pod/producer-deploy-6999d4f5db-cq46p evicted
+pod/producer-deploy-6999d4f5db-zw9mw evicted
+pod/consumer-deploy-8c47cf674-dtj4m evicted
+node/node-3.k8s drained
+root@node-1:~# kubectl uncordon node-3.k8s
+node/node-3.k8s uncordoned
+root@node-1:~# kubectl get nodes
+NAME         STATUS   ROLES           AGE    VERSION
+node-1.k8s   Ready    control-plane   139m   v1.27.7
+node-2.k8s   Ready    <none>          119m   v1.27.7
+node-3.k8s   Ready    <none>          119m   v1.27.7
+root@node-1:~# etcdctl
+-bash: etcdctl: command not found
+root@node-1:~# apt-get update && apt-get install etcd-client
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  etcd-client
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 4,176 kB of archives.
+After this operation, 16.4 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main amd64 etcd-client amd64 3.3.25+dfsg-6+b6 [4,176 kB]
+Fetched 4,176 kB in 1s (3,370 kB/s)
+Selecting previously unselected package etcd-client.
+(Reading database ... 31853 files and directories currently installed.)
+Preparing to unpack .../etcd-client_3.3.25+dfsg-6+b6_amd64.deb ...
+Unpacking etcd-client (3.3.25+dfsg-6+b6) ...
+Setting up etcd-client (3.3.25+dfsg-6+b6) ...
+Processing triggers for man-db (2.9.4-2) ...
+root@node-1:~#
+root@node-1:~# etcdctl
+NAME:
+   etcdctl - A simple command line client for etcd.
+
+WARNING:
+   Environment variable ETCDCTL_API is not set; defaults to etcdctl v2.
+   Set environment variable ETCDCTL_API=3 to use v3 API or ETCDCTL_API=2 to use v2 API.
+
+USAGE:
+   etcdctl [global options] command [command options] [arguments...]
+
+VERSION:
+   3.3.25
+
+COMMANDS:
+   backup          backup an etcd directory
+   cluster-health  check the health of the etcd cluster
+   mk              make a new key with a given value
+   mkdir           make a new directory
+   rm              remove a key or a directory
+   rmdir           removes the key if it is an empty directory or a key-value pair
+   get             retrieve the value of a key
+   ls              retrieve a directory
+   set             set the value of a key
+   setdir          create a new directory or update an existing directory TTL
+   update          update an existing key with a given value
+   updatedir       update an existing directory
+   watch           watch a key for changes
+   exec-watch      watch a key for changes and exec an executable
+   member          member add, remove and list subcommands
+   user            user add, grant and revoke subcommands
+   role            role add, grant and revoke subcommands
+   auth            overall auth controls
+   help, h         Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --debug                          output cURL commands which can be used to reproduce the request
+   --no-sync                        don't synchronize cluster information before sending request
+   --output simple, -o simple       output response in the given format (simple, `extended` or `json`) (default: "simple")
+   --discovery-srv value, -D value  domain name to query for SRV records describing cluster endpoints
+   --insecure-discovery             accept insecure SRV records describing cluster endpoints
+   --peers value, -C value          DEPRECATED - "--endpoints" should be used instead
+   --endpoint value                 DEPRECATED - "--endpoints" should be used instead
+   --endpoints value                a comma-delimited list of machine addresses in the cluster (default: "http://127.0.0.1:2379,http://127.0.0.1:4001")
+   --cert-file value                identify HTTPS client using this SSL certificate file
+   --key-file value                 identify HTTPS client using this SSL key file
+   --ca-file value                  verify certificates of HTTPS-enabled servers using this CA bundle
+   --username value, -u value       provide username[:password] and prompt if password is not supplied.
+   --timeout value                  connection timeout per request (default: 2s)
+   --total-timeout value            timeout for the command execution (except watch) (default: 5s)
+   --help, -h                       show help
+   --version, -v                    print the version
+root@node-1:~# cat /etc/kubernetes/manifests/etcd.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://192.168.100.18:2379
+  creationTimestamp: null
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - etcd
+    - --advertise-client-urls=https://192.168.100.18:2379
+    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
+    - --client-cert-auth=true
+    - --data-dir=/var/lib/etcd
+    - --experimental-initial-corrupt-check=true
+    - --experimental-watch-progress-notify-interval=5s
+    - --initial-advertise-peer-urls=https://192.168.100.18:2380
+    - --initial-cluster=node-1.k8s=https://192.168.100.18:2380
+    - --key-file=/etc/kubernetes/pki/etcd/server.key
+    - --listen-client-urls=https://127.0.0.1:2379,https://192.168.100.18:2379
+    - --listen-metrics-urls=http://127.0.0.1:2381
+    - --listen-peer-urls=https://192.168.100.18:2380
+    - --name=node-1.k8s
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+    - --peer-client-cert-auth=true
+    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    - --snapshot-count=10000
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    image: registry.k8s.io/etcd:3.5.9-0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 127.0.0.1
+        path: /health?exclude=NOSPACE&serializable=true
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    name: etcd
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 127.0.0.1
+        path: /health?serializable=false
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    volumeMounts:
+    - mountPath: /var/lib/etcd
+      name: etcd-data
+    - mountPath: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  hostNetwork: true
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+  - hostPath:
+      path: /var/lib/etcd
+      type: DirectoryOrCreate
+    name: etcd-data
+status: {}
+root@node-1:~# ETCDCTL_API=3 etcdctl --endpoint=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt member list
+Error: unknown flag: --endpoint
+NAME:
+        member list - Lists all members in the cluster
+
+USAGE:
+        etcdctl member list [flags]
+
+DESCRIPTION:
+        When --write-out is set to simple, this command prints out comma-separated member lists for each endpoint.
+        The items in the lists are ID, Status, Name, Peer Addrs, Client Addrs.
+
+OPTIONS:
+  -h, --help[=false]    help for list
+
+GLOBAL OPTIONS:
+      --cacert=""                               verify certificates of TLS-enabled secure servers using this CA bundle
+      --cert=""                                 identify secure client using this TLS certificate file
+      --command-timeout=5s                      timeout for short running command (excluding dial timeout)
+      --debug[=false]                           enable client-side debug logging
+      --dial-timeout=2s                         dial timeout for client connections
+  -d, --discovery-srv=""                        domain name to query for SRV records describing cluster endpoints
+      --endpoints=[127.0.0.1:2379]              gRPC endpoints
+      --hex[=false]                             print byte strings as hex encoded strings
+      --insecure-discovery[=true]               accept insecure SRV records describing cluster endpoints
+      --insecure-skip-tls-verify[=false]        skip server certificate verification (CAUTION: this option should be enabled only for testing purposes)
+      --insecure-transport[=true]               disable transport security for client connections
+      --keepalive-time=2s                       keepalive time for client connections
+      --keepalive-timeout=6s                    keepalive timeout for client connections
+      --key=""                                  identify secure client using this TLS key file
+      --user=""                                 username[:password] for authentication (prompt if password is not supplied)
+  -w, --write-out="simple"                      set the output format (fields, json, protobuf, simple, table)
+
+
+Error: unknown flag: --endpoint
+root@node-1:~# ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt member lis
+t
+7043c15c379800f, started, node-1.k8s, https://192.168.100.18:2380, https://192.168.100.18:2379
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt endpoint status
+https://127.0.0.1:2379, 7043c15c379800f, 3.5.9, 2.8 MB, true, 3, 16414
+root@node-1:~#
+root@node-1:~# alias etcdutil='ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt'
+root@node-1:~# etcdutil member list
+7043c15c379800f, started, node-1.k8s, https://192.168.100.18:2380, https://192.168.100.18:2379
+root@node-1:~# etcdutil snapshot save /tmp/etcd-snapshot.db
+2023-10-24 17:35:12.780307 I | clientv3: opened snapshot stream; downloading
+2023-10-24 17:35:13.221045 I | clientv3: completed snapshot read; closing
+Snapshot saved at /tmp/etcd-snapshot.db
+root@node-1:~# ls -alh /temp/etcd-snapshot.db
+ls: cannot access '/temp/etcd-snapshot.db': No such file or directory
+root@node-1:~# ls -alh /tmp/etcd-snapshot.db
+-rw-r--r-- 1 root root 2.7M Oct 24 17:35 /tmp/etcd-snapshot.db
+root@node-1:~#
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# etcdutil snapshot status /tmp/etcd-snapshot.db
+dd39aaac, 14846, 1453, 2.8 MB
+root@node-1:~# kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+consumer-deploy-8c47cf674-2xzlt    1/1     Running   0          27m
+consumer-deploy-8c47cf674-dl6xv    1/1     Running   0          27m
+consumer-deploy-8c47cf674-kh8f6    1/1     Running   0          27m
+producer-deploy-6999d4f5db-5lj9b   1/1     Running   0          27m
+producer-deploy-6999d4f5db-jpnxg   1/1     Running   0          27m
+producer-deploy-6999d4f5db-m9s77   1/1     Running   0          27m
+root@node-1:~# kubectl get deployment
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+consumer-deploy   3/3     3            3           90m
+producer-deploy   3/3     3            3           111m
+root@node-1:~# kubectl delete deployment producer-deploy
+deployment.apps "producer-deploy" deleted
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# kubectl get deployment
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+consumer-deploy   3/3     3            3           91m
+root@node-1:~# kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+consumer-deploy-8c47cf674-2xzlt   1/1     Running   0          29m
+consumer-deploy-8c47cf674-dl6xv   1/1     Running   0          29m
+consumer-deploy-8c47cf674-kh8f6   1/1     Running   0          29m
+root@node-1:~# etcdutil snapshot restore /tmp/etcd-snapshot.db --data-dir /var/lib/etcd-restore --name=n
+ode-1.k8s --initial-cluster-token=etcd-cluster-1 --initial-cluster=node-1.k8s=https://192.168.100.18:238
+0 --initial-advertise-peer-urls=https://192.168.100.18:2380
+2023-10-24 17:48:21.987699 I | mvcc: restore compact to 14111
+2023-10-24 17:48:22.172107 I | etcdserver/membership: added member 158383fffb0d0ba7 [https://192.168.100.18:2380] to cluster f5f75fddf887065b
+root@node-1:~# cat /etc/kubernetes/manifests/etcd.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://192.168.100.18:2379
+  creationTimestamp: null
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - etcd
+    - --advertise-client-urls=https://192.168.100.18:2379
+    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
+    - --client-cert-auth=true
+    - --data-dir=/var/lib/etcd
+    - --experimental-initial-corrupt-check=true
+    - --experimental-watch-progress-notify-interval=5s
+    - --initial-advertise-peer-urls=https://192.168.100.18:2380
+    - --initial-cluster=node-1.k8s=https://192.168.100.18:2380
+    - --key-file=/etc/kubernetes/pki/etcd/server.key
+    - --listen-client-urls=https://127.0.0.1:2379,https://192.168.100.18:2379
+    - --listen-metrics-urls=http://127.0.0.1:2381
+    - --listen-peer-urls=https://192.168.100.18:2380
+    - --name=node-1.k8s
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+    - --peer-client-cert-auth=true
+    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    - --snapshot-count=10000
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    image: registry.k8s.io/etcd:3.5.9-0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 127.0.0.1
+        path: /health?exclude=NOSPACE&serializable=true
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    name: etcd
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 127.0.0.1
+        path: /health?serializable=false
+        port: 2381
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    volumeMounts:
+    - mountPath: /var/lib/etcd
+      name: etcd-data
+    - mountPath: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  hostNetwork: true
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+  - hostPath:
+      path: /var/lib/etcd
+      type: DirectoryOrCreate
+    name: etcd-data
+status: {}
+root@node-1:~# vi /etc/kubernetes/manifests/etcd.yaml
+root@node-1:~#
+root@node-1:~#
+root@node-1:~# kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+consumer-deploy-8c47cf674-2xzlt    1/1     Running   0          45m
+consumer-deploy-8c47cf674-dl6xv    1/1     Running   0          45m
+consumer-deploy-8c47cf674-kh8f6    1/1     Running   0          45m
+producer-deploy-6999d4f5db-5lj9b   1/1     Running   0          45m
+producer-deploy-6999d4f5db-jpnxg   1/1     Running   0          45m
+producer-deploy-6999d4f5db-m9s77   1/1     Running   0          45m
+root@node-1:~#
+root@node-1:~# kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+consumer-deploy-8c47cf674-2xzlt    1/1     Running   0          45m
+consumer-deploy-8c47cf674-dl6xv    1/1     Running   0          45m
+consumer-deploy-8c47cf674-kh8f6    1/1     Running   0          45m
+producer-deploy-6999d4f5db-5lj9b   1/1     Running   0          45m
+producer-deploy-6999d4f5db-jpnxg   1/1     Running   0          45m
+producer-deploy-6999d4f5db-m9s77   1/1     Running   0          45m
+root@node-1:~# exit
+logout
+Connection to 192.168.100.18 closed.
+PS C:\Users\NB>

@@ -1,0 +1,161 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Nov 19 10:29:34 2023 from 10.0.2.2
+vagrant@node1:~$ cat > 1-app-init-init.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-init
+  labels:
+    app: pod-init
+spec:
+  containers:
+  - name: cont-main
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: data
+      mountPath: /usr/share/nginx/html
+  initContainers:
+  - name: cont-init-1
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo "$(date +'%d-%m-%Y %H:%M:%S') => begin initialization ..." >> /data/index.html;
+        sleep 10;
+        echo "$(date +'%d-%m-%Y %H:%M:%S') => ... done" >> /data/index.html;
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  - name: cont-init-2
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo "$(date +'%d-%m-%Y %H:%M:%S') => launching the application ..." >> /data/index.html;
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-init
+  labels:
+    app: svc-init
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: pod-init
+vagrant@node1:~$
+vagrant@node1:~$ cat 1-app-init-init.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-init
+  labels:
+    app: pod-init
+spec:
+  containers:
+  - name: cont-main
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: data
+      mountPath: /usr/share/nginx/html
+  initContainers:
+  - name: cont-init-1
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo "$(date +'%d-%m-%Y %H:%M:%S') => begin initialization ..." >> /data/index.html;
+        sleep 10;
+        echo "$(date +'%d-%m-%Y %H:%M:%S') => ... done" >> /data/index.html;
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  - name: cont-init-2
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo "$(date +'%d-%m-%Y %H:%M:%S') => launching the application ..." >> /data/index.html;
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-init
+  labels:
+    app: svc-init
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: pod-init
+vagrant@node1:~$ kubectl apply -f 1-app-init-init.yaml
+pod/pod-init created
+service/svc-init created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME       READY   STATUS     RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+pod-init   0/1     Init:0/2   0          7s    10.244.104.46   node2   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME       READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+pod-init   1/1     Running   0          19s   10.244.104.46   node2   <none>           <none>
+vagrant@node1:~$ kubectl delete -f 1-app-init-init.yaml
+pod "pod-init" deleted
+service "svc-init" deleted
+vagrant@node1:~$ history
+  ...
+  586  cat > 1-app-init-init.yaml
+  587  cat 1-app-init-init.yaml
+  588  kubectl apply -f 1-app-init-init.yaml
+  589  kubectl get pods -o wide
+  590  kubectl delete -f 1-app-init-init.yaml
+  591  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant halt
+==> node3: Attempting graceful shutdown of VM...
+==> node2: Attempting graceful shutdown of VM...
+==> node1: Attempting graceful shutdown of VM...
+==> node1: Forcing shutdown of VM...
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant halt
+
+
+PS C:\Users\NB\Kubernetes>

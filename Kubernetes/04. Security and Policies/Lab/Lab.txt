@@ -1,0 +1,2942 @@
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T12:48:08Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T12:48:11Z"
+          },
+          {
+            "type": "ContainersReady",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T12:48:11Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T12:48:10Z"
+          }
+        ],
+        "hostIP": "192.168.99.102",
+        "podIP": "10.244.104.3",
+        "podIPs": [
+          {
+            "ip": "10.244.104.3"
+          }
+        ],
+        "startTime": "2023-11-01T12:48:08Z",
+        "containerStatuses": [
+          {
+            "name": "demo-pod",
+            "state": {
+              "running": {
+                "startedAt": "2023-11-01T12:48:10Z"
+              }
+            },
+            "lastState": {},
+            "ready": true,
+            "restartCount": 0,
+            "image": "docker.io/shekeriev/k8s-oracle:latest",
+            "imageID": "docker.io/shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6",
+            "containerID": "containerd://709cba32c354011c58b7468d2b78cfe03180402f7be43dfa06b55966894f3428",
+            "started": true
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    },
+    {
+      "metadata": {
+        "name": "rbac-pod",
+        "namespace": "rbac-ns",
+        "uid": "5e878393-f82f-446a-b207-4123ffd1638a",
+        "resourceVersion": "21202",
+        "creationTimestamp": "2023-11-01T11:43:55Z",
+        "labels": {
+          "run": "rbac-pod"
+        },
+        "annotations": {
+          "cni.projectcalico.org/containerID": "aab06c0bae8f0a81aff50780d7ccd732d21fe1b73dcb6d005255c3669d7e49a5",
+          "cni.projectcalico.org/podIP": "10.244.135.4/32",
+          "cni.projectcalico.org/podIPs": "10.244.135.4/32"
+        },
+        "managedFields": [
+          {
+            "manager": "kubectl-run",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-11-01T11:43:55Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:labels": {
+                  ".": {},
+                  "f:run": {}
+                }
+              },
+              "f:spec": {
+                "f:containers": {
+                  "k:{\"name\":\"rbac-pod\"}": {
+                    ".": {},
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:name": {},
+                    "f:resources": {},
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {}
+                  }
+                },
+                "f:dnsPolicy": {},
+                "f:enableServiceLinks": {},
+                "f:restartPolicy": {},
+                "f:schedulerName": {},
+                "f:securityContext": {},
+                "f:terminationGracePeriodSeconds": {}
+              }
+            }
+          },
+          {
+            "manager": "calico",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-11-01T11:43:56Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:cni.projectcalico.org/containerID": {},
+                  "f:cni.projectcalico.org/podIP": {},
+                  "f:cni.projectcalico.org/podIPs": {}
+                }
+              }
+            },
+            "subresource": "status"
+          },
+          {
+            "manager": "kubelet",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-11-01T11:43:58Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:status": {
+                "f:conditions": {
+                  "k:{\"type\":\"ContainersReady\"}": {
+                    ".": {},
+                    "f:lastProbeTime": {},
+                    "f:lastTransitionTime": {},
+                    "f:status": {},
+                    "f:type": {}
+                  },
+                  "k:{\"type\":\"Initialized\"}": {
+                    ".": {},
+                    "f:lastProbeTime": {},
+                    "f:lastTransitionTime": {},
+                    "f:status": {},
+                    "f:type": {}
+                  },
+                  "k:{\"type\":\"Ready\"}": {
+                    ".": {},
+                    "f:lastProbeTime": {},
+                    "f:lastTransitionTime": {},
+                    "f:status": {},
+                    "f:type": {}
+                  }
+                },
+                "f:containerStatuses": {},
+                "f:hostIP": {},
+                "f:phase": {},
+                "f:podIP": {},
+                "f:podIPs": {
+                  ".": {},
+                  "k:{\"ip\":\"10.244.135.4\"}": {
+                    ".": {},
+                    "f:ip": {}
+                  }
+                },
+                "f:startTime": {}
+              }
+            },
+            "subresource": "status"
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "kube-api-access-q675q",
+            "projected": {
+              "sources": [
+                {
+                  "serviceAccountToken": {
+                    "expirationSeconds": 3607,
+                    "path": "token"
+                  }
+                },
+                {
+                  "configMap": {
+                    "name": "kube-root-ca.crt",
+                    "items": [
+                      {
+                        "key": "ca.crt",
+                        "path": "ca.crt"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "downwardAPI": {
+                    "items": [
+                      {
+                        "path": "namespace",
+                        "fieldRef": {
+                          "apiVersion": "v1",
+                          "fieldPath": "metadata.namespace"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "rbac-pod",
+            "image": "shekeriev/k8s-oracle",
+            "resources": {},
+            "volumeMounts": [
+              {
+                "name": "kube-api-access-q675q",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "node3",
+        "securityContext": {},
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ],
+        "priority": 0,
+        "enableServiceLinks": true,
+        "preemptionPolicy": "PreemptLowerPriority"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T11:43:54Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T11:43:57Z"
+          },
+          {
+            "type": "ContainersReady",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T11:43:57Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2023-11-01T11:43:55Z"
+          }
+        ],
+        "hostIP": "192.168.99.103",
+        "podIP": "10.244.135.4",
+        "podIPs": [
+          {
+            "ip": "10.244.135.4"
+          }
+        ],
+        "startTime": "2023-11-01T11:43:54Z",
+        "containerStatuses": [
+          {
+            "name": "rbac-pod",
+            "state": {
+              "running": {
+                "startedAt": "2023-11-01T11:43:56Z"
+              }
+            },
+            "lastState": {},
+            "ready": true,
+            "restartCount": 0,
+            "image": "docker.io/shekeriev/k8s-oracle:latest",
+            "imageID": "docker.io/shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6",
+            "containerID": "containerd://d33d2f65bd71c899a4f40cf4737254d02b07f0d12a17eac614baaddbb93422d1",
+            "started": true
+          }
+        ],
+        "qosClass": "BestEffort"
+      }
+    }
+  ]
+}root@demo-pod:/app# curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/api/v1/namespaces/rbac-ns/services
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "resourceVersion": "32823"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "rbac-svc",
+        "namespace": "rbac-ns",
+        "uid": "fcac7784-387c-4dfa-a263-0e4101bf0c1a",
+        "resourceVersion": "21255",
+        "creationTimestamp": "2023-11-01T11:44:23Z",
+        "labels": {
+          "run": "rbac-pod"
+        },
+        "managedFields": [
+          {
+            "manager": "kubectl-expose",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-11-01T11:44:23Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:labels": {
+                  ".": {},
+                  "f:run": {}
+                }
+              },
+              "f:spec": {
+                "f:internalTrafficPolicy": {},
+                "f:ports": {
+                  ".": {},
+                  "k:{\"port\":5000,\"protocol\":\"TCP\"}": {
+                    ".": {},
+                    "f:port": {},
+                    "f:protocol": {},
+                    "f:targetPort": {}
+                  }
+                },
+                "f:selector": {},
+                "f:sessionAffinity": {},
+                "f:type": {}
+              }
+            }
+          }
+        ]
+      },
+      "spec": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 5000,
+            "targetPort": 5000
+          }
+        ],
+        "selector": {
+          "run": "rbac-pod"
+        },
+        "clusterIP": "10.107.80.187",
+        "clusterIPs": [
+          "10.107.80.187"
+        ],
+        "type": "ClusterIP",
+        "sessionAffinity": "None",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "internalTrafficPolicy": "Cluster"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  ]
+}root@demo-pod:/app#
+root@demo-pod:/app# curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X DELETE ${APISERVER}/api/v1/namespaces/rbac-ns/services/rbac-svc
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {},
+  "status": "Failure",
+  "message": "services \"rbac-svc\" is forbidden: User \"system:serviceaccount:rbac-ns:demo-sa\" cannot delete resource \"services\" in API group \"\" in the namespace \"rbac-ns\"",
+  "reason": "Forbidden",
+  "details": {
+    "name": "rbac-svc",
+    "kind": "services"
+  },
+  "code": 403
+}root@demo-pod:/app# curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" \
+> -X DELETE ${APISERVER}/api/v1/namespaces/rbac-ns/pods/rbac-pod
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "rbac-pod",
+    "namespace": "rbac-ns",
+    "uid": "5e878393-f82f-446a-b207-4123ffd1638a",
+    "resourceVersion": "32960",
+    "creationTimestamp": "2023-11-01T11:43:55Z",
+    "deletionTimestamp": "2023-11-01T13:22:55Z",
+    "deletionGracePeriodSeconds": 30,
+    "labels": {
+      "run": "rbac-pod"
+    },
+    "annotations": {
+      "cni.projectcalico.org/containerID": "aab06c0bae8f0a81aff50780d7ccd732d21fe1b73dcb6d005255c3669d7e49a5",
+      "cni.projectcalico.org/podIP": "10.244.135.4/32",
+      "cni.projectcalico.org/podIPs": "10.244.135.4/32"
+    },
+    "managedFields": [
+      {
+        "manager": "kubectl-run",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2023-11-01T11:43:55Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:labels": {
+              ".": {},
+              "f:run": {}
+            }
+          },
+          "f:spec": {
+            "f:containers": {
+              "k:{\"name\":\"rbac-pod\"}": {
+                ".": {},
+                "f:image": {},
+                "f:imagePullPolicy": {},
+                "f:name": {},
+                "f:resources": {},
+                "f:terminationMessagePath": {},
+                "f:terminationMessagePolicy": {}
+              }
+            },
+            "f:dnsPolicy": {},
+            "f:enableServiceLinks": {},
+            "f:restartPolicy": {},
+            "f:schedulerName": {},
+            "f:securityContext": {},
+            "f:terminationGracePeriodSeconds": {}
+          }
+        }
+      },
+      {
+        "manager": "calico",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2023-11-01T11:43:56Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:cni.projectcalico.org/containerID": {},
+              "f:cni.projectcalico.org/podIP": {},
+              "f:cni.projectcalico.org/podIPs": {}
+            }
+          }
+        },
+        "subresource": "status"
+      },
+      {
+        "manager": "kubelet",
+        "operation": "Update",
+        "apiVersion": "v1",
+        "time": "2023-11-01T11:43:58Z",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:status": {
+            "f:conditions": {
+              "k:{\"type\":\"ContainersReady\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"Initialized\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"Ready\"}": {
+                ".": {},
+                "f:lastProbeTime": {},
+                "f:lastTransitionTime": {},
+                "f:status": {},
+                "f:type": {}
+              }
+            },
+            "f:containerStatuses": {},
+            "f:hostIP": {},
+            "f:phase": {},
+            "f:podIP": {},
+            "f:podIPs": {
+              ".": {},
+              "k:{\"ip\":\"10.244.135.4\"}": {
+                ".": {},
+                "f:ip": {}
+              }
+            },
+            "f:startTime": {}
+          }
+        },
+        "subresource": "status"
+      }
+    ]
+  },
+  "spec": {
+    "volumes": [
+      {
+        "name": "kube-api-access-q675q",
+        "projected": {
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "expirationSeconds": 3607,
+                "path": "token"
+              }
+            },
+            {
+              "configMap": {
+                "name": "kube-root-ca.crt",
+                "items": [
+                  {
+                    "key": "ca.crt",
+                    "path": "ca.crt"
+                  }
+                ]
+              }
+            },
+            {
+              "downwardAPI": {
+                "items": [
+                  {
+                    "path": "namespace",
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "metadata.namespace"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "defaultMode": 420
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "rbac-pod",
+        "image": "shekeriev/k8s-oracle",
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name": "kube-api-access-q675q",
+            "readOnly": true,
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always"
+      }
+    ],
+    "restartPolicy": "Always",
+    "terminationGracePeriodSeconds": 30,
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccountName": "default",
+    "serviceAccount": "default",
+    "nodeName": "node3",
+    "securityContext": {},
+    "schedulerName": "default-scheduler",
+    "tolerations": [
+      {
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      },
+      {
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }
+    ],
+    "priority": 0,
+    "enableServiceLinks": true,
+    "preemptionPolicy": "PreemptLowerPriority"
+  },
+  "status": {
+    "phase": "Running",
+    "conditions": [
+      {
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-11-01T11:43:54Z"
+      },
+      {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-11-01T11:43:57Z"
+      },
+      {
+        "type": "ContainersReady",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-11-01T11:43:57Z"
+      },
+      {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2023-11-01T11:43:55Z"
+      }
+    ],
+    "hostIP": "192.168.99.103",
+    "podIP": "10.244.135.4",
+    "podIPs": [
+      {
+        "ip": "10.244.135.4"
+      }
+    ],
+    "startTime": "2023-11-01T11:43:54Z",
+    "containerStatuses": [
+      {
+        "name": "rbac-pod",
+        "state": {
+          "running": {
+            "startedAt": "2023-11-01T11:43:56Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "docker.io/shekeriev/k8s-oracle:latest",
+        "imageID": "docker.io/shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6",
+        "containerID": "containerd://d33d2f65bd71c899a4f40cf4737254d02b07f0d12a17eac614baaddbb93422d1",
+        "started": true
+      }
+    ],
+    "qosClass": "BestEffort"
+  }
+}root@demo-pod:/app# exit
+exit
+vagrant@node1:~/part1$ kubectl get pods,svc -n rbac-ns
+NAME           READY   STATUS    RESTARTS   AGE
+pod/demo-pod   1/1     Running   0          36m
+
+NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/rbac-svc   ClusterIP   10.107.80.187   <none>        5000/TCP   100m
+vagrant@node1:~/part1$ kubectl delete namespace rbac-ns
+namespace "rbac-ns" deleted
+vagrant@node1:~/part1$ cd ..
+vagrant@node1:~$ ls
+part1  part2  part3
+vagrant@node1:~$ kubectl describe nodes
+Name:               node1
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node1
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node1"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.101/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.166.128
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:41:40 +0200
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node1
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:27:48 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:44:28 +0200   Wed, 01 Nov 2023 10:44:28 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:23:14 +0200   Wed, 01 Nov 2023 10:41:39 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:23:14 +0200   Wed, 01 Nov 2023 10:41:39 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:23:14 +0200   Wed, 01 Nov 2023 10:41:39 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:23:14 +0200   Wed, 01 Nov 2023 10:43:23 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.101
+  Hostname:    node1
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                04239583-aba4-e24a-8dd0-77117c0a1caf
+  Boot ID:                    f7662645-298a-4c22-b986-8f05a6e834b4
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+Non-terminated Pods:          (14 in total)
+  Namespace                   Name                                        CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                        ------------  ----------  ---------------  -------------  ---
+  calico-apiserver            calico-apiserver-5b7bc7f7b7-f8hs9           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h42m
+  calico-apiserver            calico-apiserver-5b7bc7f7b7-j76mv           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h42m
+  calico-system               calico-kube-controllers-78d8c95cc7-qxkk4    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  calico-system               calico-node-rzs64                           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  calico-system               calico-typha-f8759cc74-dznbz                0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  calico-system               csi-node-driver-ck59f                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  kube-system                 coredns-5d78c9869d-mx2w4                    100m (5%)     0 (0%)      70Mi (3%)        170Mi (9%)     4h45m
+  kube-system                 coredns-5d78c9869d-x5f4p                    100m (5%)     0 (0%)      70Mi (3%)        170Mi (9%)     4h45m
+  kube-system                 etcd-node1                                  100m (5%)     0 (0%)      100Mi (5%)       0 (0%)         4h46m
+  kube-system                 kube-apiserver-node1                        250m (12%)    0 (0%)      0 (0%)           0 (0%)         4h46m
+  kube-system                 kube-controller-manager-node1               200m (10%)    0 (0%)      0 (0%)           0 (0%)         4h46m
+  kube-system                 kube-proxy-8lpxb                            0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  kube-system                 kube-scheduler-node1                        100m (5%)     0 (0%)      0 (0%)           0 (0%)         4h46m
+  tigera-operator             tigera-operator-f6bb878c4-dbhkj             0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                850m (42%)   0 (0%)
+  memory             240Mi (12%)  340Mi (18%)
+  ephemeral-storage  0 (0%)       0 (0%)
+  hugepages-2Mi      0 (0%)       0 (0%)
+Events:              <none>
+
+
+Name:               node2
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node2
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node2"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.102/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.104.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:45:15 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node2
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:27:46 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:47:46 +0200   Wed, 01 Nov 2023 10:47:46 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:25:12 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:25:12 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:25:12 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:25:12 +0200   Wed, 01 Nov 2023 10:47:04 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.102
+  Hostname:    node2
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                2c7b5757-f5ac-1d4b-a27a-5aa1e5fd91d9
+  Boot ID:                    dc310a05-9d94-4abf-b553-10d5149dbb41
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.1.0/24
+PodCIDRs:                     10.244.1.0/24
+Non-terminated Pods:          (4 in total)
+  Namespace                   Name                            CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                            ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-ltvh9               0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h42m
+  calico-system               calico-typha-f8759cc74-tqtz7    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h38m
+  calico-system               csi-node-driver-djrrb           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h42m
+  kube-system                 kube-proxy-xwtgg                0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h42m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+  hugepages-2Mi      0 (0%)    0 (0%)
+Events:              <none>
+
+
+Name:               node3
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node3
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node3"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.103/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.135.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:49:04 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node3
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:27:51 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:51:10 +0200   Wed, 01 Nov 2023 10:51:10 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:26:48 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:26:48 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:26:48 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:26:48 +0200   Wed, 01 Nov 2023 10:50:28 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.103
+  Hostname:    node3
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                4852bd88-173c-8842-b21e-365a55301c73
+  Boot ID:                    0a915fc1-d9dc-4d7e-abc1-be7f4a2354e5
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.2.0/24
+PodCIDRs:                     10.244.2.0/24
+Non-terminated Pods:          (3 in total)
+  Namespace                   Name                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                     ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-xlg7w        0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h38m
+  calico-system               csi-node-driver-s55zb    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h38m
+  kube-system                 kube-proxy-p99v9         0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h38m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+  hugepages-2Mi      0 (0%)    0 (0%)
+Events:              <none>
+vagrant@node1:~$ kubectl create namespace reslim
+namespace/reslim created
+vagrant@node1:~$ kubectl run pod-1 --image=alpine --restart=Never --namespace reslim -- dd if=/dev/zero of=/dev/null bs=16M
+pod/pod-1 created
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME    READY   STATUS    RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-1   1/1     Running   0          13s   10.244.135.5   node3   <none>           <none>
+vagrant@node1:~$ kubectl describe node node3
+Name:               node3
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node3
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node3"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.103/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.135.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:49:04 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node3
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:32:18 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:51:10 +0200   Wed, 01 Nov 2023 10:51:10 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:50:28 +0200   KubeletReady                 kubelet isMem: 1877544K used, 140676K free, 1224K shrd, 52656K buff, 1319260K cached
+CPU:   0% usr  52% sys   0% nic  46% idle   0% io   0% irq   0% sirq
+Load average: 0.95 0.52 0.29 4/297 13
+  PID  PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
+    1     0 root     R    17972   1%   0  52% dd if /dev/zero of /dev/null bs 16M
+    8     0 root     R     1600   0%   1   0% top
+vagrant@node1:~$ kubectl describe node node3
+Name:               node3
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node3
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node3"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.103/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.135.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:49:04 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node3
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:34:22 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:51:10 +0200   Wed, 01 Nov 2023 10:51:10 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:32:16 +0200   Wed, 01 Nov 2023 10:50:28 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.103
+  Hostname:    node3
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                4852bd88-173c-8842-b21e-365a55301c73
+  Boot ID:                    0a915fc1-d9dc-4d7e-abc1-be7f4a2354e5
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.2.0/24
+PodCIDRs:                     10.244.2.0/24
+Non-terminated Pods:          (4 in total)
+  Namespace                   Name                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                     ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-xlg7w        0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  calico-system               csi-node-driver-s55zb    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  kube-system                 kube-proxy-p99v9         0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h45m
+  reslim                      pod-1                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         2m46s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+Mem: 1903508K used, 114712K free, 1224K shrd, 53040K buff, 1326260K cached
+CPU:  0.0% usr 55.0% sys  0.0% nic 45.0% idle  0.0% io  0.0% irq  0.0% sirq
+Load average: 0.86 0.78 0.49 2/302 13
+  PID  PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
+    1     0 root     R    37040  1.8   0 50.0 dd if /dev/zero of /dev/null bs 32M
+    7     0 root     R     4404  0.2   1  0.0 top
+vagrant@node1:~$ kubectl describe node node3
+Name:               node3
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node3
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node3"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.103/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.135.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:49:04 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node3
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:39:13 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:51:10 +0200   Wed, 01 Nov 2023 10:51:10 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:38:20 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:38:20 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:38:20 +0200   Wed, 01 Nov 2023 10:49:04 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:38:20 +0200   Wed, 01 Nov 2023 10:50:28 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.103
+  Hostname:    node3
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                4852bd88-173c-8842-b21e-365a55301c73
+  Boot ID:                    0a915fc1-d9dc-4d7e-abc1-be7f4a2354e5
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.2.0/24
+PodCIDRs:                     10.244.2.0/24
+Non-terminated Pods:          (4 in total)
+  Namespace                   Name                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                     ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-xlg7w        0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h50m
+  calico-system               csi-node-driver-s55zb    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h50m
+  kube-system                 kube-proxy-p99v9         0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h50m
+  reslim                      pod-2                    250m (12%)    0 (0%)      16Mi (0%)        0 (0%)         86s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                250m (12%)  0 (0%)
+  memory             16Mi (0%)   0 (0%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:              <none>
+vagrant@node1:~$ cd part2
+vagrant@node1:~/part2$ cat > deployment-res.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: res
+  namespace: reslim
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      purpose: res
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        purpose: res
+    spec:
+      containers:
+      - name: main
+        image: alpine
+        command: ["dd", "if=/dev/zero", "of=/dev/null", "bs=32M"]
+        resources:
+          requests:
+            cpu: 500m
+            memory: 32Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ cat deployment-res.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: res
+  namespace: reslim
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      purpose: res
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        purpose: res
+    spec:
+      containers:
+      - name: main
+        image: alpine
+        command: ["dd", "if=/dev/zero", "of=/dev/null", "bs=32M"]
+        resources:
+          requests:
+            cpu: 500m
+            memory: 32Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ kubectl apply -f part2/deployment-res.yaml
+error: the path "part2/deployment-res.yaml" does not exist
+vagrant@node1:~/part2$ kubectl apply -f deployment-res.yaml
+deployment.apps/res created
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS              RESTARTS   AGE     IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Running             0          3m17s   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   0/1     ContainerCreating   0          7s      <none>         node3   <none>           <none>
+res-66767bc74-5h6rd   0/1     ContainerCreating   0          8s      <none>         node2   <none>           <none>
+res-66767bc74-nzjjx   1/1     Running             0          7s      10.244.104.4   node2   <none>           <none>
+vagrant@node1:~/part2$ kubectl describe node node2
+Name:               node2
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node2
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node2"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.102/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.104.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:45:15 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node2
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:41:51 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:47:46 +0200   Wed, 01 Nov 2023 10:47:46 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:41:43 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:41:43 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:41:43 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:41:43 +0200   Wed, 01 Nov 2023 10:47:04 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.102
+  Hostname:    node2
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                2c7b5757-f5ac-1d4b-a27a-5aa1e5fd91d9
+  Boot ID:                    dc310a05-9d94-4abf-b553-10d5149dbb41
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.1.0/24
+PodCIDRs:                     10.244.1.0/24
+Non-terminated Pods:          (6 in total)
+  Namespace                   Name                            CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                            ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-ltvh9               0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h56m
+  calico-system               calico-typha-f8759cc74-tqtz7    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h52m
+  calico-system               csi-node-driver-djrrb           0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h56m
+  kube-system                 kube-proxy-xwtgg                0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h56m
+  reslim                      res-66767bc74-5h6rd             500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         53s
+  reslim                      res-66767bc74-nzjjx             500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         52s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                1 (50%)    0 (0%)
+  memory             64Mi (3%)  0 (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:              <none>
+vagrant@node1:~/part2$ kubectl scale deployment res -n reslim --replicas=5
+deployment.apps/res scaled
+vagrant@node1:~/part2$ kubectl get deployment -n reslim
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+res    3/5     5            3           88s
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS              RESTARTS   AGE     IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Running             0          4m49s   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Running             0          99s     10.244.135.7   node3   <none>           <none>
+res-66767bc74-5h6rd   1/1     Running             0          100s    10.244.104.5   node2   <none>           <none>
+res-66767bc74-d2prb   1/1     Running             0          22s     10.244.135.8   node3   <none>           <none>
+res-66767bc74-d7txv   0/1     ContainerCreating   0          21s     <none>         node2   <none>           <none>
+res-66767bc74-nzjjx   1/1     Running             0          99s     10.244.104.4   node2   <none>           <none>
+vagrant@node1:~/part2$ kubectl describe pod res-66767bc74-2nwb4 -n reslim
+Name:             res-66767bc74-2nwb4
+Namespace:        reslim
+Priority:         0
+Service Account:  default
+Node:             node3/192.168.99.103
+Start Time:       Wed, 01 Nov 2023 15:41:01 +0200
+Labels:           pod-template-hash=66767bc74
+                  purpose=res
+Annotations:      cni.projectcalico.org/containerID: c7843d7d0fdfe0c45f878c28990b28a57037e58f0241f28e0cedcf76a8cba335
+                  cni.projectcalico.org/podIP: 10.244.135.7/32
+                  cni.projectcalico.org/podIPs: 10.244.135.7/32
+Status:           Running
+IP:               10.244.135.7
+IPs:
+  IP:           10.244.135.7
+Controlled By:  ReplicaSet/res-66767bc74
+Containers:
+  main:
+    Container ID:  containerd://26b7590ea0593e7941fb79ff752ef8607c63efb8a791319c1a1b2997ee98fcf4
+    Image:         alpine
+    Image ID:      docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      dd
+      if=/dev/zero
+      of=/dev/null
+      bs=32M
+    State:          Running
+      Started:      Wed, 01 Nov 2023 15:41:11 +0200
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:        500m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rwf9b (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-rwf9b:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason        Age    From               Message
+  ----     ------        ----   ----               -------
+  Normal   Scheduled     3m13s  default-scheduler  Successfully assigned reslim/res-66767bc74-2nwb4 to node3
+  Normal   Pulling       3m7s   kubelet            Pulling image "alpine"
+  Normal   Pulled        3m6s   kubelet            Successfully pulled image "alpine" in 1.211033225s (1.211052515s including waiting)
+  Normal   Created       3m6s   kubelet            Created container main
+  Normal   Started       3m5s   kubelet            Started container main
+  Warning  NodeNotReady  5s     node-controller    Node is not ready
+vagrant@node1:~/part2$ kubectl scale deployment res -n reslim --replicas=8
+deployment.apps/res scaled
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS    RESTARTS   AGE     IP             NODE     NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Running   0          6m50s   10.244.135.6   node3    <none>           <none>
+res-66767bc74-2nwb4   1/1     Running   0          3m40s   10.244.135.7   node3    <none>           <none>
+res-66767bc74-5h6rd   1/1     Running   0          3m41s   10.244.104.5   node2    <none>           <none>
+res-66767bc74-7rgq7   0/1     Pending   0          16s     <none>         <none>   <none>           <none>
+res-66767bc74-d2prb   1/1     Running   0          2m23s   10.244.135.8   node3    <none>           <none>
+res-66767bc74-d7txv   1/1     Running   0          2m22s   10.244.104.6   node2    <none>           <none>
+res-66767bc74-nzjjx   1/1     Running   0          3m40s   10.244.104.4   node2    <none>           <none>
+res-66767bc74-qqqtn   1/1     Running   0          16s     10.244.104.7   node2    <none>           <none>
+res-66767bc74-s756s   0/1     Pending   0          16s     <none>         <none>   <none>           <none>
+vagrant@node1:~/part2$ kubectl get pods -n reslim res-66767bc74-s756s
+NAME                  READY   STATUS    RESTARTS   AGE
+res-66767bc74-s756s   0/1     Pending   0          2m31s
+vagrant@node1:~/part2$ kubectl describe pods -n reslim res-66767bc74-s756s
+Name:             res-66767bc74-s756s
+Namespace:        reslim
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           pod-template-hash=66767bc74
+                  purpose=res
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    ReplicaSet/res-66767bc74
+Containers:
+  main:
+    Image:      alpine
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      dd
+      if=/dev/zero
+      of=/dev/null
+      bs=32M
+    Requests:
+      cpu:        500m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lzr75 (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False
+Volumes:
+  kube-api-access-lzr75:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                    From               Message
+  ----     ------            ----                   ----               -------
+  Warning  FailedScheduling  2m55s (x2 over 2m57s)  default-scheduler  0/3 nodes are available: 1 Insufficient cpu, 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }, 1 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption: 0/3 nodes are available: 1 No preemption victims found for incoming pod, 2 Preemption is not helpful for scheduling..
+vagrant@node1:~/part2$ kubectl describe nodes node2
+Name:               node2
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node2
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node2"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.102/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.104.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:45:15 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node2
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:48:41 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 10:47:46 +0200   Wed, 01 Nov 2023 10:47:46 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 15:46:56 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 15:46:56 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 15:46:56 +0200   Wed, 01 Nov 2023 10:46:06 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 15:46:56 +0200   Wed, 01 Nov 2023 10:47:04 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.102
+  Hostname:    node2
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                2c7b5757-f5ac-1d4b-a27a-5aa1e5fd91d9
+  Boot ID:                    dc310a05-9d94-4abf-b553-10d5149dbb41
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.1.0/24
+PodCIDRs:                     10.244.1.0/24
+Non-terminated Pods:          (8 in total)
+  Namespace                   Name                            CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                            ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-ltvh9               0 (0%)        0 (0%)      0 (0%)           0 (0%)         5h3m
+  calico-system               calico-typha-f8759cc74-tqtz7    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4h59m
+  calico-system               csi-node-driver-djrrb           0 (0%)        0 (0%)      0 (0%)           0 (0%)         5h3m
+  kube-system                 kube-proxy-xwtgg                0 (0%)        0 (0%)      0 (0%)           0 (0%)         5h3m
+  reslim                      res-66767bc74-5h6rd             500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         7m51s
+  reslim                      res-66767bc74-d7txv             500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         6m32s
+  reslim                      res-66767bc74-nzjjx             500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         7m50s
+  reslim                      res-66767bc74-qqqtn             500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         4m26s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                2 (100%)    0 (0%)
+  memory             128Mi (6%)  0 (0%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:              <none>
+vagrant@node1:~/part2$ kubectl describe nodes node3
+Name:               node3
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node3
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node3"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.103/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.135.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:49:04 +0200
+Taints:             node.kubernetes.io/unreachable:NoExecute
+                    node.kubernetes.io/unreachable:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node3
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 15:43:26 +0200
+Conditions:
+  Type                 Status    LastHeartbeatTime                 LastTransitionTime                Reason              Message
+  ----                 ------    -----------------                 ------------------                ------              -------
+  NetworkUnavailable   False     Wed, 01 Nov 2023 10:51:10 +0200   Wed, 01 Nov 2023 10:51:10 +0200   CalicoIsUp          Calico is running on this node
+  MemoryPressure       Unknown   Wed, 01 Nov 2023 15:43:26 +0200   Wed, 01 Nov 2023 15:44:10 +0200   NodeStatusUnknown   Kubelet stopped posting node status.
+  DiskPressure         Unknown   Wed, 01 Nov 2023 15:43:26 +0200   Wed, 01 Nov 2023 15:44:10 +0200   NodeStatusUnknown   Kubelet stopped posting node status.
+  PIDPressure          Unknown   Wed, 01 Nov 2023 15:43:26 +0200   Wed, 01 Nov 2023 15:44:10 +0200   NodeStatusUnknown   Kubelet stopped posting node status.
+  Ready                Unknown   Wed, 01 Nov 2023 15:43:26 +0200   Wed, 01 Nov 2023 15:44:10 +0200   NodeStatusUnknown   Kubelet stopped posting node status.
+Addresses:
+  InternalIP:  192.168.99.103
+  Hostname:    node3
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+  memory:             1915820Ki
+  pods:               110
+System Info:
+  Machine ID:                 ddcfbf35d15548c5b2bcc0b61a8543a2
+  System UUID:                4852bd88-173c-8842-b21e-365a55301c73
+  Boot ID:                    0a915fc1-d9dc-4d7e-abc1-be7f4a2354e5
+  Kernel Version:             5.10.0-26-amd64
+  OS Image:                   Debian GNU/Linux 11 (bullseye)
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.24
+  Kubelet Version:            v1.27.5
+  Kube-Proxy Version:         v1.27.5
+PodCIDR:                      10.244.2.0/24
+PodCIDRs:                     10.244.2.0/24
+Non-terminated Pods:          (6 in total)
+  Namespace                   Name                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                     ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-xlg7w        0 (0%)        0 (0%)      0 (0%)           0 (0%)         5h
+  calico-system               csi-node-driver-s55zb    0 (0%)        0 (0%)      0 (0%)           0 (0%)         5h
+  kube-system                 kube-proxy-p99v9         0 (0%)        0 (0%)      0 (0%)           0 (0%)         5h
+  reslim                      pod-2                    250m (12%)    0 (0%)      16Mi (0%)        0 (0%)         11m
+  reslim                      res-66767bc74-2nwb4      500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         8m5s
+  reslim                      res-66767bc74-d2prb      500m (25%)    0 (0%)      32Mi (1%)        0 (0%)         6m48s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                1250m (62%)  0 (0%)
+  memory             80Mi (4%)    0 (0%)
+  ephemeral-storage  0 (0%)       0 (0%)
+  hugepages-2Mi      0 (0%)       0 (0%)
+Events:
+  Type    Reason        Age    From             Message
+  ----    ------        ----   ----             -------
+  Normal  NodeNotReady  4m58s  node-controller  Node node3 status is now: NodeNotReady
+vagrant@node1:~/part2$ kubectl delete -f deployment-res.yaml
+deployment.apps "res" deleted
+vagrant@node1:~/part2$ kubectl delete -f pod-2.yaml
+error: the path "pod-2.yaml" does not exist
+vagrant@node1:~/part2$ cd ..
+vagrant@node1:~$ kubectl delete -f pod-2.yaml
+pod "pod-2" deleted
+
+
+^Cvagrant@node1:~$
+vagrant@node1:~$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          17m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          13m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          12m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          17m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          14m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          13m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          17m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          14m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          13m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          18m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          15m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          13m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          19m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          16m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          15m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          20m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          17m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          16m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ kubectl delete namespace reslim
+namespace "reslim" deleted
+^Cvagrant@node1:~$ kubectl get ns
+NAME               STATUS        AGE
+calico-apiserver   Active        5h23m
+calico-system      Active        5h26m
+default            Active        5h26m
+kube-node-lease    Active        5h26m
+kube-public        Active        5h26m
+kube-system        Active        5h26m
+reslim             Terminating   38m
+tigera-operator    Active        5h26m
+vagrant@node1:~$ exit
+logout
+There are stopped jobs.
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS        AGE
+calico-apiserver   Active        5h23m
+calico-system      Active        5h26m
+default            Active        5h27m
+kube-node-lease    Active        5h27m
+kube-public        Active        5h27m
+kube-system        Active        5h27m
+reslim             Terminating   38m
+tigera-operator    Active        5h27m
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS        AGE
+calico-apiserver   Active        5h24m
+calico-system      Active        5h27m
+default            Active        5h28m
+kube-node-lease    Active        5h28m
+kube-public        Active        5h28m
+kube-system        Active        5h28m
+reslim             Terminating   39m
+tigera-operator    Active        5h28m
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS        AGE
+calico-apiserver   Active        5h25m
+calico-system      Active        5h27m
+default            Active        5h28m
+kube-node-lease    Active        5h28m
+kube-public        Active        5h28m
+kube-system        Active        5h28m
+reslim             Terminating   39m
+tigera-operator    Active        5h28m
+vagrant@node1:~$ kubectl delete namespace reslim
+namespace "reslim" deleted
+^Cvagrant@node1:~$ kubectl get ns
+NAME               STATUS        AGE
+calico-apiserver   Active        5h25m
+calico-system      Active        5h28m
+default            Active        5h29m
+kube-node-lease    Active        5h29m
+kube-public        Active        5h29m
+kube-system        Active        5h29m
+reslim             Terminating   40m
+tigera-operator    Active        5h28m
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          32m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          29m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          28m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$  exit
+logout
+There are stopped jobs.
+vagrant@node1:~$ history
+    1  cd .kube
+    2  cd..
+    3  cd.
+    4  cdexit
+    5  exit
+    6  cd .kube
+    7  ls
+    8  cat ~/.kube/config
+    9  sudo useradd -m -s /bin/bash ivan
+   10  sudo passwd ivan
+   11  cd /home/ivan
+   12  sudo mkdir .certs && cd .certs
+   13  sudo openssl genrsa -out ivan.key 2048
+   14  ls
+   15  sudo openssl req -new -key ivan.key -out ivan.csr -subj "/CN=ivan"
+   16  ls
+   17  sudo openssl x509 -req -in ivan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out ivan.crt -days 365
+   18  ls
+   19  cd
+   20  sudo mkdir -p /home/ivan/.kube
+   21  cat /etc/kubernetes/admin.conf
+   22  sudo cat /etc/kubernetes/admin.conf
+   23  sudo vi /home/ivan/.kube/config
+   24  sudo chown -R ivan: /home/ivan
+   25  kubectl create namespace demo-dev
+   26  kubectl create namespace demo-prod
+   27  kubectl get ns
+   28  su - ivan
+   29  ls
+   30  mkdir part1
+   31  mkdir part2
+   32  mkdir part3
+   33  ls
+   34  cd part1
+   35  cat > ivan-rb.yaml
+   36  ls
+   37  cat ivan-rb.yaml
+   38  sed -i s/john/ivan/g ivan-rb.yaml
+   39  cat ivan-rb.yaml
+   40  ls
+   41  kubectl apply -f ivan-rb.yaml
+   42  kubectl get rolebinding -n demo-dev
+   43  kubectl get rolebinding -n demo-prod
+   44  kubectl run pod-prod --image=shekeriev/k8s-oracle --labels=app=oracle --namespace demo-prod
+   45  kubectl run pod-dev --image=shekeriev/k8s-oracle --labels=app=oracle --namespace demo-dev
+   46  kubectl get pods -n demo-prod
+   47  kubectl get pods -n demo-dev
+   48  su - ivan
+   49  kubectl auth can-i create pods
+   50  kubectl auth can-i create services
+   51  kubectl auth can-i create pods -n demo-prod
+   52  kubectl auth can-i create pods -n demo-dev
+   53  kubectl auth can-i create pods --as ivan
+   54  kubectl auth can-i create pods -n demo-prod --as ivan
+   55  kubectl auth can-i create pods -n demo-dev --as ivan
+   56  kubectl auth can-i --list --namespace demo-dev --as ivan
+   57  kubectl delete ns demo-prod demo-dev
+   58  cd ..
+   59  kubectl create namespace rbac-ns
+   60  kubectl run rbac-pod --image=shekeriev/k8s-oracle --namespace=rbac-ns
+   61  kubectl expose pod rbac-pod --port=5000 --name=rbac-svc --namespace=rbac-ns
+   62  kubectl get serviceaccount -n rbac-ns
+   63  kubectl get pod rbac-pod -n rbac-ns -o yaml | grep serviceAccount
+   64  kubectl exec -it rbac-pod -n rbac-ns -- bash
+   65  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   66  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   67  kubectl get serviceaccount -n rbac-ns
+   68  kubectl get serviceaccount -n rbac-nw
+   69  kubectl create role view-pods--verb=get,list,watch --resource=pods --namespace=rbac-ns
+   70  kubectl create role view-pods --verb=get,list,watch --resource=pods --namespace=rbac-ns
+   71  kubectl create rolebinding view-pods --role=view-pods --serviceaccount=rbac-ns:default --namespace=rbac-ns
+   72  kubectl exec -it rbac-pod -n rbac-ns -- bash
+   73  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   74  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   75  kubectl get role view-pods -n rbac-ns -o yaml
+   76  kubectl edit role view-pods -n rbac-ns
+   77  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   78  kubectl create serviceaccount demo-sa --namespace rbac-ns
+   79  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   80  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   81  kubectl get serviceaccount -n rbac-ns
+   82  cd part1
+   83  cat > demo-role.yaml
+   84  ls
+   85  cat > demo-role.yaml
+   86  cat demo-role.yaml
+   87  ls
+   88  cat > demo-role.yaml
+   89  ls
+   90  cat demo-role.yaml
+   91  cat > demo-role.yaml
+   92  cat demo-role.yaml
+   93  kubectl apply -f demo-role.yaml
+   94  kubectl create rolebinding demo-role --role=demo-role --serviceaccount=rbac-ns:demo-sa --namespace=rbac-ns
+   95  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   96  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   97  kubectl auth can-i delete pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   98  kubectl auth can-i delete services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   99  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  100  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  101  kubectl auth can-i delete pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  102  kubectl auth can-i delete services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  103  cat > demo-pod.yaml
+  104  cat demo-pod.yaml
+  105  kubectl apply -f demo-pod.yaml
+  106  kubectl exec -it demo-pod -n rbac-ns -- bash
+  107  kubectl get pods,svc -n rbac-ns
+  108  kubectl delete namespace rbac-ns
+  109  cd ..
+  110  ls
+  111  kubectl describe nodes
+  112  kubectl create namespace reslim
+  113  kubectl run pod-1 --image=alpine --restart=Never --namespace reslim -- dd if=/dev/zero of=/dev/null bs=16M
+  114  kubectl get pods -n reslim -o wide
+  115  kubectl describe node node3
+  116  kubectl exec -it pod-1 -n reslim -- top
+  118  kubectl delete pod pod-1 -n reslim
+  119  cat > pod-2.yaml
+  120  cat pod-2.yaml
+  121  kubectl apply -f part2/pod-2.yaml
+  122  kubectl apply -f pod-2.yaml
+  123  kubectl get pods -n reslim -o wide
+  124  kubectl exec -it pod-2 -n reslim -- top
+  125  kubectl describe node node3
+  126  cd part2
+  127  cat > deployment-res.yaml
+  128  cat deployment-res.yaml
+  129  kubectl apply -f part2/deployment-res.yaml
+  130  kubectl apply -f deployment-res.yaml
+  131  kubectl get pods -n reslim -o wide
+  132  kubectl describe node node2
+  133  kubectl scale deployment res -n reslim --replicas=5
+  134  kubectl get deployment -n reslim
+  136  kubectl describe pod res-66767bc74-2nwb4 -n reslim
+  137  kubectl scale deployment res -n reslim --replicas=8
+  138  kubectl get pods -n reslim -o wide
+  139  kubectl get pods -n reslim res-66767bc74-s756s
+  140  kubectl describe pods -n reslim res-66767bc74-s756s
+  141  kubectl describe nodes node2
+  142  kubectl describe nodes node3
+  143  kubectl delete -f deployment-res.yaml
+  144  kubectl delete -f pod-2.yaml
+  145  cd ..
+  146  kubectl delete -f pod-2.yaml
+  147  kubectl get pods
+  149  kubectl delete namespace reslim
+  150  kubectl get ns
+  152  kubectl get ns
+  153  kubectl delete namespace reslim
+  154  kubectl get ns
+  155  kubectl get pods -n reslim -o wide
+  156  history
+vagrant@node1:~$ exit
+logout
+There are stopped jobs.
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov  1 11:57:15 2023 from 10.0.2.2
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-2                 1/1     Terminating   0          39m   10.244.135.6   node3   <none>           <none>
+res-66767bc74-2nwb4   1/1     Terminating   0          35m   10.244.135.7   node3   <none>           <none>
+res-66767bc74-d2prb   1/1     Terminating   0          34m   10.244.135.8   node3   <none>           <none>
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 cd '.\04. Security and Policies\'
+   3 cd .\lab\
+   4 vagrant up
+   5 vagrant ssh node1
+   6 vagrant ssh node1
+   7 vagrant ssh node1
+
+
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> vagrant ssh node1
+VM must be running to open SSH connection. Run `vagrant up`
+to start the virtual machine.
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> vagrant up
+Bringing machine 'node1' up with 'virtualbox' provider...
+Bringing machine 'node2' up with 'virtualbox' provider...
+Bringing machine 'node3' up with 'virtualbox' provider...
+==> node1: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node1: Clearing any previously set forwarded ports...
+==> node1: Clearing any previously set network interfaces...
+==> node1: Preparing network interfaces based on configuration...
+    node1: Adapter 1: nat
+    node1: Adapter 2: hostonly
+==> node1: Forwarding ports...
+    node1: 22 (guest) => 2222 (host) (adapter 1)
+==> node1: Running 'pre-boot' VM customizations...
+==> node1: Booting VM...
+==> node1: Waiting for machine to boot. This may take a few minutes...
+    node1: SSH address: 127.0.0.1:2222
+    node1: SSH username: vagrant
+    node1: SSH auth method: private key
+==> node1: Machine booted and ready!
+==> node1: Checking for guest additions in VM...
+==> node1: Setting hostname...
+==> node1: Configuring and enabling network interfaces...
+==> node1: Mounting shared folders...
+    node1: /vagrant => C:/Users/NB/Kubernetes/04. Security and Policies/lab/vagrant
+==> node1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node1: flag to force provisioning. Provisioners marked to run always will still run.
+==> node2: Clearing any previously set forwarded ports...
+==> node2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> node2: Clearing any previously set network interfaces...
+==> node2: Preparing network interfaces based on configuration...
+    node2: Adapter 1: nat
+    node2: Adapter 2: hostonly
+==> node2: Forwarding ports...
+    node2: 22 (guest) => 2200 (host) (adapter 1)
+==> node2: Running 'pre-boot' VM customizations...
+==> node2: Booting VM...
+==> node2: Waiting for machine to boot. This may take a few minutes...
+    node2: SSH address: 127.0.0.1:2200
+    node2: SSH username: vagrant
+    node2: SSH auth method: private key
+==> node2: Machine booted and ready!
+==> node2: Checking for guest additions in VM...
+==> node2: Setting hostname...
+==> node2: Configuring and enabling network interfaces...
+==> node2: Mounting shared folders...
+    node2: /vagrant => C:/Users/NB/Kubernetes/04. Security and Policies/lab/vagrant
+==> node2: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node2: flag to force provisioning. Provisioners marked to run always will still run.
+==> node3: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node3: Clearing any previously set forwarded ports...
+==> node3: Fixed port collision for 22 => 2222. Now on port 2201.
+==> node3: Clearing any previously set network interfaces...
+==> node3: Preparing network interfaces based on configuration...
+    node3: Adapter 1: nat
+    node3: Adapter 2: hostonly
+==> node3: Forwarding ports...
+    node3: 22 (guest) => 2201 (host) (adapter 1)
+==> node3: Running 'pre-boot' VM customizations...
+==> node3: Booting VM...
+==> node3: Waiting for machine to boot. This may take a few minutes...
+    node3: SSH address: 127.0.0.1:2201
+    node3: SSH username: vagrant
+    node3: SSH auth method: private key
+==> node3: Machine booted and ready!
+==> node3: Checking for guest additions in VM...
+==> node3: Setting hostname...
+==> node3: Configuring and enabling network interfaces...
+==> node3: Mounting shared folders...
+    node3: /vagrant => C:/Users/NB/Kubernetes/04. Security and Policies/lab/vagrant
+==> node3: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node3: flag to force provisioning. Provisioners marked to run always will still run.
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov  1 16:16:42 2023 from 10.0.2.2
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+NAME                  READY   STATUS        RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+pod-2                 0/1     Terminating   0          44m   <none>   node3   <none>           <none>
+res-66767bc74-2nwb4   0/1     Terminating   0          41m   <none>   node3   <none>           <none>
+res-66767bc74-d2prb   0/1     Terminating   0          39m   <none>   node3   <none>           <none>
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS        AGE
+calico-apiserver   Active        5h37m
+calico-system      Active        5h40m
+default            Active        5h40m
+kube-node-lease    Active        5h40m
+kube-public        Active        5h40m
+kube-system        Active        5h40m
+reslim             Terminating   52m
+tigera-operator    Active        5h40m
+vagrant@node1:~$ kubectl create ns reslim
+namespace/reslim created
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS   AGE
+calico-apiserver   Active   5h37m
+calico-system      Active   5h40m
+default            Active   5h41m
+kube-node-lease    Active   5h41m
+kube-public        Active   5h41m
+kube-system        Active   5h41m
+reslim             Active   6s
+tigera-operator    Active   5h41m
+vagrant@node1:~$ kubectl get pods -n reslim -o wide
+No resources found in reslim namespace.
+vagrant@node1:~$ cd part2
+vagrant@node1:~/part2$ ls
+deployment-res.yaml
+vagrant@node1:~/part2$ cat > pod-3a.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3a
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["dd", "if=/dev/zero", "of=/dev/null", "bs=64M"]
+    name: main
+    resources:
+      requests:
+        cpu: 250m
+        memory: 16Mi
+      limits:
+        cpu: 500m
+        memory: 128Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ cat pod-3a.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3a
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["dd", "if=/dev/zero", "of=/dev/null", "bs=64M"]
+    name: main
+    resources:
+      requests:
+        cpu: 250m
+        memory: 16Mi
+      limits:
+        cpu: 500m
+        memory: 128Mivagrant@node1:~/part2$ kubectl apply -f part2/pod-3a.yaml
+error: the path "part2/pod-3a.yaml" does not exist
+vagrant@node1:~/part2$ kubectl apply -f pod-3a.yaml
+pod/pod-3a created
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide
+NAME     READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+pod-3a   1/1     Running   0          12s   10.244.135.10   node3   <none>           <none>
+vagrant@node1:~/part2$ kubectl describe node node3
+Name:               node3
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node3
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node3"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 192.168.99.103/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 10.244.135.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 01 Nov 2023 10:49:04 +0200
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node3
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 01 Nov 2023 16:26:07 +0200
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Wed, 01 Nov 2023 16:21:52 +0200   Wed, 01 Nov 2023 16:21:52 +0200   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Wed, 01 Nov 2023 16:21:29 +0200   Wed, 01 Nov 2023 16:21:29 +0200   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Wed, 01 Nov 2023 16:21:29 +0200   Wed, 01 Nov 2023 16:21:29 +0200   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Wed, 01 Nov 2023 16:21:29 +0200   Wed, 01 Nov 2023 16:21:29 +0200   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Wed, 01 Nov 2023 16:21:29 +0200   Wed, 01 Nov 2023 16:21:29 +0200   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.99.103
+  Hostname:    node3
+Capacity:
+  cpu:                2
+  ephemeral-storage:  15421320Ki
+  hugepages-2Mi:      0
+  memory:             2018220Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  14212288489
+  hugepages-2Mi:      0
+Mem: 1501860K used, 516360K free, 1240K shrd, 16384K buff, 1031644K cached
+CPU:  1.7% usr 11.2% sys  0.0% nic 86.0% idle  0.0% io  0.0% irq  0.9% sirq
+Load average: 0.49 0.31 0.16 3/300 11
+  PID  PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
+    1     0 root     R    69808  3.4   1 13.9 dd if /dev/zero of /dev/null bs 64M
+    6     0 root     R     4404  0.2   0  0.0 top
+vagrant@node1:~/part2$ kubectl delete pod pod-3a -n reslim
+pod "pod-3a" deleted
+vagrant@node1:~/part2$ cat > pod-3b.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3b
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["sh", "-c", "sleep 30s ; dd if=/dev/zero of=/dev/null bs=64M"]
+    name: main
+    resources:
+      requests:
+        cpu: 250m
+        memory: 16Mi
+      limits:
+        cpu: 500m
+        memory: 32Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ cat pod-3b.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-3b
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["sh", "-c", "sleep 30s ; dd if=/dev/zero of=/dev/null bs=64M"]
+    name: main
+    resources:
+      requests:
+        cpu: 250m
+        memory: 16Mi
+      limits:
+        cpu: 500m
+        memory: 32Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide -w
+^Cvagrant@node1:~/part2$ kubectl apply -f part2/pod-3b.yaml
+error: the path "part2/pod-3b.yaml" does not exist
+vagrant@node1:~/part2$ kubectl apply -f pod-3b.yaml
+pod/pod-3b created
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide -w
+NAME     READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+pod-3b   1/1     Running   0          6s    10.244.135.11   node3   <none>           <none>
+pod-3b   0/1     OOMKilled   0          34s   10.244.135.11   node3   <none>           <none>
+pod-3b   1/1     Running     1 (4s ago)   36s   10.244.135.11   node3   <none>           <none>
+^Cvagrant@node1:~/part2$ kubectl delete -f pod-3b.yaml
+pod "pod-3b" deleted
+vagrant@node1:~/part2$ kubectl get pods -n reslim -o wide
+No resources found in reslim namespace.
+vagrant@node1:~/part2$ cat > limits.yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limits
+  namespace: reslim
+spec:
+  limits:
+  - type: Pod
+    max:
+      cpu: 1
+      memory: 1Gi
+    min:
+      cpu: 100m
+      memory: 16Mi
+  - type: Container
+    defaultRequest:
+      cpu: 100m
+      memory: 16Mi
+    default:
+      cpu: 200m
+      memory: 32Mi
+    max:
+      cpu: 1
+      memory: 1Gi
+    min:
+      cpu: 100m
+      memory: 16Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ cat limits.yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limits
+  namespace: reslim
+spec:
+  limits:
+  - type: Pod
+    max:
+      cpu: 1
+      memory: 1Gi
+    min:
+      cpu: 100m
+      memory: 16Mi
+  - type: Container
+    defaultRequest:
+      cpu: 100m
+      memory: 16Mi
+    default:
+      cpu: 200m
+      memory: 32Mi
+    max:
+      cpu: 1
+      memory: 1Gi
+    min:
+      cpu: 100m
+      memory: 16Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$ kubectl apply -f part2/limits.yaml
+error: the path "part2/limits.yaml" does not exist
+vagrant@node1:~/part2$ kubectl apply -f limits.yaml
+limitrange/limits created
+vagrant@node1:~/part2$ kubectl describe limitrange limits -n reslim
+Name:       limits
+Namespace:  reslim
+Type        Resource  Min   Max  Default Request  Default Limit  Max Limit/Request Ratio
+----        --------  ---   ---  ---------------  -------------  -----------------------
+Pod         cpu       100m  1    -                -              -
+Pod         memory    16Mi  1Gi  -                -              -
+Container   memory    16Mi  1Gi  16Mi             32Mi           -
+Container   cpu       100m  1    100m             200m           -
+vagrant@node1:~/part2$ cat > pod-4a.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-4a
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["sleep", "1d"]
+    name: mainvagrant@node1:~/part2$
+vagrant@node1:~/part2$ cat pod-4a.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-4a
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["sleep", "1d"]
+    name: mainvagrant@node1:~/part2$
+vagrant@node1:~/part2$ kubectl apply -f pod-4a.yaml
+pod/pod-4a created
+vagrant@node1:~/part2$ kubectl decribe pod pod-4a -n reslim
+error: unknown command "decribe" for "kubectl"
+
+Did you mean this?
+        describe
+vagrant@node1:~/part2$ kubectl describe pod pod-4a -n reslim
+Name:             pod-4a
+Namespace:        reslim
+Priority:         0
+Service Account:  default
+Node:             node3/192.168.99.103
+Start Time:       Wed, 01 Nov 2023 16:34:59 +0200
+Labels:           <none>
+Annotations:      cni.projectcalico.org/containerID: 4dd1fba0131c4f4d755b8b16a8cb816de55a92eb638c310c80b9ca125e1881a9
+                  cni.projectcalico.org/podIP: 10.244.135.12/32
+                  cni.projectcalico.org/podIPs: 10.244.135.12/32
+                  kubernetes.io/limit-ranger: LimitRanger plugin set: cpu, memory request for container main; cpu, memory limit for container main
+Status:           Running
+IP:               10.244.135.12
+IPs:
+  IP:  10.244.135.12
+Containers:
+  main:
+    Container ID:  containerd://25ca5ddb414c7198e29b4292860c7f27a4d82bc70a4ae8de1babd98ab25c7be7
+    Image:         busybox
+    Image ID:      docker.io/library/busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      1d
+    State:          Running
+      Started:      Wed, 01 Nov 2023 16:35:01 +0200
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  32Mi
+    Requests:
+      cpu:        100m
+      memory:     16Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-4ntrg (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-4ntrg:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  62s   default-scheduler  Successfully assigned reslim/pod-4a to node3
+  Normal  Pulling    61s   kubelet            Pulling image "busybox"
+  Normal  Pulled     60s   kubelet            Successfully pulled image "busybox" in 1.189062631s (1.189068801s including waiting)
+  Normal  Created    60s   kubelet            Created container main
+  Normal  Started    60s   kubelet            Started container main
+vagrant@node1:~/part2$ kubectl delete pod pod-4a -n reslim
+pod "pod-4a" deleted
+vagrant@node1:~/part2$ kubectl delete -f limits.yaml
+limitrange "limits" deleted
+vagrant@node1:~/part2$ ls
+deployment-res.yaml  limits.yaml  pod-3a.yaml  pod-3b.yaml  pod-4a.yaml
+vagrant@node1:~/part2$ cat > quota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: reslim
+spec:
+  hard:
+    pods: 3
+    requests.cpu: 1
+    requests.memory: 1Gi
+    limits.cpu: 2
+    limits.memory: 2Givagrant@node1:~/part2$
+vagrant@node1:~/part2$ cat quota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: reslim
+spec:
+  hard:
+    pods: 3
+    requests.cpu: 1
+    requests.memory: 1Gi
+    limits.cpu: 2
+    limits.memory: 2Givagrant@node1:~/part2$
+vagrant@node1:~/part2$ kubectl apply -f quota.yaml
+resourcequota/quota created
+vagrant@node1:~/part2$ kubectl get quota -n reslim
+NAME    AGE   REQUEST                                                LIMIT
+quota   16s   pods: 0/3, requests.cpu: 0/1, requests.memory: 0/1Gi   limits.cpu: 0/2, limits.memory: 0/2Gi
+vagrant@node1:~/part2$ kubectl describe quota quota -n reslim
+Name:            quota
+Namespace:       reslim
+Resource         Used  Hard
+--------         ----  ----
+limits.cpu       0     2
+limits.memory    0     2Gi
+pods             0     3
+requests.cpu     0     1
+requests.memory  0     1Gi
+vagrant@node1:~/part2$ cat > pod-5b.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-5a
+  namespace: reslim
+spec:
+  containers:
+  - image: busybox
+    command: ["sleep", "1d"]
+    name: main
+    resources:
+      requests:
+        cpu: 500m
+        memory: 128Mi
+      limits:
+        cpu: 1
+        memory: 256Mivagrant@node1:~/part2$
+vagrant@node1:~/part2$
+vagrant@node1:~/part2$ kubectl apply -f pod-5b.yaml
+pod/pod-5a created
+vagrant@node1:~/part2$ kubectl delete namespace reslim
+namespace "reslim" deleted
+vagrant@node1:~/part2$ cd
+vagrant@node1:~$ kubectl get pods -A
+NAMESPACE          NAME                                       READY   STATUS    RESTARTS      AGE
+calico-apiserver   calico-apiserver-5b7bc7f7b7-f8hs9          1/1     Running   1 (37m ago)   6h12m
+calico-apiserver   calico-apiserver-5b7bc7f7b7-j76mv          1/1     Running   1 (37m ago)   6h12m
+calico-system      calico-kube-controllers-78d8c95cc7-qxkk4   1/1     Running   1 (37m ago)   6h15m
+calico-system      calico-node-ltvh9                          1/1     Running   1 (36m ago)   6h12m
+calico-system      calico-node-rzs64                          1/1     Running   1 (37m ago)   6h15m
+calico-system      calico-node-xlg7w                          1/1     Running   1 (35m ago)   6h8m
+calico-system      calico-typha-f8759cc74-dznbz               1/1     Running   2             6h15m
+calico-system      calico-typha-f8759cc74-tqtz7               1/1     Running   2 (36m ago)   6h8m
+calico-system      csi-node-driver-ck59f                      2/2     Running   2 (37m ago)   6h15m
+calico-system      csi-node-driver-djrrb                      2/2     Running   2 (36m ago)   6h12m
+calico-system      csi-node-driver-s55zb                      2/2     Running   2 (35m ago)   6h8m
+kube-system        coredns-5d78c9869d-mx2w4                   1/1     Running   1 (37m ago)   6h15m
+kube-system        coredns-5d78c9869d-x5f4p                   1/1     Running   1 (37m ago)   6h15m
+kube-system        etcd-node1                                 1/1     Running   1 (37m ago)   6h15m
+kube-system        kube-apiserver-node1                       1/1     Running   1 (37m ago)   6h15m
+kube-system        kube-controller-manager-node1              1/1     Running   2 (37m ago)   6h15m
+kube-system        kube-proxy-8lpxb                           1/1     Running   1 (37m ago)   6h15m
+kube-system        kube-proxy-p99v9                           1/1     Running   1 (35m ago)   6h8m
+kube-system        kube-proxy-xwtgg                           1/1     Running   1 (36m ago)   6h12m
+kube-system        kube-scheduler-node1                       1/1     Running   2 (36m ago)   6h15m
+tigera-operator    tigera-operator-f6bb878c4-dbhkj            1/1     Running   3 (36m ago)   6h15m
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS   AGE
+calico-apiserver   Active   6h12m
+calico-system      Active   6h15m
+default            Active   6h16m
+kube-node-lease    Active   6h16m
+kube-public        Active   6h16m
+kube-system        Active   6h16m
+tigera-operator    Active   6h16m
+vagrant@node1:~$ kubectl create namespace basicnp
+namespace/basicnp created
+vagrant@node1:~$ kubectl create deployment oracle --image=shekeriev/k8s-oracle --namespace basicnp
+deployment.apps/oracle created
+vagrant@node1:~$ kubectl expose deployment oracle --port=5000 --namespace basicnp
+service/oracle exposed
+vagrant@node1:~$ kubectl get svc,pod -n basicnp
+NAME             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/oracle   ClusterIP   10.102.101.239   <none>        5000/TCP   10s
+
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/oracle-6b855f6c5d-lgd2c   1/1     Running   0          27s
+vagrant@node1:~$ kubectl run tester --image=alpine --namespace basicnp -- sleep 1d
+pod/tester created
+vagrant@node1:~$ kubectl exec -it tester --namespace basicnp -- sh
+/ # apk add curl
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz
+(1/7) Installing ca-certificates (20230506-r0)
+(2/7) Installing brotli-libs (1.0.9-r14)
+(3/7) Installing libunistring (1.1-r1)
+(4/7) Installing libidn2 (2.3.4-r1)
+(5/7) Installing nghttp2-libs (1.57.0-r0)
+(6/7) Installing libcurl (8.4.0-r0)
+(7/7) Installing curl (8.4.0-r0)
+Executing busybox-1.36.1-r2.trigger
+Executing ca-certificates-20230506-r0.trigger
+OK: 12 MiB in 22 packages
+/ # curl --connect-timeout 5 http://oracle:5000
+<span style="font-size: x-large;">Hmmmm, I sense that you are wondering ...</span><br /><br />
+<span style="font-size: xx-large;"><b>Is Kubernetes a good fit for me?</b></span><br /><br />
+<span style="font-size: x-large;">... and I tell you my friend ... with <b>59%</b> confidence - <b>It depends</b></span><br />
+<hr>
+<small><i>Served by <b>oracle-6b855f6c5d-lgd2c</b></i></small>
+/ # exit
+vagrant@node1:~$ cd part3
+vagrant@node1:~/part3$ cat > oracle-policy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: access-oracle
+  namespace: basicnp
+spec:
+  podSelector:
+    matchLabels:
+      app: oracle
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          access: "true"vagrant@node1:~/part3$
+vagrant@node1:~/part3$ cat oracle-policy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: access-oracle
+  namespace: basicnp
+spec:
+  podSelector:
+    matchLabels:
+      app: oracle
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          access: "true"vagrant@node1:~/part3$ cd ..
+vagrant@node1:~$ kubectl apply -f part3/oracle-policy.yaml
+networkpolicy.networking.k8s.io/access-oracle created
+vagrant@node1:~$ kubectl describe netpol access-oracle -n basicnp
+Name:         access-oracle
+Namespace:    basicnp
+Created on:   2023-11-01 17:03:08 +0200 EET
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=oracle
+  Allowing ingress traffic:
+    To Port: <any> (traffic allowed to all ports)
+    From:
+      PodSelector: access=true
+  Not affecting egress traffic
+  Policy Types: Ingress
+vagrant@node1:~$ kubectl exec -it tester --namespace basicnp -- sh
+/ # curl --connect-timeout 5 http://oracle:5000
+curl: (28) Failed to connect to oracle port 5000 after 5004 ms: Timeout was reached
+/ # exit
+command terminated with exit code 28
+vagrant@node1:~$ kubectl run tester --image=alpine -- sleep 1d
+pod/tester created
+vagrant@node1:~$ kubectl exec -it tester -- sh
+/ # apk add curl
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz
+(1/7) Installing ca-certificates (20230506-r0)
+(2/7) Installing brotli-libs (1.0.9-r14)
+(3/7) Installing libunistring (1.1-r1)
+(4/7) Installing libidn2 (2.3.4-r1)
+(5/7) Installing nghttp2-libs (1.57.0-r0)
+(6/7) Installing libcurl (8.4.0-r0)
+(7/7) Installing curl (8.4.0-r0)
+Executing busybox-1.36.1-r2.trigger
+Executing ca-certificates-20230506-r0.trigger
+OK: 12 MiB in 22 packages
+/ # curl --connect-timeout 5 http://oracle.basicnp:5000
+curl: (28) Failed to connect to oracle.basicnp port 5000 after 5001 ms: Timeout was reached
+/ # exit
+command terminated with exit code 28
+vagrant@node1:~$ kubectl label pods tester --namespace basicnp access=true
+pod/tester labeled
+vagrant@node1:~$ kubectl exec -it tester --namespace basicnp -- sh
+/ # curl --connect-timeout 5 http://oracle:5000
+<span style="font-size: x-large;">Hmmmm, I sense that you are wondering ...</span><br /><br />
+<span style="font-size: xx-large;"><b>Will it be difficult for me to learn Kubernetes?</b></span><br /><br />
+<span style="font-size: x-large;">... and I tell you my friend ... with <b>2%</b> confidence - <b>No</b></span><br />
+<hr>
+<small><i>Served by <b>oracle-6b855f6c5d-lgd2c</b></i></small>
+/ # exit
+vagrant@node1:~$ kubectl exec -it tester -- sh
+/ # curl --connect-timeout 5 http://oracle.basicnp:5000
+curl: (28) Failed to connect to oracle.basicnp port 5000 after 5003 ms: Timeout was reached
+/ # exit
+command terminated with exit code 28
+vagrant@node1:~$ kubectl label pods tester access=true
+pod/tester labeled
+vagrant@node1:~$ kubectl exec -it tester -- sh
+/ # curl --connect-timeout 5 http://oracle.basicnp:5000
+curl: (28) Failed to connect to oracle.basicnp port 5000 after 5004 ms: Timeout was reached
+/ # exit
+command terminated with exit code 28
+vagrant@node1:~$ kubectl edit netpol access-oracle -n basicnp
+Edit cancelled, no changes made.
+vagrant@node1:~$ kubectl edit netpol access-oracle -n basicnp
+networkpolicy.networking.k8s.io/access-oracle edited
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$ kubectl exec -it tester -- sh
+/ # curl --connect-timeout 5 http://oracle.basicnp:5000
+<span style="font-size: x-large;">Hmmmm, I sense that you are wondering ...</span><br /><br />
+<span style="font-size: xx-large;"><b>Will it be difficult for me to learn Kubernetes?</b></span><br /><br />
+<span style="font-size: x-large;">... and I tell you my friend ... with <b>81%</b> confidence - <b>Maybe</b></span><br />
+<hr>
+<small><i>Served by <b>oracle-6b855f6c5d-lgd2c</b></i></small>
+/ # exit
+vagrant@node1:~$ kubectl label pod tester access-
+pod/tester unlabeled
+vagrant@node1:~$ kubectl exec -it tester -- sh
+/ # curl --connect-timeout 5 http://oracle.basicnp:5000
+<span style="font-size: x-large;">Hmmmm, I sense that you are wondering ...</span><br /><br />
+<span style="font-size: xx-large;"><b>Should I start learning Kubernetes?</b></span><br /><br />
+<span style="font-size: x-large;">... and I tell you my friend ... with <b>63%</b> confidence - <b>It depends</b></span><br />
+<hr>
+<small><i>Served by <b>oracle-6b855f6c5d-lgd2c</b></i></small>
+/ # exit
+vagrant@node1:~$ kubectl describe netpol access-oracle -n basicnp
+Name:         access-oracle
+Namespace:    basicnp
+Created on:   2023-11-01 17:03:08 +0200 EET
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=oracle
+  Allowing ingress traffic:
+    To Port: <any> (traffic allowed to all ports)
+    From:
+      NamespaceSelector: <none>
+    From:
+      PodSelector: access=true
+  Not affecting egress traffic
+  Policy Types: Ingress
+vagrant@node1:~$ kubectl edit netpol access-oracle -n basicnp
+networkpolicy.networking.k8s.io/access-oracle edited
+vagrant@node1:~$ kubectl describe netpol access-oracle -n basicnp
+Name:         access-oracle
+Namespace:    basicnp
+Created on:   2023-11-01 17:03:08 +0200 EET
+Labels:       <none>
+Annotations:  <none>
+Spec:
+  PodSelector:     app=oracle
+  Allowing ingress traffic:
+    To Port: <any> (traffic allowed to all ports)
+    From:
+      NamespaceSelector: <none>
+      PodSelector: access=true
+  Not affecting egress traffic
+  Policy Types: Ingress
+vagrant@node1:~$ kubectl exec -it tester -- sh
+/ # curl --connect-timeout 5 http://oracle.basicnp:5000
+curl: (28) Failed to connect to oracle.basicnp port 5000 after 5003 ms: Timeout was reached
+/ # exit
+command terminated with exit code 28
+vagrant@node1:~$ kubectl delete pod tester
+pod "tester" deleted
+vagrant@node1:~$ kubectl delete namespace basicnp
+namespace "basicnp" deleted
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/00-namespace.yaml
+namespace/stars created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/01-management-ui.yaml
+namespace/management-ui created
+service/management-ui created
+deployment.apps/management-ui created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/02-backend.yaml
+service/backend created
+deployment.apps/backend created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/03-frontend.yaml
+service/frontend created
+deployment.apps/frontend created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/04-client.yaml
+namespace/client created
+deployment.apps/client created
+service/client created
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS   AGE
+calico-apiserver   Active   6h49m
+calico-system      Active   6h52m
+client             Active   13m
+default            Active   6h52m
+kube-node-lease    Active   6h52m
+kube-public        Active   6h52m
+kube-system        Active   6h52m
+management-ui      Active   14m
+stars              Active   14m
+tigera-operator    Active   6h52m
+vagrant@node1:~$ kubectl get pods --all-namespaces --watch
+NAMESPACE          NAME                                       READY   STATUS    RESTARTS      AGE
+calico-apiserver   calico-apiserver-5b7bc7f7b7-f8hs9          1/1     Running   1 (74m ago)   6h49m
+calico-apiserver   calico-apiserver-5b7bc7f7b7-j76mv          1/1     Running   1 (74m ago)   6h49m
+calico-system      calico-kube-controllers-78d8c95cc7-qxkk4   1/1     Running   1 (74m ago)   6h52m
+calico-system      calico-node-ltvh9                          1/1     Running   1 (74m ago)   6h49m
+calico-system      calico-node-rzs64                          1/1     Running   1 (74m ago)   6h52m
+calico-system      calico-node-xlg7w                          1/1     Running   1 (73m ago)   6h45m
+calico-system      calico-typha-f8759cc74-dznbz               1/1     Running   2             6h52m
+calico-system      calico-typha-f8759cc74-tqtz7               1/1     Running   2 (73m ago)   6h45m
+calico-system      csi-node-driver-ck59f                      2/2     Running   2 (74m ago)   6h52m
+calico-system      csi-node-driver-djrrb                      2/2     Running   2 (74m ago)   6h49m
+calico-system      csi-node-driver-s55zb                      2/2     Running   2 (73m ago)   6h45m
+client             client-5ffc76cd8c-6f7pc                    1/1     Running   0             14m
+kube-system        coredns-5d78c9869d-mx2w4                   1/1     Running   1 (74m ago)   6h52m
+kube-system        coredns-5d78c9869d-x5f4p                   1/1     Running   1 (74m ago)   6h52m
+kube-system        etcd-node1                                 1/1     Running   1 (74m ago)   6h53m
+kube-system        kube-apiserver-node1                       1/1     Running   1 (74m ago)   6h53m
+kube-system        kube-controller-manager-node1              1/1     Running   2 (74m ago)   6h53m
+kube-system        kube-proxy-8lpxb                           1/1     Running   1 (74m ago)   6h52m
+kube-system        kube-proxy-p99v9                           1/1     Running   1 (73m ago)   6h45m
+kube-system        kube-proxy-xwtgg                           1/1     Running   1 (74m ago)   6h49m
+kube-system        kube-scheduler-node1                       1/1     Running   2 (73m ago)   6h53m
+management-ui      management-ui-6fc897588c-n79dk             1/1     Running   0             14m
+stars              backend-8dcd69cdf-j9d96                    1/1     Running   0             14m
+stars              frontend-6bdffd57b5-m2vjr                  1/1     Running   0             14m
+tigera-operator    tigera-operator-f6bb878c4-dbhkj            1/1     Running   3 (73m ago)   6h52m
+^Cvagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$ kubectl get all -n management-ui
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod/management-ui-6fc897588c-n79dk   1/1     Running   0          15m
+
+NAME                    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/management-ui   NodePort   10.108.67.61   <none>        9001:30002/TCP   15m
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/management-ui   1/1     1            1           15m
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/management-ui-6fc897588c   1         1         1       15m
+vagrant@node1:~$ kubectl create -n stars -f https://docs.tigera.io/files/default-deny.yaml
+networkpolicy.networking.k8s.io/default-deny created
+vagrant@node1:~$ kubectl create -n client -f https://docs.tigera.io/files/default-deny.yaml
+networkpolicy.networking.k8s.io/default-deny created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/allow-ui.yaml
+networkpolicy.networking.k8s.io/allow-ui created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/allow-ui-client.yaml
+networkpolicy.networking.k8s.io/allow-ui created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/backend-policy.yaml
+networkpolicy.networking.k8s.io/backend-policy created
+vagrant@node1:~$ kubectl create -f https://docs.tigera.io/files/frontend-policy.yaml
+networkpolicy.networking.k8s.io/frontend-policy created
+vagrant@node1:~$ kubectl delete ns client stars management-ui
+namespace "client" deleted
+namespace "stars" deleted
+namespace "management-ui" deleted
+vagrant@node1:~$ kubectl get ns
+NAME               STATUS   AGE
+calico-apiserver   Active   6h56m
+calico-system      Active   6h59m
+default            Active   6h59m
+kube-node-lease    Active   6h59m
+kube-public        Active   6h59m
+kube-system        Active   6h59m
+tigera-operator    Active   6h59m
+vagrant@node1:~$ kubectl get nodes
+NAME    STATUS   ROLES           AGE     VERSION
+node1   Ready    control-plane   7h      v1.27.5
+node2   Ready    <none>          6h56m   v1.27.5
+node3   Ready    <none>          6h52m   v1.27.5
+vagrant@node1:~$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~$ history
+    1  cd .kube
+    2  cd..
+    3  cd.
+    4  cdexit
+    5  exit
+    6  cd .kube
+    7  ls
+    8  cat ~/.kube/config
+    9  sudo useradd -m -s /bin/bash ivan
+   10  sudo passwd ivan
+   11  cd /home/ivan
+   12  sudo mkdir .certs && cd .certs
+   13  sudo openssl genrsa -out ivan.key 2048
+   14  ls
+   15  sudo openssl req -new -key ivan.key -out ivan.csr -subj "/CN=ivan"
+   16  ls
+   17  sudo openssl x509 -req -in ivan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out ivan.crt -days 365
+   18  ls
+   19  cd
+   20  sudo mkdir -p /home/ivan/.kube
+   21  cat /etc/kubernetes/admin.conf
+   22  sudo cat /etc/kubernetes/admin.conf
+   23  sudo vi /home/ivan/.kube/config
+   24  sudo chown -R ivan: /home/ivan
+   25  kubectl create namespace demo-dev
+   26  kubectl create namespace demo-prod
+   27  kubectl get ns
+   28  su - ivan
+   29  ls
+   30  mkdir part1
+   31  mkdir part2
+   32  mkdir part3
+   33  ls
+   34  cd part1
+   35  cat > ivan-rb.yaml
+   36  ls
+   37  cat ivan-rb.yaml
+   38  sed -i s/john/ivan/g ivan-rb.yaml
+   39  cat ivan-rb.yaml
+   40  ls
+   41  kubectl apply -f ivan-rb.yaml
+   42  kubectl get rolebinding -n demo-dev
+   43  kubectl get rolebinding -n demo-prod
+   44  kubectl run pod-prod --image=shekeriev/k8s-oracle --labels=app=oracle --namespace demo-prod
+   45  kubectl run pod-dev --image=shekeriev/k8s-oracle --labels=app=oracle --namespace demo-dev
+   46  kubectl get pods -n demo-prod
+   47  kubectl get pods -n demo-dev
+   48  su - ivan
+   49  kubectl auth can-i create pods
+   50  kubectl auth can-i create services
+   51  kubectl auth can-i create pods -n demo-prod
+   52  kubectl auth can-i create pods -n demo-dev
+   53  kubectl auth can-i create pods --as ivan
+   54  kubectl auth can-i create pods -n demo-prod --as ivan
+   55  kubectl auth can-i create pods -n demo-dev --as ivan
+   56  kubectl auth can-i --list --namespace demo-dev --as ivan
+   57  kubectl delete ns demo-prod demo-dev
+   58  cd ..
+   59  kubectl create namespace rbac-ns
+   60  kubectl run rbac-pod --image=shekeriev/k8s-oracle --namespace=rbac-ns
+   61  kubectl expose pod rbac-pod --port=5000 --name=rbac-svc --namespace=rbac-ns
+   62  kubectl get serviceaccount -n rbac-ns
+   63  kubectl get pod rbac-pod -n rbac-ns -o yaml | grep serviceAccount
+   64  kubectl exec -it rbac-pod -n rbac-ns -- bash
+   65  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   66  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   67  kubectl get serviceaccount -n rbac-ns
+   68  kubectl get serviceaccount -n rbac-nw
+   69  kubectl create role view-pods--verb=get,list,watch --resource=pods --namespace=rbac-ns
+   70  kubectl create role view-pods --verb=get,list,watch --resource=pods --namespace=rbac-ns
+   71  kubectl create rolebinding view-pods --role=view-pods --serviceaccount=rbac-ns:default --namespace=rbac-ns
+   72  kubectl exec -it rbac-pod -n rbac-ns -- bash
+   73  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   74  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   75  kubectl get role view-pods -n rbac-ns -o yaml
+   76  kubectl edit role view-pods -n rbac-ns
+   77  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:default
+   78  kubectl create serviceaccount demo-sa --namespace rbac-ns
+   79  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   80  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   81  kubectl get serviceaccount -n rbac-ns
+   82  cd part1
+   83  cat > demo-role.yaml
+   84  ls
+   85  cat > demo-role.yaml
+   86  cat demo-role.yaml
+   87  ls
+   88  cat > demo-role.yaml
+   89  ls
+   90  cat demo-role.yaml
+   91  cat > demo-role.yaml
+   92  cat demo-role.yaml
+   93  kubectl apply -f demo-role.yaml
+   94  kubectl create rolebinding demo-role --role=demo-role --serviceaccount=rbac-ns:demo-sa --namespace=rbac-ns
+   95  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   96  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   97  kubectl auth can-i delete pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   98  kubectl auth can-i delete services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+   99  kubectl auth can-i get pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  100  kubectl auth can-i get services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  101  kubectl auth can-i delete pods --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  102  kubectl auth can-i delete services --namespace rbac-ns --as system:serviceaccount:rbac-ns:demo-sa
+  103  cat > demo-pod.yaml
+  104  cat demo-pod.yaml
+  105  kubectl apply -f demo-pod.yaml
+  106  kubectl exec -it demo-pod -n rbac-ns -- bash
+  107  kubectl get pods,svc -n rbac-ns
+  108  kubectl delete namespace rbac-ns
+  109  cd ..
+  110  ls
+  111  kubectl describe nodes
+  112  kubectl create namespace reslim
+  113  kubectl run pod-1 --image=alpine --restart=Never --namespace reslim -- dd if=/dev/zero of=/dev/null bs=16M
+  114  kubectl get pods -n reslim -o wide
+  115  kubectl describe node node3
+  116  kubectl exec -it pod-1 -n reslim -- top
+  117  kubectl describe node node3
+  118  kubectl delete pod pod-1 -n reslim
+  119  cat > pod-2.yaml
+  120  cat pod-2.yaml
+  121  kubectl apply -f part2/pod-2.yaml
+  122  kubectl apply -f pod-2.yaml
+  123  kubectl get pods -n reslim -o wide
+  124  kubectl exec -it pod-2 -n reslim -- top
+  125  kubectl describe node node3
+  126  cd part2
+  127  cat > deployment-res.yaml
+  128  cat deployment-res.yaml
+  129  kubectl apply -f part2/deployment-res.yaml
+  130  kubectl apply -f deployment-res.yaml
+  131  kubectl get pods -n reslim -o wide
+  132  kubectl describe node node2
+  133  kubectl scale deployment res -n reslim --replicas=5
+  134  kubectl get deployment -n reslim
+  135  kubectl get pods -n reslim -o wide
+  136  kubectl describe pod res-66767bc74-2nwb4 -n reslim
+  137  kubectl scale deployment res -n reslim --replicas=8
+  138  kubectl get pods -n reslim -o wide
+  139  kubectl get pods -n reslim res-66767bc74-s756s
+  140  kubectl describe pods -n reslim res-66767bc74-s756s
+  141  kubectl describe nodes node2
+  142  kubectl describe nodes node3
+  143  kubectl delete -f deployment-res.yaml
+  144  kubectl delete -f pod-2.yaml
+  145  cd ..
+  146  kubectl delete -f pod-2.yaml
+  147  kubectl get pods
+  148  kubectl get pods -n reslim -o wide
+  149  kubectl delete namespace reslim
+  150  kubectl get ns
+  151  exit
+  152  kubectl get ns
+  153  kubectl delete namespace reslim
+  154  kubectl get ns
+  155  kubectl get pods -n reslim -o wide
+  156  history
+  157  exit
+  158  kubectl get pods -n reslim -o wide
+  159  exit
+  160  kubectl get pods -n reslim -o wide
+  161  kubectl get ns
+  162  kubectl create ns reslim
+  163  kubectl get ns
+  164  kubectl get pods -n reslim -o wide
+  165  cd part2
+  166  ls
+  167  cat > pod-3a.yaml
+  168  cat pod-3a.yaml
+  169  kubectl apply -f part2/pod-3a.yaml
+  170  kubectl apply -f pod-3a.yaml
+  171  kubectl get pods -n reslim -o wide
+  172  kubectl describe node node3
+  173  kubectl exec -it pod-3a -n reslim -- top
+  174  kubectl delete pod pod-3a -n reslim
+  175  cat > pod-3b.yaml
+  176  cat pod-3b.yaml
+  177  kubectl get pods -n reslim -o wide -w
+  178  kubectl apply -f part2/pod-3b.yaml
+  179  kubectl apply -f pod-3b.yaml
+  180  kubectl get pods -n reslim -o wide -w
+  181  kubectl delete -f pod-3b.yaml
+  182  kubectl get pods -n reslim -o wide
+  183  cat > limits.yaml
+  184  cat limits.yaml
+  185  kubectl apply -f part2/limits.yaml
+  186  kubectl apply -f limits.yaml
+  187  kubectl describe limitrange limits -n reslim
+  188  cat > pod-4a.yaml
+  189  cat pod-4a.yaml
+  190  kubectl apply -f pod-4a.yaml
+  191  kubectl decribe pod pod-4a -n reslim
+  192  kubectl describe pod pod-4a -n reslim
+  193  kubectl delete pod pod-4a -n reslim
+  194  kubectl delete -f limits.yaml
+  195  ls
+  196  cat > quota.yaml
+  197  cat quota.yaml
+  198  kubectl apply -f quota.yaml
+  199  kubectl get quota -n reslim
+  200  kubectl describe quota quota -n reslim
+  201  cat > pod-5b.yaml
+  202  kubectl apply -f pod-5b.yaml
+  203  kubectl delete namespace reslim
+  204  cd
+  205  kubectl get pods -A
+  206  kubectl get ns
+  207  kubectl create namespace basicnp
+  208  kubectl create deployment oracle --image=shekeriev/k8s-oracle --namespace basicnp
+  209  kubectl expose deployment oracle --port=5000 --namespace basicnp
+  210  kubectl get svc,pod -n basicnp
+  211  kubectl run tester --image=alpine --namespace basicnp -- sleep 1d
+  212  kubectl exec -it tester --namespace basicnp -- sh
+  214  cat > oracle-policy.yaml
+  215  cat oracle-policy.yaml
+  216  cd ..
+  217  kubectl apply -f part3/oracle-policy.yaml
+  218  kubectl describe netpol access-oracle -n basicnp
+  219  kubectl exec -it tester --namespace basicnp -- sh
+  220  kubectl run tester --image=alpine -- sleep 1d
+  221  kubectl exec -it tester -- sh
+  222  kubectl label pods tester --namespace basicnp access=true
+  223  kubectl exec -it tester --namespace basicnp -- sh
+  224  kubectl exec -it tester -- sh
+  225  kubectl label pods tester access=true
+  226  kubectl exec -it tester -- sh
+  227  kubectl edit netpol access-oracle -n basicnp
+  228  kubectl exec -it tester -- sh
+  229  kubectl label pod tester access-
+  230  kubectl exec -it tester -- sh
+  231  kubectl describe netpol access-oracle -n basicnp
+  232  kubectl edit netpol access-oracle -n basicnp
+  233  kubectl describe netpol access-oracle -n basicnp
+  234  kubectl exec -it tester -- sh
+  235  kubectl delete pod tester
+  236  kubectl delete namespace basicnp
+  237  kubectl create -f https://docs.tigera.io/files/00-namespace.yaml
+  238  kubectl create -f https://docs.tigera.io/files/01-management-ui.yaml
+  239  kubectl create -f https://docs.tigera.io/files/02-backend.yaml
+  240  kubectl create -f https://docs.tigera.io/files/03-frontend.yaml
+  241  kubectl create -f https://docs.tigera.io/files/04-client.yaml
+  242  kubectl get ns
+  243  kubectl get pods --all-namespaces --watch
+  244  kubectl get all -n management-ui
+  245  kubectl create -n stars -f https://docs.tigera.io/files/default-deny.yaml
+  246  kubectl create -n client -f https://docs.tigera.io/files/default-deny.yaml
+  247  kubectl create -f https://docs.tigera.io/files/allow-ui.yaml
+  248  kubectl create -f https://docs.tigera.io/files/allow-ui-client.yaml
+  249  kubectl create -f https://docs.tigera.io/files/backend-policy.yaml
+  250  kubectl create -f https://docs.tigera.io/files/frontend-policy.yaml
+  251  kubectl delete ns client stars management-ui
+  252  kubectl get ns
+  253  kubectl get nodes
+  254  kubectl get pods
+  255  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 cd '.\04. Security and Policies\'
+   3 cd .\lab\
+   4 vagrant up
+   5 vagrant ssh node1
+   6 vagrant ssh node1
+   7 vagrant ssh node1
+   8 Get-History
+   9 vagrant ssh node1
+  10 vagrant up
+  11 vagrant ssh node1
+
+
+PS C:\Users\NB\Kubernetes\04. Security and Policies\lab>

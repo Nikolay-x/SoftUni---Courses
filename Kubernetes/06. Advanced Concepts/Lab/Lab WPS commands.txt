@@ -1,0 +1,258 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant up
+   4 vagrant ssh node1
+
+
+
+vagrant@node1:~$ history
+  ...
+  327  kubectl get nodes
+  328  ps ax | grep /usr/bin/kubelet
+  329  cat /var/lib/kubelet/config.yaml
+  330  ls -l /etc/kubernetes/manifests
+  331  sudo cat /etc/kubernetes/manifests/etcd.yaml
+  332  cat > 1-static-pod.yaml
+  333  cat 1-static-pod.yaml
+  334  sudo cp part1/1-static-pod.yaml /etc/kubernetes/manifests/
+  335  sudo cp 1-static-pod.yaml /etc/kubernetes/manifests/
+  336  ls -l /etc/kubernetes/manifests
+  337  kubectl get pods -o wide
+  338  kubectl get nodes
+  339  kubectl get pods -n kube-system
+  340  kubectl delete pod static-pod-node1
+  341  kubectl get pods -o wide
+  342  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  343  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock rm --force d174a2d6759b5
+  344  sudo crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps | grep static-pod
+  345  kubectl get pods -o wide
+  346  sudo rm /etc/kubernetes/manifests/1-static-pod.yaml
+  347  kubectl get pods -o wide -w
+  348  kubectl get pods -o wide
+  349  cat > 2-sidecar.yaml
+  350  cat 2-sidecar.yaml
+  351  kubectl apply -f 2-sidecar.yaml
+  352  kubectl get pods -o wide
+  353  kubectl get pods -o wide -w
+  354  kubectl get pods -o wide
+  355  kubectl get pods,svc -o wide
+  356  kubectl describe pod/sidecar-6d89497788-8j2mb
+  357  kubectl get pods,svc -o wide
+  358  kubectl exec -it pod/sidecar-pod/sidecar-6d89497788-6rgcz -- sh
+  359  kubectl exec -it pod/sidecar-6d89497788-6rgcz -- sh
+  360  kubectl exec -it deploy/sidecar -c cont-sidecar -- sh
+  361  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- bash
+  362  kubectl exec -it pod/sidecar-6d89497788-6rgcz -c cont-main -- kill 1
+  363  kubectl get pods
+  364  kubectl delete -f 2-sidecar.yaml
+  365  kubectl get pods
+  366  cat > 3-adapter.yaml
+  367  cat 3-adapter.yaml
+  368  kubectl apply -f 3-adapter.yaml
+  369  kubectl get pods
+  370  kubectl exec -it adapter -c cont-main -- cat /var/log/app.log
+  371  kubectl exec -it adapter -c cont-adapter -- cat /var/log/out.log
+  372  kubectl delete -f 3-adapter.yaml
+  373  kubectl get pods
+  374  cat > 4-init-container.yaml
+  375  cat 4-init-container.yaml
+  376  kubectl apply -f 4-init-container.yaml
+  377  kubectl get pods,svc
+  378  kubectl get pods -w
+  379  kubectl describe pod pod-init
+  380  kubectl delete -f 4-init-container.yaml
+  381  kubectl get pods,svc
+  382  hostname
+  383  wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -O metrics-server.yaml
+  384  vi metrics-server.yaml
+  385  cat metrics-server.yaml
+  386  kubectl apply -f metrics-server.yaml
+  387  kubectl get all -A
+  388  kubectl get all -n kube-system
+  389  cat > 1-auto-scale.yaml
+  390  cat 1-auto-scale.yaml
+  391  kubectl apply -f 1-auto-scale.yaml
+  392  kubectl get pods
+  393  cat > 1-auto-scale-hpa.yaml
+  394  cat 1-auto-scale-hpa.yaml
+  395  kubectl apply -f 1-auto-scale-hpa.yaml
+  396  kubectl get horizontalpodautoscalers auto-scale-deploy
+  397  kubectl get pods -o wide
+  398  kubectl get deployments
+  399  kubectl get horizontalpodautoscalers auto-scale-deploy
+  400  kubectl get pods -o wide
+  401  kubectl get deployments
+  402  kubectl delete -f 1-auto-scale-hpa.yaml
+  403  kubectl delete -f 1-auto-scale.yaml
+  404  kubectl delete -f metrics-server.yaml
+  405  kubectl get nodes --show-labels
+  406  kubectl describe node k8s1
+  407  kubectl label node node2 disk=hitachi --overwrite
+  408  kubectl label node node3 disk=hitachi --overwrite
+  409  kubectl get nodes --show-labels
+  410  kubectl describe node | grep Taints
+  411  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule-
+  412  kubectl taint nodes node1 node-role.kubernetes.io/control-plane:NoSchedule
+  413  kubectl describe node | grep Taints
+  414  kubectl get pods -n kube-system -o wide
+  415  kubectl describe pod coredns-5d78c9869d-4mqgb -n kube-system
+  416  kubectl get pods -n kube-system -o wide
+  417  kubectl describe pod etcd-node1 -n kube-system
+  418  kubectl taint node node2 demo-taint=nomorework:NoSchedule
+  419  kubectl describe node | grep Taints
+  420  cat > 2-schedule.yaml
+  421  cat 2-schedule.yaml
+  422  kubectl apply -f 2-schedule.yaml
+  423  kubectl get pods -o wide
+  424  kubectl delete -f 2-schedule.yaml
+  425  cat > 2-schedule-toleration.yaml
+  426  cat 2-schedule-toleration.yaml
+  427  kubectl apply -f 2-schedule-toleration.yaml
+  428  kubectl get pods -o wide
+  429  kubectl taint node node2 demo-taint-
+  430  kubectl get pods -o wide
+  431  kubectl delete -f 2-schedule-toleration.yaml
+  432  cat > 3-daemon-set.yaml
+  433  cat 3-daemon-set.yaml
+  434  cp 3-daemon-set.yaml pure-ds.yaml
+  435  vi pure-ds.yaml
+  436  cat pure-ds.yaml
+  437  kubectl apply -f pure-ds.yaml
+  438  kubectl get ds
+  439  kubectl get pods -o wide
+  440  kubectl delete -f pure-ds.yaml
+  441  cat 3-daemon-set.yaml
+  442  kubectl apply -f 3-daemon-set.yaml
+  443  kubectl get ds
+  444  kubectl get pods
+  445  kubectl get nodes --show-labels
+  446  kubectl label node node2 disk=samsung
+  447  kubectl label node node2 disk=samsung --overwrite
+  448  kubectl get nodes --show-labels
+  449  kubectl get ds
+  450  kubectl get pods -o wide
+  451  kubectl label node node3 disk=samsung
+  452  kubectl label node node3 disk=samsung --overwrite
+  453  kubectl get pods -o wide
+  454  kubectl get ds
+  455  kubectl label node node2 disk=wdc --overwrite
+  456  kubectl get ds
+  457  kubectl get pods -o wide
+  458  kubectl delete -f 3-daemon-set.yaml
+  459  kubectl get ds
+  460  cat > 4-batch-job.yaml
+  461  cat 4-batch-job.yaml
+  462  kubectl apply -f 4-batch-job.yaml
+  463  kubectl get jobs
+  464  kubectl get jobs -o wide
+  465  kubectl get pods
+  466  kubectl describe job batch-job
+  467  kubectl get jobs -o wide
+  468  kubectl get pods
+  469  kubectl get jobs -o wide
+  470  kubectl describe job batch-job
+  471  kubectl delete -f 4-batch-job.yaml
+  472  kubectl get pods
+  473  cat > 4-batch-job-serial.yaml
+  474  cat 4-batch-job-serial.yaml
+  475  kubectl apply -f 4-batch-job-serial.yaml
+  476  kubectl get jobs
+  477  kubectl describe job batch-job-serial
+  478  kubectl get pods
+  479  kubectl delete -f 4-batch-job-serial.yaml
+  480  kubectl get pods
+  481  cat > 4-batch-job-parallel.yaml
+  482  cat 4-batch-job-parallel.yaml
+  483  kubectl apply -f 4-batch-job-parallel.yaml
+  484  kubectl get jobs
+  485  kubectl get jobs -o wide
+  486  kubectl get pods -o wide
+  487  kubectl describe job batch-job-parallel
+  488  kubectl get pods -o wide
+  489  kubectl get jobs -o wide
+  490  kubectl delete -f 4-batch-job-parallel.yaml
+  491  cat > 4-batch-job-serial.yaml
+  492  sudo rm 4-batch-job-serial.yaml
+  493  ls
+  494  cat > 4-batch-job-cron.yaml
+  495  cat 4-batch-job-cron.yaml
+  496  kubectl apply -f 4-batch-job-cron.yaml
+  497  kubectl get cronjobs
+  498  kubectl get cronjobs -o wide
+  499  kubectl get pods -o wide
+  500  kubectl delete -f 4-batch-job-cron.yaml
+  501  ls
+  502  ls -a
+  503  git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.3.2
+  504  cd kubernetes-ingress/deployments
+  505  ls
+  506  cd ..
+  507  apt-get install tree
+  508  sudo apt-get install tree
+  509  cd kubernetes-ingress/deployments
+  510  tree .
+  511  kubectl apply -f common/ns-and-sa.yaml
+  512  kubectl apply -f rbac/rbac.yaml
+  513  kubectl apply -f ../examples/shared-examples/default-server-secret/default-server-secret.yaml
+  514  kubectl apply -f common/nginx-config.yaml
+  515  kubectl apply -f common/ingress-class.yaml
+  516  kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
+  517  kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
+  518  kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
+  519  kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+  520  kubectl apply -f deployment/nginx-ingress.yaml
+  521  kubectl get pods --namespace=nginx-ingress -w
+  522  ls -al service/
+  523  kubectl create -f service/nodeport.yaml
+  524  kubectl get service -n nginx-ingress
+  525  cd ..
+  526  cat > pod-svc-1.yaml
+  527  cat pod-svc-1.yaml
+  528  kubectl get ingressclass
+  529  kubectl apply -f pod-svc-1.yaml
+  530  kubectl get pod,svc
+  531  cat > 1-nginx-single.yaml
+  532  cat 1-nginx-single.yaml
+  534  kubectl get ingress
+  535  kubectl describe ingress ingress-ctrl
+  536  ip a
+  537  sudo vi /etc/hosts
+  538  ping demo.lab
+  539  kubectl get svc nginx-ingress -n nginx-ingress
+  540  cat > 2-nginx-custom-path-a.yaml
+  541  kubectl apply -f 2-nginx-custom-path-a.yaml
+  542  kubectl describe ingress ingress-ctrl
+  543  kubectl logs pod1
+  544  cat > 2-nginx-custom-path-b.yaml
+  545  kubectl apply -f 2-nginx-custom-path-b.yaml
+  546  kubectl describe ingress ingress-ctrl
+  547  cat > pod-svc-d.yaml
+  548  kubectl apply -f pod-svc-d.yaml
+  549  cat > 3-nginx-default-back.yaml
+  550  kubectl apply -f 3-nginx-default-back.yaml
+  551  kubectl describe ingress ingress-ctrl
+  552  cat > pod-svc-2.yaml
+  553  cat pod-svc-2.yaml
+  554  kubectl apply -f pod-svc-2.yaml
+  555  cat > 4-nginx-fan-out.yaml
+  556  ubectl apply -f part3/4-nginx-fan-out.yaml
+  557  kubectl apply -f 4-nginx-fan-out.yaml
+  558  kubectl describe ingress ingress-ctrl
+  559  cat > 5-nginx-name-vhost.yaml
+  560  kubectl apply -f 5-nginx-name-vhost.yaml
+  561  kubectl describe ingress ingress-ctrl
+  562  kubectl delete pods podd pod1 pod2
+  563  kubectl delete svc serviced service1 service2
+  564  kubectl delete ingress ingress-ctrl
+  565  kubectl delete namespace nginx-ingress
+  566  kubectl delete clusterrolebinding nginx-ingress
+  567  kubectl delete clusterrole nginx-ingress
+  568  cd /kubernetes-ingress/deployments
+  569  cd kubernetes-ingress/deployments
+  570  kubectl delete -f common/crds/
+  571  cd ..
+  572  history

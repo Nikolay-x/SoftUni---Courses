@@ -1,0 +1,127 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 Set-Location -Path 'C:\Users\NB\Kubernetes'
+   2 vagrant up
+   3 vagrant up
+   4 vagrant ssh node1
+   5 Get-Process | Out-Clipboard
+   6 vagrant halt
+
+
+
+vagrant@node1:~$ history
+    1  cat ~/.kube/config
+    2  sudo useradd -m -s /bin/bash ivan
+    3  sudo passwd ivan
+    4  cd /home/ivan
+    5  sudo mkdir .certs && cd .certs
+    6  sudo openssl genrsa -out ivan.key 2048
+    7  sudo openssl req -new -key ivan.key -out ivan.csr -subj "/CN=ivan"
+    8  sudo openssl x509 -req -in ivan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out ivan.crt -days 365
+    9  cd
+   10  kubectl config set-credentials ivan --client-certificate=/home/ivan/.certs/ivan.crt --client-key=/home/ivan/.certs/ivan.key
+   11  kubectl config set-context ivan-context --cluster=kubernetes --user=ivan
+   12  kubectl config get-users
+   13  kubectl config get-contexts
+   14  kubectl config view
+   15  sudo mkdir /home/ivan/.kube
+   16  sudo cp ~/.kube/config /home/ivan/.kube/config
+   17  sudo vi /home/ivan/.kube/config
+   18  sudo chown -R ivan: /home/ivan/
+   19  sudo cat /home/ivan/.kube/config
+   20  sudo vi /home/ivan/.kube/config
+   21  sudo cat /home/ivan/.kube/config
+   22  sudo chown -R ivan: /home/ivan/
+   23  sudo useradd -m -s /bin/bash mariana
+   24  sudo passwd mariana
+   25  cd /home/mariana
+   26  sudo mkdir .certs && cd .certs
+   27  sudo openssl genrsa -out mariana.key 2048
+   28  sudo openssl req -new -key mariana.key -out mariana.csr -subj "/CN=mariana"
+   29  sudo openssl x509 -req -in mariana.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out mariana.crt -days 365
+   30  cd
+   31  kubectl config set-credentials mariana --client-certificate=/home/mariana/.certs/mariana.crt --client-key=/home/mariana/.certs/mariana.key
+   32  kubectl config set-context mariana-context --cluster=kubernetes --user=mariana
+   33  kubectl config get-users
+   34  kubectl config get-contexts
+   35  kubectl config view
+   36  sudo mkdir /home/mariana/.kube
+   37  sudo cp ~/.kube/config /home/mariana/.kube/config
+   38  sudo vi /home/mariana/.kube/config
+   39  sudo cat /home/mariana/.kube/config
+   40  sudo chown -R mariana: /home/mariana/
+   41  cat > gurus-clusterrole.yaml
+   42  cat gurus-clusterrole.yaml
+   43  cat > gurus-clusterrolebinding.yaml
+   44  cat gurus-clusterrolebinding.yaml
+   45  kubectl apply -f gurus-clusterrole.yaml
+   46  kubectl apply -f gurus-clusterrolebinding.yaml
+   47  kubectl create namespace projectx
+   48  cat > limit-range.yaml
+   49  cat limit-range.yaml
+   50  kubectl apply -f projectx-limitrange.yaml
+   51  kubectl apply -f limit-range.yaml
+   52  cat > projectx-resourcequota.yaml
+   53  cat projectx-resourcequota.yaml
+   54  kubectl apply -f projectx-resourcequota.yaml
+   55  cat > devguru-role.yaml
+   56  cat devguru-role.yaml
+   57  kubectl apply -f devguru-role.yaml
+   58  cat > devguru-role.yaml
+   59  cat devguru-role.yaml
+   60  kubectl apply -f devguru-role.yaml
+   61  cat > devguru-role.yaml
+   62  cat devguru-role.yaml
+   63  kubectl apply -f devguru-role.yaml
+   64  cat > devguru-binding.yaml
+   65  cat devguru-binding.yaml
+   66  kubectl apply -f devguru-binding.yaml
+   67  cat > consumer-to-producer.yaml
+   68  cat consumer-to-producer.yaml
+   69  cat > client-to-consumer.yaml
+   70  cat client-to-consumer.yaml
+   71  cat > consumer.yaml
+   72  cat consumer.yaml
+   73  cat > client.yaml
+   74  cat client.yaml
+   75  kubectl apply -f producer-consumer.yaml
+   76  kubectl apply -f consumer.yaml
+   77  kubectl apply -f client.yaml
+   78  cat > client.yaml
+   79  cat client.yaml
+   80  kubectl apply -f client.yaml
+   81  cat > client.yaml
+   82  cat client.yaml
+   83  kubectl apply -f client.yaml
+   84  cat > client.yaml
+   85  cat client.yaml
+   86  kubectl apply -f client.yaml
+   87  cat > client.yaml
+   88  cat client.yaml
+   89  kubectl apply -f client.yaml
+   90  cat > client.yaml
+   91  cat client.yaml
+   92  kubectl apply -f client.yaml
+   93  cat > client.yaml
+   94  cat client.yaml
+   95  kubectl apply -f client.yaml
+   96  ls
+   97  kubectl apply -f consumer-to-producer.yaml
+   98  kubectl apply -f client-to-consumer.yaml
+   99  cat > client.yaml
+  100  cat client.yaml
+  101  kubectl apply -f client.yaml
+  102  cat > client.yaml
+  103  cat client.yaml
+  104  kubectl apply -f client.yaml
+  105  kubectl cluster-info
+  106  kubectl get all --all-namespaces
+  107  kubectl get roles --all-namespaces
+  108  kubectl get clusterroles --all-namespaces
+  109  kubectl get all -n projectx
+  110  kubectl get clusterroles
+  111  kubectl get clusterrolebindings
+  112  kubectl get resourcequotas --all-namespaces
+  113  history

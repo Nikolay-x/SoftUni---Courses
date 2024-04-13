@@ -1,0 +1,651 @@
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get ns
+NAME              STATUS   AGE
+default           Active   160m
+kube-node-lease   Active   160m
+kube-public       Active   160m
+kube-system       Active   160m
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl apply -f demo-files/4-rc.yml
+replicationcontroller/appa-rc created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rc
+NAME      DESIRED   CURRENT   READY   AGE
+appa-rc   3         3         3       11s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rc -o wide
+NAME      DESIRED   CURRENT   READY   AGE   CONTAINERS       IMAGES                  SELECTOR
+appa-rc   3         3         3       32s   appa-container   shekeriev/k8s-appa:v1   app=appa
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe rc appa-rc
+Name:         appa-rc
+Namespace:    default
+Selector:     app=appa
+Labels:       app=appa
+              ver=v1
+Annotations:  <none>
+Replicas:     3 current / 3 desired
+Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=appa
+           ver=v1
+  Containers:
+   appa-container:
+    Image:        shekeriev/k8s-appa:v1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                    Message
+  ----    ------            ----   ----                    -------
+  Normal  SuccessfulCreate  6m46s  replication-controller  Created pod: appa-rc-7cvz2
+  Normal  SuccessfulCreate  6m46s  replication-controller  Created pod: appa-rc-g8kcp
+  Normal  SuccessfulCreate  6m46s  replication-controller  Created pod: appa-rc-8vzmg
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe services appa-svc
+Name:                     appa-svc
+Namespace:                default
+Labels:                   app=appa
+                          ver=v1
+Annotations:              <none>
+Selector:                 app=appa,ver=v1
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.104.23.154
+IPs:                      10.104.23.154
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.0.10:80,10.244.0.11:80,10.244.0.9:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> minikube service list
+|-------------|------------|--------------|-----------------------------|
+|  NAMESPACE  |    NAME    | TARGET PORT  |             URL             |
+|-------------|------------|--------------|-----------------------------|
+| default     | appa-svc   |           80 | http://172.25.180.252:30001 |
+| default     | kubernetes | No node port |                             |
+| kube-system | kube-dns   | No node port |                             |
+|-------------|------------|--------------|-----------------------------|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl scale --replicas=5 rc/appa-rc
+replicationcontroller/appa-rc scaled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rc
+NAME      DESIRED   CURRENT   READY   AGE
+appa-rc   5         5         5       5m28s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+appa-rc-7cvz2   1/1     Running   0          5m41s
+appa-rc-8vzmg   1/1     Running   0          5m41s
+appa-rc-g8kcp   1/1     Running   0          5m41s
+appa-rc-kfgn5   1/1     Running   0          34s
+appa-rc-tvf5m   1/1     Running   0          34s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe services appa-svc
+Name:                     appa-svc
+Namespace:                default
+Labels:                   app=appa
+                          ver=v1
+Annotations:              <none>
+Selector:                 app=appa,ver=v1
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.104.23.154
+IPs:                      10.104.23.154
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.0.10:80,10.244.0.11:80,10.244.0.12:80 + 2 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe endpoints appa-svc
+Name:         appa-svc
+Namespace:    default
+Labels:       app=appa
+              ver=v1
+Annotations:  endpoints.kubernetes.io/last-change-trigger-time: 2023-10-18T12:20:50Z
+Subsets:
+  Addresses:          10.244.0.10,10.244.0.11,10.244.0.12,10.244.0.13,10.244.0.9
+  NotReadyAddresses:  <none>
+  Ports:
+    Name     Port  Protocol
+    ----     ----  --------
+    <unset>  80    TCP
+
+Events:  <none>
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl scale --replicas=2 rc/appa-rc
+replicationcontroller/appa-rc scaled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rc
+NAME      DESIRED   CURRENT   READY   AGE
+appa-rc   2         2         2       7m37s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+appa-rc-7cvz2   1/1     Running   0          7m52s
+appa-rc-g8kcp   1/1     Running   0          7m52s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl delete -f demo-files/4-rc.yml
+replicationcontroller "appa-rc" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl apply -f demo-files/5-rs.yml
+replicaset.apps/appa-rs created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+NAME      DESIRED   CURRENT   READY   AGE
+appa-rs   3         3         3       92s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs -o wide
+NAME      DESIRED   CURRENT   READY   AGE    CONTAINERS       IMAGES                  SELECTOR
+appa-rs   3         3         3       115s   appa-container   shekeriev/k8s-appa:v1   app=appa
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe rs appa-rs
+Name:         appa-rs
+Namespace:    default
+Selector:     app=appa
+Labels:       <none>
+Annotations:  <none>
+Replicas:     3 current / 3 desired
+Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=appa
+           ver=v1
+  Containers:
+   appa-container:
+    Image:        shekeriev/k8s-appa:v1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  7m40s  replicaset-controller  Created pod: appa-rs-c5p99
+  Normal  SuccessfulCreate  7m40s  replicaset-controller  Created pod: appa-rs-9jlc4
+  Normal  SuccessfulCreate  7m40s  replicaset-controller  Created pod: appa-rs-2fk6p
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe services appa-svc
+Name:                     appa-svc
+Namespace:                default
+Labels:                   app=appa
+                          ver=v1
+Annotations:              <none>
+Selector:                 app=appa,ver=v1
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.104.23.154
+IPs:                      10.104.23.154
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.0.14:80,10.244.0.15:80,10.244.0.16:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> minikube service list
+|-------------|------------|--------------|-----------------------------|
+|  NAMESPACE  |    NAME    | TARGET PORT  |             URL             |
+|-------------|------------|--------------|-----------------------------|
+| default     | appa-svc   |           80 | http://172.25.180.252:30001 |
+| default     | kubernetes | No node port |                             |
+| kube-system | kube-dns   | No node port |                             |
+|-------------|------------|--------------|-----------------------------|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl scale --replicas=5 rs/appa-rs
+replicaset.apps/appa-rs scaled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+NAME      DESIRED   CURRENT   READY   AGE
+appa-rs   5         5         5       3m24s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe services appa-svc
+Name:                     appa-svc
+Namespace:                default
+Labels:                   app=appa
+                          ver=v1
+Annotations:              <none>
+Selector:                 app=appa,ver=v1
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.104.23.154
+IPs:                      10.104.23.154
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.0.14:80,10.244.0.15:80,10.244.0.16:80 + 2 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe endpoints appa-svc
+Name:         appa-svc
+Namespace:    default
+Labels:       app=appa
+              ver=v1
+Annotations:  endpoints.kubernetes.io/last-change-trigger-time: 2023-10-18T12:27:51Z
+Subsets:
+  Addresses:          10.244.0.14,10.244.0.15,10.244.0.16,10.244.0.17,10.244.0.18
+  NotReadyAddresses:  <none>
+  Ports:
+    Name     Port  Protocol
+    ----     ----  --------
+    <unset>  80    TCP
+
+Events:
+  Type     Reason                  Age                  From                 Message
+  ----     ------                  ----                 ----                 -------
+  Warning  FailedToUpdateEndpoint  9m55s (x2 over 10m)  endpoint-controller  Failed to update endpoint default/appa-svc: Operation cannot be fulfilled on endpoints "appa-svc": the object has been modified; please apply your changes to the latest version and try again
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl scale --replicas=2 rs/appa-rs
+replicaset.apps/appa-rs scaled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+NAME      DESIRED   CURRENT   READY   AGE
+appa-rs   2         2         2       4m43s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> minikube service list
+|-------------|------------|--------------|-----------------------------|
+|  NAMESPACE  |    NAME    | TARGET PORT  |             URL             |
+|-------------|------------|--------------|-----------------------------|
+| default     | appa-svc   |           80 | http://172.25.180.252:30001 |
+| default     | kubernetes | No node port |                             |
+| kube-system | kube-dns   | No node port |                             |
+|-------------|------------|--------------|-----------------------------|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl delete -f demo-files/5-rs.yml
+replicaset.apps "appa-rs" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl create deployment appa-deploy --image=shekeriev/k8s-appa:v1 --replicas=2 --port=80
+deployment.apps/appa-deploy created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get deployments
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+appa-deploy   2/2     2            2           12s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe deployment appa-deploy
+Name:                   appa-deploy
+Namespace:              default
+CreationTimestamp:      Wed, 18 Oct 2023 15:31:06 +0300
+Labels:                 app=appa-deploy
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=appa-deploy
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=appa-deploy
+  Containers:
+   k8s-appa:
+    Image:        shekeriev/k8s-appa:v1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   appa-deploy-7dc9645664 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  6m5s  deployment-controller  Scaled up replica set appa-deploy-7dc9645664 to 2
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl scale deployment appa-deploy --replicas=10
+deployment.apps/appa-deploy scaled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods -w
+NAME                           READY   STATUS    RESTARTS   AGE
+appa-deploy-7dc9645664-4r2tl   1/1     Running   0          13s
+appa-deploy-7dc9645664-8g6mm   1/1     Running   0          13s
+appa-deploy-7dc9645664-8pjrr   1/1     Running   0          13s
+appa-deploy-7dc9645664-8s8sc   1/1     Running   0          13s
+appa-deploy-7dc9645664-gw6m4   1/1     Running   0          60s
+appa-deploy-7dc9645664-mbbpn   1/1     Running   0          13s
+appa-deploy-7dc9645664-mmpx8   1/1     Running   0          13s
+appa-deploy-7dc9645664-qtd6x   1/1     Running   0          13s
+appa-deploy-7dc9645664-rxqth   1/1     Running   0          60s
+appa-deploy-7dc9645664-vwgkv   1/1     Running   0          13s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods
+NAME                           READY   STATUS    RESTARTS   AGE
+appa-deploy-7dc9645664-4r2tl   1/1     Running   0          53s
+appa-deploy-7dc9645664-8g6mm   1/1     Running   0          53s
+appa-deploy-7dc9645664-8pjrr   1/1     Running   0          53s
+appa-deploy-7dc9645664-8s8sc   1/1     Running   0          53s
+appa-deploy-7dc9645664-gw6m4   1/1     Running   0          100s
+appa-deploy-7dc9645664-mbbpn   1/1     Running   0          53s
+appa-deploy-7dc9645664-mmpx8   1/1     Running   0          53s
+appa-deploy-7dc9645664-qtd6x   1/1     Running   0          53s
+appa-deploy-7dc9645664-rxqth   1/1     Running   0          100s
+appa-deploy-7dc9645664-vwgkv   1/1     Running   0          53s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl delete deployment appa-deploy
+deployment.apps "appa-deploy" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl apply -f demo-files/6-appa-deploy-v1.yml
+deployment.apps/appa-deploy created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods -w
+NAME                           READY   STATUS    RESTARTS   AGE
+appa-deploy-5d75b885b7-brr9r   1/1     Running   0          10s
+appa-deploy-5d75b885b7-brrhb   1/1     Running   0          10s
+appa-deploy-5d75b885b7-bslmb   1/1     Running   0          10s
+appa-deploy-5d75b885b7-hnvn7   1/1     Running   0          10s
+appa-deploy-5d75b885b7-jf6bd   1/1     Running   0          10s
+appa-deploy-5d75b885b7-lg2sl   1/1     Running   0          10s
+appa-deploy-5d75b885b7-qwx8c   1/1     Running   0          10s
+appa-deploy-5d75b885b7-rmwnf   1/1     Running   0          10s
+appa-deploy-5d75b885b7-t96gb   1/1     Running   0          10s
+appa-deploy-5d75b885b7-xs542   1/1     Running   0          10s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get deployments
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+appa-deploy   10/10   10           10          35s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get deployments -o wide
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS       IMAGES                  SELECTOR
+appa-deploy   10/10   10           10          51s   appa-container   shekeriev/k8s-appa:v1   app=appa,ver=v1
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+NAME                     DESIRED   CURRENT   READY   AGE
+appa-deploy-5d75b885b7   10        10        10      110s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl apply -f demo-files/7-appa-deploy-v2.yml
+deployment.apps/appa-deploy configured
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout status deployment appa-deploy
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 9 of 10 updated replicas are available...
+Waiting for deployment "appa-deploy" rollout to finish: 9 of 10 updated replicas are available...
+deployment "appa-deploy" successfully rolled out
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods -w
+NAME                           READY   STATUS    RESTARTS   AGE
+appa-deploy-5f759c9464-k74x8   1/1     Running   0          3m52s
+appa-deploy-5f759c9464-lhwqq   1/1     Running   0          73s
+appa-deploy-5f759c9464-lnm27   1/1     Running   0          91s
+appa-deploy-5f759c9464-nc7rm   1/1     Running   0          91s
+appa-deploy-5f759c9464-qdqzs   1/1     Running   0          2m1s
+appa-deploy-5f759c9464-qjdvg   1/1     Running   0          3m52s
+appa-deploy-5f759c9464-sjsm5   1/1     Running   0          119s
+appa-deploy-5f759c9464-tvrs2   1/1     Running   0          57s
+appa-deploy-5f759c9464-w8gnm   1/1     Running   0          73s
+appa-deploy-5f759c9464-xvpvj   1/1     Running   0          2m16s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get deployments
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+appa-deploy   10/10   10           10          9m12s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get deployments -o wide
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS       IMAGES                  SELECTOR
+appa-deploy   10/10   10           10          9m21s   appa-container   shekeriev/k8s-appa:v2   app=appa,ver=v1
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> Compare-Object (Get-Content -Path demo-files/6-appa-deploy-v1.yml) -DifferenceObject (Get-Content -Path demo-files/7-appa-deploy-v2.yml) -IncludeEqual
+
+InputObject                          SideIndicator
+-----------                          -------------
+apiVersion: apps/v1                  ==
+kind: Deployment                     ==
+metadata:                            ==
+  name: appa-deploy                  ==
+spec:                                ==
+  replicas: 10                       ==
+  selector:                          ==
+    matchLabels:                     ==
+      app: appa                      ==
+      ver: v1                        ==
+  minReadySeconds: 15                ==
+  strategy:                          ==
+    type: RollingUpdate              ==
+    rollingUpdate:                   ==
+      maxUnavailable: 1              ==
+      maxSurge: 1                    ==
+  template:                          ==
+    metadata:                        ==
+      labels:                        ==
+        app: appa                    ==
+        ver: v1                      ==
+    spec:                            ==
+      containers:                    ==
+      - name: appa-container         ==
+        ports:                       ==
+        - containerPort: 80          ==
+        image: shekeriev/k8s-appa:v2 =>
+        image: shekeriev/k8s-appa:v1 <=
+
+
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe deployment appa-deploy
+Name:                   appa-deploy
+Namespace:              default
+CreationTimestamp:      Wed, 18 Oct 2023 15:37:05 +0300
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=appa,ver=v1
+Replicas:               10 desired | 10 updated | 10 total | 10 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        15
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=appa
+           ver=v1
+  Containers:
+   appa-container:
+    Image:        shekeriev/k8s-appa:v2
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   appa-deploy-5f759c9464 (10/10 replicas created)
+Events:
+  Type    Reason             Age                    From                   Message
+  ----    ------             ----                   ----                   -------
+  Normal  ScalingReplicaSet  15m                    deployment-controller  Scaled up replica set appa-deploy-5d75b885b7 to 10
+  Normal  ScalingReplicaSet  10m                    deployment-controller  Scaled up replica set appa-deploy-5f759c9464 to 1
+  Normal  ScalingReplicaSet  10m                    deployment-controller  Scaled down replica set appa-deploy-5d75b885b7 to 9 from 10
+  Normal  ScalingReplicaSet  10m                    deployment-controller  Scaled up replica set appa-deploy-5f759c9464 to 2 from 1
+  Normal  ScalingReplicaSet  9m16s                  deployment-controller  Scaled down replica set appa-deploy-5d75b885b7 to 8 from 9
+  Normal  ScalingReplicaSet  9m16s                  deployment-controller  Scaled up replica set appa-deploy-5f759c9464 to 3 from 2
+  Normal  ScalingReplicaSet  9m1s                   deployment-controller  Scaled down replica set appa-deploy-5d75b885b7 to 7 from 8
+  Normal  ScalingReplicaSet  9m1s                   deployment-controller  Scaled up replica set appa-deploy-5f759c9464 to 4 from 3
+  Normal  ScalingReplicaSet  8m59s                  deployment-controller  Scaled down replica set appa-deploy-5d75b885b7 to 6 from 7
+  Normal  ScalingReplicaSet  7m57s (x7 over 8m59s)  deployment-controller  (combined from similar events): Scaled up replica set appa-deploy-5f759c9464 to 10 from 9
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+NAME                     DESIRED   CURRENT   READY   AGE
+appa-deploy-5d75b885b7   0         0         0       10m
+appa-deploy-5f759c9464   10        10        10      5m30s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl describe rs
+Name:           appa-deploy-5d75b885b7
+Namespace:      default
+Selector:       app=appa,pod-template-hash=5d75b885b7,ver=v1
+Labels:         app=appa
+                pod-template-hash=5d75b885b7
+                ver=v1
+Annotations:    deployment.kubernetes.io/desired-replicas: 10
+                deployment.kubernetes.io/max-replicas: 11
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/appa-deploy
+Replicas:       0 current / 0 desired
+Pods Status:    0 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=appa
+           pod-template-hash=5d75b885b7
+           ver=v1
+  Containers:
+   appa-container:
+    Image:        shekeriev/k8s-appa:v1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-brr9r
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-qwx8c
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-t96gb
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-lg2sl
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-xs542
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-jf6bd
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-brrhb
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-rmwnf
+  Normal  SuccessfulCreate  16m    replicaset-controller  Created pod: appa-deploy-5d75b885b7-bslmb
+  Normal  SuccessfulCreate  16m    replicaset-controller  (combined from similar events): Created pod: appa-deploy-5d75b885b7-hnvn7
+  Normal  SuccessfulDelete  11m    replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-jf6bd
+  Normal  SuccessfulDelete  9m46s  replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-brr9r
+  Normal  SuccessfulDelete  9m31s  replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-t96gb
+  Normal  SuccessfulDelete  9m29s  replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-bslmb
+  Normal  SuccessfulDelete  9m1s   replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-hnvn7
+  Normal  SuccessfulDelete  9m1s   replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-xs542
+  Normal  SuccessfulDelete  8m43s  replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-lg2sl
+  Normal  SuccessfulDelete  8m43s  replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-brrhb
+  Normal  SuccessfulDelete  8m27s  replicaset-controller  Deleted pod: appa-deploy-5d75b885b7-qwx8c
+  Normal  SuccessfulDelete  8m27s  replicaset-controller  (combined from similar events): Deleted pod: appa-deploy-5d75b885b7-rmwnf
+
+
+Name:           appa-deploy-5f759c9464
+Namespace:      default
+Selector:       app=appa,pod-template-hash=5f759c9464,ver=v1
+Labels:         app=appa
+                pod-template-hash=5f759c9464
+                ver=v1
+Annotations:    deployment.kubernetes.io/desired-replicas: 10
+                deployment.kubernetes.io/max-replicas: 11
+                deployment.kubernetes.io/revision: 2
+Controlled By:  Deployment/appa-deploy
+Replicas:       10 current / 10 desired
+Pods Status:    10 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=appa
+           pod-template-hash=5f759c9464
+           ver=v1
+  Containers:
+   appa-container:
+    Image:        shekeriev/k8s-appa:v2
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  11m    replicaset-controller  Created pod: appa-deploy-5f759c9464-k74x8
+  Normal  SuccessfulCreate  11m    replicaset-controller  Created pod: appa-deploy-5f759c9464-qjdvg
+  Normal  SuccessfulCreate  9m46s  replicaset-controller  Created pod: appa-deploy-5f759c9464-xvpvj
+  Normal  SuccessfulCreate  9m31s  replicaset-controller  Created pod: appa-deploy-5f759c9464-qdqzs
+  Normal  SuccessfulCreate  9m29s  replicaset-controller  Created pod: appa-deploy-5f759c9464-sjsm5
+  Normal  SuccessfulCreate  9m1s   replicaset-controller  Created pod: appa-deploy-5f759c9464-nc7rm
+  Normal  SuccessfulCreate  9m1s   replicaset-controller  Created pod: appa-deploy-5f759c9464-lnm27
+  Normal  SuccessfulCreate  8m43s  replicaset-controller  Created pod: appa-deploy-5f759c9464-lhwqq
+  Normal  SuccessfulCreate  8m43s  replicaset-controller  Created pod: appa-deploy-5f759c9464-w8gnm
+  Normal  SuccessfulCreate  8m27s  replicaset-controller  (combined from similar events): Created pod: appa-deploy-5f759c9464-tvrs2
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl apply -f demo-files/7-appa-deploy-v2.yml --record
+Flag --record has been deprecated, --record will be removed in the future
+deployment.apps/appa-deploy configured
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout status deployment appa-deploy
+deployment "appa-deploy" successfully rolled out
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout history deployment appa-deploy
+deployment.apps/appa-deploy
+REVISION  CHANGE-CAUSE
+1         <none>
+2         kubectl.exe apply --filename=demo-files/7-appa-deploy-v2.yml --record=true
+
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout undo deployment appa-deploy --to-revision=1
+deployment.apps/appa-deploy rolled back
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout status deployment appa-deploy
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+deployment "appa-deploy" successfully rolled out
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout history deployment appa-deploy
+deployment.apps/appa-deploy
+REVISION  CHANGE-CAUSE
+2         kubectl.exe apply --filename=demo-files/7-appa-deploy-v2.yml --record=true
+3         <none>
+
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl apply -f demo-files/7-appa-deploy-v2.yml --record
+Flag --record has been deprecated, --record will be removed in the future
+deployment.apps/appa-deploy configured
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl rollout status deployment appa-deploy
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "appa-deploy" rollout to finish: 1 old replicas are pending termination...
+deployment "appa-deploy" successfully rolled out
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl delete deployment appa-deploy
+deployment.apps "appa-deploy" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get rs
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get deployment
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl delete service appa-svc
+service "appa-svc" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> kubectl get all --all-namespaces
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS   AGE
+kube-system   pod/coredns-5d78c9869d-p54nh           1/1     Running   0          3h52m
+kube-system   pod/etcd-minikube                      1/1     Running   0          3h52m
+kube-system   pod/kube-apiserver-minikube            1/1     Running   0          3h52m
+kube-system   pod/kube-controller-manager-minikube   1/1     Running   0          3h52m
+kube-system   pod/kube-proxy-m5n57                   1/1     Running   0          3h52m
+kube-system   pod/kube-scheduler-minikube            1/1     Running   0          3h52m
+kube-system   pod/storage-provisioner                1/1     Running   0          3h52m
+
+NAMESPACE     NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
+default       service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP                  3h52m
+kube-system   service/kube-dns     ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   3h52m
+
+NAMESPACE     NAME                        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   daemonset.apps/kube-proxy   1         1         1       1            1           kubernetes.io/os=linux   3h52m
+
+NAMESPACE     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/coredns   1/1     1            1           3h52m
+
+NAMESPACE     NAME                                 DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/coredns-5d78c9869d   1         1         1       3h52m
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1>

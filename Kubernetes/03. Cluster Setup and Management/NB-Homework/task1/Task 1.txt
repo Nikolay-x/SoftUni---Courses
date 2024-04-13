@@ -1,0 +1,82 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+                                                                                                                                      Try the new cross-platform PowerShell https://aka.ms/pscore6                                                                                                                                                                                                                PS C:\WINDOWS\system32> Set-Location -Path 'C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1'               PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> minikube start --nodes 2                               * minikube v1.31.2 on Microsoft Windows 10 Home 10.0.19045.3448 Build 19045.3448
+* Automatically selected the hyperv driver. Other choices: virtualbox, ssh
+* Starting control plane node minikube in cluster minikube
+* Creating hyperv VM (CPUs=2, Memory=2200MB, Disk=20000MB) ...
+! This VM is having trouble accessing https://registry.k8s.io
+* To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+
+X Exiting due to RUNTIME_ENABLE: Failed to enable container runtime: sudo systemctl restart docker: Process exited with status 1
+stdout:
+
+stderr:
+Job for docker.service failed because the control process exited with error code.
+See "systemctl status docker.service" and "journalctl -xe" for details.
+
+*
+╭─────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                             │
+│    * If the above advice does not help, please let us know:                                 │
+│      https://github.com/kubernetes/minikube/issues/new/choose                               │
+│                                                                                             │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.    │
+│                                                                                             │
+╰─────────────────────────────────────────────────────────────────────────────────────────────╯
+
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> minikube start --nodes 2
+* minikube v1.31.2 on Microsoft Windows 10 Home 10.0.19045.3448 Build 19045.3448
+* Using the hyperv driver based on existing profile
+* Starting control plane node minikube in cluster minikube                                                                            * Updating the running hyperv "minikube" VM ...                                                                                       ! This VM is having trouble accessing https://registry.k8s.io                                                                         * To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/       * Preparing Kubernetes v1.27.4 on Docker 24.0.4 ...                                                                                     - Generating certificates and keys ...
+  - Booting up control plane ...
+  - Configuring RBAC rules ...
+* Configuring CNI (Container Networking Interface) ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass
+! The cluster minikube already exists which means the --nodes parameter will be ignored. Use "minikube node add" to add nodes to an existing cluster.
+
+! C:\Program Files\Docker\Docker\resources\bin\kubectl.exe is version 1.25.9, which may have incompatibilities with Kubernetes 1.27.4.
+  - Want kubectl v1.27.4? Try 'minikube kubectl -- get pods -A'
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> kubectl apply -f oracle-deployment.yaml
+deployment.apps/oracle-deployment created
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> kubectl apply -f oracle-service.yaml
+service/oracle-service created
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> minikube service oracle-service --url
+http://172.30.51.51:31443
+
+X Exiting due to SVC_UNREACHABLE: service not available: no running pod for service oracle-service found
+*
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                          │
+│    * If the above advice does not help, please let us know:                                              │
+│      https://github.com/kubernetes/minikube/issues/new/choose                                            │
+│                                                                                                          │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.                 │
+│    * Please also attach the following file to the GitHub issue:                                          │
+│    * - C:\Users\NB\AppData\Local\Temp\minikube_service_a0fd004575c5376c94414402f2d97ec67c4c16fa_0.log    │
+│                                                                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> minikube service list
+|-------------|----------------|--------------|---------------------------|
+|  NAMESPACE  |      NAME      | TARGET PORT  |            URL            |
+|-------------|----------------|--------------|---------------------------|
+| default     | kubernetes     | No node port |                           |
+| default     | oracle-service |           82 | http://172.30.51.51:31443 |
+| kube-system | kube-dns       | No node port |                           |
+|-------------|----------------|--------------|---------------------------|
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> kubectl delete service oracle-service
+service "oracle-service" deleted
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> kubectl delete deployment oracle-deployment
+deployment.apps "oracle-deployment" deleted
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> minikube stop
+* Stopping node "minikube"  ...
+* Powering off "minikube" via SSH ...
+* 1 node stopped.
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> minikube delete
+* Stopping node "minikube"  ...
+* Deleting "minikube" in hyperv ...
+* Removed all traces of the "minikube" cluster.
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1>

@@ -1,0 +1,56 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant up
+   3 vagrant ssh node1
+   4 Get-History
+   5 vagrant halt
+
+
+
+vagrant@node1:~$ history
+  283  kubectl version --short
+  284  uname -a
+  285  openssl genrsa -out main.key 4096
+  286  openssl req -new -x509 -key main.key -out main.crt -days 365 -subj /CN=www.hw.lab
+  287  cat main.key
+  288  cat main.crt
+  289  cat > hwcm.yaml
+  290  cat hwcm.yaml
+  291  cat > hwpod.yaml
+  292  cat hwpod.yaml
+  293  cat > hwsec.yaml
+  294  cat hwsec.yaml
+  295  kubectl apply -f hwcm.yaml
+  296  kubectl apply -f hwsec.yaml
+  297  cat > hwsec.yaml
+  298  cat hwsec.yaml
+  299  kubectl apply -f hwsec.yaml
+  300  base64 main.key
+  301  base64 main.crt
+  302  kubectl apply -f hwsec.yaml
+  303  cat > hwsec.yaml
+  304  kubectl apply -f hwsec.yaml
+  305  cat > hwsec.yaml
+  306  cat hwsec.yaml
+  307  kubectl apply -f hwsec.yaml
+  308  kubectl apply -f hwpod.yaml
+  309  kubectl get pods
+  310  kubectl get secrets
+  311  kubectl get configmaps
+  312  cat > hwsec.yaml
+  313  cat hwsec.yaml
+  314  kubectl apply -f hwsec.yaml
+  315  kubectl get pods
+  316  kubectl get configmaps
+  317  kubectl get secrets
+  318  history
+  319  kubectl delete configmap hwcm
+  320  kubectl delete secret hwsec
+  321  kubectl delete pod hwpod
+  322  kubectl get configmaps
+  323  kubectl get secrets
+  324  kubectl get pods
+  325  history

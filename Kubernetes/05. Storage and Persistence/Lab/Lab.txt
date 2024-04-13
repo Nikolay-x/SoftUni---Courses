@@ -1,0 +1,2883 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 13:23:29 2023 from 10.0.2.2
+vagrant@node1:~$ mkdir part1
+vagrant@node1:~$ cd part1
+vagrant@node1:~/part1$ cat > emptydir-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-ed
+  labels:
+    app: notes
+spec:
+  containers:
+  - image: shekeriev/k8s-notes
+    name: container-ed
+    volumeMounts:
+    - mountPath: /data
+      name: data-volume
+  volumes:
+  - name: data-volume
+    emptyDir: {}vagrant@node1:~/part1$
+vagrant@node1:~/part1$ cat emptydir-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-ed
+  labels:
+    app: notes
+spec:
+  containers:
+  - image: shekeriev/k8s-notes
+    name: container-ed
+    volumeMounts:
+    - mountPath: /data
+      name: data-volume
+  volumes:
+  - name: data-volume
+    emptyDir: {}vagrant@node1:~/part1$
+vagrant@node1:~/part1$ kubectl apply -f part1/emptydir-pod.yaml
+error: the path "part1/emptydir-pod.yaml" does not exist
+vagrant@node1:~/part1$ cat > service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-vol
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: notesvagrant@node1:~/part1$
+vagrant@node1:~/part1$ cat service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-vol
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: notesvagrant@node1:~/part1$
+vagrant@node1:~/part1$ kubectl apply -f emptydir-pod.yaml
+pod/pod-ed created
+vagrant@node1:~/part1$ kubectl apply -f service.yaml
+service/svc-vol created
+vagrant@node1:~/part1$ kubectl get pods,svc
+NAME         READY   STATUS              RESTARTS   AGE
+pod/pod-ed   0/1     ContainerCreating   0          36s
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        51m
+service/svc-vol      NodePort    10.108.30.105   <none>        80:30001/TCP   17s
+vagrant@node1:~/part1$ kubectl describe pod pod-ed
+Name:             pod-ed
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Sat, 11 Nov 2023 12:07:38 +0200
+Labels:           app=notes
+Annotations:      cni.projectcalico.org/containerID: f5e1197e3c11504041b13438dd02636aeddbc65ab32d1247266b10a791759989
+                  cni.projectcalico.org/podIP: 10.244.104.3/32
+                  cni.projectcalico.org/podIPs: 10.244.104.3/32
+Status:           Running
+IP:               10.244.104.3
+IPs:
+  IP:  10.244.104.3
+Containers:
+  container-ed:
+    Container ID:   containerd://6e62ecf1ec8dc3022dbbf1473a4a98843157edcf16cf62fa95477d0d030f4738
+    Image:          shekeriev/k8s-notes
+    Image ID:       docker.io/shekeriev/k8s-notes@sha256:3071d3d7b871447261c533be81f461e6fae418e79a46fcdf32a27adaa84d1ccc
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 11 Nov 2023 12:09:17 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from data-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-86c6n (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  data-volume:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-86c6n:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  3m3s  default-scheduler  Successfully assigned default/pod-ed to node2
+  Normal  Pulling    3m4s  kubelet            Pulling image "shekeriev/k8s-notes"
+  Normal  Pulled     87s   kubelet            Successfully pulled image "shekeriev/k8s-notes" in 1m37.283255788s (1m37.283281321s including waiting)
+  Normal  Created    86s   kubelet            Created container container-ed
+  Normal  Started    86s   kubelet            Started container container-ed
+vagrant@node1:~/part1$ kubectl exec -it pod-ed -- bash
+root@pod-ed:/var/www/html# cd /data
+root@pod-ed:/data# ls
+notes.txt
+root@pod-ed:/data# cat notes.txt
+note 1
+note 2
+root@pod-ed:/data# cat notes.txt
+note 1
+note 2
+note 3
+root@pod-ed:/data# exit
+exit
+vagrant@node1:~/part1$ kubectl exec -it pod-ed -- /bin/bash -c "kill 1"
+command terminated with exit code 143
+vagrant@node1:~/part1$ kubectl get pods,svc
+NAME         READY   STATUS    RESTARTS      AGE
+pod/pod-ed   1/1     Running   1 (43s ago)   8m37s
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        59m
+service/svc-vol      NodePort    10.108.30.105   <none>        80:30001/TCP   8m18s
+vagrant@node1:~/part1$ kubectl describe pod pod-ed
+Name:             pod-ed
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Sat, 11 Nov 2023 12:07:38 +0200
+Labels:           app=notes
+Annotations:      cni.projectcalico.org/containerID: f5e1197e3c11504041b13438dd02636aeddbc65ab32d1247266b10a791759989
+                  cni.projectcalico.org/podIP: 10.244.104.3/32
+                  cni.projectcalico.org/podIPs: 10.244.104.3/32
+Status:           Running
+IP:               10.244.104.3
+IPs:
+  IP:  10.244.104.3
+Containers:
+  container-ed:
+    Container ID:   containerd://443b374d4ff76a0cefe779375d4bebbdb8ee09d595b694ab23260238d98e219e
+    Image:          shekeriev/k8s-notes
+    Image ID:       docker.io/shekeriev/k8s-notes@sha256:3071d3d7b871447261c533be81f461e6fae418e79a46fcdf32a27adaa84d1ccc
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 11 Nov 2023 12:15:36 +0200
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sat, 11 Nov 2023 12:09:17 +0200
+      Finished:     Sat, 11 Nov 2023 12:15:33 +0200
+    Ready:          True
+    Restart Count:  1
+    Environment:    <none>
+    Mounts:
+      /data from data-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-86c6n (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  data-volume:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-86c6n:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age                  From               Message
+  ----    ------     ----                 ----               -------
+  Normal  Scheduled  9m19s                default-scheduler  Successfully assigned default/pod-ed to node2
+  Normal  Pulled     7m43s                kubelet            Successfully pulled image "shekeriev/k8s-notes" in 1m37.283255788s (1m37.283281321s including waiting)
+  Normal  Pulling    85s (x2 over 9m20s)  kubelet            Pulling image "shekeriev/k8s-notes"
+  Normal  Created    84s (x2 over 7m42s)  kubelet            Created container container-ed
+  Normal  Pulled     84s                  kubelet            Successfully pulled image "shekeriev/k8s-notes" in 1.210214446s (1.210221395s including waiting)
+  Normal  Started    83s (x2 over 7m42s)  kubelet            Started container container-ed
+vagrant@node1:~/part1$ kubectl delete pod pod-ed
+pod "pod-ed" deleted
+vagrant@node1:~/part1$ kubectl get pods,svc
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        63m
+service/svc-vol      NodePort    10.108.30.105   <none>        80:30001/TCP   12m
+vagrant@node1:~/part1$ kubectl apply -f emptydir-pod.yaml
+pod/pod-ed created
+vagrant@node1:~/part1$ kubectl get pods,svc
+NAME         READY   STATUS    RESTARTS   AGE
+pod/pod-ed   1/1     Running   0          6s
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        64m
+service/svc-vol      NodePort    10.108.30.105   <none>        80:30001/TCP   13m
+vagrant@node1:~/part1$ cat > git-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-git
+  labels:
+    app: notes
+spec:
+  containers:
+  - image: php:apache
+    name: container-git
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: git-volume
+    - mountPath: /data
+      name: data-volume
+  volumes:
+  - name: git-volume
+    gitRepo:
+      repository: "https://github.com/shekeriev/k8s-notes.git"
+      revision: "main"
+      directory: .
+  - name: data-volume
+    emptyDir: {}vagrant@node1:~/part1$
+vagrant@node1:~/part1$ cat git-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-git
+  labels:
+    app: notes
+spec:
+  containers:
+  - image: php:apache
+    name: container-git
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: git-volume
+    - mountPath: /data
+      name: data-volume
+  volumes:
+  - name: git-volume
+    gitRepo:
+      repository: "https://github.com/shekeriev/k8s-notes.git"
+      revision: "main"
+      directory: .
+  - name: data-volume
+    emptyDir: {}vagrant@node1:~/part1$
+vagrant@node1:~/part1$ kubectl apply -f git-pod.yaml
+Warning: spec.volumes[0].gitRepo: deprecated in v1.11
+pod/pod-git created
+vagrant@node1:~/part1$ kubectl exec -it pod-git -- bash
+error: unable to upgrade connection: container not found ("container-git")
+vagrant@node1:~/part1$ kubectl exec -it pod-git -- bash
+error: unable to upgrade connection: container not found ("container-git")
+vagrant@node1:~/part1$ kubectl delete pod pod-git
+pod "pod-git" deleted
+vagrant@node1:~/part1$ cat > hostpath-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-hp
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: hp-data
+      volumes:
+      - name: hp-data
+        hostPath:
+          path: /tmp/data
+          type: Directoryvagrant@node1:~/part1$
+vagrant@node1:~/part1$ cat hostpath-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-hp
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: hp-data
+      volumes:
+      - name: hp-data
+        hostPath:
+          path: /tmp/data
+          type: Directoryvagrant@node1:~/part1$
+vagrant@node1:~/part1$ mkdir --mode=777 /tmp/data
+vagrant@node1:~/part1$ mkdir --mode=777 /tmp/data
+mkdir: cannot create directory ‘/tmp/data’: File exists
+vagrant@node1:~/part1$ ls -al /tmp
+total 52
+drwxrwxrwt  9 root    root    4096 Nov 11 12:45 .
+drwxr-xr-x 19 root    root    4096 Nov 11 11:12 ..
+-rw-r--r--  1 root    root     823 Nov 11 11:16 custom-resources.yaml
+drwxrwxrwx  2 vagrant vagrant 4096 Nov 11 12:45 data
+drwxrwxrwt  2 root    root    4096 Nov 11 11:11 .font-unix
+drwxrwxrwt  2 root    root    4096 Nov 11 11:11 .ICE-unix
+srw-rw-rw-  1 root    root       0 Nov 11 11:11 .iprt-localipc-DRMIpcServer
+-rw-r--r--  1 root    root       5 Nov 11 11:12 k8s-branch
+-rw-r--r--  1 root    root       7 Nov 11 11:12 k8s-version
+drwx------  3 root    root    4096 Nov 11 11:11 systemd-private-dbe0d1a16c1949dc827432e11149d670-systemd-logind.service-PEpkgf
+drwxrwxrwt  2 root    root    4096 Nov 11 11:11 .Test-unix
+-rwxr-xr-x  1 vagrant vagrant 1672 Nov 11 11:14 vagrant-shell
+drwxrwxrwt  2 root    root    4096 Nov 11 11:11 .X11-unix
+drwxrwxrwt  2 root    root    4096 Nov 11 11:11 .XIM-unix
+vagrant@node1:~/part1$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 13:23:29 2023 from 10.0.2.2
+vagrant@node2:~$ mkdir --mode=777 /tmp/data
+vagrant@node2:~$ ls -al /tmp
+total 48
+drwxrwxrwt  9 root    root    4096 Nov 11 12:47 .
+drwxr-xr-x 19 root    root    4096 Nov 11 11:17 ..
+drwxrwxrwx  2 vagrant vagrant 4096 Nov 11 12:47 data
+drwxrwxrwt  2 root    root    4096 Nov 11 11:17 .font-unix
+drwxrwxrwt  2 root    root    4096 Nov 11 11:17 .ICE-unix
+srw-rw-rw-  1 root    root       0 Nov 11 11:17 .iprt-localipc-DRMIpcServer
+-rw-r--r--  1 root    root       5 Nov 11 11:17 k8s-branch
+-rw-r--r--  1 root    root       7 Nov 11 11:17 k8s-version
+drwx------  3 root    root    4096 Nov 11 11:17 systemd-private-e1a7a7f65f08419db740c24e805c7051-systemd-logind.service-AEbmqi
+drwxrwxrwt  2 root    root    4096 Nov 11 11:17 .Test-unix
+-rwxr-xr-x  1 vagrant vagrant  163 Nov 11 11:20 vagrant-shell
+drwxrwxrwt  2 root    root    4096 Nov 11 11:17 .X11-unix
+drwxrwxrwt  2 root    root    4096 Nov 11 11:17 .XIM-unix
+vagrant@node2:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node3
+Linux node3 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 22 13:23:29 2023 from 10.0.2.2
+vagrant@node3:~$ mkdir --mode=777 /tmp/data
+vagrant@node3:~$ ls -al /tmp
+total 48
+drwxrwxrwt  9 root    root    4096 Nov 11 12:48 .
+drwxr-xr-x 19 root    root    4096 Nov 11 11:22 ..
+drwxrwxrwx  2 vagrant vagrant 4096 Nov 11 12:47 data
+drwxrwxrwt  2 root    root    4096 Nov 11 11:21 .font-unix
+drwxrwxrwt  2 root    root    4096 Nov 11 11:21 .ICE-unix
+srw-rw-rw-  1 root    root       0 Nov 11 11:21 .iprt-localipc-DRMIpcServer
+-rw-r--r--  1 root    root       5 Nov 11 11:22 k8s-branch
+-rw-r--r--  1 root    root       7 Nov 11 11:22 k8s-version
+drwx------  3 root    root    4096 Nov 11 11:21 systemd-private-c3438700a9ef4984ab4d35609117b0ae-systemd-logind.service-33ecYe
+drwxrwxrwt  2 root    root    4096 Nov 11 11:21 .Test-unix
+-rwxr-xr-x  1 vagrant vagrant  163 Nov 11 11:25 vagrant-shell
+drwxrwxrwt  2 root    root    4096 Nov 11 11:21 .X11-unix
+drwxrwxrwt  2 root    root    4096 Nov 11 11:21 .XIM-unix
+vagrant@node3:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 11:59:47 2023 from 10.0.2.2
+vagrant@node1:~$ kubectl apply -f hostpath-deployment.yaml
+error: the path "hostpath-deployment.yaml" does not exist
+vagrant@node1:~$ cat hostpath-deployment.yaml
+cat: hostpath-deployment.yaml: No such file or directory
+vagrant@node1:~$ cat > hostpath-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-hp
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: hp-data
+      volumes:
+      - name: hp-data
+        hostPath:
+          path: /tmp/data
+          type: Directoryvagrant@node1:~$
+vagrant@node1:~$ cat hostpath-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-hp
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: hp-data
+      volumes:
+      - name: hp-data
+        hostPath:
+          path: /tmp/data
+          type: Directoryvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f hostpath-deployment.yaml
+deployment.apps/notes-deploy created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS              RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-5485bf6fdd-69mn7   1/1     Running             0          17s   10.244.104.5   node2   <none>           <none>
+notes-deploy-5485bf6fdd-cb54c   0/1     ContainerCreating   0          17s   <none>         node3   <none>           <none>
+notes-deploy-5485bf6fdd-kvrh4   0/1     ContainerCreating   0          17s   <none>         node3   <none>           <none>
+pod-ed                          1/1     Running             0          29m   10.244.104.4   node2   <none>           <none>
+vagrant@node1:~$ kubectl delete -f hostpath-deployment.yaml
+deployment.apps "notes-deploy" deleted
+vagrant@node1:~$ kubectl get pods -o wide
+NAME     READY   STATUS    RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+pod-ed   1/1     Running   0          34m   10.244.104.4   node2   <none>           <none>
+vagrant@node1:~$ cat pod-ed.yaml
+cat: pod-ed.yaml: No such file or directory
+vagrant@node1:~$ kubectl pod delete pod-ed
+error: unknown command "pod" for "kubectl"
+
+Did you mean this?
+        top
+vagrant@node1:~$ kubectl delete pods pod-ed
+pod "pod-ed" deleted
+vagrant@node1:~$ kubectl get pods -o wide
+No resources found in default namespace.
+vagrant@node1:~$ kubectl apply -f hostpath-deployment.yaml
+deployment.apps/notes-deploy created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS    RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-5485bf6fdd-262vr   1/1     Running   0          8s    10.244.135.6   node3   <none>           <none>
+notes-deploy-5485bf6fdd-phslt   1/1     Running   0          8s    10.244.104.6   node2   <none>           <none>
+notes-deploy-5485bf6fdd-z5hh5   1/1     Running   0          9s    10.244.104.7   node2   <none>           <none>
+vagrant@node1:~$ kubectl delete -f hostpath-deployment.yaml
+deployment.apps "notes-deploy" deleted
+vagrant@node1:~$ kubectl get pods -o wide
+No resources found in default namespace.
+vagrant@node1:~$ ssh vagrant@node2
+The authenticity of host 'node2 (192.168.99.102)' can't be established.
+ECDSA key fingerprint is SHA256:GinN0ST6RH4pRplqQ6atpwi/qMba2Lw1FRe70ePjeYE.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'node2,192.168.99.102' (ECDSA) to the list of known hosts.
+vagrant@node2's password:
+Connection closed by 192.168.99.102 port 22
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 12:46:56 2023 from 10.0.2.2
+vagrant@node2:~$ cat /etc/hosts
+127.0.0.1       localhost
+127.0.1.1       debian
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+127.0.2.1 node2.k8s.lab node2
+192.168.99.101 node1.k8s.lab node1
+192.168.99.102 node2.k8s.lab node2
+192.168.99.103 node3.k8s.lab node3
+vagrant@node2:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 12:48:25 2023 from 10.0.2.2
+vagrant@node1:~$ echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+nfs-server-ip   nfs-server
+vagrant@node1:~$ sudo apt-get update && apt-get install -y nfs-common
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Hit:2 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+vagrant@node1:~$ chmod -R 777 /data/nfs/k8sdata
+chmod: cannot access '/data/nfs/k8sdata': No such file or directory
+vagrant@node1:~$ cat > nfs-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-nfs
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: nfs-data
+      volumes:
+      - name: nfs-data
+        nfs:
+          server: nfs-server
+          path: /data/nfs/k8sdatavagrant@node1:~$
+vagrant@node1:~$ cat nfs-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-nfs
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: nfs-data
+      volumes:
+      - name: nfs-data
+        nfs:
+          server: nfs-server
+          path: /data/nfs/k8sdatavagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f nfs-deployment.yaml
+deployment.apps/notes-deploy created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-759fcb5c94-gntlp   0/1     ContainerCreating   0          10s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-tcnm2   0/1     ContainerCreating   0          10s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-z4xnh   0/1     ContainerCreating   0          10s   <none>   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-759fcb5c94-gntlp   0/1     ContainerCreating   0          29s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-tcnm2   0/1     ContainerCreating   0          29s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-z4xnh   0/1     ContainerCreating   0          29s   <none>   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-759fcb5c94-gntlp   0/1     ContainerCreating   0          49s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-tcnm2   0/1     ContainerCreating   0          49s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-z4xnh   0/1     ContainerCreating   0          49s   <none>   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-759fcb5c94-gntlp   0/1     ContainerCreating   0          67s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-tcnm2   0/1     ContainerCreating   0          67s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-z4xnh   0/1     ContainerCreating   0          67s   <none>   node3   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS              RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-759fcb5c94-gntlp   0/1     ContainerCreating   0          2m41s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-tcnm2   0/1     ContainerCreating   0          2m41s   <none>   node2   <none>           <none>
+notes-deploy-759fcb5c94-z4xnh   0/1     ContainerCreating   0          2m41s   <none>   node3   <none>           <none>
+vagrant@node1:~$ sudo chmod -R 777 /data/nfs/k8sdata
+chmod: cannot access '/data/nfs/k8sdata': No such file or directory
+vagrant@node1:~$ mkdir --mode=777 /data/nfs/k8sdata
+mkdir: cannot create directory ‘/data/nfs/k8sdata’: No such file or directory
+vagrant@node1:~$ mkdir --mode=777 /data/nfs
+mkdir: cannot create directory ‘/data/nfs’: No such file or directory
+vagrant@node1:~$ sudo mkdir --mode=777 /data/nfs/k8sdata
+mkdir: cannot create directory ‘/data/nfs/k8sdata’: No such file or directory
+vagrant@node1:~$ sudo mkdir --mode=777 /data
+vagrant@node1:~$ sudo mkdir --mode=777 /data/nfs
+vagrant@node1:~$ sudo mkdir --mode=777 /data/nfs/k8sdata
+vagrant@node1:~$ kubectl delete -f nfs-deployment.yaml
+deployment.apps "notes-deploy" deleted
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:07:12 2023 from 10.0.2.2
+vagrant@node2:~$  sudo mkdir --mode=777 /data/nfs/k8sdata
+mkdir: cannot create directory ‘/data/nfs/k8sdata’: No such file or directory
+vagrant@node2:~$  sudo mkdir --mode=777 /data
+vagrant@node2:~$  sudo mkdir --mode=777 /data/nfs
+vagrant@node2:~$  sudo mkdir --mode=777 /data/nfs/k8sdata
+vagrant@node2:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node3
+Linux node3 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 12:47:40 2023 from 10.0.2.2
+vagrant@node3:~$  sudo mkdir --mode=777 /data
+vagrant@node3:~$  sudo mkdir --mode=777 /data/nfs
+vagrant@node3:~$  sudo mkdir --mode=777 /data/nfs/k8sdata
+vagrant@node3:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:09:34 2023 from 10.0.2.2
+vagrant@node1:~$ chmod -R 777 /data/nfs/k8sdata
+chmod: changing permissions of '/data/nfs/k8sdata': Operation not permitted
+vagrant@node1:~$ sudo chmod -R 777 /data/nfs/k8sdata
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node2
+Linux node2 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:21:46 2023 from 10.0.2.2
+vagrant@node2:~$ sudo chmod -R 777 /data/nfs/k8sdata
+vagrant@node2:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node3
+Linux node3 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:23:02 2023 from 10.0.2.2
+vagrant@node3:~$ sudo chmod -R 777 /data/nfs/k8sdata
+vagrant@node3:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:23:36 2023 from 10.0.2.2
+vagrant@node1:~$ kubectl delete -f hostpath-deployment.yaml
+Error from server (NotFound): error when deleting "hostpath-deployment.yaml": deployments.apps "notes-deploy" not found
+vagrant@node1:~$ cat nfs-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-nfs
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: nfs-data
+      volumes:
+      - name: nfs-data
+        nfs:
+          server: nfs-server
+          path: /data/nfs/k8sdatavagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f hostpath-deployment.yaml
+deployment.apps/notes-deploy created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS    RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-5485bf6fdd-h6bfn   1/1     Running   0          9s    10.244.104.8   node2   <none>           <none>
+notes-deploy-5485bf6fdd-j88p6   1/1     Running   0          9s    10.244.135.7   node3   <none>           <none>
+notes-deploy-5485bf6fdd-jspsp   1/1     Running   0          9s    10.244.104.9   node2   <none>           <none>
+vagrant@node1:~$ kubectl describe pod notes-deploy-5485bf6fdd-jspsp
+Name:             notes-deploy-5485bf6fdd-jspsp
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Sat, 11 Nov 2023 13:26:32 +0200
+Labels:           app=notes
+                  pod-template-hash=5485bf6fdd
+Annotations:      cni.projectcalico.org/containerID: ce44a6c19b6e0695e2fa0a5be959ecf75edab65ce1a96270b520823237e90d8c
+                  cni.projectcalico.org/podIP: 10.244.104.9/32
+                  cni.projectcalico.org/podIPs: 10.244.104.9/32
+Status:           Running
+IP:               10.244.104.9
+IPs:
+  IP:           10.244.104.9
+Controlled By:  ReplicaSet/notes-deploy-5485bf6fdd
+Containers:
+  container-hp:
+    Container ID:   containerd://22a4360c0c1599d5a7e81f45ac5da12eb4443aa956e9c0f00198a6a9e7ebc596
+    Image:          shekeriev/k8s-notes
+    Image ID:       docker.io/shekeriev/k8s-notes@sha256:3071d3d7b871447261c533be81f461e6fae418e79a46fcdf32a27adaa84d1ccc
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 11 Nov 2023 13:26:36 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from hp-data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-msjtx (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  hp-data:
+    Type:          HostPath (bare host directory volume)
+    Path:          /tmp/data
+    HostPathType:  Directory
+  kube-api-access-msjtx:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  3m45s  default-scheduler  Successfully assigned default/notes-deploy-5485bf6fdd-jspsp to node2
+  Normal  Pulling    3m45s  kubelet            Pulling image "shekeriev/k8s-notes"
+  Normal  Pulled     3m43s  kubelet            Successfully pulled image "shekeriev/k8s-notes" in 1.158089435s (2.225664785s including waiting)
+  Normal  Created    3m43s  kubelet            Created container container-hp
+  Normal  Started    3m43s  kubelet            Started container container-hp
+vagrant@node1:~$ kubectl delete -f nfs-deployment.yaml
+deployment.apps "notes-deploy" deleted
+vagrant@node1:~$ kubectl get pods -o wide
+NAME                            READY   STATUS        RESTARTS   AGE     IP             NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-5485bf6fdd-jspsp   0/1     Terminating   0          4m16s   10.244.104.9   node2   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+No resources found in default namespace.
+vagrant@node1:~$ cat > pvc10gb.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc10gb
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      purpose: demovagrant@node1:~$
+vagrant@node1:~$ cat pvc10gb.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc10gb
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      purpose: demovagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pvnfs10gb.yaml
+error: the path "pvnfs10gb.yaml" does not exist
+vagrant@node1:~$ cat > pvnfs10gb.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvnfs10gb
+  labels:
+    purpose: demo
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8sdata
+    server: nfs-servervagrant@node1:~$
+vagrant@node1:~$ cat pvnfs10gb.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvnfs10gb
+  labels:
+    purpose: demo
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8sdata
+    server: nfs-servervagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pvnfs10gb.yaml
+persistentvolume/pvnfs10gb created
+vagrant@node1:~$ kubectl get pv
+NAME        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+pvnfs10gb   10Gi       RWX            Recycle          Available                                   13s
+vagrant@node1:~$ kubectl describe pv pvnfs10gb
+Name:            pvnfs10gb
+Labels:          purpose=demo
+Annotations:     <none>
+Finalizers:      [kubernetes.io/pv-protection]
+StorageClass:
+Status:          Available
+Claim:
+Reclaim Policy:  Recycle
+Access Modes:    RWX
+VolumeMode:      Filesystem
+Capacity:        10Gi
+Node Affinity:   <none>
+Message:
+Source:
+    Type:      NFS (an NFS mount that lasts the lifetime of a pod)
+    Server:    nfs-server
+    Path:      /data/nfs/k8sdata
+    ReadOnly:  false
+Events:        <none>
+vagrant@node1:~$ cat pvc10gb.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc10gb
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      purpose: demovagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pvc10gb.yaml
+persistentvolumeclaim/pvc10gb created
+vagrant@node1:~$ kubectl get pv
+NAME        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS   REASON   AGE
+pvnfs10gb   10Gi       RWX            Recycle          Bound    default/pvc10gb                           112s
+vagrant@node1:~$ kubectl get pvc
+NAME      STATUS   VOLUME      CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+pvc10gb   Bound    pvnfs10gb   10Gi       RWX                           25s
+vagrant@node1:~$ kubectl describe pvc pvc10gb
+Name:          pvc10gb
+Namespace:     default
+StorageClass:
+Status:        Bound
+Volume:        pvnfs10gb
+Labels:        <none>
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      10Gi
+Access Modes:  RWX
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:        <none>
+vagrant@node1:~$ cat > pv-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-nfs
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: volume-by-claim
+      volumes:
+      - name: volume-by-claim
+        persistentVolumeClaim:
+          claimName: pvc10gbvagrant@node1:~$
+vagrant@node1:~$ cat pv-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notes
+  template:
+    metadata:
+      labels:
+        app: notes
+    spec:
+      containers:
+      - name: container-nfs
+        image: shekeriev/k8s-notes
+        volumeMounts:
+        - mountPath: /data
+          name: volume-by-claim
+      volumes:
+      - name: volume-by-claim
+        persistentVolumeClaim:
+          claimName: pvc10gbvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pv-deployment.yaml
+deployment.apps/notes-deploy created
+vagrant@node1:~$ kubectl get pods -o wide -w
+NAME                            READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-845b59c97f-699l8   0/1     ContainerCreating   0          9s    <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-mc6r5   0/1     ContainerCreating   0          9s    <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-pf76h   0/1     ContainerCreating   0          9s    <none>   node3   <none>           <none>
+^Cvagrant@node1:~$
+vagrant@node1:~$ kubectl get pods -o wide -w
+NAME                            READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-845b59c97f-699l8   0/1     ContainerCreating   0          61s   <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-mc6r5   0/1     ContainerCreating   0          61s   <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-pf76h   0/1     ContainerCreating   0          61s   <none>   node3   <none>           <none>
+^Cvagrant@node1:~$ kubectl describe pvc pvc10gb
+Name:          pvc10gb
+Namespace:     default
+StorageClass:
+Status:        Bound
+Volume:        pvnfs10gb
+Labels:        <none>
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      10Gi
+Access Modes:  RWX
+VolumeMode:    Filesystem
+Used By:       notes-deploy-845b59c97f-699l8
+               notes-deploy-845b59c97f-mc6r5
+               notes-deploy-845b59c97f-pf76h
+Events:        <none>
+vagrant@node1:~$ kubectl describe pod notes-deploy-845b59c97f-pf76h
+Name:             notes-deploy-845b59c97f-pf76h
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node3/192.168.99.103
+Start Time:       Sat, 11 Nov 2023 13:42:11 +0200
+Labels:           app=notes
+                  pod-template-hash=845b59c97f
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    ReplicaSet/notes-deploy-845b59c97f
+Containers:
+  container-nfs:
+    Container ID:
+    Image:          shekeriev/k8s-notes
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from volume-by-claim (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-vtwph (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  volume-by-claim:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  pvc10gb
+    ReadOnly:   false
+  kube-api-access-vtwph:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason       Age                 From               Message
+  ----     ------       ----                ----               -------
+  Normal   Scheduled    2m13s               default-scheduler  Successfully assigned default/notes-deploy-845b59c97f-pf76h to node3
+  Warning  FailedMount  10s                 kubelet            Unable to attach or mount volumes: unmounted volumes=[volume-by-claim], unattached volumes=[], failed to process volumes=[]: timed out waiting for the condition
+  Warning  FailedMount  5s (x9 over 2m13s)  kubelet            MountVolume.SetUp failed for volume "pvnfs10gb" : mount failed: exit status 32
+Mounting command: mount
+Mounting arguments: -t nfs -o nfsvers=4.1 nfs-server:/data/nfs/k8sdata /var/lib/kubelet/pods/6260a390-4521-445b-b80b-9aa0132ccf84/volumes/kubernetes.io~nfs/pvnfs10gb
+Output: mount: /var/lib/kubelet/pods/6260a390-4521-445b-b80b-9aa0132ccf84/volumes/kubernetes.io~nfs/pvnfs10gb: bad option; for several filesystems (e.g. nfs, cifs) you might need a /sbin/mount.<type> helper program.
+vagrant@node1:~$ kubectl get pods -o wide -w
+NAME                            READY   STATUS              RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-845b59c97f-699l8   0/1     ContainerCreating   0          2m55s   <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-mc6r5   0/1     ContainerCreating   0          2m55s   <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-pf76h   0/1     ContainerCreating   0          2m55s   <none>   node3   <none>           <none>
+^Cvagrant@node1:~$ kubectl get pods -o wide -w
+NAME                            READY   STATUS              RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+notes-deploy-845b59c97f-699l8   0/1     ContainerCreating   0          3m29s   <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-mc6r5   0/1     ContainerCreating   0          3m29s   <none>   node2   <none>           <none>
+notes-deploy-845b59c97f-pf76h   0/1     ContainerCreating   0          3m29s   <none>   node3   <none>           <none>
+^Cvagrant@node1:~$
+vagrant@node1:~$ kubectl delete -f pv-deployment.yaml
+deployment.apps "notes-deploy" deleted
+vagrant@node1:~$ kubectl delete -f pvc10gb.yaml
+persistentvolumeclaim "pvc10gb" deleted
+^Cvagrant@node1:~$ kubectl apply -f pvc10gb.yaml
+Warning: Detected changes to resource pvc10gb which is currently being deleted.
+persistentvolumeclaim/pvc10gb unchanged
+vagrant@node1:~$ kubectl apply -f pv-deployment.yaml
+deployment.apps/notes-deploy created
+vagrant@node1:~$ kubectl get pods -o wide -w
+NAME                            READY   STATUS    RESTARTS   AGE   IP       NODE     NOMINATED NODE   READINESS GATES
+notes-deploy-845b59c97f-c2nn9   0/1     Pending   0          22s   <none>   <none>   <none>           <none>
+notes-deploy-845b59c97f-jtlxt   0/1     Pending   0          22s   <none>   <none>   <none>           <none>
+notes-deploy-845b59c97f-qs675   0/1     Pending   0          22s   <none>   <none>   <none>           <none>
+^Cvagrant@node1:~$ kubectl scale --replicas=2 deployment notes-deploy
+deployment.apps/notes-deploy scaled
+vagrant@node1:~$ kubectl delete -f pv-deployment.yaml
+deployment.apps "notes-deploy" deleted
+vagrant@node1:~$ kubectl delete -f service.yaml
+error: the path "service.yaml" does not exist
+vagrant@node1:~$ kubectl delete -f part1/service.yaml
+service "svc-vol" deleted
+vagrant@node1:~$ kubectl delete -f pvc10gb.yaml
+Error from server (NotFound): error when deleting "pvc10gb.yaml": persistentvolumeclaims "pvc10gb" not found
+vagrant@node1:~$ kubectl delete -f pvnfs10gb.yaml
+persistentvolume "pvnfs10gb" deleted
+vagrant@node1:~$ history
+    1  mkdir part1
+    2  cd part1
+    3  cat > emptydir-pod.yaml
+    4  cat emptydir-pod.yaml
+    5  kubectl apply -f part1/emptydir-pod.yaml
+    6  cat > service.yaml
+    7  cat service.yaml
+    8  kubectl apply -f emptydir-pod.yaml
+    9  kubectl apply -f service.yaml
+   10  kubectl get pods,svc
+   11  kubectl describe pod pod-ed
+   12  kubectl exec -it pod-ed -- bash
+   13  kubectl exec -it pod-ed -- /bin/bash -c "kill 1"
+   14  kubectl get pods,svc
+   15  kubectl describe pod pod-ed
+   16  kubectl delete pod pod-ed
+   17  kubectl get pods,svc
+   18  kubectl apply -f emptydir-pod.yaml
+   19  kubectl get pods,svc
+   20  cat > git-pod.yaml
+   21  cat git-pod.yaml
+   22  kubectl apply -f git-pod.yaml
+   23  kubectl exec -it pod-git -- bash
+   24  kubectl delete pod pod-git
+   25  cat > hostpath-deployment.yaml
+   26  cat hostpath-deployment.yaml
+   27  mkdir --mode=777 /tmp/data
+   28  ls -al /tmp
+   29  exit
+   30  kubectl apply -f hostpath-deployment.yaml
+   31  cat hostpath-deployment.yaml
+   32  cat > hostpath-deployment.yaml
+   33  cat hostpath-deployment.yaml
+   34  kubectl apply -f hostpath-deployment.yaml
+   35  kubectl get pods -o wide
+   36  kubectl delete -f hostpath-deployment.yaml
+   37  kubectl get pods -o wide
+   38  cat pod-ed.yaml
+   39  kubectl pod delete pod-ed
+   40  kubectl delete pods pod-ed
+   41  kubectl get pods -o wide
+   42  kubectl apply -f hostpath-deployment.yaml
+   43  kubectl get pods -o wide
+   44  kubectl delete -f hostpath-deployment.yaml
+   45  kubectl get pods -o wide
+   46  ssh vagrant@node2
+   47  exit
+   48  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+   49  sudo apt-get update && apt-get install -y nfs-common
+   50  chmod -R 777 /data/nfs/k8sdata
+   51  cat > nfs-deployment.yaml
+   52  cat nfs-deployment.yaml
+   53  kubectl apply -f nfs-deployment.yaml
+   54  kubectl get pods -o wide
+   55  sudo chmod -R 777 /data/nfs/k8sdata
+   56  mkdir --mode=777 /data/nfs/k8sdata
+   57  mkdir --mode=777 /data/nfs
+   58  sudo mkdir --mode=777 /data/nfs/k8sdata
+   59  sudo mkdir --mode=777 /data
+   60  sudo mkdir --mode=777 /data/nfs
+   61  sudo mkdir --mode=777 /data/nfs/k8sdata
+   62  kubectl delete -f nfs-deployment.yaml
+   63  exit
+   64  chmod -R 777 /data/nfs/k8sdata
+   65  sudo chmod -R 777 /data/nfs/k8sdata
+   66  exit
+   67  kubectl delete -f hostpath-deployment.yaml
+   68  cat nfs-deployment.yaml
+   69  kubectl apply -f hostpath-deployment.yaml
+   70  kubectl get pods -o wide
+   71  kubectl describe pod notes-deploy-5485bf6fdd-jspsp
+   72  kubectl delete -f nfs-deployment.yaml
+   73  kubectl get pods -o wide
+   74  cat > pvc10gb.yaml
+   75  cat pvc10gb.yaml
+   76  kubectl apply -f pvnfs10gb.yaml
+   77  cat > pvnfs10gb.yaml
+   78  cat pvnfs10gb.yaml
+   79  kubectl apply -f pvnfs10gb.yaml
+   80  kubectl get pv
+   81  kubectl describe pv pvnfs10gb
+   82  cat pvc10gb.yaml
+   83  kubectl apply -f pvc10gb.yaml
+   84  kubectl get pv
+   85  kubectl get pvc
+   86  kubectl describe pvc pvc10gb
+   87  cat > pv-deployment.yaml
+   88  cat pv-deployment.yaml
+   89  kubectl apply -f pv-deployment.yaml
+   90  kubectl get pods -o wide -w
+   91  kubectl describe pvc pvc10gb
+   92  kubectl describe pod notes-deploy-845b59c97f-pf76h
+   93  kubectl get pods -o wide -w
+   94  kubectl delete -f pv-deployment.yaml
+   95  kubectl delete -f pvc10gb.yaml
+   96  kubectl apply -f pvc10gb.yaml
+   97  kubectl apply -f pv-deployment.yaml
+   98  kubectl get pods -o wide -w
+   99  kubectl scale --replicas=2 deployment notes-deploy
+  100  kubectl delete -f pv-deployment.yaml
+  101  kubectl delete -f service.yaml
+  102  kubectl delete -f part1/service.yaml
+  103  kubectl delete -f pvc10gb.yaml
+  104  kubectl delete -f pvnfs10gb.yaml
+  105  history
+vagrant@node1:~$ kubectl get pods -o wide -w
+^Cvagrant@node1:~$ kubectl get pods -o wide
+No resources found in default namespace.
+vagrant@node1:~$ echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+nfs-server-ip   nfs-server
+vagrant@node1:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:10:cb:2e brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+       valid_lft 75534sec preferred_lft 75534sec
+    inet6 fe80::a00:27ff:fe10:cb2e/64 scope link
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:cd:9b:42 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.99.101/24 brd 192.168.99.255 scope global enp0s8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fecd:9b42/64 scope link
+       valid_lft forever preferred_lft forever
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+    link/ether 02:42:75:40:32:de brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+5: vxlan.calico: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 66:f9:37:c3:7e:94 brd ff:ff:ff:ff:ff:ff
+    inet 10.244.166.128/32 scope global vxlan.calico
+       valid_lft forever preferred_lft forever
+    inet6 fe80::64f9:37ff:fec3:7e94/64 scope link
+       valid_lft forever preferred_lft forever
+8: cali8e05c65ec31@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-0b78a5b4-5d26-0767-66d9-f8c1637827cd
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+9: cali04637b64a15@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-1e6235a7-1627-dc07-364d-82786954d985
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+10: cali6d83383600b@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-a31f9cf0-7d04-a8f2-e952-15f149942925
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+11: calib7909a24c77@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-fd9875f4-2983-3001-f9ad-453d4bcc2bb5
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+vagrant@node1:~$ hostname -I
+10.0.2.15 192.168.99.101 172.17.0.1 10.244.166.128
+vagrant@node1:~$ cat > pod-no-env.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-no-env
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-no-envvagrant@node1:~$
+vagrant@node1:~$ cat pod-no-env.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-no-env
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-no-envvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pod-no-env.yaml
+pod/pod-no-env created
+vagrant@node1:~$ cat > svc-environ.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-environ
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: environvagrant@node1:~$
+vagrant@node1:~$ cat svc-environ.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-environ
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: environvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f svc-environ.yaml
+service/svc-environ created
+vagrant@node1:~$ kubectl get pods,svc
+NAME             READY   STATUS    RESTARTS   AGE
+pod/pod-no-env   1/1     Running   0          93s
+
+NAME                  TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes    ClusterIP   10.96.0.1      <none>        443/TCP        3h14m
+service/svc-environ   NodePort    10.99.105.37   <none>        80:30001/TCP   8s
+vagrant@node1:~$ kubectl describe pod pod-no-env
+Name:             pod-no-env
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Sat, 11 Nov 2023 14:29:30 +0200
+Labels:           app=environ
+Annotations:      cni.projectcalico.org/containerID: e95edc5ccf671132ce004752c2095771db2f714176c44452532cc19c5ad43b0d
+                  cni.projectcalico.org/podIP: 10.244.104.10/32
+                  cni.projectcalico.org/podIPs: 10.244.104.10/32
+Status:           Running
+IP:               10.244.104.10
+IPs:
+  IP:  10.244.104.10
+Containers:
+  cont-no-env:
+    Container ID:   containerd://a8ff3d607330e6dc23af5f3ce94c1a3c5e1f81c938e180b7d04c337e5f707925
+    Image:          shekeriev/k8s-environ
+    Image ID:       docker.io/shekeriev/k8s-environ@sha256:48eff5ab29fc4a61308818f93e8aee9f93dcd9d6fccb155da7ea4ef0dcacf18e
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 11 Nov 2023 14:29:39 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-c7xgv (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-c7xgv:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  2m24s  default-scheduler  Successfully assigned default/pod-no-env to node2
+  Normal  Pulling    2m21s  kubelet            Pulling image "shekeriev/k8s-environ"
+  Normal  Pulled     2m18s  kubelet            Successfully pulled image "shekeriev/k8s-environ" in 3.281776146s (3.281784011s including waiting)
+  Normal  Created    2m18s  kubelet            Created container cont-no-env
+  Normal  Started    2m18s  kubelet            Started container cont-no-env
+vagrant@node1:~$ kubectl delete -f pod-no-env.yaml
+pod "pod-no-env" deleted
+vagrant@node1:~$ cat > pod-w-env.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-w-env
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    env:
+    - name: XYZ1
+      value: "VALUE1"
+    - name: XYZ2
+      value: "42"vagrant@node1:~$
+vagrant@node1:~$ cat pod-w-env.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-w-env
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    env:
+    - name: XYZ1
+      value: "VALUE1"
+    - name: XYZ2
+      value: "42"vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pod-w-env.yaml
+pod/pod-w-env created
+vagrant@node1:~$ kubectl describe pod pod-w-env
+Name:             pod-w-env
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Sat, 11 Nov 2023 14:35:41 +0200
+Labels:           app=environ
+Annotations:      cni.projectcalico.org/containerID: 37246f197a93cef5034019aaf318ee35f193285527245dda526a32df2af32499
+                  cni.projectcalico.org/podIP: 10.244.104.11/32
+                  cni.projectcalico.org/podIPs: 10.244.104.11/32
+Status:           Running
+IP:               10.244.104.11
+IPs:
+  IP:  10.244.104.11
+Containers:
+  cont-w-env:
+    Container ID:   containerd://bb81db7669cad852943bfa6154addafa121cafebab42f3544379c8f217ad5222
+    Image:          shekeriev/k8s-environ
+    Image ID:       docker.io/shekeriev/k8s-environ@sha256:48eff5ab29fc4a61308818f93e8aee9f93dcd9d6fccb155da7ea4ef0dcacf18e
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 11 Nov 2023 14:35:44 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      XYZ1:  VALUE1
+      XYZ2:  42
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-d6nvc (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-d6nvc:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  26s   default-scheduler  Successfully assigned default/pod-w-env to node2
+  Normal  Pulling    27s   kubelet            Pulling image "shekeriev/k8s-environ"
+  Normal  Pulled     25s   kubelet            Successfully pulled image "shekeriev/k8s-environ" in 1.418832288s (1.418837661s including waiting)
+  Normal  Created    25s   kubelet            Created container cont-w-env
+  Normal  Started    25s   kubelet            Started container cont-w-env
+vagrant@node1:~$ kubectl delete -f pod-w-env.yaml
+pod "pod-w-env" deleted
+vagrant@node1:~$ kubectl create configmap environ-map-a --from-literal=XYZ1=VALUE1
+configmap/environ-map-a created
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+environ-map-a      1      10s
+kube-root-ca.crt   1      3h20m
+vagrant@node1:~$ kubectl describe cm environ-map-a
+Name:         environ-map-a
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+XYZ1:
+----
+VALUE1
+
+BinaryData
+====
+
+Events:  <none>
+vagrant@node1:~$ kubectl get cm environ-map-a -o yaml
+apiVersion: v1
+data:
+  XYZ1: VALUE1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-11T12:36:55Z"
+  name: environ-map-a
+  namespace: default
+  resourceVersion: "24553"
+  uid: b52f4e37-ac9e-4fc3-97b4-5e9faf372219
+vagrant@node1:~$ kubectl create configmap environ-map-b --from-literal=XYZ2=42 --from-literal=XYZ3=3.14
+configmap/environ-map-b created
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+environ-map-a      1      2m4s
+environ-map-b      2      63s
+kube-root-ca.crt   1      3h22m
+vagrant@node1:~$ kubectl delete cm environ-map-a environ-map-b
+configmap "environ-map-a" deleted
+configmap "environ-map-b" deleted
+vagrant@node1:~$ cat > cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environ-map-1
+data:
+  XYZ1: "VALUE1"
+  XYZ2: "42"
+  XYZ3: "3.14"vagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$ cat cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environ-map-1
+data:
+  XYZ1: "VALUE1"
+  XYZ2: "42"
+  XYZ3: "3.14"vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f cm.yaml
+configmap/environ-map-1 created
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+environ-map-1      3      6s
+kube-root-ca.crt   1      3h23m
+vagrant@node1:~$ cat > variables.conf << EOF
+> XYZ_FF1=VALUE1
+> XYZ_FF2=42
+> EOF
+vagrant@node1:~$ cat variables.conf
+XYZ_FF1=VALUE1
+XYZ_FF2=42
+vagrant@node1:~$ kubectl create configmap environ-map-a --from-file=variables.conf
+configmap/environ-map-a created
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+environ-map-1      3      6m3s
+environ-map-a      1      11s
+kube-root-ca.crt   1      3h29m
+vagrant@node1:~$ kubectl get cm environ-map-a -o yaml
+apiVersion: v1
+data:
+  variables.conf: |
+    XYZ_FF1=VALUE1
+    XYZ_FF2=42
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-11T12:46:42Z"
+  name: environ-map-a
+  namespace: default
+  resourceVersion: "25698"
+  uid: 775cfb95-09e7-4e88-b64c-0f4665d6bcb7
+vagrant@node1:~$ cat > flag.conf << EOF
+> true
+> EOF
+vagrant@node1:~$ kubectl create configmap environ-map-b --from-file=debug=flag.conf
+configmap/environ-map-b created
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+environ-map-1      3      8m3s
+environ-map-a      1      2m11s
+environ-map-b      1      12s
+kube-root-ca.crt   1      3h31m
+vagrant@node1:~$ kubectl get cm environ-map-b -o yaml
+apiVersion: v1
+data:
+  debug: |
+    true
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-11T12:48:41Z"
+  name: environ-map-b
+  namespace: default
+  resourceVersion: "25931"
+  uid: 88c5ad06-9ec0-4fbc-abd0-110d793cdba3
+vagrant@node1:~$ kubectl delete cm environ-map-a environ-map-b
+configmap "environ-map-a" deleted
+configmap "environ-map-b" deleted
+vagrant@node1:~$ rm variables.conf flag.conf
+vagrant@node1:~$ mkdir variables
+vagrant@node1:~$ echo 'production' > variables/mode
+vagrant@node1:~$ echo 'false' > variables/debug
+vagrant@node1:~$ tree variables/
+-bash: tree: command not found
+vagrant@node1:~$ kubectl create configmap environ-map-a --from-file=variables/
+configmap/environ-map-a created
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+environ-map-1      3      10m
+environ-map-a      2      8s
+kube-root-ca.crt   1      3h34m
+vagrant@node1:~$ kubectl get cm environ-map-a -o yaml
+apiVersion: v1
+data:
+  debug: |
+    false
+  mode: |
+    production
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-11T12:51:37Z"
+  name: environ-map-a
+  namespace: default
+  resourceVersion: "26282"
+  uid: 1674a949-ebd6-4646-9178-4adb216c9787
+vagrant@node1:~$ kubectl delete cm environ-map-a
+configmap "environ-map-a" deleted
+vagrant@node1:~$ rm -rf variables/
+vagrant@node1:~$ cat > pod-cm-env-var.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-env-var
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    env:
+    - name: XYZ_FROM_CM
+      valueFrom:
+        configMapKeyRef:
+          name: environ-map-1
+          key: XYZ2vagrant@node1:~$
+vagrant@node1:~$ cat pod-cm-env-var.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-env-var
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    env:
+    - name: XYZ_FROM_CM
+      valueFrom:
+        configMapKeyRef:
+          name: environ-map-1
+          key: XYZ2vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pod-cm-env-var.yaml
+pod/pod-cm-env-var created
+vagrant@node1:~$ kubectl get cm environ-map-1 -o yaml
+apiVersion: v1
+data:
+  XYZ1: VALUE1
+  XYZ2: "42"
+  XYZ3: "3.14"
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"XYZ1":"VALUE1","XYZ2":"42","XYZ3":"3.14"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"environ-map-1","namespace":"default"}}
+  creationTimestamp: "2023-11-11T12:40:50Z"
+  name: environ-map-1
+  namespace: default
+  resourceVersion: "25022"
+  uid: 93f08c1f-1136-484d-8ec8-8b65782ae9e6
+vagrant@node1:~$ kubectl delete pod pod-cm-env-var
+pod "pod-cm-env-var" deleted
+vagrant@node1:~$ cat > pod-cm-env-vars.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-env-vars
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    envFrom:
+    - configMapRef:
+        name: environ-map-1
+      #prefix: CM_ # Use this to prefix variables created from the ConfigMapvagrant@node1:~$
+vagrant@node1:~$ cat pod-cm-env-vars.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-env-vars
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    envFrom:
+    - configMapRef:
+        name: environ-map-1
+      #prefix: CM_ # Use this to prefix variables created from the ConfigMapvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pod-cm-env-vars.yaml
+pod/pod-cm-env-vars created
+vagrant@node1:~$ kubectl delete pod pod-cm-env-vars
+pod "pod-cm-env-vars" deleted
+vagrant@node1:~$ kubectl delete cm environ-map-1
+configmap "environ-map-1" deleted
+vagrant@node1:~$ kubectl get secret
+No resources found in default namespace.
+vagrant@node1:~$ kubectl create secret generic secret-a --from-literal=password='Parolka1'
+secret/secret-a created
+vagrant@node1:~$ echo 'DrugaParolka1' > password.conf
+vagrant@node1:~$ kubectl create secret generic secret-b --from-file=password=password.conf
+secret/secret-b created
+vagrant@node1:~$ kubectl get secret
+NAME       TYPE     DATA   AGE
+secret-a   Opaque   1      40s
+secret-b   Opaque   1      12s
+vagrant@node1:~$ kubectl get secret secret-a -o yaml
+apiVersion: v1
+data:
+  password: UGFyb2xrYTE=
+kind: Secret
+metadata:
+  creationTimestamp: "2023-11-11T13:00:49Z"
+  name: secret-a
+  namespace: default
+  resourceVersion: "27408"
+  uid: 913c939f-40ca-481e-903a-3242bddb5174
+type: Opaque
+vagrant@node1:~$ kubectl get secret secret-b -o yaml
+apiVersion: v1
+data:
+  password: RHJ1Z2FQYXJvbGthMQo=
+kind: Secret
+metadata:
+  creationTimestamp: "2023-11-11T13:01:17Z"
+  name: secret-b
+  namespace: default
+  resourceVersion: "27462"
+  uid: d25f63b8-dbd6-4aa2-858e-bbda8d08202e
+type: Opaque
+vagrant@node1:~$ echo UGFyb2xrYTE= | base64 --decode
+Parolka1vagrant@node1:~$
+vagrant@node1:~$ kubectl delete secret secret-a secret-b
+secret "secret-a" deleted
+secret "secret-b" deleted
+vagrant@node1:~$ cat > secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecrets
+  namespace: default
+data:
+  password1: S3ViZXJuZXRlc1JvY2tzIQo=
+  password2: U3VwZXJTZWNyZXRQQHNzdzByZAo=
+  message: S3ViZXJuZXRlcyBpcyBib3RoIGZ1biBhbmQgZWFzeSB0byBsZWFybiA7KQo=vagrant@node1:~$
+vagrant@node1:~$ cat secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecrets
+  namespace: default
+data:
+  password1: S3ViZXJuZXRlc1JvY2tzIQo=
+  password2: U3VwZXJTZWNyZXRQQHNzdzByZAo=
+  message: S3ViZXJuZXRlcyBpcyBib3RoIGZ1biBhbmQgZWFzeSB0byBsZWFybiA7KQo=vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f secrets.yaml
+secret/mysecrets created
+vagrant@node1:~$ kubectl get secrets
+NAME        TYPE     DATA   AGE
+mysecrets   Opaque   3      8s
+vagrant@node1:~$ cat > pod-secret.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secret
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    envFrom:
+    - secretRef:
+        name: mysecrets
+      prefix: XYZ_vagrant@node1:~$
+vagrant@node1:~$ cat pod-secret.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secret
+  labels:
+    app: environ
+spec:
+  containers:
+  - image: shekeriev/k8s-environ
+    name: cont-w-env
+    envFrom:
+    - secretRef:
+        name: mysecrets
+      prefix: XYZ_vagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f pod-secret.yaml
+pod/pod-secret created
+vagrant@node1:~$ kubectl delete pod/pod-secret service/svc-environ secret/mysecrets
+pod "pod-secret" deleted
+service "svc-environ" deleted
+secret "mysecrets" deleted
+vagrant@node1:~$ rm password.conf
+vagrant@node1:~$ ls data/nfs
+ls: cannot access 'data/nfs': No such file or directory
+vagrant@node1:~$ sudo ls data/nfs
+ls: cannot access 'data/nfs': No such file or directory
+vagrant@node1:~$ sudo apt-get update
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+vagrant@node1:~$ sudo apt-get install nfs-kernel-server
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  keyutils libevent-2.1-7 libnfsidmap2 nfs-common rpcbind
+Suggested packages:
+  open-iscsi watchdog
+The following NEW packages will be installed:
+  keyutils libevent-2.1-7 libnfsidmap2 nfs-common nfs-kernel-server rpcbind
+0 upgraded, 6 newly installed, 0 to remove and 3 not upgraded.
+Need to get 682 kB of archives.
+After this operation, 2,028 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bullseye/main amd64 rpcbind amd64 1.2.5-9 [51.4 kB]
+Get:2 http://deb.debian.org/debian bullseye/main amd64 keyutils amd64 1.6.1-2 [52.8 kB]
+Get:3 http://deb.debian.org/debian bullseye/main amd64 libevent-2.1-7 amd64 2.1.12-stable-1 [188 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 libnfsidmap2 amd64 0.25-6 [32.6 kB]
+Get:5 http://deb.debian.org/debian bullseye/main amd64 nfs-common amd64 1:1.3.4-6 [232 kB]
+Get:6 http://deb.debian.org/debian bullseye/main amd64 nfs-kernel-server amd64 1:1.3.4-6 [125 kB]
+Fetched 682 kB in 0s (2,081 kB/s)
+Selecting previously unselected package rpcbind.
+(Reading database ... 55065 files and directories currently installed.)
+Preparing to unpack .../0-rpcbind_1.2.5-9_amd64.deb ...
+Unpacking rpcbind (1.2.5-9) ...
+Selecting previously unselected package keyutils.
+Preparing to unpack .../1-keyutils_1.6.1-2_amd64.deb ...
+Unpacking keyutils (1.6.1-2) ...
+Selecting previously unselected package libevent-2.1-7:amd64.
+Preparing to unpack .../2-libevent-2.1-7_2.1.12-stable-1_amd64.deb ...
+Unpacking libevent-2.1-7:amd64 (2.1.12-stable-1) ...
+Selecting previously unselected package libnfsidmap2:amd64.
+Preparing to unpack .../3-libnfsidmap2_0.25-6_amd64.deb ...
+Unpacking libnfsidmap2:amd64 (0.25-6) ...
+Selecting previously unselected package nfs-common.
+Preparing to unpack .../4-nfs-common_1%3a1.3.4-6_amd64.deb ...
+Unpacking nfs-common (1:1.3.4-6) ...
+Selecting previously unselected package nfs-kernel-server.
+Preparing to unpack .../5-nfs-kernel-server_1%3a1.3.4-6_amd64.deb ...
+Unpacking nfs-kernel-server (1:1.3.4-6) ...
+Setting up rpcbind (1.2.5-9) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /lib/systemd/system/rpcbind.service.
+Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /lib/systemd/system/rpcbind.socket.
+Setting up libevent-2.1-7:amd64 (2.1.12-stable-1) ...
+Setting up keyutils (1.6.1-2) ...
+Setting up libnfsidmap2:amd64 (0.25-6) ...
+Setting up nfs-common (1:1.3.4-6) ...
+
+Creating config file /etc/idmapd.conf with new version
+Adding system user `statd' (UID 107) ...
+Adding new user `statd' (UID 107) with group `nogroup' ...
+Not creating home directory `/var/lib/nfs'.
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+nfs-utils.service is a disabled or a static unit, not starting it.
+Setting up nfs-kernel-server (1:1.3.4-6) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /lib/systemd/system/nfs-server.service.
+Job for nfs-server.service canceled.
+
+Creating config file /etc/exports with new version
+
+Creating config file /etc/default/nfs-kernel-server with new version
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+vagrant@node1:~$ ls data
+ls: cannot access 'data': No such file or directory
+vagrant@node1:~$ mkdir data
+vagrant@node1:~$ ls data
+vagrant@node1:~$ cd data
+vagrant@node1:~/data$ mkdir nfs
+vagrant@node1:~/data$ cd nfs
+vagrant@node1:~/data/nfs$ sudo mkdir k8spva
+vagrant@node1:~/data/nfs$ sudo mkdir k8spvb
+vagrant@node1:~/data/nfs$ sudo mkdir k8spvc
+vagrant@node1:~/data/nfs$ ls
+k8spva  k8spvb  k8spvc
+vagrant@node1:~/data/nfs$ cd ..
+vagrant@node1:~/data$ cd ..
+vagrant@node1:~$ ls /etc/exports
+/etc/exports
+vagrant@node1:~$ cd etc
+-bash: cd: etc: No such file or directory
+vagrant@node1:~$ cd /etc
+vagrant@node1:/etc$ cd /exports
+-bash: cd: /exports: No such file or directory
+vagrant@node1:/etc$ ls
+adduser.conf            crontab                 gai.conf         kernel           manpath.config  profile           runit              sysctl.d
+adjtime                 cron.weekly             groff            kernel-img.conf  mime.types      profile.d         security           systemd
+alternatives            dbus-1                  group            kubernetes       mke2fs.conf     protocols         selinux            terminfo
+apparmor                debconf.conf            group-           ldap             modprobe.d      python3           services           timezone
+apparmor.d              debian_version          grub.d           ld.so.cache      modules         python3.9         shadow             tmpfiles.d
+apt                     default                 gshadow          ld.so.conf       modules-load.d  rc0.d             shadow-            ucf.conf
+bash.bashrc             deluser.conf            gshadow-         ld.so.conf.d     motd            rc1.d             shells             udev
+bash_completion         depmod.d                gss              libaudit.conf    mtab            rc2.d             skel               ufw
+bash_completion.d       dhcp                    host.conf        locale.alias     nanorc          rc3.d             ssh                update-motd.d
+bindresvport.blacklist  dictionaries-common     hostname         locale.gen       netconfig       rc4.d             ssl                vim
+binfmt.d                discover.conf.d         hosts            localtime        network         rc5.d             subgid             wgetrc
+ca-certificates         discover-modprobe.conf  hosts.allow      logcheck         networks        rc6.d             subgid-            X11
+ca-certificates.conf    docker                  hosts.deny       login.defs       nftables.conf   rcS.d             subuid             xattr.conf
+calico                  dpkg                    idmapd.conf      logrotate.conf   nsswitch.conf   reportbug.conf    subuid-            xdg
+cni                     e2scrub.conf            init.d           logrotate.d      opt             request-key.conf  sudo.conf
+console-setup           emacs                   initramfs-tools  machine-id       os-release      request-key.d     sudoers
+containerd              environment             inputrc          magic            pam.conf        resolv.conf       sudoers.d
+cron.d                  ethertypes              insserv.conf.d   magic.mime       pam.d           rmt               sudo_logsrvd.conf
+cron.daily              exports                 iproute2         mailcap          passwd          rpc               sv
+cron.hourly             fonts                   issue            mailcap.order    passwd-         rsyslog.conf      sysconfig
+cron.monthly            fstab                   issue.net        mailname         perl            rsyslog.d         sysctl.conf
+vagrant@node1:/etc$ sudo vi /etc/exports
+vagrant@node1:/etc$ vagrant@node1:/etc$ mkdir data
+mkdir: cannot create directory ‘data’: Permission denied
+vagrant@node1:/etc$ sudo mkdir data
+vagrant@node1:/etc$ cd data
+vagrant@node1:/etc/data$ sudo mkdir nfs
+vagrant@node1:/etc/data$ cd ..
+vagrant@node1:/etc$ ls
+adduser.conf            crontab                 fstab            issue.net        mailname        perl              rsyslog.d          sysctl.conf
+adjtime                 cron.weekly             gai.conf         kernel           manpath.config  profile           runit              sysctl.d
+alternatives            data                    groff            kernel-img.conf  mime.types      profile.d         security           systemd
+apparmor                dbus-1                  group            kubernetes       mke2fs.conf     protocols         selinux            terminfo
+apparmor.d              debconf.conf            group-           ldap             modprobe.d      python3           services           timezone
+apt                     debian_version          grub.d           ld.so.cache      modules         python3.9         shadow             tmpfiles.d
+bash.bashrc             default                 gshadow          ld.so.conf       modules-load.d  rc0.d             shadow-            ucf.conf
+bash_completion         deluser.conf            gshadow-         ld.so.conf.d     motd            rc1.d             shells             udev
+bash_completion.d       depmod.d                gss              libaudit.conf    mtab            rc2.d             skel               ufw
+bindresvport.blacklist  dhcp                    host.conf        locale.alias     nanorc          rc3.d             ssh                update-motd.d
+binfmt.d                dictionaries-common     hostname         locale.gen       netconfig       rc4.d             ssl                vim
+ca-certificates         discover.conf.d         hosts            localtime        network         rc5.d             subgid             wgetrc
+ca-certificates.conf    discover-modprobe.conf  hosts.allow      logcheck         networks        rc6.d             subgid-            X11
+calico                  docker                  hosts.deny       login.defs       nftables.conf   rcS.d             subuid             xattr.conf
+cni                     dpkg                    idmapd.conf      logrotate.conf   nsswitch.conf   reportbug.conf    subuid-            xdg
+console-setup           e2scrub.conf            init.d           logrotate.d      opt             request-key.conf  sudo.conf
+containerd              emacs                   initramfs-tools  machine-id       os-release      request-key.d     sudoers
+cron.d                  environment             inputrc          magic            pam.conf        resolv.conf       sudoers.d
+cron.daily              ethertypes              insserv.conf.d   magic.mime       pam.d           rmt               sudo_logsrvd.conf
+cron.hourly             exports                 iproute2         mailcap          passwd          rpc               sv
+cron.monthly            fonts                   issue            mailcap.order    passwd-         rsyslog.conf      sysconfig
+vagrant@node1:/etc$ cd data
+vagrant@node1:/etc/data$ ls
+nfs
+vagrant@node1:/etc/data$ cd ..
+vagrant@node1:/etc$ cd ..
+vagrant@node1:/$ sudo service nfs-kernel-server restart
+vagrant@node1:/$ sudo nano /etc/hosts
+vagrant@node1:/$ vagrant@node1:/$
+vagrant@node1:/$
+vagrant@node1:/$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:10:cb:2e brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+       valid_lft 69978sec preferred_lft 69978sec
+    inet6 fe80::a00:27ff:fe10:cb2e/64 scope link
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:cd:9b:42 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.99.101/24 brd 192.168.99.255 scope global enp0s8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fecd:9b42/64 scope link
+       valid_lft forever preferred_lft forever
+4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+    link/ether 02:42:75:40:32:de brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+5: vxlan.calico: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ether 66:f9:37:c3:7e:94 brd ff:ff:ff:ff:ff:ff
+    inet 10.244.166.128/32 scope global vxlan.calico
+       valid_lft forever preferred_lft forever
+    inet6 fe80::64f9:37ff:fec3:7e94/64 scope link
+       valid_lft forever preferred_lft forever
+8: cali8e05c65ec31@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-0b78a5b4-5d26-0767-66d9-f8c1637827cd
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+9: cali04637b64a15@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-1e6235a7-1627-dc07-364d-82786954d985
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+10: cali6d83383600b@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-a31f9cf0-7d04-a8f2-e952-15f149942925
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+11: calib7909a24c77@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-fd9875f4-2983-3001-f9ad-453d4bcc2bb5
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+vagrant@node1:/$ hostname -I
+10.0.2.15 192.168.99.101 172.17.0.1 10.244.166.128
+vagrant@node1:/$ sudo nano /etc/hosts
+vagrant@node1:/$ sudo nano /etc/hosts
+vagrant@node1:/$ vagrant@node1:/$ sudo nano /etc/hosts
+vagrant@node1:/$ vagrant@node1:/$ ping nfs-server
+PING nfs-server (192.168.99.101) 56(84) bytes of data.
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=1 ttl=64 time=0.059 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=2 ttl=64 time=0.066 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=3 ttl=64 time=0.077 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=4 ttl=64 time=0.105 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=5 ttl=64 time=0.061 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=6 ttl=64 time=0.052 ms
+^C
+--- nfs-server ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5130ms
+rtt min/avg/max/mdev = 0.052/0.070/0.105/0.017 ms
+vagrant@node1:/$ cd etc
+vagrant@node1:/etc$ cd data
+vagrant@node1:/etc/data$ cd nfs
+vagrant@node1:/etc/data/nfs$ sudo mkdir k8spva
+vagrant@node1:/etc/data/nfs$ sudo mkdir k8spvb
+vagrant@node1:/etc/data/nfs$ sudo mkdir k8spvc
+vagrant@node1:/etc/data/nfs$ ls
+k8spva  k8spvb  k8spvc
+vagrant@node1:/etc/data/nfs$ sudo chmod 777 k8spv(a,b,c)
+-bash: syntax error near unexpected token `('
+vagrant@node1:/etc/data/nfs$ sudo chmod 777 k8spva
+vagrant@node1:/etc/data/nfs$ sudo chmod 777 k8spvb
+vagrant@node1:/etc/data/nfs$ sudo chmod 777 k8spvc
+vagrant@node1:/etc/data/nfs$ cd /etc
+vagrant@node1:/etc$ sudo vi exports
+vagrant@node1:/etc$ vagrant@node1:/etc$ sudo vi exports
+vagrant@node1:/etc$ vagrant@node1:/etc$ sudo export
+sudo: export: command not found
+vagrant@node1:/etc$ sudo exportfs -rav
+exportfs: /etc/exports [1]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/etc/data/nfs/k8spva".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [2]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/etc/data/nfs/k8spvb".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exportfs: /etc/exports [3]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/etc/data/nfs/k8spvc".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exporting *:/etc/data/nfs/k8spvc
+exporting *:/etc/data/nfs/k8spvb
+exporting *:/etc/data/nfs/k8spva
+vagrant@node1:/etc$ cd ..
+vagrant@node1:/$ cat > pvssa.yaml
+-bash: pvssa.yaml: Permission denied
+vagrant@node1:/$ sudo cat > pvssa.yaml
+-bash: pvssa.yaml: Permission denied
+vagrant@node1:/$ sudo cat pvssa.yaml
+cat: pvssa.yaml: No such file or directory
+vagrant@node1:/$ cat > pvssa.yaml
+-bash: pvssa.yaml: Permission denied
+vagrant@node1:/$ sudo cat > pvssa.yaml
+-bash: pvssa.yaml: Permission denied
+vagrant@node1:/$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Nov 11 13:25:32 2023 from 10.0.2.2
+vagrant@node1:~$ cat > pvssa.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssa
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spva
+    server: nfs-servervagrant@node1:~$
+vagrant@node1:~$ cat > pvssb.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssb
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spvb
+    server: nfs-servervagrant@node1:~$
+vagrant@node1:~$
+vagrant@node1:~$ cat > pvssc.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssc
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spvc
+    server: nfs-servervagrant@node1:~$
+vagrant@node1:~$ cat pvssa.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssa
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spva
+    server: nfs-servervagrant@node1:~$ cat pvssb.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssb
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spvb
+    server: nfs-servervagrant@node1:~$ cat pvssc.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvssc
+  labels:
+    purpose: ssdemo
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /data/nfs/k8spvc
+    server: nfs-servervagrant@node1:~$
+vagrant@node1:~$ ping nfs-server
+PING nfs-server (192.168.99.101) 56(84) bytes of data.
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=1 ttl=64 time=0.082 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=2 ttl=64 time=0.212 ms
+64 bytes from node1.k8s.lab (192.168.99.101): icmp_seq=3 ttl=64 time=0.094 ms
+^C
+--- nfs-server ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2025ms
+rtt min/avg/max/mdev = 0.082/0.129/0.212/0.058 ms
+vagrant@node1:~$ kubectl apply -f pvssa.yaml
+persistentvolume/pvssa created
+vagrant@node1:~$ kubectl apply -f pvssb.yaml
+persistentvolume/pvssb created
+vagrant@node1:~$ kubectl apply -f pvssc.yaml
+persistentvolume/pvssc created
+vagrant@node1:~$ kubectl get pv
+NAME    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+pvssa   1Gi        RWO            Recycle          Available                                   24s
+pvssb   1Gi        RWO            Recycle          Available                                   18s
+pvssc   1Gi        RWO            Recycle          Available                                   13s
+vagrant@node1:~$ cat > svcss.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: facts
+spec:
+  selector:
+    app: facts
+  clusterIP: None
+  ports:
+  - port: 5000
+    protocol: TCPvagrant@node1:~$
+vagrant@node1:~$ cat svcss.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: facts
+spec:
+  selector:
+    app: facts
+  clusterIP: None
+  ports:
+  - port: 5000
+    protocol: TCPvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f svcss.yaml
+service/facts created
+vagrant@node1:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+facts        ClusterIP   None         <none>        5000/TCP   12s
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    4h53m
+vagrant@node1:~$ cat > ss.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: facts
+spec:
+  selector:
+    matchLabels:
+      app: facts
+  serviceName: facts
+  replicas: 2
+  # POD template
+  template:
+    metadata:
+      labels:
+        app: facts
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: main
+        image: shekeriev/k8s-facts
+        ports:
+        - name: app
+          containerPort: 5000
+        volumeMounts:
+        - name: facts-data
+          mountPath: /data
+  # VolumeClaim template
+  volumeClaimTemplates:
+  - metadata:
+      name: facts-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Givagrant@node1:~$
+vagrant@node1:~$ cat ss.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: facts
+spec:
+  selector:
+    matchLabels:
+      app: facts
+  serviceName: facts
+  replicas: 2
+  # POD template
+  template:
+    metadata:
+      labels:
+        app: facts
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: main
+        image: shekeriev/k8s-facts
+        ports:
+        - name: app
+          containerPort: 5000
+        volumeMounts:
+        - name: facts-data
+          mountPath: /data
+  # VolumeClaim template
+  volumeClaimTemplates:
+  - metadata:
+      name: facts-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Givagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f ss.yaml
+statefulset.apps/facts created
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          12s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/facts        ClusterIP   None         <none>        5000/TCP   110s
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP    4h54m
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     12s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           3m39s
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        3m33s
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        3m28s
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           12s
+vagrant@node1:~$ cat > svcssnp.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: factsnp
+spec:
+  selector:
+    app: facts
+  type: NodePort
+  ports:
+  - port: 5000
+    nodePort: 30001
+    protocol: TCPvagrant@node1:~$
+vagrant@node1:~$ kubectl apply -f svcssnp.yaml
+service/factsnp created
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          110s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None           <none>        5000/TCP         3m28s
+service/factsnp      NodePort    10.102.2.153   <none>        5000:30001/TCP   12s
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP          4h56m
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/2     110s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           5m17s
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        5m11s
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        5m6s
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           110s
+vagrant@node1:~$ kubectl get pods,pvc -o wide
+NAME          READY   STATUS              RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+pod/facts-0   0/1     ContainerCreating   0          2m12s   <none>   node2   <none>           <none>
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE     VOLUMEMODE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           2m12s   Filesystem
+vagrant@node1:~$ kubectl get pods,pvc -o wide
+NAME          READY   STATUS              RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+pod/facts-0   0/1     ContainerCreating   0          2m33s   <none>   node2   <none>           <none>
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE     VOLUMEMODE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           2m33s   Filesystem
+vagrant@node1:~$ kubectl get pods,pvc -o wide
+NAME          READY   STATUS              RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+pod/facts-0   0/1     ContainerCreating   0          3m11s   <none>   node2   <none>           <none>
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE     VOLUMEMODE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           3m11s   Filesystem
+vagrant@node1:~$ kubectl delete pod facts-0
+pod "facts-0" deleted
+^Cvagrant@node1:~$ kubect get pods,pvc -o wide
+-bash: kubect: command not found
+vagrant@node1:~$ kubectl get pods,pvc -o wide
+NAME          READY   STATUS        RESTARTS   AGE     IP       NODE    NOMINATED NODE   READINESS GATES
+pod/facts-0   0/1     Terminating   0          4m13s   <none>   node2   <none>           <none>
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE     VOLUMEMODE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           4m13s   Filesystem
+vagrant@node1:~$ kubectl scale --replicas=1 statefulset/facts
+statefulset.apps/facts scaled
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          16s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None           <none>        5000/TCP         6m18s
+service/factsnp      NodePort    10.102.2.153   <none>        5000:30001/TCP   3m2s
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP          4h59m
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/1     4m40s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           8m7s
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        8m1s
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        7m56s
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           4m40s
+vagrant@node1:~$ kubectl scale --replicas=3 statefulset/facts
+statefulset.apps/facts scaled
+vagrant@node1:~$ kubectl get pod,svc,statefulset,pv,pvc
+NAME          READY   STATUS              RESTARTS   AGE
+pod/facts-0   0/1     ContainerCreating   0          58s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/facts        ClusterIP   None           <none>        5000/TCP         7m
+service/factsnp      NodePort    10.102.2.153   <none>        5000:30001/TCP   3m44s
+service/kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP          4h59m
+
+NAME                     READY   AGE
+statefulset.apps/facts   0/3     5m22s
+
+NAME                     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                        STORAGECLASS   REASON   AGE
+persistentvolume/pvssa   1Gi        RWO            Recycle          Bound       default/facts-data-facts-0                           8m49s
+persistentvolume/pvssb   1Gi        RWO            Recycle          Available                                                        8m43s
+persistentvolume/pvssc   1Gi        RWO            Recycle          Available                                                        8m38s
+
+NAME                                       STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/facts-data-facts-0   Bound    pvssa    1Gi        RWO                           5m22s
+vagrant@node1:~$ kubectl delete statefulset.apps/facts
+statefulset.apps "facts" deleted
+vagrant@node1:~$ kubectl delete service/facts service/factsnp
+service "facts" deleted
+service "factsnp" deleted
+vagrant@node1:~$ kubectl delete persistentvolumeclaim facts-data-facts-0 facts-data-facts-1 facts-data-facts-2
+persistentvolumeclaim "facts-data-facts-0" deleted
+Error from server (NotFound): persistentvolumeclaims "facts-data-facts-1" not found
+Error from server (NotFound): persistentvolumeclaims "facts-data-facts-2" not found
+vagrant@node1:~$ kubectl delete persistentvolume pvssa pvssb pvssc
+persistentvolume "pvssa" deleted
+persistentvolume "pvssb" deleted
+persistentvolume "pvssc" deleted
+vagrant@node1:~$ history
+    1  mkdir part1
+    2  cd part1
+    3  cat > emptydir-pod.yaml
+    4  cat emptydir-pod.yaml
+    5  kubectl apply -f part1/emptydir-pod.yaml
+    6  cat > service.yaml
+    7  cat service.yaml
+    8  kubectl apply -f emptydir-pod.yaml
+    9  kubectl apply -f service.yaml
+   10  kubectl get pods,svc
+   11  kubectl describe pod pod-ed
+   12  kubectl exec -it pod-ed -- bash
+   13  kubectl exec -it pod-ed -- /bin/bash -c "kill 1"
+   14  kubectl get pods,svc
+   15  kubectl describe pod pod-ed
+   16  kubectl delete pod pod-ed
+   17  kubectl get pods,svc
+   18  kubectl apply -f emptydir-pod.yaml
+   19  kubectl get pods,svc
+   20  cat > git-pod.yaml
+   21  cat git-pod.yaml
+   22  kubectl apply -f git-pod.yaml
+   23  kubectl exec -it pod-git -- bash
+   24  kubectl delete pod pod-git
+   25  cat > hostpath-deployment.yaml
+   26  cat hostpath-deployment.yaml
+   27  mkdir --mode=777 /tmp/data
+   28  ls -al /tmp
+   29  exit
+   30  kubectl apply -f hostpath-deployment.yaml
+   31  cat hostpath-deployment.yaml
+   32  cat > hostpath-deployment.yaml
+   33  cat hostpath-deployment.yaml
+   34  kubectl apply -f hostpath-deployment.yaml
+   35  kubectl get pods -o wide
+   36  kubectl delete -f hostpath-deployment.yaml
+   37  kubectl get pods -o wide
+   38  cat pod-ed.yaml
+   39  kubectl pod delete pod-ed
+   40  kubectl delete pods pod-ed
+   41  kubectl get pods -o wide
+   42  kubectl apply -f hostpath-deployment.yaml
+   43  kubectl get pods -o wide
+   44  kubectl delete -f hostpath-deployment.yaml
+   45  kubectl get pods -o wide
+   46  ssh vagrant@node2
+   47  exit
+   48  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+   49  sudo apt-get update && apt-get install -y nfs-common
+   50  chmod -R 777 /data/nfs/k8sdata
+   51  cat > nfs-deployment.yaml
+   52  cat nfs-deployment.yaml
+   53  kubectl apply -f nfs-deployment.yaml
+   54  kubectl get pods -o wide
+   55  sudo chmod -R 777 /data/nfs/k8sdata
+   56  mkdir --mode=777 /data/nfs/k8sdata
+   57  mkdir --mode=777 /data/nfs
+   58  sudo mkdir --mode=777 /data/nfs/k8sdata
+   59  sudo mkdir --mode=777 /data
+   60  sudo mkdir --mode=777 /data/nfs
+   61  sudo mkdir --mode=777 /data/nfs/k8sdata
+   62  kubectl delete -f nfs-deployment.yaml
+   63  exit
+   64  chmod -R 777 /data/nfs/k8sdata
+   65  sudo chmod -R 777 /data/nfs/k8sdata
+   66  exit
+   67  kubectl delete -f hostpath-deployment.yaml
+   68  cat nfs-deployment.yaml
+   69  kubectl apply -f hostpath-deployment.yaml
+   70  kubectl get pods -o wide
+   71  kubectl describe pod notes-deploy-5485bf6fdd-jspsp
+   72  kubectl delete -f nfs-deployment.yaml
+   73  kubectl get pods -o wide
+   74  cat > pvc10gb.yaml
+   75  cat pvc10gb.yaml
+   76  kubectl apply -f pvnfs10gb.yaml
+   77  cat > pvnfs10gb.yaml
+   78  cat pvnfs10gb.yaml
+   79  kubectl apply -f pvnfs10gb.yaml
+   80  kubectl get pv
+   81  kubectl describe pv pvnfs10gb
+   82  cat pvc10gb.yaml
+   83  kubectl apply -f pvc10gb.yaml
+   84  kubectl get pv
+   85  kubectl get pvc
+   86  kubectl describe pvc pvc10gb
+   87  cat > pv-deployment.yaml
+   88  cat pv-deployment.yaml
+   89  kubectl apply -f pv-deployment.yaml
+   90  kubectl get pods -o wide -w
+   91  kubectl describe pvc pvc10gb
+   92  kubectl describe pod notes-deploy-845b59c97f-pf76h
+   93  kubectl get pods -o wide -w
+   94  kubectl delete -f pv-deployment.yaml
+   95  kubectl delete -f pvc10gb.yaml
+   96  kubectl apply -f pvc10gb.yaml
+   97  kubectl apply -f pv-deployment.yaml
+   98  kubectl get pods -o wide -w
+   99  kubectl scale --replicas=2 deployment notes-deploy
+  100  kubectl delete -f pv-deployment.yaml
+  101  kubectl delete -f service.yaml
+  102  kubectl delete -f part1/service.yaml
+  103  kubectl delete -f pvc10gb.yaml
+  104  kubectl delete -f pvnfs10gb.yaml
+  105  history
+  106  kubectl get pods -o wide -w
+  107  kubectl get pods -o wide
+  108  echo 'nfs-server-ip   nfs-server' | sudo tee -a /etc/hosts
+  109  ip a
+  110  hostname -I
+  111  cat > pod-no-env.yaml
+  112  cat pod-no-env.yaml
+  113  kubectl apply -f pod-no-env.yaml
+  114  cat > svc-environ.yaml
+  115  cat svc-environ.yaml
+  116  kubectl apply -f svc-environ.yaml
+  117  kubectl get pods,svc
+  118  kubectl describe pod pod-no-env
+  119  kubectl delete -f pod-no-env.yaml
+  120  cat > pod-w-env.yaml
+  121  cat pod-w-env.yaml
+  122  kubectl apply -f pod-w-env.yaml
+  123  kubectl describe pod pod-w-env
+  124  kubectl delete -f pod-w-env.yaml
+  125  kubectl create configmap environ-map-a --from-literal=XYZ1=VALUE1
+  126  kubectl get cm
+  127  kubectl describe cm environ-map-a
+  128  kubectl get cm environ-map-a -o yaml
+  129  kubectl create configmap environ-map-b --from-literal=XYZ2=42 --from-literal=XYZ3=3.14
+  130  kubectl get cm
+  131  kubectl delete cm environ-map-a environ-map-b
+  132  cat > cm.yaml
+  133  cat cm.yaml
+  134  kubectl apply -f cm.yaml
+  135  kubectl get cm
+  136  cat > variables.conf << EOF
+  137  XYZ_FF1=VALUE1
+  138  XYZ_FF2=42
+  139  EOF
+  140  cat variables.conf
+  141  kubectl create configmap environ-map-a --from-file=variables.conf
+  142  kubectl get cm
+  143  kubectl get cm environ-map-a -o yaml
+  144  cat > flag.conf << EOF
+  145  true
+  146  EOF
+  147  kubectl create configmap environ-map-b --from-file=debug=flag.conf
+  148  kubectl get cm
+  149  kubectl get cm environ-map-b -o yaml
+  150  kubectl delete cm environ-map-a environ-map-b
+  151  rm variables.conf flag.conf
+  152  mkdir variables
+  153  echo 'production' > variables/mode
+  154  echo 'false' > variables/debug
+  155  tree variables/
+  156  kubectl create configmap environ-map-a --from-file=variables/
+  157  kubectl get cm
+  158  kubectl get cm environ-map-a -o yaml
+  159  kubectl delete cm environ-map-a
+  160  rm -rf variables/
+  161  cat > pod-cm-env-var.yaml
+  162  cat pod-cm-env-var.yaml
+  163  kubectl apply -f pod-cm-env-var.yaml
+  164  kubectl get cm environ-map-1 -o yaml
+  165  kubectl delete pod pod-cm-env-var
+  166  cat > pod-cm-env-vars.yaml
+  167  cat pod-cm-env-vars.yaml
+  168  kubectl apply -f pod-cm-env-vars.yaml
+  169  kubectl delete pod pod-cm-env-vars
+  170  kubectl delete cm environ-map-1
+  171  kubectl get secret
+  172  kubectl create secret generic secret-a --from-literal=password='Parolka1'
+  173  echo 'DrugaParolka1' > password.conf
+  174  kubectl create secret generic secret-b --from-file=password=password.conf
+  175  kubectl get secret
+  176  kubectl get secret secret-a -o yaml
+  177  kubectl get secret secret-b -o yaml
+  178  echo UGFyb2xrYTE= | base64 --decode
+  179  kubectl delete secret secret-a secret-b
+  180  cat > secrets.yaml
+  181  cat secrets.yaml
+  182  kubectl apply -f secrets.yaml
+  183  kubectl get secrets
+  184  cat > pod-secret.yaml
+  185  cat pod-secret.yaml
+  186  kubectl apply -f pod-secret.yaml
+  187  kubectl delete pod/pod-secret service/svc-environ secret/mysecrets
+  188  rm password.conf
+  189  ls data/nfs
+  190  sudo ls data/nfs
+  191  sudo apt-get update
+  192  sudo apt-get install nfs-kernel-server
+  193  ls data
+  194  mkdir data
+  195  ls data
+  196  cd data
+  197  mkdir nfs
+  198  cd nfs
+  199  sudo mkdir k8spva
+  200  sudo mkdir k8spvb
+  201  sudo mkdir k8spvc
+  202  ls
+  203  cd ..
+  204  ls /etc/exports
+  205  cd etc
+  206  cd /etc
+  207  cd /exports
+  208  ls
+  209  sudo vi /etc/exports
+  210  mkdir data
+  211  sudo mkdir data
+  212  cd data
+  213  sudo mkdir nfs
+  214  cd ..
+  215  ls
+  216  cd data
+  217  ls
+  218  cd ..
+  219  sudo service nfs-kernel-server restart
+  220  sudo nano /etc/hosts
+  221  ip a
+  222  hostname -I
+  223  sudo nano /etc/hosts
+  224  ping nfs-server
+  225  cd etc
+  226  cd data
+  227  cd nfs
+  228  sudo mkdir k8spva
+  229  sudo mkdir k8spvb
+  230  sudo mkdir k8spvc
+  231  ls
+  232  sudo chmod 777 k8spv(a,b,c)
+  233  sudo chmod 777 k8spva
+  234  sudo chmod 777 k8spvb
+  235  sudo chmod 777 k8spvc
+  236  cd /etc
+  237  sudo vi exports
+  238  sudo export
+  239  sudo exportfs -rav
+  240  cd ..
+  241  cat > pvssa.yaml
+  242  sudo cat > pvssa.yaml
+  243  sudo cat pvssa.yaml
+  244  cat > pvssa.yaml
+  245  sudo cat > pvssa.yaml
+  246  exit
+  247  cat > pvssa.yaml
+  248  cat > pvssb.yaml
+  249  cat > pvssc.yaml
+  250  cat pvssa.yaml
+  251  cat pvssb.yaml
+  252  cat pvssc.yaml
+  253  ping nfs-server
+  254  kubectl apply -f pvssa.yaml
+  255  kubectl apply -f pvssb.yaml
+  256  kubectl apply -f pvssc.yaml
+  257  kubectl get pv
+  258  cat > svcss.yaml
+  259  cat svcss.yaml
+  260  kubectl apply -f svcss.yaml
+  261  kubectl get svc
+  262  cat > ss.yaml
+  263  cat ss.yaml
+  264  kubectl apply -f ss.yaml
+  265  kubectl get pod,svc,statefulset,pv,pvc
+  266  cat > svcssnp.yaml
+  267  kubectl apply -f svcssnp.yaml
+  268  kubectl get pod,svc,statefulset,pv,pvc
+  269  kubectl get pods,pvc -o wide
+  270  kubectl delete pod facts-0
+  271  kubect get pods,pvc -o wide
+  272  kubectl get pods,pvc -o wide
+  273  kubectl scale --replicas=1 statefulset/facts
+  274  kubectl get pod,svc,statefulset,pv,pvc
+  275  kubectl scale --replicas=3 statefulset/facts
+  276  kubectl get pod,svc,statefulset,pv,pvc
+  277  kubectl delete statefulset.apps/facts
+  278  kubectl delete service/facts service/factsnp
+  279  kubectl delete persistentvolumeclaim facts-data-facts-0 facts-data-facts-1 facts-data-facts-2
+  280  kubectl delete persistentvolume pvssa pvssb pvssc
+  281  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant ssh node2
+   4 vagrant ssh node3
+   5 vagrant ssh node1
+   6 vagrant ssh node2
+   7 vagrant ssh node1
+   8 vagrant ssh node2
+   9 vagrant ssh node3
+  10 vagrant ssh node1
+  11 vagrant ssh node2
+  12 vagrant ssh node3
+  13 vagrant ssh node1
+  14 vagrant ssh node1
+
+
+PS C:\Users\NB\Kubernetes> vagrant halt
+==> node3: Attempting graceful shutdown of VM...
+==> node2: Attempting graceful shutdown of VM...
+==> node1: Attempting graceful shutdown of VM...
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant ssh node2
+   4 vagrant ssh node3
+   5 vagrant ssh node1
+   6 vagrant ssh node2
+   7 vagrant ssh node1
+   8 vagrant ssh node2
+   9 vagrant ssh node3
+  10 vagrant ssh node1
+  11 vagrant ssh node2
+  12 vagrant ssh node3
+  13 vagrant ssh node1
+  14 vagrant ssh node1
+  15 Get-History
+  16 vagrant halt
+
+
+PS C:\Users\NB\Kubernetes>

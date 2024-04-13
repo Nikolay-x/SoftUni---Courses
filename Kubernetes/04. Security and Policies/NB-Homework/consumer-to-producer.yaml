@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-consumer-to-producer
+  namespace: projectx
+spec:
+  podSelector:
+    matchLabels:
+      app: consumer
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: producer

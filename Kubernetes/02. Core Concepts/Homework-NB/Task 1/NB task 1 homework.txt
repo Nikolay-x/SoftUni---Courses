@@ -1,0 +1,202 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\WINDOWS\system32> cd\
+PS C:\> cd .\Users\
+PS C:\Users> cd .\NB\
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> cd '.\02. Core Concepts\'
+PS C:\Users\NB\Kubernetes\02. Core Concepts> cd .\homework\
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d23h
+kube-node-lease   Active   2d23h
+kube-public       Active   2d23h
+kube-system       Active   2d23h
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl create namespace homework
+namespace/homework created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d23h
+homework          Active   5s
+kube-node-lease   Active   2d23h
+kube-public       Active   2d23h
+kube-system       Active   2d23h
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl config set-context --current --namespace=homework
+Context "minikube" modified.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get pods
+No resources found in homework namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl run homework-1 --image shekeriev/k8s-oracle --labels="app=hw,tier=gold"
+pod/homework-1 created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get pods --show-labels
+NAME         READY   STATUS    RESTARTS   AGE   LABELS
+homework-1   1/1     Running   0          22s   app=hw,tier=gold
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl label pod homework-1 tier-
+pod/homework-1 unlabeled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get pods --show-labels
+NAME         READY   STATUS    RESTARTS   AGE   LABELS
+homework-1   1/1     Running   0          52s   app=hw
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl run homework-2 --image shekeriev/k8s-oracle
+pod/homework-2 created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get pods --show-labels
+NAME         READY   STATUS    RESTARTS   AGE   LABELS
+homework-1   1/1     Running   0          86s   app=hw
+homework-2   1/1     Running   0          4s    run=homework-2
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl label pod homework-2 app=hw
+pod/homework-2 labeled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl label pod homework-2 run-
+pod/homework-2 unlabeled
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get pods --show-labels
+NAME         READY   STATUS    RESTARTS   AGE     LABELS
+homework-1   1/1     Running   0          2m11s   app=hw
+homework-2   1/1     Running   0          49s     app=hw
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl annotate pods homework-1 purpose='homework'
+pod/homework-1 annotated
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl annotate pods homework-2 purpose='homework'
+pod/homework-2 annotated
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl describe pod homework-1
+Name:             homework-1
+Namespace:        homework
+Priority:         0
+Service Account:  default
+Node:             minikube/172.25.180.252
+Start Time:       Sat, 21 Oct 2023 12:09:03 +0300
+Labels:           app=hw
+Annotations:      purpose: homework
+Status:           Running
+IP:               10.244.0.71
+IPs:
+  IP:  10.244.0.71
+Containers:
+  homework-1:
+    Container ID:   docker://c8cab4f8c70f84d9d17f93766d64dbd2887751191f280c57451961dd949057b9
+    Image:          shekeriev/k8s-oracle
+    Image ID:       docker-pullable://shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 21 Oct 2023 12:09:07 +0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zb2wk (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-zb2wk:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  8m51s  default-scheduler  Successfully assigned homework/homework-1 to minikube
+  Normal  Pulling    8m50s  kubelet            Pulling image "shekeriev/k8s-oracle"
+  Normal  Pulled     8m47s  kubelet            Successfully pulled image "shekeriev/k8s-oracle" in 2.68104042s (2.68105862s including waiting)
+  Normal  Created    8m47s  kubelet            Created container homework-1
+  Normal  Started    8m47s  kubelet            Started container homework-1
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl describe pod homework-2
+Name:             homework-2
+Namespace:        homework
+Priority:         0
+Service Account:  default
+Node:             minikube/172.25.180.252
+Start Time:       Sat, 21 Oct 2023 12:10:25 +0300
+Labels:           app=hw
+Annotations:      purpose: homework
+Status:           Running
+IP:               10.244.0.72
+IPs:
+  IP:  10.244.0.72
+Containers:
+  homework-2:
+    Container ID:   docker://6d79c4ee97970b510e1999082cfef8a164dccd74c532f6730cd88d80a1dd090c
+    Image:          shekeriev/k8s-oracle
+    Image ID:       docker-pullable://shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 21 Oct 2023 12:10:28 +0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9mgq5 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-9mgq5:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  7m43s  default-scheduler  Successfully assigned homework/homework-2 to minikube
+  Normal  Pulling    7m42s  kubelet            Pulling image "shekeriev/k8s-oracle"
+  Normal  Pulled     7m40s  kubelet            Successfully pulled image "shekeriev/k8s-oracle" in 2.175262865s (2.175269765s including waiting)
+  Normal  Created    7m40s  kubelet            Created container homework-2
+  Normal  Started    7m40s  kubelet            Started container homework-2
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl expose pod homework-1 --port=32000 --target-port=80 --type=NodePort --name=homework-svc
+service/homework-svc exposed
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl expose pod homework-2 --port=32000 --target-port=80 --type=NodePort
+service/homework-2 exposed
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get svc homework-svc
+NAME           TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)           AGE
+homework-svc   NodePort   10.107.219.204   <none>        32000:30773/TCP   40s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> minikube service list
+|-------------|--------------|--------------|-----------------------------|
+|  NAMESPACE  |     NAME     | TARGET PORT  |             URL             |
+|-------------|--------------|--------------|-----------------------------|
+| default     | kubernetes   | No node port |                             |
+| homework    | homework-2   |        32000 | http://172.25.180.252:31744 |
+| homework    | homework-svc |        32000 | http://172.25.180.252:30773 |
+| kube-system | kube-dns     | No node port |                             |
+|-------------|--------------|--------------|-----------------------------|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl delete svc homework-2
+service "homework-2" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl delete svc homework-svc
+service "homework-svc" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> minikube service list
+|-------------|------------|--------------|-----|
+|  NAMESPACE  |    NAME    | TARGET PORT  | URL |
+|-------------|------------|--------------|-----|
+| default     | kubernetes | No node port |     |
+| kube-system | kube-dns   | No node port |     |
+|-------------|------------|--------------|-----|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl apply -f homerwork-svc.yaml
+service/homework-svc created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> minikube service list
+|-------------|--------------|--------------|-----|
+|  NAMESPACE  |     NAME     | TARGET PORT  | URL |
+|-------------|--------------|--------------|-----|
+| default     | kubernetes   | No node port |     |
+| homework    | homework-svc | No node port |     |
+| kube-system | kube-dns     | No node port |     |
+|-------------|--------------|--------------|-----|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> kubectl get service -n homework
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+homework-svc   ClusterIP   10.96.254.140   <none>        32000/TCP   5m20s

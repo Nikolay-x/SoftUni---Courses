@@ -1,0 +1,15 @@
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 Set-Location -Path 'C:\Users\NB\Kubernetes\03. Cluster Setup and Management\NB-Homework\Task-1'
+   2 minikube start --nodes 2
+   3 minikube start --nodes 2
+   4 kubectl apply -f oracle-deployment.yaml
+   5 kubectl apply -f oracle-service.yaml
+   6 minikube service oracle-service --url
+   7 minikube service list
+   8 kubectl delete service oracle-service
+   9 kubectl delete deployment oracle-deployment
+  10 minikube stop
+  11 minikube delete

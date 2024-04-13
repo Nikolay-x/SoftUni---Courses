@@ -1,0 +1,16 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+
+
+
+vagrant@node1:~$ history
+  ...
+  772  cat > scenario-2.yaml
+  773  kubectl apply -f scenario-2.yaml
+  774  kubectl get pods -o wide
+  775  kubectl delete -f scenario-2.yaml
+  776  history

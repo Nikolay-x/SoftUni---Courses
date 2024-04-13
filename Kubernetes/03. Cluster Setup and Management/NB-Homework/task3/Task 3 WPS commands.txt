@@ -1,0 +1,11 @@
+PS C:\Users\NB\Kubernetes\03. Cluster Setup and Management\task3> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 cd '.\03. Cluster Setup and Management\'
+   3 cd .\task3\
+   4 vagrant up
+   5 kubectl get nodes
+   6 vagrant ssh node1
+   7 vagrant destroy --force

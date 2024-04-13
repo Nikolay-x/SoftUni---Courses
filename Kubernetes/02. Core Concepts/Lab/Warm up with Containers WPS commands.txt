@@ -1,0 +1,56 @@
+PS C:\Users\NB\Kubernetes\Core Concepts> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 docker version
+   2 docker container run --name alp1 -it alpine sh
+   3 docker container ls
+   4 docker container ls -a
+   5 docker container rm alp1
+   6 docker container ls -a
+   7 docker container run --name alp1 -it alpine sh
+   8 docker container ls
+   9 docker conatiner attach alp1
+  10 docker container attach alp1
+  11 docker container ls
+  12 docker container ls -a
+  13 docker container rm alp1
+  14 docker container run --name alp1 -it --rm alpine sh
+  15 docker container ls -a
+  16 docker container run --name web1 -d nginx
+  17 docker container ls
+  18 curl http://localhost
+  19 docker container rm --force web1
+  20 docker run --name web1 -d -p 80:80 nginx
+  21 docker run --name web1 -d -p 80:82 nginx\
+  22 docker run --name web1 -d -p 80:82 nginx
+  23 docker container rm --force web1
+  24 docker run --name web1 -d -p 80:82 nginx
+  25 docker container rm --force web1
+  26 docker run --name web1 -d -p 80:86 nginx
+  27 docker container rm --force web1
+  28 docker run --name web1 -d -p 82:82 nginx
+  29 curl http://localhost
+  30 docker container rm --force web1
+  31 docker run --name web1 -d -p 80:82 nginx
+  32 docker container rm --force web1
+  33 docker run --name web1 -d -p 80:8082 nginx
+  34 docker container rm --force web1
+  35 docker run --name web1 -d -p 82:80 nginx
+  36 docker container ls
+  37 sudo ss -ntpl
+  38 docker container rm --force web1
+  39 cd C:\Users\NB\Kubernetes\Core Concepts
+  40 cd .\Kubernetes\
+  41 cd '.\Core Concepts\'
+  42 docker image build -t my-nginx:v1 .
+  43 mkdir web
+  44 echo 'hello' > web/index.html
+  45 docker image build -t my-nginx:v1 .
+  46 docker image ls
+  47 docker run --name web1 -d -p 82:80 my-nginx:v1
+  48 echo 'Another page :)' > /usr/share/nginx/html/index.html
+  49 docker container exec -it web1 bash
+  50 curl http://localhost
+  51 docker container diff web1
+  52 docker container rm --force web1

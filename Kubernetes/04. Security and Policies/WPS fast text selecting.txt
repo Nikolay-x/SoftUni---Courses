@@ -1,0 +1,4 @@
+I did it! Go to the top of the terminal tab/tile of your target the document. 
+Press ctrl + shift paint some text, go with the mouse to the scroll bar (do not release ctrl + shift), 
+move to the desired bottom. 
+Then click/paint with the mouse and you will be selecting from the desired begining to the desired end. 

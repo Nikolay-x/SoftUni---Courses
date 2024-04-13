@@ -1,0 +1,38 @@
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd\
+   2 cd .\Users\
+   3 cd .\NB\
+   4 cd .\Kubernetes\
+   5 cd '.\02. Core Concepts\'
+   6 cd .\homework\
+   7 kubectl get namespaces
+   8 kubectl create namespace homework
+   9 kubectl get namespaces
+  10 kubectl config set-context --current --namespace=homework
+  11 kubectl get pods
+  12 kubectl run homework-1 --image shekeriev/k8s-oracle --labels="app=hw,tier=gold"
+  13 kubectl get pods --show-labels
+  14 kubectl label pod homework-1 tier-
+  15 kubectl get pods --show-labels
+  16 kubectl run homework-2 --image shekeriev/k8s-oracle
+  17 kubectl get pods --show-labels
+  18 kubectl label pod homework-2 app=hw
+  19 kubectl label pod homework-2 run-
+  20 kubectl get pods --show-labels
+  21 kubectl annotate pods homework-1 purpose='homework'
+  22 kubectl annotate pods homework-2 purpose='homework'
+  23 kubectl describe pod homework-1
+  24 kubectl describe pod homework-2
+  25 kubectl expose pod homework-1 --port=32000 --target-port=80 --type=NodePort --name=homework-svc
+  26 kubectl expose pod homework-2 --port=32000 --target-port=80 --type=NodePort
+  27 kubectl get svc homework-svc
+  28 minikube service list
+  29 kubectl delete svc homework-2
+  30 kubectl delete svc homework-svc
+  31 minikube service list
+  32 kubectl apply -f homerwork-svc.yaml
+  33 minikube service list
+  34 kubectl get service -n homework

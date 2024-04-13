@@ -1,0 +1,18 @@
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 Set-Location -Path 'C:\Users\NB\Kubernetes\02. Core Concepts\homework\task 2'
+   2 kubectl apply -f namespace.yaml
+   3 kubectl apply -f pod-1.yaml
+   4 kubectl label pod/homework-1 -n homework tier-
+   5 kubectl apply -f pod-2.yaml
+   6 kubectl label pod/homework-2 -n homework app=hw
+   7 kubectl get pods --show-labels
+   8 kubectl config set-context --current --namespace=homework
+   9 kubectl get pods --show-labels
+  10 kubectl annotate pod/homework-1 -n homework purpose=homework
+  11 kubectl annotate pod/homework-2 -n homework purpose=homework
+  12 kubectl apply -f service.yaml
+  13 minikube service list
+  14 kubectl get service -n homework

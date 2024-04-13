@@ -1,0 +1,595 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> ssh root@192.168.100.12
+The authenticity of host '192.168.100.12 (192.168.100.12)' can't be established.
+ECDSA key fingerprint is SHA256:XB4VPF4r/4PWwkiLKfmtlZZD0D6Eb+wdERsPxIcy1v4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.100.12' (ECDSA) to the list of known hosts.
+root@192.168.100.12's password:
+Linux debian 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 10:31:27 2023
+root@debian:~# lsmod | grep br_netfilter
+root@debian:~# modprobe br_netfilter
+root@debian:~# lsmod | grep br_netfilter
+br_netfilter           32768  0
+bridge                262144  1 br_netfilter
+root@debian:~# cat << EOF | tee /etc/modules-load.d/k8s.conf
+> br_netfilter
+> EOF
+br_netfilter
+root@debian:~# cat << EOF | tee /etc/sysctl.d/k8s.conf
+> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+root@debian:~#
+root@debian:~# sysctl --system
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/k8s.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+root@debian:~#
+root@debian:~# update-alternatives --query iptables
+update-alternatives: error: no alternatives for iptables
+root@debian:~#
+root@debian:~# update-alternatives --set iptables /usr/sbin/iptables-legacy
+update-alternatives: error: no alternatives for iptables
+root@debian:~#
+root@debian:~# apt-get install iptables
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+Suggested packages:
+  firewalld
+The following NEW packages will be installed:
+  iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0
+0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+Need to get 472 kB of archives.
+After this operation, 2,850 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bullseye/main amd64 libip6tc2 amd64 1.8.7-1 [35.0 kB]
+Get:2 http://deb.debian.org/debian bullseye/main amd64 libnfnetlink0 amd64 1.0.1-3+b1 [13.9 kB]
+Get:3 http://deb.debian.org/debian bullseye/main amd64 libnetfilter-conntrack3 amd64 1.0.8-3 [40.6 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 iptables amd64 1.8.7-1 [382 kB]
+Fetched 472 kB in 0s (1,820 kB/s)
+Selecting previously unselected package libip6tc2:amd64.
+(Reading database ... 29629 files and directories currently installed.)
+Preparing to unpack .../libip6tc2_1.8.7-1_amd64.deb ...
+Unpacking libip6tc2:amd64 (1.8.7-1) ...
+Selecting previously unselected package libnfnetlink0:amd64.
+Preparing to unpack .../libnfnetlink0_1.0.1-3+b1_amd64.deb ...
+Unpacking libnfnetlink0:amd64 (1.0.1-3+b1) ...
+Selecting previously unselected package libnetfilter-conntrack3:amd64.
+Preparing to unpack .../libnetfilter-conntrack3_1.0.8-3_amd64.deb ...
+Unpacking libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+Selecting previously unselected package iptables.
+Preparing to unpack .../iptables_1.8.7-1_amd64.deb ...
+Unpacking iptables (1.8.7-1) ...
+Setting up libip6tc2:amd64 (1.8.7-1) ...
+Setting up libnfnetlink0:amd64 (1.0.1-3+b1) ...
+Setting up libnetfilter-conntrack3:amd64 (1.0.8-3) ...
+Setting up iptables (1.8.7-1) ...
+update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+root@debian:~#
+root@debian:~# update-alternatives --query iptables
+Name: iptables
+Link: /usr/sbin/iptables
+Slaves:
+ iptables-restore /usr/sbin/iptables-restore
+ iptables-save /usr/sbin/iptables-save
+Status: auto
+Best: /usr/sbin/iptables-nft
+Value: /usr/sbin/iptables-nft
+
+Alternative: /usr/sbin/iptables-legacy
+Priority: 10
+Slaves:
+ iptables-restore /usr/sbin/iptables-legacy-restore
+ iptables-save /usr/sbin/iptables-legacy-save
+
+Alternative: /usr/sbin/iptables-nft
+Priority: 20
+Slaves:
+ iptables-restore /usr/sbin/iptables-nft-restore
+ iptables-save /usr/sbin/iptables-nft-save
+root@debian:~#
+root@debian:~# update-alternatives --set iptables /usr/sbin/iptables-legacy
+update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in manual mode
+root@debian:~#
+root@debian:~# update-alternatives --query iptables
+Name: iptables
+Link: /usr/sbin/iptables
+Slaves:
+ iptables-restore /usr/sbin/iptables-restore
+ iptables-save /usr/sbin/iptables-save
+Status: manual
+Best: /usr/sbin/iptables-nft
+Value: /usr/sbin/iptables-legacy
+
+Alternative: /usr/sbin/iptables-legacy
+Priority: 10
+Slaves:
+ iptables-restore /usr/sbin/iptables-legacy-restore
+ iptables-save /usr/sbin/iptables-legacy-save
+
+Alternative: /usr/sbin/iptables-nft
+Priority: 20
+Slaves:
+ iptables-restore /usr/sbin/iptables-nft-restore
+ iptables-save /usr/sbin/iptables-nft-save
+root@debian:~#
+root@debian:~# free -h
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi        74Mi       1.7Gi       0.0Ki       190Mi       1.7Gi
+Swap:          974Mi          0B       974Mi
+root@debian:~#
+root@debian:~# swapoff -a
+root@debian:~# sed -i '/swap/ s/^/#/' /etc/fstab
+root@debian:~#
+root@debian:~# lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda      8:0    0   32G  0 disk
+├─sda1   8:1    0   31G  0 part /
+├─sda2   8:2    0    1K  0 part
+└─sda5   8:5    0  975M  0 part
+sr0     11:0    1 1024M  0 rom
+root@debian:~#
+root@debian:~# apt-get update
+Get:1 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 http://security.debian.org/debian-security bullseye-security/main Sources [159 kB]
+Get:5 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [256 kB]
+Get:6 http://security.debian.org/debian-security bullseye-security/main Translation-en [165 kB]
+Fetched 672 kB in 1s (938 kB/s)
+Reading package lists... Done
+root@debian:~#
+root@debian:~# apt-get install ca-certificates curl gnupg lsb-release
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20210119).
+lsb-release is already the newest version (11.1.0).
+lsb-release set to manually installed.
+curl is already the newest version (7.74.0-1.3+deb11u10).
+The following additional packages will be installed:
+  dirmngr gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server gpgconf gpgsm libassuan0 libksba8 libnpth0
+  pinentry-curses
+Suggested packages:
+  dbus-user-session pinentry-gnome3 tor parcimonie xloadimage scdaemon pinentry-doc
+The following NEW packages will be installed:
+  dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server gpgconf gpgsm libassuan0 libksba8 libnpth0
+  pinentry-curses
+0 upgraded, 14 newly installed, 0 to remove and 0 not upgraded.
+Need to get 7,665 kB of archives.
+After this operation, 15.7 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bullseye/main amd64 libassuan0 amd64 2.5.3-7.1 [50.5 kB]
+Get:2 http://deb.debian.org/debian bullseye/main amd64 gpgconf amd64 2.2.27-2+deb11u2 [548 kB]
+Get:3 http://deb.debian.org/debian bullseye/main amd64 libksba8 amd64 1.5.0-3+deb11u2 [123 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 libnpth0 amd64 1.6-3 [19.0 kB]
+Get:5 http://deb.debian.org/debian bullseye/main amd64 dirmngr amd64 2.2.27-2+deb11u2 [763 kB]
+Get:6 http://deb.debian.org/debian bullseye/main amd64 gnupg-l10n all 2.2.27-2+deb11u2 [1,086 kB]
+Get:7 http://deb.debian.org/debian bullseye/main amd64 gnupg-utils amd64 2.2.27-2+deb11u2 [905 kB]
+Get:8 http://deb.debian.org/debian bullseye/main amd64 gpg amd64 2.2.27-2+deb11u2 [928 kB]
+Get:9 http://deb.debian.org/debian bullseye/main amd64 pinentry-curses amd64 1.1.0-4 [64.9 kB]
+Get:10 http://deb.debian.org/debian bullseye/main amd64 gpg-agent amd64 2.2.27-2+deb11u2 [669 kB]
+Get:11 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-client amd64 2.2.27-2+deb11u2 [524 kB]
+Get:12 http://deb.debian.org/debian bullseye/main amd64 gpg-wks-server amd64 2.2.27-2+deb11u2 [516 kB]
+Get:13 http://deb.debian.org/debian bullseye/main amd64 gpgsm amd64 2.2.27-2+deb11u2 [645 kB]
+Get:14 http://deb.debian.org/debian bullseye/main amd64 gnupg all 2.2.27-2+deb11u2 [825 kB]
+Fetched 7,665 kB in 2s (4,238 kB/s)
+Selecting previously unselected package libassuan0:amd64.
+(Reading database ... 29849 files and directories currently installed.)
+Preparing to unpack .../00-libassuan0_2.5.3-7.1_amd64.deb ...
+Unpacking libassuan0:amd64 (2.5.3-7.1) ...
+Selecting previously unselected package gpgconf.
+Preparing to unpack .../01-gpgconf_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gpgconf (2.2.27-2+deb11u2) ...
+Selecting previously unselected package libksba8:amd64.
+Preparing to unpack .../02-libksba8_1.5.0-3+deb11u2_amd64.deb ...
+Unpacking libksba8:amd64 (1.5.0-3+deb11u2) ...
+Selecting previously unselected package libnpth0:amd64.
+Preparing to unpack .../03-libnpth0_1.6-3_amd64.deb ...
+Unpacking libnpth0:amd64 (1.6-3) ...
+Selecting previously unselected package dirmngr.
+Preparing to unpack .../04-dirmngr_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking dirmngr (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gnupg-l10n.
+Preparing to unpack .../05-gnupg-l10n_2.2.27-2+deb11u2_all.deb ...
+Unpacking gnupg-l10n (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gnupg-utils.
+Preparing to unpack .../06-gnupg-utils_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gnupg-utils (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gpg.
+Preparing to unpack .../07-gpg_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gpg (2.2.27-2+deb11u2) ...
+Selecting previously unselected package pinentry-curses.
+Preparing to unpack .../08-pinentry-curses_1.1.0-4_amd64.deb ...
+Unpacking pinentry-curses (1.1.0-4) ...
+Selecting previously unselected package gpg-agent.
+Preparing to unpack .../09-gpg-agent_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gpg-agent (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gpg-wks-client.
+Preparing to unpack .../10-gpg-wks-client_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gpg-wks-client (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gpg-wks-server.
+Preparing to unpack .../11-gpg-wks-server_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gpg-wks-server (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gpgsm.
+Preparing to unpack .../12-gpgsm_2.2.27-2+deb11u2_amd64.deb ...
+Unpacking gpgsm (2.2.27-2+deb11u2) ...
+Selecting previously unselected package gnupg.
+Preparing to unpack .../13-gnupg_2.2.27-2+deb11u2_all.deb ...
+Unpacking gnupg (2.2.27-2+deb11u2) ...
+Setting up libksba8:amd64 (1.5.0-3+deb11u2) ...
+Setting up libnpth0:amd64 (1.6-3) ...
+Setting up libassuan0:amd64 (2.5.3-7.1) ...
+Setting up gnupg-l10n (2.2.27-2+deb11u2) ...
+Setting up gpgconf (2.2.27-2+deb11u2) ...
+Setting up gpg (2.2.27-2+deb11u2) ...
+Setting up gnupg-utils (2.2.27-2+deb11u2) ...
+Setting up pinentry-curses (1.1.0-4) ...
+Setting up gpg-agent (2.2.27-2+deb11u2) ...
+Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-browser.socket → /usr/lib/systemd/user/gpg-agent-browser.socket.
+Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-extra.socket → /usr/lib/systemd/user/gpg-agent-extra.socket.
+Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent-ssh.socket → /usr/lib/systemd/user/gpg-agent-ssh.socket.
+Created symlink /etc/systemd/user/sockets.target.wants/gpg-agent.socket → /usr/lib/systemd/user/gpg-agent.socket.
+Setting up gpgsm (2.2.27-2+deb11u2) ...
+Setting up dirmngr (2.2.27-2+deb11u2) ...
+Created symlink /etc/systemd/user/sockets.target.wants/dirmngr.socket → /usr/lib/systemd/user/dirmngr.socket.
+Setting up gpg-wks-server (2.2.27-2+deb11u2) ...
+Setting up gpg-wks-client (2.2.27-2+deb11u2) ...
+Setting up gnupg (2.2.27-2+deb11u2) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+root@debian:~#
+root@debian:~# curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+root@debian:~#
+root@debian:~# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+root@debian:~#
+root@debian:~# apt-get update
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Hit:2 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Get:4 https://download.docker.com/linux/debian bullseye InRelease [43.3 kB]
+Get:5 https://download.docker.com/linux/debian bullseye/stable amd64 Packages [27.4 kB]
+Fetched 70.7 kB in 1s (93.9 kB/s)
+Reading package lists... Done
+root@debian:~#
+root@debian:~# apt-get install docker-ce docker-ce-cli containerd.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  dbus-user-session docker-buildx-plugin docker-ce-rootless-extras docker-compose-plugin git git-man liberror-perl libglib2.0-0
+  libglib2.0-data libltdl7 libslirp0 patch pigz shared-mime-info slirp4netns xdg-user-dirs
+Suggested packages:
+  aufs-tools cgroupfs-mount | cgroup-lite git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk gitweb git-cvs
+  git-mediawiki git-svn ed diffutils-doc
+The following NEW packages will be installed:
+  containerd.io dbus-user-session docker-buildx-plugin docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin git
+  git-man liberror-perl libglib2.0-0 libglib2.0-data libltdl7 libslirp0 patch pigz shared-mime-info slirp4netns xdg-user-dirs
+0 upgraded, 19 newly installed, 0 to remove and 0 not upgraded.
+Need to get 125 MB of archives.
+After this operation, 466 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bullseye/main amd64 pigz amd64 2.6-1 [64.0 kB]
+Get:2 https://download.docker.com/linux/debian bullseye/stable amd64 containerd.io amd64 1.6.24-1 [28.6 MB]
+Get:3 http://deb.debian.org/debian bullseye/main amd64 dbus-user-session amd64 1.12.28-0+deb11u1 [100 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 liberror-perl all 0.17029-1 [31.0 kB]
+Get:5 http://deb.debian.org/debian bullseye/main amd64 git-man all 1:2.30.2-1+deb11u2 [1,828 kB]
+Get:6 http://deb.debian.org/debian bullseye/main amd64 git amd64 1:2.30.2-1+deb11u2 [5,518 kB]
+Get:7 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-0 amd64 2.66.8-1 [1,370 kB]
+Get:8 http://deb.debian.org/debian bullseye/main amd64 libglib2.0-data all 2.66.8-1 [1,164 kB]
+Get:9 http://deb.debian.org/debian bullseye/main amd64 libltdl7 amd64 2.4.6-15 [391 kB]
+Get:10 http://deb.debian.org/debian bullseye/main amd64 libslirp0 amd64 4.4.0-1+deb11u2 [57.9 kB]
+Get:11 http://deb.debian.org/debian bullseye/main amd64 patch amd64 2.7.6-7 [128 kB]
+Get:12 http://deb.debian.org/debian bullseye/main amd64 shared-mime-info amd64 2.0-1 [701 kB]
+Get:13 http://deb.debian.org/debian bullseye/main amd64 slirp4netns amd64 1.0.1-2 [33.4 kB]
+Get:14 http://deb.debian.org/debian bullseye/main amd64 xdg-user-dirs amd64 0.17-2 [53.8 kB]
+Get:15 https://download.docker.com/linux/debian bullseye/stable amd64 docker-buildx-plugin amd64 0.11.2-1~debian.11~bullseye [28.2 MB]
+Get:16 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-cli amd64 5:24.0.6-1~debian.11~bullseye [13.3 MB]
+Get:17 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce amd64 5:24.0.6-1~debian.11~bullseye [22.6 MB]
+Get:18 https://download.docker.com/linux/debian bullseye/stable amd64 docker-ce-rootless-extras amd64 5:24.0.6-1~debian.11~bullseye [9,029 kB]
+Get:19 https://download.docker.com/linux/debian bullseye/stable amd64 docker-compose-plugin amd64 2.21.0-1~debian.11~bullseye [11.9 MB]
+Fetched 125 MB in 35s (3,537 kB/s)
+Selecting previously unselected package pigz.
+(Reading database ... 30100 files and directories currently installed.)
+Preparing to unpack .../00-pigz_2.6-1_amd64.deb ...
+Unpacking pigz (2.6-1) ...
+Selecting previously unselected package containerd.io.
+Preparing to unpack .../01-containerd.io_1.6.24-1_amd64.deb ...
+Unpacking containerd.io (1.6.24-1) ...
+Selecting previously unselected package dbus-user-session.
+Preparing to unpack .../02-dbus-user-session_1.12.28-0+deb11u1_amd64.deb ...
+Unpacking dbus-user-session (1.12.28-0+deb11u1) ...
+Selecting previously unselected package docker-buildx-plugin.
+Preparing to unpack .../03-docker-buildx-plugin_0.11.2-1~debian.11~bullseye_amd64.deb ...
+Unpacking docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../04-docker-ce-cli_5%3a24.0.6-1~debian.11~bullseye_amd64.deb ...
+Unpacking docker-ce-cli (5:24.0.6-1~debian.11~bullseye) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../05-docker-ce_5%3a24.0.6-1~debian.11~bullseye_amd64.deb ...
+Unpacking docker-ce (5:24.0.6-1~debian.11~bullseye) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../06-docker-ce-rootless-extras_5%3a24.0.6-1~debian.11~bullseye_amd64.deb ...
+Unpacking docker-ce-rootless-extras (5:24.0.6-1~debian.11~bullseye) ...
+Selecting previously unselected package docker-compose-plugin.
+Preparing to unpack .../07-docker-compose-plugin_2.21.0-1~debian.11~bullseye_amd64.deb ...
+Unpacking docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../08-liberror-perl_0.17029-1_all.deb ...
+Unpacking liberror-perl (0.17029-1) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../09-git-man_1%3a2.30.2-1+deb11u2_all.deb ...
+Unpacking git-man (1:2.30.2-1+deb11u2) ...
+Selecting previously unselected package git.
+Preparing to unpack .../10-git_1%3a2.30.2-1+deb11u2_amd64.deb ...
+Unpacking git (1:2.30.2-1+deb11u2) ...
+Selecting previously unselected package libglib2.0-0:amd64.
+Preparing to unpack .../11-libglib2.0-0_2.66.8-1_amd64.deb ...
+Unpacking libglib2.0-0:amd64 (2.66.8-1) ...
+Selecting previously unselected package libglib2.0-data.
+Preparing to unpack .../12-libglib2.0-data_2.66.8-1_all.deb ...
+Unpacking libglib2.0-data (2.66.8-1) ...
+Selecting previously unselected package libltdl7:amd64.
+Preparing to unpack .../13-libltdl7_2.4.6-15_amd64.deb ...
+Unpacking libltdl7:amd64 (2.4.6-15) ...
+Selecting previously unselected package libslirp0:amd64.
+Preparing to unpack .../14-libslirp0_4.4.0-1+deb11u2_amd64.deb ...
+Unpacking libslirp0:amd64 (4.4.0-1+deb11u2) ...
+Selecting previously unselected package patch.
+Preparing to unpack .../15-patch_2.7.6-7_amd64.deb ...
+Unpacking patch (2.7.6-7) ...
+Selecting previously unselected package shared-mime-info.
+Preparing to unpack .../16-shared-mime-info_2.0-1_amd64.deb ...
+Unpacking shared-mime-info (2.0-1) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../17-slirp4netns_1.0.1-2_amd64.deb ...
+Unpacking slirp4netns (1.0.1-2) ...
+Selecting previously unselected package xdg-user-dirs.
+Preparing to unpack .../18-xdg-user-dirs_0.17-2_amd64.deb ...
+Unpacking xdg-user-dirs (0.17-2) ...
+Setting up xdg-user-dirs (0.17-2) ...
+Setting up libglib2.0-0:amd64 (2.66.8-1) ...
+No schema files found: doing nothing.
+Setting up liberror-perl (0.17029-1) ...
+Setting up dbus-user-session (1.12.28-0+deb11u1) ...
+Setting up docker-buildx-plugin (0.11.2-1~debian.11~bullseye) ...
+Setting up libglib2.0-data (2.66.8-1) ...
+Setting up shared-mime-info (2.0-1) ...
+Setting up containerd.io (1.6.24-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up patch (2.7.6-7) ...
+Setting up docker-compose-plugin (2.21.0-1~debian.11~bullseye) ...
+Setting up libltdl7:amd64 (2.4.6-15) ...
+Setting up docker-ce-cli (5:24.0.6-1~debian.11~bullseye) ...
+Setting up libslirp0:amd64 (4.4.0-1+deb11u2) ...
+Setting up pigz (2.6-1) ...
+Setting up git-man (1:2.30.2-1+deb11u2) ...
+Setting up docker-ce-rootless-extras (5:24.0.6-1~debian.11~bullseye) ...
+Setting up slirp4netns (1.0.1-2) ...
+Setting up docker-ce (5:24.0.6-1~debian.11~bullseye) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Setting up git (1:2.30.2-1+deb11u2) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+root@debian:~#
+root@debian:~# docker info
+Client: Docker Engine - Community
+ Version:    24.0.6
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.11.2
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.21.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 24.0.6
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 61f9fd88f79f081d64d6fa3bb1a0dc71ec870523
+ runc version: v1.1.9-0-gccaecfc
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 5.10.0-26-amd64
+ Operating System: Debian GNU/Linux 11 (bullseye)
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 1.925GiB
+ Name: debian
+ ID: 5435b323-bce6-48f2-aff6-f78a51571169
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+root@debian:~# apt-get install -y apt-transport-https ca-certificates curl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20210119).
+curl is already the newest version (7.74.0-1.3+deb11u10).
+The following NEW packages will be installed:
+  apt-transport-https
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 160 kB of archives.
+After this operation, 166 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main amd64 apt-transport-https all 2.2.4 [160 kB]
+Fetched 160 kB in 0s (790 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 31715 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.2.4_all.deb ...
+Unpacking apt-transport-https (2.2.4) ...
+Setting up apt-transport-https (2.2.4) ...
+root@debian:~#
+root@debian:~# curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | gpg --dearmor -o /usr/share/keyrings/kubernetes-archive-keyring.gpg
+root@debian:~#
+root@debian:~# echo 'deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
+deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /
+root@debian:~#
+root@debian:~# apt-get update
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease [1,189 B]
+Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  Packages [12.7 kB]
+Fetched 13.8 kB in 1s (13.2 kB/s)
+Reading package lists... Done
+root@debian:~#
+root@debian:~# apt-cache madison kubelet
+   kubelet | 1.27.7-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.6-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.5-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.4-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.3-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.2-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+   kubelet | 1.27.0-2.1 | https://pkgs.k8s.io/core:/stable:/v1.27/deb  Packages
+root@debian:~#
+root@debian:~# apt-get install kubelet=1.27.5-1.1 kubeadm=1.27.5-1.1 kubectl=1.27.5-1.1
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables ethtool kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables ethtool kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+Need to get 86.6 MB of archives.
+After this operation, 331 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bullseye/main amd64 conntrack amd64 1:1.4.6-2 [33.9 kB]
+Get:2 http://deb.debian.org/debian bullseye/main amd64 ebtables amd64 2.0.11-4+b1 [86.6 kB]
+Get:3 http://deb.debian.org/debian bullseye/main amd64 ethtool amd64 1:5.9-1 [182 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 socat amd64 1.7.4.1-3 [370 kB]
+Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  cri-tools 1.27.1-1.1 [19.5 MB]
+Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubernetes-cni 1.2.0-2.1 [27.6 MB]
+Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubelet 1.27.5-1.1 [18.7 MB]
+Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubectl 1.27.5-1.1 [10.2 MB]
+Get:9 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubeadm 1.27.5-1.1 [9,923 kB]
+Fetched 86.6 MB in 18s (4,838 kB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 31719 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.6-2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.27.1-1.1_amd64.deb ...
+Unpacking cri-tools (1.27.1-1.1) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-4+b1_amd64.deb ...
+Unpacking ebtables (2.0.11-4+b1) ...
+Selecting previously unselected package ethtool.
+Preparing to unpack .../3-ethtool_1%3a5.9-1_amd64.deb ...
+Unpacking ethtool (1:5.9-1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../4-kubernetes-cni_1.2.0-2.1_amd64.deb ...
+Unpacking kubernetes-cni (1.2.0-2.1) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../5-socat_1.7.4.1-3_amd64.deb ...
+Unpacking socat (1.7.4.1-3) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../6-kubelet_1.27.5-1.1_amd64.deb ...
+Unpacking kubelet (1.27.5-1.1) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../7-kubectl_1.27.5-1.1_amd64.deb ...
+Unpacking kubectl (1.27.5-1.1) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../8-kubeadm_1.27.5-1.1_amd64.deb ...
+Unpacking kubeadm (1.27.5-1.1) ...
+Setting up conntrack (1:1.4.6-2) ...
+Setting up kubectl (1.27.5-1.1) ...
+Setting up ebtables (2.0.11-4+b1) ...
+Setting up socat (1.7.4.1-3) ...
+Setting up cri-tools (1.27.1-1.1) ...
+Setting up kubernetes-cni (1.2.0-2.1) ...
+Setting up ethtool (1:5.9-1) ...
+Setting up kubelet (1.27.5-1.1) ...
+Setting up kubeadm (1.27.5-1.1) ...
+Processing triggers for man-db (2.9.4-2) ...
+root@debian:~#
+root@debian:~# apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+root@debian:~#
+root@debian:~# cp /etc/containerd/config.toml /etc/containerd/config.toml.bak
+root@debian:~#
+root@debian:~# containerd config default | tee /etc/containerd/config.toml > /dev/null
+root@debian:~#
+root@debian:~# sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+root@debian:~#
+root@debian:~# sed -i 's/pause:3.6/pause:3.9/g' /etc/containerd/config.toml
+root@debian:~#
+root@debian:~# systemctl restart containerd
+root@debian:~#
+root@debian:~# poweroff
+Connection to 192.168.100.12 closed by remote host.
+Connection to 192.168.100.12 closed.
+PS C:\Users\NB>

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+  namespace: projectx
+spec:
+  containers:
+  - name: client
+    image: shekeriev/k8s-oracle
+    resources:
+      limits:
+        memory: "128Mi"  # Modify as needed within the ResourceQuota limits
+      requests:
+        memory: "64Mi"   # Modify as needed within the ResourceQuota limits
+    command: ["/bin/sleep", "3600"]

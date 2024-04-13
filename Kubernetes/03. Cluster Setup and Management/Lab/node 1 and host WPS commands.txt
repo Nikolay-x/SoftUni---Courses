@@ -1,0 +1,67 @@
+PS C:\Users\NB> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 ssh root@192.168.100.18
+   2 ssh root@192.168.100.18
+   3 cd .kube
+   4 cd..
+   5 ls
+   6 cd .kube
+   7 ls
+   8 ren config config.bak
+   9 scp root@192.168.100.18:/etc/kubernetes/admin.conf .
+  10 ls
+  11 ren .\admin.conf config
+  12 ls
+  13 kubectl get nodes
+  14 kubectl cluster-info
+  15 kubectl version --client
+  16 kubectl version
+  17 cat config
+  18 kubectl get pods -o wide
+  19 Set-Location -Path 'D:\IT\SoftUni\231016 Kubernetes\231023 03. Cluster Setup and Management\M2-...
+  20 kubectl apply -f producer-deployment.yml
+  21 kubectl get pods -o wide
+  22 Get-History
+  23 kubectl apply -f consumer-deployment.yml
+  24 kubectl apply -f consumer-svc.yml
+  25 kubectl apply -f producer-svc.yml
+  26 kubectl get pods -o wide
+  27 kubectl get nodes
+  28 kubectl get pods -o wide
+  29 kubectl get nodes
+  30 kubectl get svc
+  31 kubectl describe service producer
+  32 kubectl describe service consumer
+  33 kubectl get pods -o wide
+  34 kubectl get nodes
+  35 kubectl get svc
+  36 kubectl get pods
+  37 kubectl get pods -o wide
+  38 kubectl describe service producer
+  39 kubectl describe service consumer
+  40 kubectl cordon node-3.k8s
+  41 kubectl get nodes
+  42 kubectl edit deployment producer-deploy
+  43 kubectl edit deployment producer-deploy
+  44 kubectl get pods
+  45 kubectl get pods -o wide
+  46 kubectl uncordon node-3.k8s
+  47 kubectl get pods -o wide
+  48 kubectl edit deployment producer-deploy
+  49 kubectl get pods -o wide
+  50 kubectl get pods -o wide
+  51 kubectl get pods -o wide
+  52 kubectl drain node-3.k8s --ignore-daemonsets --delete-local-data --force
+  53 kubectl get pods -o wide
+  54 kubectl get pods -o wide
+  55 kubectl get nodes
+  56 kubectl uncordon node-3.k8s
+  57 kubectl get nodes
+  58 kubectl get nodes
+  59 kubectl get nodes
+  60 kubectl get pods -o wide
+  61 cd\
+  62 Set-Location -Path 'C:\Users\NB'
+  63 ssh root@192.168.100.18

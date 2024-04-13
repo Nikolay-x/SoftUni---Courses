@@ -1,0 +1,175 @@
+PS C:\Users\NB\Kubernetes\02. Core Concepts\m1> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd..
+   2 cd..
+   3 cd C:\Users\NB\Kubernetes
+   4 minikube version
+   5 minikube
+   6 minikube status
+   7 minikube start --dry-run=true
+   8 minikube start --help
+   9 minikube status
+  10 minikube start
+  11 minikube status
+  12 cd '.\Core Concepts\'
+  13 minikube ssh
+  14 Get-History
+  15 kubectl
+  16 kubectl version --client
+  17 kubectl cluster-info
+  18 kubectl get nodes
+  19 kubectl get nodes -o wide
+  20 Get-History
+  21 clear
+  22 kubectl api-resources
+  23 kubectl api-versions
+  24 kubectl explain pod
+  25 kubectl explain pod.spec
+  26 kubectl explain pod.spec | find.exe /I `"required`"
+  27 kubectl explain pod.spec.containers
+  28 kubectl explain pod.spec.containers | find.exe /I `"required`"
+  29 kubectl create namespace ns1
+  30 kubectl get namespaces
+  31 kubectl create --help
+  32 kubectl create namespace ns2 --dry-run=client --output=yaml
+  33 cd..
+  34 cd '.\02. Core Concepts\'
+  35 cd .\m1\
+  36 kubectl create namespace ns2 --dry-run=client --output=yaml > ns2.yaml
+  37 kubectl create -f ns2.yaml
+  38 kubectl get namespaces
+  39 kubectl delete namespaces ns2
+  40 kubectl get namespaces
+  41 kubectl create -f ns2.yaml
+  42 kubectl get namespaces
+  43 kubectl delete -f ns2.yaml
+  44 kubectl get namespaces
+  45 kubectl get pods
+  46 kubectl get ns
+  47 kubectl get pods --all-namespaces
+  48 kubectl get pods -A
+  49 kubectl run nginx-pod --image nginx
+  50 kubectl get pods
+  51 kubectl get pods
+  52 kubectl delete pod nginx-pod
+  53 kubectl get pods
+  54 kubectl run nginx-pod --image nginx -n ns1
+  55 kubectl run --help
+  56 kubectl options
+  57 kubectl get pods -A
+  58 kubectl get pods -n ns1
+  59 kubectl run nginx-pod-yaml --image nginx -n ns1 --dry-run=client -o=yaml
+  60 kubectl delete namespace ns1
+  61 kubectl get pods -A
+  62 kubectl create -f demo-files/1-appa-pod.yml
+  63 kubectl get pods
+  64 kubectl get pods
+  65 kubectl get pods
+  66 kubectl describe pod appa-pod
+  67 kubectl apply -f demo-files/2-appa-pod-ext.yml
+  68 kubectl describe pod appa-pod
+  69 Compare-Object (Get-Content -Path demo-files/1-appa-pod.yml) -DifferenceObject (Get-Content -Path demo-files/1-appa-pod.yml)(Ge...
+  70 Compare-Object (Get-Content -Path demo-files/1-appa-pod.yml) -DifferenceObject (Get-Content -Path demo-files/1-appa-pod.yml)(Ge...
+  71 Compare-Object (Get-Content -Path demo-files/1-appa-pod.yml) -DifferenceObject (Get-Content -Path demo-files/2-appa-pod-ext.yml...
+  72 kubectl run nginx-1 --image=nginx --labels="image=nginx,ver=v1" --annotations="created-by=user1"
+  73 kubectl run nginx-2 --image=nginx --labels="image=nginx,ver=v2" --annotations="created-by=user1"
+  74 kubectl get pods
+  75 kubectl get pods -o wide
+  76 kubectl get pods --show-labels
+  77 kubectl get pods -L image,ver
+  78 kubectl get pods -l ver=v1
+  79 kubectl get pods -l image=nginx
+  80 kubectl describe pod nginx-1
+  81 kubectl label --overwrite pods nginx-2 ver=v1
+  82 kubectl get pods --show-labels
+  83 kubectl get pods -L app,image,ver
+  84 kubectl delete pods -l image=nginx
+  85 kubectl get pods
+  86 kubectl expose pod appa-pod --name=appa-svc --target-port=80 --type=NodePort
+  87 kubectl get svc appa-svc
+  88 kubectl describe svc appa-svc
+  89 minikube service list
+  90 kubectl delete svc appa-svc
+  91 kubectl get svc
+  92 kubectl get pod
+  93 kubectl apply -f demo-files/3-appa-svc.yml
+  94 kubectl get svc
+  95 kubectl describe svc appa-svc
+  96 kubectl run appa-pod-1 --image=shekeriev/k8s-appa:v1 --labels="app=appa,ver=v1"
+  97 kubectl describe svc appa-svc
+  98 minikube service list
+  99 kubectl get pod
+ 100 kubectl delete pod appa-pod
+ 101 kubectl delete pod appa-pod-1
+ 102 kubectl describe svc appa-svc
+ 103 Get-History
+ 104 clear
+ 105 kubectl get ns
+ 106 kubectl apply -f demo-files/4-rc.yml
+ 107 kubectl get rc
+ 108 kubectl get rc -o wide
+ 109 kubectl describe rc appa-rc
+ 110 kubectl describe services appa-svc
+ 111 minikube service list
+ 112 kubectl scale --replicas=5 rc/appa-rc
+ 113 kubectl get rc
+ 114 kubectl get pods
+ 115 kubectl describe services appa-svc
+ 116 kubectl describe endpoints appa-svc
+ 117 kubectl scale --replicas=2 rc/appa-rc
+ 118 kubectl get rc
+ 119 kubectl get pods
+ 120 kubectl delete -f demo-files/4-rc.yml
+ 121 kubectl apply -f demo-files/5-rs.yml
+ 122 kubectl get rs
+ 123 kubectl get rs -o wide
+ 124 kubectl describe rs appa-rs
+ 125 kubectl describe services appa-svc
+ 126 minikube service list
+ 127 kubectl scale --replicas=5 rs/appa-rs
+ 128 kubectl get rs
+ 129 kubectl describe services appa-svc
+ 130 kubectl describe endpoints appa-svc
+ 131 kubectl scale --replicas=2 rs/appa-rs
+ 132 kubectl get rs
+ 133 minikube service list
+ 134 kubectl delete -f demo-files/5-rs.yml
+ 135 kubectl get rs
+ 136 kubectl create deployment appa-deploy --image=shekeriev/k8s-appa:v1 --replicas=2 --port=80
+ 137 kubectl get deployments
+ 138 kubectl describe deployment appa-deploy
+ 139 kubectl scale deployment appa-deploy --replicas=10
+ 140 kubectl get pods -w
+ 141 kubectl get pods
+ 142 kubectl delete deployment appa-deploy
+ 143 kubectl get pods
+ 144 kubectl apply -f demo-files/6-appa-deploy-v1.yml
+ 145 kubectl get pods -w
+ 146 kubectl get deployments
+ 147 kubectl get deployments -o wide
+ 148 kubectl get rs
+ 149 kubectl apply -f demo-files/7-appa-deploy-v2.yml
+ 150 kubectl rollout status deployment appa-deploy
+ 151 kubectl get pods -w
+ 152 kubectl get deployments
+ 153 kubectl get deployments -o wide
+ 154 Compare-Object (Get-Content -Path demo-files/6-appa-deploy-v1.yml) -DifferenceObject (Get-Content -Path demo-files/7-appa-deplo...
+ 155 kubectl describe deployment appa-deploy
+ 156 kubectl get rs
+ 157 kubectl describe rs
+ 158 kubectl apply -f demo-files/7-appa-deploy-v2.yml --record
+ 159 kubectl rollout status deployment appa-deploy
+ 160 kubectl rollout history deployment appa-deploy
+ 161 kubectl rollout undo deployment appa-deploy --to-revision=1
+ 162 kubectl rollout status deployment appa-deploy
+ 163 kubectl rollout history deployment appa-deploy
+ 164 kubectl apply -f demo-files/7-appa-deploy-v2.yml --record
+ 165 kubectl rollout status deployment appa-deploy
+ 166 kubectl delete deployment appa-deploy
+ 167 kubectl get rs
+ 168 kubectl get pods
+ 169 kubectl get deployment
+ 170 kubectl delete service appa-svc
+ 171 kubectl get all --all-namespaces

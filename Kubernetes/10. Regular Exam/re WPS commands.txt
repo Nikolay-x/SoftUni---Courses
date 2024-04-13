@@ -1,0 +1,234 @@
+exam@station:~$ history
+    1  kubectl
+    2  exit
+    3  kubectl
+    4  exit
+    5  kubectl
+    6  exit
+    7  kubectl
+    8  history
+    9  exit
+   10  ping sofia
+   11  kubectl config get-contexts
+   12  kubectl get nodes
+   13  history
+   14  exit
+   15  kubectl config get-contexts
+   16  tree /files
+   17  kubectl config get-contexts
+   18  kubectl get nodes
+   19  ssh varna-2
+   20  ssh varna-1
+   21  ssh varna-2
+   22  kubectl get nodes
+   23  kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+   24  kubectl get nodes
+   25  kubectl describe node | grep Taint
+   26  kubectl taint nodes venus-1 node-role.kubernetes.io/control-plane:NoSchedule-
+   27  kubectl taint nodes varna-1 node-role.kubernetes.io/control-plane:NoSchedule-
+   28  kubectl describe node | grep Taint
+   29  tree /files
+   30  cp /files/varna/t304a.yaml /files/varna/t304b.yaml
+   31  tree /files
+   32  nano  /files/varna/t304b.yaml
+   33  cat  /files/varna/t304b.yaml
+   34  kubectl apply -f /files/varna/t304b.yaml
+   35  kubectl get pods -o wide
+   36  cp /files/varna/t305a.yaml /files/varna/t305b.yaml
+   37  nano /files/varna/t305b.yaml
+   38  cat /files/varna/t305b.yaml
+   39  kubectl apply -f /files/varna/t305b.yaml
+   40  nano /files/varna/t305b.yaml
+   41  kubectl apply -f /files/varna/t305b.yaml
+   42  kubectl get pods,svc -n cherry
+   43  kubectl config get-contexts
+   44  kubectl config use-context sofia-admin@sofia
+   45  kubectl config get-contexts
+   46  tree /files
+   47  mkdir /files/sofia/t101
+   48  mkdir -p /files/mars/t103/{base,overlays}
+   49  tree /files
+   50  cd files
+   51  cd /files
+   52  rm -r mars
+   53  cd
+   54  tree /files
+   55  mkdir -p /files/sofia/t103/{base,overlays}
+   56  mkdir -p /files/sofia/t103/overlays/{blue,green}
+   57  tree /files
+   58  cp /files/sofia/t101a.yaml /files/sofia/t103/base/
+   59  tree /files
+   60  cat /files/sofia/t101a.yaml
+   61  cd /files
+   62  rm -r mars
+   63  cd sofia
+   64  rm -r t103
+   65  cd
+   66  tree /files
+   67  mkdir -p /files/mars/t101/{base,overlays}
+   68  mkdir -p /files/mars/t101/overlays/{blue,green}
+   69  cp /files/sofia/t101a.yaml /files/sofia/t101/base/
+   70  tree /files
+   71  cd /files
+   72  rm -r mars
+   73  cd
+   74  tree /files
+   75  mkdir -p /files/sofia/t101/{base,overlays}
+   76  mkdir -p /files/sofia/t101/overlays/{blue,green}
+   77  tree /files
+   78  cp /files/sofia/t101a.yaml /files/sofia/t101/base/
+   79  tree /files
+   80  cat /files/sofia/t101a.yaml
+   81  nano /files/sofia/t101/base/kustomization.yaml
+   82  tree /files
+   83  cd /files/sofia/t101
+   84  ls
+   85  kustomize build base/
+   86  nano overlays/blue/kustomization.yaml
+   87  nano overlays/blue/cust-svc.yaml
+   88  kustomize build overlays/blue/
+   89  nano overlays/green/kustomization.yaml
+   90  nano overlays/green/cust-dpl.yaml
+   91  nano overlays/green/cust-svc.yaml
+   92  kustomize build overlays/green/
+   93  kustomize build overlays/blue/ | kubectl apply -f -
+   94  kubectl apply -k overlays/green/
+   95  kubectl get pods,svc
+   96  tree /files
+   97  cd
+   98  cp /files/sofia/t102a.yaml /files/sofia/t102b.yaml
+   99  nano /files/sofia/t102b.yaml
+  100  tree /files
+  101  kubectl apply -f /files/sofia/t102b.yaml
+  102  kubectl get pods,cronjobs
+  103  nano /files/sofia/haproxy-ingress.yaml
+  104  kubectl apply -f haproxy-ingress.yaml
+  105  kubectl apply -f /files/sofia/haproxy-ingress.yaml
+  106  kubectl config get-contexts
+  107  kubectl get ns animals
+  108  kubectl get pods,svc -n animals
+  109  kubectl get ingressclass
+  110  tree /files
+  111  nano /files/sofia/t104b.yaml
+  112  tree /files
+  113  kubectl apply -f /files/sofia/t104b.yaml
+  114  kubectl get ingress -n animals
+  115  kubectl get service -n haproxy-controller
+  116  kubectl get service -n default
+  117  helm repo add haproxytech https://haproxytech.github.io/helm-charts
+  118  helm repo update
+  119  helm install my-haproxy haproxytech/kubernetes-haproxy
+  120  tree /files
+  121  kubectl describe ingress pets-ingress -n animals
+  122  kubectl describe node | grep Taints
+  123  kubectl taint nodes sofia-1 node-role.kubernetes.io/control-plane:NoSchedule-
+  124  kubectl describe node | grep Taints
+  125  kubectl get pods,sa,role,rolebinding -n fortress
+  126  kubectl create serviceaccount observer -n fortress
+  127  kubectl get pods,sa,role,rolebinding -n fortress
+  128  kubectl create role looknotouch -n fortress --verb=get --resource=pods
+  129  kubectl create rolebinding looknotouch -n fortress --role=looknotouch --serviceaccount=fortress:observer
+  130  kubectl get pods,sa,role,rolebinding -n fortress
+  131  cp /files/sofia/t106a.yaml /files/sofia/t106b.yaml
+  132  nano /files/sofia/t106b.yaml
+  133  kubectl apply -f /files/sofia/t106b.yaml
+  134  kubectl get pods,sa,role,rolebinding -n fortress
+  135  kubectl get -n fortress pod/observer -o yaml | grep serviceAccount
+  136  kubectl config get-contexts
+  137  kubectl config use-context plovdiv-admin@plovdiv
+  138  kubectl config get-contexts
+  139  kubectl get pods,svc -n apple
+  140  kubectl get pods,svc -n orange
+  141  kubectl get pods,svc -n apricot
+  142  curl http://plovdiv-1:30901
+  143  curl http://plovdiv-1:30902
+  144  curl http://plovdiv-1:30903
+  145  kubectl get ns orange --show-labels
+  146  nano /files/plovdiv/t201b.yaml
+  147  kubectl apply -f /files/plovdiv/t201b.yaml
+  148  kubectl get netpol -n apple
+  149  kubectl describe netpol access-apple -n apple
+  150  curl http://plovdiv-1:30901
+  151  nano /files/plovdiv/t201b.yaml
+  152  curl --connect-timeout 5 http://plovdiv-1:30901
+  153  curl --connect-timeout 5 http://plovdiv-1:30902
+  154  curl --connect-timeout 5 http://plovdiv-1:30903
+  155  tree /files
+  156  kubectl config get-contexts
+  157  kubectl get ns
+  158  kubectl create ns tomato
+  159  kubectl get ns
+  160  helm repo add bitnami https://charts.bitnami.com/bitnami
+  161  kubectl create configmap -n tomato exam-nginx-cm --from-literal=index.html="Kubernetes+Helm=Fun"
+  162  helm install exam-nginx -n tomato bitnami/nginx --set service.type=NodePort --set service.nodePorts.http=32202 --set htdocsConfigMap=exam-nginx-cm
+  163  kubectl get pods,svc,cm -n tomato
+  164  curl http://plovdiv-1:32202
+  165  kubectl edit configmap -n tomato exam-nginx-cm --from-literal=index.html="Helm and Kubernetes Master"
+  166  kubectl delete configmap -n tomato exam-nginx-cm --from-literal=index.html="Helm and Kubernetes Master"
+  167  kubectl create configmap -n tomato exam-nginx-cm --from-literal=index.html="Helm and Kubernetes Master"
+  168  kubectl delete configmap -n tomato exam-nginx-cm
+  169  kubectl create configmap -n tomato exam-nginx-cm --from-literal=index.html="Helm and Kubernetes Master"
+  170  curl http://plovdiv-1:32202
+  171  kubectl get pods,secret -n cucumber
+  172  kubectl get secret -n cucumber cucumber-secret -o jsonpath={.data.scretfact} | base64 --decode
+  173  nano /files/plovdiv/t203-secret.txt
+  174  cat /files/plovdiv/t203-secret.txt
+  175  tree /files
+  176  kubectl get pods,svc -n banana
+  177  kubectl describe -n banana pod/banana-pod-1
+  178  cp /files/plovdiv/t204a.yaml /files/plovdiv/t204b.yaml
+  179  nano /files/plovdiv/t204b.yaml
+  180  kubectl delete -f /files/plovdiv/t204b.yaml
+  181  kubectl apply -f /files/plovdiv/t204b.yaml
+  182  kubectl get pods,svc -n banana
+  183  kubectl describe -n banana service/banana-svc
+  184  nano /files/plovdiv/t204b.yaml
+  185  kubectl apply -f /files/plovdiv/t204b.yaml
+  186  kubectl get pods,svc -n banana
+  187  kubectl describe -n banana service/banana-svc
+  188  kubectl describe node | grep Taints
+  189  kubectl taint nodes venus-1 node-role.kubernetes.io/control-plane:NoSchedule-
+  190  kubectl taint nodes plovdiv-1 node-role.kubernetes.io/control-plane:NoSchedule-
+  191  kubectl describe node | grep Taints
+  192  exam@station:~$ kubectl get nodes --show-labels
+  193  kubectl get nodes --show-labels
+  194  kubectl label node plovdiv-1 speed=slow
+  195  kubectl label node plovdiv-2 speed=fast
+  196  kubectl get nodes --show-labels
+  197  cp /files/plovdiv/t207a.yaml /files/plovdiv/t207b.yaml
+  198  nano /files/plovdiv/t207b.yaml
+  199  kubectl apply -f /files/plovdiv/t207b.yaml
+  200  kubectl get pods -o wide
+  201  cp /files/plovdiv/t208a.yaml /files/plovdiv/t208b.yaml
+  202  nano /files/plovdiv/t208b.yaml
+  203  kubectl apply -f /files/plovdiv/t208b.yaml
+  204  kubectl get pods -o wide
+  205  tree /files
+  206  kubectl config get-contexts
+  207  history
+  208*
+  209  helm repo add bitnami https://charts.bitnami.com/bitnami
+  210  helm repo list
+  211  helm install exam-nginx -n tomato bitnami/nginx --set service.type=NodePort --set service.nodePorts.http=32202 --set htdocsConfigMap=exam-nginx-cm
+  212  kubectl delete configmap -n tomato exam-nginx-cm
+  213  kubectl create configmap -n tomato exam-nginx-cm --from-literal=index.html='<h1>Helm and Kubernetes Master</h1>'
+  214  curl http://plovdiv-1:32202
+  215  kubectl delete configmap -n tomato exam-nginx-cm
+  216  helm uninstall exam-nginx -n tomato bitnami/nginx
+  217  helm list -n tomato
+  218  helm install exam-nginx -n tomato bitnami/nginx
+  219  helm list
+  220  helm list -n tomato
+  221* helm install exam-nginx ./nginx-chart --namespace tomato
+  222  helm edit exam-nginx -n tomato --set service.type=NodePort
+  223  helm --help
+  224  helm uninstall exam-nginx -n tomato bitnami/nginx
+  225  helm list -n tomato
+  226  helm install exam-nginx ./nginx-chart --namespace tomato --set service.type=NodePort
+  227  helm install exam-nginx --namespace tomato --set service.type=NodePort
+  228  helm install exam-nginx -n tomato bitnami/nginx --set service.type=NodePort
+  229  helm list -n tomato
+  230  kubectl create configmap -n tomato exam-nginx-cm --from-literal=index.html='<h1>Helm and Kubernetes Master</h1>'
+  231  helm list -n tomato
+  232  curl http://plovdiv-1:32202
+  233  history

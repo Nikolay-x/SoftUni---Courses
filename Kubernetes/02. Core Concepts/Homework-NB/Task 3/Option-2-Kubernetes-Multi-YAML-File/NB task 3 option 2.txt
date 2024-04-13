@@ -1,0 +1,142 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\WINDOWS\system32> Set-Location -Path 'C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File'
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File>
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl apply -f multi-yaml-file.yaml
+namespace/homework created
+pod/homework-1 created
+pod/homework-2 created
+service/homework-svc created
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl config set-context --current --namespace=homework
+Context "minikube" modified.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl describe pod homework-1
+Name:             homework-1
+Namespace:        homework
+Priority:         0
+Service Account:  default
+Node:             minikube/172.25.180.252
+Start Time:       Sat, 21 Oct 2023 14:05:29 +0300
+Labels:           app=hw
+Annotations:      purpose: homework
+Status:           Running
+IP:               10.244.0.81
+IPs:
+  IP:  10.244.0.81
+Containers:
+  homework-1-container:
+    Container ID:   docker://d1dbd837065b984053cbfebeee593eb27d0c918559998d73918e2feb6252253f
+    Image:          shekeriev/k8s-oracle
+    Image ID:       docker-pullable://shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 21 Oct 2023 14:05:32 +0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mdhjr (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-mdhjr:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  6m8s  default-scheduler  Successfully assigned homework/homework-1 to minikube
+  Normal  Pulling    6m7s  kubelet            Pulling image "shekeriev/k8s-oracle"
+  Normal  Pulled     6m5s  kubelet            Successfully pulled image "shekeriev/k8s-oracle" in 1.979431029s (1.97952843s including waiting)
+  Normal  Created    6m5s  kubelet            Created container homework-1-container
+  Normal  Started    6m5s  kubelet            Started container homework-1-container
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl describe pod homework-2
+Name:             homework-2
+Namespace:        homework
+Priority:         0
+Service Account:  default
+Node:             minikube/172.25.180.252
+Start Time:       Sat, 21 Oct 2023 14:05:29 +0300
+Labels:           app=hw
+Annotations:      purpose: homework
+Status:           Running
+IP:               10.244.0.82
+IPs:
+  IP:  10.244.0.82
+Containers:
+  homework-2-container:
+    Container ID:   docker://91607227c9e4fd13fd276ec10ff2b667d680470f2ada5119d5d6bd11933ce46a
+    Image:          shekeriev/k8s-oracle
+    Image ID:       docker-pullable://shekeriev/k8s-oracle@sha256:bf9453a92d8798d73cc300b4dac00bd098b25fc7f0a3fc9157866169e9b18db6
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 21 Oct 2023 14:05:35 +0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-nwvnr (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-nwvnr:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  6m22s  default-scheduler  Successfully assigned homework/homework-2 to minikube
+  Normal  Pulling    6m21s  kubelet            Pulling image "shekeriev/k8s-oracle"
+  Normal  Pulled     6m16s  kubelet            Successfully pulled image "shekeriev/k8s-oracle" in 2.484744106s (4.445003268s including waiting)
+  Normal  Created    6m16s  kubelet            Created container homework-2-container
+  Normal  Started    6m16s  kubelet            Started container homework-2-container
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> minikube service list
+|-------------|--------------|--------------|-----|
+|  NAMESPACE  |     NAME     | TARGET PORT  | URL |
+|-------------|--------------|--------------|-----|
+| default     | kubernetes   | No node port |     |
+| homework    | homework-svc | No node port |     |
+| kube-system | kube-dns     | No node port |     |
+|-------------|--------------|--------------|-----|
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl get service -n homework
+NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)     AGE
+homework-svc   ClusterIP   10.102.15.20   <none>        32000/TCP   70s
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl delete namespaces homework
+namespace "homework" deleted
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl config set-context --current --namespace=default
+Context "minikube" modified.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   3d1h
+kube-node-lease   Active   3d1h
+kube-public       Active   3d1h
+kube-system       Active   3d1h
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3\Option-2-Kubernetes-Multi-YAML-File>

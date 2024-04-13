@@ -1,0 +1,279 @@
+PS C:\Users\NB\Kubernetes> cd ..
+PS C:\Users\NB> cd .\debian-nfs\
+PS C:\Users\NB\debian-nfs> vagrant init --minimal shekeriev/debian-12
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+PS C:\Users\NB\debian-nfs> vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'shekeriev/debian-12' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'shekeriev/debian-12'
+    default: URL: https://vagrantcloud.com/api/v2/vagrant/shekeriev/debian-12
+==> default: Adding box 'shekeriev/debian-12' (v0.1) for provider: virtualbox
+    default: Downloading: https://vagrantcloud.com/shekeriev/boxes/debian-12/versions/0.1/providers/virtualbox/unknown/vagrant.box
+    default:
+    default: Calculating and comparing box checksum...
+==> default: Successfully added box 'shekeriev/debian-12' (v0.1) for 'virtualbox'!
+==> default: Importing base box 'shekeriev/debian-12'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'shekeriev/debian-12' version '0.1' is up to date...
+==> default: Setting the name of the VM: debian-nfs_default_1700315460679_128
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/NB/debian-nfs
+PS C:\Users\NB\debian-nfs> vagrant ssh
+Linux debian 6.1.0-13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.55-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sun Oct 15 15:29:55 2023 from 10.0.2.2
+vagrant@debian:~$ cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+vagrant@debian:~$ sudo apt-get update
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [52.1 kB]
+Get:3 http://security.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+Get:4 http://deb.debian.org/debian bookworm-updates/main Sources.diff/Index [6,117 B]
+Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages.diff/Index [6,117 B]
+Get:6 http://deb.debian.org/debian bookworm-updates/main Translation-en.diff/Index [6,117 B]
+Get:7 http://deb.debian.org/debian bookworm-updates/main Sources T-2023-11-06-2008.27-F-2023-11-06-2008.27.pdiff [1,393 B]
+Get:8 http://deb.debian.org/debian bookworm-updates/main amd64 Packages T-2023-11-06-2008.27-F-2023-11-06-2008.27.pdiff [475 B]
+Get:7 http://deb.debian.org/debian bookworm-updates/main Sources T-2023-11-06-2008.27-F-2023-11-06-2008.27.pdiff [1,393 B]
+Get:8 http://deb.debian.org/debian bookworm-updates/main amd64 Packages T-2023-11-06-2008.27-F-2023-11-06-2008.27.pdiff [475 B]
+Get:9 http://deb.debian.org/debian bookworm-updates/main Translation-en T-2023-11-06-2008.27-F-2023-11-06-2008.27.pdiff [320 B]
+Get:9 http://deb.debian.org/debian bookworm-updates/main Translation-en T-2023-11-06-2008.27-F-2023-11-06-2008.27.pdiff [320 B]
+Get:10 http://security.debian.org/debian-security bookworm-security/main Sources [60.0 kB]
+Get:11 http://security.debian.org/debian-security bookworm-security/main amd64 Packages [101 kB]
+Get:12 http://security.debian.org/debian-security bookworm-security/main Translation-en [58.7 kB]
+Fetched 341 kB in 1s (299 kB/s)
+Reading package lists... Done
+vagrant@debian:~$ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  libssl3 openssl
+2 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 3,438 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://security.debian.org/debian-security bookworm-security/main amd64 libssl3 amd64 3.0.11-1~deb12u2 [2,019 kB]
+Get:2 http://security.debian.org/debian-security bookworm-security/main amd64 openssl amd64 3.0.11-1~deb12u2 [1,419 kB]
+Fetched 3,438 kB in 1s (2,484 kB/s)
+Reading changelogs... Done
+(Reading database ... 51850 files and directories currently installed.)
+Preparing to unpack .../libssl3_3.0.11-1~deb12u2_amd64.deb ...
+Unpacking libssl3:amd64 (3.0.11-1~deb12u2) over (3.0.11-1~deb12u1) ...
+Preparing to unpack .../openssl_3.0.11-1~deb12u2_amd64.deb ...
+Unpacking openssl (3.0.11-1~deb12u2) over (3.0.11-1~deb12u1) ...
+Setting up libssl3:amd64 (3.0.11-1~deb12u2) ...
+Setting up openssl (3.0.11-1~deb12u2) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for libc-bin (2.36-9+deb12u3) ...
+vagrant@debian:~$ sudo apt-get install nfs-kernel-server
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  keyutils libevent-core-2.1-7 libnfsidmap1 libyaml-0-2 nfs-common python3-yaml rpcbind
+Suggested packages:
+  open-iscsi watchdog
+The following NEW packages will be installed:
+  keyutils libevent-core-2.1-7 libnfsidmap1 libyaml-0-2 nfs-common nfs-kernel-server python3-yaml rpcbind
+0 upgraded, 8 newly installed, 0 to remove and 0 not upgraded.
+Need to get 872 kB of archives.
+After this operation, 3,342 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libevent-core-2.1-7 amd64 2.1.12-stable-8 [131 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libnfsidmap1 amd64 1:2.6.2-4 [54.7 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 rpcbind amd64 1.2.6-6+b1 [48.3 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 keyutils amd64 1.6.3-2 [54.5 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 nfs-common amd64 1:2.6.2-4 [260 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 libyaml-0-2 amd64 0.2.5-1 [53.6 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 nfs-kernel-server amd64 1:2.6.2-4 [151 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 python3-yaml amd64 6.0-3+b2 [119 kB]
+Fetched 872 kB in 1s (1,718 kB/s)
+Selecting previously unselected package libevent-core-2.1-7:amd64.
+(Reading database ... 51850 files and directories currently installed.)
+Preparing to unpack .../0-libevent-core-2.1-7_2.1.12-stable-8_amd64.deb ...
+Unpacking libevent-core-2.1-7:amd64 (2.1.12-stable-8) ...
+Selecting previously unselected package libnfsidmap1:amd64.
+Preparing to unpack .../1-libnfsidmap1_1%3a2.6.2-4_amd64.deb ...
+Unpacking libnfsidmap1:amd64 (1:2.6.2-4) ...
+Selecting previously unselected package rpcbind.
+Preparing to unpack .../2-rpcbind_1.2.6-6+b1_amd64.deb ...
+Unpacking rpcbind (1.2.6-6+b1) ...
+Selecting previously unselected package keyutils.
+Preparing to unpack .../3-keyutils_1.6.3-2_amd64.deb ...
+Unpacking keyutils (1.6.3-2) ...
+Selecting previously unselected package nfs-common.
+Preparing to unpack .../4-nfs-common_1%3a2.6.2-4_amd64.deb ...
+Unpacking nfs-common (1:2.6.2-4) ...
+Selecting previously unselected package libyaml-0-2:amd64.
+Preparing to unpack .../5-libyaml-0-2_0.2.5-1_amd64.deb ...
+Unpacking libyaml-0-2:amd64 (0.2.5-1) ...
+Selecting previously unselected package nfs-kernel-server.
+Preparing to unpack .../6-nfs-kernel-server_1%3a2.6.2-4_amd64.deb ...
+Unpacking nfs-kernel-server (1:2.6.2-4) ...
+Selecting previously unselected package python3-yaml.
+Preparing to unpack .../7-python3-yaml_6.0-3+b2_amd64.deb ...
+Unpacking python3-yaml (6.0-3+b2) ...
+Setting up libnfsidmap1:amd64 (1:2.6.2-4) ...
+Setting up libyaml-0-2:amd64 (0.2.5-1) ...
+Setting up python3-yaml (6.0-3+b2) ...
+Setting up rpcbind (1.2.6-6+b1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /lib/systemd/system/rpcbind.service.
+Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /lib/systemd/system/rpcbind.socket.
+Setting up libevent-core-2.1-7:amd64 (2.1.12-stable-8) ...
+Setting up keyutils (1.6.3-2) ...
+Setting up nfs-common (1:2.6.2-4) ...
+
+Creating config file /etc/idmapd.conf with new version
+
+Creating config file /etc/nfs.conf with new version
+Adding system user `statd' (UID 103) ...
+Adding new user `statd' (UID 103) with group `nogroup' ...
+Not creating home directory `/var/lib/nfs'.
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+auth-rpcgss-module.service is a disabled or a static unit, not starting it.
+nfs-idmapd.service is a disabled or a static unit, not starting it.
+nfs-utils.service is a disabled or a static unit, not starting it.
+proc-fs-nfsd.mount is a disabled or a static unit, not starting it.
+rpc-gssd.service is a disabled or a static unit, not starting it.
+rpc-statd-notify.service is a disabled or a static unit, not starting it.
+rpc-statd.service is a disabled or a static unit, not starting it.
+rpc-svcgssd.service is a disabled or a static unit, not starting it.
+rpc_pipefs.target is a disabled or a static unit, not starting it.
+var-lib-nfs-rpc_pipefs.mount is a disabled or a static unit, not starting it.
+Setting up nfs-kernel-server (1:2.6.2-4) ...
+Created symlink /etc/systemd/system/nfs-client.target.wants/nfs-blkmap.service → /lib/systemd/system/nfs-blkmap.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /lib/systemd/system/nfs-server.service.
+nfsdcld.service is a disabled or a static unit, not starting it.
+Creating config file /etc/exports with new version
+
+Creating config file /etc/default/nfs-kernel-server with new version
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for libc-bin (2.36-9+deb12u3) ...
+vagrant@debian:~$
+vagrant@debian:~$ systemctl status nfs-server.service
+● nfs-server.service - NFS server and services
+     Loaded: loaded (/lib/systemd/system/nfs-server.service; enabled; preset: enabled)
+     Active: active (exited) since Sat 2023-11-18 15:55:02 EET; 1min 12s ago
+   Main PID: 2050 (code=exited, status=0/SUCCESS)
+        CPU: 12ms
+vagrant@debian:~$
+vagrant@debian:~$
+vagrant@debian:~$ sudo mkdir -p /storage/export1
+vagrant@debian:~$
+vagrant@debian:~$ sudo chmod 777 /storage/export1/
+vagrant@debian:~$
+vagrant@debian:~$ sudo nano etc/exports
+vagrant@debian:~$ cat etc/exports
+cat: etc/exports: No such file or directory
+vagrant@debian:~$ cat /etc/exports
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+vagrant@debian:~$ sudo nano /etc/exports
+vagrant@debian:~$ cat /etc/exports
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+/storage/export1 *(rw)
+vagrant@debian:~$ sudo exportfs -rav
+exportfs: /etc/exports [1]: Neither 'subtree_check' or 'no_subtree_check' specified for export "*:/storage/export1".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
+exporting *:/storage/export1
+vagrant@debian:~$ history
+    1  cat /etc/os-release
+    2  sudo apt-get update
+    3  sudo apt-get upgrade
+    4  sudo apt-get install nfs-kernel-server
+    5  systemctl status nfs-server.service
+    6  sudo mkdir -p /storage/export1
+    7  sudo chmod 777 /storage/export1/
+    8  sudo nano etc/exports
+    9  cat etc/exports
+   10  cat /etc/exports
+   11  sudo nano /etc/exports
+   12  cat /etc/exports
+   13  sudo exportfs -rav
+   14  history
+vagrant@debian:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\debian-nfs> vagrant halt
+==> default: Attempting graceful shutdown of VM...
+PS C:\Users\NB\debian-nfs> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant up
+   4 vagrant ssh node1
+   5 Get-History
+   6 vagrant halt
+   7 vagrant up
+   8 vagrant ssh node1
+   9 vagrant halt
+  10 cd ..
+  11 cd .\debian-nfs\
+  12 vagrant init --minimal shekeriev/debian-12
+  13 vagrant up
+  14 vagrant ssh
+  15 vagrant halt
+
+
+PS C:\Users\NB\debian-nfs>

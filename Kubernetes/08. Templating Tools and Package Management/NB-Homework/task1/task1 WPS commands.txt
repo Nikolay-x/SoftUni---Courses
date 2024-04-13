@@ -1,0 +1,27 @@
+vagrant@node1:~$ history
+  ...
+  340  mkdir -p homework/task1
+  341  tree homework/
+  342  cat > homework/task1/task1-sed
+  343  tree homework/
+  344  sed 's/%replicas%/3/ ; s/%nodeport%/30001/' homework/task1/task1-sed.yaml | kubectl apply -f -
+  345  cd homework/
+  346  sed 's/%replicas%/3/ ; s/%nodeport%/30001/' task1/task1-sed.yaml | kubectl apply -f -
+  347*
+  348  rm homework/task1/task1-sed
+  349  tree homework
+  350  cat > homework/task1/task1-sed.yaml
+  351  sed 's/%replicas%/3/ ; s/%nodeport%/30001/' homework/task1/task1-sed.yaml | kubectl apply -f -
+  352  kubectl get pods,svc
+  353  kubectl get deployments -n homework
+  354  kubectl get pods -n homework
+  355  kubectl get services -n homework
+  356  kubectl delete -f homework/task1/task1-sed.yaml
+  357  kubectl get services -n homework
+  358  kubectl get pods -n homework
+  359  kubectl delete pods -n homework
+  360  kubectl get pods -n homework
+  361  kubectl get deployments -n homework
+  362  kubectl get services -n homework
+  363  kubectl get namespace homework
+  364  history

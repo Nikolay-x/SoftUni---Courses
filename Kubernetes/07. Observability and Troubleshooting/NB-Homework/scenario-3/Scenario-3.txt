@@ -1,0 +1,290 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 09:13:27 2023 from 10.0.2.2
+vagrant@node1:~$ cat > scenario-3.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: startup-mixed
+  name: startup-mixed
+spec:
+  initContainers:
+  - name: init-data
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo '(Almost) Always Ready to Serve ;)' > /data/index.html
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  containers:
+  - name: cont-main
+    image: nginx
+    volumeMounts:
+    - name: data
+      mountPath: /usr/share/nginx/html
+    livenessProbe:
+      httpGet:
+        path: /healthy.html
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    startupProbe:
+      exec:
+        command:
+        - cat
+        - /usr/share/nginx/html/healthy.html
+      failureThreshold: 10
+      periodSeconds: 5
+  - name: cont-sidecar-postpone
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - while true; do
+          sleep 20;
+          echo 'WORKING' > /check/healthy.html;
+          sleep 60;
+        done
+    volumeMounts:
+    - name: data
+      mountPath: /check
+  - name: cont-sidecar-break
+    image: alpine
+    command: ["/bin/sh", "-c"]
+    args:
+      - while true; do
+          sleep 60;
+          rm /check/healthy.html;
+          sleep 20;
+        done
+    volumeMounts:
+    - name: data
+      mountPath: /check
+  volumes:
+  - name: data
+    emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: startup-mixed
+  labels:
+    app: startup-mixed
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: startup-mixed
+vagrant@node1:~$ kubectl apply -f scenario-3.yaml
+pod/startup-mixed created
+service/startup-mixed created
+vagrant@node1:~$ kubectl get pods -o wide
+NAME            READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+startup-mixed   2/3     Running   0          7s    10.244.104.13   node2   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME            READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+startup-mixed   2/3     Running   0          16s   10.244.104.13   node2   <none>           <none>
+vagrant@node1:~$ kubectl get pods -o wide
+NAME            READY   STATUS    RESTARTS   AGE   IP              NODE    NOMINATED NODE   READINESS GATES
+startup-mixed   3/3     Running   0          34s   10.244.104.13   node2   <none>           <none>
+vagrant@node1:~$ kubectl describe pod startup-mixed
+Name:             startup-mixed
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node2/192.168.99.102
+Start Time:       Wed, 22 Nov 2023 09:32:38 +0200
+Labels:           app=startup-mixed
+Annotations:      cni.projectcalico.org/containerID: 987511c626a375890ebc5b4dca6143d6927ccd52cc38e804a78f0c35e82527c5
+                  cni.projectcalico.org/podIP: 10.244.104.13/32
+                  cni.projectcalico.org/podIPs: 10.244.104.13/32
+Status:           Running
+IP:               10.244.104.13
+IPs:
+  IP:  10.244.104.13
+Init Containers:
+  init-data:
+    Container ID:  containerd://26a6f0495e0fd98de4625b8c7273977ede14034f8dd902c208f58519a51adfa8
+    Image:         alpine
+    Image ID:      docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -c
+    Args:
+      echo '(Almost) Always Ready to Serve ;)' > /data/index.html
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Wed, 22 Nov 2023 09:32:40 +0200
+      Finished:     Wed, 22 Nov 2023 09:32:40 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-q8mms (ro)
+Containers:
+  cont-main:
+    Container ID:   containerd://fcb08a5b15e7d46c4d91e557e684ccd0b76bc517a524eb07247100a8251de190
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:10d1f5b58f74683ad34eb29287e07dab1e90f10af243f151bb50aa5dbb4d62ee
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 22 Nov 2023 09:33:59 +0200
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Wed, 22 Nov 2023 09:32:42 +0200
+      Finished:     Wed, 22 Nov 2023 09:33:58 +0200
+    Ready:          True
+    Restart Count:  1
+    Liveness:       http-get http://:80/healthy.html delay=5s timeout=1s period=5s #success=1 #failure=3
+    Startup:        exec [cat /usr/share/nginx/html/healthy.html] delay=0s timeout=1s period=5s #success=1 #failure=10
+    Environment:    <none>
+    Mounts:
+      /usr/share/nginx/html from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-q8mms (ro)
+  cont-sidecar-postpone:
+    Container ID:  containerd://93363a9dd9f52b612a33bf3233e90b767b8ad32c8ad34c3d654ffda9e03e1027
+    Image:         alpine
+    Image ID:      docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -c
+    Args:
+      while true; do sleep 20; echo 'WORKING' > /check/healthy.html; sleep 60; done
+    State:          Running
+      Started:      Wed, 22 Nov 2023 09:32:43 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /check from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-q8mms (ro)
+  cont-sidecar-break:
+    Container ID:  containerd://bf9b623db0e7818ef78af25efa01fc468f87554eb3ac3ec5db6c222f229d1529
+    Image:         alpine
+    Image ID:      docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -c
+    Args:
+      while true; do sleep 60; rm /check/healthy.html; sleep 20; done
+    State:          Running
+      Started:      Wed, 22 Nov 2023 09:32:44 +0200
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /check from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-q8mms (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  data:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  kube-api-access-q8mms:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Pulling    2m27s                 kubelet            Pulling image "alpine"
+  Normal   Scheduled  2m27s                 default-scheduler  Successfully assigned default/startup-mixed to node2
+  Normal   Pulled     2m26s                 kubelet            Successfully pulled image "alpine" in 1.195747619s (1.195754034s including waiting)
+  Normal   Created    2m26s                 kubelet            Created container init-data
+  Normal   Started    2m26s                 kubelet            Started container init-data
+  Normal   Pulled     2m24s                 kubelet            Successfully pulled image "nginx" in 1.089131519s (1.089137556s including waiting)
+  Normal   Created    2m24s                 kubelet            Created container cont-main
+  Normal   Started    2m24s                 kubelet            Started container cont-main
+  Normal   Pulling    2m24s                 kubelet            Pulling image "alpine"
+  Normal   Pulling    2m23s                 kubelet            Pulling image "alpine"
+  Normal   Pulled     2m23s                 kubelet            Successfully pulled image "alpine" in 1.087519999s (1.087524921s including waiting)
+  Normal   Created    2m23s                 kubelet            Created container cont-sidecar-postpone
+  Normal   Started    2m23s                 kubelet            Started container cont-sidecar-postpone
+  Normal   Created    2m22s                 kubelet            Created container cont-sidecar-break
+  Normal   Pulled     2m22s                 kubelet            Successfully pulled image "alpine" in 1.10250869s (1.102513923s including waiting)
+  Normal   Started    2m22s                 kubelet            Started container cont-sidecar-break
+  Warning  Unhealthy  2m3s (x4 over 2m18s)  kubelet            Startup probe failed: cat: /usr/share/nginx/html/healthy.html: No such file or directory
+  Normal   Pulling    68s (x2 over 2m25s)   kubelet            Pulling image "nginx"
+  Warning  Unhealthy  68s (x3 over 78s)     kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+  Normal   Killing    68s                   kubelet            Container cont-main failed liveness probe, will be restarted
+vagrant@node1:~$ kubectl describe svc startup-mixed
+Name:                     startup-mixed
+Namespace:                default
+Labels:                   app=startup-mixed
+Annotations:              <none>
+Selector:                 app=startup-mixed
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.101.54.155
+IPs:                      10.101.54.155
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.244.104.13:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+vagrant@node1:~$ kubectl delete -f scenario-3.yaml
+pod "startup-mixed" deleted
+service "startup-mixed" deleted
+vagrant@node1:~$ history
+  ...
+  778  cat > scenario-3.yaml
+  779  kubectl apply -f scenario-3.yaml
+  780  kubectl get pods -o wide
+  781  kubectl describe pod startup-mixed
+  782  kubectl describe svc startup-mixed
+  783  kubectl delete -f scenario-3.yaml
+  784  history
+vagrant@node1:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+
+
+PS C:\Users\NB\Kubernetes>

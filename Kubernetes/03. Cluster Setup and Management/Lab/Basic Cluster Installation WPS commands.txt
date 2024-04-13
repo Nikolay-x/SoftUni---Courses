@@ -1,0 +1,5 @@
+PS C:\Users\NB> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 ssh root@192.168.100.12

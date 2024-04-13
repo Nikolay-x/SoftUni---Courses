@@ -1,0 +1,29 @@
+PS C:\Users\NB\debian-nfs> Get-History
+
+  Id CommandLine
+  -- -----------
+  ...
+  10 cd ..
+  11 cd .\debian-nfs\
+  12 vagrant init --minimal shekeriev/debian-12
+  13 vagrant up
+  14 vagrant ssh
+  15 vagrant halt
+
+
+
+vagrant@debian:~$ history
+    1  cat /etc/os-release
+    2  sudo apt-get update
+    3  sudo apt-get upgrade
+    4  sudo apt-get install nfs-kernel-server
+    5  systemctl status nfs-server.service
+    6  sudo mkdir -p /storage/export1
+    7  sudo chmod 777 /storage/export1/
+    8  sudo nano etc/exports
+    9  cat etc/exports
+   10  cat /etc/exports
+   11  sudo nano /etc/exports
+   12  cat /etc/exports
+   13  sudo exportfs -rav
+   14  history

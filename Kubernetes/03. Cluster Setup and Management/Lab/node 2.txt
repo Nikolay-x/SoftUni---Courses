@@ -1,0 +1,172 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> ssh root@192.168.100.19
+The authenticity of host '192.168.100.19 (192.168.100.19)' can't be established.
+ECDSA key fingerprint is SHA256:XB4VPF4r/4PWwkiLKfmtlZZD0D6Eb+wdERsPxIcy1v4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.100.19' (ECDSA) to the list of known hosts.
+root@192.168.100.19's password:
+Linux debian 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 13:49:07 2023
+root@debian:~# hostnamectl set-hostname node-2.k8s
+root@debian:~#
+root@debian:~# exit
+logout
+Connection to 192.168.100.19 closed.
+PS C:\Users\NB> ssh root@192.168.100.19
+root@192.168.100.19's password:
+Linux node-2.k8s 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 13:54:04 2023 from 192.168.100.7
+root@node-2:~#
+Message from syslogd@debian at Oct 24 14:42:42 ...
+ kernel:[ 3382.203852] watchdog: BUG: soft lockup - CPU#0 stuck for 128s! [swapper/0:0]
+
+root@node-2:~# echo "192.168.100.18  node-1.k8s  node-1" | tee -a /etc/hosts
+echo "192.168.100.19  node-2.k8s  node-2" | tee -a /etc/hosts
+echo "192.168.100.20  node-3.k8s  node-3" | tee -a /etc/hosts
+192.168.100.18  node-1.k8s  node-1
+192.168.100.19  node-2.k8s  node-2
+192.168.100.20  node-3.k8s  node-3
+root@node-2:~# ping node-1
+PING node-1.k8s (192.168.100.18) 56(84) bytes of data.
+64 bytes from node-1.k8s (192.168.100.18): icmp_seq=1 ttl=64 time=1.10 ms
+64 bytes from node-1.k8s (192.168.100.18): icmp_seq=2 ttl=64 time=0.844 ms
+64 bytes from node-1.k8s (192.168.100.18): icmp_seq=3 ttl=64 time=1.10 ms
+64 bytes from node-1.k8s (192.168.100.18): icmp_seq=5 ttl=64 time=3.48 ms
+^C
+--- node-1.k8s ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4190ms
+rtt min/avg/max/mdev = 0.844/2.241/4.693/1.556 ms
+root@node-2:~# kubeadm join 192.168.100.18:6443 --token nxms82.3l03c3s5a8syz02g --discovery-token-ca-cert-hash sha256:833133171283f3c30176e46c591d04a0fd0824c3f3683d2593ab9ea8035c3636
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+root@node-2:~#
+Message from syslogd@debian at Oct 24 15:42:06 ...
+ kernel:[ 6946.321968] watchdog: BUG: soft lockup - CPU#0 stuck for 36s! [containerd-shim:1860]
+
+root@node-2:~# exit
+logout
+Connection to 192.168.100.19 closed.
+PS C:\Users\NB> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 ssh root@192.168.100.19
+   2 ssh root@192.168.100.19
+
+
+PS C:\Users\NB> ssh root@192.168.100.19
+root@192.168.100.19's password:
+Linux node-2.k8s 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 24 14:37:06 2023 from 192.168.100.7
+root@node-2:~# apt-get update && apt-get install -y --allow-change-held-packages kubeadm=1.27.7-1.1
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following held packages will be changed:
+  kubeadm
+The following packages will be upgraded:
+  kubeadm
+1 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Need to get 9,937 kB of archives.
+After this operation, 8,192 B of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubeadm 1.27.7-1.1 [9,937 kB]
+Fetched 9,937 kB in 3s (3,310 kB/s)
+apt-listchanges: Reading changelogs...
+(Reading database ... 31853 files and directories currently installed.)
+Preparing to unpack .../kubeadm_1.27.7-1.1_amd64.deb ...
+Unpacking kubeadm (1.27.7-1.1) over (1.27.5-1.1) ...
+Setting up kubeadm (1.27.7-1.1) ...
+root@node-2:~#
+root@node-2:~#
+root@node-2:~# kubeadm upgrade node
+[upgrade] Reading configuration from the cluster...
+[upgrade] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Running pre-flight checks
+[preflight] Skipping prepull. Not a control plane node.
+[upgrade] Skipping phase. Not a control plane node.
+[upgrade] Backing up kubelet config file to /etc/kubernetes/tmp/kubeadm-kubelet-config204110189/config.yaml
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[upgrade] The configuration for this node was successfully updated!
+[upgrade] Now you should go ahead and upgrade the kubelet package using your package manager.
+root@node-2:~# kubectl drain node-2.k8s --ignore-daemonsets --delete-emptydir-data --force
+E1024 17:02:23.024323    8912 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp [::1]:8080: connect: connection refused
+E1024 17:02:23.024919    8912 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp [::1]:8080: connect: connection refused
+E1024 17:02:23.027350    8912 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp [::1]:8080: connect: connection refused
+E1024 17:02:23.030181    8912 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp [::1]:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@node-2:~# apt-get update
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Reading package lists... Done
+root@node-2:~# apt-get install -y --allow-change-held-packages kubelet=1.27.7-1.1 kubectl=1.27.7-1.1
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following held packages will be changed:
+  kubectl kubelet
+The following packages will be upgraded:
+  kubectl kubelet
+2 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 29.0 MB of archives.
+After this operation, 28.7 kB of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubectl 1.27.7-1.1 [10.2 MB]
+Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  kubelet 1.27.7-1.1 [18.7 MB]
+Fetched 29.0 MB in 6s (4,541 kB/s)
+apt-listchanges: Reading changelogs...
+(Reading database ... 31853 files and directories currently installed.)
+Preparing to unpack .../kubectl_1.27.7-1.1_amd64.deb ...
+Unpacking kubectl (1.27.7-1.1) over (1.27.5-1.1) ...
+Preparing to unpack .../kubelet_1.27.7-1.1_amd64.deb ...
+Unpacking kubelet (1.27.7-1.1) over (1.27.5-1.1) ...
+Setting up kubectl (1.27.7-1.1) ...
+Setting up kubelet (1.27.7-1.1) ...
+root@node-2:~# systemctl daemon-reload
+root@node-2:~# systemctl restart kubelet
+root@node-2:~# exit
+logout
+Connection to 192.168.100.19 closed.
+PS C:\Users\NB>

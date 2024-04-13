@@ -1,0 +1,15 @@
+PS C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 Set-Location -Path 'C:\Users\NB\Kubernetes\02. Core Concepts\homework\task-3'
+   2 kubectl apply -f Option-1-Kubernetes-Manifest-Directory/
+   3 kubectl config set-context --current --namespace=homework
+   4 kubectl get pods --show-labels
+   5 kubectl describe pod homework-1
+   6 kubectl describe pod homework-2
+   7 minikube service list
+   8 kubectl get service -n homework
+   9 kubectl delete namespaces homework
+  10 kubectl config set-context --current --namespace=default
+  11 kubectl get pods

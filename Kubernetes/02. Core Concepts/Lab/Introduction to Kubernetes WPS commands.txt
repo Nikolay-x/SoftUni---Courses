@@ -1,0 +1,23 @@
+PS C:\Users\NB\Kubernetes\Core Concepts> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd..
+   2 cd..
+   3 cd C:\Users\NB\Kubernetes
+   4 minikube version
+   5 minikube
+   6 minikube status
+   7 minikube start --dry-run=true
+   8 minikube start --help
+   9 minikube status
+  10 minikube start
+  11 minikube status
+  12 cd '.\Core Concepts\'
+  13 minikube ssh
+  14 Get-History
+  15 kubectl
+  16 kubectl version --client
+  17 kubectl cluster-info
+  18 kubectl get nodes
+  19 kubectl get nodes -o wide

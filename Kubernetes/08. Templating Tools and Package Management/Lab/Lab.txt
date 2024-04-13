@@ -1,0 +1,4241 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\NB> cd .\Kubernetes\
+PS C:\Users\NB\Kubernetes> vagrant up
+Bringing machine 'node1' up with 'virtualbox' provider...
+Bringing machine 'node2' up with 'virtualbox' provider...
+Bringing machine 'node3' up with 'virtualbox' provider...
+==> node1: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node1: Clearing any previously set forwarded ports...
+==> node1: Clearing any previously set network interfaces...
+==> node1: Preparing network interfaces based on configuration...
+    node1: Adapter 1: nat
+    node1: Adapter 2: hostonly
+==> node1: Forwarding ports...
+    node1: 22 (guest) => 2222 (host) (adapter 1)
+==> node1: Running 'pre-boot' VM customizations...
+==> node1: Booting VM...
+==> node1: Waiting for machine to boot. This may take a few minutes...
+    node1: SSH address: 127.0.0.1:2222
+    node1: SSH username: vagrant
+    node1: SSH auth method: private key
+==> node1: Machine booted and ready!
+==> node1: Checking for guest additions in VM...
+==> node1: Setting hostname...
+==> node1: Configuring and enabling network interfaces...
+==> node1: Mounting shared folders...
+    node1: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node1: flag to force provisioning. Provisioners marked to run always will still run.
+==> node2: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node2: Clearing any previously set forwarded ports...
+==> node2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> node2: Clearing any previously set network interfaces...
+==> node2: Preparing network interfaces based on configuration...
+    node2: Adapter 1: nat
+    node2: Adapter 2: hostonly
+==> node2: Forwarding ports...
+    node2: 22 (guest) => 2200 (host) (adapter 1)
+==> node2: Running 'pre-boot' VM customizations...
+==> node2: Booting VM...
+==> node2: Waiting for machine to boot. This may take a few minutes...
+    node2: SSH address: 127.0.0.1:2200
+    node2: SSH username: vagrant
+    node2: SSH auth method: private key
+==> node2: Machine booted and ready!
+==> node2: Checking for guest additions in VM...
+==> node2: Setting hostname...
+==> node2: Configuring and enabling network interfaces...
+==> node2: Mounting shared folders...
+    node2: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node2: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node2: flag to force provisioning. Provisioners marked to run always will still run.
+==> node3: Checking if box 'shekeriev/debian-11' version '0.5' is up to date...
+==> node3: Clearing any previously set forwarded ports...
+==> node3: Fixed port collision for 22 => 2222. Now on port 2201.
+==> node3: Clearing any previously set network interfaces...
+==> node3: Preparing network interfaces based on configuration...
+    node3: Adapter 1: nat
+    node3: Adapter 2: hostonly
+==> node3: Forwarding ports...
+    node3: 22 (guest) => 2201 (host) (adapter 1)
+==> node3: Running 'pre-boot' VM customizations...
+==> node3: Booting VM...
+==> node3: Waiting for machine to boot. This may take a few minutes...
+    node3: SSH address: 127.0.0.1:2201
+    node3: SSH username: vagrant
+    node3: SSH auth method: private key
+==> node3: Machine booted and ready!
+==> node3: Checking for guest additions in VM...
+==> node3: Setting hostname...
+==> node3: Configuring and enabling network interfaces...
+==> node3: Mounting shared folders...
+    node3: /vagrant => C:/Users/NB/Kubernetes/vagrant
+==> node3: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> node3: flag to force provisioning. Provisioners marked to run always will still run.
+PS C:\Users\NB\Kubernetes> vagrant ssh node1
+Linux node1 5.10.0-26-amd64 #1 SMP Debian 5.10.197-1 (2023-09-29) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Nov 22 13:24:08 2023 from 10.0.2.2
+vagrant@node1:~$ cat > 1-appa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/k8s-environ:latest
+        env:
+        - name: APPROACH
+          value: "STATIC"
+        - name: FOCUSON
+          value: "APPROACH"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~$ cat > 2-appa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: %replicas%
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: %image%:%tag%
+        env:
+        - name: APPROACH
+          value: "%approach%"
+        - name: FOCUSON
+          value: "APPROACH"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: %nodeport%
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~$ cat 2-appa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: %replicas%
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: %image%:%tag%
+        env:
+        - name: APPROACH
+          value: "%approach%"
+        - name: FOCUSON
+          value: "APPROACH"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: %nodeport%
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~$ cat 2-appa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: %replicas%
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: %image%:%tag%
+        env:
+        - name: APPROACH
+          value: "%approach%"
+        - name: FOCUSON
+          value: "APPROACH"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: %nodeport%
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~$ sed 's/%replicas%/3/ ; s@%image%@shekeriev/k8s-environ@ ; s/%tag%/green/ ; s/%approach%/MANUAL/ ; s/%nodeport%/30001/' 2-appa.yaml |
+ kubectl apply -f -
+deployment.apps/appa created
+service/appa created
+vagrant@node1:~$ cat 2-appa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: %replicas%
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: %image%:%tag%
+        env:
+        - name: APPROACH
+          value: "%approach%"
+        - name: FOCUSON
+          value: "APPROACH"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: %nodeport%
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~$ sed 's/%replicas%/3/ ; s@%image%@shekeriev/k8s-environ@ ; s/%tag%/latest/ ; s/%approach%/MANUAL/ ; s/%nodeport%/30001/' part1/1-manual/2-appa.yaml | kubectl apply -f -
+sed: can't read part1/1-manual/2-appa.yaml: No such file or directory
+error: no objects passed to apply
+vagrant@node1:~$ sed 's/%replicas%/3/ ; s@%image%@shekeriev/k8s-environ@ ; s/%tag%/latest/ ; s/%approach%/MANUAL/ ; s/%nodeport%/30001/' 2-appa.yaml
+| kubectl apply -f -
+deployment.apps/appa configured
+service/appa unchanged
+vagrant@node1:~$ kubectl delete deployment appa
+deployment.apps "appa" deleted
+vagrant@node1:~$ kubectl delete service appa
+service "appa" deleted
+vagrant@node1:~$ curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+v5.2.1
+kustomize installed to /home/vagrant/kustomize
+vagrant@node1:~$ kustomize version
+-bash: kustomize: command not found
+vagrant@node1:~$ sudo mv kustomize /usr/local/bin
+vagrant@node1:~$ kustomize version
+v5.2.1
+vagrant@node1:~$ DEMO=/tmp/hello
+vagrant@node1:~$ BASE=$DEMO/base
+vagrant@node1:~$ mkdir -p $BASE
+vagrant@node1:~$ curl -s -o "$BASE/#1.yaml" "https://raw.githubusercontent.com\
+> /kubernetes-sigs/kustomize\
+> /master/examples/helloWorld\
+> /{configMap,deployment,kustomization,service}.yaml"
+vagrant@node1:~$ tree $DEMO
+-bash: tree: command not found
+vagrant@node1:~$ apt update && sudo apt upgrade
+Reading package lists... Done
+E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+E: Unable to lock directory /var/lib/apt/lists/
+W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
+vagrant@node1:~$ apt update
+Reading package lists... Done
+E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+E: Unable to lock directory /var/lib/apt/lists/
+W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
+vagrant@node1:~$ sudo apt update && sudo apt upgrade
+Get:1 http://security.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Hit:2 http://deb.debian.org/debian bullseye InRelease
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Hit:4 https://download.docker.com/linux/debian bullseye InRelease
+Get:6 http://security.debian.org/debian-security bullseye-security/main Sources [160 kB]
+Get:7 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [259 kB]
+Get:8 http://security.debian.org/debian-security bullseye-security/main Translation-en [166 kB]
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.27/deb  InRelease
+Fetched 677 kB in 1s (532 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+4 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages have been kept back:
+  kubeadm kubectl kubelet
+The following packages will be upgraded:
+  libtiff5
+1 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+Need to get 290 kB of archives.
+After this operation, 1,024 B of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://security.debian.org/debian-security bullseye-security/main amd64 libtiff5 amd64 4.2.0-1+deb11u5 [290 kB]
+Fetched 290 kB in 0s (1,673 kB/s)
+Reading changelogs... Done
+(Reading database ... 55065 files and directories currently installed.)
+Preparing to unpack .../libtiff5_4.2.0-1+deb11u5_amd64.deb ...
+Unpacking libtiff5:amd64 (4.2.0-1+deb11u5) over (4.2.0-1+deb11u4) ...
+Setting up libtiff5:amd64 (4.2.0-1+deb11u5) ...
+Processing triggers for libc-bin (2.31-13+deb11u7) ...
+vagrant@node1:~$ apt install tree
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+vagrant@node1:~$ sudo apt install tree
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  tree
+0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+Need to get 49.6 kB of archives.
+After this operation, 118 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main amd64 tree amd64 1.8.0-1+b1 [49.6 kB]
+Fetched 49.6 kB in 0s (415 kB/s)
+Selecting previously unselected package tree.
+(Reading database ... 55065 files and directories currently installed.)
+Preparing to unpack .../tree_1.8.0-1+b1_amd64.deb ...
+Unpacking tree (1.8.0-1+b1) ...
+Setting up tree (1.8.0-1+b1) ...
+Processing triggers for man-db (2.9.4-2) ...
+vagrant@node1:~$ tree $DEMO
+/tmp/hello
+└── base
+    ├── configMap.yaml
+    ├── deployment.yaml
+    ├── kustomization.yaml
+    └── service.yaml
+
+1 directory, 4 files
+vagrant@node1:~$ cat $BASE/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: arbitrary
+
+# Example configuration for the webserver
+# at https://github.com/monopole/hello
+commonLabels:
+  app: hello
+
+resources:
+- deployment.yaml
+- service.yaml
+- configMap.yaml
+vagrant@node1:~$ cat $BASE/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        deployment: hello
+    spec:
+      containers:
+      - name: the-container
+        image: monopole/hello:1
+        command: ["/hello",
+                  "--port=8080",
+                  "--enableRiskyFeature=$(ENABLE_RISKY)"]
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              name: the-map
+              key: altGreeting
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              name: the-map
+              key: enableRisky
+vagrant@node1:~$ kustomize build $BASE
+apiVersion: v1
+data:
+  altGreeting: Good Morning!
+  enableRisky: "false"
+kind: ConfigMap
+metadata:
+  labels:
+    app: hello
+  name: the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello
+  name: the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hello
+    deployment: hello
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello
+  name: the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+        deployment: hello
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+vagrant@node1:~$ kustomize build $BASE | kubectl apply -f -
+configmap/the-map created
+service/the-service created
+deployment.apps/the-deployment created
+vagrant@node1:~$ kubectl get services
+NAME          TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes    ClusterIP      10.96.0.1      <none>        443/TCP          6d23h
+the-service   LoadBalancer   10.108.16.29   <pending>     8666:30867/TCP   15s
+vagrant@node1:~$ cat $BASE/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: arbitrary
+
+# Example configuration for the webserver
+# at https://github.com/monopole/hello
+commonLabels:
+  app: hello
+
+resources:
+- deployment.yaml
+- service.yaml
+- configMap.yaml
+vagrant@node1:~$ kustomize build $BASE | kubectl delete -f -
+configmap "the-map" deleted
+service "the-service" deleted
+deployment.apps "the-deployment" deleted
+vagrant@node1:~$ sed -i.bak 's/app: hello/app: my-hello/' $BASE/kustomization.yaml
+vagrant@node1:~$ kustomize build $BASE
+apiVersion: v1
+data:
+  altGreeting: Good Morning!
+  enableRisky: "false"
+kind: ConfigMap
+metadata:
+  labels:
+    app: my-hello
+  name: the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: my-hello
+  name: the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-hello
+    deployment: hello
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-hello
+  name: the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-hello
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        app: my-hello
+        deployment: hello
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+vagrant@node1:~$ tree $DEMO
+/tmp/hello
+└── base
+    ├── configMap.yaml
+    ├── deployment.yaml
+    ├── kustomization.yaml
+    ├── kustomization.yaml.bak
+    └── service.yaml
+
+1 directory, 5 files
+vagrant@node1:~$ OVERLAYS=$DEMO/overlays
+vagrant@node1:~$ mkdir -p $OVERLAYS/staging
+vagrant@node1:~$ mkdir -p $OVERLAYS/production
+vagrant@node1:~$ tree $DEMO
+/tmp/hello
+├── base
+│   ├── configMap.yaml
+│   ├── deployment.yaml
+│   ├── kustomization.yaml
+│   ├── kustomization.yaml.bak
+│   └── service.yaml
+└── overlays
+    ├── production
+    └── staging
+
+4 directories, 5 files
+vagrant@node1:~$ cat <<'EOF' >$OVERLAYS/staging/kustomization.yaml
+> namePrefix: staging-
+> labels:
+> - includeSelectors: true
+>   pairs:
+>     org: acmeCorporation
+>     variant: staging
+> commonAnnotations:
+>   note: Hello, I am staging!
+> resources:
+> - ../../base
+> patches:
+> ^C
+vagrant@node1:~$ cat <<'EOF' >$OVERLAYS/staging/kustomization.yaml
+> namePrefix: staging-
+> labels:
+> - includeSelectors: true
+>   pairs:
+>     org: acmeCorporation
+>     variant: staging
+> commonAnnotations:
+>   note: Hello, I am staging!
+> resources:
+> - ../../base
+> patches:
+> - path: map.yaml
+> EOF
+vagrant@node1:~$ cat <<EOF >$OVERLAYS/staging/map.yaml
+> apiVersion: v1
+> kind: ConfigMap
+> metadata:
+>   name: the-map
+> data:
+>   altGreeting: "Have a pineapple!"
+>   enableRisky: "true"
+> EOF
+vagrant@node1:~$ tree $DEMO
+/tmp/hello
+├── base
+│   ├── configMap.yaml
+│   ├── deployment.yaml
+│   ├── kustomization.yaml
+│   ├── kustomization.yaml.bak
+│   └── service.yaml
+└── overlays
+    ├── production
+    └── staging
+        ├── kustomization.yaml
+        └── map.yaml
+
+4 directories, 7 files
+vagrant@node1:~$ cat <<EOF >$OVERLAYS/production/kustomization.yaml
+> namePrefix: production-
+> labels:
+> - includeSelectors: true
+>   pairs:
+>     org: acmeCorporation
+>     variant: production
+> commonAnnotations:
+>   note: Hello, I am production!
+> resources:
+> - ../../base
+> patches:
+> - path: deployment.yaml
+> EOF
+vagrant@node1:~$ cat <<EOF >$OVERLAYS/production/deployment.yaml
+> apiVersion: apps/v1
+> kind: Deployment
+> metadata:
+>   name: the-deployment
+> spec:
+>   replicas: 5
+> EOF
+vagrant@node1:~$ tree $DEMO
+/tmp/hello
+├── base
+│   ├── configMap.yaml
+│   ├── deployment.yaml
+│   ├── kustomization.yaml
+│   ├── kustomization.yaml.bak
+│   └── service.yaml
+└── overlays
+    ├── production
+    │   ├── deployment.yaml
+    │   └── kustomization.yaml
+    └── staging
+        ├── kustomization.yaml
+        └── map.yaml
+
+4 directories, 9 files
+vagrant@node1:~$ cat \$BASE/deployment.yaml
+cat: '$BASE/deployment.yaml': No such file or directory
+vagrant@node1:~$ cat $BASE/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        deployment: hello
+    spec:
+      containers:
+      - name: the-container
+        image: monopole/hello:1
+        command: ["/hello",
+                  "--port=8080",
+                  "--enableRiskyFeature=$(ENABLE_RISKY)"]
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              name: the-map
+              key: altGreeting
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              name: the-map
+              key: enableRisky
+vagrant@node1:~$ cat $OVERLAYS/production/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-deployment
+spec:
+  replicas: 5
+vagrant@node1:~$ diff <(kustomize build $OVERLAYS/staging) <(kustomize build $OVERLAYS/production) | more
+3,4c3,4
+<   altGreeting: Have a pineapple!
+<   enableRisky: "true"
+---
+>   altGreeting: Good Morning!
+>   enableRisky: "false"
+8c8
+<     note: Hello, I am staging!
+---
+>     note: Hello, I am production!
+12,13c12,13
+<     variant: staging
+<   name: staging-the-map
+---
+>     variant: production
+>   name: production-the-map
+19c19
+<     note: Hello, I am staging!
+---
+>     note: Hello, I am production!
+23,24c23,24
+<     variant: staging
+<   name: staging-the-service
+---
+>     variant: production
+>   name: production-the-service
+34c34
+<     variant: staging
+---
+>     variant: production
+41c41
+<     note: Hello, I am staging!
+---
+>     note: Hello, I am production!
+45,46c45,46
+<     variant: staging
+<   name: staging-the-deployment
+---
+>     variant: production
+>   name: production-the-deployment
+48c48
+<   replicas: 3
+---
+>   replicas: 5
+54c54
+<       variant: staging
+---
+>       variant: production
+58c58
+<         note: Hello, I am staging!
+vagrant@node1:~$ kustomize build $OVERLAYS/staging
+apiVersion: v1
+data:
+  altGreeting: Have a pineapple!
+  enableRisky: "true"
+kind: ConfigMap
+metadata:
+  annotations:
+    note: Hello, I am staging!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: staging
+  name: staging-the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    note: Hello, I am staging!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: staging
+  name: staging-the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-hello
+    deployment: hello
+    org: acmeCorporation
+    variant: staging
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    note: Hello, I am staging!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: staging
+  name: staging-the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-hello
+      deployment: hello
+      org: acmeCorporation
+      variant: staging
+  template:
+    metadata:
+      annotations:
+        note: Hello, I am staging!
+      labels:
+        app: my-hello
+        deployment: hello
+        org: acmeCorporation
+        variant: staging
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: staging-the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: staging-the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+vagrant@node1:~$ kustomize build $OVERLAYS/production
+apiVersion: v1
+data:
+  altGreeting: Good Morning!
+  enableRisky: "false"
+kind: ConfigMap
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-hello
+    deployment: hello
+    org: acmeCorporation
+    variant: production
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: my-hello
+      deployment: hello
+      org: acmeCorporation
+      variant: production
+  template:
+    metadata:
+      annotations:
+        note: Hello, I am production!
+      labels:
+        app: my-hello
+        deployment: hello
+        org: acmeCorporation
+        variant: production
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: production-the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: production-the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+vagrant@node1:~$ kustomize build $OVERLAYS/staging | kubectl apply -f -^C
+vagrant@node1:~$ kubectl apply -k $OVERLAYS/staging
+configmap/staging-the-map created
+service/staging-the-service created
+deployment.apps/staging-the-deployment created
+vagrant@node1:~$ kubectl get services
+NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes            ClusterIP      10.96.0.1        <none>        443/TCP          6d23h
+staging-the-service   LoadBalancer   10.100.181.210   <pending>     8666:31456/TCP   11s
+vagrant@node1:~$ kustomize build $OVERLAYS/production | kubectl apply -f -^C
+vagrant@node1:~$ kubectl apply -k $OVERLAYS/production
+configmap/production-the-map created
+service/production-the-service created
+deployment.apps/production-the-deployment created
+vagrant@node1:~$ kubectl get services
+NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes               ClusterIP      10.96.0.1        <none>        443/TCP          6d23h
+production-the-service   LoadBalancer   10.111.97.109    <pending>     8666:31700/TCP   12s
+staging-the-service      LoadBalancer   10.100.181.210   <pending>     8666:31456/TCP   89s
+vagrant@node1:~$ kustomize build $OVERLAYS/staging | kubectl delete -f -
+configmap "staging-the-map" deleted
+service "staging-the-service" deleted
+deployment.apps "staging-the-deployment" deleted
+vagrant@node1:~$ kustomize build $OVERLAYS/production | kubectl delete -f -
+configmap "production-the-map" deleted
+service "production-the-service" deleted
+deployment.apps "production-the-deployment" deleted
+vagrant@node1:~$ kubectl delete -k $OVERLAYS/staging^C
+vagrant@node1:~$ kubectl delete -k $OVERLAYS/production^C
+vagrant@node1:~$ mkdir part1
+vagrant@node1:~$ ls
+1-appa.yaml  2-appa.yaml  part1
+vagrant@node1:~$ cd part1
+vagrant@node1:~/part1$ mkdir 2-kustomize
+vagrant@node1:~/part1$ cd 2-kustomize/
+vagrant@node1:~/part1/2-kustomize$ mkdir base
+vagrant@node1:~/part1/2-kustomize$ cd base/
+vagrant@node1:~/part1/2-kustomize/base$ cd ..
+vagrant@node1:~/part1/2-kustomize$ cat > base/appa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/k8s-environ:latest
+        env:
+        - name: APPROACH
+          value: "STATIC"
+        - name: FOCUSON
+          value: "APPROACH"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~/part1/2-kustomize$ cat > base/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - appa.yaml
+vagrant@node1:~/part1/2-kustomize$ kustomize build base/
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  ports:
+  - nodePort: 30001
+    port: 80
+    protocol: TCP
+  selector:
+    app: appa
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - env:
+        - name: APPROACH
+          value: STATIC
+        - name: FOCUSON
+          value: APPROACH
+        image: shekeriev/k8s-environ:latest
+        name: main
+vagrant@node1:~/part1/2-kustomize$ tree .
+.
+└── base
+    ├── appa.yaml
+    └── kustomization.yaml
+
+1 directory, 2 files
+vagrant@node1:~/part1/2-kustomize$ mkdir -p overlays/{blue,green}
+vagrant@node1:~/part1/2-kustomize$ tree .
+.
+├── base
+│   ├── appa.yaml
+│   └── kustomization.yaml
+└── overlays
+    ├── blue
+    └── green
+
+4 directories, 2 files
+vagrant@node1:~/part1/2-kustomize$ cat > overlays/blue/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: blue-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: blue
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-rs.yaml
+vagrant@node1:~/part1/2-kustomize$ cat > overlays/green/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: green-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: green
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-np.yaml
+vagrant@node1:~/part1/2-kustomize$ tree .
+.
+├── base
+│   ├── appa.yaml
+│   └── kustomization.yaml
+└── overlays
+    ├── blue
+    │   └── kustomization.yaml
+    └── green
+        └── kustomization.yaml
+
+4 directories, 4 files
+vagrant@node1:~/part1/2-kustomize$ cat > overlays/blue/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  template:
+    spec:
+      containers:
+      - name: main
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (BLUE)"
+vagrant@node1:~/part1/2-kustomize$ cat > overlays/blue/custom-rs.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: 5
+vagrant@node1:~/part1/2-kustomize$ cat > overlays/green/custom-env.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  template:
+    spec:
+      containers:
+      - name: main
+        env:
+        - name: APPROACH
+          value: "KUSTOMIZE (GREEN)"
+vagrant@node1:~/part1/2-kustomize$ cat > overlays/green/custom-np.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  ports:
+  - nodePort: 30002
+    port: 80
+    protocol: TCP
+vagrant@node1:~/part1/2-kustomize$ tree .
+.
+├── base
+│   ├── appa.yaml
+│   └── kustomization.yaml
+└── overlays
+    ├── blue
+    │   ├── custom-env.yaml
+    │   ├── custom-rs.yaml
+    │   └── kustomization.yaml
+    └── green
+        ├── custom-env.yaml
+        ├── custom-np.yaml
+        └── kustomization.yaml
+
+4 directories, 8 files
+vagrant@node1:~/part1/2-kustomize$ cd base/
+vagrant@node1:~/part1/2-kustomize/base$ cd ..
+vagrant@node1:~/part1/2-kustomize$ cd overlays/
+vagrant@node1:~/part1/2-kustomize/overlays$ cd blue/
+vagrant@node1:~/part1/2-kustomize/overlays/blue$ kustomize edit set image shekeriev/k8s-environ:latest=shekeriev/k8s-environ:blue
+vagrant@node1:~/part1/2-kustomize/overlays/blue$ cat kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: blue-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: blue
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-rs.yaml
+images:
+- name: shekeriev/k8s-environ:latest
+  newName: shekeriev/k8s-environ
+  newTag: blue
+vagrant@node1:~/part1/2-kustomize/overlays/blue$ cd ..
+vagrant@node1:~/part1/2-kustomize/overlays$ cd green/
+vagrant@node1:~/part1/2-kustomize/overlays/green$ kustomize edit set image shekeriev/k8s-environ:latest=shekeriev/k8s-environ:green
+vagrant@node1:~/part1/2-kustomize/overlays/green$ cat kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: green-
+labels:
+- includeSelectors: true
+  pairs:
+    variant: green
+resources:
+- ../../base
+patches:
+- path: custom-env.yaml
+- path: custom-np.yaml
+images:
+- name: shekeriev/k8s-environ:latest
+  newName: shekeriev/k8s-environ
+  newTag: green
+vagrant@node1:~/part1/2-kustomize/overlays/green$ cd ..
+vagrant@node1:~/part1/2-kustomize/overlays$ cd ..
+vagrant@node1:~/part1/2-kustomize$ tree .
+.
+├── base
+│   ├── appa.yaml
+│   └── kustomization.yaml
+└── overlays
+    ├── blue
+    │   ├── custom-env.yaml
+    │   ├── custom-rs.yaml
+    │   └── kustomization.yaml
+    └── green
+        ├── custom-env.yaml
+        ├── custom-np.yaml
+        └── kustomization.yaml
+
+4 directories, 8 files
+vagrant@node1:~/part1/2-kustomize$ kustomize build overlays/blue | kubectl apply -f -^C
+vagrant@node1:~/part1/2-kustomize$ kustomize build overlays/green | kubectl apply -f -^C
+vagrant@node1:~/part1/2-kustomize$ kubectl apply -k overlays/blue
+service/blue-appa created
+deployment.apps/blue-appa created
+vagrant@node1:~/part1/2-kustomize$ kubectl apply -k overlays/green
+service/green-appa created
+deployment.apps/green-appa created
+vagrant@node1:~/part1/2-kustomize$ kubectl get pods,svc
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/blue-appa-5599cd8fcd-2c2lc    1/1     Running   0          20s
+pod/blue-appa-5599cd8fcd-4qkxx    1/1     Running   0          20s
+pod/blue-appa-5599cd8fcd-fl6s6    1/1     Running   0          20s
+pod/blue-appa-5599cd8fcd-ghzvf    1/1     Running   0          20s
+pod/blue-appa-5599cd8fcd-qtbnk    1/1     Running   0          20s
+pod/green-appa-65fccf69ff-jmccz   1/1     Running   0          11s
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/blue-appa    NodePort    10.102.65.114   <none>        80:30001/TCP   20s
+service/green-appa   NodePort    10.104.189.82   <none>        80:30002/TCP   11s
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        7d
+vagrant@node1:~/part1/2-kustomize$ kustomize build overlays/blue | kubectl delete -f -^C
+vagrant@node1:~/part1/2-kustomize$ kustomize build overlays/green | kubectl delete -f -^C
+vagrant@node1:~/part1/2-kustomize$ kubectl delete -k overlays/blue
+service "blue-appa" deleted
+deployment.apps "blue-appa" deleted
+vagrant@node1:~/part1/2-kustomize$ kubectl delete -k overlays/green
+service "green-appa" deleted
+deployment.apps "green-appa" deleted
+vagrant@node1:~/part1/2-kustomize$ cd ../../
+vagrant@node1:~$ curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 79.6M  100 79.6M    0     0  3716k      0  0:00:21  0:00:21 --:--:-- 4507k
+vagrant@node1:~$ skaffold version
+v2.9.0
+vagrant@node1:~$ cd part1/
+vagrant@node1:~/part1$ mkdir 3-skaffold
+vagrant@node1:~/part1$ cd 3-skaffold/
+vagrant@node1:~/part1/3-skaffold$ cat > code.sh
+#!/bin/sh
+
+GREETING="Hello Awesome World!"
+STEP=2
+
+echo "Printing \"$GREETING\" every $STEP second(s) ..."
+
+while true; do echo $GREETING; sleep $STEP; done
+vagrant@node1:~/part1/3-skaffold$ cat > Dockerfile
+FROM alpine
+
+COPY code.sh /
+
+CMD ["sh", "-c", "/code.sh"]
+vagrant@node1:~/part1/3-skaffold$ cat > pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: skaffold
+spec:
+  containers:
+  - image: shekeriev/k8s-skaffold
+    name: main
+vagrant@node1:~/part1/3-skaffold$ ls
+code.sh  Dockerfile  pod.yaml
+vagrant@node1:~/part1/3-skaffold$ tree .
+.
+├── code.sh
+├── Dockerfile
+└── pod.yaml
+
+0 directories, 3 files
+vagrant@node1:~/part1/3-skaffold$ skaffold init
+WARN[0000] Skipping Jib: no JVM: [java -version] failed: exec: "java": executable file not found in $PATH  subtask=-1 task=DevLoop
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: --skaffold
+build:
+  artifacts:
+    - image: shekeriev/k8s-skaffold
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - pod.yaml
+
+? Do you want to write this configuration to skaffold.yaml? Yes
+Configuration skaffold.yaml was written
+You can now run [skaffold build] to build the artifacts
+or [skaffold run] to build and deploy
+or [skaffold dev] to enter development mode, with auto-redeploy
+vagrant@node1:~/part1/3-skaffold$ tree
+.
+├── code.sh
+├── Dockerfile
+├── pod.yaml
+└── skaffold.yaml
+
+0 directories, 4 files
+vagrant@node1:~/part1/3-skaffold$ cat skaffold.yaml
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: --skaffold
+build:
+  artifacts:
+    - image: shekeriev/k8s-skaffold
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - pod.yaml
+vagrant@node1:~/part1/3-skaffold$ docker login
+Log in with your Docker ID or email address to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com/ to create one.
+You can log in with your password or a Personal Access Token (PAT). Using a limited-scope PAT grants better security and is required for organizations using SSO. Learn more at https://docs.docker.com/go/access-tokens/
+
+Username: nikolayx
+Password:
+WARNING! Your password will be stored unencrypted in /home/vagrant/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+vagrant@node1:~/part1/3-skaffold$ ls
+code.sh  Dockerfile  pod.yaml  skaffold.yaml
+vagrant@node1:~/part1/3-skaffold$ chmod +x code.sh
+vagrant@node1:~/part1/3-skaffold$
+vagrant@node1:~/part1/3-skaffold$ skaffold run --tail
+Generating tags...
+ - shekeriev/k8s-skaffold -> shekeriev/k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - shekeriev/k8s-skaffold: Not found. Building
+Starting build...
+Building [shekeriev/k8s-skaffold]...
+Target platforms: [linux/amd64]
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B 0.0s done
+#1 DONE 0.3s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 95B 0.0s done
+#2 DONE 0.3s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 ...
+
+#4 [auth] library/alpine:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 2.1s
+
+#5 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#5 resolve docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#5 ...
+
+#6 [internal] load build context
+#6 transferring context: 193B 0.0s done
+#6 DONE 0.1s
+
+#5 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#5 resolve docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978 0.1s done
+#5 sha256:48d9183eb12a05c99bcc0bf44a003607b8e941e1d4f41f9ad12bdcc4b5672f86 528B / 528B done
+#5 sha256:8ca4688f4f356596b5ae539337c9941abc78eda10021d35cbc52659c74d9b443 1.47kB / 1.47kB done
+#5 sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa 0B / 3.40MB 0.2s
+#5 sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978 1.64kB / 1.64kB done
+#5 sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa 1.05MB / 3.40MB 1.4s
+#5 sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa 2.10MB / 3.40MB 2.4s
+#5 sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa 3.15MB / 3.40MB 3.3s
+#5 sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa 3.40MB / 3.40MB 3.5s done
+#5 extracting sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa
+#5 extracting sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa 0.7s done
+#5 DONE 4.7s
+
+#7 [2/2] COPY code.sh /
+#7 DONE 0.4s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.1s done
+#8 writing image sha256:8b271df15cf97520432dcfdea4f20c60dbc433ef04586ffdd6febfeb54421f15 0.0s done
+#8 naming to docker.io/shekeriev/k8s-skaffold:latest 0.0s done
+#8 DONE 0.2s
+The push refers to repository [docker.io/shekeriev/k8s-skaffold]
+bba1ded2a01b: Preparing
+cc2447e1835a: Preparing
+Build Failed. No push access to specified image repository. Try running with `--default-repo` flag. Otherwise start a local kubernetes cluster like `minikube`.
+vagrant@node1:~/part1/3-skaffold$ skaffold run --tail --default-repo
+flag needs an argument: --default-repo
+See 'skaffold run --help' for usage.
+vagrant@node1:~/part1/3-skaffold$ skaffold run --help
+Run a pipeline: build and test artifacts, tag them, update Kubernetes manifests and deploy to a cluster.
+
+Examples:
+  # Build, test, deploy and tail the logs
+  skaffold run --tail
+
+  # Run with a given profile
+  skaffold run -p <profile>
+
+Options:
+      --assume-yes=false: If true, skaffold will skip yes/no confirmation from the user and default to yes
+      --auto=false: Run with an auto-generated skaffold configuration. This will create a temporary `skaffold.yaml` file
+and kubernetes manifests necessary to run the application
+      --auto-create-config=true: If true, skaffold will try to create a config for the user's run if it doesn't find one
+      --build-concurrency=-1: Number of concurrently running builds. Set to 0 to run all builds in parallel. Doesn't
+violate build order among dependencies.
+  -b, --build-image=[]: Only build artifacts with image names that contain the given substring. Default is to build
+sources for all artifacts
+      --cache-artifacts=true: Set to false to disable default caching of artifacts
+      --cache-file='': Specify the location of the cache file (default $HOME/.skaffold/cache)
+      --check-cluster-node-platforms=true: When set to true, images are built for the target platforms matching the
+active kubernetes cluster node platforms. Enabled by default for `dev`, `debug` and `run`
+      --cleanup=true: Delete deployments after dev or debug mode is interrupted
+      --cloud-run-location='': The GCP Region to deploy Cloud Run services to
+      --cloud-run-project='': The GCP Project ID or Project Number to deploy for Cloud Run
+  -c, --config='': File for global configurations (defaults to $HOME/.skaffold/config)
+  -d, --default-repo='': Default repository value (overrides global config)
+      --detect-minikube=true: Use heuristics to detect a minikube cluster
+      --digest-source='': Set to 'remote' to skip builds and resolve the digest of images by tag from the remote
+registry. Set to 'local' to build images locally and use digests from built images. Set to 'tag' to use tags directly
+from the build. Set to 'none' to use tags directly from the Kubernetes manifests. If unspecified, defaults to 'remote'
+for remote clusters, and 'tag' for local clusters like kind or minikube.
+      --disable-multi-platform-build=false: When set to true, forces only single platform image builds even when
+multiple target platforms are specified. Enabled by default for `dev` and `debug` modes, to keep dev-loop fast
+      --enable-platform-node-affinity=true: If true, when deploying to a mixed node cluster, skaffold will add platform
+(os/arch) node affinity definition to rendered manifests based on the image platforms
+  -f, --filename='skaffold.yaml': Path or URL to the Skaffold config file
+      --force=false: Recreate Kubernetes resources if necessary for deployment, warning: might cause downtime!
+      --hydration-dir='.kpt-pipeline': The directory to where the (kpt) hydration takes place. Default to a hidden
+directory .kpt-pipeline.
+      --insecure-registry=[]: Target registries for built images which are not secure
+      --iterative-status-check=true: Run `status-check` iteratively after each deploy step, instead of all-together at
+the end of all deploys (default).
+      --kube-context='': Deploy to this Kubernetes context
+      --kubeconfig='': Path to the kubeconfig file to use for CLI requests.
+  -l, --label=[]: Add custom labels to deployed objects. Set multiple times for multiple labels
+  -m, --module=[]: Filter Skaffold configs to only the provided named modules
+      --mute-logs=[]: mute logs for specified stages in pipeline (build, deploy, status-check, none, all)
+  -n, --namespace='': Runs deployments in the specified namespace. When used with 'render' command, renders manifests
+contain the namespace
+      --no-prune=false: Skip removing images and containers built by Skaffold
+      --no-prune-children=false: Skip removing layers reused by Skaffold
+      --platform=[]: The platform to target for the build artifacts
+      --port-forward=off: Port-forward exposes service ports and container ports within pods and other resources (off,
+user, services, debug, pods)
+  -p, --profile=[]: Activate profiles by name (prefixed with `-` to disable a profile)
+      --profile-auto-activation=true: Set to false to disable profile auto activation
+      --propagate-profiles=true: Setting '--propagate-profiles=false' disables propagating profiles set by the
+'--profile' flag across config dependencies. This mean that only profiles defined directly in the target 'skaffold.yaml'
+file are activated.
+      --remote-cache-dir='': Specify the location of the remote cache (default $HOME/.skaffold/remote-cache)
+      --resource-selector-rules-file='': Path to JSON file specifying the deny list of yaml objects for skaffold to NOT
+transform with 'image' and 'label' field replacements.  NOTE: this list is additive to skaffold's default denylist and
+denylist has priority over allowlist
+      --rpc-http-port=: tcp port to expose the Skaffold API over HTTP REST
+      --rpc-port=: tcp port to expose the Skaffold API over gRPC
+      --skip-tests=false: Whether to skip the tests after building
+      --status-check=: Wait for deployed resources to stabilize
+      --status-check-selectors='': File containing resource selectors for kubernetes resources status check. A sample
+file looks like the following:
+{
+  "selectors":[
+    {
+      "group":"my.domain",
+      "kind":"MyCRD"
+    }
+    ]
+}
+The values of "group" and "kind" are regular expressions.
+      --sync-remote-cache='always': Controls how Skaffold manages the remote config cache (see `remote-cache-dir`). One
+of `always` (default), `missing`, or `never`. `always` syncs remote repositories to latest on access. `missing` only
+clones remote repositories if they do not exist locally. `never` means the user takes responsibility for updating remote
+repositories.
+  -t, --tag='': The optional custom tag to use for images which overrides the current Tagger configuration
+      --tail=false: Stream logs from deployed objects
+      --tolerate-failures-until-deadline=false: Configures `status-check` to tolerate failures until Skaffold's
+statusCheckDeadline duration or the deployments progressDeadlineSeconds  Otherwise deployment failures skaffold
+encounters will immediately fail the deployment.  Defaults to 'false'
+      --toot=false: Emit a terminal beep after the deploy is complete
+      --wait-for-connection=false: Blocks ending execution of skaffold until the /v2/events gRPC/HTTP endpoint is hit
+      --wait-for-deletions=true: Wait for pending deletions to complete before a deployment
+      --wait-for-deletions-delay=2s: Delay between two checks for pending deletions
+      --wait-for-deletions-max=1m0s: Max duration to wait for pending deletions
+
+Usage:
+  skaffold run [flags] [options]
+
+Use "skaffold options" for a list of global command-line options (applies to all commands).
+vagrant@node1:~/part1/3-skaffold$ skaffold run --tail --default-repo='skaffold'
+Generating tags...
+ - shekeriev/k8s-skaffold -> skaffold/shekeriev_k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - shekeriev/k8s-skaffold: Not found. Building
+Starting build...
+Building [shekeriev/k8s-skaffold]...
+Target platforms: [linux/amd64]
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 95B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.6s
+
+#4 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 29B done
+#5 DONE 0.0s
+
+#6 [2/2] COPY code.sh /
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 writing image sha256:8b271df15cf97520432dcfdea4f20c60dbc433ef04586ffdd6febfeb54421f15 done
+#7 naming to docker.io/skaffold/shekeriev_k8s-skaffold:latest 0.0s done
+#7 DONE 0.0s
+The push refers to repository [docker.io/skaffold/shekeriev_k8s-skaffold]
+bba1ded2a01b: Preparing
+cc2447e1835a: Preparing
+Build Failed. No push access to specified image repository. Check your `--default-repo` value or try `docker login`.
+vagrant@node1:~/part1/3-skaffold$ docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /home/vagrant/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+vagrant@node1:~/part1/3-skaffold$ skaffold run --tail --default-repo='nikolayx/skaffold'
+Generating tags...
+ - shekeriev/k8s-skaffold -> nikolayx/skaffold/shekeriev_k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - shekeriev/k8s-skaffold: Not found. Building
+Starting build...
+Building [shekeriev/k8s-skaffold]...
+Target platforms: [linux/amd64]
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 95B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.6s
+
+#4 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 29B done
+#5 DONE 0.0s
+
+#6 [2/2] COPY code.sh /
+#6 CACHED
+
+#7 exporting to image
+#7 exporting layers done
+#7 writing image sha256:8b271df15cf97520432dcfdea4f20c60dbc433ef04586ffdd6febfeb54421f15 0.0s done
+#7 naming to docker.io/nikolayx/skaffold/shekeriev_k8s-skaffold:latest 0.0s done
+#7 DONE 0.0s
+The push refers to repository [docker.io/nikolayx/skaffold/shekeriev_k8s-skaffold]
+bba1ded2a01b: Preparing
+cc2447e1835a: Preparing
+Build Failed. No push access to specified image repository. Check your `--default-repo` value or try `docker login nikolayx`.
+vagrant@node1:~/part1/3-skaffold$ skaffold run --tail --default-repo=nikolayx/skaffold
+Generating tags...
+ - shekeriev/k8s-skaffold -> nikolayx/skaffold/shekeriev_k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - shekeriev/k8s-skaffold: Not found. Building
+Starting build...
+Building [shekeriev/k8s-skaffold]...
+Target platforms: [linux/amd64]
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context:
+#1 transferring context: 2B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 95B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 ...
+
+#4 [auth] library/alpine:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 1.4s
+
+#5 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 29B done
+#6 DONE 0.0s
+
+#7 [2/2] COPY code.sh /
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 writing image sha256:8b271df15cf97520432dcfdea4f20c60dbc433ef04586ffdd6febfeb54421f15
+#8 writing image sha256:8b271df15cf97520432dcfdea4f20c60dbc433ef04586ffdd6febfeb54421f15 0.0s done
+#8 naming to docker.io/nikolayx/skaffold/shekeriev_k8s-skaffold:latest done
+#8 DONE 0.0s
+The push refers to repository [docker.io/nikolayx/skaffold/shekeriev_k8s-skaffold]
+bba1ded2a01b: Preparing
+cc2447e1835a: Preparing
+Build Failed. No push access to specified image repository. Check your `--default-repo` value or try `docker login nikolayx`.
+vagrant@node1:~/part1/3-skaffold$ ls
+code.sh  Dockerfile  pod.yaml  skaffold.yaml
+vagrant@node1:~/part1/3-skaffold$ sudo vi pod.yaml
+vagrant@node1:~/part1/3-skaffold$ sudo vi skaffold.yaml
+vagrant@node1:~/part1/3-skaffold$ cat skaffold.yaml
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: --skaffold
+build:
+  artifacts:
+    - image: nikolayx/k8s-skaffold
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - pod.yaml
+vagrant@node1:~/part1/3-skaffold$ cat pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: skaffold
+spec:
+  containers:
+  - image: nikolayx/k8s-skaffold
+    name: main
+vagrant@node1:~/part1/3-skaffold$ skaffold run --tail
+Generating tags...
+ - nikolayx/k8s-skaffold -> nikolayx/k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - nikolayx/k8s-skaffold: Not found. Building
+Starting build...
+Building [nikolayx/k8s-skaffold]...
+Target platforms: [linux/amd64]
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.1s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 95B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 ...
+
+#4 [auth] library/alpine:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 1.6s
+
+#5 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 29B 0.0s done
+#6 DONE 0.0s
+
+#7 [2/2] COPY code.sh /
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 writing image sha256:8b271df15cf97520432dcfdea4f20c60dbc433ef04586ffdd6febfeb54421f15 done
+#8 naming to docker.io/nikolayx/k8s-skaffold:latest 0.0s done
+#8 DONE 0.0s
+The push refers to repository [docker.io/nikolayx/k8s-skaffold]
+bba1ded2a01b: Preparing
+cc2447e1835a: Preparing
+bba1ded2a01b: Pushed
+cc2447e1835a: Pushed
+latest: digest: sha256:1cc96e92d17bfc29bca6f043fc489e8d6914f6f4faa4b8b0a96031f680377490 size: 734
+Build [nikolayx/k8s-skaffold] succeeded
+Starting test...
+Tags used in deployment:
+ - nikolayx/k8s-skaffold -> nikolayx/k8s-skaffold:latest@sha256:1cc96e92d17bfc29bca6f043fc489e8d6914f6f4faa4b8b0a96031f680377490
+Starting deploy...
+ - pod/skaffold created
+Waiting for deployments to stabilize...
+ - pods: creating container main
+    - pod/skaffold: creating container main
+ - pods is ready.
+Deployments stabilized in 11.592 seconds
+Press Ctrl+C to exit
+[main] Printing "Hello Awesome World!" every 2 second(s) ...
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+^C
+Help improve Skaffold with our 2-minute anonymous survey: run 'skaffold survey'
+To help improve the quality of this product, we collect anonymized usage data for details on what is tracked and how we use this data visit <https://skaffold.dev/docs/resources/telemetry/>. This data is handled in accordance with our privacy policy <https://policies.google.com/privacy>
+
+You may choose to opt out of this collection by running the following command:
+        skaffold config set --global collect-metrics false
+vagrant@node1:~/part1/3-skaffold$ kubectl delete pod skaffold
+pod "skaffold" deleted
+vagrant@node1:~/part1/3-skaffold$ skaffold dev
+Generating tags...
+ - nikolayx/k8s-skaffold -> nikolayx/k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - nikolayx/k8s-skaffold: Found Remotely
+Tags used in deployment:
+ - nikolayx/k8s-skaffold -> nikolayx/k8s-skaffold:latest@sha256:1cc96e92d17bfc29bca6f043fc489e8d6914f6f4faa4b8b0a96031f680377490
+Starting deploy...
+ - pod/skaffold created
+Waiting for deployments to stabilize...
+ - pods: creating container main
+    - pod/skaffold: creating container main
+ - pods is ready.
+Deployments stabilized in 6.669 seconds
+Listing files to watch...
+ - nikolayx/k8s-skaffold
+Press Ctrl+C to exit
+Watching for changes...
+[main] Printing "Hello Awesome World!" every 2 second(s) ...
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+[main] Hello Awesome World!
+^CCleaning up...
+ - pod "skaffold" deleted
+
+vagrant@node1:~/part1/3-skaffold$ vi code.sh
+vagrant@node1:~/part1/3-skaffold$ vagrant@node1:~/part1/3-skaffold$ cat code.sh
+#!/bin/sh
+
+GREETING="Hello Beautiful World!"
+STEP=2
+
+echo "Printing \"$GREETING\" every $STEP second(s) ..."
+
+while true; do echo $GREETING; sleep $STEP; done
+vagrant@node1:~/part1/3-skaffold$ skaffold dev
+Generating tags...
+ - nikolayx/k8s-skaffold -> nikolayx/k8s-skaffold:latest
+Some taggers failed. Rerun with -vdebug for errors.
+Checking cache...
+ - nikolayx/k8s-skaffold: Not found. Building
+Starting build...
+Building [nikolayx/k8s-skaffold]...
+Target platforms: [linux/amd64]
+#0 building with "default" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 95B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.6s
+
+#4 [internal] load build context
+#4 transferring context: 195B done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/alpine@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+#5 CACHED
+
+#6 [2/2] COPY code.sh /
+#6 DONE 0.2s
+
+#7 exporting to image
+#7 exporting layers
+#7 exporting layers 0.1s done
+#7 writing image sha256:f866b475016e9a2fd7bf89669dd9a700640d84cb33e80bdceeb25063adc9b0de done
+#7 naming to docker.io/nikolayx/k8s-skaffold:latest 0.0s done
+#7 DONE 0.2s
+The push refers to repository [docker.io/nikolayx/k8s-skaffold]
+393c4a2d4c42: Preparing
+cc2447e1835a: Preparing
+cc2447e1835a: Layer already exists
+393c4a2d4c42: Pushed
+latest: digest: sha256:cf84d96fe0f231ff17044484c71d3dcbb1ff2705958cc2429181b9a7632086d1 size: 734
+Build [nikolayx/k8s-skaffold] succeeded
+Tags used in deployment:
+ - nikolayx/k8s-skaffold -> nikolayx/k8s-skaffold:latest@sha256:cf84d96fe0f231ff17044484c71d3dcbb1ff2705958cc2429181b9a7632086d1
+Starting deploy...
+ - pod/skaffold created
+Waiting for deployments to stabilize...
+ - pods: creating container main
+    - pod/skaffold: creating container main
+ - pods is ready.
+Deployments stabilized in 8.673 seconds
+Listing files to watch...
+ - nikolayx/k8s-skaffold
+Press Ctrl+C to exit
+Watching for changes...
+[main] Printing "Hello Beautiful World!" every 2 second(s) ...
+[main] Hello Beautiful World!
+[main] Hello Beautiful World!
+[main] Hello Beautiful World!
+[main] Hello Beautiful World!
+[main] Hello Beautiful World!
+[main] Hello Beautiful World!
+[main] Hello Beautiful World!
+^CCleaning up...
+ - pod "skaffold" deleted
+
+vagrant@node1:~/part1/3-skaffold$ kubectl get pods
+No resources found in default namespace.
+vagrant@node1:~/part1/3-skaffold$ cd ../..
+vagrant@node1:~$ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 11664  100 11664    0     0  33136      0 --:--:-- --:--:-- --:--:-- 33042
+Downloading https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
+Verifying checksum... Done.
+Preparing to install helm into /usr/local/bin
+helm installed into /usr/local/bin/helm
+vagrant@node1:~$ helm version
+version.BuildInfo{Version:"v3.13.1", GitCommit:"3547a4b5bf5edb5478ce352e18858d8a552a4110", GitTreeState:"clean", GoVersion:"go1.20.8"}
+vagrant@node1:~$ helm repo add bitnami https://charts.bitnami.com/bitnami
+"bitnami" has been added to your repositories
+vagrant@node1:~$ helm repo list
+NAME    URL
+bitnami https://charts.bitnami.com/bitnami
+vagrant@node1:~$ helm env
+HELM_BIN="helm"
+HELM_BURST_LIMIT="100"
+HELM_CACHE_HOME="/home/vagrant/.cache/helm"
+HELM_CONFIG_HOME="/home/vagrant/.config/helm"
+HELM_DATA_HOME="/home/vagrant/.local/share/helm"
+HELM_DEBUG="false"
+HELM_KUBEAPISERVER=""
+HELM_KUBEASGROUPS=""
+HELM_KUBEASUSER=""
+HELM_KUBECAFILE=""
+HELM_KUBECONTEXT=""
+HELM_KUBEINSECURE_SKIP_TLS_VERIFY="false"
+HELM_KUBETLS_SERVER_NAME=""
+HELM_KUBETOKEN=""
+HELM_MAX_HISTORY="10"
+HELM_NAMESPACE="default"
+HELM_PLUGINS="/home/vagrant/.local/share/helm/plugins"
+HELM_REGISTRY_CONFIG="/home/vagrant/.config/helm/registry/config.json"
+HELM_REPOSITORY_CACHE="/home/vagrant/.cache/helm/repository"
+HELM_REPOSITORY_CONFIG="/home/vagrant/.config/helm/repositories.yaml"
+vagrant@node1:~$ helm install my-nginx-1 bitnami/nginx
+NAME: my-nginx-1
+LAST DEPLOYED: Wed Nov 29 16:33:01 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 15.4.3
+APP VERSION: 1.25.3
+
+** Please be patient while the chart is being deployed **
+NGINX can be accessed through the following DNS name from within your cluster:
+
+    my-nginx-1.default.svc.cluster.local (port 80)
+
+To access NGINX from outside the cluster, follow the steps below:
+
+1. Get the NGINX URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-nginx-1'
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-nginx-1)
+    export SERVICE_IP=$(kubectl get svc --namespace default my-nginx-1 -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "http://${SERVICE_IP}:${SERVICE_PORT}"
+vagrant@node1:~$ ls -al /home/vagrant/.cache/helm/repository
+total 9460
+drwxr-xr-x 2 vagrant vagrant    4096 Nov 29 16:33 .
+drwxr-xr-x 3 vagrant vagrant    4096 Nov 29 16:30 ..
+-rw-r--r-- 1 vagrant vagrant    1269 Nov 29 16:30 bitnami-charts.txt
+-rw-r--r-- 1 vagrant vagrant 9630427 Nov 29 16:30 bitnami-index.yaml
+-rw-r--r-- 1 vagrant vagrant   40201 Nov 29 16:33 nginx-15.4.3.tgz
+vagrant@node1:~$ helm list
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+my-nginx-1      default         1               2023-11-29 16:33:01.815842103 +0200 EET deployed        nginx-15.4.3    1.25.3
+vagrant@node1:~$ helm status my-nginx-1
+NAME: my-nginx-1
+LAST DEPLOYED: Wed Nov 29 16:33:01 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 15.4.3
+APP VERSION: 1.25.3
+
+** Please be patient while the chart is being deployed **
+NGINX can be accessed through the following DNS name from within your cluster:
+
+    my-nginx-1.default.svc.cluster.local (port 80)
+
+To access NGINX from outside the cluster, follow the steps below:
+
+1. Get the NGINX URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-nginx-1'
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-nginx-1)
+    export SERVICE_IP=$(kubectl get svc --namespace default my-nginx-1 -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "http://${SERVICE_IP}:${SERVICE_PORT}"
+vagrant@node1:~$ kubectl get pods,svc
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/my-nginx-1-98dbdf769-q66dv   1/1     Running   0          7m11s
+
+NAME                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP        7d3h
+service/my-nginx-1   LoadBalancer   10.96.138.183   <pending>     80:30167/TCP   7m13s
+vagrant@node1:~$ helm get manifest my-nginx-1
+^C
+vagrant@node1:~$ kubectl get secret
+NAME                               TYPE                 DATA   AGE
+sh.helm.release.v1.my-nginx-1.v1   helm.sh/release.v1   1      10m
+vagrant@node1:~$ kubectl get pods,svc
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/my-nginx-1-98dbdf769-q66dv   1/1     Running   0          11m
+
+NAME                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP        7d3h
+service/my-nginx-1   LoadBalancer   10.96.138.183   <pending>     80:30167/TCP   11m
+vagrant@node1:~$ helm get all my-nginx-1
+NAME: my-nginx-1
+LAST DEPLOYED: Wed Nov 29 16:33:01 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+CHART: nginx
+VERSION: 15.4.3
+APP_VERSION: 1.25.3
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+null
+
+COMPUTED VALUES:
+affinity: {}
+args: []
+autoscaling:
+  enabled: false
+  maxReplicas: ""
+  minReplicas: ""
+  targetCPU: ""
+  targetMemory: ""
+cloneStaticSiteFromGit:
+  branch: ""
+  enabled: false
+  extraEnvVars: []
+  extraEnvVarsSecret: ""
+  extraVolumeMounts: []
+  gitClone:
+    args: []
+    command: []
+  gitSync:
+    args: []
+    command: []
+    resources:
+      limits: {}
+      requests: {}
+  image:
+    digest: ""
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    registry: docker.io
+    repository: bitnami/git
+    tag: 2.43.0-debian-11-r0
+  interval: 60
+  repository: ""
+clusterDomain: cluster.local
+command: []
+common:
+  exampleValue: common-chart
+  global:
+    imagePullSecrets: []
+    imageRegistry: ""
+commonAnnotations: {}
+commonLabels: {}
+containerPorts:
+  http: 8080
+  https: ""
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  enabled: true
+  privileged: false
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1001
+  seccompProfile:
+    type: RuntimeDefault
+customLivenessProbe: {}
+customReadinessProbe: {}
+customStartupProbe: {}
+diagnosticMode:
+  args:
+  - infinity
+  command:
+  - sleep
+  enabled: false
+existingServerBlockConfigmap: ""
+extraContainerPorts: []
+extraDeploy: []
+extraEnvVars: []
+extraEnvVarsCM: ""
+extraEnvVarsSecret: ""
+extraVolumeMounts: []
+extraVolumes: []
+fullnameOverride: ""
+global:
+  imagePullSecrets: []
+  imageRegistry: ""
+healthIngress:
+  annotations: {}
+  enabled: false
+  extraHosts: []
+  extraPaths: []
+  extraRules: []
+  extraTls: []
+  hostname: example.local
+  ingressClassName: ""
+  path: /
+  pathType: ImplementationSpecific
+  secrets: []
+  selfSigned: false
+  tls: false
+hostAliases: []
+hostIPC: false
+hostNetwork: false
+image:
+  debug: false
+  digest: ""
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: bitnami/nginx
+  tag: 1.25.3-debian-11-r1
+ingress:
+  annotations: {}
+  apiVersion: ""
+  enabled: false
+  extraHosts: []
+  extraPaths: []
+  extraRules: []
+  extraTls: []
+  hostname: nginx.local
+  ingressClassName: ""
+  path: /
+  pathType: ImplementationSpecific
+  secrets: []
+  selfSigned: false
+  tls: false
+initContainers: []
+kubeVersion: ""
+lifecycleHooks: {}
+livenessProbe:
+  enabled: true
+  failureThreshold: 6
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+metrics:
+  enabled: false
+  image:
+    digest: ""
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    registry: docker.io
+    repository: bitnami/nginx-exporter
+    tag: 0.11.0-debian-11-r370
+  podAnnotations: {}
+  port: ""
+  prometheusRule:
+    additionalLabels: {}
+    enabled: false
+    namespace: ""
+    rules: []
+  resources:
+    limits: {}
+    requests: {}
+  securityContext:
+    enabled: false
+    runAsUser: 1001
+  service:
+    annotations:
+      prometheus.io/port: '{{ .Values.metrics.service.port }}'
+      prometheus.io/scrape: "true"
+    port: 9113
+  serviceMonitor:
+    enabled: false
+    honorLabels: false
+    interval: ""
+    jobLabel: ""
+    labels: {}
+    metricRelabelings: []
+    namespace: ""
+    relabelings: []
+    scrapeTimeout: ""
+    selector: {}
+nameOverride: ""
+namespaceOverride: ""
+nodeAffinityPreset:
+  key: ""
+  type: ""
+  values: []
+nodeSelector: {}
+pdb:
+  create: false
+  maxUnavailable: 0
+  minAvailable: 1
+podAffinityPreset: ""
+podAnnotations: {}
+podAntiAffinityPreset: soft
+podLabels: {}
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+  sysctls: []
+priorityClassName: ""
+readinessProbe:
+  enabled: true
+  failureThreshold: 3
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 3
+replicaCount: 1
+resources:
+  limits: {}
+  requests: {}
+revisionHistoryLimit: 10
+schedulerName: ""
+serverBlock: ""
+service:
+  annotations: {}
+  clusterIP: ""
+  externalTrafficPolicy: Cluster
+  extraPorts: []
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+  nodePorts:
+    http: ""
+    https: ""
+  ports:
+    http: 80
+    https: 443
+  sessionAffinity: None
+  sessionAffinityConfig: {}
+  targetPort:
+    http: http
+    https: https
+  type: LoadBalancer
+serviceAccount:
+  annotations: {}
+  automountServiceAccountToken: false
+  create: false
+  name: ""
+sidecarSingleProcessNamespace: false
+sidecars: []
+startupProbe:
+  enabled: false
+  failureThreshold: 6
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+staticSiteConfigmap: ""
+staticSitePVC: ""
+terminationGracePeriodSeconds: ""
+tolerations: []
+topologySpreadConstraints: []
+updateStrategy:
+  rollingUpdate: {}
+  type: RollingUpdate
+
+HOOKS:
+MANIFEST:
+---
+# Source: nginx/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx-1
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: my-nginx-1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.3
+    helm.sh/chart: nginx-15.4.3
+  annotations:
+spec:
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: "Cluster"
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app.kubernetes.io/instance: my-nginx-1
+    app.kubernetes.io/name: nginx
+---
+# Source: nginx/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-1
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: my-nginx-1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.3
+    helm.sh/chart: nginx-15.4.3
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: my-nginx-1
+      app.kubernetes.io/name: nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-nginx-1
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: nginx
+        app.kubernetes.io/version: 1.25.3
+        helm.sh/chart: nginx-15.4.3
+      annotations:
+    spec:
+
+      automountServiceAccountToken: false
+      shareProcessNamespace: false
+      serviceAccountName: default
+      affinity:
+        podAffinity:
+
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: my-nginx-1
+                    app.kubernetes.io/name: nginx
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+
+      hostNetwork: false
+      hostIPC: false
+      securityContext:
+        fsGroup: 1001
+        sysctls: []
+      initContainers:
+      containers:
+        - name: nginx
+          image: docker.io/bitnami/nginx:1.25.3-debian-11-r1
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: NGINX_HTTP_PORT_NUMBER
+              value: "8080"
+          envFrom:
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            tcpSocket:
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+            tcpSocket:
+              port: http
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+      volumes:
+
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 15.4.3
+APP VERSION: 1.25.3
+
+** Please be patient while the chart is being deployed **
+NGINX can be accessed through the following DNS name from within your cluster:
+
+    my-nginx-1.default.svc.cluster.local (port 80)
+
+To access NGINX from outside the cluster, follow the steps below:
+
+1. Get the NGINX URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-nginx-1'
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-nginx-1)
+    export SERVICE_IP=$(kubectl get svc --namespace default my-nginx-1 -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "http://${SERVICE_IP}:${SERVICE_PORT}"
+vagrant@node1:~$ kubectl get service my-nginx-1
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+my-nginx-1   LoadBalancer   10.96.138.183   <pending>     80:30167/TCP   13m
+vagrant@node1:~$ kubectl create configmap my-nginx-2-index --from-literal=index.html='<h1>Hello from NGINX chart :)</h1>'
+configmap/my-nginx-2-index created
+vagrant@node1:~$ kebectl get cm
+-bash: kebectl: command not found
+vagrant@node1:~$ kubectl get cm
+NAME               DATA   AGE
+kube-root-ca.crt   1      7d3h
+my-nginx-2-index   1      29s
+vagrant@node1:~$ kubectl get cm my-nginx-2-index -o yaml
+apiVersion: v1
+data:
+  index.html: <h1>Hello from NGINX chart :)</h1>
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-29T14:52:57Z"
+  name: my-nginx-2-index
+  namespace: default
+  resourceVersion: "22395"
+  uid: 449abbdd-8b07-41b6-9384-d46e44c18565
+vagrant@node1:~$ helm install my-nginx-2 bitnami/nginx --set staticSiteConfigmap=my-nginx-2-index --dry-run
+NAME: my-nginx-2
+LAST DEPLOYED: Wed Nov 29 16:54:21 2023
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+HOOKS:
+MANIFEST:
+---
+# Source: nginx/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx-2
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: my-nginx-2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.3
+    helm.sh/chart: nginx-15.4.3
+  annotations:
+spec:
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: "Cluster"
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app.kubernetes.io/instance: my-nginx-2
+    app.kubernetes.io/name: nginx
+---
+# Source: nginx/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-2
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: my-nginx-2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.3
+    helm.sh/chart: nginx-15.4.3
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: my-nginx-2
+      app.kubernetes.io/name: nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-nginx-2
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: nginx
+        app.kubernetes.io/version: 1.25.3
+        helm.sh/chart: nginx-15.4.3
+      annotations:
+    spec:
+
+      automountServiceAccountToken: false
+      shareProcessNamespace: false
+      serviceAccountName: default
+      affinity:
+        podAffinity:
+
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: my-nginx-2
+                    app.kubernetes.io/name: nginx
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+
+      hostNetwork: false
+      hostIPC: false
+      securityContext:
+        fsGroup: 1001
+        sysctls: []
+      initContainers:
+      containers:
+        - name: nginx
+          image: docker.io/bitnami/nginx:1.25.3-debian-11-r1
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: NGINX_HTTP_PORT_NUMBER
+              value: "8080"
+          envFrom:
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            tcpSocket:
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+            tcpSocket:
+              port: http
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: staticsite
+              mountPath: /app
+      volumes:
+        - name: staticsite
+
+          configMap:
+            name: my-nginx-2-index
+
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 15.4.3
+APP VERSION: 1.25.3
+
+** Please be patient while the chart is being deployed **
+NGINX can be accessed through the following DNS name from within your cluster:
+
+    my-nginx-2.default.svc.cluster.local (port 80)
+
+To access NGINX from outside the cluster, follow the steps below:
+
+1. Get the NGINX URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-nginx-2'
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-nginx-2)
+    export SERVICE_IP=$(kubectl get svc --namespace default my-nginx-2 -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "http://${SERVICE_IP}:${SERVICE_PORT}"
+vagrant@node1:~$ helm install my-nginx-2 bitnami/nginx --set staticSiteConfigmap=my-nginx-2-index
+NAME: my-nginx-2
+LAST DEPLOYED: Wed Nov 29 16:55:26 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 15.4.3
+APP VERSION: 1.25.3
+
+** Please be patient while the chart is being deployed **
+NGINX can be accessed through the following DNS name from within your cluster:
+
+    my-nginx-2.default.svc.cluster.local (port 80)
+
+To access NGINX from outside the cluster, follow the steps below:
+
+1. Get the NGINX URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-nginx-2'
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-nginx-2)
+    export SERVICE_IP=$(kubectl get svc --namespace default my-nginx-2 -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "http://${SERVICE_IP}:${SERVICE_PORT}"
+vagrant@node1:~$ helm list
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+my-nginx-1      default         1               2023-11-29 16:33:01.815842103 +0200 EET deployed        nginx-15.4.3    1.25.3
+my-nginx-2      default         1               2023-11-29 16:55:26.870046106 +0200 EET deployed        nginx-15.4.3    1.25.3
+vagrant@node1:~$ kubectl get pods,svc
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/my-nginx-1-98dbdf769-q66dv   1/1     Running   0          22m
+pod/my-nginx-2-cbc96d878-czcj2   1/1     Running   0          26s
+
+NAME                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP        7d3h
+service/my-nginx-1   LoadBalancer   10.96.138.183   <pending>     80:30167/TCP   22m
+service/my-nginx-2   LoadBalancer   10.104.39.244   <pending>     80:30576/TCP   26s
+vagrant@node1:~$ helm uninstall my-nginx-1 my-nginx-2
+release "my-nginx-1" uninstalled
+release "my-nginx-2" uninstalled
+vagrant@node1:~$ helm install my-nginx-2 bitnami/nginx --set staticSiteConfigmap=my-nginx-2-index
+NAME: my-nginx-2
+LAST DEPLOYED: Wed Nov 29 16:56:46 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: nginx
+CHART VERSION: 15.4.3
+APP VERSION: 1.25.3
+
+** Please be patient while the chart is being deployed **
+NGINX can be accessed through the following DNS name from within your cluster:
+
+    my-nginx-2.default.svc.cluster.local (port 80)
+
+To access NGINX from outside the cluster, follow the steps below:
+
+1. Get the NGINX URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-nginx-2'
+
+    export SERVICE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services my-nginx-2)
+    export SERVICE_IP=$(kubectl get svc --namespace default my-nginx-2 -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "http://${SERVICE_IP}:${SERVICE_PORT}"
+vagrant@node1:~$ kubectl get svc
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP        7d3h
+my-nginx-2   LoadBalancer   10.97.92.166   <pending>     80:30609/TCP   46s
+vagrant@node1:~$ helm uninstall my-nginx-2
+release "my-nginx-2" uninstalled
+vagrant@node1:~$ kubectl get pods,svc,cm,secret
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d3h
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      7d3h
+configmap/my-nginx-2-index   1      5m16s
+vagrant@node1:~$ kubectl delete cm my-nginx-2-index
+configmap "my-nginx-2-index" deleted
+vagrant@node1:~$ helm search hub wordpress
+URL                                                     CHART VERSION   APP VERSION             DESCRIPTION
+https://artifacthub.io/packages/helm/wordpress-...      1.0.2           1.0.0                   A Helm chart for deploying Wordpress+Mariadb st...
+https://artifacthub.io/packages/helm/kube-wordp...      0.1.0           1.1                     this is my wordpress package
+https://artifacthub.io/packages/helm/bitnami/wo...      18.1.19         6.4.1                   WordPress is the world's most popular blogging ...
+https://artifacthub.io/packages/helm/bitnami-ak...      15.2.13         6.1.0                   WordPress is the world's most popular blogging ...
+https://artifacthub.io/packages/helm/shubham-wo...      0.1.0           1.16.0                  A Helm chart for Kubernetes
+https://artifacthub.io/packages/helm/truecharts...      3.0.67          6.4.1                   The WordPress rich content management system ca...
+https://artifacthub.io/packages/helm/camptocamp...      0.6.10          4.8.1                   Web publishing platform for building blogs and ...
+https://artifacthub.io/packages/helm/sikalabs/w...      0.2.0                                   Simple Wordpress
+https://artifacthub.io/packages/helm/riftbit/wo...      12.1.16         5.8.1                   Web publishing platform for building blogs and ...
+https://artifacthub.io/packages/helm/devops/wor...      0.12.0          1.16.0                  Wordpress helm chart
+https://artifacthub.io/packages/helm/rock8s/wor...      0.0.1           latest                  open source software you can use to create a be...
+https://artifacthub.io/packages/helm/skywordpre...      0.1.0           1.16.0                  A Helm chart for WordPress
+https://artifacthub.io/packages/helm/groundhog2...      0.10.0          6.4.0-apache            A Helm chart for Wordpress on Kubernetes
+https://artifacthub.io/packages/helm/mcouliba/w...      0.1.0           1.16.0                  A Helm chart for Kubernetes
+https://artifacthub.io/packages/helm/homeenterp...      0.5.0           5.9.3-php8.1-apache     Blog server
+https://artifacthub.io/packages/helm/wordpress-...      6.1.1-3.0rc5    master                  Lightweight Wordpress installation with additio...
+https://artifacthub.io/packages/helm/wordpress-...      1.0.0           1.1                     This is a package for configuring wordpress and...
+https://artifacthub.io/packages/helm/securecode...      4.3.0           4.0                     Insecure & Outdated Wordpress Instance: Never e...
+https://artifacthub.io/packages/helm/wordpressm...      1.0.0                                   This is the Helm Chart that creates the Wordpre...
+https://artifacthub.io/packages/helm/bitpoke/wo...      0.12.2          v0.12.2                 Bitpoke WordPress Operator Helm Chart
+https://artifacthub.io/packages/helm/bitpoke/wo...      0.12.4          v0.12.4                 Helm chart for deploying a WordPress site on Bi...
+https://artifacthub.io/packages/helm/kube-wordp...      0.1.0           0.0.1-alpha             Helm Chart for Wordpress installation on MySQL ...
+https://artifacthub.io/packages/helm/riotkit-or...      2.1.0-alpha4    v2.1-alpha4             Lightweight Wordpress installation with additio...
+https://artifacthub.io/packages/helm/phntom/bin...      0.0.4           0.0.3                   www.binaryvision.co.il static wordpress
+https://artifacthub.io/packages/helm/gh-shessel...      2.1.12          6.1.1                   Web publishing platform for building blogs and ...
+https://artifacthub.io/packages/helm/sikalabs/w...      0.1.2
+https://artifacthub.io/packages/helm/gh-shessel...      6.3.1           6.3.1                   Web publishing platform for building blogs and ...
+https://artifacthub.io/packages/helm/wordpressh...      0.1.0           1.16.0                  A Helm chart for Kubernetes
+https://artifacthub.io/packages/helm/wordpress-...      0.1.0           1.1                     this is chart create the wordpress with suitabl...
+https://artifacthub.io/packages/helm/wordpress-...      0.0.1                                   Helm Chart for wordpress-gatsby
+https://artifacthub.io/packages/helm/bitpoke/bi...      1.8.14          1.8.14                  The Bitpoke App for WordPress provides a versat...
+https://artifacthub.io/packages/helm/sonu-wordp...      1.0.0           2                       This is my custom chart to deploy wordpress and...
+https://artifacthub.io/packages/helm/wordpress/...      0.2.0           1.1.0                   Wordpress for Kubernetes
+https://artifacthub.io/packages/helm/uvaise-wor...      0.2.0           1.1.0                   Wordpress for Kubernetes
+https://artifacthub.io/packages/helm/wordpress-...      0.1.0           1.16.0                  A Helm chart for wordpress deployed on Azure Ku...
+https://artifacthub.io/packages/helm/wordpress-...      1.0.0           2                       This is my custom chart to deploy wordpress and...
+https://artifacthub.io/packages/helm/bitpoke/stack      0.12.4          v0.12.4                 Your Open-Source, Cloud-Native WordPress Infras...
+https://artifacthub.io/packages/helm/securecode...      4.3.0           v3.8.25                 A Helm chart for the WordPress security scanner...
+https://artifacthub.io/packages/helm/wordpresss...      1.1.0           5.8.2                   Web publishing platform for building blogs and ...
+https://artifacthub.io/packages/helm/viveksahu2...      1.0.0           2                       This is my custom chart to deploy wordpress and...
+https://artifacthub.io/packages/helm/six/wordress       0.2.0           1.1.0                   Wordpress for Kubernetes
+https://artifacthub.io/packages/helm/jinchi-cha...      0.2.0           1.1.0                   Wordpress for Kubernetes
+https://artifacthub.io/packages/helm/wordpressm...      0.1.0           1.1
+vagrant@node1:~$ helm search repo wordpress
+NAME                    CHART VERSION   APP VERSION     DESCRIPTION
+bitnami/wordpress       18.1.19         6.4.1           WordPress is the world's most popular blogging ...
+bitnami/wordpress-intel 2.1.31          6.1.1           DEPRECATED WordPress for Intel is the most popu...
+vagrant@node1:~$ helm show chart bitnami/wordpress
+annotations:
+  category: CMS
+  images: |
+    - name: apache-exporter
+      image: docker.io/bitnami/apache-exporter:1.0.3-debian-11-r1
+    - name: os-shell
+      image: docker.io/bitnami/os-shell:11-debian-11-r91
+    - name: wordpress
+      image: docker.io/bitnami/wordpress:6.4.1-debian-11-r10
+  licenses: Apache-2.0
+apiVersion: v2
+appVersion: 6.4.1
+dependencies:
+- condition: memcached.enabled
+  name: memcached
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 6.x.x
+- condition: mariadb.enabled
+  name: mariadb
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 14.x.x
+- name: common
+  repository: oci://registry-1.docker.io/bitnamicharts
+  tags:
+  - bitnami-common
+  version: 2.x.x
+description: WordPress is the world's most popular blogging and content management
+  platform. Powerful yet simple, everyone from students to global corporations use
+  it to build beautiful, functional websites.
+home: https://bitnami.com
+icon: https://bitnami.com/assets/stacks/wordpress/img/wordpress-stack-220x234.png
+keywords:
+- application
+- blog
+- cms
+- http
+- php
+- web
+- wordpress
+maintainers:
+- name: VMware, Inc.
+  url: https://github.com/bitnami/charts
+name: wordpress
+sources:
+- https://github.com/bitnami/charts/tree/main/bitnami/wordpress
+version: 18.1.19
+
+vagrant@node1:~$ helm show readme bitnami/wordpress
+<!--- app-name: WordPress -->
+
+# Bitnami package for WordPress
+
+WordPress is the world's most popular blogging and content management platform. Powerful yet simple, everyone from students to global corporations use it to build beautiful, functional websites.
+
+[Overview of WordPress](http://www.wordpress.org)
+
+## TL;DR
+
+```console
+helm install my-release oci://registry-1.docker.io/bitnamicharts/wordpress
+```
+
+Looking to use WordPress in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
+## Introduction
+
+This chart bootstraps a [WordPress](https://github.com/bitnami/containers/tree/main/bitnami/wordpress) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+It also packages the [Bitnami MariaDB chart](https://github.com/bitnami/charts/tree/main/bitnami/mariadb) which is required for bootstrapping a MariaDB deployment for the database requirements of the WordPress application, and the [Bitnami Memcached chart](https://github.com/bitnami/charts/tree/main/bitnami/memcached) that can be used to cache database queries.
+
+Bitnami charts can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
+
+## Prerequisites
+
+- Kubernetes 1.23+
+- Helm 3.8.0+
+- PV provisioner support in the underlying infrastructure
+- ReadWriteMany volumes for deployment scaling
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm install my-release oci://REGISTRY_NAME/REPOSITORY_NAME/wordpress
+```
+
+> Note: You need to substitute the placeholders `REGISTRY_NAME` and `REPOSITORY_NAME` with a reference to your Helm chart registry and repository. For example, in the case of Bitnami, you need to use `REGISTRY_NAME=registry-1.docker.io` and `REPOSITORY_NAME=bitnamicharts`.
+
+The command deploys WordPress on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+
+> **Tip**: List all releases using `helm list`
+
+## Uninstalling the Chart
+
+To uninstall/delete the `my-release` deployment:
+
+```console
+helm delete my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+## Parameters
+
+### Global parameters
+
+| Name                      | Description                                     | Value |
+| ------------------------- | ----------------------------------------------- | ----- |
+| `global.imageRegistry`    | Global Docker image registry                    | `""`  |
+| `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`  |
+| `global.storageClass`     | Global StorageClass for Persistent Volume(s)    | `""`  |
+
+### Common parameters
+
+| Name                     | Description                                                                                  | Value           |
+| ------------------------ | -------------------------------------------------------------------------------------------- | --------------- |
+| `kubeVersion`            | Override Kubernetes version                                                                  | `""`            |
+| `nameOverride`           | String to partially override common.names.fullname template (will maintain the release name) | `""`            |
+| `fullnameOverride`       | String to fully override common.names.fullname template                                      | `""`            |
+| `commonLabels`           | Labels to add to all deployed resources                                                      | `{}`            |
+| `commonAnnotations`      | Annotations to add to all deployed resources                                                 | `{}`            |
+| `clusterDomain`          | Kubernetes Cluster Domain                                                                    | `cluster.local` |
+| `extraDeploy`            | Array of extra objects to deploy with the release                                            | `[]`            |
+| `diagnosticMode.enabled` | Enable diagnostic mode (all probes will be disabled and the command will be overridden)      | `false`         |
+| `diagnosticMode.command` | Command to override all containers in the deployment                                         | `["sleep"]`     |
+| `diagnosticMode.args`    | Args to override all containers in the deployment                                            | `["infinity"]`  |
+
+### WordPress Image parameters
+
+| Name                | Description                                                                                               | Value                       |
+| ------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `image.registry`    | WordPress image registry                                                                                  | `REGISTRY_NAME`             |
+| `image.repository`  | WordPress image repository                                                                                | `REPOSITORY_NAME/wordpress` |
+| `image.digest`      | WordPress image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                        |
+| `image.pullPolicy`  | WordPress image pull policy                                                                               | `IfNotPresent`              |
+| `image.pullSecrets` | WordPress image pull secrets                                                                              | `[]`                        |
+| `image.debug`       | Specify if debug values should be set                                                                     | `false`                     |
+
+### WordPress Configuration parameters
+
+| Name                                   | Description                                                                           | Value              |
+| -------------------------------------- | ------------------------------------------------------------------------------------- | ------------------ |
+| `wordpressUsername`                    | WordPress username                                                                    | `user`             |
+| `wordpressPassword`                    | WordPress user password                                                               | `""`               |
+| `existingSecret`                       | Name of existing secret containing WordPress credentials                              | `""`               |
+| `wordpressEmail`                       | WordPress user email                                                                  | `user@example.com` |
+| `wordpressFirstName`                   | WordPress user first name                                                             | `FirstName`        |
+| `wordpressLastName`                    | WordPress user last name                                                              | `LastName`         |
+| `wordpressBlogName`                    | Blog name                                                                             | `User's Blog!`     |
+| `wordpressTablePrefix`                 | Prefix to use for WordPress database tables                                           | `wp_`              |
+| `wordpressScheme`                      | Scheme to use to generate WordPress URLs                                              | `http`             |
+| `wordpressSkipInstall`                 | Skip wizard installation                                                              | `false`            |
+| `wordpressExtraConfigContent`          | Add extra content to the default wp-config.php file                                   | `""`               |
+| `wordpressConfiguration`               | The content for your custom wp-config.php file (advanced feature)                     | `""`               |
+| `existingWordPressConfigurationSecret` | The name of an existing secret with your custom wp-config.php file (advanced feature) | `""`               |
+| `wordpressConfigureCache`              | Enable W3 Total Cache plugin and configure cache settings                             | `false`            |
+| `wordpressPlugins`                     | Array of plugins to install and activate. Can be specified as `all` or `none`.        | `none`             |
+| `apacheConfiguration`                  | The content for your custom httpd.conf file (advanced feature)                        | `""`               |
+| `existingApacheConfigurationConfigMap` | The name of an existing secret with your custom httpd.conf file (advanced feature)    | `""`               |
+| `customPostInitScripts`                | Custom post-init.d user scripts                                                       | `{}`               |
+| `smtpHost`                             | SMTP server host                                                                      | `""`               |
+| `smtpPort`                             | SMTP server port                                                                      | `""`               |
+| `smtpUser`                             | SMTP username                                                                         | `""`               |
+| `smtpPassword`                         | SMTP user password                                                                    | `""`               |
+| `smtpProtocol`                         | SMTP protocol                                                                         | `""`               |
+| `smtpExistingSecret`                   | The name of an existing secret with SMTP credentials                                  | `""`               |
+| `allowEmptyPassword`                   | Allow the container to be started with blank passwords                                | `true`             |
+| `allowOverrideNone`                    | Configure Apache to prohibit overriding directives with htaccess files                | `false`            |
+| `overrideDatabaseSettings`             | Allow overriding the database settings persisted in wp-config.php                     | `false`            |
+| `htaccessPersistenceEnabled`           | Persist custom changes on htaccess files                                              | `false`            |
+| `customHTAccessCM`                     | The name of an existing ConfigMap with custom htaccess rules                          | `""`               |
+| `command`                              | Override default container command (useful when using custom images)                  | `[]`               |
+| `args`                                 | Override default container args (useful when using custom images)                     | `[]`               |
+| `extraEnvVars`                         | Array with extra environment variables to add to the WordPress container              | `[]`               |
+| `extraEnvVarsCM`                       | Name of existing ConfigMap containing extra env vars                                  | `""`               |
+| `extraEnvVarsSecret`                   | Name of existing Secret containing extra env vars                                     | `""`               |
+
+### WordPress Multisite Configuration parameters
+
+| Name                            | Description                                                                                                                        | Value       |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `multisite.enable`              | Whether to enable WordPress Multisite configuration.                                                                               | `false`     |
+| `multisite.host`                | WordPress Multisite hostname/address. This value is mandatory when enabling Multisite mode.                                        | `""`        |
+| `multisite.networkType`         | WordPress Multisite network type to enable. Allowed values: `subfolder`, `subdirectory` or `subdomain`.                            | `subdomain` |
+| `multisite.enableNipIoRedirect` | Whether to enable IP address redirection to nip.io wildcard DNS. Useful when running on an IP address with subdomain network type. | `false`     |
+
+### WordPress deployment parameters
+
+| Name                                                | Description                                                                                                              | Value            |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| `replicaCount`                                      | Number of WordPress replicas to deploy                                                                                   | `1`              |
+| `updateStrategy.type`                               | WordPress deployment strategy type                                                                                       | `RollingUpdate`  |
+| `schedulerName`                                     | Alternate scheduler                                                                                                      | `""`             |
+| `terminationGracePeriodSeconds`                     | In seconds, time given to the WordPress pod to terminate gracefully                                                      | `""`             |
+| `topologySpreadConstraints`                         | Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template | `[]`             |
+| `priorityClassName`                                 | Name of the existing priority class to be used by WordPress pods, priority class needs to be created beforehand          | `""`             |
+| `hostAliases`                                       | WordPress pod host aliases                                                                                               | `[]`             |
+| `extraVolumes`                                      | Optionally specify extra list of additional volumes for WordPress pods                                                   | `[]`             |
+| `extraVolumeMounts`                                 | Optionally specify extra list of additional volumeMounts for WordPress container(s)                                      | `[]`             |
+| `sidecars`                                          | Add additional sidecar containers to the WordPress pod                                                                   | `[]`             |
+| `initContainers`                                    | Add additional init containers to the WordPress pods                                                                     | `[]`             |
+| `podLabels`                                         | Extra labels for WordPress pods                                                                                          | `{}`             |
+| `podAnnotations`                                    | Annotations for WordPress pods                                                                                           | `{}`             |
+| `podAffinityPreset`                                 | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                      | `""`             |
+| `podAntiAffinityPreset`                             | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                 | `soft`           |
+| `nodeAffinityPreset.type`                           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                | `""`             |
+| `nodeAffinityPreset.key`                            | Node label key to match. Ignored if `affinity` is set                                                                    | `""`             |
+| `nodeAffinityPreset.values`                         | Node label values to match. Ignored if `affinity` is set                                                                 | `[]`             |
+| `affinity`                                          | Affinity for pod assignment                                                                                              | `{}`             |
+| `nodeSelector`                                      | Node labels for pod assignment                                                                                           | `{}`             |
+| `tolerations`                                       | Tolerations for pod assignment                                                                                           | `[]`             |
+| `resources.limits`                                  | The resources limits for the WordPress containers                                                                        | `{}`             |
+| `resources.requests.memory`                         | The requested memory for the WordPress containers                                                                        | `512Mi`          |
+| `resources.requests.cpu`                            | The requested cpu for the WordPress containers                                                                           | `300m`           |
+| `containerPorts.http`                               | WordPress HTTP container port                                                                                            | `8080`           |
+| `containerPorts.https`                              | WordPress HTTPS container port                                                                                           | `8443`           |
+| `extraContainerPorts`                               | Optionally specify extra list of additional ports for WordPress container(s)                                             | `[]`             |
+| `podSecurityContext.enabled`                        | Enabled WordPress pods' Security Context                                                                                 | `true`           |
+| `podSecurityContext.fsGroup`                        | Set WordPress pod's Security Context fsGroup                                                                             | `1001`           |
+| `containerSecurityContext.enabled`                  | Enabled containers' Security Context                                                                                     | `true`           |
+| `containerSecurityContext.runAsUser`                | Set containers' Security Context runAsUser                                                                               | `1001`           |
+| `containerSecurityContext.runAsNonRoot`             | Set container's Security Context runAsNonRoot                                                                            | `true`           |
+| `containerSecurityContext.privileged`               | Set container's Security Context privileged                                                                              | `false`          |
+| `containerSecurityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                                                                  | `false`          |
+| `containerSecurityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                                                                | `false`          |
+| `containerSecurityContext.capabilities.drop`        | List of capabilities to be dropped                                                                                       | `["ALL"]`        |
+| `containerSecurityContext.seccompProfile.type`      | Set container's Security Context seccomp profile                                                                         | `RuntimeDefault` |
+| `livenessProbe.enabled`                             | Enable livenessProbe on WordPress containers                                                                             | `true`           |
+| `livenessProbe.initialDelaySeconds`                 | Initial delay seconds for livenessProbe                                                                                  | `120`            |
+| `livenessProbe.periodSeconds`                       | Period seconds for livenessProbe                                                                                         | `10`             |
+| `livenessProbe.timeoutSeconds`                      | Timeout seconds for livenessProbe                                                                                        | `5`              |
+| `livenessProbe.failureThreshold`                    | Failure threshold for livenessProbe                                                                                      | `6`              |
+| `livenessProbe.successThreshold`                    | Success threshold for livenessProbe                                                                                      | `1`              |
+| `readinessProbe.enabled`                            | Enable readinessProbe on WordPress containers                                                                            | `true`           |
+| `readinessProbe.initialDelaySeconds`                | Initial delay seconds for readinessProbe                                                                                 | `30`             |
+| `readinessProbe.periodSeconds`                      | Period seconds for readinessProbe                                                                                        | `10`             |
+| `readinessProbe.timeoutSeconds`                     | Timeout seconds for readinessProbe                                                                                       | `5`              |
+| `readinessProbe.failureThreshold`                   | Failure threshold for readinessProbe                                                                                     | `6`              |
+| `readinessProbe.successThreshold`                   | Success threshold for readinessProbe                                                                                     | `1`              |
+| `startupProbe.enabled`                              | Enable startupProbe on WordPress containers                                                                              | `false`          |
+| `startupProbe.initialDelaySeconds`                  | Initial delay seconds for startupProbe                                                                                   | `30`             |
+| `startupProbe.periodSeconds`                        | Period seconds for startupProbe                                                                                          | `10`             |
+| `startupProbe.timeoutSeconds`                       | Timeout seconds for startupProbe                                                                                         | `5`              |
+| `startupProbe.failureThreshold`                     | Failure threshold for startupProbe                                                                                       | `6`              |
+| `startupProbe.successThreshold`                     | Success threshold for startupProbe                                                                                       | `1`              |
+| `customLivenessProbe`                               | Custom livenessProbe that overrides the default one                                                                      | `{}`             |
+| `customReadinessProbe`                              | Custom readinessProbe that overrides the default one                                                                     | `{}`             |
+| `customStartupProbe`                                | Custom startupProbe that overrides the default one                                                                       | `{}`             |
+| `lifecycleHooks`                                    | for the WordPress container(s) to automate configuration before or after startup                                         | `{}`             |
+
+### Traffic Exposure Parameters
+
+| Name                               | Description                                                                                                                                              | Value                    |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `service.type`                     | WordPress service type                                                                                                                                   | `LoadBalancer`           |
+| `service.ports.http`               | WordPress service HTTP port                                                                                                                              | `80`                     |
+| `service.ports.https`              | WordPress service HTTPS port                                                                                                                             | `443`                    |
+| `service.httpsTargetPort`          | Target port for HTTPS                                                                                                                                    | `https`                  |
+| `service.nodePorts.http`           | Node port for HTTP                                                                                                                                       | `""`                     |
+| `service.nodePorts.https`          | Node port for HTTPS                                                                                                                                      | `""`                     |
+| `service.sessionAffinity`          | Control where client requests go, to the same pod or round-robin                                                                                         | `None`                   |
+| `service.sessionAffinityConfig`    | Additional settings for the sessionAffinity                                                                                                              | `{}`                     |
+| `service.clusterIP`                | WordPress service Cluster IP                                                                                                                             | `""`                     |
+| `service.loadBalancerIP`           | WordPress service Load Balancer IP                                                                                                                       | `""`                     |
+| `service.loadBalancerSourceRanges` | WordPress service Load Balancer sources                                                                                                                  | `[]`                     |
+| `service.externalTrafficPolicy`    | WordPress service external traffic policy                                                                                                                | `Cluster`                |
+| `service.annotations`              | Additional custom annotations for WordPress service                                                                                                      | `{}`                     |
+| `service.extraPorts`               | Extra port to expose on WordPress service                                                                                                                | `[]`                     |
+| `ingress.enabled`                  | Enable ingress record generation for WordPress                                                                                                           | `false`                  |
+| `ingress.pathType`                 | Ingress path type                                                                                                                                        | `ImplementationSpecific` |
+| `ingress.apiVersion`               | Force Ingress API version (automatically detected if not set)                                                                                            | `""`                     |
+| `ingress.ingressClassName`         | IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)                                                                            | `""`                     |
+| `ingress.hostname`                 | Default host for the ingress record. The hostname is templated and thus can contain other variable references.                                           | `wordpress.local`        |
+| `ingress.path`                     | Default path for the ingress record                                                                                                                      | `/`                      |
+| `ingress.annotations`              | Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.                         | `{}`                     |
+| `ingress.tls`                      | Enable TLS configuration for the host defined at `ingress.hostname` parameter                                                                            | `false`                  |
+| `ingress.tlsWwwPrefix`             | Adds www subdomain to default cert                                                                                                                       | `false`                  |
+| `ingress.selfSigned`               | Create a TLS secret for this ingress record using self-signed certificates generated by Helm                                                             | `false`                  |
+| `ingress.extraHosts`               | An array with additional hostname(s) to be covered with the ingress record. The host names are templated and thus can contain other variable references. | `[]`                     |
+| `ingress.extraPaths`               | An array with additional arbitrary paths that may need to be added to the ingress under the main host                                                    | `[]`                     |
+| `ingress.extraTls`                 | TLS configuration for additional hostname(s) to be covered with this ingress record                                                                      | `[]`                     |
+| `ingress.secrets`                  | Custom TLS certificates as secrets                                                                                                                       | `[]`                     |
+| `ingress.extraRules`               | Additional rules to be covered with this ingress record                                                                                                  | `[]`                     |
+
+### Persistence Parameters
+
+| Name                                                   | Description                                                                                                        | Value                      |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| `persistence.enabled`                                  | Enable persistence using Persistent Volume Claims                                                                  | `true`                     |
+| `persistence.storageClass`                             | Persistent Volume storage class                                                                                    | `""`                       |
+| `persistence.accessModes`                              | Persistent Volume access modes                                                                                     | `[]`                       |
+| `persistence.accessMode`                               | Persistent Volume access mode (DEPRECATED: use `persistence.accessModes` instead)                                  | `ReadWriteOnce`            |
+| `persistence.size`                                     | Persistent Volume size                                                                                             | `10Gi`                     |
+| `persistence.dataSource`                               | Custom PVC data source                                                                                             | `{}`                       |
+| `persistence.existingClaim`                            | The name of an existing PVC to use for persistence                                                                 | `""`                       |
+| `persistence.selector`                                 | Selector to match an existing Persistent Volume for WordPress data PVC                                             | `{}`                       |
+| `persistence.annotations`                              | Persistent Volume Claim annotations                                                                                | `{}`                       |
+| `volumePermissions.enabled`                            | Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`                    | `false`                    |
+| `volumePermissions.image.registry`                     | OS Shell + Utility image registry                                                                                  | `REGISTRY_NAME`            |
+| `volumePermissions.image.repository`                   | OS Shell + Utility image repository                                                                                | `REPOSITORY_NAME/os-shell` |
+| `volumePermissions.image.digest`                       | OS Shell + Utility image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                       |
+| `volumePermissions.image.pullPolicy`                   | OS Shell + Utility image pull policy                                                                               | `IfNotPresent`             |
+| `volumePermissions.image.pullSecrets`                  | OS Shell + Utility image pull secrets                                                                              | `[]`                       |
+| `volumePermissions.resources.limits`                   | The resources limits for the init container                                                                        | `{}`                       |
+| `volumePermissions.resources.requests`                 | The requested resources for the init container                                                                     | `{}`                       |
+| `volumePermissions.containerSecurityContext.runAsUser` | User ID for the init container                                                                                     | `0`                        |
+
+### Other Parameters
+
+| Name                                          | Description                                                            | Value   |
+| --------------------------------------------- | ---------------------------------------------------------------------- | ------- |
+| `serviceAccount.create`                       | Enable creation of ServiceAccount for WordPress pod                    | `false` |
+| `serviceAccount.name`                         | The name of the ServiceAccount to use.                                 | `""`    |
+| `serviceAccount.automountServiceAccountToken` | Allows auto mount of ServiceAccountToken on the serviceAccount created | `true`  |
+| `serviceAccount.annotations`                  | Additional custom annotations for the ServiceAccount                   | `{}`    |
+| `pdb.create`                                  | Enable a Pod Disruption Budget creation                                | `false` |
+| `pdb.minAvailable`                            | Minimum number/percentage of pods that should remain scheduled         | `1`     |
+| `pdb.maxUnavailable`                          | Maximum number/percentage of pods that may be made unavailable         | `""`    |
+| `autoscaling.enabled`                         | Enable Horizontal POD autoscaling for WordPress                        | `false` |
+| `autoscaling.minReplicas`                     | Minimum number of WordPress replicas                                   | `1`     |
+| `autoscaling.maxReplicas`                     | Maximum number of WordPress replicas                                   | `11`    |
+| `autoscaling.targetCPU`                       | Target CPU utilization percentage                                      | `50`    |
+| `autoscaling.targetMemory`                    | Target Memory utilization percentage                                   | `50`    |
+
+### Metrics Parameters
+
+| Name                                         | Description                                                                                                     | Value                             |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `metrics.enabled`                            | Start a sidecar prometheus exporter to expose metrics                                                           | `false`                           |
+| `metrics.image.registry`                     | Apache exporter image registry                                                                                  | `REGISTRY_NAME`                   |
+| `metrics.image.repository`                   | Apache exporter image repository                                                                                | `REPOSITORY_NAME/apache-exporter` |
+| `metrics.image.digest`                       | Apache exporter image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag | `""`                              |
+| `metrics.image.pullPolicy`                   | Apache exporter image pull policy                                                                               | `IfNotPresent`                    |
+| `metrics.image.pullSecrets`                  | Apache exporter image pull secrets                                                                              | `[]`                              |
+| `metrics.containerPorts.metrics`             | Prometheus exporter container port                                                                              | `9117`                            |
+| `metrics.livenessProbe.enabled`              | Enable livenessProbe on Prometheus exporter containers                                                          | `true`                            |
+| `metrics.livenessProbe.initialDelaySeconds`  | Initial delay seconds for livenessProbe                                                                         | `15`                              |
+| `metrics.livenessProbe.periodSeconds`        | Period seconds for livenessProbe                                                                                | `10`                              |
+| `metrics.livenessProbe.timeoutSeconds`       | Timeout seconds for livenessProbe                                                                               | `5`                               |
+| `metrics.livenessProbe.failureThreshold`     | Failure threshold for livenessProbe                                                                             | `3`                               |
+| `metrics.livenessProbe.successThreshold`     | Success threshold for livenessProbe                                                                             | `1`                               |
+| `metrics.readinessProbe.enabled`             | Enable readinessProbe on Prometheus exporter containers                                                         | `true`                            |
+| `metrics.readinessProbe.initialDelaySeconds` | Initial delay seconds for readinessProbe                                                                        | `5`                               |
+| `metrics.readinessProbe.periodSeconds`       | Period seconds for readinessProbe                                                                               | `10`                              |
+| `metrics.readinessProbe.timeoutSeconds`      | Timeout seconds for readinessProbe                                                                              | `3`                               |
+| `metrics.readinessProbe.failureThreshold`    | Failure threshold for readinessProbe                                                                            | `3`                               |
+| `metrics.readinessProbe.successThreshold`    | Success threshold for readinessProbe                                                                            | `1`                               |
+| `metrics.startupProbe.enabled`               | Enable startupProbe on Prometheus exporter containers                                                           | `false`                           |
+| `metrics.startupProbe.initialDelaySeconds`   | Initial delay seconds for startupProbe                                                                          | `10`                              |
+| `metrics.startupProbe.periodSeconds`         | Period seconds for startupProbe                                                                                 | `10`                              |
+| `metrics.startupProbe.timeoutSeconds`        | Timeout seconds for startupProbe                                                                                | `1`                               |
+| `metrics.startupProbe.failureThreshold`      | Failure threshold for startupProbe                                                                              | `15`                              |
+| `metrics.startupProbe.successThreshold`      | Success threshold for startupProbe                                                                              | `1`                               |
+| `metrics.customLivenessProbe`                | Custom livenessProbe that overrides the default one                                                             | `{}`                              |
+| `metrics.customReadinessProbe`               | Custom readinessProbe that overrides the default one                                                            | `{}`                              |
+| `metrics.customStartupProbe`                 | Custom startupProbe that overrides the default one                                                              | `{}`                              |
+| `metrics.resources.limits`                   | The resources limits for the Prometheus exporter container                                                      | `{}`                              |
+| `metrics.resources.requests`                 | The requested resources for the Prometheus exporter container                                                   | `{}`                              |
+| `metrics.service.ports.metrics`              | Prometheus metrics service port                                                                                 | `9150`                            |
+| `metrics.service.annotations`                | Additional custom annotations for Metrics service                                                               | `{}`                              |
+| `metrics.serviceMonitor.enabled`             | Create ServiceMonitor Resource for scraping metrics using Prometheus Operator                                   | `false`                           |
+| `metrics.serviceMonitor.namespace`           | Namespace for the ServiceMonitor Resource (defaults to the Release Namespace)                                   | `""`                              |
+| `metrics.serviceMonitor.interval`            | Interval at which metrics should be scraped.                                                                    | `""`                              |
+| `metrics.serviceMonitor.scrapeTimeout`       | Timeout after which the scrape is ended                                                                         | `""`                              |
+| `metrics.serviceMonitor.labels`              | Additional labels that can be used so ServiceMonitor will be discovered by Prometheus                           | `{}`                              |
+| `metrics.serviceMonitor.selector`            | Prometheus instance selector labels                                                                             | `{}`                              |
+| `metrics.serviceMonitor.relabelings`         | RelabelConfigs to apply to samples before scraping                                                              | `[]`                              |
+| `metrics.serviceMonitor.metricRelabelings`   | MetricRelabelConfigs to apply to samples before ingestion                                                       | `[]`                              |
+| `metrics.serviceMonitor.honorLabels`         | Specify honorLabels parameter to add the scrape endpoint                                                        | `false`                           |
+| `metrics.serviceMonitor.jobLabel`            | The name of the label on the target service to use as the job name in prometheus.                               | `""`                              |
+
+### NetworkPolicy parameters
+
+| Name                                                          | Description                                                                                                                  | Value   |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `networkPolicy.enabled`                                       | Enable network policies                                                                                                      | `false` |
+| `networkPolicy.metrics.enabled`                               | Enable network policy for metrics (prometheus)                                                                               | `false` |
+| `networkPolicy.metrics.namespaceSelector`                     | Monitoring namespace selector labels. These labels will be used to identify the prometheus' namespace.                       | `{}`    |
+| `networkPolicy.metrics.podSelector`                           | Monitoring pod selector labels. These labels will be used to identify the Prometheus pods.                                   | `{}`    |
+| `networkPolicy.ingress.enabled`                               | Enable network policy for Ingress Proxies                                                                                    | `false` |
+| `networkPolicy.ingress.namespaceSelector`                     | Ingress Proxy namespace selector labels. These labels will be used to identify the Ingress Proxy's namespace.                | `{}`    |
+| `networkPolicy.ingress.podSelector`                           | Ingress Proxy pods selector labels. These labels will be used to identify the Ingress Proxy pods.                            | `{}`    |
+| `networkPolicy.ingressRules.backendOnlyAccessibleByFrontend`  | Enable ingress rule that makes the backend (mariadb) only accessible by testlink's pods.                                     | `false` |
+| `networkPolicy.ingressRules.customBackendSelector`            | Backend selector labels. These labels will be used to identify the backend pods.                                             | `{}`    |
+| `networkPolicy.ingressRules.accessOnlyFrom.enabled`           | Enable ingress rule that makes testlink only accessible from a particular origin                                             | `false` |
+| `networkPolicy.ingressRules.accessOnlyFrom.namespaceSelector` | Namespace selector label that is allowed to access testlink. This label will be used to identified the allowed namespace(s). | `{}`    |
+| `networkPolicy.ingressRules.accessOnlyFrom.podSelector`       | Pods selector label that is allowed to access testlink. This label will be used to identified the allowed pod(s).            | `{}`    |
+| `networkPolicy.ingressRules.customRules`                      | Custom network policy ingress rule                                                                                           | `{}`    |
+| `networkPolicy.egressRules.denyConnectionsToExternal`         | Enable egress rule that denies outgoing traffic outside the cluster, except for DNS (port 53).                               | `false` |
+| `networkPolicy.egressRules.customRules`                       | Custom network policy rule                                                                                                   | `{}`    |
+
+### Database Parameters
+
+| Name                                       | Description                                                                                    | Value               |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------- |
+| `mariadb.enabled`                          | Deploy a MariaDB server to satisfy the applications database requirements                      | `true`              |
+| `mariadb.architecture`                     | MariaDB architecture. Allowed values: `standalone` or `replication`                            | `standalone`        |
+| `mariadb.auth.rootPassword`                | MariaDB root password                                                                          | `""`                |
+| `mariadb.auth.database`                    | MariaDB custom database                                                                        | `bitnami_wordpress` |
+| `mariadb.auth.username`                    | MariaDB custom user name                                                                       | `bn_wordpress`      |
+| `mariadb.auth.password`                    | MariaDB custom user password                                                                   | `""`                |
+| `mariadb.primary.persistence.enabled`      | Enable persistence on MariaDB using PVC(s)                                                     | `true`              |
+| `mariadb.primary.persistence.storageClass` | Persistent Volume storage class                                                                | `""`                |
+| `mariadb.primary.persistence.accessModes`  | Persistent Volume access modes                                                                 | `[]`                |
+| `mariadb.primary.persistence.size`         | Persistent Volume size                                                                         | `8Gi`               |
+| `externalDatabase.host`                    | External Database server host                                                                  | `localhost`         |
+| `externalDatabase.port`                    | External Database server port                                                                  | `3306`              |
+| `externalDatabase.user`                    | External Database username                                                                     | `bn_wordpress`      |
+| `externalDatabase.password`                | External Database user password                                                                | `""`                |
+| `externalDatabase.database`                | External Database database name                                                                | `bitnami_wordpress` |
+| `externalDatabase.existingSecret`          | The name of an existing secret with database credentials. Evaluated as a template              | `""`                |
+| `memcached.enabled`                        | Deploy a Memcached server for caching database queries                                         | `false`             |
+| `memcached.auth.enabled`                   | Enable Memcached authentication                                                                | `false`             |
+| `memcached.auth.username`                  | Memcached admin user                                                                           | `""`                |
+| `memcached.auth.password`                  | Memcached admin password                                                                       | `""`                |
+| `memcached.auth.existingPasswordSecret`    | Existing secret with Memcached credentials (must contain a value for `memcached-password` key) | `""`                |
+| `memcached.service.port`                   | Memcached service port                                                                         | `11211`             |
+| `externalCache.host`                       | External cache server host                                                                     | `localhost`         |
+| `externalCache.port`                       | External cache server port                                                                     | `11211`             |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
+
+```console
+helm install my-release \
+  --set wordpressUsername=admin \
+  --set wordpressPassword=password \
+  --set mariadb.auth.rootPassword=secretpassword \
+    oci://REGISTRY_NAME/REPOSITORY_NAME/wordpress
+```
+
+> Note: You need to substitute the placeholders `REGISTRY_NAME` and `REPOSITORY_NAME` with a reference to your Helm chart registry and repository. For example, in the case of Bitnami, you need to use `REGISTRY_NAME=registry-1.docker.io` and `REPOSITORY_NAME=bitnamicharts`.
+
+The above command sets the WordPress administrator account username and password to `admin` and `password` respectively. Additionally, it sets the MariaDB `root` user password to `secretpassword`.
+
+> NOTE: Once this chart is deployed, it is not possible to change the application's access credentials, such as usernames or passwords, using Helm. To change these application credentials after deployment, delete any persistent volumes (PVs) used by the chart and re-deploy it, or use the application's built-in administrative tools if available.
+
+Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
+
+```console
+helm install my-release -f values.yaml oci://REGISTRY_NAME/REPOSITORY_NAME/wordpress
+```
+
+> Note: You need to substitute the placeholders `REGISTRY_NAME` and `REPOSITORY_NAME` with a reference to your Helm chart registry and repository. For example, in the case of Bitnami, you need to use `REGISTRY_NAME=registry-1.docker.io` and `REPOSITORY_NAME=bitnamicharts`.
+> **Tip**: You can use the default [values.yaml](https://github.com/bitnami/charts/tree/main/bitnami/wordpress/values.yaml)
+
+## Configuration and installation details
+
+### [Rolling VS Immutable tags](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/)
+
+It is strongly recommended to use immutable tags in a production environment. This ensures your deployment does not change automatically if the same tag is updated with a different image.
+
+Bitnami will release a new chart updating its containers if a new version of the main container, significant changes, or critical vulnerabilities exist.
+
+### Known limitations
+
+When performing admin operations that require activating the maintenance mode (such as updating a plugin or theme), it's activated in only one replica (see: [bug report](https://core.trac.wordpress.org/ticket/50797)). This implies that WP could be attending requests on other replicas while performing admin operations, with unpredictable consequences.
+
+To avoid that, you can manually activate/deactivate the maintenance mode on every replica using the WP CLI. For instance, if you installed WP with three replicas, you can run the commands below to activate the maintenance mode in all of them (assuming that the release name is `wordpress`):
+
+```console
+kubectl exec $(kubectl get pods -l app.kubernetes.io/name=wordpress -o jsonpath='{.items[0].metadata.name}') -c wordpress -- wp maintenance-mode activate
+kubectl exec $(kubectl get pods -l app.kubernetes.io/name=wordpress -o jsonpath='{.items[1].metadata.name}') -c wordpress -- wp maintenance-mode activate
+kubectl exec $(kubectl get pods -l app.kubernetes.io/name=wordpress -o jsonpath='{.items[2].metadata.name}') -c wordpress -- wp maintenance-mode activate
+```
+
+### External database support
+
+You may want to have WordPress connect to an external database rather than installing one inside your cluster. Typical reasons for this are to use a managed database service, or to share a common database server for all your applications. To achieve this, the chart allows you to specify credentials for an external database with the [`externalDatabase` parameter](#database-parameters). You should also disable the MariaDB installation with the `mariadb.enabled` option. Here is an example:
+
+```console
+mariadb.enabled=false
+externalDatabase.host=myexternalhost
+externalDatabase.user=myuser
+externalDatabase.password=mypassword
+externalDatabase.database=mydatabase
+externalDatabase.port=3306
+```
+
+Refer to the [documentation on using an external database with WordPress](https://docs.bitnami.com/kubernetes/apps/wordpress/configuration/use-external-database/) and the [tutorial on integrating WordPress with a managed cloud database](https://docs.bitnami.com/tutorials/secure-wordpress-kubernetes-managed-database-ssl-upgrades/) for more information.
+
+### Memcached
+
+This chart provides support for using Memcached to cache database queries and objects improving the website performance. To enable this feature, set `wordpressConfigureCache` and `memcached.enabled` parameters to `true`.
+
+When this feature is enabled, a Memcached server will be deployed in your K8s cluster using the Bitnami Memcached chart and the [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) plugin will be activated and configured to use the Memcached server for database caching.
+
+It is also possible to use an external cache server rather than installing one inside your cluster. To achieve this, the chart allows you to specify credentials for an external cache server with the [`externalCache` parameter](#database-parameters). You should also disable the Memcached installation with the `memcached.enabled` option. Here is an example:
+
+```console
+wordpressConfigureCache=true
+memcached.enabled=false
+externalCache.host=myexternalcachehost
+externalCache.port=11211
+```
+
+### Ingress
+
+This chart provides support for Ingress resources. If you have an ingress controller installed on your cluster, such as [nginx-ingress-controller](https://github.com/bitnami/charts/tree/main/bitnami/nginx-ingress-controller) or [contour](https://github.com/bitnami/charts/tree/main/bitnami/contour) you can utilize the ingress controller to serve your application.
+
+To enable Ingress integration, set `ingress.enabled` to `true`. The `ingress.hostname` property can be used to set the host name. The `ingress.tls` parameter can be used to add the TLS configuration for this host. It is also possible to have more than one host, with a separate TLS configuration for each host. [Learn more about configuring and using Ingress](https://docs.bitnami.com/kubernetes/apps/wordpress/configuration/configure-ingress/).
+
+### TLS secrets
+
+The chart also facilitates the creation of TLS secrets for use with the Ingress controller, with different options for certificate management. [Learn more about TLS secrets](https://docs.bitnami.com/kubernetes/apps/wordpress/administration/enable-tls-ingress/).
+
+### `.htaccess` files
+
+For performance and security reasons, it is a good practice to configure Apache with the `AllowOverride None` directive. Instead of using `.htaccess` files, Apache will load the same directives at boot time. These directives are located in `/opt/bitnami/wordpress/wordpress-htaccess.conf`.
+
+By default, the container image includes all the default `.htaccess` files in WordPress (together with the default plugins). To enable this feature, install the chart with the value `allowOverrideNone=yes`.
+
+[Learn more about working with `.htaccess` files](https://docs.bitnami.com/kubernetes/apps/wordpress/configuration/understand-htaccess/).
+
+## Persistence
+
+The [Bitnami WordPress](https://github.com/bitnami/containers/tree/main/bitnami/wordpress) image stores the WordPress data and configurations at the `/bitnami` path of the container. Persistent Volume Claims are used to keep the data across deployments.
+
+If you encounter errors when working with persistent volumes, refer to our [troubleshooting guide for persistent volumes](https://docs.bitnami.com/kubernetes/faq/troubleshooting/troubleshooting-persistence-volumes/).
+
+### Additional environment variables
+
+In case you want to add extra environment variables (useful for advanced operations like custom init scripts), you can use the `extraEnvVars` property.
+
+```yaml
+wordpress:
+  extraEnvVars:
+    - name: LOG_LEVEL
+      value: error
+```
+
+Alternatively, you can use a ConfigMap or a Secret with the environment variables. To do so, use the `extraEnvVarsCM` or the `extraEnvVarsSecret` values.
+
+### Sidecars
+
+If additional containers are needed in the same pod as WordPress (such as additional metrics or logging exporters), they can be defined using the `sidecars` parameter. If these sidecars export extra ports, extra port definitions can be added using the `service.extraPorts` parameter. [Learn more about configuring and using sidecar containers](https://docs.bitnami.com/kubernetes/apps/wordpress/configuration/configure-sidecar-init-containers/).
+
+### Pod affinity
+
+This chart allows you to set your custom affinity using the `affinity` parameter. Learn more about Pod affinity in the [kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity).
+
+As an alternative, use one of the preset configurations for pod affinity, pod anti-affinity, and node affinity available at the [bitnami/common](https://github.com/bitnami/charts/tree/main/bitnami/common#affinities) chart. To do so, set the `podAffinityPreset`, `podAntiAffinityPreset`, or `nodeAffinityPreset` parameters.
+
+## Troubleshooting
+
+Find more information about how to deal with common errors related to Bitnami's Helm charts in [this troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues).
+
+## Notable changes
+
+### 13.2.0
+
+Removed support for limiting auto-updates to WordPress core via the `wordpressAutoUpdateLevel` option. To update WordPress core, we recommend you use the `helm upgrade` command to update your deployment instead of using the built-in update functionality.
+
+### 11.0.0
+
+The [Bitnami WordPress](https://github.com/bitnami/containers/tree/main/bitnami/wordpress) image was refactored and now the source code is published in GitHub in the `rootfs` folder of the container image.
+
+In addition, several new features have been implemented:
+
+- Multisite mode is now supported via `multisite.*` options.
+- Plugins can be installed and activated on the first deployment via the `wordpressPlugins` option.
+- Added support for limiting auto-updates to WordPress core via the `wordpressAutoUpdateLevel` option. In addition, auto-updates have been disabled by default. To update WordPress core, we recommend to swap the container image version for your deployment instead of using the built-in update functionality.
+
+To enable the new features, it is not possible to do it by upgrading an existing deployment. Instead, it is necessary to perform a fresh deploy.
+
+## Upgrading
+
+### To 18.0.0
+
+This major release bumps the MariaDB version to 11.1. No major issues are expected during the upgrade.
+
+### To 17.0.0
+
+This major release bumps the MariaDB version to 11.0. Follow the [upstream instructions](https://mariadb.com/kb/en/upgrading-from-mariadb-10-11-to-mariadb-11-0/) for upgrading from MariaDB 10.11 to 11.0. No major issues are expected during the upgrade.
+
+### To 16.0.0
+
+This major release bumps the MariaDB version to 10.11. Follow the [upstream instructions](https://mariadb.com/kb/en/upgrading-from-mariadb-10-6-to-mariadb-10-11/) for upgrading from MariaDB 10.6 to 10.11. No major issues are expected during the upgrade.
+
+### To 14.0.0
+
+This major release bumps the MariaDB version to 10.6. Follow the [upstream instructions](https://mariadb.com/kb/en/upgrading-from-mariadb-105-to-mariadb-106/) for upgrading from MariaDB 10.5 to 10.6. No major issues are expected during the upgrade.
+
+### To 13.0.0
+
+This major release renames several values in this chart and adds missing features, in order to be inline with the rest of assets in the Bitnami charts repository.
+
+- `service.port` and `service.httpsPort` have been regrouped under the `service.ports` map.
+- `metrics.service.port` has been regrouped under the `metrics.service.ports` map.
+- `serviceAccountName` has been deprecated in favor of `serviceAccount` map.
+
+Additionally updates the MariaDB & Memcached subcharts to their newest major `10.x.x` and `6.x.x`, respectively, which contain similar changes.
+
+### To 12.0.0
+
+WordPress version was bumped to its latest major, `5.8.x`. Though no incompatibilities are expected while upgrading from previous versions, WordPress recommends backing up your application first.
+
+Site backups can be easily performed using tools such as [VaultPress](https://vaultpress.com/) or [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/).
+
+### To 11.0.0
+
+The [Bitnami WordPress](https://github.com/bitnami/containers/tree/main/bitnami/wordpress) image was refactored and now the source code is published in GitHub in the `rootfs` folder of the container image.
+
+Compatibility is not guaranteed due to the amount of involved changes, however no breaking changes are expected.
+
+### To 10.0.0
+
+[On November 13, 2020, Helm v2 support was formally finished](https://github.com/helm/charts#status-of-the-project), this major version is the result of the required changes applied to the Helm Chart to be able to incorporate the different features added in Helm v3 and to be consistent with the Helm project itself regarding the Helm v2 EOL.
+
+[Learn more about this change and related upgrade considerations](https://docs.bitnami.com/kubernetes/apps/wordpress/administration/upgrade-helm3/).
+
+#### Additional upgrade notes
+
+- MariaDB dependency version was bumped to a new major version that introduces several incompatibilities. Therefore, backwards compatibility is not guaranteed unless an external database is used. Check [MariaDB Upgrading Notes](https://github.com/bitnami/charts/tree/main/bitnami/mariadb#to-800) for more information.
+- If you want to upgrade to this version from a previous one installed with Helm v3, there are two alternatives:
+  - Install a new WordPress chart, and migrate your WordPress site using backup/restore tools such as [VaultPress](https://vaultpress.com/) or [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/).
+  - Reuse the PVC used to hold the MariaDB data on your previous release. To do so, follow the instructions below (the following example assumes that the release name is `wordpress`).
+
+> Warning: please create a backup of your database before running any of these actions. The steps below would be only valid if your application (e.g. any plugins or custom code) is compatible with MariaDB 10.5.
+
+Obtain the credentials and the name of the PVC used to hold the MariaDB data on your current release:
+
+```console
+export WORDPRESS_PASSWORD=$(kubectl get secret --namespace default wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+export MARIADB_ROOT_PASSWORD=$(kubectl get secret --namespace default wordpress-mariadb -o jsonpath="{.data.mariadb-root-password}" | base64 -d)
+export MARIADB_PASSWORD=$(kubectl get secret --namespace default wordpress-mariadb -o jsonpath="{.data.mariadb-password}" | base64 -d)
+export MARIADB_PVC=$(kubectl get pvc -l app.kubernetes.io/instance=wordpress,app.kubernetes.io/name=mariadb,app.kubernetes.io/component=primary -o jsonpath="{.items[0].metadata.name}")
+```
+
+Upgrade your release (maintaining the version) disabling MariaDB and scaling WordPress replicas to 0:
+
+```console
+helm upgrade wordpress oci://REGISTRY_NAME/REPOSITORY_NAME/wordpress --set wordpressPassword=$WORDPRESS_PASSWORD --set replicaCount=0 --set mariadb.enabled=false --version 9.6.4
+```
+
+> Note: You need to substitute the placeholders `REGISTRY_NAME` and `REPOSITORY_NAME` with a reference to your Helm chart registry and repository. For example, in the case of Bitnami, you need to use `REGISTRY_NAME=registry-1.docker.io` and `REPOSITORY_NAME=bitnamicharts`.
+
+Finally, upgrade you release to `10.0.0` reusing the existing PVC, and enabling back MariaDB:
+
+```console
+helm upgrade wordpress oci://REGISTRY_NAME/REPOSITORY_NAME/wordpress --set mariadb.primary.persistence.existingClaim=$MARIADB_PVC --set mariadb.auth.rootPassword=$MARIADB_ROOT_PASSWORD --set mariadb.auth.password=$MARIADB_PASSWORD --set wordpressPassword=$WORDPRESS_PASSWORD
+```
+
+> Note: You need to substitute the placeholders `REGISTRY_NAME` and `REPOSITORY_NAME` with a reference to your Helm chart registry and repository. For example, in the case of Bitnami, you need to use `REGISTRY_NAME=registry-1.docker.io` and `REPOSITORY_NAME=bitnamicharts`.
+
+You should see the lines below in MariaDB container logs:
+
+```console
+$ kubectl logs $(kubectl get pods -l app.kubernetes.io/instance=wordpress,app.kubernetes.io/name=mariadb,app.kubernetes.io/component=primary -o jsonpath="{.items[0].metadata.name}")
+...
+mariadb 12:13:24.98 INFO  ==> Using persisted data
+mariadb 12:13:25.01 INFO  ==> Running mysql_upgrade
+...
+```
+
+### To 9.0.0
+
+The [Bitnami WordPress](https://github.com/bitnami/containers/tree/main/bitnami/wordpress) image was migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by setting the parameters `securityContext.runAsUser`, and `securityContext.fsGroup` to `0`.
+Chart labels and Ingress configuration were also adapted to follow the Helm charts best practices.
+
+Consequences:
+
+- The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+- No writing permissions will be granted on `wp-config.php` by default.
+- Backwards compatibility is not guaranteed.
+
+To upgrade to `9.0.0`, it's recommended to install a new WordPress chart, and migrate your WordPress site using backup/restore tools such as [VaultPress](https://vaultpress.com/) or [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/).
+
+### To 8.0.0
+
+Helm performs a lookup for the object based on its group (apps), version (v1), and kind (Deployment). Also known as its GroupVersionKind, or GVK. Changing the GVK is considered a compatibility breaker from Kubernetes' point of view, so you cannot "upgrade" those objects to the new GVK in-place. Earlier versions of Helm 3 did not perform the lookup correctly which has since been fixed to match the spec.
+
+In <https://github.com/helm/charts/pulls/12642> the `apiVersion` of the deployment resources was updated to `apps/v1` in tune with the API's deprecated, resulting in compatibility breakage.
+
+This major version signifies this change.
+
+### To 3.0.0
+
+Backwards compatibility is not guaranteed unless you modify the labels used on the chart's deployments.
+Use the workaround below to upgrade from versions previous to `3.0.0`. The following example assumes that the release name is `wordpress`:
+
+```console
+kubectl patch deployment wordpress-wordpress --type=json -p='[{"op": "remove", "path": "/spec/selector/matchLabels/chart"}]'
+kubectl delete statefulset wordpress-mariadb --cascade=false
+```
+
+## License
+
+Copyright &copy; 2023 VMware, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+<http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+vagrant@node1:~$ helm install my-wordpress bitnami/wordpress
+NAME: my-wordpress
+LAST DEPLOYED: Wed Nov 29 17:01:10 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: wordpress
+CHART VERSION: 18.1.19
+APP VERSION: 6.4.1
+
+** Please be patient while the chart is being deployed **
+
+Your WordPress site can be accessed through the following DNS name from within your cluster:
+
+    my-wordpress.default.svc.cluster.local (port 80)
+
+To access your WordPress site from outside the cluster follow the steps below:
+
+1. Get the WordPress URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-wordpress'
+
+   export SERVICE_IP=$(kubectl get svc --namespace default my-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+   echo "WordPress URL: http://$SERVICE_IP/"
+   echo "WordPress Admin URL: http://$SERVICE_IP/admin"
+
+2. Open a browser and access WordPress using the obtained URL.
+
+3. Login with the following credentials below to see your blog:
+
+  echo Username: user
+  echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+vagrant@node1:~$ helm list
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+my-wordpress    default         1               2023-11-29 17:01:10.056388957 +0200 EET deployed        wordpress-18.1.19       6.4.1
+vagrant@node1:~$ kubectl get pods,svc
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/my-wordpress-5f5fb5f9dc-qmpld   0/1     Pending   0          18s
+pod/my-wordpress-mariadb-0          0/1     Pending   0          18s
+
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+service/kubernetes             ClusterIP      10.96.0.1        <none>        443/TCP                      7d3h
+service/my-wordpress           LoadBalancer   10.104.46.224    <pending>     80:31704/TCP,443:32384/TCP   18s
+service/my-wordpress-mariadb   ClusterIP      10.105.149.196   <none>        3306/TCP                     18s
+vagrant@node1:~$ kubectl get pods,svc
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/my-wordpress-5f5fb5f9dc-qmpld   0/1     Pending   0          40s
+pod/my-wordpress-mariadb-0          0/1     Pending   0          40s
+
+NAME                           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+service/kubernetes             ClusterIP      10.96.0.1        <none>        443/TCP                      7d3h
+service/my-wordpress           LoadBalancer   10.104.46.224    <pending>     80:31704/TCP,443:32384/TCP   40s
+service/my-wordpress-mariadb   ClusterIP      10.105.149.196   <none>        3306/TCP                     40s
+vagrant@node1:~$ helm uninstall my-wordpress
+release "my-wordpress" uninstalled
+vagrant@node1:~$ kubectl get pvc
+NAME                          STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+data-my-wordpress-mariadb-0   Pending                                                     84s
+vagrant@node1:~$ kubectl delete pvc data-my-wordpress-mariadb-0
+persistentvolumeclaim "data-my-wordpress-mariadb-0" deleted
+vagrant@node1:~$ kubectl get pvc
+No resources found in default namespace.
+vagrant@node1:~$ helm install my-wordpress bitnami/wordpress --set service.type=NodePort --set persistence.enabled=false --set mariadb.primary.persistence.enabled=false
+NAME: my-wordpress
+LAST DEPLOYED: Wed Nov 29 17:04:31 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: wordpress
+CHART VERSION: 18.1.19
+APP VERSION: 6.4.1
+
+** Please be patient while the chart is being deployed **
+
+Your WordPress site can be accessed through the following DNS name from within your cluster:
+
+    my-wordpress.default.svc.cluster.local (port 80)
+
+To access your WordPress site from outside the cluster follow the steps below:
+
+1. Get the WordPress URL by running these commands:
+
+   export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services my-wordpress)
+   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+   echo "WordPress URL: http://$NODE_IP:$NODE_PORT/"
+   echo "WordPress Admin URL: http://$NODE_IP:$NODE_PORT/admin"
+
+2. Open a browser and access WordPress using the obtained URL.
+
+3. Login with the following credentials below to see your blog:
+
+  echo Username: user
+  echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+vagrant@node1:~$ kubectl get pods,svc,pvc,pv -o wide
+NAME                                READY   STATUS              RESTARTS   AGE   IP       NODE    NOMINATED NODE   READINESS GATES
+pod/my-wordpress-68c76b9d8b-kxx9r   0/1     ContainerCreating   0          21s   <none>   node2   <none>           <none>
+pod/my-wordpress-mariadb-0          0/1     ContainerCreating   0          21s   <none>   node2   <none>           <none>
+
+NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE    SELECTOR
+service/kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP                      7d3h   <none>
+service/my-wordpress           NodePort    10.97.108.177   <none>        80:30888/TCP,443:31782/TCP   21s    app.kubernetes.io/instance=my-wordpress,app.kubernetes.io/name=wordpress
+service/my-wordpress-mariadb   ClusterIP   10.108.174.8    <none>        3306/TCP                     21s    app.kubernetes.io/component=primary,app.kubernetes.io/instance=my-wordpress,app.kubernetes.io/name=mariadb
+vagrant@node1:~$ helm status my-wordpress
+NAME: my-wordpress
+LAST DEPLOYED: Wed Nov 29 17:04:31 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: wordpress
+CHART VERSION: 18.1.19
+APP VERSION: 6.4.1
+
+** Please be patient while the chart is being deployed **
+
+Your WordPress site can be accessed through the following DNS name from within your cluster:
+
+    my-wordpress.default.svc.cluster.local (port 80)
+
+To access your WordPress site from outside the cluster follow the steps below:
+
+1. Get the WordPress URL by running these commands:
+
+   export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services my-wordpress)
+   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+   echo "WordPress URL: http://$NODE_IP:$NODE_PORT/"
+   echo "WordPress Admin URL: http://$NODE_IP:$NODE_PORT/admin"
+
+2. Open a browser and access WordPress using the obtained URL.
+
+3. Login with the following credentials below to see your blog:
+
+  echo Username: user
+  echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+vagrant@node1:~$ export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services my-wordpress)
+vagrant@node1:~$ export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+vagrant@node1:~$ echo "WordPress URL: http://$NODE_IP:$NODE_PORT/"
+WordPress URL: http://192.168.99.101:30888/
+vagrant@node1:~$ echo "WordPress Admin URL: http://$NODE_IP:$NODE_PORT/admin"
+WordPress Admin URL: http://192.168.99.101:30888/admin
+vagrant@node1:~$ echo Username: user
+Username: user
+vagrant@node1:~$ echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+Password: I4AqHMPvOJ
+vagrant@node1:~$ kubectl get pods,svc,pvc,pv -o wide
+NAME                                READY   STATUS    RESTARTS   AGE     IP              NODE    NOMINATED NODE   READINESS GATES
+pod/my-wordpress-68c76b9d8b-kxx9r   0/1     Running   0          6m55s   10.244.104.35   node2   <none>           <none>
+pod/my-wordpress-mariadb-0          1/1     Running   0          6m55s   10.244.104.34   node2   <none>           <none>
+
+NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE     SELECTOR
+service/kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP                      7d3h    <none>
+service/my-wordpress           NodePort    10.97.108.177   <none>        80:30888/TCP,443:31782/TCP   6m55s   app.kubernetes.io/instance=my-wordpress,app.kubernetes.io/name=wordpress
+service/my-wordpress-mariadb   ClusterIP   10.108.174.8    <none>        3306/TCP                     6m55s   app.kubernetes.io/component=primary,app.kubernetes.io/instance=my-wordpress,app.kubernetes.io/name=mariadb
+vagrant@node1:~$ helm uninstall my-wordpress
+release "my-wordpress" uninstalled
+vagrant@node1:~$ kubectl get pods,svc,pvc,pv -o wide
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE    SELECTOR
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d3h   <none>
+vagrant@node1:~$ vagrant@node1:~$
+vagrant@node1:~$ helm create mychart
+Creating mychart
+vagrant@node1:~$ ls
+1-appa.yaml  2-appa.yaml  mychart  part1  skaffold
+vagrant@node1:~$ tree mychart
+mychart
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── hpa.yaml
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   ├── serviceaccount.yaml
+│   ├── service.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
+
+3 directories, 10 files
+vagrant@node1:~$ cat mychart/deployment.yaml
+cat: mychart/deployment.yaml: No such file or directory
+vagrant@node1:~$ cat mychart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mychart.fullname" . }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mychart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mychart.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mychart.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+vagrant@node1:~$ cat mychart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mychart.fullname" . }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "mychart.selectorLabels" . | nindent 4 }}
+vagrant@node1:~$ mkdir -p webchart/templates
+vagrant@node1:~$ tree webchart
+webchart
+└── templates
+
+1 directory, 0 files
+vagrant@node1:~$ touch webchart/{Chart.yaml,values.yaml} webchart/templates/{cm.yaml,pod.yaml,svc.yaml}
+vagrant@node1:~$ tree webchart
+webchart
+├── Chart.yaml
+├── templates
+│   ├── cm.yaml
+│   ├── pod.yaml
+│   └── svc.yaml
+└── values.yaml
+
+1 directory, 5 files
+vagrant@node1:~$ cat > webchart/Chart.yaml
+apiVersion: v2
+name: webchart
+description: A simple Apache-based Helm chart for Kubernetes
+
+# Chart type. A chart can be either an 'application' or a 'library' chart
+type: application
+
+# Version of the chart
+version: 0.1.0
+
+# Version of the application. In our case - Apache 2.4.51
+appVersion: "2.4.51"
+vagrant@node1:~$ cat > webchart/templates/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webchart-cm
+data:
+  index.html: <h1>Hello from Apache :)</h1>
+vagrant@node1:~$ cat > webchart/templates/pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webchart-pod
+  labels:
+    app: webchart
+spec:
+  containers:
+  - name: main
+    image: httpd:2.4.51
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: html
+      mountPath: /usr/local/apache2/htdocs
+  volumes:
+  - name: html
+    configMap:
+      name: webchart-cm
+vagrant@node1:~$ cat > webchart/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: webchart-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: webchart
+vagrant@node1:~$ tree webchart
+webchart
+├── Chart.yaml
+├── templates
+│   ├── cm.yaml
+│   ├── pod.yaml
+│   └── svc.yaml
+└── values.yaml
+
+1 directory, 5 files
+vagrant@node1:~$ helm show chart webchart
+apiVersion: v2
+appVersion: 2.4.51
+description: A simple Apache-based Helm chart for Kubernetes
+name: webchart
+type: application
+version: 0.1.0
+
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ cat webchart/Chart.yaml
+apiVersion: v2
+name: webchart
+description: A simple Apache-based Helm chart for Kubernetes
+
+# Chart type. A chart can be either an 'application' or a 'library' chart
+type: application
+
+# Version of the chart
+version: 0.1.0
+
+# Version of the application. In our case - Apache 2.4.51
+appVersion: "2.4.51"
+vagrant@node1:~$ cat webchart/templates/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webchart-cm
+data:
+  index.html: <h1>Hello from Apache :)</h1>
+vagrant@node1:~$ ls
+1-appa.yaml  2-appa.yaml  mychart  part1  skaffold  webchart
+vagrant@node1:~$ rm 1-appa.yaml
+vagrant@node1:~$ ls
+2-appa.yaml  mychart  part1  skaffold  webchart
+vagrant@node1:~$ rm 2-appa.yaml
+vagrant@node1:~$ ls
+mychart  part1  skaffold  webchart
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ cat webchart/templates/pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webchart-pod
+  labels:
+    app: webchart
+spec:
+  containers:
+  - name: main
+    image: httpd:2.4.51
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: html
+      mountPath: /usr/local/apache2/htdocs
+  volumes:
+  - name: html
+    configMap:
+      name: webchart-cm
+vagrant@node1:~$ cat webchart/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: webchart-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: webchart
+vagrant@node1:~$ helm show chart webchart
+apiVersion: v2
+appVersion: 2.4.51
+description: A simple Apache-based Helm chart for Kubernetes
+name: webchart
+type: application
+version: 0.1.0
+
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ tree webchart/
+webchart/
+├── Chart.yaml
+├── templates
+│   ├── cm.yaml
+│   ├── pod.yaml
+│   └── svc.yaml
+└── values.yaml
+
+1 directory, 5 files
+vagrant@node1:~$ ls
+mychart  part1  skaffold  webchart
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ cat webchart/Chart.yaml
+apiVersion: v2
+name: webchart
+description: A simple Apache-based Helm chart for Kubernetes
+
+# Chart type. A chart can be either an 'application' or a 'library' chart
+type: application
+
+# Version of the chart
+version: 0.1.0
+
+# Version of the application. In our case - Apache 2.4.51
+appVersion: "2.4.51"
+vagrant@node1:~$ cat webchart/templates/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webchart-cm
+data:
+  index.html: <h1>Hello from Apache :)</h1>
+vagrant@node1:~$ cat webchart/templates/pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webchart-pod
+  labels:
+    app: webchart
+spec:
+  containers:
+  - name: main
+    image: httpd:2.4.51
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: html
+      mountPath: /usr/local/apache2/htdocs
+  volumes:
+  - name: html
+    configMap:
+      name: webchart-cm
+vagrant@node1:~$ cat webchart/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: webchart-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: webchart
+vagrant@node1:~$ helm show chart webchart
+apiVersion: v2
+appVersion: 2.4.51
+description: A simple Apache-based Helm chart for Kubernetes
+name: webchart
+type: application
+version: 0.1.0
+
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ helm get manifest test1
+Error: release: not found
+vagrant@node1:~$ kubectl get cm,pods,svc
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      7d4h
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d4h
+vagrant@node1:~$ kubectl delete cm configmap/kube-root-ca.crt
+error: there is no need to specify a resource type as a separate argument when passing arguments in resource/name form (e.g. 'kubectl get resource/<resource_name>' instead of 'kubectl get resource resource/<resource_name>'
+vagrant@node1:~$ kubectl delete cm kube-root-ca.crt
+configmap "kube-root-ca.crt" deleted
+vagrant@node1:~$ helm install test1 webchart
+^CRelease test1 has been cancelled.
+E1129 17:58:12.431380  110899 round_tripper.go:63] CancelRequest not implemented by *cli.retryingRoundTripper
+Error: INSTALLATION FAILED: unable to build kubernetes objects from release manifest: Get "https://192.168.99.101:6443/openapi/v2?timeout=32s": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+vagrant@node1:~$ helm show chart webchart
+apiVersion: v2
+appVersion: 2.4.51
+description: A simple Apache-based Helm chart for Kubernetes
+name: webchart
+type: application
+version: 0.1.0
+
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ helm get manifest test1
+Error: release: not found
+vagrant@node1:~$ kubectl get cm,pods,svc
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      2m21s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d4h
+vagrant@node1:~$ helm install test2 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm uninstall test1
+Error: uninstall: Release not loaded: test1: release: not found
+vagrant@node1:~$ cat > webchart/templates/cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-cm
+data:
+  index.html: <h1>Hello from Apache :)</h1>
+vagrant@node1:~$ cat > webchart/templates/pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-pod
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  containers:
+  - name: main
+    image: httpd:2.4.51
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: html
+      mountPath: /usr/local/apache2/htdocs
+  volumes:
+  - name: html
+    configMap:
+      name: {{ .Release.Name }}-cm
+vagrant@node1:~$ cat > webchart/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: {{ .Release.Name }}
+vagrant@node1:~$ helm install test1 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ kubectl get cm,pods,svc
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      5m36s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d4h
+vagrant@node1:~$ helm install test2 webchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource ConfigMap "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ kubectl get cm,pods,svc
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      6m2s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d4h
+vagrant@node1:~$ helm uninstall test1 test2
+Error: uninstall: Release not loaded: test1: release: not found
+vagrant@node1:~$ ls
+mychart  part1  skaffold  webchart
+vagrant@node1:~$ helm package webchart
+Successfully packaged chart and saved it to: /home/vagrant/webchart-0.1.0.tgz
+vagrant@node1:~$ ls
+mychart  part1  skaffold  webchart  webchart-0.1.0.tgz
+vagrant@node1:~$ mkdir -p appchart/templates
+vagrant@node1:~$ tree appchart
+appchart
+└── templates
+
+1 directory, 0 files
+vagrant@node1:~$ cat > appchart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appa
+  template:
+    metadata:
+      labels:
+        app: appa
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/k8s-environ:latest
+        env:
+        - name: APPROACH
+          value: "STATIC"
+        - name: FOCUSON
+          value: "APPROACH"
+vagrant@node1:~$ cat > appchart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: appa
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: appa
+vagrant@node1:~$
+vagrant@node1:~$ tree appchart
+appchart
+└── templates
+    ├── deployment.yaml
+    └── service.yaml
+
+1 directory, 2 files
+vagrant@node1:~$ cat > appchart/Chart.yaml
+apiVersion: v2
+name: appchart
+description: A simple Helm chart for Kubernetes based on an existing application
+
+# Chart type. A chart can be either an 'application' or a 'library' chart
+type: application
+
+# Version of the chart
+version: 0.1.0
+
+# Version of the application. In our case this can be a custom version as it is our application
+appVersion: "1.0.0"
+vagrant@node1:~$ cat > appchart/values.yaml file
+cat: file: No such file or directory
+vagrant@node1:~$ cat > appchart/values.yaml
+vagrant@node1:~$ tree appchart
+appchart
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   └── service.yaml
+└── values.yaml
+
+1 directory, 4 files
+vagrant@node1:~$ cat > appchart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+spec:
+  replicas: {{ .Values.replicasCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: main
+        image: shekeriev/k8s-environ:latest
+        env:
+        - name: APPROACH
+          value: {{ .Values.approachVar }}
+        - name: FOCUSON
+          value: {{ .Values.focusOnVar }}
+vagrant@node1:~$ cat > appchart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: {{ .Values.nodePort }}
+    protocol: TCP
+  selector:
+    app: {{ .Release.Name }}
+vagrant@node1:~$ cat > appchart/values.yaml
+replicasCount: 1
+approachVar: "Helm Charts! :)"
+focusOnVar: "APPROACH"
+nodePort: 30001
+vagrant@node1:~$ helm show all appchart
+apiVersion: v2
+appVersion: 1.0.0
+description: A simple Helm chart for Kubernetes based on an existing application
+name: appchart
+type: application
+version: 0.1.0
+
+---
+replicasCount: 1
+approachVar: "Helm Charts! :)"
+focusOnVar: "APPROACH"
+nodePort: 30001
+
+vagrant@node1:~$ helm install app1 appchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource Service "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ kubectl get deployments,pods,svc
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d4h
+vagrant@node1:~$ helm install app2 appchart
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource Service "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ kubectl get deployments,pods,svc
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d4h
+vagrant@node1:~$ helm uninstall app2
+Error: uninstall: Release not loaded: app2: release: not found
+vagrant@node1:~$ helm install app2 appchart --set nodePort=30002 --set replicasCount=3
+Error: INSTALLATION FAILED: Unable to continue with install: could not get information about the resource Service "" in namespace "default": resource name may not be empty
+vagrant@node1:~$ helm list
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+vagrant@node1:~$ kubectl get deployments,pods,svc
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d5h
+vagrant@node1:~$ helm uninstall app1 app2
+Error: uninstall: Release not loaded: app1: release: not found
+vagrant@node1:~$ ls
+appchart  mychart  part1  skaffold  webchart  webchart-0.1.0.tgz
+vagrant@node1:~$ tree appchart
+appchart
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   └── service.yaml
+└── values.yaml
+
+1 directory, 4 files

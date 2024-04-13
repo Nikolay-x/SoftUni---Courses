@@ -1,0 +1,90 @@
+PS C:\Users\NB\Kubernetes> Get-History
+
+  Id CommandLine
+  -- -----------
+   1 cd .\Kubernetes\
+   2 vagrant ssh node1
+   3 vagrant ssh node2
+   4 vagrant ssh node3
+   5 vagrant ssh node1
+   6 vagrant ssh node1
+   7 vagrant ssh node2
+   8 vagrant ssh node3
+   9 vagrant ssh node1
+  10 vagrant ssh node2
+  11 vagrant ssh node3
+  12 vagrant ssh node1
+  13 vagrant halt
+
+
+
+vagrant@node1:~$ history
+  ...
+  786  cat /etc/os-release
+  787  sudo apt-get update
+  788  sudo apt-get upgrade
+  789  sudo apt-get install nfs-kernel-server
+  790  systemctl status nfs-server.service
+  791  sudo mkdir -p /data/nfs/k8sdata
+  792  sudo chmod 777 /data/nfs/k8sdata
+  793  sudo nano etc/exports
+  794  sudo nano /etc/exports
+  795  cat /etc/exports
+  796  sudo exportfs -rav
+  797  exit
+  798  cd data
+  799  ls
+  800  cd nfs/
+  801  ls
+  802  mkdir k8sdata
+  803  ls
+  804  sudo mkdir k8sdata
+  805  ls
+  806  sudo chmod 777 k8spva
+  807  sudo chmod 777 k8spvb
+  808  sudo chmod 777 k8spvc
+  809  sudo chmod 777 k8sdata
+  810  ls
+  811  cd /etc
+  812  sudo nano /etc/exports
+  813  cat exports
+  814  sudo exportfs -rav
+  815  cd ..
+
+  ???  sudo service nfs-kernel-server restart
+
+  816  cat > sc4-pvss.yaml
+  817  sudo cat > sc4-pvss.yaml
+  818  exit
+  819  sudo cat > sc4-pvss.yaml
+  820  kubectl apply -f sc4-pvss.yaml
+  821  kubectl get pv
+  822  cat > sc4-svcss.yaml
+  823  cat sc4-svcss.yaml
+  824  kubectl apply -f sc4-svcss.yaml
+  825  kubectl get svc
+  826  cat > sc4-ss.yaml
+  827  cat sc4-ss.yaml
+  828  kubectl apply -f sc4-ss.yaml
+  829  kubectl get pod,svc,statefulset,pv,pvc
+  830  kubectl describe pod facts-0
+  831  exit
+  832  kubectl get pod,svc,statefulset,pv,pvc
+  833  kubectl describe pod facts-0
+  834  kubectl get pod,svc,statefulset,pv,pvc
+  835  kubectl delete -f sc4-ss.yaml
+  836  kubectl apply -f sc4-ss.yaml
+  837  kubectl get pod,svc,statefulset,pv,pvc
+  838  cat > sc4-svcssnp.yaml
+  839  kubectl apply -f sc4-svcssnp.yaml
+  840  kubectl get pod,svc,statefulset,pv,pvc
+  841  kubectl describe pod facts-0
+  842  kubectl get pod,svc,statefulset,pv,pvc
+  843  exit
+  844  kubectl get pod,svc,statefulset,pv,pvc
+  845  cd data
+  846  ls
+  847  cd nfs
+  848  ls
+  849  cd ..
+  850  history
